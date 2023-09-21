@@ -1,41 +1,18 @@
-# Projektantrag - Vorlage
+# LeoCode
+Florian Hagmair, David Pröller und Lukas Hoyer
 
-Verwenden Sie ein Dokumentenformat Ihrer Wahl, aber halten Sie die Vorgaben zur Kapitelstruktur und Inhalt ein:
-
-## 1. Ausgangslage
-
-### 1.1. Ist-Situation
-
-> :bulb: **Hinweise:**
->
-> - Hier wird zuerst das Projektumfeld geklärt: Geht es um den Imkerverein oder das Schulbuffet der HTL Leonding?
-> - Beschreiben Sie die Istsituation: Um welche Aktivitäten/Abläufe handelt es sich?
-
-### 1.2. Verbesserungspotenziale
-
-> :bulb: **Hinweise:**
->
-> - Beschreiben Sie hier die Probleme und Verbesserungspotenziale in bezug auf die Istsituation.
-> - Es sollte dabei klar werden, dass unbedingt Handlungsbedarf besteht!
-
-## 2. Zielsetzung
-
-> :bulb: **Hinweise:**
->
-> - Skizzieren Sie Ihr Konzept für ein neues System, das die vorher beschriebenen Probleme lösen kann.
-> - Verwenden Sie dazu eine Mindmap, um die Kern-Features Ihres Systems herauszuarbeiten.
-
-## 3. Chancen und Risiken
-
-> :bulb: **Hinweise:**
->
-> - Welchen Nutzen hat Ihr vorgeschlagenes System für die strategische Ausrichtung der Firma?
-> - Mit welchen konkreten Projektrisiken muss man rechnen?
-> - Führen Sie eine SWOT-Analyse für das Projekt durch.
-
-## 4. Planung
-
-> :bulb: **Hinweise:**
->
-> - Klären Sie personelle und finanzielle Rahmenbedingungen.
-> - Definieren Sie grobe Meilensteine für die Projektumsetzung.
+## User Stories
+- Als Lehrer will ich über einen Button meinen Code inkluse Unit-Tests für das Übungsbeispiel meiner Schüler hochladen.
+- Als Lehrer will ich den Lernvortschritt von meinen Schüllern für jedes Level sehen.
+- Als Lehrer will ich sehen, wie lange meine Schüler für das jeweilige Level gebraucht habe.
+- Als Lehrer will ich sehen, wie viele Versuche meine Schüler für das jeweilige Level gebraucht haben.
+- Als Lehrer will ich bei der Regestrierung auswählen, dass ich ein Lehrer bin und somit mehr Rechte bekomme.
+- Als Lehrer will ich auswählen können für welche Klassen dieses Level ist.
+- Als Lehrer will ich beim Hochladen der Dateien für das Level die Programmiersprache auswählen können.
+- Als Schüler will ich für das Übungsbeispiel im Program meine Lösung implementieren können.
+- Als Schüler will ich nach der Implementierun sehen wie viele Unit-Tests erfolgreich waren.
+- Als Schüler will ich nach der Implementierun sehen wie viele Unit-Tests nicht erfolgreich waren.
+- Als Schüler will ich sehen welche Level ich schon erfolgreich bestanden.
+- Als Schüler will ich sehen wie lange ich für das jeweilige Level gebraucht habe.
+- Als Schüler will ich, wenn die Unit-Tests nicht erfolgreich waren, dass ich das Level nochmals probieren/bearbeiten kann.
+- Als Schüler will ich sehen, wie viele Versuche ich für das Level gebraucht habe.
