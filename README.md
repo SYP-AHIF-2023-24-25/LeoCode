@@ -42,12 +42,12 @@ Unser Ziel ist es, eine funktionelle Anwendung zu programmieren, die von allen L
 
 
 - Wintersemester
-    genehmigter Projektantrag
-    ausplanen der Features
-    Design überlegen
-    Einlesen in vorherigen Code der Webseite
+   - genehmigter Projektantrag
+   - ausplanen der Features
+   - Design überlegen
+   - Einlesen in vorherigen Code der Webseite
 - Sommersemester
-    Programmierung der Features
-    Ersten funktionierenden Prototyp programmieren
-    Webseite mit 3D Applikation verknüpfen
+   - Programmierung der Features
+   - Ersten funktionierenden Prototyp programmieren
+   - Webseite mit 3D Applikation verknüpfen
 
