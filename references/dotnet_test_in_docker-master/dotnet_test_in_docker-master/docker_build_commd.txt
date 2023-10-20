@@ -1,0 +1,4 @@
+make sure run.sh line endings are LF (e.g. Notepad++)!
+
+> docker build --rm -t mhaslinger/dotnetrunner .
+> docker push mhaslinger/dotnetrunner

@@ -1,0 +1,3 @@
+docker run --rm -v ${PWD}:/usr/src/project -w usr/src/project --entrypoint "/bin/bash run.sh" mcr.microsoft.com/dotnet/sdk:5.0
+C:\temp\LeoCode\PasswordTest
+docker run --rm -v C:\temp\LeoCode\PasswordTest:/usr/src/project -w usr/src/project --entrypoint "/bin/bash run.sh" mcr.microsoft.com/dotnet/sdk:5.0
