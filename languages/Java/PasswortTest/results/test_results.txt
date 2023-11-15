@@ -1,0 +1,44 @@
+
+Thanks for using JUnit! Support its development at https://junit.org/sponsoring
+
+[36m╷[0m
+[36m├─[0m [31mJUnit Jupiter[0m [31m✘[0m [31mjava.lang.NoClassDefFoundError: org/junit/platform/engine/support/store/NamespacedHierarchicalStore$CloseAction[0m
+[36m├─[0m [36mJUnit Vintage[0m [32m✔[0m
+[36m│  └─[0m [36mPasswortTestTests[0m [32m✔[0m
+[36m│     ├─[0m [34mtestPasswordLength[0m [32m✔[0m
+[36m│     ├─[0m [34mtestPasswordLength_notOk[0m [32m✔[0m
+[36m│     └─[0m [34mtestPasswordLength_not_Ok[0m [32m✔[0m
+[36m└─[0m [36mJUnit Platform Suite[0m [32m✔[0m
+
+Failures (1):
+  JUnit Jupiter
+    => java.lang.BootstrapMethodError: java.lang.NoClassDefFoundError: org/junit/platform/engine/support/store/NamespacedHierarchicalStore$CloseAction
+       org.junit.jupiter.engine.descriptor.AbstractExtensionContext.<clinit>(AbstractExtensionContext.java:43)
+       org.junit.jupiter.engine.descriptor.JupiterEngineDescriptor.prepare(JupiterEngineDescriptor.java:57)
+       org.junit.jupiter.engine.descriptor.JupiterEngineDescriptor.prepare(JupiterEngineDescriptor.java:31)
+       org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$prepare$2(NodeTestTask.java:123)
+       org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+       [...]
+     Caused by: java.lang.NoClassDefFoundError: org/junit/platform/engine/support/store/NamespacedHierarchicalStore$CloseAction
+       [...]
+     Caused by: java.lang.ClassNotFoundException: org.junit.platform.engine.support.store.NamespacedHierarchicalStore$CloseAction
+       java.net.URLClassLoader.findClass(URLClassLoader.java:381)
+       java.lang.ClassLoader.loadClass(ClassLoader.java:424)
+       sun.misc.Launcher$AppClassLoader.loadClass(Launcher.java:349)
+       java.lang.ClassLoader.loadClass(ClassLoader.java:357)
+       [...]
+
+Test run finished after 28 ms
+[         4 containers found      ]
+[         0 containers skipped    ]
+[         4 containers started    ]
+[         0 containers aborted    ]
+[         3 containers successful ]
+[         1 containers failed     ]
+[         3 tests found           ]
+[         0 tests skipped         ]
+[         3 tests started         ]
+[         0 tests aborted         ]
+[         3 tests successful      ]
+[         0 tests failed          ]
+
