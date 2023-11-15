@@ -7,7 +7,7 @@ if [ -z "$1" ]; then
 fi
 
 if [ -z "$2" ]; then
-    echo "Bitte den Ordnernamen als 2 Argument angeben."
+    echo "Bitte den Namen der Quelldatei als 2 Argument angeben."
     exit 1
 fi
 output_dir="/usr/src/project/results"
@@ -23,27 +23,23 @@ cp -R "$project_path"/* /usr/src/work
 cd /usr/src/work || exit 1
 
 cd ./src
-echo $(pwd)
-echo $(ls)
-javac PasswortTest.java
+javac "$2".java
 
 # Check if compilation was successful
 if [ $? -eq 0 ]; then
   echo "Compilation successful. Running the program..."
 
   # Run Java program
-  java PasswortTest
+  java "$2"
 
 else
   echo "Compilation failed. Please fix the errors."
 fi
-echo $(pwd)
-echo $(ls)
 
 # Compile the JUnit test file with dependencies in the classpath
-javac -cp .:junit-jupiter-api-5.10.1.jar:junit-jupiter-engine-5.10.1.jar:junit-platform-console-standalone-1.9.3.jar:apiguardian-api-1.1.2.jar PasswortTestTests.java
+javac -cp .:junit-jupiter-api-5.10.1.jar:junit-jupiter-engine-5.10.1.jar:junit-platform-console-standalone-1.9.3.jar:apiguardian-api-1.1.2.jar "$2"Tests.java
 
 # Run the compiled JUnit test (replace YourTestClassName with the actual test class name)
-java -cp .:junit-jupiter-api-5.10.1.jar:junit-jupiter-engine-5.10.1.jar:junit-platform-console-standalone-1.9.3.jar:apiguardian-api-1.1.2.jar org.junit.platform.console.ConsoleLauncher --select-class PasswortTestTests > $output_file 2>&1 && echo "Tests passed successfully!"
+java -cp .:junit-jupiter-api-5.10.1.jar:junit-jupiter-engine-5.10.1.jar:junit-platform-console-standalone-1.9.3.jar:apiguardian-api-1.1.2.jar org.junit.platform.console.ConsoleLauncher --select-class "$2"Tests > $output_file 2>&1 && echo "Tests passed successfully!"
 
 cp -r /usr/src/work/results/* /usr/src/project/results
