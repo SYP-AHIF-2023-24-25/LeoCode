@@ -9,6 +9,7 @@ Florian Hagmair, David Pröller und Lukas Hoyer
  - Als Lehrer will ich auswählen können für welche Klassen dieses Level ist.
  - Als Schüler will ich für das Übungsbeispiel im Program meine Lösung implementieren können.
  - Als Schüler will ich nach der Implementierun sehen wie viele Unit-Tests erfolgreich und nicht erfolgreich waren.
+ - Als Schüler will ich mit einem Buttonclick meinen Code kompilieren lassen und danach die Ergebnisse der Unit-Tests sehen.
  - Als Schüler will ich, wenn die Unit-Tests nicht erfolgreich waren, dass ich das Level nochmals probieren/bearbeiten kann.
  - Als Schüler will ich sehen wie viel Lernfortschritt ich schon pro Level habe(% des geschafften Levels).
  - Als Lehrer will ich den Lernfortschritt meiner Schüler für die einzelnen Level sehen können(% des geschafften Levels z.B: 33,3% wenn er das erste Beispiel von 3 bei einem Level geschafft hat).
