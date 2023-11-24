@@ -8,4 +8,4 @@ RUN npm run build
 FROM nginx
 COPY ./nginx.conf /etc/nginx/conf.d/default.conf
 WORKDIR /usr/share/nginx/html
-COPY --from=builder /app/dist/frontend .
+COPY --from=builder /app/dist/demo .
