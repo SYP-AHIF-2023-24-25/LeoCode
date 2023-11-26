@@ -5,16 +5,16 @@
     "passes": 3,
     "pending": 0,
     "failures": 0,
-    "start": "2023-11-15T17:10:01.732Z",
-    "end": "2023-11-15T17:10:01.749Z",
-    "duration": 17
+    "start": "2023-11-26T17:29:44.205Z",
+    "end": "2023-11-26T17:29:44.207Z",
+    "duration": 2
   },
   "tests": [
     {
       "title": "should return true for a valid password",
       "fullTitle": "CheckPassword Function should return true for a valid password",
       "file": "/usr/src/project/test/passwordChecker.spec.js",
-      "duration": 2,
+      "duration": 0,
       "currentRetry": 0,
       "speed": "fast",
       "err": {}
@@ -32,7 +32,7 @@
       "title": "should return false for an invalid password (too long)",
       "fullTitle": "CheckPassword Function should return false for an invalid password (too long)",
       "file": "/usr/src/project/test/passwordChecker.spec.js",
-      "duration": 1,
+      "duration": 0,
       "currentRetry": 0,
       "speed": "fast",
       "err": {}
@@ -45,7 +45,7 @@
       "title": "should return true for a valid password",
       "fullTitle": "CheckPassword Function should return true for a valid password",
       "file": "/usr/src/project/test/passwordChecker.spec.js",
-      "duration": 2,
+      "duration": 0,
       "currentRetry": 0,
       "speed": "fast",
       "err": {}
@@ -63,7 +63,7 @@
       "title": "should return false for an invalid password (too long)",
       "fullTitle": "CheckPassword Function should return false for an invalid password (too long)",
       "file": "/usr/src/project/test/passwordChecker.spec.js",
-      "duration": 1,
+      "duration": 0,
       "currentRetry": 0,
       "speed": "fast",
       "err": {}
