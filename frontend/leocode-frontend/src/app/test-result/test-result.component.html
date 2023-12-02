@@ -13,6 +13,7 @@
                     <th>Passed</th>
                     <th>Not Passed</th>
                     <th>Total Tests</th>
+                    <th>Timer</th>
                 </tr>
             </thead>
             <tbody>
@@ -21,6 +22,7 @@
                     <td>{{result.passed}}</td>
                     <td>{{result.notPassed}}</td>
                     <td>{{result.total}}</td>
+                    <td>{{timer}}</td>
                 </tr>
         </table>
         <button (click)="startTest()" class="btn btn-primary" >Start Tests</button>
