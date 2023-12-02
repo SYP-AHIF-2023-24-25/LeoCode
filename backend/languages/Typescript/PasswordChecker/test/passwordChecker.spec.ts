@@ -17,4 +17,9 @@ describe('CheckPassword Function', () => {
         const isValid = CheckPassword('thisPasswordIsTooLong');
         expect(isValid).to.equal(false);
     });
+
+    it('should return false for an invalid password', () => {
+        const isValid = CheckPassword('thisPasswordIsTooLong');
+        expect(isValid).to.equal(true);
+    });
 });

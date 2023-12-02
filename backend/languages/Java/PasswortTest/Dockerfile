@@ -4,19 +4,18 @@ FROM openjdk:alpine
 # Add the JUnit library to the classpath
 RUN apk add --no-cache junit
 
-# Create directories
-RUN mkdir -p /usr/src/work
-RUN mkdir -p /usr/src/project
+#RUN ["apk", "add", "cp"] # alpine stuff
 
-# Set working directory
+RUN ["mkdir", "-p", "/usr/src/work"]
+RUN ["mkdir", "-p", "/usr/src/project"]
+
 WORKDIR /usr/src/work
 
-# Copy the run.sh script
-COPY run.sh run.sh
+COPY run.sh /scripts/run.sh
+RUN ["chmod", "+x", "/scripts/run.sh"]
 
-# Set execute permissions for the script
-RUN chmod +x run.sh
+ENTRYPOINT ["/scripts/run.sh"]
 
-# Set the script as the entry point
-ENTRYPOINT ["/bin/sh", "run.sh"]
+
+
 
