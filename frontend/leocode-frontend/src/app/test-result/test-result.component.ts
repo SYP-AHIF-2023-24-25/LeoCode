@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Result } from '../model/result';
 import { OriginalResult } from '../model/original-result';
+import { RestService } from '../service/rest.service';
 
 @Component({
   selector: 'app-test-result',
@@ -19,7 +20,37 @@ export class TestResultComponent {
   };
 
 
-  constructor() { 
+  constructor(private rest: RestService) { 
+  }
+
+
+  convertFromJson(originalResult: OriginalResult): Result {
+    const passed : number = originalResult.stats.passes;
+    const notPassed : number = originalResult.stats.failures;
+    const total : number = originalResult.stats.tests;
+
+    const result: Result = {
+        message: "Test results",
+        passed,
+        notPassed,
+        total
+    };
+
+    return result;
+  }
+
+
+  startTest() {
+    // TODO : Request befehl zu server/backend schicken und messen wie lange es dauert bis die antwort kommt
+    this.timer = 0;
+    const intervalId = setInterval(() => {
+      this.timer++;
+    }, 1000);
+
+    // TODO : Request befehl zu server/schicken und das json file welches man zurück bekommt convertieren und in result speichern
+    /*this.rest.getResults().subscribe((data) => {
+      this.result = this.convertFromJson(data as OriginalResult);
+    });*/
     const originalJson = {
       "stats": {
         "suites": 1,
@@ -92,35 +123,9 @@ export class TestResultComponent {
         }
       ]
     };
+
     const originalResult: OriginalResult = originalJson as OriginalResult;
     this.result = this.convertFromJson(originalResult);
-  }
-
-
-  convertFromJson(originalResult: OriginalResult): Result {
-    const passed : number = originalResult.stats.passes;
-    const notPassed : number = originalResult.stats.failures;
-    const total : number = originalResult.stats.tests;
-
-    const result: Result = {
-        message: "Test results",
-        passed,
-        notPassed,
-        total
-    };
-
-    return result;
-  }
-
-
-  startTest() {
-    // TODO : Reques befehl zu server/backend schicken und messen wie lange es dauert bis die antwort kommt
-    this.timer = 0;
-    const intervalId = setInterval(() => {
-      this.timer++;
-    }, 1000);
-
-    // TODO : Reques befehl zu server/schicken und das json file welches man zurück bekommt convertieren und in result speichern
 
     clearInterval(intervalId);
 
