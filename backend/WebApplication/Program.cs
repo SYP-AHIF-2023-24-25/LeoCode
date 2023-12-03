@@ -1,4 +1,6 @@
 using System.Diagnostics;
+using System.IO;
+using System.Linq;
 using System.Text.Json;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,6 +10,18 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+// Add CORS policy
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAngularFrontend", builder =>
+    {
+        builder.WithOrigins("http://localhost:4200/test-results") // Replace with your Angular frontend URL
+               .AllowAnyHeader()
+               .AllowAnyMethod()
+               .AllowAnyOrigin();
+    });
+});
+
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
@@ -16,13 +30,16 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+// Enable CORS
+app.UseCors("AllowAngularFrontend");
+
 app.UseHttpsRedirection();
 
 app.MapGet("/runtests", async () =>
 {
     var cwd = Directory.GetCurrentDirectory();
-    cwd = @"C:\Schule\4AHIF\LeoCode\languages\Typescript\PasswordChecker";
-    var processInfo = new ProcessStartInfo("docker", $"run --rm -v {cwd}:/usr/src/project -w /usr/src/project davidpr05/pwdcheck");
+    cwd = @"C:\Users\Kelit\Schule2023-24\syp\LeoCode\languages\Typescript\PasswordChecker";
+    var processInfo = new ProcessStartInfo("docker", $"run --rm -v {cwd}:/usr/src/project -w /usr/src/project passwordchecker");
     processInfo.CreateNoWindow = true;
     processInfo.UseShellExecute = false;
     processInfo.RedirectStandardOutput = true;

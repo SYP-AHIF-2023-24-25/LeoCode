@@ -42,91 +42,17 @@ export class TestResultComponent {
 
   startTest() {
     // TODO : Request befehl zu server/backend schicken und messen wie lange es dauert bis die antwort kommt
+    //TODO: Fix timer
     this.timer = 0;
     const intervalId = setInterval(() => {
       this.timer++;
     }, 1000);
 
     // TODO : Request befehl zu server/schicken und das json file welches man zurück bekommt convertieren und in result speichern
-    /*this.rest.getResults().subscribe((data) => {
+    this.rest.getResults().subscribe((data) => {
       this.result = this.convertFromJson(data as OriginalResult);
-    });*/
-    const originalJson = {
-      "stats": {
-        "suites": 1,
-        "tests": 3,
-        "passes": 3,
-        "pending": 0,
-        "failures": 0,
-        "start": "2023-11-16T08:20:11.947Z",
-        "end": "2023-11-16T08:20:11.952Z",
-        "duration": 5
-      },
-      "tests": [
-        {
-          "title": "should return true for a valid password",
-          "fullTitle": "CheckPassword Function should return true for a valid password",
-          "file": "/usr/src/project/test/passwordChecker.spec.js",
-          "duration": 1,
-          "currentRetry": 0,
-          "speed": "fast",
-          "err": {}
-        },
-        {
-          "title": "should return false for an invalid password (too short)",
-          "fullTitle": "CheckPassword Function should return false for an invalid password (too short)",
-          "file": "/usr/src/project/test/passwordChecker.spec.js",
-          "duration": 0,
-          "currentRetry": 0,
-          "speed": "fast",
-          "err": {}
-        },
-        {
-          "title": "should return false for an invalid password (too long)",
-          "fullTitle": "CheckPassword Function should return false for an invalid password (too long)",
-          "file": "/usr/src/project/test/passwordChecker.spec.js",
-          "duration": 0,
-          "currentRetry": 0,
-          "speed": "fast",
-          "err": {}
-        }
-      ],
-      "pending": [],
-      "failures": [],
-      "passes": [
-        {
-          "title": "should return true for a valid password",
-          "fullTitle": "CheckPassword Function should return true for a valid password",
-          "file": "/usr/src/project/test/passwordChecker.spec.js",
-          "duration": 1,
-          "currentRetry": 0,
-          "speed": "fast",
-          "err": {}
-        },
-        {
-          "title": "should return false for an invalid password (too short)",
-          "fullTitle": "CheckPassword Function should return false for an invalid password (too short)",
-          "file": "/usr/src/project/test/passwordChecker.spec.js",
-          "duration": 0,
-          "currentRetry": 0,
-          "speed": "fast",
-          "err": {}
-        },
-        {
-          "title": "should return false for an invalid password (too long)",
-          "fullTitle": "CheckPassword Function should return false for an invalid password (too long)",
-          "file": "/usr/src/project/test/passwordChecker.spec.js",
-          "duration": 0,
-          "currentRetry": 0,
-          "speed": "fast",
-          "err": {}
-        }
-      ]
-    };
-
-    const originalResult: OriginalResult = originalJson as OriginalResult;
-    this.result = this.convertFromJson(originalResult);
-
+    });
+    
     clearInterval(intervalId);
 
   }

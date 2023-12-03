@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -6,11 +6,16 @@ import { Injectable } from '@angular/core';
 })
 export class RestService {
 
-  baseUrl: string = 'http://localhost:7169';
+  baseUrl: string = 'http://localhost:5080';
 
   constructor(private httpClient: HttpClient) { }
 
   getResults() {
-    return this.httpClient.get(`${this.baseUrl}/runtests`);
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*' // Erlaubt alle Ursprünge (*)
+    });
+
+    return this.httpClient.get(`${this.baseUrl}/runtests`, { headers: headers });
   }
 }
