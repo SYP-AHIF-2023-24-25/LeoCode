@@ -15,7 +15,3 @@ COPY run.sh /scripts/run.sh
 RUN ["chmod", "+x", "/scripts/run.sh"]
 
 ENTRYPOINT ["/scripts/run.sh"]
-
-
-
-

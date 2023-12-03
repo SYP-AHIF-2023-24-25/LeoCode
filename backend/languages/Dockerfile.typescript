@@ -1,4 +1,9 @@
-FROM mcr.microsoft.com/dotnet/sdk:7.0
+FROM node:latest
+
+WORKDIR /usr/src/project
+
+# Installiere notwendige AbhÃ¤ngigkeiten
+RUN npm install -g typescript
 
 ENV NUGET_PACKAGES=/usr/cache 
 

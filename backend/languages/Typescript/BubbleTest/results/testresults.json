@@ -1,0 +1,36 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 1,
+    "passes": 1,
+    "pending": 0,
+    "failures": 0,
+    "start": "2023-12-03T20:00:09.702Z",
+    "end": "2023-12-03T20:00:09.706Z",
+    "duration": 4
+  },
+  "tests": [
+    {
+      "title": "should return true for a bubble",
+      "fullTitle": "bubbleTest Function should return true for a bubble",
+      "file": "/usr/src/work/test/bubbleTest.spec.js",
+      "duration": 1,
+      "currentRetry": 0,
+      "speed": "fast",
+      "err": {}
+    }
+  ],
+  "pending": [],
+  "failures": [],
+  "passes": [
+    {
+      "title": "should return true for a bubble",
+      "fullTitle": "bubbleTest Function should return true for a bubble",
+      "file": "/usr/src/work/test/bubbleTest.spec.js",
+      "duration": 1,
+      "currentRetry": 0,
+      "speed": "fast",
+      "err": {}
+    }
+  ]
+}
