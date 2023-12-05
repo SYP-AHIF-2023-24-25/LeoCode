@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Result } from '../model/result';
 import { OriginalResult } from '../model/original-result';
 import { RestService } from '../service/rest.service';
+import { TimeLoggerService } from '../service/time-logger.service';
 
 @Component({
   selector: 'app-test-result',
@@ -10,7 +11,7 @@ import { RestService } from '../service/rest.service';
 })
 export class TestResultComponent {
 
-  timer: number = 0;
+  timer: String = "";
 
   result: Result = {
     message: "Test results",
@@ -40,20 +41,23 @@ export class TestResultComponent {
   }
 
 
+
+
   startTest() {
-    // TODO : Request befehl zu server/backend schicken und messen wie lange es dauert bis die antwort kommt
-    //TODO: Fix timer
-    this.timer = 0;
-    const intervalId = setInterval(() => {
-      this.timer++;
-    }, 1000);
+    const timeLogger = new TimeLoggerService(); 
+    timeLogger.start();
 
-    // TODO : Request befehl zu server/schicken und das json file welches man zurück bekommt convertieren und in result speichern
-    this.rest.getResults().subscribe((data) => {
-      this.result = this.convertFromJson(data as OriginalResult);
-    });
     
-    clearInterval(intervalId);
-
+    this.rest.getResults().subscribe(
+      (data) => {
+        this.result = this.convertFromJson(data as OriginalResult);
+        this.timer = timeLogger.stop();
+      },
+      (error) => {
+        console.error("Error in API request", error);
+        this.timer = timeLogger.stop();
+      }
+    );
   }
+
 }
