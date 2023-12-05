@@ -19,14 +19,8 @@ elif [ "$language" == "Typescript" ]; then
     npm test -- --reporter json --reporter-options output=/usr/src/work/results/testresults.json
     cp -r /usr/src/work/results/* /usr/src/project/"$language"/"$project_name"/results
 elif [ "$language" == "Java" ]; then
-    output_dir="/usr/src/project/"$language"/"$project_name"/results"
-    output_file="/usr/src/project/"$language"/"$project_name"/results/test_results.txt"
-    cd ./src
-    javac "$project_name".java
-    java "$project_name"
-    javac -cp .:junit-jupiter-api-5.10.1.jar:junit-jupiter-engine-5.10.1.jar:junit-platform-console-standalone-1.9.3.jar:apiguardian-api-1.1.2.jar "$project_name"Tests.java
-    java -cp .:junit-jupiter-api-5.10.1.jar:junit-jupiter-engine-5.10.1.jar:junit-platform-console-standalone-1.9.3.jar:apiguardian-api-1.1.2.jar org.junit.platform.console.ConsoleLauncher --select-class "$project_name"Tests > $output_file 2>&1 && echo "Tests passed successfully!"
-    cp -r /usr/src/work/results/* /usr/src/project/results
+    mvn test surefire-report:report
+    cp -r target/surefire-reports/* /usr/src/project/"$language"/"$project_name"/results
 fi
 
 echo "Build und Testprozess abgeschlossen."

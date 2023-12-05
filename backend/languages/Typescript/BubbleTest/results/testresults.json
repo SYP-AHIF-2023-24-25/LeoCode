@@ -5,8 +5,8 @@
     "passes": 1,
     "pending": 0,
     "failures": 0,
-    "start": "2023-12-03T20:00:09.702Z",
-    "end": "2023-12-03T20:00:09.706Z",
+    "start": "2023-12-05T20:36:08.655Z",
+    "end": "2023-12-05T20:36:08.659Z",
     "duration": 4
   },
   "tests": [
@@ -14,7 +14,7 @@
       "title": "should return true for a bubble",
       "fullTitle": "bubbleTest Function should return true for a bubble",
       "file": "/usr/src/work/test/bubbleTest.spec.js",
-      "duration": 1,
+      "duration": 2,
       "currentRetry": 0,
       "speed": "fast",
       "err": {}
@@ -27,7 +27,7 @@
       "title": "should return true for a bubble",
       "fullTitle": "bubbleTest Function should return true for a bubble",
       "file": "/usr/src/work/test/bubbleTest.spec.js",
-      "duration": 1,
+      "duration": 2,
       "currentRetry": 0,
       "speed": "fast",
       "err": {}

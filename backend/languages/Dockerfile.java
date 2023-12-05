@@ -1,8 +1,7 @@
-# Use an official OpenJDK image with Alpine as the base
-FROM openjdk:alpine
+# Verwende ein offizielles Maven-Image als Basisimage
+FROM maven:3.9.5-amazoncorretto-17 as builder
 
-# Add the JUnit library to the classpath
-RUN apk add --no-cache junit
+ENV NUGET_PACKAGES=/usr/cache 
 
 #RUN ["apk", "add", "cp"] # alpine stuff
 
