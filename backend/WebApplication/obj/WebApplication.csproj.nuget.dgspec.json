@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Kelit\\Schule2023-24\\syp\\LeoCode\\backend\\WebApplication\\WebApplication.csproj": {}
+    "C:\\Schule\\4AHIF\\LeoCode\\backend\\WebApplication\\WebApplication.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Kelit\\Schule2023-24\\syp\\LeoCode\\backend\\WebApplication\\WebApplication.csproj": {
+    "C:\\Schule\\4AHIF\\LeoCode\\backend\\WebApplication\\WebApplication.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Kelit\\Schule2023-24\\syp\\LeoCode\\backend\\WebApplication\\WebApplication.csproj",
+        "projectUniqueName": "C:\\Schule\\4AHIF\\LeoCode\\backend\\WebApplication\\WebApplication.csproj",
         "projectName": "WebApplication",
-        "projectPath": "C:\\Users\\Kelit\\Schule2023-24\\syp\\LeoCode\\backend\\WebApplication\\WebApplication.csproj",
-        "packagesPath": "C:\\Users\\Kelit\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Kelit\\Schule2023-24\\syp\\LeoCode\\backend\\WebApplication\\obj\\",
+        "projectPath": "C:\\Schule\\4AHIF\\LeoCode\\backend\\WebApplication\\WebApplication.csproj",
+        "packagesPath": "C:\\Users\\Florian\\.nuget\\packages\\",
+        "outputPath": "C:\\Schule\\4AHIF\\LeoCode\\backend\\WebApplication\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Kelit\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Florian\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
