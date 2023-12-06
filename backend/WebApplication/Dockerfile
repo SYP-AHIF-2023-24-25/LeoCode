@@ -1,11 +1,13 @@
-FROM node:18 as builder
+# Build stage
+FROM mcr.microsoft.com/dotnet/sdk:8.0 as build
 WORKDIR /app
-COPY ./package*.json .
-RUN npm install
 COPY . .
-RUN npm run build
+RUN dotnet restore
+RUN dotnet publish -c Release -o out
 
-FROM nginx
-COPY ./nginx.conf /etc/nginx/conf.d/default.conf
-WORKDIR /usr/share/nginx/html
-COPY --from=builder /app/dist/WebApplication .
+# Final stage
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
+WORKDIR /app
+COPY --from=build /app/out .
+EXPOSE 80
+ENTRYPOINT ["dotnet", "WebApplication.dll"]
