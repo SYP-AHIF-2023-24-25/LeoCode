@@ -1,0 +1,11 @@
+/* Standard-Theme-Stile */
+body {
+    background-color: #ffffff;
+    color: #333333;
+  }
+  
+  /* Dark-Theme-Stile */
+  body.dark-mode {
+    background-color: #333333;
+    color: #ffffff;
+  }

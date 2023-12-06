@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-4" >
+        <h1>test-results</h1>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Messages</th>
+                    <th>Passed</th>
+                    <th>Not Passed</th>
+                    <th>Total Tests</th>
+                    <th>Timer</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{result.message}}</td>
+                    <td>{{result.passed}}</td>
+                    <td>{{result.notPassed}}</td>
+                    <td>{{result.total}}</td>
+                    <td>{{timer}}</td>
+                </tr>
+        </table>
+        <button (click)="startTest()" class="btn btn-primary" >Start Tests</button>
+    </div>
+</body>
