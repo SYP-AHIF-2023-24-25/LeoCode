@@ -2,25 +2,24 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
+using Microsoft.AspNetCore.Mvc;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-// Add CORS policy
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowAngularFrontend", builder =>
+    options.AddDefaultPolicy(builder =>
     {
-        builder.WithOrigins("http://localhost:4200/test-results") // Replace with your Angular frontend URL
+        builder.WithOrigins("http://localhost:4200/test-results", "http://localhost:4200")
                .AllowAnyHeader()
                .AllowAnyMethod()
                .AllowAnyOrigin();
     });
 });
+builder.Services.AddSignalR();
 
 var app = builder.Build();
 
@@ -30,49 +29,65 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-// Enable CORS
 app.UseCors("AllowAngularFrontend");
 
 app.UseHttpsRedirection();
 
-app.MapGet("/runtests", async () =>
-{
-    var cwd = Directory.GetCurrentDirectory();
-    var path = @"C:\Schule\4AHIF\LeoCode\backend\languages";
-    
-    cwd = $@"{path}\Typescript\PasswordChecker";
-    
-    var processInfo = new ProcessStartInfo("docker", $"run --rm -v {path}:/usr/src/project -w /usr/src/project florianhagmair06/passwordchecker Typescript PasswordChecker");
-
-    processInfo.CreateNoWindow = true;
-    processInfo.UseShellExecute = false;
-    processInfo.RedirectStandardOutput = true;
-    processInfo.RedirectStandardError = true;
-
-
-
-    var proc = new Process
-    {
-        StartInfo = processInfo,
-        EnableRaisingEvents = true
-    };
-
-    proc.Start();
-    proc.BeginOutputReadLine();
-    await proc.WaitForExitAsync();
-
-    var code = proc.ExitCode;
-    proc.Dispose();
-
-    var resultsFile = Directory.EnumerateFiles($"{cwd}\\results", "*.json").FirstOrDefault();
-
-    string jsonString = File.ReadAllText(resultsFile);
-
-    JsonDocument jsonDocument = JsonDocument.Parse(jsonString);
-    JsonElement rootElement = jsonDocument.RootElement;
-    return rootElement;
-})
-.WithName("RunTests")
-.WithOpenApi();
+app.MapPost("/runtests", RunTestsHandler)
+    .WithName("RunTests")
+    .WithOpenApi();
 
 app.Run();
+
+async Task<IActionResult> RunTestsHandler(string language, string ProgramName)
+{
+    try
+    {
+        var cwd = Directory.GetCurrentDirectory();
+        var parentDirectory = Directory.GetParent(cwd).FullName;
+        var targetDirectory = Path.Combine(parentDirectory, "languages");
+        var path = @"C:\Schule\4AHIF\LeoCode\backend\languages\";
+        cwd = $@"C:\Schule\4AHIF\LeoCode\backend\languages\{language}\{ProgramName}";
+
+        var command = $"run --rm -v {path}:/usr/src/project -w /usr/src/project pwdchecker {language} {ProgramName}";
+        var processInfo = new ProcessStartInfo("docker", command)
+        {
+            CreateNoWindow = true,
+            UseShellExecute = false,
+            RedirectStandardOutput = true,
+            RedirectStandardError = true
+        };
+
+        using (var proc = new Process { StartInfo = processInfo, EnableRaisingEvents = true })
+        {
+            proc.Start();
+            await proc.WaitForExitAsync();
+
+            var code = proc.ExitCode;
+
+            var resultsFile = Directory.GetFiles($"{cwd}\\results", "*.json").FirstOrDefault();
+
+            if (resultsFile != null)
+            {
+                string jsonString = await File.ReadAllTextAsync(resultsFile);
+
+                var jsonDocument = JsonDocument.Parse(jsonString);
+                var rootElement = jsonDocument.RootElement;
+
+                var responseObject = new { data = rootElement };
+
+                return new OkObjectResult(responseObject);
+            }
+            else
+            {
+                var errorObject = new { error = "No results file found." };
+                return new BadRequestObjectResult(errorObject);
+            }
+        }
+    }
+    catch (Exception ex)
+    {
+        var errorObject = new { error = $"An error occurred: {ex.Message}" };
+        return new BadRequestObjectResult(errorObject);
+    }
+}

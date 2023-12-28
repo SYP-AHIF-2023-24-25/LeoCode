@@ -460,7 +460,7 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Florian\\.nuget\\packages\\": {}
+    "C:\\Users\\dap03\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
@@ -468,11 +468,11 @@
       "projectUniqueName": "C:\\Schule\\4AHIF\\LeoCode\\backend\\WebApplication\\WebApplication.csproj",
       "projectName": "WebApplication",
       "projectPath": "C:\\Schule\\4AHIF\\LeoCode\\backend\\WebApplication\\WebApplication.csproj",
-      "packagesPath": "C:\\Users\\Florian\\.nuget\\packages\\",
+      "packagesPath": "C:\\Users\\dap03\\.nuget\\packages\\",
       "outputPath": "C:\\Schule\\4AHIF\\LeoCode\\backend\\WebApplication\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Florian\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\dap03\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
