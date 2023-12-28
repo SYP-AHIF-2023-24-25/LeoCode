@@ -38,7 +38,8 @@ app.UseHttpsRedirection();
 app.MapGet("/runtests", async () =>
 {
     var cwd = Directory.GetCurrentDirectory();
-    var path = @"C:\Schule\4AHIF\LeoCode\backend\languages";
+    
+    var path = $@"{cwd}\..\languages";
     
     cwd = $@"{path}\Typescript\PasswordChecker";
     
