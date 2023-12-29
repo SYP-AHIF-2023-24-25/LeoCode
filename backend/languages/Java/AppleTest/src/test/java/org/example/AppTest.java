@@ -38,7 +38,7 @@ public class AppTest
 
     public void testIsAApple() {
         	App app = new App();
-        	assertTrue(app.isAApple("apple"));
+        	assertTrue(app.isAApple("x"));
     }
 
     public void testIsAApple_True() {
