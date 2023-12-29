@@ -22,16 +22,6 @@ namespace LeoCodeBackend
                 string jsonResult = ConvertTestResultsToJson(testResults);
 
                 File.WriteAllText(jsonFilePath, jsonResult);
-
-                Console.WriteLine("Conversion completed successfully.");
-            }
-            catch (FileNotFoundException ex)
-            {
-                Console.WriteLine($"Error: TRX file not found. {ex.Message}");
-            }
-            catch (XmlException ex)
-            {
-                Console.WriteLine($"Error: XML parsing issue. {ex.Message}");
             }
             catch (Exception ex)
             {
@@ -52,10 +42,7 @@ namespace LeoCodeBackend
                 {
                     TestName = testResultElement.Attribute("testName").Value,
                     Outcome = testResultElement.Attribute("outcome").Value,
-                    ErrorMessage = testResultElement.Attribute("errorMessage")?.Value,
-                    ErrorStackTrace = testResultElement.Attribute("errorStackTrace")?.Value,
-                    StartTime = DateTime.ParseExact(testResultElement.Attribute("startTime").Value, "yyyy-MM-ddTHH:mm:ss.FFFFFFFK", null),
-                    EndTime = DateTime.ParseExact(testResultElement.Attribute("endTime").Value, "yyyy-MM-ddTHH:mm:ss.FFFFFFFK", null)
+                    ErrorMessage = testResultElement.Attribute("errorMessage")?.Value
                 };
 
                 testResults.Add(testResult);
@@ -66,7 +53,7 @@ namespace LeoCodeBackend
 
         static string ConvertTestResultsToJson(List<TestResult> testResults)
         {
-            var summary = new
+            Summary summary = new Summary()
             {
                 TotalTests = testResults.Count,
                 PassedTests = testResults.Count(result => result.Outcome == "Passed"),
@@ -77,27 +64,34 @@ namespace LeoCodeBackend
             {
                 Summary = summary,
                 TestResults = testResults.Select(result =>
-                    new
+                    new TestResult
                     {
                         TestName = result.TestName,
                         Outcome = result.Outcome,
-                        ErrorMessage = result.ErrorMessage,
-                        ErrorStackTrace = result.ErrorStackTrace,
-                        StartTime = result.StartTime,
-                        EndTime = result.EndTime
+                        ErrorMessage = result.ErrorMessage
                     })
             };
 
             return JsonConvert.SerializeObject(jsonResults, Newtonsoft.Json.Formatting.Indented);
         }
     }
-    class TestResult
+    public class TestResult
     {
         public string TestName { get; set; }
         public string Outcome { get; set; }
         public string ErrorMessage { get; set; }
-        public string ErrorStackTrace { get; set; }
-        public DateTime StartTime { get; set; }
-        public DateTime EndTime { get; set; }
+    }
+
+    public class Summary
+    {
+        public int TotalTests { get; set; }
+        public int PassedTests { get; set; }
+        public int FailedTests { get; set; }
+    }
+
+    public class CustomResults
+    {
+        public Summary Summary { get; set; }
+        public List<TestResult> TestResults { get; set; }
     }
 }

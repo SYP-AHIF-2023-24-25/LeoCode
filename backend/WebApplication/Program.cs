@@ -16,6 +16,9 @@ namespace LeoCodeBackend
 
         static void Main(string[] args)
         {
+            ResultFileHelperCSharp resultFileHelperCSharp = new ResultFileHelperCSharp();
+            resultFileHelperCSharp.ConvertTrxToJson();
+
             var builder = WebApplication.CreateBuilder(args);
 
             builder.Services.AddEndpointsApiExplorer();
