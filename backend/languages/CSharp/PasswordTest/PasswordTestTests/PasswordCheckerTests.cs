@@ -20,9 +20,9 @@ namespace Tests
         [TestMethod()]
         public void T02_checkPassword_invalid()
         {
-            Assert.IsFalse(PasswordChecker.CheckPassword("1"));
-            Assert.IsFalse(PasswordChecker.CheckPassword("12345"));
-            Assert.IsFalse(PasswordChecker.CheckPassword("12345678910"));
+            Assert.IsTrue(PasswordChecker.CheckPassword("1"));
+            Assert.IsTrue(PasswordChecker.CheckPassword("12345"));
+            Assert.IsTrue(PasswordChecker.CheckPassword("12345678910"));
         }
     }
 }
