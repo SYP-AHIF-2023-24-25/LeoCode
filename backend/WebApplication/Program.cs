@@ -65,7 +65,7 @@ class Program
 
             cwd = $@"{path}\{language}\{ProgramName}";
 
-            var command = $"run --rm -v {path}:/usr/src/project -w /usr/src/project pwdchecker {language} {ProgramName}";
+            var command = $"run --rm -v {path}:/usr/src/project -w /usr/src/project pwdchec {language} {ProgramName}";
             var processInfo = new ProcessStartInfo("docker", command)
             {
                 CreateNoWindow = true,
@@ -81,7 +81,7 @@ class Program
 
                 var code = proc.ExitCode;
 
-                var resultsFile = Directory.GetFiles($"{cwd}\\results", "*.json").FirstOrDefault();
+                var resultsFile = Directory.GetFiles($"{cwd}\\results", "*.trx").FirstOrDefault();
 
                 if (resultsFile != null)
                 {
