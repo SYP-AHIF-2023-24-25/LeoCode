@@ -8,16 +8,12 @@ namespace LeoCodeBackend
     {
         public void ConvertTrxToJson()
         {
-            string trxFilePath = "C:\\Schule\\4AHIF\\LeoCode\\backend\\languages\\CSharp\\PasswordTest\\results\\_0d32bfe019ae_2023-12-03_19_07_36.trx";
+            string trxFilePath = "C:\\Schule\\4AHIF\\LeoCode\\backend\\languages\\CSharp\\PasswordTest\\results\\_0d34c18ff43e_2023-12-29_22_41_05.trx";
             string jsonFilePath = "C:\\test.json";
 
             try
             {
                 var testResults = LoadTestResults(trxFilePath);
-
-                Console.WriteLine($"Total Tests: {testResults.Count}");
-                Console.WriteLine($"Passed Tests: {testResults.Count(result => result.Outcome == "Passed")}");
-                Console.WriteLine($"Failed Tests: {testResults.Count(result => result.Outcome == "Failed")}");
 
                 string jsonResult = ConvertTestResultsToJson(testResults);
 
