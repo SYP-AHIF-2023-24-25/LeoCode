@@ -12,6 +12,7 @@ import { TimeLoggerService } from '../service/time-logger.service';
 export class TestResultComponent {
 
   timer: String = "";
+  loading: boolean = false;
 
   result: Result = {
     message: "Test results",
@@ -40,22 +41,36 @@ export class TestResultComponent {
     return result;
   }
 
+  resetFields(){
+    this.result = {
+      message: "Test results",
+      passed: 0,
+      notPassed: 0,
+      total: 0
+    };
+    this.timer = "";
+  }
+
 
 
 
   startTest() {
+    this.loading = true;
     const timeLogger = new TimeLoggerService(); 
     timeLogger.start();
+
 
     
     this.rest.getResults().subscribe(
       (data) => {
         this.result = this.convertFromJson(data as OriginalResult);
         this.timer = timeLogger.stop();
+        this.loading = false;  
       },
       (error) => {
         console.error("Error in API request", error);
         this.timer = timeLogger.stop();
+        this.loading  = false;
       }
     );
   }

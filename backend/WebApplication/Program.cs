@@ -38,11 +38,11 @@ app.UseHttpsRedirection();
 app.MapGet("/runtests", async () =>
 {
     var cwd = Directory.GetCurrentDirectory();
-    var path = @"C:\Schule\4AHIF\LeoCode\backend\languages";
+    var path = @"C:\Users\Kelit\Schule2023-24\syp\LeoCode\backend\languages";
     
     cwd = $@"{path}\Typescript\PasswordChecker";
     
-    var processInfo = new ProcessStartInfo("docker", $"run --rm -v {path}:/usr/src/project -w /usr/src/project florianhagmair06/passwordchecker Typescript PasswordChecker");
+    var processInfo = new ProcessStartInfo("docker", $"run --rm -v {path}:/usr/src/project -w /usr/src/project passwordchecker Typescript PasswordChecker");
 
     processInfo.CreateNoWindow = true;
     processInfo.UseShellExecute = false;

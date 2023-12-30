@@ -23,8 +23,16 @@
                     <td>{{result.notPassed}}</td>
                     <td>{{result.total}}</td>
                     <td>{{timer}}</td>
+                    <td> 
+                        <div *ngIf="loading" class="spinner-border text-primary" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div></td>
                 </tr>
         </table>
-        <button (click)="startTest()" class="btn btn-primary" >Start Tests</button>
+        <button (click)="startTest()" (click)="resetFields()" class="btn btn-primary" [disabled]="loading">Start Tests</button>
+        
+
+        
+
     </div>
 </body>
