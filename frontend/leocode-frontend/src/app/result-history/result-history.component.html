@@ -1,0 +1,6 @@
+<ul>
+    <li *ngFor="let entry of resultHistory">
+      {{ entry.timestamp | date }} - {{ entry.message }} - {{entry.passed}} - {{entry.notPassed}} - {{entry.total}}- {{entry.timer}}
+    </li>
+  </ul>
+  <button class="btn btn-primary" (click)="clearHistory()">Clear History</button>

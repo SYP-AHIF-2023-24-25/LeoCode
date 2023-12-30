@@ -3,6 +3,7 @@ import { Result } from '../model/result';
 import { OriginalResult } from '../model/original-result';
 import { RestService } from '../service/rest.service';
 import { TimeLoggerService } from '../service/time-logger.service';
+import { ResultHistoryService } from '../service/result-history.service';
 
 @Component({
   selector: 'app-test-result',
@@ -11,7 +12,7 @@ import { TimeLoggerService } from '../service/time-logger.service';
 })
 export class TestResultComponent {
 
-  timer: String = "";
+  timer: string = "";
   loading: boolean = false;
 
   result: Result = {
@@ -22,7 +23,7 @@ export class TestResultComponent {
   };
 
 
-  constructor(private rest: RestService) { 
+  constructor(private rest: RestService, private resultHistoryService: ResultHistoryService) { 
   }
 
 
@@ -55,6 +56,7 @@ export class TestResultComponent {
 
 
   startTest() {
+    this.resetFields();
     this.loading = true;
     const timeLogger = new TimeLoggerService(); 
     timeLogger.start();
@@ -65,6 +67,16 @@ export class TestResultComponent {
       (data) => {
         this.result = this.convertFromJson(data as OriginalResult);
         this.timer = timeLogger.stop();
+        const logEntry = {
+          message: this.result.message,
+          timestamp: new Date(),
+          passed: this.result.passed,
+          notPassed: this.result.notPassed,
+          total: this.result.total,
+          timer: this.timer
+        };
+    
+        this.resultHistoryService.addResult(logEntry.message,logEntry.passed, logEntry.notPassed, logEntry.total, logEntry.timer);    
         this.loading = false;  
       },
       (error) => {
@@ -74,5 +86,4 @@ export class TestResultComponent {
       }
     );
   }
-
 }

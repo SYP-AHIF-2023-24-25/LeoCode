@@ -10,7 +10,7 @@ export class TimeLoggerService {
     this.startTime = performance.now();
   }
 
-  stop(): String {
+  stop(): string {
     if (this.startTime !== null) {
       const endTime = performance.now();
       const elapsedMilliseconds = endTime - this.startTime;
