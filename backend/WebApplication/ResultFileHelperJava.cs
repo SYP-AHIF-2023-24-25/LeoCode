@@ -2,7 +2,7 @@ using Newtonsoft.Json;
 using System.Xml;
 using System.Xml.Linq;
 
-namespace LeoCodeBackend
+namespace LeoCodeBackend2
 {
     public class ResultFileHelperJava
     {
@@ -95,8 +95,7 @@ namespace LeoCodeBackend
     {
         public string TestName { get; set; }
         public string Outcome { get; set; }
-        public DateTime StartTime { get; set; }
-        public DateTime EndTime { get; set; }
+        public string ErrorMessage { get; set; }
     }
     public class Summary
     {
