@@ -19,6 +19,9 @@ namespace LeoCodeBackend
             ResultFileHelperCSharp resultFileHelperCSharp = new ResultFileHelperCSharp();
             resultFileHelperCSharp.ConvertTrxToJson();
 
+            /*ResultFileHelperTypescript resultFileHelperTypescript = new ResultFileHelperTypescript();
+            resultFileHelperTypescript.testserliazicer();*/
+
             var builder = WebApplication.CreateBuilder(args);
 
             builder.Services.AddEndpointsApiExplorer();
@@ -73,7 +76,7 @@ namespace LeoCodeBackend
 
                 cwd = $@"{path}\{language}\{ProgramName}";
 
-                var command = $"run --rm -v {path}:/usr/src/project -w /usr/src/project pwdchec {language} {ProgramName}";
+                var command = $"run --rm -v {path}:/usr/src/project -w /usr/src/project pwdtest {language} {ProgramName}";
                 var processInfo = new ProcessStartInfo("docker", command)
                 {
                     CreateNoWindow = true,
@@ -88,7 +91,7 @@ namespace LeoCodeBackend
                     await proc.WaitForExitAsync();
 
                     var code = proc.ExitCode;
-
+                    ResultFileHelperCSharp resultFileHelperCSharp = new ResultFileHelperCSharp();
                     var resultsFile = Directory.GetFiles($"{cwd}\\results", "*.trx").FirstOrDefault();
 
                     if (resultsFile != null)
