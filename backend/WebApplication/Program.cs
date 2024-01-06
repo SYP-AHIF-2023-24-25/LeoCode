@@ -16,8 +16,11 @@ namespace LeoCodeBackend
 
         static void Main(string[] args)
         {
-            ResultFileHelperCSharp resultFileHelperCSharp = new ResultFileHelperCSharp();
-            resultFileHelperCSharp.ConvertTrxToJson();
+            /*ResultFileHelperCSharp resultFileHelperCSharp = new ResultFileHelperCSharp();
+            resultFileHelperCSharp.ConvertTrxToJson();*/
+
+            /*ResultFileHelperJava resultFileHelperJava = new ResultFileHelperJava();
+            resultFileHelperJava.ConvertXmlToJson();*/
 
             /*ResultFileHelperTypescript resultFileHelperTypescript = new ResultFileHelperTypescript();
             resultFileHelperTypescript.testserliazicer();*/
@@ -92,6 +95,8 @@ namespace LeoCodeBackend
 
                     var code = proc.ExitCode;
                     ResultFileHelperCSharp resultFileHelperCSharp = new ResultFileHelperCSharp();
+                    //ResultFileHelperJava resultFileHelperJava = new ResultFileHelperJava();
+                    //var resultsFile = Directory.GetFiles($"{cwd}\\results", "*.xml").FirstOrDefault();
                     var resultsFile = Directory.GetFiles($"{cwd}\\results", "*.trx").FirstOrDefault();
 
                     if (resultsFile != null)

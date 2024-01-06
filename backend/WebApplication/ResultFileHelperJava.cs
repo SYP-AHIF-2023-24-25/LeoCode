@@ -2,7 +2,7 @@ using Newtonsoft.Json;
 using System.Xml;
 using System.Xml.Linq;
 
-namespace LeoCodeBackend2
+namespace LeoCodeBackend
 {
     public class ResultFileHelperJava
     {
@@ -89,25 +89,6 @@ namespace LeoCodeBackend2
 
             return JsonConvert.SerializeObject(jsonResults, Newtonsoft.Json.Formatting.Indented);
         }
-    }
-
-    public class TestResult
-    {
-        public string TestName { get; set; }
-        public string Outcome { get; set; }
-        public string ErrorMessage { get; set; }
-    }
-    public class Summary
-    {
-        public int TotalTests { get; set; }
-        public int PassedTests { get; set; }
-        public int FailedTests { get; set; }
-    }
-
-    public class CustomResults
-    {
-        public Summary Summary { get; set; }
-        public List<TestResult> TestResults { get; set; }
     }
 }
 

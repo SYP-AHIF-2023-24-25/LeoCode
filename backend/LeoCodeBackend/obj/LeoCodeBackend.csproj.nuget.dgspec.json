@@ -10,11 +10,11 @@
         "projectUniqueName": "C:\\Schule\\4AHIF\\LeoCode\\backend\\LeoCodeBackend\\LeoCodeBackend.csproj",
         "projectName": "LeoCodeBackend",
         "projectPath": "C:\\Schule\\4AHIF\\LeoCode\\backend\\LeoCodeBackend\\LeoCodeBackend.csproj",
-        "packagesPath": "C:\\Users\\dap03\\.nuget\\packages\\",
+        "packagesPath": "C:\\Users\\Florian\\.nuget\\packages\\",
         "outputPath": "C:\\Schule\\4AHIF\\LeoCode\\backend\\LeoCodeBackend\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\dap03\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Florian\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
