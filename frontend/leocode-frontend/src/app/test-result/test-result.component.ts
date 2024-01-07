@@ -7,6 +7,7 @@ import { ResultHistoryService } from '../service/result-history.service';
 
 import * as monaco from 'monaco-editor';
 
+
 @Component({
   selector: 'app-test-result',
   templateUrl: './test-result.component.html',
@@ -35,7 +36,7 @@ export class TestResultComponent implements AfterViewInit{
     this.initMonacoEditor();
   }
 
-  private initMonacoEditor() {
+ /* private initMonacoEditor() {
     const container = this.editorContainer.nativeElement;
 
     if (container) {
@@ -44,10 +45,10 @@ export class TestResultComponent implements AfterViewInit{
         language: 'javascript',
       });
     }
-  }
+  }*/
 
-  /*
-  private initMonacoEditor() {
+  
+ /* private initMonacoEditor() {
     const container = this.editorContainer.nativeElement;
   
     if (container) {
@@ -59,7 +60,8 @@ export class TestResultComponent implements AfterViewInit{
         });
       });
     }
-  }
+  }*/
+  
  private initMonacoEditor() {
     const container = this.editorContainer.nativeElement;
   
@@ -70,7 +72,8 @@ export class TestResultComponent implements AfterViewInit{
       } else {
         const loaderScript = document.createElement('script');
         loaderScript.type = 'text/javascript';
-        loaderScript.src = 'https://unpkg.com/monaco-editor@latest/min/vs/loader.js';
+        loaderScript.src = 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.20.0/min/vs/loader.js';
+        //loaderScript.src = '../../../node_modules/monaco-editor/min/vs/loader.js';
         loaderScript.onload = () => this.createEditor(container);
         document.head.appendChild(loaderScript);
       }
@@ -78,15 +81,18 @@ export class TestResultComponent implements AfterViewInit{
   }
   
   private createEditor(container: HTMLElement) {
-    (window as any).require.config({ paths: { 'vs': 'https://unpkg.com/monaco-editor@latest/min/vs' } });
+    (window as any).require.config({ paths: { 'vs': 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.20.0/min/vs' } });
     (window as any).require(['vs/editor/editor.main'], () => {
       const editor = (window as any).monaco.editor.create(container, {
         value: 'console.log("Hello, Monaco Editor!");',
         language: 'typescript',
-        
+        theme: 'vs-dark',
+        //readOnly: true,
+        automaticLayout: true
       });
     });
-  }*/
+  }
+
   
 
 

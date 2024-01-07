@@ -2,19 +2,15 @@
 <html>
 <head>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    
-    <!-- Laden Sie die notwendigen Skripte lokal -->
-    <script src="/assets/monaco-editor/min/vs/loader.js"></script>
-    <script src="/assets/monaco-editor/min/vs/editor/editor.main.nls.js"></script>
-    <script src="/assets/monaco-editor/min/vs/editor/editor.main.js"></script>
-
 </head>
 <body>
-
-    <div #editorContainer class="editor-container" style="height: 500px;"></div> 
-
     <div class="container mt-4" >
-        <h1>test-results</h1>
+        <h1>Enter your code here:</h1>
+
+        <div #editorContainer class="editor-container" style="height: 400px;"></div> 
+
+        <br>
+        <h1>Unitests-result</h1>
         <table class="table">
             <thead>
                 <tr>
@@ -39,6 +35,7 @@
                 </tr>
         </table>
         <button (click)="startTest()"class="btn btn-primary" [disabled]="loading">Start Tests</button>   
+        <buttont routerLink="/result-history" class="btn btn-primary" style="margin-left: 10px;">Result History</buttont>
 
     </div>
 </body>
