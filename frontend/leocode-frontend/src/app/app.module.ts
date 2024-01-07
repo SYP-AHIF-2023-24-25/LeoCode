@@ -6,13 +6,15 @@ import { AppComponent } from './app.component';
 import { TestResultComponent } from './test-result/test-result.component';
 import { FormsModule } from '@angular/forms';
 import { ResultHistoryComponent } from './result-history/result-history.component';
+import { IntroductionComponent } from './introduction/introduction.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     TestResultComponent,
-    ResultHistoryComponent
+    ResultHistoryComponent,
+    IntroductionComponent
   ],
   imports: [
     BrowserModule,

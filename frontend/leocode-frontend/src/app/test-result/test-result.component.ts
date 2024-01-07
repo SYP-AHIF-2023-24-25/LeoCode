@@ -6,6 +6,9 @@ import { TimeLoggerService } from '../service/time-logger.service';
 import { ResultHistoryService } from '../service/result-history.service';
 
 import * as monaco from 'monaco-editor';
+import * as  passwordChecker from 'raw-loader!../../../../backend/languages/Typescript/PasswordChecker/src/passwordChecker';
+
+
 
 
 @Component({
@@ -15,7 +18,7 @@ import * as monaco from 'monaco-editor';
 })
 
 
-export class TestResultComponent implements AfterViewInit{
+export class TestResultComponent implements AfterViewInit {
   
   @ViewChild('editorContainer') editorContainer!: ElementRef;
   editor!: monaco.editor.IStandaloneCodeEditor ;
@@ -37,6 +40,39 @@ export class TestResultComponent implements AfterViewInit{
   ngAfterViewInit() {
     this.initMonacoEditor();
   }
+
+ // FIRST METHOD
+   /* private initMonacoEditor() {
+    const editorContainer : HTMLElement | any = document.getElementById('editor');
+
+    if (editorContainer instanceof HTMLElement) {
+      monaco.editor.create(editorContainer, {
+        value: 'console.log("Hello, Monaco Editor!");',
+        language: 'typescript',
+        theme: 'vs-dark',
+        automaticLayout: true
+      });
+    } else {
+      console.error('Editor container not found or not an HTMLElement.');
+    }
+  }
+
+  
+ /* THIRD METHOD
+    private initMonacoEditor() {
+    const container = this.editorContainer.nativeElement;
+  
+    if (container) {
+      // Using Monaco's AMD loader directly
+      monaco.loader.require(['vs/editor/editor.main'], () => {
+        const editor = monaco.editor.create(container, {
+          value: 'console.log("Hello, Monaco Editor!");',
+          language: 'javascript',
+        });
+      });
+    }
+  }
+  */
   private initMonacoEditor() {
     const container = this.editorContainer.nativeElement;
 
@@ -55,21 +91,27 @@ export class TestResultComponent implements AfterViewInit{
   }
 
   private createEditor(container: HTMLElement) {
+    
     (window as any).require.config({ paths: { 'vs': 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.20.0/min/vs' } });
     (window as any).require(['vs/editor/editor.main'], () => {
       this.editor = (window as any).monaco.editor.create(container, {
         value: 'console.log("Hello, Monaco Editor!");',
         language: 'typescript',
         theme: 'vs-dark',
-        automaticLayout: true
+        automaticLayout: true,
       });
     });
+  }
+
+  getTemplateAsString(){
+
   }
 
   getEditorCode() {
     if (this.editor) {
       const code = this.editor.getValue();
-      console.log('Current code in the editor:', code);
+      console.log(code);
+      //console.log(passwordChecker);
       return code;
     } else {
       console.error('Editor not initialized.');
