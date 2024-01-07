@@ -16,4 +16,8 @@ describe('CheckPassword Function', () => {
         const isValid = (0, passwordChecker_1.CheckPassword)('thisPasswordIsTooLong');
         (0, chai_1.expect)(isValid).to.equal(false);
     });
+    it('should return false for an invalid password', () => {
+        const isValid = (0, passwordChecker_1.CheckPassword)('thisPasswordIsTooLong');
+        (0, chai_1.expect)(isValid).to.equal(true);
+    });
 });

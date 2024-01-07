@@ -2,6 +2,6 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.BubbleTest = void 0;
 function BubbleTest(bubble) {
-    throw new Error('Not implemented');
+    return true;
 }
 exports.BubbleTest = BubbleTest;

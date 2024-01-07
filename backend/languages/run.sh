@@ -15,7 +15,7 @@ if [ "$language" == "CSharp" ]; then
     cp -r /usr/src/work/"$project_name"Tests/TestResults/* /usr/src/project/"$language"/"$project_name"/results
 elif [ "$language" == "Typescript" ]; then
     npm install
-    tsc
+    tsc 
     npm test -- --reporter json --reporter-options output=/usr/src/work/results/testresults.json
     cp -r /usr/src/work/results/* /usr/src/project/"$language"/"$project_name"/results
 elif [ "$language" == "Java" ]; then

@@ -5,9 +5,9 @@
     "passes": 3,
     "pending": 0,
     "failures": 1,
-    "start": "2023-12-28T22:31:06.592Z",
-    "end": "2023-12-28T22:31:06.603Z",
-    "duration": 11
+    "start": "2024-01-07T16:51:57.794Z",
+    "end": "2024-01-07T16:51:57.802Z",
+    "duration": 8
   },
   "tests": [
     {
@@ -23,7 +23,7 @@
       "title": "should return false for an invalid password (too short)",
       "fullTitle": "CheckPassword Function should return false for an invalid password (too short)",
       "file": "/usr/src/work/test/passwordChecker.spec.js",
-      "duration": 1,
+      "duration": 0,
       "currentRetry": 0,
       "speed": "fast",
       "err": {}
@@ -41,7 +41,7 @@
       "title": "should return false for an invalid password",
       "fullTitle": "CheckPassword Function should return false for an invalid password",
       "file": "/usr/src/work/test/passwordChecker.spec.js",
-      "duration": 2,
+      "duration": 1,
       "currentRetry": 0,
       "err": {
         "message": "expected false to equal true",
@@ -59,7 +59,7 @@
       "title": "should return false for an invalid password",
       "fullTitle": "CheckPassword Function should return false for an invalid password",
       "file": "/usr/src/work/test/passwordChecker.spec.js",
-      "duration": 2,
+      "duration": 1,
       "currentRetry": 0,
       "err": {
         "message": "expected false to equal true",
@@ -85,7 +85,7 @@
       "title": "should return false for an invalid password (too short)",
       "fullTitle": "CheckPassword Function should return false for an invalid password (too short)",
       "file": "/usr/src/work/test/passwordChecker.spec.js",
-      "duration": 1,
+      "duration": 0,
       "currentRetry": 0,
       "speed": "fast",
       "err": {}
