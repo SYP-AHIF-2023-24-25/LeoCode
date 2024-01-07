@@ -4,3 +4,9 @@
     background-color: #4CAF50; /* Farbe der Ladeleiste */
     transition: width 0.3s; /* Animationsdauer für die Ladeleiste */
   }
+
+  #editorContainer {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }

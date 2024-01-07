@@ -1,16 +1,22 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef,AfterViewInit, ViewChild } from '@angular/core';
 import { Result } from '../model/result';
 import { OriginalResult } from '../model/original-result';
 import { RestService } from '../service/rest.service';
 import { TimeLoggerService } from '../service/time-logger.service';
 import { ResultHistoryService } from '../service/result-history.service';
 
+import * as monaco from 'monaco-editor';
+
 @Component({
   selector: 'app-test-result',
   templateUrl: './test-result.component.html',
   styleUrls: ['./test-result.component.css']
 })
-export class TestResultComponent {
+
+
+export class TestResultComponent implements AfterViewInit{
+  
+  @ViewChild('editorContainer') editorContainer!: ElementRef;
 
   timer: string = "";
   loading: boolean = false;
@@ -22,9 +28,67 @@ export class TestResultComponent {
     total: 0
   };
 
-
   constructor(private rest: RestService, private resultHistoryService: ResultHistoryService) { 
   }
+
+  ngAfterViewInit() {
+    this.initMonacoEditor();
+  }
+
+  private initMonacoEditor() {
+    const container = this.editorContainer.nativeElement;
+
+    if (container) {
+      monaco.editor.create(container, {
+        value: 'console.log("Hello, Monaco Editor!");',
+        language: 'javascript',
+      });
+    }
+  }
+
+  /*
+  private initMonacoEditor() {
+    const container = this.editorContainer.nativeElement;
+  
+    if (container) {
+      // Using Monaco's AMD loader directly
+      monaco.loader.require(['vs/editor/editor.main'], () => {
+        const editor = monaco.editor.create(container, {
+          value: 'console.log("Hello, Monaco Editor!");',
+          language: 'javascript',
+        });
+      });
+    }
+  }
+ private initMonacoEditor() {
+    const container = this.editorContainer.nativeElement;
+  
+    if (container) {
+      // Ensure that the Monaco loader is loaded
+      if ((window as any).monaco) {
+        this.createEditor(container);
+      } else {
+        const loaderScript = document.createElement('script');
+        loaderScript.type = 'text/javascript';
+        loaderScript.src = 'https://unpkg.com/monaco-editor@latest/min/vs/loader.js';
+        loaderScript.onload = () => this.createEditor(container);
+        document.head.appendChild(loaderScript);
+      }
+    }
+  }
+  
+  private createEditor(container: HTMLElement) {
+    (window as any).require.config({ paths: { 'vs': 'https://unpkg.com/monaco-editor@latest/min/vs' } });
+    (window as any).require(['vs/editor/editor.main'], () => {
+      const editor = (window as any).monaco.editor.create(container, {
+        value: 'console.log("Hello, Monaco Editor!");',
+        language: 'typescript',
+        
+      });
+    });
+  }*/
+  
+
 
 
   convertFromJson(originalResult: OriginalResult): Result {
@@ -86,4 +150,6 @@ export class TestResultComponent {
       }
     );
   }
+
+  
 }
