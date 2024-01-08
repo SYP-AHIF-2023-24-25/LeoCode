@@ -6,6 +6,8 @@ using System.IO;
 using System.Linq;
 using System.Text.Json;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.ObjectModel;
+using System.Management.Automation;
 
 namespace SecondLeoCodeBackend 
 {
@@ -15,6 +17,9 @@ namespace SecondLeoCodeBackend
 
         static void Main(string[] args)
         {
+            InstallingNodeModules("Typescript", "PasswordChecker");
+            BuildImage("typescript");
+            
             var builder = WebApplication.CreateBuilder(args);
 
             builder.Services.AddEndpointsApiExplorer();
@@ -55,6 +60,63 @@ namespace SecondLeoCodeBackend
                 .WithOpenApi();
 
             app.Run();
+        }
+
+        static async void InstallingNodeModules(string language, string projectName) {
+            var cwd = Directory.GetCurrentDirectory();
+
+            //var path = $@"{cwd}\..\languages\{language}\{projectName}";
+            var path = @"C:\Schule\4AHIF\LeoCode\backend\languages\Typescript\PasswordChecker";
+
+            /*Console.WriteLine(path);
+            //var command = $"install --prefix {path}";
+            var processInfo = new ProcessStartInfo
+            {
+                FileName = "npm",
+                Arguments = "install",
+                WorkingDirectory = path,
+                CreateNoWindow = true,
+                UseShellExecute = false,
+                RedirectStandardOutput = true,
+                RedirectStandardError = true
+            };
+
+            using (var proc = new Process { StartInfo = processInfo, EnableRaisingEvents = true })
+            {
+                proc.Start();
+                await proc.WaitForExitAsync();
+                var code = proc.ExitCode;
+                if (code == 0) {
+                    Console.WriteLine("Erfolgreich node_modules heruntergeladen");
+                } else {
+                    Console.WriteLine("Fehler beim herunterladen der node_modules");
+                }
+            }*/
+            Process process = new Process();
+            ProcessStartInfo startInfo = new ProcessStartInfo
+            {
+                FileName = "cmd.exe",
+                RedirectStandardInput = true,
+                RedirectStandardOutput = true,
+                RedirectStandardError = true,
+                UseShellExecute = false,
+                CreateNoWindow = true,
+                WorkingDirectory = path
+            };
+
+            process.StartInfo = startInfo;
+            process.Start();
+
+            // Send npm install command to the command prompt
+            process.StandardInput.WriteLine("npm install");
+            process.StandardInput.Flush();
+            process.StandardInput.Close();
+
+            // Capture and print the output
+            string output = process.StandardOutput.ReadToEnd();
+            string error = process.StandardError.ReadToEnd();
+
+            process.WaitForExit();
         }
 
         static void ReplaceCode(string code)
@@ -98,13 +160,15 @@ namespace SecondLeoCodeBackend
             return functionNames;
         }
         */
-        static void BuildImage(string language) 
+        static async void BuildImage(string language) 
         {
             try 
             {
                 var cwd = Directory.GetCurrentDirectory();
                 var dockerFilePath = $@"{cwd}\..\languages\Dockerfile.{language}";
                 var projectBuildPath = $@"{cwd}\..\languages";
+                Console.WriteLine(dockerFilePath);
+                Console.WriteLine(projectBuildPath);
                 var command = $"build -f {dockerFilePath} -t pwdtest {projectBuildPath}";
                 var processInfo = new ProcessStartInfo("docker", command)
                 {
@@ -117,7 +181,7 @@ namespace SecondLeoCodeBackend
                 using (var proc = new Process { StartInfo = processInfo, EnableRaisingEvents = true })
                 {
                     proc.Start();
-                    proc.WaitForExit();
+                    await proc.WaitForExitAsync();
 
                     var code = proc.ExitCode;
                 
