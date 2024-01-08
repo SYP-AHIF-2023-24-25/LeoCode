@@ -13,7 +13,7 @@ namespace SecondLeoCodeBackend
 {
     class Program
     {
-        private static Process backendProcess;
+        //private static Process backendProcess;
 
         static void Main(string[] args)
         {
@@ -29,7 +29,9 @@ namespace SecondLeoCodeBackend
             {
                 options.AddDefaultPolicy(builder =>
                 {
-                    builder.AllowAnyOrigin();
+                    builder.AllowAnyOrigin()
+                            .AllowAnyMethod()
+                            .AllowAnyHeader();
                 });
             });
 
@@ -65,33 +67,8 @@ namespace SecondLeoCodeBackend
         static async void InstallingNodeModules(string language, string projectName) {
             var cwd = Directory.GetCurrentDirectory();
 
-            //var path = $@"{cwd}\..\languages\{language}\{projectName}";
-            var path = @"C:\Schule\4AHIF\LeoCode\backend\languages\Typescript\PasswordChecker";
+            var path = $@"{cwd}\..\languages\{language}\{projectName}";
 
-            /*Console.WriteLine(path);
-            //var command = $"install --prefix {path}";
-            var processInfo = new ProcessStartInfo
-            {
-                FileName = "npm",
-                Arguments = "install",
-                WorkingDirectory = path,
-                CreateNoWindow = true,
-                UseShellExecute = false,
-                RedirectStandardOutput = true,
-                RedirectStandardError = true
-            };
-
-            using (var proc = new Process { StartInfo = processInfo, EnableRaisingEvents = true })
-            {
-                proc.Start();
-                await proc.WaitForExitAsync();
-                var code = proc.ExitCode;
-                if (code == 0) {
-                    Console.WriteLine("Erfolgreich node_modules heruntergeladen");
-                } else {
-                    Console.WriteLine("Fehler beim herunterladen der node_modules");
-                }
-            }*/
             Process process = new Process();
             ProcessStartInfo startInfo = new ProcessStartInfo
             {
@@ -107,36 +84,15 @@ namespace SecondLeoCodeBackend
             process.StartInfo = startInfo;
             process.Start();
 
-            // Send npm install command to the command prompt
             process.StandardInput.WriteLine("npm install");
             process.StandardInput.Flush();
             process.StandardInput.Close();
-
-            // Capture and print the output
-            string output = process.StandardOutput.ReadToEnd();
-            string error = process.StandardError.ReadToEnd();
 
             process.WaitForExit();
         }
 
         static void ReplaceCode(string code)
         {
-            /*
-            var cwd = Directory.GetCurrentDirectory();
-            string templateFilePath = $"{cwd}/../languages/Typescript/PasswordChecker/src/passwordChecker.ts";
-            string[] userCode = ["console.log('Hello World'); return true;", "let name: string = 'Florian'; return false;", "return true;"];
-
-            string templateCode = File.ReadAllText(templateFilePath);
-            string[] functionNames = getMethodeNames(templateCode);
-            for (int i = 0; i < userCode.Length; i++)
-            {
-                // Funktion zum Ersetzen des Benutzercode für eine bestimmte Funktion
-                string marker = $"// TODO CODE FÜR {functionNames[i]} HIER EINFÜGEN";
-                string newCode = $"{marker}\n{userCode[i]}";
-
-                templateCode = templateCode.Replace($"{marker}", newCode);
-                File.WriteAllText(templateFilePath, templateCode);
-            }*/
             var cwd = Directory.GetCurrentDirectory();
             string templateFilePath = $"{cwd}/../languages/Typescript/PasswordChecker/src/passwordChecker.ts";
             string templateCode = File.ReadAllText(templateFilePath);
@@ -144,22 +100,6 @@ namespace SecondLeoCodeBackend
             File.WriteAllText(templateFilePath, templateCode);
 
         }
-        /*
-        static string[] getMethodeNames(string code)
-        {
-            string[] functionNames = [];
-            string[] lines = code.Split("\n");
-            foreach (var line in lines)
-            {
-                if (line.Contains("function"))
-                {
-                    string functionName = line.Split("function")[1].Split("(")[0].Trim();
-                    functionNames.Append(functionName);
-                }
-            }
-            return functionNames;
-        }
-        */
         static async void BuildImage(string language) 
         {
             try 
@@ -169,7 +109,7 @@ namespace SecondLeoCodeBackend
                 var projectBuildPath = $@"{cwd}\..\languages";
                 Console.WriteLine(dockerFilePath);
                 Console.WriteLine(projectBuildPath);
-                var command = $"build -f {dockerFilePath} -t pwdtest {projectBuildPath}";
+                var command = $"build -f {dockerFilePath} -t hagi18769420 {projectBuildPath}";
                 var processInfo = new ProcessStartInfo("docker", command)
                 {
                     CreateNoWindow = true,
@@ -192,7 +132,7 @@ namespace SecondLeoCodeBackend
                     }
                     else
                     {
-                        Console.WriteLine($"Image builed not successfully. Exit Code: {backendProcess.ExitCode}");
+                        //Console.WriteLine($"Image builed not successfully. Exit Code: {backendProcess.ExitCode}");
                     }
                 }
 
@@ -213,7 +153,7 @@ namespace SecondLeoCodeBackend
 
                 cwd = $@"{path}\{language}\{ProgramName}";
 
-                var command = $"run --rm -v {path}:/usr/src/project -w /usr/src/project pwdtest {language} {ProgramName}";
+                var command = $"run --rm -v {path}:/usr/src/project -w /usr/src/project hagi18769420 {language} {ProgramName}";
                 var processInfo = new ProcessStartInfo("docker", command)
                 {
                     CreateNoWindow = true,

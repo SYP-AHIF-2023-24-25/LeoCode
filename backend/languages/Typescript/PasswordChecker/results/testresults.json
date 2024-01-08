@@ -5,16 +5,16 @@
     "passes": 0,
     "pending": 0,
     "failures": 4,
-    "start": "2024-01-08T19:41:56.156Z",
-    "end": "2024-01-08T19:41:56.332Z",
-    "duration": 176
+    "start": "2024-01-08T19:52:14.342Z",
+    "end": "2024-01-08T19:52:14.345Z",
+    "duration": 3
   },
   "tests": [
     {
       "title": "should return true for a valid password",
       "fullTitle": "CheckPassword Function should return true for a valid password",
       "file": "/usr/src/project/Typescript/PasswordChecker/test/passwordChecker.spec.js",
-      "duration": 67,
+      "duration": 1,
       "currentRetry": 0,
       "err": {
         "message": "expected false to equal true",
@@ -29,7 +29,7 @@
       "title": "should return false for an invalid password (too short)",
       "fullTitle": "CheckPassword Function should return false for an invalid password (too short)",
       "file": "/usr/src/project/Typescript/PasswordChecker/test/passwordChecker.spec.js",
-      "duration": 2,
+      "duration": 0,
       "currentRetry": 0,
       "err": {
         "message": "expected false to equal true",
@@ -44,7 +44,7 @@
       "title": "should return false for an invalid password (too long)",
       "fullTitle": "CheckPassword Function should return false for an invalid password (too long)",
       "file": "/usr/src/project/Typescript/PasswordChecker/test/passwordChecker.spec.js",
-      "duration": 2,
+      "duration": 0,
       "currentRetry": 0,
       "err": {
         "message": "expected false to equal true",
@@ -59,7 +59,7 @@
       "title": "should return false for an invalid password",
       "fullTitle": "CheckPassword Function should return false for an invalid password",
       "file": "/usr/src/project/Typescript/PasswordChecker/test/passwordChecker.spec.js",
-      "duration": 2,
+      "duration": 0,
       "currentRetry": 0,
       "err": {
         "message": "expected false to equal true",
@@ -77,7 +77,7 @@
       "title": "should return true for a valid password",
       "fullTitle": "CheckPassword Function should return true for a valid password",
       "file": "/usr/src/project/Typescript/PasswordChecker/test/passwordChecker.spec.js",
-      "duration": 67,
+      "duration": 1,
       "currentRetry": 0,
       "err": {
         "message": "expected false to equal true",
@@ -92,7 +92,7 @@
       "title": "should return false for an invalid password (too short)",
       "fullTitle": "CheckPassword Function should return false for an invalid password (too short)",
       "file": "/usr/src/project/Typescript/PasswordChecker/test/passwordChecker.spec.js",
-      "duration": 2,
+      "duration": 0,
       "currentRetry": 0,
       "err": {
         "message": "expected false to equal true",
@@ -107,7 +107,7 @@
       "title": "should return false for an invalid password (too long)",
       "fullTitle": "CheckPassword Function should return false for an invalid password (too long)",
       "file": "/usr/src/project/Typescript/PasswordChecker/test/passwordChecker.spec.js",
-      "duration": 2,
+      "duration": 0,
       "currentRetry": 0,
       "err": {
         "message": "expected false to equal true",
@@ -122,7 +122,7 @@
       "title": "should return false for an invalid password",
       "fullTitle": "CheckPassword Function should return false for an invalid password",
       "file": "/usr/src/project/Typescript/PasswordChecker/test/passwordChecker.spec.js",
-      "duration": 2,
+      "duration": 0,
       "currentRetry": 0,
       "err": {
         "message": "expected false to equal true",
