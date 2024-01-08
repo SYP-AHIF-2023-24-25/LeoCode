@@ -2,19 +2,19 @@
   "stats": {
     "suites": 1,
     "tests": 4,
-    "passes": 3,
+    "passes": 4,
     "pending": 0,
-    "failures": 1,
-    "start": "2024-01-07T16:51:57.794Z",
-    "end": "2024-01-07T16:51:57.802Z",
-    "duration": 8
+    "failures": 0,
+    "start": "2024-01-08T18:15:42.360Z",
+    "end": "2024-01-08T18:15:42.362Z",
+    "duration": 2
   },
   "tests": [
     {
       "title": "should return true for a valid password",
       "fullTitle": "CheckPassword Function should return true for a valid password",
-      "file": "/usr/src/work/test/passwordChecker.spec.js",
-      "duration": 1,
+      "file": "/usr/src/project/Typescript/PasswordChecker/test/passwordChecker.spec.js",
+      "duration": 0,
       "currentRetry": 0,
       "speed": "fast",
       "err": {}
@@ -22,7 +22,7 @@
     {
       "title": "should return false for an invalid password (too short)",
       "fullTitle": "CheckPassword Function should return false for an invalid password (too short)",
-      "file": "/usr/src/work/test/passwordChecker.spec.js",
+      "file": "/usr/src/project/Typescript/PasswordChecker/test/passwordChecker.spec.js",
       "duration": 0,
       "currentRetry": 0,
       "speed": "fast",
@@ -31,7 +31,7 @@
     {
       "title": "should return false for an invalid password (too long)",
       "fullTitle": "CheckPassword Function should return false for an invalid password (too long)",
-      "file": "/usr/src/work/test/passwordChecker.spec.js",
+      "file": "/usr/src/project/Typescript/PasswordChecker/test/passwordChecker.spec.js",
       "duration": 0,
       "currentRetry": 0,
       "speed": "fast",
@@ -40,43 +40,21 @@
     {
       "title": "should return false for an invalid password",
       "fullTitle": "CheckPassword Function should return false for an invalid password",
-      "file": "/usr/src/work/test/passwordChecker.spec.js",
-      "duration": 1,
+      "file": "/usr/src/project/Typescript/PasswordChecker/test/passwordChecker.spec.js",
+      "duration": 0,
       "currentRetry": 0,
-      "err": {
-        "message": "expected false to equal true",
-        "showDiff": true,
-        "actual": "false",
-        "expected": "true",
-        "operator": "strictEqual",
-        "stack": "AssertionError: expected false to equal true\n    at Context.<anonymous> (test/passwordChecker.spec.js:21:40)\n    at process.processImmediate (node:internal/timers:478:21)"
-      }
+      "speed": "fast",
+      "err": {}
     }
   ],
   "pending": [],
-  "failures": [
-    {
-      "title": "should return false for an invalid password",
-      "fullTitle": "CheckPassword Function should return false for an invalid password",
-      "file": "/usr/src/work/test/passwordChecker.spec.js",
-      "duration": 1,
-      "currentRetry": 0,
-      "err": {
-        "message": "expected false to equal true",
-        "showDiff": true,
-        "actual": "false",
-        "expected": "true",
-        "operator": "strictEqual",
-        "stack": "AssertionError: expected false to equal true\n    at Context.<anonymous> (test/passwordChecker.spec.js:21:40)\n    at process.processImmediate (node:internal/timers:478:21)"
-      }
-    }
-  ],
+  "failures": [],
   "passes": [
     {
       "title": "should return true for a valid password",
       "fullTitle": "CheckPassword Function should return true for a valid password",
-      "file": "/usr/src/work/test/passwordChecker.spec.js",
-      "duration": 1,
+      "file": "/usr/src/project/Typescript/PasswordChecker/test/passwordChecker.spec.js",
+      "duration": 0,
       "currentRetry": 0,
       "speed": "fast",
       "err": {}
@@ -84,7 +62,7 @@
     {
       "title": "should return false for an invalid password (too short)",
       "fullTitle": "CheckPassword Function should return false for an invalid password (too short)",
-      "file": "/usr/src/work/test/passwordChecker.spec.js",
+      "file": "/usr/src/project/Typescript/PasswordChecker/test/passwordChecker.spec.js",
       "duration": 0,
       "currentRetry": 0,
       "speed": "fast",
@@ -93,7 +71,16 @@
     {
       "title": "should return false for an invalid password (too long)",
       "fullTitle": "CheckPassword Function should return false for an invalid password (too long)",
-      "file": "/usr/src/work/test/passwordChecker.spec.js",
+      "file": "/usr/src/project/Typescript/PasswordChecker/test/passwordChecker.spec.js",
+      "duration": 0,
+      "currentRetry": 0,
+      "speed": "fast",
+      "err": {}
+    },
+    {
+      "title": "should return false for an invalid password",
+      "fullTitle": "CheckPassword Function should return false for an invalid password",
+      "file": "/usr/src/project/Typescript/PasswordChecker/test/passwordChecker.spec.js",
       "duration": 0,
       "currentRetry": 0,
       "speed": "fast",
