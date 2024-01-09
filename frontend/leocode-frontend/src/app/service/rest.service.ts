@@ -6,17 +6,18 @@ import { Injectable } from '@angular/core';
 })
 export class RestService {
 
-  baseUrl: string = 'http://localhost:5080';
-  
+  private baseUrl: string = 'http://localhost:5080/';
 
   constructor(private httpClient: HttpClient) { }
 
-  getResults() {
+  runTests(language: string, ProgramName: string) {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': '*' // Erlaubt alle Ursprünge (*)
+      'Access-Control-Allow-Origin': '*' // Erlaubt alle Ursprünge ()
     });
 
-    return this.httpClient.get(`${this.baseUrl}/runtests`, { headers: headers });
+    const body = { language, ProgramName };
+
+    return this.httpClient.post(`${this.baseUrl}/runtestssecondbackend`, body, { headers: headers });
   }
 }
