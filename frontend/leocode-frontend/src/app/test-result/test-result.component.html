@@ -1,8 +1,18 @@
 <h2>Monaco-Editor:</h2>
-<div style="height: 500px">
-
-  <ngx-monaco-editor style="height: 100%" [options]="editorOptions" [(ngModel)]="code"></ngx-monaco-editor>
+<div *ngFor="let codeSection of codeSections">
+  <div *ngIf="codeSection.readonly">
+    {{codeSection.code }}
+  </div>
+  <div *ngIf="!codeSection.readonly" style="height: 500px">
+    <ngx-monaco-editor style="height: 100%" [options]="editorOptions"
+      [(ngModel)]="codeSection.code"></ngx-monaco-editor>
+  </div>
 </div>
+
+<!-- <div style="height: 500px">
+
+    <ngx-monaco-editor style="height: 100%" [options]="editorOptions" [(ngModel)]="code"></ngx-monaco-editor>
+  </div> -->
 <div class="container mt-4">
   <h1>Enter your code here:</h1>
 

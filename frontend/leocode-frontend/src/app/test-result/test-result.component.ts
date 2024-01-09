@@ -6,6 +6,7 @@ import { TimeLoggerService } from '../service/time-logger.service';
 import { ResultHistoryService } from '../service/result-history.service';
 
 import * as monaco from 'monaco-editor';
+import { CodeSection } from './code-sections';
 
 
 
@@ -23,6 +24,12 @@ export class TestResultComponent implements AfterViewInit {
 
   @ViewChild('editorContainer') editorContainer!: ElementRef;
   editor!: monaco.editor.IStandaloneCodeEditor;
+
+  codeSections: CodeSection[] = [
+    { code: "console.log();", readonly: true },
+    { code: "", readonly: false },
+    { code: "console.log();", readonly: true }
+  ];
 
 
   timer: string = "";
@@ -43,7 +50,7 @@ export class TestResultComponent implements AfterViewInit {
   }
   /*
     private initMonacoEditor() {
-  
+
       if (this.editorContainer instanceof HTMLElement) {
         this.editor = monaco.editor.create(this.editorContainer, {
           value: 'console.log("Hello, Monaco Editor!");',
