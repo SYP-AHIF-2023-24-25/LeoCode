@@ -1,0 +1,43 @@
+<h2>Playground</h2>
+<div *ngFor="let codeSection of codeSections">
+  <div *ngIf="codeSection.readonly">
+    {{codeSection.code }}
+  </div>
+  <div *ngIf="!codeSection.readonly" style="height: 300px">
+    <ngx-monaco-editor style="height: 300px; width: 1000px"  [options]="editorOptions"
+      [(ngModel)]="codeSection.code"></ngx-monaco-editor>
+  </div>
+</div>
+
+<div class="container mt-4">
+  <br>
+  <h1>Unitests-result</h1>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Messages</th>
+        <th>Passed</th>
+        <th>Not Passed</th>
+        <th>Total Tests</th>
+        <th>Timer</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{{result.message}}</td>
+        <td>{{result.passed}}</td>
+        <td>{{result.notPassed}}</td>
+        <td>{{result.total}}</td>
+        <td>{{timer}}</td>
+        <td>
+          <div *ngIf="loading" class="spinner-border text-primary" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+        </td>
+      </tr>
+  </table>
+  <button (click)="startTest()" class="btn btn-primary" [disabled]="loading">Start
+    Tests</button>
+  <buttont routerLink="/result-history" class="btn btn-primary" style="margin-left: 10px;">Result History</buttont>
+
+</div>

@@ -7,7 +7,7 @@ import { Injectable } from '@angular/core';
 export class RestService {
 
   baseUrl: string = 'http://localhost:5080';
-  //baseUrl: string = 'http://140.238.213.255:8080';
+  
 
   constructor(private httpClient: HttpClient) { }
 
