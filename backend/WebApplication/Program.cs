@@ -16,6 +16,7 @@ namespace LeoCodeBackend
 
         static void Main(string[] args)
         {
+            StartBackend();
             var builder = WebApplication.CreateBuilder(args);
 
             builder.Services.AddEndpointsApiExplorer();
@@ -64,48 +65,36 @@ namespace LeoCodeBackend
             app.Run();
         }
 
-        static async void RunTestsSecondBackend(string language, string ProgramName){
-            string apiUrl = "http://localhost:5055/runtest";
-
-            var requestData = new
-            {
-                language = language,         // Replace with the actual language
-                ProgramName = ProgramName  // Replace with the actual program name
-            };
-
+        static async Task<IActionResult> RunTestsSecondBackend(string language, string ProgramName)
+        {
             try
             {
-                // Convert the data to URL-encoded form data
-                var formData = new FormUrlEncodedContent(new[]
-                {
-                    new KeyValuePair<string, string>("language", requestData.language),
-                    new KeyValuePair<string, string>("ProgramName", requestData.ProgramName)
-                });
+                var apiUrl = $"http://localhost:5055/runtest?language={Uri.EscapeDataString(language)}&ProgramName={Uri.EscapeDataString(ProgramName)}";
 
-                // Create an instance of HttpClient
-                using (HttpClient client = new HttpClient())
+                using (var httpClient = new HttpClient())
                 {
-                    // Send the POST request
-                    HttpResponseMessage response = await client.PostAsync(apiUrl, formData);
+                    var response = await httpClient.PostAsync(apiUrl, null);
 
-                    // Check if the request was successful
                     if (response.IsSuccessStatusCode)
                     {
-                        // Read and handle the response
-                        string responseBody = await response.Content.ReadAsStringAsync();
-                        Console.WriteLine("Response from the server: " + responseBody);
+                        var responseContent = await response.Content.ReadAsStringAsync();
+                        var jsonDocument = JsonDocument.Parse(responseContent);
+                        var rootElement = jsonDocument.RootElement;
+
+                        var responseObject = new { data = rootElement };
+                        return new OkObjectResult(responseObject);
                     }
                     else
                     {
-                        // Handle unsuccessful request
-                        Console.WriteLine("Error: " + response.StatusCode);
+                        var errorObject = new { error = $"HTTP Error: {response.StatusCode}" };
+                        return new BadRequestObjectResult(errorObject);
                     }
                 }
             }
             catch (Exception ex)
             {
-                // Handle exceptions
-                Console.WriteLine("Exception: " + ex.Message);
+                var errorObject = new { error = $"An error occurred: {ex.Message}" };
+                return new BadRequestObjectResult(errorObject);
             }
         }
 
@@ -162,7 +151,7 @@ namespace LeoCodeBackend
             }
         }
 
-        static void StartBackend(HttpContext context)
+        static void StartBackend()
         {
             try
             {
@@ -185,7 +174,7 @@ namespace LeoCodeBackend
             }
         }
 
-        static void StopBackend(HttpContext context)
+        static void StopBackend()
         {
             try
             {

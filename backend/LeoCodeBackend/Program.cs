@@ -109,7 +109,7 @@ namespace SecondLeoCodeBackend
                 var projectBuildPath = $@"{cwd}\..\languages";
                 Console.WriteLine(dockerFilePath);
                 Console.WriteLine(projectBuildPath);
-                var command = $"build -f {dockerFilePath} -t hagi18769420 {projectBuildPath}";
+                var command = $"build -f {dockerFilePath} -t bello {projectBuildPath}";
                 var processInfo = new ProcessStartInfo("docker", command)
                 {
                     CreateNoWindow = true,
@@ -153,7 +153,7 @@ namespace SecondLeoCodeBackend
 
                 cwd = $@"{path}\{language}\{ProgramName}";
 
-                var command = $"run --rm -v {path}:/usr/src/project -w /usr/src/project hagi18769420 {language} {ProgramName}";
+                var command = $"run --rm -v {path}:/usr/src/project -w /usr/src/project bello {language} {ProgramName}";
                 var processInfo = new ProcessStartInfo("docker", command)
                 {
                     CreateNoWindow = true,
