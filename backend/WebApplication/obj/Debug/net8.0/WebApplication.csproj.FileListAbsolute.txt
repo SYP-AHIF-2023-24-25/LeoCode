@@ -66,3 +66,4 @@ C:\Users\Kelit\Schule2023-24\syp\LeoCode\backend\WebApplication\obj\Debug\net8.0
 C:\Users\Kelit\Schule2023-24\syp\LeoCode\backend\WebApplication\obj\Debug\net8.0\WebApplication.pdb
 C:\Users\Kelit\Schule2023-24\syp\LeoCode\backend\WebApplication\obj\Debug\net8.0\WebApplication.genruntimeconfig.cache
 C:\Users\Kelit\Schule2023-24\syp\LeoCode\backend\WebApplication\obj\Debug\net8.0\ref\WebApplication.dll
+C:\Schule\4AHIF\LeoCode\backend\WebApplication\bin\Debug\net8.0\Newtonsoft.Json.dll

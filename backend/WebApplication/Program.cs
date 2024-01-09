@@ -1,78 +1,194 @@
+using System;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.DependencyInjection;
 
-var builder = WebApplication.CreateBuilder(args);
-
-// Add services to the container.
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-
-// Add CORS policy
-builder.Services.AddCors(options =>
+namespace LeoCodeBackend
 {
-    options.AddPolicy("AllowAngularFrontend", builder =>
+    class Program
     {
-        builder.WithOrigins("http://localhost:4200/test-results") // Replace with your Angular frontend URL
-               .AllowAnyHeader()
-               .AllowAnyMethod()
-               .AllowAnyOrigin();
-    });
-});
+        private static Process backendProcess;
 
-var app = builder.Build();
+        static void Main(string[] args)
+        {
+            StartBackend();
+            var builder = WebApplication.CreateBuilder(args);
 
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
+            builder.Services.AddEndpointsApiExplorer();
+            builder.Services.AddSwaggerGen();
+
+            builder.Services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(builder =>
+                {
+                    builder.WithOrigins("http://localhost:4200/test-results", "http://localhost:4200")
+                           .AllowAnyHeader()
+                           .AllowAnyMethod()
+                           .AllowAnyOrigin();
+                });
+            });
+            builder.Services.AddSignalR();
+
+            var app = builder.Build();
+
+            if (app.Environment.IsDevelopment())
+            {
+                app.UseSwagger();
+                app.UseSwaggerUI();
+            }
+
+            app.UseCors("AllowAngularFrontend");
+
+            app.UseHttpsRedirection();
+
+            app.MapPost("/runtests", RunTestsApi)
+                .WithName("RunTestsApi")
+                .WithOpenApi();
+
+            app.MapPost("/start", StartBackend)
+                .WithName("Start")
+                .WithOpenApi();
+
+            app.MapPost("/stop", StopBackend)
+                .WithName("Stop")
+                .WithOpenApi();
+
+            app.MapPost("/runtestssecondbackend", RunTestsSecondBackend)
+                .WithName("RunTestsSecondBackend")
+                .WithOpenApi();
+
+            app.Run();
+        }
+
+        static async Task<IActionResult> RunTestsSecondBackend(string language, string ProgramName)
+        {
+            try
+            {
+                var apiUrl = $"http://localhost:5055/runtest?language={Uri.EscapeDataString(language)}&ProgramName={Uri.EscapeDataString(ProgramName)}";
+
+                using (var httpClient = new HttpClient())
+                {
+                    var response = await httpClient.PostAsync(apiUrl, null);
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var responseContent = await response.Content.ReadAsStringAsync();
+                        var jsonDocument = JsonDocument.Parse(responseContent);
+                        var rootElement = jsonDocument.RootElement;
+
+                        var responseObject = new { data = rootElement };
+                        return new OkObjectResult(responseObject);
+                    }
+                    else
+                    {
+                        var errorObject = new { error = $"HTTP Error: {response.StatusCode}" };
+                        return new BadRequestObjectResult(errorObject);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                var errorObject = new { error = $"An error occurred: {ex.Message}" };
+                return new BadRequestObjectResult(errorObject);
+            }
+        }
+
+        static async Task<IActionResult> RunTestsApi(string language, string ProgramName)
+        {
+            try
+            {
+                var cwd = Directory.GetCurrentDirectory();
+
+                var path = $@"{cwd}\..\languages";
+
+                cwd = $@"{path}\{language}\{ProgramName}";
+
+                var command = $"run --rm -v {path}:/usr/src/project -w /usr/src/project pwdtest {language} {ProgramName}";
+                var processInfo = new ProcessStartInfo("docker", command)
+                {
+                    CreateNoWindow = true,
+                    UseShellExecute = false,
+                    RedirectStandardOutput = true,
+                    RedirectStandardError = true
+                };
+
+                using (var proc = new Process { StartInfo = processInfo, EnableRaisingEvents = true })
+                {
+                    proc.Start();
+                    await proc.WaitForExitAsync();
+
+                    var code = proc.ExitCode;
+                    ResultFileHelperCSharp resultFileHelperCSharp = new ResultFileHelperCSharp();
+                    var resultsFile = Directory.GetFiles($"{cwd}\\results", "*.json").FirstOrDefault();
+
+                    if (resultsFile != null)
+                    {
+                        string jsonString = await File.ReadAllTextAsync(resultsFile);
+
+                        var jsonDocument = JsonDocument.Parse(jsonString);
+                        var rootElement = jsonDocument.RootElement;
+
+                        var responseObject = new { data = rootElement };
+
+                        return new OkObjectResult(responseObject);
+                    }
+                    else
+                    {
+                        var errorObject = new { error = "No results file found." };
+                        return new BadRequestObjectResult(errorObject);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                var errorObject = new { error = $"An error occurred: {ex.Message}" };
+                return new BadRequestObjectResult(errorObject);
+            }
+        }
+
+        static void StartBackend()
+        {
+            try
+            {
+                string webApiProjectPath = @"../LeoCodeBackend";
+
+                ProcessStartInfo psi = new ProcessStartInfo
+                {
+                    FileName = "dotnet",
+                    Arguments = "run",
+                    WorkingDirectory = webApiProjectPath,
+                };
+
+                backendProcess = Process.Start(psi);
+
+                Console.WriteLine("Web API started successfully.");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error starting Web API: {ex.Message}");
+            }
+        }
+
+        static void StopBackend()
+        {
+            try
+            {
+                if (backendProcess != null && !backendProcess.HasExited)
+                {
+                    backendProcess.Kill();
+                    backendProcess.WaitForExit(); // Optionally wait for the process to exit
+                    Console.WriteLine("Web API process killed.");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error stopping Web API: {ex.Message}");
+            }
+        }
+    }
 }
-
-// Enable CORS
-app.UseCors("AllowAngularFrontend");
-
-app.UseHttpsRedirection();
-
-app.MapGet("/runtests", async () =>
-{
-    var cwd = Directory.GetCurrentDirectory();
-    var path = @"C:\Schule\4AHIF\LeoCode\backend\languages";
-    
-    cwd = $@"{path}\Typescript\PasswordChecker";
-    
-    var processInfo = new ProcessStartInfo("docker", $"run --rm -v {path}:/usr/src/project -w /usr/src/project florianhagmair06/passwordchecker Typescript PasswordChecker");
-
-    processInfo.CreateNoWindow = true;
-    processInfo.UseShellExecute = false;
-    processInfo.RedirectStandardOutput = true;
-    processInfo.RedirectStandardError = true;
-
-
-
-    var proc = new Process
-    {
-        StartInfo = processInfo,
-        EnableRaisingEvents = true
-    };
-
-    proc.Start();
-    proc.BeginOutputReadLine();
-    await proc.WaitForExitAsync();
-
-    var code = proc.ExitCode;
-    proc.Dispose();
-
-    var resultsFile = Directory.EnumerateFiles($"{cwd}\\results", "*.json").FirstOrDefault();
-
-    string jsonString = File.ReadAllText(resultsFile);
-
-    JsonDocument jsonDocument = JsonDocument.Parse(jsonString);
-    JsonElement rootElement = jsonDocument.RootElement;
-    return rootElement;
-})
-.WithName("RunTests")
-.WithOpenApi();
-
-app.Run();
