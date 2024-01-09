@@ -65,9 +65,7 @@ export class TestResultComponent  implements OnInit{
 
   
   parseCodeSectionsToTemplate(codeSections: CodeSection[]) {
-
       let template: string = "";
-  
       for(let i = 0; i < codeSections.length; i++) {
         template += codeSections[i].code + "\n";
       }
@@ -106,6 +104,7 @@ export class TestResultComponent  implements OnInit{
     console.log (this.codeSections);
     this.parseCodeSectionsToTemplate(this.codeSections);
     console.log (this.testTemplate);
+    
     this.resetFields();
     this.loading = true;
     const timeLogger = new TimeLoggerService();
