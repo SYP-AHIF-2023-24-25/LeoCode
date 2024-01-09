@@ -7,6 +7,7 @@ import { TestResultComponent } from './test-result/test-result.component';
 import { FormsModule } from '@angular/forms';
 import { ResultHistoryComponent } from './result-history/result-history.component';
 import { IntroductionComponent } from './introduction/introduction.component';
+import { MonacoEditorModule } from 'ngx-monaco-editor-v2';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { IntroductionComponent } from './introduction/introduction.component';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    MonacoEditorModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

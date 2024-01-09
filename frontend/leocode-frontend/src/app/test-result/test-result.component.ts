@@ -1,4 +1,4 @@
-import { Component, ElementRef,AfterViewInit, ViewChild, OnInit } from '@angular/core';
+import { Component, ElementRef, AfterViewInit, ViewChild, OnInit } from '@angular/core';
 import { Result } from '../model/result';
 import { OriginalResult } from '../model/original-result';
 import { RestService } from '../service/rest.service';
@@ -6,7 +6,6 @@ import { TimeLoggerService } from '../service/time-logger.service';
 import { ResultHistoryService } from '../service/result-history.service';
 
 import * as monaco from 'monaco-editor';
-import * as  passwordChecker from 'raw-loader!../../../../backend/languages/Typescript/PasswordChecker/src/passwordChecker';
 
 
 
@@ -19,10 +18,12 @@ import * as  passwordChecker from 'raw-loader!../../../../backend/languages/Type
 
 
 export class TestResultComponent implements AfterViewInit {
-  
+  editorOptions = { theme: 'vs-dark', language: 'javascript' };
+  code: string = 'function x() {\nconsole.log("Hello world!");\n}';
+
   @ViewChild('editorContainer') editorContainer!: ElementRef;
-  editor!: monaco.editor.IStandaloneCodeEditor ;
-  
+  editor!: monaco.editor.IStandaloneCodeEditor;
+
 
   timer: string = "";
   loading: boolean = false;
@@ -34,76 +35,31 @@ export class TestResultComponent implements AfterViewInit {
     total: 0
   };
 
-  constructor(private rest: RestService, private resultHistoryService: ResultHistoryService) { 
+  constructor(private rest: RestService, private resultHistoryService: ResultHistoryService) {
   }
 
   ngAfterViewInit() {
-    this.initMonacoEditor();
+    //this.initMonacoEditor();
   }
-
- // FIRST METHOD
-   /* private initMonacoEditor() {
-    const editorContainer : HTMLElement | any = document.getElementById('editor');
-
-    if (editorContainer instanceof HTMLElement) {
-      monaco.editor.create(editorContainer, {
-        value: 'console.log("Hello, Monaco Editor!");',
-        language: 'typescript',
-        theme: 'vs-dark',
-        automaticLayout: true
-      });
-    } else {
-      console.error('Editor container not found or not an HTMLElement.');
-    }
-  }
-
-  
- /* THIRD METHOD
+  /*
     private initMonacoEditor() {
-    const container = this.editorContainer.nativeElement;
   
-    if (container) {
-      // Using Monaco's AMD loader directly
-      monaco.loader.require(['vs/editor/editor.main'], () => {
-        const editor = monaco.editor.create(container, {
+      if (this.editorContainer instanceof HTMLElement) {
+        this.editor = monaco.editor.create(this.editorContainer, {
           value: 'console.log("Hello, Monaco Editor!");',
-          language: 'javascript',
+          language: 'typescript',
+          theme: 'vs-dark',
+          automaticLayout: true
         });
-      });
-    }
-  }
-  */
-  private initMonacoEditor() {
-    const container = this.editorContainer.nativeElement;
-
-    if (container) {
-      // Ensure that the Monaco loader is loaded
-      if ((window as any).monaco) {
-        this.createEditor(container);
       } else {
-        const loaderScript = document.createElement('script');
-        loaderScript.type = 'text/javascript';
-        loaderScript.src = 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.20.0/min/vs/loader.js';
-        loaderScript.onload = () => this.createEditor(container);
-        document.head.appendChild(loaderScript);
+        console.error('Editor container not found or not an HTMLElement.');
       }
     }
-  }
+  */
 
-  private createEditor(container: HTMLElement) {
-    
-    (window as any).require.config({ paths: { 'vs': 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.20.0/min/vs' } });
-    (window as any).require(['vs/editor/editor.main'], () => {
-      this.editor = (window as any).monaco.editor.create(container, {
-        value: 'console.log("Hello, Monaco Editor!");',
-        language: 'typescript',
-        theme: 'vs-dark',
-        automaticLayout: true,
-      });
-    });
-  }
 
-  getTemplateAsString(){
+
+  getTemplateAsString() {
 
   }
 
@@ -119,26 +75,26 @@ export class TestResultComponent implements AfterViewInit {
     }
   }
 
-  
+
 
 
 
   convertFromJson(originalResult: OriginalResult): Result {
-    const passed : number = originalResult.stats.passes;
-    const notPassed : number = originalResult.stats.failures;
-    const total : number = originalResult.stats.tests;
+    const passed: number = originalResult.stats.passes;
+    const notPassed: number = originalResult.stats.failures;
+    const total: number = originalResult.stats.tests;
 
     const result: Result = {
-        message: "Test results",
-        passed,
-        notPassed,
-        total
+      message: "Test results",
+      passed,
+      notPassed,
+      total
     };
 
     return result;
   }
 
-  resetFields(){
+  resetFields() {
     this.result = {
       message: "Test results",
       passed: 0,
@@ -154,11 +110,11 @@ export class TestResultComponent implements AfterViewInit {
   startTest() {
     this.resetFields();
     this.loading = true;
-    const timeLogger = new TimeLoggerService(); 
+    const timeLogger = new TimeLoggerService();
     timeLogger.start();
 
 
-    
+
     this.rest.getResults().subscribe(
       (data) => {
         this.result = this.convertFromJson(data as OriginalResult);
@@ -171,17 +127,17 @@ export class TestResultComponent implements AfterViewInit {
           total: this.result.total,
           timer: this.timer
         };
-    
-        this.resultHistoryService.addResult(logEntry.message,logEntry.passed, logEntry.notPassed, logEntry.total, logEntry.timer);    
-        this.loading = false;  
+
+        this.resultHistoryService.addResult(logEntry.message, logEntry.passed, logEntry.notPassed, logEntry.total, logEntry.timer);
+        this.loading = false;
       },
       (error) => {
         console.error("Error in API request", error);
         this.timer = timeLogger.stop();
-        this.loading  = false;
+        this.loading = false;
       }
     );
   }
 
-  
+
 }
