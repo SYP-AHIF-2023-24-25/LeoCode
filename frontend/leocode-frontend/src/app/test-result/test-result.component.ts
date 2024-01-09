@@ -5,8 +5,7 @@ import { RestService } from '../service/rest.service';
 import { TimeLoggerService } from '../service/time-logger.service';
 import { ResultHistoryService } from '../service/result-history.service';
 
-import * as monaco from 'monaco-editor';
-import { CodeSection } from './code-sections';
+import { CodeSection } from '../model/code-sections';
 
 
 
@@ -18,19 +17,16 @@ import { CodeSection } from './code-sections';
 })
 
 
-export class TestResultComponent implements AfterViewInit {
-  editorOptions = { theme: 'vs-dark', language: 'javascript' };
+export class TestResultComponent  implements OnInit{
+
+  testTemplate: string = 'export function CheckPassword(password: string): boolean{\n  Todo Implementation \n}'
+
+
+  editorOptions = { theme: 'vs-dark', language: 'typescrip'};
+  
   code: string = 'function x() {\nconsole.log("Hello world!");\n}';
 
-  @ViewChild('editorContainer') editorContainer!: ElementRef;
-  editor!: monaco.editor.IStandaloneCodeEditor;
-
-  codeSections: CodeSection[] = [
-    { code: "console.log();", readonly: true },
-    { code: "", readonly: false },
-    { code: "console.log();", readonly: true }
-  ];
-
+  codeSections: CodeSection[] = [];
 
   timer: string = "";
   loading: boolean = false;
@@ -45,46 +41,38 @@ export class TestResultComponent implements AfterViewInit {
   constructor(private rest: RestService, private resultHistoryService: ResultHistoryService) {
   }
 
-  ngAfterViewInit() {
-    //this.initMonacoEditor();
+  ngOnInit(): void {
+    this.parseTemplateToCodeSections(this.testTemplate);
   }
-  /*
-    private initMonacoEditor() {
 
-      if (this.editorContainer instanceof HTMLElement) {
-        this.editor = monaco.editor.create(this.editorContainer, {
-          value: 'console.log("Hello, Monaco Editor!");',
-          language: 'typescript',
-          theme: 'vs-dark',
-          automaticLayout: true
-        });
-      } else {
-        console.error('Editor container not found or not an HTMLElement.');
+  parseTemplateToCodeSections(template: string) {
+
+    let stringCodeSections: string[]= template.split("\n");
+
+    let codeSections: CodeSection[] = [];
+
+
+    for(let i = 0; i < stringCodeSections.length; i++) {
+      if(stringCodeSections[i].includes("Todo Implementation")) {
+        codeSections.push({ code: stringCodeSections[i], readonly: false });
+      }else {
+        codeSections.push({ code: stringCodeSections[i], readonly: true });
       }
     }
-  */
 
-
-
-  getTemplateAsString() {
-
+    this.codeSections = codeSections;
   }
 
-  getEditorCode() {
-    if (this.editor) {
-      const code = this.editor.getValue();
-      console.log(code);
-      //console.log(passwordChecker);
-      return code;
-    } else {
-      console.error('Editor not initialized.');
-      return '';
+  
+  parseCodeSectionsToTemplate(codeSections: CodeSection[]) {
+
+      let template: string = "";
+  
+      for(let i = 0; i < codeSections.length; i++) {
+        template += codeSections[i].code + "\n";
+      }
+      this.testTemplate = template;
     }
-  }
-
-
-
-
 
   convertFromJson(originalResult: OriginalResult): Result {
     const passed: number = originalResult.stats.passes;
@@ -115,6 +103,9 @@ export class TestResultComponent implements AfterViewInit {
 
 
   startTest() {
+    console.log (this.codeSections);
+    this.parseCodeSectionsToTemplate(this.codeSections);
+    console.log (this.testTemplate);
     this.resetFields();
     this.loading = true;
     const timeLogger = new TimeLoggerService();

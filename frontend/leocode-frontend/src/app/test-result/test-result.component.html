@@ -3,8 +3,8 @@
   <div *ngIf="codeSection.readonly">
     {{codeSection.code }}
   </div>
-  <div *ngIf="!codeSection.readonly" style="height: 500px">
-    <ngx-monaco-editor style="height: 100%" [options]="editorOptions"
+  <div *ngIf="!codeSection.readonly" style="height: 300px">
+    <ngx-monaco-editor style="height: 300px; width: 1000px"  [options]="editorOptions"
       [(ngModel)]="codeSection.code"></ngx-monaco-editor>
   </div>
 </div>
@@ -14,10 +14,6 @@
     <ngx-monaco-editor style="height: 100%" [options]="editorOptions" [(ngModel)]="code"></ngx-monaco-editor>
   </div> -->
 <div class="container mt-4">
-  <h1>Enter your code here:</h1>
-
-  <div #editorContainer class="editor-container" style="height: 400px;"></div>
-  <!--<div id="editor" style="height: 500px;"></div>-->
   <br>
   <h1>Unitests-result</h1>
   <table class="table">
@@ -44,7 +40,7 @@
         </td>
       </tr>
   </table>
-  <button (click)="startTest()" (click)="getEditorCode()" class="btn btn-primary" [disabled]="loading">Start
+  <button (click)="startTest()" class="btn btn-primary" [disabled]="loading">Start
     Tests</button>
   <buttont routerLink="/result-history" class="btn btn-primary" style="margin-left: 10px;">Result History</buttont>
 
