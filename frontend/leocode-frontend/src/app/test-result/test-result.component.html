@@ -1,15 +1,17 @@
-<h2>Playground</h2>
-<div *ngFor="let codeSection of codeSections">
-  <div *ngIf="codeSection.readonly">
-    {{codeSection.code }}
-  </div>
-  <div *ngIf="!codeSection.readonly" style="height: 300px">
-    <ngx-monaco-editor style="height: 300px; width: 1000px"  [options]="editorOptions"
-      [(ngModel)]="codeSection.code"></ngx-monaco-editor>
-  </div>
-</div>
+
 
 <div class="container mt-4">
+  <h2>Playground</h2>
+  <div *ngFor="let codeSection of codeSections">
+      <div *ngIf="codeSection.readonly">
+          <mark>{{codeSection.code }}</mark> 
+      </div>
+      <div *ngIf="!codeSection.readonly" style="height: 300px">
+          <ngx-monaco-editor style="height: 300px; width: 1000px"  [options]="editorOptions"
+          [(ngModel)]="codeSection.code"></ngx-monaco-editor>
+      </div>
+  </div>
+
   <br>
   <h1>Unitests-result</h1>
   <table class="table">
