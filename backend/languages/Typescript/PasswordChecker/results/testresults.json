@@ -2,12 +2,12 @@
   "stats": {
     "suites": 1,
     "tests": 4,
-    "passes": 0,
+    "passes": 4,
     "pending": 0,
-    "failures": 4,
-    "start": "2024-01-09T21:30:55.785Z",
-    "end": "2024-01-09T21:30:55.788Z",
-    "duration": 3
+    "failures": 0,
+    "start": "2024-01-10T01:30:54.141Z",
+    "end": "2024-01-10T01:30:54.142Z",
+    "duration": 1
   },
   "tests": [
     {
@@ -16,14 +16,8 @@
       "file": "/usr/src/project/Typescript/PasswordChecker/test/passwordChecker.spec.js",
       "duration": 1,
       "currentRetry": 0,
-      "err": {
-        "message": "expected false to equal true",
-        "showDiff": true,
-        "actual": "false",
-        "expected": "true",
-        "operator": "strictEqual",
-        "stack": "AssertionError: expected false to equal true\n    at Context.<anonymous> (test/passwordChecker.spec.js:9:40)\n    at process.processImmediate (node:internal/timers:478:21)"
-      }
+      "speed": "fast",
+      "err": {}
     },
     {
       "title": "should return false for an invalid password (too short)",
@@ -31,14 +25,8 @@
       "file": "/usr/src/project/Typescript/PasswordChecker/test/passwordChecker.spec.js",
       "duration": 0,
       "currentRetry": 0,
-      "err": {
-        "message": "expected false to equal true",
-        "showDiff": true,
-        "actual": "false",
-        "expected": "true",
-        "operator": "strictEqual",
-        "stack": "AssertionError: expected false to equal true\n    at Context.<anonymous> (test/passwordChecker.spec.js:13:40)\n    at process.processImmediate (node:internal/timers:478:21)"
-      }
+      "speed": "fast",
+      "err": {}
     },
     {
       "title": "should return false for an invalid password (too long)",
@@ -46,14 +34,8 @@
       "file": "/usr/src/project/Typescript/PasswordChecker/test/passwordChecker.spec.js",
       "duration": 0,
       "currentRetry": 0,
-      "err": {
-        "message": "expected false to equal true",
-        "showDiff": true,
-        "actual": "false",
-        "expected": "true",
-        "operator": "strictEqual",
-        "stack": "AssertionError: expected false to equal true\n    at Context.<anonymous> (test/passwordChecker.spec.js:17:40)\n    at process.processImmediate (node:internal/timers:478:21)"
-      }
+      "speed": "fast",
+      "err": {}
     },
     {
       "title": "should return false for an invalid password",
@@ -61,32 +43,21 @@
       "file": "/usr/src/project/Typescript/PasswordChecker/test/passwordChecker.spec.js",
       "duration": 0,
       "currentRetry": 0,
-      "err": {
-        "message": "expected false to equal true",
-        "showDiff": true,
-        "actual": "false",
-        "expected": "true",
-        "operator": "strictEqual",
-        "stack": "AssertionError: expected false to equal true\n    at Context.<anonymous> (test/passwordChecker.spec.js:21:40)\n    at process.processImmediate (node:internal/timers:478:21)"
-      }
+      "speed": "fast",
+      "err": {}
     }
   ],
   "pending": [],
-  "failures": [
+  "failures": [],
+  "passes": [
     {
       "title": "should return true for a valid password",
       "fullTitle": "CheckPassword Function should return true for a valid password",
       "file": "/usr/src/project/Typescript/PasswordChecker/test/passwordChecker.spec.js",
       "duration": 1,
       "currentRetry": 0,
-      "err": {
-        "message": "expected false to equal true",
-        "showDiff": true,
-        "actual": "false",
-        "expected": "true",
-        "operator": "strictEqual",
-        "stack": "AssertionError: expected false to equal true\n    at Context.<anonymous> (test/passwordChecker.spec.js:9:40)\n    at process.processImmediate (node:internal/timers:478:21)"
-      }
+      "speed": "fast",
+      "err": {}
     },
     {
       "title": "should return false for an invalid password (too short)",
@@ -94,14 +65,8 @@
       "file": "/usr/src/project/Typescript/PasswordChecker/test/passwordChecker.spec.js",
       "duration": 0,
       "currentRetry": 0,
-      "err": {
-        "message": "expected false to equal true",
-        "showDiff": true,
-        "actual": "false",
-        "expected": "true",
-        "operator": "strictEqual",
-        "stack": "AssertionError: expected false to equal true\n    at Context.<anonymous> (test/passwordChecker.spec.js:13:40)\n    at process.processImmediate (node:internal/timers:478:21)"
-      }
+      "speed": "fast",
+      "err": {}
     },
     {
       "title": "should return false for an invalid password (too long)",
@@ -109,14 +74,8 @@
       "file": "/usr/src/project/Typescript/PasswordChecker/test/passwordChecker.spec.js",
       "duration": 0,
       "currentRetry": 0,
-      "err": {
-        "message": "expected false to equal true",
-        "showDiff": true,
-        "actual": "false",
-        "expected": "true",
-        "operator": "strictEqual",
-        "stack": "AssertionError: expected false to equal true\n    at Context.<anonymous> (test/passwordChecker.spec.js:17:40)\n    at process.processImmediate (node:internal/timers:478:21)"
-      }
+      "speed": "fast",
+      "err": {}
     },
     {
       "title": "should return false for an invalid password",
@@ -124,15 +83,8 @@
       "file": "/usr/src/project/Typescript/PasswordChecker/test/passwordChecker.spec.js",
       "duration": 0,
       "currentRetry": 0,
-      "err": {
-        "message": "expected false to equal true",
-        "showDiff": true,
-        "actual": "false",
-        "expected": "true",
-        "operator": "strictEqual",
-        "stack": "AssertionError: expected false to equal true\n    at Context.<anonymous> (test/passwordChecker.spec.js:21:40)\n    at process.processImmediate (node:internal/timers:478:21)"
-      }
+      "speed": "fast",
+      "err": {}
     }
-  ],
-  "passes": []
+  ]
 }

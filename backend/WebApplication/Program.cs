@@ -43,7 +43,7 @@ namespace LeoCodeBackend
             }
 
             app.UseCors("AllowAngularFrontend");
-
+            app.UseCors();
             app.UseHttpsRedirection();
 
             app.MapPost("/runtests", RunTestsApi)
@@ -65,7 +65,7 @@ namespace LeoCodeBackend
             app.Run();
         }
 
-        static async Task<IActionResult> RunTestsSecondBackend(string language, string ProgramName)
+        static async Task<string> RunTestsSecondBackend(string language, string ProgramName)
         {
             try
             {
@@ -80,21 +80,20 @@ namespace LeoCodeBackend
                         var responseContent = await response.Content.ReadAsStringAsync();
                         var jsonDocument = JsonDocument.Parse(responseContent);
                         var rootElement = jsonDocument.RootElement;
-
                         var responseObject = new { data = rootElement };
-                        return new OkObjectResult(responseObject);
+                        return JsonSerializer.Serialize(responseObject);
                     }
                     else
                     {
                         var errorObject = new { error = $"HTTP Error: {response.StatusCode}" };
-                        return new BadRequestObjectResult(errorObject);
+                        return "error";
                     }
                 }
             }
             catch (Exception ex)
             {
                 var errorObject = new { error = $"An error occurred: {ex.Message}" };
-                return new BadRequestObjectResult(errorObject);
+                return "error";
             }
         }
 

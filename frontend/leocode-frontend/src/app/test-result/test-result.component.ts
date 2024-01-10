@@ -137,7 +137,9 @@ export class TestResultComponent  implements OnInit{
 
     this.rest.runTests('Typescript', 'PasswordChecker').subscribe(
       (data) => {
-        this.result = this.convertFromJson(data as OriginalResult);
+        const d = data.data.value.data; // Extract the relevant data
+        this.result = this.convertFromJson(d as OriginalResult);
+        
         this.timer = timeLogger.stop();
         const logEntry = {
           message: this.result.message,

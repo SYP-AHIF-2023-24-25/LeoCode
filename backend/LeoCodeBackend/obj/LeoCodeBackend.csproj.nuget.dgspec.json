@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Kelit\\Schule2023-24\\syp\\LeoCode\\backend\\LeoCodeBackend\\LeoCodeBackend.csproj": {}
+    "C:\\Schule\\4AHIF\\LeoCode\\backend\\LeoCodeBackend\\LeoCodeBackend.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Kelit\\Schule2023-24\\syp\\LeoCode\\backend\\LeoCodeBackend\\LeoCodeBackend.csproj": {
+    "C:\\Schule\\4AHIF\\LeoCode\\backend\\LeoCodeBackend\\LeoCodeBackend.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Kelit\\Schule2023-24\\syp\\LeoCode\\backend\\LeoCodeBackend\\LeoCodeBackend.csproj",
+        "projectUniqueName": "C:\\Schule\\4AHIF\\LeoCode\\backend\\LeoCodeBackend\\LeoCodeBackend.csproj",
         "projectName": "LeoCodeBackend",
-        "projectPath": "C:\\Users\\Kelit\\Schule2023-24\\syp\\LeoCode\\backend\\LeoCodeBackend\\LeoCodeBackend.csproj",
-        "packagesPath": "C:\\Users\\Kelit\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Kelit\\Schule2023-24\\syp\\LeoCode\\backend\\LeoCodeBackend\\obj\\",
+        "projectPath": "C:\\Schule\\4AHIF\\LeoCode\\backend\\LeoCodeBackend\\LeoCodeBackend.csproj",
+        "packagesPath": "C:\\Users\\dap03\\.nuget\\packages\\",
+        "outputPath": "C:\\Schule\\4AHIF\\LeoCode\\backend\\LeoCodeBackend\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Kelit\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\dap03\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [

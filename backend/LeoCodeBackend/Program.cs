@@ -46,7 +46,7 @@ namespace SecondLeoCodeBackend
             }
 
             app.UseCors("AllowAngularFrontend");
-
+            app.UseCors();
             app.UseHttpsRedirection();
             
             app.MapPost("/runtest", RunTests)
@@ -109,7 +109,7 @@ namespace SecondLeoCodeBackend
                 var projectBuildPath = $@"{cwd}\..\languages";
                 Console.WriteLine(dockerFilePath);
                 Console.WriteLine(projectBuildPath);
-                var command = $"build -f {dockerFilePath} -t bello {projectBuildPath}";
+                var command = $"build -f {dockerFilePath} -t paswrd {projectBuildPath}";
                 var processInfo = new ProcessStartInfo("docker", command)
                 {
                     CreateNoWindow = true,
@@ -153,7 +153,7 @@ namespace SecondLeoCodeBackend
 
                 cwd = $@"{path}\{language}\{ProgramName}";
 
-                var command = $"run --rm -v {path}:/usr/src/project -w /usr/src/project bello {language} {ProgramName}";
+                var command = $"run --rm -v {path}:/usr/src/project -w /usr/src/project paswrd {language} {ProgramName}";
                 var processInfo = new ProcessStartInfo("docker", command)
                 {
                     CreateNoWindow = true,
