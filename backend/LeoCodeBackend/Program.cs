@@ -1,25 +1,22 @@
-using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.ObjectModel;
-using System.Management.Automation;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.DependencyInjection;
 
-namespace SecondLeoCodeBackend 
+namespace LeoCodeBackend
 {
     class Program
     {
-        //private static Process backendProcess;
+        private static Process backendProcess;
 
         static void Main(string[] args)
         {
-            InstallingNodeModules("Typescript", "PasswordChecker");
-            BuildImage("typescript");
-            
+            StartBackend();
             var builder = WebApplication.CreateBuilder(args);
 
             builder.Services.AddEndpointsApiExplorer();
@@ -29,12 +26,12 @@ namespace SecondLeoCodeBackend
             {
                 options.AddDefaultPolicy(builder =>
                 {
-                    builder.AllowAnyOrigin()
-                            .AllowAnyMethod()
-                            .AllowAnyHeader();
+                    builder.WithOrigins("http://localhost:4200/test-results", "http://localhost:4200")
+                           .AllowAnyHeader()
+                           .AllowAnyMethod()
+                           .AllowAnyOrigin();
                 });
             });
-
             builder.Services.AddSignalR();
 
             var app = builder.Build();
@@ -48,102 +45,59 @@ namespace SecondLeoCodeBackend
             app.UseCors("AllowAngularFrontend");
             app.UseCors();
             app.UseHttpsRedirection();
-            
-            app.MapPost("/runtest", RunTests)
-                .WithName("RunTests")
-                .WithOpenApi();
-            
-            app.MapPost("/buildimage", BuildImage)
-                .WithName("BuildImage")
+
+            app.MapPost("/runtests", RunTestsApi)
+                .WithName("RunTestsApi")
                 .WithOpenApi();
 
-            app.MapPost("/replacecode", ReplaceCode)
-                .WithName("ReplaceCode")
+            app.MapPost("/start", StartBackend)
+                .WithName("Start")
+                .WithOpenApi();
+
+            app.MapPost("/stop", StopBackend)
+                .WithName("Stop")
+                .WithOpenApi();
+
+            app.MapPost("/runtestssecondbackend", RunTestsSecondBackend)
+                .WithName("RunTestsSecondBackend")
                 .WithOpenApi();
 
             app.Run();
         }
 
-        static async void InstallingNodeModules(string language, string projectName) {
-            var cwd = Directory.GetCurrentDirectory();
-
-            var path = $@"{cwd}\..\languages\{language}\{projectName}";
-
-            Process process = new Process();
-            ProcessStartInfo startInfo = new ProcessStartInfo
-            {
-                FileName = "cmd.exe",
-                RedirectStandardInput = true,
-                RedirectStandardOutput = true,
-                RedirectStandardError = true,
-                UseShellExecute = false,
-                CreateNoWindow = true,
-                WorkingDirectory = path
-            };
-
-            process.StartInfo = startInfo;
-            process.Start();
-
-            process.StandardInput.WriteLine("npm install");
-            process.StandardInput.Flush();
-            process.StandardInput.Close();
-
-            process.WaitForExit();
-        }
-
-        static void ReplaceCode(string code)
+        static async Task<string> RunTestsSecondBackend(string language, string ProgramName)
         {
-            var cwd = Directory.GetCurrentDirectory();
-            string templateFilePath = $"{cwd}/../languages/Typescript/PasswordChecker/src/passwordChecker.ts";
-            string templateCode = File.ReadAllText(templateFilePath);
-            templateCode = code;
-            File.WriteAllText(templateFilePath, templateCode);
-
-        }
-        static async void BuildImage(string language) 
-        {
-            try 
+            try
             {
-                var cwd = Directory.GetCurrentDirectory();
-                var dockerFilePath = $@"{cwd}\..\languages\Dockerfile.{language}";
-                var projectBuildPath = $@"{cwd}\..\languages";
-                Console.WriteLine(dockerFilePath);
-                Console.WriteLine(projectBuildPath);
-                var command = $"build -f {dockerFilePath} -t paswrd {projectBuildPath}";
-                var processInfo = new ProcessStartInfo("docker", command)
+                var apiUrl = $"http://localhost:5055/runtest?language={Uri.EscapeDataString(language)}&ProgramName={Uri.EscapeDataString(ProgramName)}";
+
+                using (var httpClient = new HttpClient())
                 {
-                    CreateNoWindow = true,
-                    UseShellExecute = false,
-                    RedirectStandardOutput = true,
-                    RedirectStandardError = true
-                };
+                    var response = await httpClient.PostAsync(apiUrl, null);
 
-                using (var proc = new Process { StartInfo = processInfo, EnableRaisingEvents = true })
-                {
-                    proc.Start();
-                    await proc.WaitForExitAsync();
-
-                    var code = proc.ExitCode;
-                
-
-                    if (code == 0)
+                    if (response.IsSuccessStatusCode)
                     {
-                        Console.WriteLine("Image builed successfully.");
+                        var responseContent = await response.Content.ReadAsStringAsync();
+                        var jsonDocument = JsonDocument.Parse(responseContent);
+                        var rootElement = jsonDocument.RootElement;
+                        var responseObject = new { data = rootElement };
+                        return JsonSerializer.Serialize(responseObject);
                     }
                     else
                     {
-                        //Console.WriteLine($"Image builed not successfully. Exit Code: {backendProcess.ExitCode}");
+                        var errorObject = new { error = $"HTTP Error: {response.StatusCode}" };
+                        return "error";
                     }
                 }
-
-            } 
-            catch (Exception ex) 
+            }
+            catch (Exception ex)
             {
-                Console.WriteLine($"Error: {ex.Message}");
+                var errorObject = new { error = $"An error occurred: {ex.Message}" };
+                return "error";
             }
         }
 
-        static async Task<IActionResult> RunTests(string language, string ProgramName)
+        static async Task<IActionResult> RunTestsApi(string language, string ProgramName)
         {
             try
             {
@@ -153,7 +107,7 @@ namespace SecondLeoCodeBackend
 
                 cwd = $@"{path}\{language}\{ProgramName}";
 
-                var command = $"run --rm -v {path}:/usr/src/project -w /usr/src/project paswrd {language} {ProgramName}";
+                var command = $"run --rm -v {path}:/usr/src/project -w /usr/src/project pwdtest {language} {ProgramName}";
                 var processInfo = new ProcessStartInfo("docker", command)
                 {
                     CreateNoWindow = true,
@@ -168,6 +122,7 @@ namespace SecondLeoCodeBackend
                     await proc.WaitForExitAsync();
 
                     var code = proc.ExitCode;
+                    ResultFileHelperCSharp resultFileHelperCSharp = new ResultFileHelperCSharp();
                     var resultsFile = Directory.GetFiles($"{cwd}\\results", "*.json").FirstOrDefault();
 
                     if (resultsFile != null)
@@ -192,6 +147,46 @@ namespace SecondLeoCodeBackend
             {
                 var errorObject = new { error = $"An error occurred: {ex.Message}" };
                 return new BadRequestObjectResult(errorObject);
+            }
+        }
+
+        static void StartBackend()
+        {
+            try
+            {
+                string webApiProjectPath = @"../LeoCodeBackendV2";
+
+                ProcessStartInfo psi = new ProcessStartInfo
+                {
+                    FileName = "dotnet",
+                    Arguments = "run",
+                    WorkingDirectory = webApiProjectPath,
+                };
+
+                backendProcess = Process.Start(psi);
+
+                Console.WriteLine("Web API started successfully.");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error starting Web API: {ex.Message}");
+            }
+        }
+
+        static void StopBackend()
+        {
+            try
+            {
+                if (backendProcess != null && !backendProcess.HasExited)
+                {
+                    backendProcess.Kill();
+                    backendProcess.WaitForExit(); // Optionally wait for the process to exit
+                    Console.WriteLine("Web API process killed.");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error stopping Web API: {ex.Message}");
             }
         }
     }

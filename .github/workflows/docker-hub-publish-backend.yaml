@@ -1,4 +1,4 @@
-name: Docker-Hub-Publish-frontend
+name: Docker-Hub-Publish-bakend
 
 # This workflow uses actions that are not certified by GitHub.
 # They are provided by a third-party and are governed by
@@ -36,6 +36,6 @@ jobs:
           uses: docker/build-push-action@v4
           with:
             # path to Dockerfile build context
-            context: ./backend/WebApplication
+            context: ./backend/LeoCodeBackend
             push: true
             tags: ${{env.IMAGE_NAME}}

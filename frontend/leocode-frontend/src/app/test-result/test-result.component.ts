@@ -19,7 +19,7 @@ import { CodeSection } from '../model/code-sections';
 
 export class TestResultComponent  implements OnInit{
 
-  testTemplate: string = 'export function CheckPassword(password: string): boolean{\n  Todo Implementation \n}'
+  testTemplate: string = 'export function CheckPassword(password: string): boolean{\n  Todo Implementation \n}\nexport function CheckPassword(password: string): boolean{\n  Todo Implementation \n}'
 
 
   editorOptions = { theme: 'vs-dark', language: 'typescrip'};

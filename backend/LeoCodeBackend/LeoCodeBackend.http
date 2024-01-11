@@ -1,6 +1,6 @@
-@LeoCodeBackend_HostAddress = http://localhost:5055
+@WebApplication_HostAddress = http://localhost:5080
 
-GET {{LeoCodeBackend_HostAddress}}/weatherforecast/
+GET {{WebApplication_HostAddress}}/weatherforecast/
 Accept: application/json
 
 ###
