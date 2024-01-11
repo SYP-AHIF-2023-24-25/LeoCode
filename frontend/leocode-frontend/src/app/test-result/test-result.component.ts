@@ -110,34 +110,9 @@ export class TestResultComponent  implements OnInit{
     const timeLogger = new TimeLoggerService();
     timeLogger.start();
 
-
-
-   /* this.rest.getResults().subscribe(
-      (data) => {
-        this.result = this.convertFromJson(data as OriginalResult);
-        this.timer = timeLogger.stop();
-        const logEntry = {
-          message: this.result.message,
-          timestamp: new Date(),
-          passed: this.result.passed,
-          notPassed: this.result.notPassed,
-          total: this.result.total,
-          timer: this.timer
-        };
-
-        this.resultHistoryService.addResult(logEntry.message, logEntry.passed, logEntry.notPassed, logEntry.total, logEntry.timer);
-        this.loading = false;
-      },
-      (error) => {
-        console.error("Error in API request", error);
-        this.timer = timeLogger.stop();
-        this.loading = false;
-      }
-    );*/
-
     this.rest.runTests('Typescript', 'PasswordChecker').subscribe(
       (data) => {
-        const d = data.data.value.data; // Extract the relevant data
+        const d = data.data.value.data;
         this.result = this.convertFromJson(d as OriginalResult);
         
         this.timer = timeLogger.stop();
