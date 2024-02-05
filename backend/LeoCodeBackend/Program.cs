@@ -12,11 +12,11 @@ namespace LeoCodeBackend
 {
     class Program
     {
-        private static Process backendProcess;
-
         static void Main(string[] args)
         {
-            StartBackend();
+            InstallingNodeModules("Typescript", "PasswordChecker");
+            BuildImage("typescript");
+
             var builder = WebApplication.CreateBuilder(args);
 
             builder.Services.AddEndpointsApiExplorer();
@@ -50,53 +50,9 @@ namespace LeoCodeBackend
                 .WithName("RunTestsApi")
                 .WithOpenApi();
 
-            app.MapPost("/start", StartBackend)
-                .WithName("Start")
-                .WithOpenApi();
-
-            app.MapPost("/stop", StopBackend)
-                .WithName("Stop")
-                .WithOpenApi();
-
-            app.MapPost("/runtestssecondbackend", RunTestsSecondBackend)
-                .WithName("RunTestsSecondBackend")
-                .WithOpenApi();
-
             app.Run();
         }
-
-        static async Task<string> RunTestsSecondBackend(string language, string ProgramName)
-        {
-            try
-            {
-                var apiUrl = $"http://localhost:5055/runtest?language={Uri.EscapeDataString(language)}&ProgramName={Uri.EscapeDataString(ProgramName)}";
-
-                using (var httpClient = new HttpClient())
-                {
-                    var response = await httpClient.PostAsync(apiUrl, null);
-
-                    if (response.IsSuccessStatusCode)
-                    {
-                        var responseContent = await response.Content.ReadAsStringAsync();
-                        var jsonDocument = JsonDocument.Parse(responseContent);
-                        var rootElement = jsonDocument.RootElement;
-                        var responseObject = new { data = rootElement };
-                        return JsonSerializer.Serialize(responseObject);
-                    }
-                    else
-                    {
-                        var errorObject = new { error = $"HTTP Error: {response.StatusCode}" };
-                        return "error";
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                var errorObject = new { error = $"An error occurred: {ex.Message}" };
-                return "error";
-            }
-        }
-
+        
         static async Task<IActionResult> RunTestsApi(string language, string ProgramName)
         {
             try
@@ -150,43 +106,73 @@ namespace LeoCodeBackend
             }
         }
 
-        static void StartBackend()
-        {
-            try
+        static async void InstallingNodeModules(string language, string projectName) {
+            var cwd = Directory.GetCurrentDirectory();
+
+            var path = $@"{cwd}\..\languages\{language}\{projectName}";
+
+            Process process = new Process();
+            ProcessStartInfo startInfo = new ProcessStartInfo
             {
-                string webApiProjectPath = @"../LeoCodeBackendV2";
+                FileName = "cmd.exe",
+                RedirectStandardInput = true,
+                RedirectStandardOutput = true,
+                RedirectStandardError = true,
+                UseShellExecute = false,
+                CreateNoWindow = true,
+                WorkingDirectory = path
+            };
 
-                ProcessStartInfo psi = new ProcessStartInfo
-                {
-                    FileName = "dotnet",
-                    Arguments = "run",
-                    WorkingDirectory = webApiProjectPath,
-                };
+            process.StartInfo = startInfo;
+            process.Start();
 
-                backendProcess = Process.Start(psi);
+            process.StandardInput.WriteLine("npm install");
+            process.StandardInput.Flush();
+            process.StandardInput.Close();
 
-                Console.WriteLine("Web API started successfully.");
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error starting Web API: {ex.Message}");
-            }
+            process.WaitForExit();
         }
 
-        static void StopBackend()
+        static async void BuildImage(string language) 
         {
-            try
+            try 
             {
-                if (backendProcess != null && !backendProcess.HasExited)
+                var cwd = Directory.GetCurrentDirectory();
+                var dockerFilePath = $@"{cwd}\..\languages\Dockerfile.{language}";
+                var projectBuildPath = $@"{cwd}\..\languages";
+                Console.WriteLine(dockerFilePath);
+                Console.WriteLine(projectBuildPath);
+                var command = $"build -f {dockerFilePath} -t passwordchecker {projectBuildPath}";
+                var processInfo = new ProcessStartInfo("docker", command)
                 {
-                    backendProcess.Kill();
-                    backendProcess.WaitForExit(); // Optionally wait for the process to exit
-                    Console.WriteLine("Web API process killed.");
+                    CreateNoWindow = true,
+                    UseShellExecute = false,
+                    RedirectStandardOutput = true,
+                    RedirectStandardError = true
+                };
+
+                using (var proc = new Process { StartInfo = processInfo, EnableRaisingEvents = true })
+                {
+                    proc.Start();
+                    await proc.WaitForExitAsync();
+
+                    var code = proc.ExitCode;
+                
+
+                    if (code == 0)
+                    {
+                        Console.WriteLine("Image builed successfully.");
+                    }
+                    else
+                    {
+                        //Console.WriteLine($"Image builed not successfully. Exit Code: {backendProcess.ExitCode}");
+                    }
                 }
-            }
-            catch (Exception ex)
+
+            } 
+            catch (Exception ex) 
             {
-                Console.WriteLine($"Error stopping Web API: {ex.Message}");
+                Console.WriteLine($"Error: {ex.Message}");
             }
         }
     }

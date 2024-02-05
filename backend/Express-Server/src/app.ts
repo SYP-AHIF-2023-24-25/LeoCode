@@ -1,4 +1,3 @@
-// src/app.ts
 import express, { Request, Response } from 'express';
 import * as fs from 'fs';
 import * as path from 'path';
@@ -6,18 +5,30 @@ import { promisify } from 'util';
 import { exec } from 'child_process';
 import { readdir, readFile } from 'fs/promises';
 import { resolve } from 'path';
-import { Exception } from '@azure/functions';
+import bodyParser from 'body-parser';
+import cors from 'cors';
+
+import swaggerUi from 'swagger-ui-express';
+
+const swaggerDocument = require('../swagger.json');
 
 const app = express();
 const port = 3000;
+
+app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use(cors());
+
+app.use(bodyParser.json()); // Neu hinzugefügt
 
 app.get('/', (req: Request, res: Response) => {
   res.send('Hello, Express!');
 });
 
-app.post('/runtest', (req: Request, res: Response) => {
+app.post('/runtests', async (req: Request, res: Response) => {
+  console.log("eintritt");
   replaceCode(req.body.code);
-  const testresults = runtests(res, req.body.language, req.body.ProgramName);
+  console.log("replaced code");
+  const testresults = await runtests(res, req.body.language, req.body.programName);
 
   res.status(200).json(testresults);
 });
@@ -27,20 +38,24 @@ app.listen(port, () => {
 });
 
 function replaceCode(code: string): void {
+  console.log("in replace code function");
   const cwd = process.cwd();
-  const templateFilePath = path.join(cwd, '../languages/Typescript/PasswordChecker/src/passwordChecker.ts');
+  console.log(cwd);
+  const templateFilePath = path.join(cwd, '../../languages/Typescript/PasswordChecker/src/passwordChecker.ts');
   let templateCode = fs.readFileSync(templateFilePath, 'utf-8');
   templateCode = code;
   fs.writeFileSync(templateFilePath, templateCode);
+  console.log("finished replacing code");
 }
 
-async function runtests(res:Response, language:string, ProgramName:string): Promise<Response> {
+async function runtests(res: Response, language: string, ProgramName: string): Promise<Response> {
   try {
     const cwd: string = process.cwd();
-    const languagesPath: string = resolve(cwd, '..', 'languages');
+    const languagesPath: string = resolve(cwd, '../../', 'languages');
+    console.log(languagesPath);
     const languagePath: string = resolve(languagesPath, language, ProgramName);
 
-    const command: string = `run --rm -v ${languagesPath}:/usr/src/project -w /usr/src/project passwordchecker ${language} ${ProgramName}`;
+    const command: string = `run --rm -v ${languagesPath}:/usr/src/project -w /usr/src/project xxx ${language} ${ProgramName}`;
     const { stdout, stderr } = await promisify(exec)(`docker ${command}`);
 
     const codeResultsPath: string = resolve(languagePath, 'results');
@@ -50,16 +65,22 @@ async function runtests(res:Response, language:string, ProgramName:string): Prom
 
     if (resultsFile) {
       const jsonString: string = await readFile(resolve(codeResultsPath, resultsFile), 'utf-8');
-      const jsonDocument = JSON.parse(jsonString);
-      const responseObject = { data: jsonDocument };
+      console.log('Received JSON:', jsonString); // Logge die empfangenen Daten
 
-      return res.status(200).send(responseObject);
+      const jsonDocument = JSON.parse(jsonString);
+
+      // Modifiziere die Antwortdaten, um zirkuläre Referenzen zu vermeiden
+      const responseString = ({ data: jsonDocument });
+
+      // Setze die Antwortdaten ohne die Response-Instanz
+      return res.status(200).send(responseString);
     } else {
       const errorObject = { error: 'No results file found.' };
-      return res.status(400).send(errorObject);
+      return res.status(400).json(errorObject);
     }
   } catch (ex: any) {
+    console.error('Error during tests:', ex); // Logge den Fehler für die Diagnose
     const errorObject = { error: `An error occurred: ${ex.message}` };
-    return res.status(500).send(errorObject);
+    return res.status(500).json(errorObject);
   }
 }
