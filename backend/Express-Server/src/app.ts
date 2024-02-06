@@ -41,21 +41,21 @@ function replaceCode(code: string): void {
   console.log("in replace code function");
   const cwd = process.cwd();
   console.log(cwd);
-  const templateFilePath = path.join(cwd, '../../languages/Typescript/PasswordChecker/src/passwordChecker.ts');
+  const templateFilePath = path.join(cwd, '../languages/Typescript/PasswordChecker/src/passwordChecker.ts');
   let templateCode = fs.readFileSync(templateFilePath, 'utf-8');
   templateCode = code;
   fs.writeFileSync(templateFilePath, templateCode);
   console.log("finished replacing code");
 }
 
-async function runtests(res: Response, language: string, ProgramName: string): Promise<Response> {
+async function runtests(res: Response, language: string, ProgramName: string): Promise<any> {
   try {
     const cwd: string = process.cwd();
-    const languagesPath: string = resolve(cwd, '../../', 'languages');
+    const languagesPath: string = resolve(cwd, '../', 'languages');
     console.log(languagesPath);
     const languagePath: string = resolve(languagesPath, language, ProgramName);
 
-    const command: string = `run --rm -v ${languagesPath}:/usr/src/project -w /usr/src/project xxx ${language} ${ProgramName}`;
+    const command: string = `run --rm -v ${languagesPath}:/usr/src/project -w /usr/src/project col29 ${language} ${ProgramName}`;
     const { stdout, stderr } = await promisify(exec)(`docker ${command}`);
 
     const codeResultsPath: string = resolve(languagePath, 'results');
@@ -73,14 +73,17 @@ async function runtests(res: Response, language: string, ProgramName: string): P
       const responseString = ({ data: jsonDocument });
 
       // Setze die Antwortdaten ohne die Response-Instanz
-      return res.status(200).send(responseString);
+      //return res.status(200).send(jsonString);
+      return responseString;
     } else {
       const errorObject = { error: 'No results file found.' };
-      return res.status(400).json(errorObject);
+      //return res.status(400).json(errorObject);
+      return "";
     }
   } catch (ex: any) {
     console.error('Error during tests:', ex); // Logge den Fehler für die Diagnose
     const errorObject = { error: `An error occurred: ${ex.message}` };
-    return res.status(500).json(errorObject);
+    //return res.status(500).json(errorObject);
+    return "";
   }
 }

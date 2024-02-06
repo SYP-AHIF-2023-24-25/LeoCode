@@ -43,7 +43,6 @@ const child_process_1 = require("child_process");
 const promises_1 = require("fs/promises");
 const path_1 = require("path");
 const body_parser_1 = __importDefault(require("body-parser"));
-const CircularJSON = __importStar(require("circular-json"));
 const cors_1 = __importDefault(require("cors"));
 const swagger_ui_express_1 = __importDefault(require("swagger-ui-express"));
 const swaggerDocument = require('../swagger.json');
@@ -69,7 +68,7 @@ function replaceCode(code) {
     console.log("in replace code function");
     const cwd = process.cwd();
     console.log(cwd);
-    const templateFilePath = path.join(cwd, '../../languages/Typescript/PasswordChecker/src/passwordChecker.ts');
+    const templateFilePath = path.join(cwd, '../languages/Typescript/PasswordChecker/src/passwordChecker.ts');
     let templateCode = fs.readFileSync(templateFilePath, 'utf-8');
     templateCode = code;
     fs.writeFileSync(templateFilePath, templateCode);
@@ -79,10 +78,10 @@ function runtests(res, language, ProgramName) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             const cwd = process.cwd();
-            const languagesPath = (0, path_1.resolve)(cwd, '../../', 'languages');
+            const languagesPath = (0, path_1.resolve)(cwd, '../', 'languages');
             console.log(languagesPath);
             const languagePath = (0, path_1.resolve)(languagesPath, language, ProgramName);
-            const command = `run --rm -v ${languagesPath}:/usr/src/project -w /usr/src/project xxx ${language} ${ProgramName}`;
+            const command = `run --rm -v ${languagesPath}:/usr/src/project -w /usr/src/project col29 ${language} ${ProgramName}`;
             const { stdout, stderr } = yield (0, util_1.promisify)(child_process_1.exec)(`docker ${command}`);
             const codeResultsPath = (0, path_1.resolve)(languagePath, 'results');
             const files = yield (0, promises_1.readdir)(codeResultsPath);
@@ -90,21 +89,24 @@ function runtests(res, language, ProgramName) {
             if (resultsFile) {
                 const jsonString = yield (0, promises_1.readFile)((0, path_1.resolve)(codeResultsPath, resultsFile), 'utf-8');
                 console.log('Received JSON:', jsonString); // Logge die empfangenen Daten
-                const jsonDocument = CircularJSON.parse(jsonString);
+                const jsonDocument = JSON.parse(jsonString);
                 // Modifiziere die Antwortdaten, um zirkuläre Referenzen zu vermeiden
-                const responseString = CircularJSON.stringify({ data: jsonDocument });
+                const responseString = ({ data: jsonDocument });
                 // Setze die Antwortdaten ohne die Response-Instanz
-                return res.status(200).send(responseString);
+                //return res.status(200).send(jsonString);
+                return responseString;
             }
             else {
                 const errorObject = { error: 'No results file found.' };
-                return res.status(400).json(errorObject);
+                //return res.status(400).json(errorObject);
+                return "";
             }
         }
         catch (ex) {
             console.error('Error during tests:', ex); // Logge den Fehler für die Diagnose
             const errorObject = { error: `An error occurred: ${ex.message}` };
-            return res.status(500).json(errorObject);
+            //return res.status(500).json(errorObject);
+            return "";
         }
     });
 }
