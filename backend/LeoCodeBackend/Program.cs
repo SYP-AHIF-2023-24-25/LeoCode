@@ -15,9 +15,14 @@ namespace LeoCodeBackend
     {
         static void Main(string[] args)
         {
-            InstallingNodeModules("Typescript", "PasswordChecker");
+            InstallingNodeModulesForExpressServer();
+            InstallingNodeModulesForProjectTemplate("Typescript", "PasswordChecker");
             BuildImage("typescript");
+            StartExpressServer();
+            
+            int pid = GetProcessIdByPort(3000);
 
+            StopExpressServer();
             var builder = WebApplication.CreateBuilder(args);
 
             builder.Services.AddEndpointsApiExplorer();
@@ -157,7 +162,7 @@ namespace LeoCodeBackend
 
 
 
-        static async void InstallingNodeModules(string language, string projectName) {
+        static async void InstallingNodeModulesForProjectTemplate(string language, string projectName) {
             var cwd = Directory.GetCurrentDirectory();
 
             var path = $@"{cwd}\..\languages\{language}\{projectName}";
@@ -225,6 +230,103 @@ namespace LeoCodeBackend
             {
                 Console.WriteLine($"Error: {ex.Message}");
             }
+        }
+
+        static async void InstallingNodeModulesForExpressServer()
+        {
+            var cwd = Directory.GetCurrentDirectory();
+
+            var path = $@"{cwd}\..\Express-Server";
+            Console.WriteLine(path);
+            Process process = new Process();
+            ProcessStartInfo startInfo = new ProcessStartInfo
+            {
+                FileName = "cmd.exe",
+                RedirectStandardInput = true,
+                RedirectStandardOutput = true,
+                RedirectStandardError = true,
+                UseShellExecute = false,
+                CreateNoWindow = true,
+                WorkingDirectory = path
+            };
+
+            process.StartInfo = startInfo;
+            process.Start();
+
+            process.StandardInput.WriteLine("npm install");
+            process.StandardInput.Flush();
+            process.StandardInput.Close();
+
+            process.WaitForExit();
+        }
+
+        static async void StartExpressServer()
+        {
+            var cwd = Directory.GetCurrentDirectory();
+            string expressServerFilePath = $@"{cwd}/../Express-Server/src/app.js";
+            var processInfo = new ProcessStartInfo("node", expressServerFilePath)
+            {
+                CreateNoWindow = true,
+                UseShellExecute = false,
+                RedirectStandardOutput = true,
+                RedirectStandardError = true
+            };
+
+            using (var proc = new Process { StartInfo = processInfo, EnableRaisingEvents = true })
+            {
+                proc.Start();
+                //await proc.WaitForExitAsync();
+            }
+        }
+
+        static async void StopExpressServer()
+        {
+            //TODO: Stop Express Server
+        }
+
+        static int GetProcessIdByPort(int portNumber)
+        {
+            int processId = -1;
+
+            try
+            {
+                var processStartInfo = new ProcessStartInfo
+                {
+                    FileName = "tasklist",
+                    RedirectStandardOutput = true,
+                    UseShellExecute = false,
+                    CreateNoWindow = true
+                };
+
+                using (var process = new Process { StartInfo = processStartInfo, EnableRaisingEvents = true })
+                {
+                    process.Start();
+                    string output = process.StandardOutput.ReadToEnd();
+                    process.WaitForExit();
+
+                    string[] lines = output.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+
+                    foreach (var line in lines)
+                    {
+                        // Überprüfen, ob die Zeile den Port enthält
+                        if (line.Contains($":{portNumber}"))
+                        {
+                            // Die PID sollte in den ersten Teilen der Zeile sein
+                            string[] parts = line.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                            if (int.TryParse(parts[1], out processId))
+                            {
+                                break; // Nur die erste gefundene PID zurückgeben
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Fehler beim Abrufen der PID: {ex.Message}");
+            }
+
+            return processId;
         }
     }
 }
