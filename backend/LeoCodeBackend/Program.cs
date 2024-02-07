@@ -7,16 +7,22 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
+using System.Text;
 
 namespace LeoCodeBackend
 {
     class Program
     {
-        private static Process backendProcess;
-
         static void Main(string[] args)
         {
-            StartBackend();
+            InstallingNodeModulesForExpressServer();
+            InstallingNodeModulesForProjectTemplate("Typescript", "PasswordChecker");
+            BuildImage("typescript");
+            StartExpressServer();
+            
+            int pid = GetProcessIdByPort(3000);
+
+            StopExpressServer();
             var builder = WebApplication.CreateBuilder(args);
 
             builder.Services.AddEndpointsApiExplorer();
@@ -50,53 +56,57 @@ namespace LeoCodeBackend
                 .WithName("RunTestsApi")
                 .WithOpenApi();
 
-            app.MapPost("/start", StartBackend)
-                .WithName("Start")
-                .WithOpenApi();
-
-            app.MapPost("/stop", StopBackend)
-                .WithName("Stop")
-                .WithOpenApi();
-
-            app.MapPost("/runtestssecondbackend", RunTestsSecondBackend)
-                .WithName("RunTestsSecondBackend")
+            app.MapPost("/runtest", runTests)
+                .WithName("RunTests")
                 .WithOpenApi();
 
             app.Run();
         }
 
-        static async Task<string> RunTestsSecondBackend(string language, string ProgramName)
-        {
-            try
+        static async Task<IActionResult> runTests(string code,string language, string ProgramName){
+            string apiUrl = "http://localhost:3000/runtests";
+            HttpResponseMessage response = null;
+
+            // Create an instance of HttpClient
+            using (HttpClient httpClient = new HttpClient())
             {
-                var apiUrl = $"http://localhost:5055/runtest?language={Uri.EscapeDataString(language)}&ProgramName={Uri.EscapeDataString(ProgramName)}";
-
-                using (var httpClient = new HttpClient())
+                
+                try
                 {
-                    var response = await httpClient.PostAsync(apiUrl, null);
+                    // Define the content to be sent in the POST request (replace with your actual content)
+                    string jsonContent = $"{{\"code\":\"{code}\",\"language\":\"{language}\",\"programName\":\"{ProgramName}\"}}";
+                    HttpContent content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
 
+                    // Send a POST request
+                    response = await httpClient.PostAsync(apiUrl, content);
+
+                    // Check if the request was successful
                     if (response.IsSuccessStatusCode)
                     {
-                        var responseContent = await response.Content.ReadAsStringAsync();
-                        var jsonDocument = JsonDocument.Parse(responseContent);
-                        var rootElement = jsonDocument.RootElement;
-                        var responseObject = new { data = rootElement };
-                        return JsonSerializer.Serialize(responseObject);
+                        // Read and output the response content as a string
+                        string responseBody = await response.Content.ReadAsStringAsync();
+                        var jsonDocument = JsonDocument.Parse(responseBody);
+                        ResultFileHelperTypescript resultFileHelperTypescript = new ResultFileHelperTypescript();
+                        var result = JsonDocument.Parse(resultFileHelperTypescript.formatData(responseBody));
+                        Console.WriteLine(result);
+                        Console.WriteLine("=======================================");
+                        var value = result.RootElement;
+                        Console.WriteLine(value);
+                        return new OkObjectResult(value);
                     }
                     else
                     {
-                        var errorObject = new { error = $"HTTP Error: {response.StatusCode}" };
-                        return "error";
+                        Console.WriteLine($"Request failed with status code {response.StatusCode}");
                     }
                 }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"An error occurred: {ex.Message}");
+                }
             }
-            catch (Exception ex)
-            {
-                var errorObject = new { error = $"An error occurred: {ex.Message}" };
-                return "error";
-            }
+            return new OkObjectResult(response.Content.ReadAsStringAsync());
         }
-
+        
         static async Task<IActionResult> RunTestsApi(string language, string ProgramName)
         {
             try
@@ -150,44 +160,173 @@ namespace LeoCodeBackend
             }
         }
 
-        static void StartBackend()
-        {
-            try
-            {
-                string webApiProjectPath = @"../LeoCodeBackendV2";
 
-                ProcessStartInfo psi = new ProcessStartInfo
+
+        static async void InstallingNodeModulesForProjectTemplate(string language, string projectName) {
+            var cwd = Directory.GetCurrentDirectory();
+
+            var path = $@"{cwd}\..\languages\{language}\{projectName}";
+
+            Process process = new Process();
+            ProcessStartInfo startInfo = new ProcessStartInfo
+            {
+                FileName = "cmd.exe",
+                RedirectStandardInput = true,
+                RedirectStandardOutput = true,
+                RedirectStandardError = true,
+                UseShellExecute = false,
+                CreateNoWindow = true,
+                WorkingDirectory = path
+            };
+
+            process.StartInfo = startInfo;
+            process.Start();
+
+            process.StandardInput.WriteLine("npm install");
+            process.StandardInput.Flush();
+            process.StandardInput.Close();
+
+            process.WaitForExit();
+        }
+
+        static async void BuildImage(string language) 
+        {
+            try 
+            {
+                var cwd = Directory.GetCurrentDirectory();
+                var dockerFilePath = $@"{cwd}\..\languages\Dockerfile.{language}";
+                var projectBuildPath = $@"{cwd}\..\languages";
+                Console.WriteLine(dockerFilePath);
+                Console.WriteLine(projectBuildPath);
+                var command = $"build -f {dockerFilePath} -t passwordchecker {projectBuildPath}";
+                var processInfo = new ProcessStartInfo("docker", command)
                 {
-                    FileName = "dotnet",
-                    Arguments = "run",
-                    WorkingDirectory = webApiProjectPath,
+                    CreateNoWindow = true,
+                    UseShellExecute = false,
+                    RedirectStandardOutput = true,
+                    RedirectStandardError = true
                 };
 
-                backendProcess = Process.Start(psi);
+                using (var proc = new Process { StartInfo = processInfo, EnableRaisingEvents = true })
+                {
+                    proc.Start();
+                    await proc.WaitForExitAsync();
 
-                Console.WriteLine("Web API started successfully.");
-            }
-            catch (Exception ex)
+                    var code = proc.ExitCode;
+                
+
+                    if (code == 0)
+                    {
+                        Console.WriteLine("Image builed successfully.");
+                    }
+                    else
+                    {
+                        //Console.WriteLine($"Image builed not successfully. Exit Code: {backendProcess.ExitCode}");
+                    }
+                }
+
+            } 
+            catch (Exception ex) 
             {
-                Console.WriteLine($"Error starting Web API: {ex.Message}");
+                Console.WriteLine($"Error: {ex.Message}");
             }
         }
 
-        static void StopBackend()
+        static async void InstallingNodeModulesForExpressServer()
         {
+            var cwd = Directory.GetCurrentDirectory();
+
+            var path = $@"{cwd}\..\Express-Server";
+            Console.WriteLine(path);
+            Process process = new Process();
+            ProcessStartInfo startInfo = new ProcessStartInfo
+            {
+                FileName = "cmd.exe",
+                RedirectStandardInput = true,
+                RedirectStandardOutput = true,
+                RedirectStandardError = true,
+                UseShellExecute = false,
+                CreateNoWindow = true,
+                WorkingDirectory = path
+            };
+
+            process.StartInfo = startInfo;
+            process.Start();
+
+            process.StandardInput.WriteLine("npm install");
+            process.StandardInput.Flush();
+            process.StandardInput.Close();
+
+            process.WaitForExit();
+        }
+
+        static async void StartExpressServer()
+        {
+            var cwd = Directory.GetCurrentDirectory();
+            string expressServerFilePath = $@"{cwd}/../Express-Server/src/app.js";
+            var processInfo = new ProcessStartInfo("node", expressServerFilePath)
+            {
+                CreateNoWindow = true,
+                UseShellExecute = false,
+                RedirectStandardOutput = true,
+                RedirectStandardError = true
+            };
+
+            using (var proc = new Process { StartInfo = processInfo, EnableRaisingEvents = true })
+            {
+                proc.Start();
+                //await proc.WaitForExitAsync();
+            }
+        }
+
+        static async void StopExpressServer()
+        {
+            //TODO: Stop Express Server
+        }
+
+        static int GetProcessIdByPort(int portNumber)
+        {
+            int processId = -1;
+
             try
             {
-                if (backendProcess != null && !backendProcess.HasExited)
+                var processStartInfo = new ProcessStartInfo
                 {
-                    backendProcess.Kill();
-                    backendProcess.WaitForExit(); // Optionally wait for the process to exit
-                    Console.WriteLine("Web API process killed.");
+                    FileName = "tasklist",
+                    RedirectStandardOutput = true,
+                    UseShellExecute = false,
+                    CreateNoWindow = true
+                };
+
+                using (var process = new Process { StartInfo = processStartInfo, EnableRaisingEvents = true })
+                {
+                    process.Start();
+                    string output = process.StandardOutput.ReadToEnd();
+                    process.WaitForExit();
+
+                    string[] lines = output.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+
+                    foreach (var line in lines)
+                    {
+                        // Überprüfen, ob die Zeile den Port enthält
+                        if (line.Contains($":{portNumber}"))
+                        {
+                            // Die PID sollte in den ersten Teilen der Zeile sein
+                            string[] parts = line.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                            if (int.TryParse(parts[1], out processId))
+                            {
+                                break; // Nur die erste gefundene PID zurückgeben
+                            }
+                        }
+                    }
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error stopping Web API: {ex.Message}");
+                Console.WriteLine($"Fehler beim Abrufen der PID: {ex.Message}");
             }
+
+            return processId;
         }
     }
 }

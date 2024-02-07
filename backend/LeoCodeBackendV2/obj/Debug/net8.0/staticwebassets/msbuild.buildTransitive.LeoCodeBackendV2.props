@@ -1,3 +1,0 @@
-﻿<Project>
-  <Import Project="..\buildMultiTargeting\LeoCodeBackendV2.props" />
-</Project>
