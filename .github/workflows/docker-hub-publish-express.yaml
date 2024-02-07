@@ -1,4 +1,4 @@
-name: Docker-Hub-Publish-backend-2
+name: Docker-Hub-Publish-Express
 
 # This workflow uses actions that are not certified by GitHub.
 # They are provided by a third-party and are governed by
@@ -13,7 +13,7 @@ env:
   # Use docker.io for Docker Hub if empty
   REGISTRY: ghcr.io
   # github.repository as <account>/<repo>
-  IMAGE_NAME: florianhagmair06/leocode-backend-2
+  IMAGE_NAME: florianhagmair06/leocode-express
 jobs:
     build-and-push:
       runs-on: ubuntu-latest
@@ -36,6 +36,6 @@ jobs:
           uses: docker/build-push-action@v4
           with:
             # path to Dockerfile build context
-            context: ./backend/LeoCodeBackendV2
+            context: ./backend/Express-Server
             push: true
             tags: ${{env.IMAGE_NAME}}

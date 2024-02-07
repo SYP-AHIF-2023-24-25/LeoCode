@@ -15,32 +15,26 @@ namespace LeoCodeBackend
     {
         static void Main(string[] args)
         {
-            InstallingNodeModulesForExpressServer();
-            InstallingNodeModulesForProjectTemplate("Typescript", "PasswordChecker");
-            BuildImage("typescript");
-            //StartExpressServer();
-            
-            int pid = GetProcessIdByPort(3000);
-
-            //StopExpressServer();
             var builder = WebApplication.CreateBuilder(args);
-
-            builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
 
             builder.Services.AddCors(options =>
             {
-                options.AddDefaultPolicy(builder =>
+                options.AddPolicy("AllowAngularFrontend", builder =>
                 {
                     builder.WithOrigins("http://localhost:4200/test-results", "http://localhost:4200")
-                           .AllowAnyHeader()
-                           .AllowAnyMethod()
-                           .AllowAnyOrigin();
+                        .AllowAnyHeader()
+                        .AllowAnyMethod()
+                        .AllowAnyOrigin();
                 });
             });
+
+            builder.Services.AddEndpointsApiExplorer();
+            builder.Services.AddSwaggerGen();
             builder.Services.AddSignalR();
 
             var app = builder.Build();
+
+            app.UseCors("AllowAngularFrontend");
 
             if (app.Environment.IsDevelopment())
             {
@@ -48,8 +42,6 @@ namespace LeoCodeBackend
                 app.UseSwaggerUI();
             }
 
-            app.UseCors("AllowAngularFrontend");
-            app.UseCors();
             app.UseHttpsRedirection();
 
             app.MapPost("/runtests", RunTestsApi)
@@ -60,13 +52,17 @@ namespace LeoCodeBackend
                 .WithName("RunTests")
                 .WithOpenApi();
 
+            InstallingNodeModulesForExpressServer();
+            InstallingNodeModulesForProjectTemplate("Typescript", "PasswordChecker");
+            BuildImage("typescript");
+            StartExpressServer();
+
             app.Run();
         }
 
         static async Task<IActionResult> runTests(string code,string language, string ProgramName){
             string apiUrl = "http://localhost:3000/runtests";
             HttpResponseMessage response = null;
-            Console.WriteLine(code);
 
             // Create an instance of HttpClient
             using (HttpClient httpClient = new HttpClient())
@@ -199,7 +195,7 @@ namespace LeoCodeBackend
                 var projectBuildPath = $@"{cwd}\..\languages";
                 Console.WriteLine(dockerFilePath);
                 Console.WriteLine(projectBuildPath);
-                var command = $"build -f {dockerFilePath} -t line18 {projectBuildPath}";
+                var command = $"build -f {dockerFilePath} -t  gutersprint {projectBuildPath}";
                 var processInfo = new ProcessStartInfo("docker", command)
                 {
                     CreateNoWindow = true,
@@ -276,7 +272,12 @@ namespace LeoCodeBackend
             using (var proc = new Process { StartInfo = processInfo, EnableRaisingEvents = true })
             {
                 proc.Start();
-                //await proc.WaitForExitAsync();
+
+                // Verwende Task.Run, um die Ausführung asynchron zu machen
+                await Task.Run(() =>
+                {
+                    proc.WaitForExit();
+                });
             }
         }
 
