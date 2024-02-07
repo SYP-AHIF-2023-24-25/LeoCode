@@ -11,7 +11,7 @@ export class RestService {
 
   constructor(private httpClient: HttpClient) { }
 
-  runTests(language: string, ProgramName: string):Observable<any> {
+  runTests(language: string, ProgramName: string,):Observable<any> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Access-Control-Allow-Origin': '*' // Erlaubt alle Ursprünge ()
