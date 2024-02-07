@@ -55,7 +55,7 @@ async function runtests(res: Response, language: string, ProgramName: string): P
     console.log(languagesPath);
     const languagePath: string = resolve(languagesPath, language, ProgramName);
     console.log(languagePath);
-    const command: string = `run --rm -v ${languagesPath}:/usr/src/project -w /usr/src/project line18 ${language} ${ProgramName}`;
+    const command: string = `run --rm -v ${languagesPath}:/usr/src/project -w /usr/src/project gutersprint ${language} ${ProgramName}`;
     const { stdout, stderr } = await promisify(exec)(`docker ${command}`);
 
     const codeResultsPath: string = resolve(languagePath, 'results');

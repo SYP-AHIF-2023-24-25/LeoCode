@@ -82,7 +82,7 @@ function runtests(res, language, ProgramName) {
             console.log(languagesPath);
             const languagePath = (0, path_1.resolve)(languagesPath, language, ProgramName);
             console.log(languagePath);
-            const command = `run --rm -v ${languagesPath}:/usr/src/project -w /usr/src/project line18 ${language} ${ProgramName}`;
+            const command = `run --rm -v ${languagesPath}:/usr/src/project -w /usr/src/project gutersprint ${language} ${ProgramName}`;
             const { stdout, stderr } = yield (0, util_1.promisify)(child_process_1.exec)(`docker ${command}`);
             const codeResultsPath = (0, path_1.resolve)(languagePath, 'results');
             const files = yield (0, promises_1.readdir)(codeResultsPath);
