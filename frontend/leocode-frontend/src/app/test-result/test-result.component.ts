@@ -77,30 +77,20 @@ export class TestResultComponent  implements OnInit{
 
   // parse from json new
   convertFromJsonV2(value: Value): ResultV2 {// mit neuen json format
-    const TotalTests: number = value.results.Summary.TotalTests;
-    const PassedTests: number = value.results.Summary.PassedTests;
-    const FailedTests: number = value.results.Summary.FailedTests;
+   
+    const TotalTests: number = value.value.Summary.TotalTests;
+    const PassedTests: number = value.value.Summary.PassedTests;
+    const FailedTests: number = value.value.Summary.FailedTests;
+
+    console.log(PassedTests);
 
     const summary: Summary = {
         TotalTests,
         PassedTests,
         FailedTests
     };
-    
-    /*const testResultsV2: TestResults[] = new Array<TestResults>();
-   for (let i = 0; i < value.results.TestResults.length; i++) {
-        const TestName: string = value.results.TestResults[i].TestName;
-        const Outcome: string = value.results.TestResults[i].Outcome;
-        const ErrorMessage: string = value.results.TestResults[i].ErrorMessage;
 
-        testResultsV2.push({
-            TestName,
-            Outcome,
-            ErrorMessage
-        });
-    }*/
-
-    const testResults: TestResults[] = value.results.TestResults.map((result: any) => {
+    const testResults: TestResults[] = value.value.TestResults.map((result: any) => {
         return {
             TestName: result.TestName,
             Outcome: result.Outcome,
@@ -144,7 +134,9 @@ export class TestResultComponent  implements OnInit{
     this.rest.runTests('Typescript', 'PasswordChecker', this.testTemplate).subscribe(
         (data) => {
           console.log(data);
-            const d = data.data.value.data;
+          
+            const d = data
+            console.log(d);
             this.resultV2 = this.convertFromJsonV2(d as Value);
             
             this.timer = timeLogger.stop();

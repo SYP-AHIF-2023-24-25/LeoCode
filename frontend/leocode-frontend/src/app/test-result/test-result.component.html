@@ -26,6 +26,7 @@
     </thead>
     <tbody>
       <tr>
+          <td>{{"Tests"}}</td>
           <td>{{resultV2.Summary.PassedTests}}</td>
           <td>{{resultV2.Summary.FailedTests}}</td>
           <td>{{resultV2.Summary.TotalTests}}</td>
@@ -39,7 +40,11 @@
       </tr>
       <tr>
         <option *ngFor="let testResult of resultV2.TestResults" [value]="testResult.TestName">
-          {{ testResult.TestName }} - {{ testResult.Outcome }}
+         <td> {{ testResult.TestName }} | </td>
+         <td></td>
+         <td></td>
+         <td></td>
+         <td>{{ testResult.Outcome }}</td>
         </option>
       </tr>
   </table>
