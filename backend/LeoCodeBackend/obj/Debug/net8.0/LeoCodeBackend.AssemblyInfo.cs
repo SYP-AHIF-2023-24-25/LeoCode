@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("LeoCodeBackend")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c1710ec54be0cf16b001f970aca81482b7aa1dd4")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0f7b99d25d57097c066e13938e096af044ba11a2")]
 [assembly: System.Reflection.AssemblyProductAttribute("LeoCodeBackend")]
 [assembly: System.Reflection.AssemblyTitleAttribute("LeoCodeBackend")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

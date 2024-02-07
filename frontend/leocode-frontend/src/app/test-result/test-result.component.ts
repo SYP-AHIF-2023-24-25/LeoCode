@@ -1,6 +1,5 @@
 import { Component, ElementRef, AfterViewInit, ViewChild, OnInit } from '@angular/core';
-import { Result } from '../model/result';
-import { OriginalResult } from '../model/original-result';
+
 import { RestService } from '../service/rest.service';
 import { TimeLoggerService } from '../service/time-logger.service';
 import { ResultHistoryService } from '../service/result-history.service';
@@ -32,13 +31,6 @@ export class TestResultComponent  implements OnInit{
   timer: string = "";
   loading: boolean = false;
 
-  // result with old json format
-  result: Result = {
-    message: "Test results",
-    passed: 0,
-    notPassed: 0,
-    total: 0
-  };
   // result with new json format
   resultV2: ResultV2 = {
     Summary: {
@@ -151,6 +143,7 @@ export class TestResultComponent  implements OnInit{
 
     this.rest.runTests('Typescript', 'PasswordChecker', this.testTemplate).subscribe(
         (data) => {
+          console.log(data);
             const d = data.data.value.data;
             this.resultV2 = this.convertFromJsonV2(d as Value);
             

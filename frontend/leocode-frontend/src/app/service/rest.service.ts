@@ -11,13 +11,13 @@ export class RestService {
 
   constructor(private httpClient: HttpClient) { }
 
-  runTests(language: string, programName: string, code:string):Observable<any> {
+  runTests(language: string, ProgramName: string, code:string):Observable<any> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Access-Control-Allow-Origin': '*' // Erlaubt alle Ursprünge ()
     });
 
 
-    return this.httpClient.post(`${this.baseUrl}runTests?code=${code} language=${language}&programName=${programName}`, null, { headers: headers });
+    return this.httpClient.post(`${this.baseUrl}runtest?code=${code}&language=${language}&ProgramName=${ProgramName}`, null, { headers: headers });
   }
 }

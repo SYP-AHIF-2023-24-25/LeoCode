@@ -198,7 +198,7 @@ namespace LeoCodeBackend
                 var projectBuildPath = $@"{cwd}\..\languages";
                 Console.WriteLine(dockerFilePath);
                 Console.WriteLine(projectBuildPath);
-                var command = $"build -f {dockerFilePath} -t passwordchecker {projectBuildPath}";
+                var command = $"build -f {dockerFilePath} -t line18 {projectBuildPath}";
                 var processInfo = new ProcessStartInfo("docker", command)
                 {
                     CreateNoWindow = true,
