@@ -18,7 +18,7 @@ const port = 3000;
 app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use(cors());
 
-app.use(bodyParser.json()); // Neu hinzugefügt
+app.use(bodyParser.json());
 
 app.get('/', (req: Request, res: Response) => {
   res.send('Hello, Express!');
@@ -55,7 +55,7 @@ async function runtests(res: Response, language: string, ProgramName: string): P
     console.log(languagesPath);
     const languagePath: string = resolve(languagesPath, language, ProgramName);
 
-    const command: string = `run --rm -v ${languagesPath}:/usr/src/project -w /usr/src/project col29 ${language} ${ProgramName}`;
+    const command: string = `run --rm -v ${languagesPath}:/usr/src/project -w /usr/src/project line18 ${language} ${ProgramName}`;
     const { stdout, stderr } = await promisify(exec)(`docker ${command}`);
 
     const codeResultsPath: string = resolve(languagePath, 'results');

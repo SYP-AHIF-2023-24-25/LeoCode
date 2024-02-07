@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
+using System.Text;
 
 namespace LeoCodeBackend
 {
@@ -50,7 +51,55 @@ namespace LeoCodeBackend
                 .WithName("RunTestsApi")
                 .WithOpenApi();
 
+            app.MapPost("/runtest", runTests)
+                .WithName("RunTests")
+                .WithOpenApi();
+
             app.Run();
+        }
+
+        static async Task<IActionResult> runTests(string code,string language, string ProgramName){
+            string apiUrl = "http://localhost:3000/runtests";
+            HttpResponseMessage response = null;
+
+            // Create an instance of HttpClient
+            using (HttpClient httpClient = new HttpClient())
+            {
+                
+                try
+                {
+                    // Define the content to be sent in the POST request (replace with your actual content)
+                    string jsonContent = $"{{\"code\":\"{code}\",\"language\":\"{language}\",\"programName\":\"{ProgramName}\"}}";
+                    HttpContent content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
+
+                    // Send a POST request
+                    response = await httpClient.PostAsync(apiUrl, content);
+
+                    // Check if the request was successful
+                    if (response.IsSuccessStatusCode)
+                    {
+                        // Read and output the response content as a string
+                        string responseBody = await response.Content.ReadAsStringAsync();
+                        var jsonDocument = JsonDocument.Parse(responseBody);
+                        ResultFileHelperTypescript resultFileHelperTypescript = new ResultFileHelperTypescript();
+                        var result = JsonDocument.Parse(resultFileHelperTypescript.formatData(responseBody));
+                        Console.WriteLine(result);
+                        Console.WriteLine("=======================================");
+                        var value = result.RootElement;
+                        Console.WriteLine(value);
+                        return new OkObjectResult(value);
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Request failed with status code {response.StatusCode}");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"An error occurred: {ex.Message}");
+                }
+            }
+            return new OkObjectResult(response.Content.ReadAsStringAsync());
         }
         
         static async Task<IActionResult> RunTestsApi(string language, string ProgramName)
@@ -105,6 +154,8 @@ namespace LeoCodeBackend
                 return new BadRequestObjectResult(errorObject);
             }
         }
+
+
 
         static async void InstallingNodeModules(string language, string projectName) {
             var cwd = Directory.GetCurrentDirectory();
