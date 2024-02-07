@@ -2,22 +2,24 @@
   "stats": {
     "suites": 1,
     "tests": 4,
-    "passes": 4,
+    "passes": 0,
     "pending": 0,
-    "failures": 0,
-    "start": "2024-02-07T08:51:00.333Z",
-    "end": "2024-02-07T08:51:00.338Z",
-    "duration": 5
+    "failures": 4,
+    "start": "2024-02-07T21:00:21.884Z",
+    "end": "2024-02-07T21:00:21.886Z",
+    "duration": 2
   },
   "tests": [
     {
       "title": "should return true for a valid password",
       "fullTitle": "CheckPassword Function should return true for a valid password",
       "file": "/usr/src/project/Typescript/PasswordChecker/test/passwordChecker.spec.js",
-      "duration": 1,
+      "duration": 0,
       "currentRetry": 0,
-      "speed": "fast",
-      "err": {}
+      "err": {
+        "stack": "ReferenceError: Todo is not defined\n    at CheckPassword (src/passwordChecker.js:4:36)\n    at Context.<anonymous> (test/passwordChecker.spec.js:8:61)\n    at process.processImmediate (node:internal/timers:478:21)",
+        "message": "Todo is not defined"
+      }
     },
     {
       "title": "should return false for an invalid password (too short)",
@@ -25,8 +27,10 @@
       "file": "/usr/src/project/Typescript/PasswordChecker/test/passwordChecker.spec.js",
       "duration": 0,
       "currentRetry": 0,
-      "speed": "fast",
-      "err": {}
+      "err": {
+        "stack": "ReferenceError: Todo is not defined\n    at CheckPassword (src/passwordChecker.js:4:36)\n    at Context.<anonymous> (test/passwordChecker.spec.js:12:61)\n    at process.processImmediate (node:internal/timers:478:21)",
+        "message": "Todo is not defined"
+      }
     },
     {
       "title": "should return false for an invalid password (too long)",
@@ -34,8 +38,10 @@
       "file": "/usr/src/project/Typescript/PasswordChecker/test/passwordChecker.spec.js",
       "duration": 0,
       "currentRetry": 0,
-      "speed": "fast",
-      "err": {}
+      "err": {
+        "stack": "ReferenceError: Todo is not defined\n    at CheckPassword (src/passwordChecker.js:4:36)\n    at Context.<anonymous> (test/passwordChecker.spec.js:16:61)\n    at process.processImmediate (node:internal/timers:478:21)",
+        "message": "Todo is not defined"
+      }
     },
     {
       "title": "should return false for an invalid password",
@@ -43,21 +49,24 @@
       "file": "/usr/src/project/Typescript/PasswordChecker/test/passwordChecker.spec.js",
       "duration": 0,
       "currentRetry": 0,
-      "speed": "fast",
-      "err": {}
+      "err": {
+        "stack": "ReferenceError: Todo is not defined\n    at CheckPassword (src/passwordChecker.js:4:36)\n    at Context.<anonymous> (test/passwordChecker.spec.js:20:61)\n    at process.processImmediate (node:internal/timers:478:21)",
+        "message": "Todo is not defined"
+      }
     }
   ],
   "pending": [],
-  "failures": [],
-  "passes": [
+  "failures": [
     {
       "title": "should return true for a valid password",
       "fullTitle": "CheckPassword Function should return true for a valid password",
       "file": "/usr/src/project/Typescript/PasswordChecker/test/passwordChecker.spec.js",
-      "duration": 1,
+      "duration": 0,
       "currentRetry": 0,
-      "speed": "fast",
-      "err": {}
+      "err": {
+        "stack": "ReferenceError: Todo is not defined\n    at CheckPassword (src/passwordChecker.js:4:36)\n    at Context.<anonymous> (test/passwordChecker.spec.js:8:61)\n    at process.processImmediate (node:internal/timers:478:21)",
+        "message": "Todo is not defined"
+      }
     },
     {
       "title": "should return false for an invalid password (too short)",
@@ -65,8 +74,10 @@
       "file": "/usr/src/project/Typescript/PasswordChecker/test/passwordChecker.spec.js",
       "duration": 0,
       "currentRetry": 0,
-      "speed": "fast",
-      "err": {}
+      "err": {
+        "stack": "ReferenceError: Todo is not defined\n    at CheckPassword (src/passwordChecker.js:4:36)\n    at Context.<anonymous> (test/passwordChecker.spec.js:12:61)\n    at process.processImmediate (node:internal/timers:478:21)",
+        "message": "Todo is not defined"
+      }
     },
     {
       "title": "should return false for an invalid password (too long)",
@@ -74,8 +85,10 @@
       "file": "/usr/src/project/Typescript/PasswordChecker/test/passwordChecker.spec.js",
       "duration": 0,
       "currentRetry": 0,
-      "speed": "fast",
-      "err": {}
+      "err": {
+        "stack": "ReferenceError: Todo is not defined\n    at CheckPassword (src/passwordChecker.js:4:36)\n    at Context.<anonymous> (test/passwordChecker.spec.js:16:61)\n    at process.processImmediate (node:internal/timers:478:21)",
+        "message": "Todo is not defined"
+      }
     },
     {
       "title": "should return false for an invalid password",
@@ -83,8 +96,11 @@
       "file": "/usr/src/project/Typescript/PasswordChecker/test/passwordChecker.spec.js",
       "duration": 0,
       "currentRetry": 0,
-      "speed": "fast",
-      "err": {}
+      "err": {
+        "stack": "ReferenceError: Todo is not defined\n    at CheckPassword (src/passwordChecker.js:4:36)\n    at Context.<anonymous> (test/passwordChecker.spec.js:20:61)\n    at process.processImmediate (node:internal/timers:478:21)",
+        "message": "Todo is not defined"
+      }
     }
-  ]
+  ],
+  "passes": []
 }

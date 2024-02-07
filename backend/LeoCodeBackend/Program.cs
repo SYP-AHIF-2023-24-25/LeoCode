@@ -66,6 +66,7 @@ namespace LeoCodeBackend
         static async Task<IActionResult> runTests(string code,string language, string ProgramName){
             string apiUrl = "http://localhost:3000/runtests";
             HttpResponseMessage response = null;
+            Console.WriteLine(code);
 
             // Create an instance of HttpClient
             using (HttpClient httpClient = new HttpClient())
