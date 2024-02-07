@@ -18,11 +18,11 @@ namespace LeoCodeBackend
             InstallingNodeModulesForExpressServer();
             InstallingNodeModulesForProjectTemplate("Typescript", "PasswordChecker");
             BuildImage("typescript");
-            StartExpressServer();
+            //StartExpressServer();
             
             int pid = GetProcessIdByPort(3000);
 
-            StopExpressServer();
+            //StopExpressServer();
             var builder = WebApplication.CreateBuilder(args);
 
             builder.Services.AddEndpointsApiExplorer();

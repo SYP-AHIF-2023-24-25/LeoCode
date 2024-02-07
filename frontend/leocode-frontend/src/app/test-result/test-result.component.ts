@@ -149,7 +149,7 @@ export class TestResultComponent  implements OnInit{
     const timeLogger = new TimeLoggerService();
     timeLogger.start();
 
-    this.rest.runTests('Typescript', 'PasswordChecker').subscribe(
+    this.rest.runTests('Typescript', 'PasswordChecker', this.testTemplate).subscribe(
         (data) => {
             const d = data.data.value.data;
             this.resultV2 = this.convertFromJsonV2(d as Value);

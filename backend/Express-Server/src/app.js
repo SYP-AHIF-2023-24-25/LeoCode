@@ -50,7 +50,7 @@ const app = (0, express_1.default)();
 const port = 3000;
 app.use('/swagger', swagger_ui_express_1.default.serve, swagger_ui_express_1.default.setup(swaggerDocument));
 app.use((0, cors_1.default)());
-app.use(body_parser_1.default.json()); // Neu hinzugefügt
+app.use(body_parser_1.default.json());
 app.get('/', (req, res) => {
     res.send('Hello, Express!');
 });
