@@ -1,1 +1,1 @@
-export function CheckPassword(password: string): boolean{  Todo Implementation }
+export function CheckPassword(password: string): boolean{return false;}
