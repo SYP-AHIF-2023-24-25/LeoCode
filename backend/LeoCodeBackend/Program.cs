@@ -53,9 +53,12 @@ namespace LeoCodeBackend
                 .WithOpenApi();
 
             InstallingNodeModulesForExpressServer();
-            InstallingNodeModulesForProjectTemplate("Typescript", "PasswordChecker");
-            BuildImage("typescript");
+            BuildImageExpressServer();
             StartExpressServer();
+
+            /*InstallingNodeModulesForProjectTemplate("Typescript", "PasswordChecker");
+            BuildImage("typescript");
+            StartExpressServer();*/
 
             app.Run();
         }
@@ -186,16 +189,15 @@ namespace LeoCodeBackend
             process.WaitForExit();
         }
 
-        static async void BuildImage(string language) 
-        {
+        static async void BuildImageExpressServer(){
             try 
             {
                 var cwd = Directory.GetCurrentDirectory();
-                var dockerFilePath = $@"{cwd}\..\languages\Dockerfile.{language}";
-                var projectBuildPath = $@"{cwd}\..\languages";
+                var dockerFilePath = $@"{cwd}\..\Express-Server\Dockerfile";
+                var projectBuildPath = $@"{cwd}\..\Express-Server";
                 Console.WriteLine(dockerFilePath);
                 Console.WriteLine(projectBuildPath);
-                var command = $"build -f {dockerFilePath} -t  gutersprint {projectBuildPath}";
+                var command = $"build -f {dockerFilePath} -t ts-runner {projectBuildPath}";
                 var processInfo = new ProcessStartInfo("docker", command)
                 {
                     CreateNoWindow = true,
@@ -259,9 +261,13 @@ namespace LeoCodeBackend
 
         static async void StartExpressServer()
         {
+            //docker-compose -f /path/to/your/docker-compose.yml up
             var cwd = Directory.GetCurrentDirectory();
-            string expressServerFilePath = $@"{cwd}/../Express-Server/src/app.js";
-            var processInfo = new ProcessStartInfo("node", expressServerFilePath)
+            Console.WriteLine($"{cwd}");
+            string expressServerFilePath = $@"{cwd}\..\languages\Typescript\docker-compose.yml";
+            Console.WriteLine(expressServerFilePath);
+            string command = $"compose -f {expressServerFilePath} up -d";
+            var processInfo = new ProcessStartInfo("docker", command)
             {
                 CreateNoWindow = true,
                 UseShellExecute = false,
@@ -279,56 +285,6 @@ namespace LeoCodeBackend
                     proc.WaitForExit();
                 });
             }
-        }
-
-        static async void StopExpressServer()
-        {
-            //TODO: Stop Express Server
-        }
-
-        static int GetProcessIdByPort(int portNumber)
-        {
-            int processId = -1;
-
-            try
-            {
-                var processStartInfo = new ProcessStartInfo
-                {
-                    FileName = "tasklist",
-                    RedirectStandardOutput = true,
-                    UseShellExecute = false,
-                    CreateNoWindow = true
-                };
-
-                using (var process = new Process { StartInfo = processStartInfo, EnableRaisingEvents = true })
-                {
-                    process.Start();
-                    string output = process.StandardOutput.ReadToEnd();
-                    process.WaitForExit();
-
-                    string[] lines = output.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
-
-                    foreach (var line in lines)
-                    {
-                        // Überprüfen, ob die Zeile den Port enthält
-                        if (line.Contains($":{portNumber}"))
-                        {
-                            // Die PID sollte in den ersten Teilen der Zeile sein
-                            string[] parts = line.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-                            if (int.TryParse(parts[1], out processId))
-                            {
-                                break; // Nur die erste gefundene PID zurückgeben
-                            }
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Fehler beim Abrufen der PID: {ex.Message}");
-            }
-
-            return processId;
         }
     }
 }
