@@ -25,19 +25,6 @@ app.get('/', (req: Request, res: Response) => {
   res.send('Hello, Express!');
 });
 
-app.get('/helloworld', (req: Request, res: Response) => {
-  res.send('Hello, World!');
-});
-
-app.get('/runtests', async (req: Request, res: Response) => {
-  console.log("eintritt");
-  replaceCode(req.body.code);
-  console.log("replaced code");
-  const testresults = await runtests(res, req.body.language, req.body.programName);
-
-  res.status(200).json(testresults);
-});
-
 app.post('/api/execute/:exerciseId', async (req: Request, res: Response) => {
   const exerciseId = req.params.exerciseId;
   const templateFilePath = `/usr/src/app/templates/${exerciseId}`;
@@ -59,44 +46,4 @@ function replaceCode(code: string): void {
   templateCode = code;
   fs.writeFileSync(templateFilePath, templateCode);
   console.log("finished replacing code");
-}
-
-async function runtests(res: Response, language: string, ProgramName: string): Promise<any> {
-  try {
-    const cwd: string = process.cwd();
-    const languagesPath: string = resolve(cwd, '../', 'languages');
-    console.log(languagesPath);
-    const languagePath: string = resolve(languagesPath, language, ProgramName);
-    console.log(languagePath);
-    const command: string = `run --rm -v ${languagesPath}:/usr/src/project -w /usr/src/project gutersprint ${language} ${ProgramName}`;
-    const { stdout, stderr } = await promisify(exec)(`docker ${command}`);
-
-    const codeResultsPath: string = resolve(languagePath, 'results');
-    const files = await readdir(codeResultsPath);
-
-    const resultsFile: string | undefined = files.find((file) => file.endsWith('.json'));
-
-    if (resultsFile) {
-      const jsonString: string = await readFile(resolve(codeResultsPath, resultsFile), 'utf-8');
-      console.log('Received JSON:', jsonString); // Logge die empfangenen Daten
-
-      const jsonDocument = JSON.parse(jsonString);
-
-      // Modifiziere die Antwortdaten, um zirkuläre Referenzen zu vermeiden
-      const responseString = ({ data: jsonDocument });
-
-      // Setze die Antwortdaten ohne die Response-Instanz
-      //return res.status(200).send(jsonString);
-      return responseString;
-    } else {
-      const errorObject = { error: 'No results file found.' };
-      //return res.status(400).json(errorObject);
-      return "";
-    }
-  } catch (ex: any) {
-    console.error('Error during tests:', ex); // Logge den Fehler für die Diagnose
-    const errorObject = { error: `An error occurred: ${ex.message}` };
-    //return res.status(500).json(errorObject);
-    return "";
-  }
 }

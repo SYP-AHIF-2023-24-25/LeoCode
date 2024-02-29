@@ -56,10 +56,6 @@ namespace LeoCodeBackend
             BuildImageExpressServer();
             StartExpressServer();
 
-            /*InstallingNodeModulesForProjectTemplate("Typescript", "PasswordChecker");
-            BuildImage("typescript");
-            StartExpressServer();*/
-
             app.Run();
         }
 
@@ -105,88 +101,6 @@ namespace LeoCodeBackend
                 }
             }
             return new OkObjectResult(response.Content.ReadAsStringAsync());
-        }
-        
-        static async Task<IActionResult> RunTestsApi(string language, string ProgramName)
-        {
-            try
-            {
-                var cwd = Directory.GetCurrentDirectory();
-
-                var path = $@"{cwd}\..\languages";
-
-                cwd = $@"{path}\{language}\{ProgramName}";
-
-                var command = $"run --rm -v {path}:/usr/src/project -w /usr/src/project pwdtest {language} {ProgramName}";
-                var processInfo = new ProcessStartInfo("docker", command)
-                {
-                    CreateNoWindow = true,
-                    UseShellExecute = false,
-                    RedirectStandardOutput = true,
-                    RedirectStandardError = true
-                };
-
-                using (var proc = new Process { StartInfo = processInfo, EnableRaisingEvents = true })
-                {
-                    proc.Start();
-                    await proc.WaitForExitAsync();
-
-                    var code = proc.ExitCode;
-                    ResultFileHelperCSharp resultFileHelperCSharp = new ResultFileHelperCSharp();
-                    var resultsFile = Directory.GetFiles($"{cwd}\\results", "*.json").FirstOrDefault();
-
-                    if (resultsFile != null)
-                    {
-                        string jsonString = await File.ReadAllTextAsync(resultsFile);
-
-                        var jsonDocument = JsonDocument.Parse(jsonString);
-                        var rootElement = jsonDocument.RootElement;
-
-                        var responseObject = new { data = rootElement };
-
-                        return new OkObjectResult(responseObject);
-                    }
-                    else
-                    {
-                        var errorObject = new { error = "No results file found." };
-                        return new BadRequestObjectResult(errorObject);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                var errorObject = new { error = $"An error occurred: {ex.Message}" };
-                return new BadRequestObjectResult(errorObject);
-            }
-        }
-
-
-
-        static async void InstallingNodeModulesForProjectTemplate(string language, string projectName) {
-            var cwd = Directory.GetCurrentDirectory();
-
-            var path = $@"{cwd}\..\languages\{language}\{projectName}";
-
-            Process process = new Process();
-            ProcessStartInfo startInfo = new ProcessStartInfo
-            {
-                FileName = "cmd.exe",
-                RedirectStandardInput = true,
-                RedirectStandardOutput = true,
-                RedirectStandardError = true,
-                UseShellExecute = false,
-                CreateNoWindow = true,
-                WorkingDirectory = path
-            };
-
-            process.StartInfo = startInfo;
-            process.Start();
-
-            process.StandardInput.WriteLine("npm install");
-            process.StandardInput.Flush();
-            process.StandardInput.Close();
-
-            process.WaitForExit();
         }
 
         static async void BuildImageExpressServer(){
@@ -261,7 +175,6 @@ namespace LeoCodeBackend
 
         static async void StartExpressServer()
         {
-            //docker-compose -f /path/to/your/docker-compose.yml up
             var cwd = Directory.GetCurrentDirectory();
             Console.WriteLine($"{cwd}");
             string expressServerFilePath = $@"{cwd}\..\languages\Typescript\docker-compose.yml";
@@ -279,7 +192,6 @@ namespace LeoCodeBackend
             {
                 proc.Start();
 
-                // Verwende Task.Run, um die Ausführung asynchron zu machen
                 await Task.Run(() =>
                 {
                     proc.WaitForExit();
