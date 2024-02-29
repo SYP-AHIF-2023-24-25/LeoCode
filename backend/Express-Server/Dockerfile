@@ -1,5 +1,5 @@
 # Use the official Node.js image as base
-FROM node:14
+FROM node:latest
 
 # Create and set the working directory
 WORKDIR /usr/src/app
@@ -17,4 +17,4 @@ COPY . .
 EXPOSE 3000
 
 # Command to run the application
-CMD ["node", "/src/app.js"]
+CMD ["node", "src/app.js"]

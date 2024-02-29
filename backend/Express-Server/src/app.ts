@@ -7,6 +7,7 @@ import { readdir, readFile } from 'fs/promises';
 import { resolve } from 'path';
 import bodyParser from 'body-parser';
 import cors from 'cors';
+import { runTs } from './execute-tests';
 
 import swaggerUi from 'swagger-ui-express';
 
@@ -31,6 +32,14 @@ app.post('/runtests', async (req: Request, res: Response) => {
   const testresults = await runtests(res, req.body.language, req.body.programName);
 
   res.status(200).json(testresults);
+});
+
+app.post('/api/execute/:exerciseId', async (req: Request, res: Response) => {
+  const exerciseId = req.params.exerciseId;
+  const templateFilePath = `/templates/${exerciseId}`;
+  console.log(templateFilePath);
+  const result = await runTs(exerciseId, templateFilePath);
+  res.status(200).json(result);
 });
 
 app.listen(port, () => {

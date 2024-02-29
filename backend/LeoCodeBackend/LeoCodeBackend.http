@@ -1,6 +1,24 @@
 @WebApplication_HostAddress = http://localhost:5080
+@TsRunnerUrl = http://localhost:8000
 
 GET {{WebApplication_HostAddress}}/weatherforecast/
 Accept: application/json
 
 ###
+POST {{TsRunnerUrl}}/api/execute/PasswordChecker
+Content-Type: application/json
+
+{
+  
+}
+
+###
+GET {{TsRunnerUrl}}
+
+###
+POST {{TsRunnerUrl}}/runtests
+Content-Type: application/json
+
+{
+  
+}
