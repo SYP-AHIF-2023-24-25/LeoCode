@@ -12,7 +12,9 @@ const ncp = require('ncp').ncp;
 
 export async function runTs(exerciseId: string, templateFilePath:string): Promise<any> {
     const solutionDir = await mkdtemp(exerciseId);
+    console.log('solutionDir');
     console.log(solutionDir);
+    console.log('solutionDir');
    // await promisify(copyFile)(templateFilePath, solutionDir);
     ncp(templateFilePath, solutionDir, { clobber: false }, function(err: any) {
     if (err) {
@@ -20,8 +22,21 @@ export async function runTs(exerciseId: string, templateFilePath:string): Promis
     }
     console.log('Copy successful!');
   });
-    const command = `npm run test`;
-    const { stdout, stderr } = await promisify(exec)(command, { cwd: solutionDir });
+    let path = `/usr/src/app/${solutionDir}`;
+    let compile = `npm install`;
+    const { stdout, stderr } = await promisify(exec)(compile, { cwd: path });
+
+    path = `/usr/src/app/${solutionDir}/`;
+    compile = `npx tsc`;
+    const { stdout: secondStdout, stderr: secondStderr } = await promisify(exec)(compile, { cwd: path });
+    console.log('secondStdout');
+
+    path = `/usr/src/app/${solutionDir}/`;
+    compile = `npm test -- --reporter json --reporter-options output=/usr/src/app/${solutionDir}/results/testresults.json`;
+    const { stdout: thirdStdout, stderr: thirdStderr } = await promisify(exec)(compile, { cwd: path });
+    console.log('thirdStdout');
+    /*const command = `npm run test`;
+    const { stdout, stderr } = await promisify(exec)(command, { cwd: solutionDir });*/
     return "Test successful";
     /*try {
       const cwd: string = process.cwd();
