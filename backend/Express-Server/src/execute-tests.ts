@@ -7,12 +7,19 @@ import { resolve } from 'path';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import e from 'express';
-
+import { copyFile } from 'fs';
+const ncp = require('ncp').ncp;
 
 export async function runTs(exerciseId: string, templateFilePath:string): Promise<any> {
     const solutionDir = await mkdtemp(exerciseId);
     console.log(solutionDir);
-    await cp(templateFilePath, solutionDir);
+   // await promisify(copyFile)(templateFilePath, solutionDir);
+    ncp(templateFilePath, solutionDir, { clobber: false }, function(err: any) {
+    if (err) {
+      return console.error(err);
+    }
+    console.log('Copy successful!');
+  });
     const command = `npm run test`;
     const { stdout, stderr } = await promisify(exec)(command, { cwd: solutionDir });
     return "Test successful";

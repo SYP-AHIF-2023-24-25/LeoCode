@@ -2,6 +2,6 @@ services:
   ts-runner:
     image: ts-runner
     volumes:
-      - ./templates:/templates
+      - ./templates:/usr/src/app/templates
     ports:
       - "8000:3000"

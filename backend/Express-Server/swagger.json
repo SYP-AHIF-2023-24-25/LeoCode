@@ -132,6 +132,51 @@
           }
         }        
       }
-    }
+    },
+    "/helloworld": {
+      "get": {
+        "summary": "Gibt Helloworld zurück",
+        "responses": {
+          "200": {
+            "description": "UnitTest erfolgreich ausgeführt!",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Hello World testen"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/execute/{exerciseId}": {
+      "post": {
+        "summary": "Führt Unit Tests aus",
+        "parameters": [
+          {
+            "name": "exerciseId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Hier die Beschreibung des Parameters einfügen"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "UnitTest erfolgreich ausgeführt!",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Hello World testen"
+                }
+              }
+            }
+          }
+        }
+      }
+    }     
   }
 }

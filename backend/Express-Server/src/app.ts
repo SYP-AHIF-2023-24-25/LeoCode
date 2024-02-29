@@ -25,7 +25,11 @@ app.get('/', (req: Request, res: Response) => {
   res.send('Hello, Express!');
 });
 
-app.post('/runtests', async (req: Request, res: Response) => {
+app.get('/helloworld', (req: Request, res: Response) => {
+  res.send('Hello, World!');
+});
+
+app.get('/runtests', async (req: Request, res: Response) => {
   console.log("eintritt");
   replaceCode(req.body.code);
   console.log("replaced code");
@@ -36,7 +40,7 @@ app.post('/runtests', async (req: Request, res: Response) => {
 
 app.post('/api/execute/:exerciseId', async (req: Request, res: Response) => {
   const exerciseId = req.params.exerciseId;
-  const templateFilePath = `/templates/${exerciseId}`;
+  const templateFilePath = `/usr/src/app/templates/${exerciseId}`;
   console.log(templateFilePath);
   const result = await runTs(exerciseId, templateFilePath);
   res.status(200).json(result);

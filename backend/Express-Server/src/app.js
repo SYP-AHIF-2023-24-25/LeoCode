@@ -44,6 +44,7 @@ const promises_1 = require("fs/promises");
 const path_1 = require("path");
 const body_parser_1 = __importDefault(require("body-parser"));
 const cors_1 = __importDefault(require("cors"));
+const execute_tests_1 = require("./execute-tests");
 const swagger_ui_express_1 = __importDefault(require("swagger-ui-express"));
 const swaggerDocument = require('../swagger.json');
 const app = (0, express_1.default)();
@@ -54,12 +55,22 @@ app.use(body_parser_1.default.json());
 app.get('/', (req, res) => {
     res.send('Hello, Express!');
 });
-app.post('/runtests', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+app.get('/helloworld', (req, res) => {
+    res.send('Hello, World!');
+});
+app.get('/runtests', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     console.log("eintritt");
     replaceCode(req.body.code);
     console.log("replaced code");
     const testresults = yield runtests(res, req.body.language, req.body.programName);
     res.status(200).json(testresults);
+}));
+app.post('/api/execute/:exerciseId', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const exerciseId = req.params.exerciseId;
+    const templateFilePath = `/usr/src/app/templates/${exerciseId}`;
+    console.log(templateFilePath);
+    const result = yield (0, execute_tests_1.runTs)(exerciseId, templateFilePath);
+    res.status(200).json(result);
 }));
 app.listen(port, () => {
     console.log(`Server is running at http://localhost:${port}`);
