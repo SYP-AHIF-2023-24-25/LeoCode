@@ -1,14 +1,19 @@
-import express, { Request, Response } from 'express';
-import * as path from 'path';
 import { promisify } from 'util';
 import { exec } from 'child_process';
-import { readdir, readFile,mkdtemp,cp } from 'fs/promises';
-import { resolve } from 'path';
-import bodyParser from 'body-parser';
-import cors from 'cors';
-import e from 'express';
-import { copyFile } from 'fs';
+import { readFile,mkdtemp,mkdir } from 'fs/promises';
 const ncp = require('ncp').ncp;
+
+export async function replaceCode(code: string,exerciseId: string): Promise<void> {
+  const solutionDir = await mkdir(exerciseId);
+  /*console.log("in replace code function");
+  const cwd = process.cwd();
+  console.log(cwd);
+  const templateFilePath = path.join(cwd, '../languages/Typescript/PasswordChecker/src/passwordChecker.ts');
+  let templateCode = fs.readFileSync(templateFilePath, 'utf-8');
+  templateCode = code;
+  fs.writeFileSync(templateFilePath, templateCode);
+  console.log("finished replacing code");*/
+}
 
 export async function runTs(exerciseId: string, templateFilePath:string): Promise<any> {
     const solutionDir = await mkdtemp(exerciseId);

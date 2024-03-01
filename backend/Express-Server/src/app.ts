@@ -1,14 +1,7 @@
 import express, { Request, Response } from 'express';
-import * as fs from 'fs';
-import * as path from 'path';
-import { promisify } from 'util';
-import { exec } from 'child_process';
-import { readdir, readFile } from 'fs/promises';
-import { resolve } from 'path';
 import bodyParser from 'body-parser';
 import cors from 'cors';
-import { runTs } from './execute-tests';
-
+import { runTs, replaceCode } from './execute-tests';
 import swaggerUi from 'swagger-ui-express';
 
 const swaggerDocument = require('../swagger.json');
@@ -26,7 +19,9 @@ app.get('/', (req: Request, res: Response) => {
 });
 
 app.post('/api/execute/:exerciseId', async (req: Request, res: Response) => {
+  const code = req.body.code;
   const exerciseId = req.params.exerciseId;
+  await replaceCode(code,exerciseId);
   const templateFilePath = `/usr/src/app/templates/${exerciseId}`;
   console.log(templateFilePath);
   const result = await runTs(exerciseId, templateFilePath);
@@ -37,13 +32,3 @@ app.listen(port, () => {
   console.log(`Server is running at http://localhost:${port}`);
 });
 
-function replaceCode(code: string): void {
-  console.log("in replace code function");
-  const cwd = process.cwd();
-  console.log(cwd);
-  const templateFilePath = path.join(cwd, '../languages/Typescript/PasswordChecker/src/passwordChecker.ts');
-  let templateCode = fs.readFileSync(templateFilePath, 'utf-8');
-  templateCode = code;
-  fs.writeFileSync(templateFilePath, templateCode);
-  console.log("finished replacing code");
-}
