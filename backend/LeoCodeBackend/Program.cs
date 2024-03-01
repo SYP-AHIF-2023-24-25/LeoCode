@@ -44,12 +44,12 @@ namespace LeoCodeBackend
 
             app.UseHttpsRedirection();
 
-            app.MapPost("/runtests", RunTestsApi)
-                .WithName("RunTestsApi")
-                .WithOpenApi();
-
-            app.MapPost("/runtest", runTests)
+            /*app.MapPost("/runtest", RunTests)
                 .WithName("RunTests")
+                .WithOpenApi();*/
+
+            app.MapPost("/runtest", RunTests)
+                .WithName("RunTest")
                 .WithOpenApi();
 
             InstallingNodeModulesForExpressServer();
@@ -59,7 +59,7 @@ namespace LeoCodeBackend
             app.Run();
         }
 
-        static async Task<IActionResult> runTests(string code,string language, string ProgramName){
+        /*static async Task<IActionResult> RunTests(string code,string language, string ProgramName){
             string apiUrl = "http://localhost:3000/runtests";
             HttpResponseMessage response = null;
 
@@ -101,7 +101,7 @@ namespace LeoCodeBackend
                 }
             }
             return new OkObjectResult(response.Content.ReadAsStringAsync());
-        }
+        }*/
 
         static async void BuildImageExpressServer(){
             try 
@@ -143,6 +143,51 @@ namespace LeoCodeBackend
             {
                 Console.WriteLine($"Error: {ex.Message}");
             }
+        }
+
+        static async Task<IActionResult> RunTests(string exerciseId)
+        {
+            string apiUrl = $"http://localhost:8000/api/execute/{exerciseId}";
+            HttpResponseMessage response = null;
+
+            // Create an instance of HttpClient
+            using (HttpClient httpClient = new HttpClient())
+            {
+                try
+                {
+                    // Define the content to be sent in the POST request (replace with your actual content)
+                    //string jsonContent = $"{{\"code\":\"{code}\",\"language\":\"{language}\",\"programName\":\"{ProgramName}\"}}";
+                    //HttpContent content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
+
+                    // Send a POST request
+                    response = await httpClient.PostAsync(apiUrl, null);
+
+                    // Check if the request was successful
+                    if (response.IsSuccessStatusCode)
+                    {
+                        // Read and output the response content as a string
+                        // Read and output the response content as a string
+                        string responseBody = await response.Content.ReadAsStringAsync();
+                        var jsonDocument = JsonDocument.Parse(responseBody);
+                        ResultFileHelperTypescript resultFileHelperTypescript = new ResultFileHelperTypescript();
+                        var result = JsonDocument.Parse(resultFileHelperTypescript.formatData(responseBody));
+                        Console.WriteLine(result);
+                        Console.WriteLine("=======================================");
+                        var value = result.RootElement;
+                        Console.WriteLine(value);
+                        return new OkObjectResult(value);
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Request failed with status code {response.StatusCode}");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"An error occurred: {ex.Message}");
+                }
+            }
+            return new OkObjectResult(response.Content.ReadAsStringAsync());
         }
 
         static async void InstallingNodeModulesForExpressServer()

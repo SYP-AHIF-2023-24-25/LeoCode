@@ -8,11 +8,9 @@ namespace LeoCodeBackend
 {
     public class ResultFileHelperTypescript
     {
-        string trxFilePath = "C:\\Schule\\4AHIF\\LeoCode\\backend\\languages\\Typescript\\PasswordChecker\\results\\testresults.json";
-        string jsonFilePath = "C:\\test.json";
         public string formatData(string json)
         {
-            Data testResults = JsonConvert.DeserializeObject<Data>(json);
+            TestResults testResults = JsonConvert.DeserializeObject<TestResults>(json);
 
 
 
@@ -20,18 +18,18 @@ namespace LeoCodeBackend
             {
                 Summary = new Summary
                 {
-                    TotalTests = testResults.data.Stats.Tests,
-                    PassedTests = testResults.data.Stats.Passes,
-                    FailedTests = testResults.data.Stats.Failures
+                    TotalTests = testResults.Stats.Tests,
+                    PassedTests = testResults.Stats.Passes,
+                    FailedTests = testResults.Stats.Failures
                 },
-                TestResults = testResults.data.Passes
+                TestResults = testResults.Passes
                 .Select(test => new TestResult
                 {
                     TestName = $"T{test.CurrentRetry + 1}_{test.Title.Replace(" ", "_").ToLower()}",
                     Outcome = "Passed",
                     ErrorMessage = ""
                 })
-                .Concat(testResults.data.Failures
+                .Concat(testResults.Failures
                     .Select(test => new TestResult
                     {
                         TestName = $"T{test.CurrentRetry + 1}_{test.Title.Replace(" ", "_").ToLower()}",
@@ -43,11 +41,6 @@ namespace LeoCodeBackend
 
             return JsonConvert.SerializeObject(customResults, Newtonsoft.Json.Formatting.Indented);
         }
-    }
-
-    public class Data
-    {
-        public TestResults data { get; set; }
     }
 
     public class TestResults
