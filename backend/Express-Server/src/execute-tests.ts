@@ -1,6 +1,7 @@
 import { promisify } from 'util';
 import { exec } from 'child_process';
 import { readFile,mkdtemp,mkdir } from 'fs/promises';
+import { Console } from 'console';
 const ncp = require('ncp').ncp;
 
 export async function replaceCode(code: string,exerciseId: string): Promise<void> {
@@ -38,7 +39,12 @@ export async function runTs(exerciseId: string, templateFilePath:string): Promis
     const { stdout: thirdStdout, stderr: thirdStderr } = await promisify(exec)(compile, { cwd: path });
     console.log('thirdStdout');
 
-    const result = await readFile(`/usr/src/app/${solutionDir}/results/testresults.json`, 'utf-8');
-
-    return result;
+    const result = await readFile(`/usr/src/app/${solutionDir}/results/testresults.json`,'utf-8');
+    console.log(`===============================`);
+    console.log(result);
+    console.log(`===============================`);
+    const jsonData = JSON.parse(result);
+    console.log(jsonData);
+    console.log(`===============================`);
+    return jsonData;
   }

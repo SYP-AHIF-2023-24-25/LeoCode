@@ -167,7 +167,9 @@ namespace LeoCodeBackend
                     {
                         // Read and output the response content as a string
                         // Read and output the response content as a string
+                        string path = "C:\\test\\test.json";
                         string responseBody = await response.Content.ReadAsStringAsync();
+                        File.WriteAllText(path, responseBody);
                         var jsonDocument = JsonDocument.Parse(responseBody);
                         ResultFileHelperTypescript resultFileHelperTypescript = new ResultFileHelperTypescript();
                         var result = JsonDocument.Parse(resultFileHelperTypescript.formatData(responseBody));

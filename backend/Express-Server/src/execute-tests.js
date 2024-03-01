@@ -9,11 +9,25 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.runTs = void 0;
+exports.runTs = exports.replaceCode = void 0;
 const util_1 = require("util");
 const child_process_1 = require("child_process");
 const promises_1 = require("fs/promises");
 const ncp = require('ncp').ncp;
+function replaceCode(code, exerciseId) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const solutionDir = yield (0, promises_1.mkdir)(exerciseId);
+        /*console.log("in replace code function");
+        const cwd = process.cwd();
+        console.log(cwd);
+        const templateFilePath = path.join(cwd, '../languages/Typescript/PasswordChecker/src/passwordChecker.ts');
+        let templateCode = fs.readFileSync(templateFilePath, 'utf-8');
+        templateCode = code;
+        fs.writeFileSync(templateFilePath, templateCode);
+        console.log("finished replacing code");*/
+    });
+}
+exports.replaceCode = replaceCode;
 function runTs(exerciseId, templateFilePath) {
     return __awaiter(this, void 0, void 0, function* () {
         const solutionDir = yield (0, promises_1.mkdtemp)(exerciseId);
@@ -36,7 +50,13 @@ function runTs(exerciseId, templateFilePath) {
         const { stdout: thirdStdout, stderr: thirdStderr } = yield (0, util_1.promisify)(child_process_1.exec)(compile, { cwd: path });
         console.log('thirdStdout');
         const result = yield (0, promises_1.readFile)(`/usr/src/app/${solutionDir}/results/testresults.json`, 'utf-8');
-        return result;
+        console.log(`===============================`);
+        console.log(result);
+        console.log(`===============================`);
+        const jsonData = JSON.parse(result);
+        console.log(jsonData);
+        console.log(`===============================`);
+        return jsonData;
     });
 }
 exports.runTs = runTs;

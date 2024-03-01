@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("LeoCodeBackend")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+234957e598dbbe2503af3e47fb52683c54f3873e")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ceed520300097fd4cacd08162bcb05f2b46d1de9")]
 [assembly: System.Reflection.AssemblyProductAttribute("LeoCodeBackend")]
 [assembly: System.Reflection.AssemblyTitleAttribute("LeoCodeBackend")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
