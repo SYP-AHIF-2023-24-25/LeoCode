@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using System.Text;
+using Newtonsoft.Json;
+using System.Text.Json.Nodes;
 
 namespace LeoCodeBackend
 {
@@ -54,6 +56,7 @@ namespace LeoCodeBackend
 
             InstallingNodeModulesForExpressServer();
             BuildImageExpressServer();
+            Thread.Sleep(5000);
             StartExpressServer();
 
             app.Run();
@@ -145,7 +148,7 @@ namespace LeoCodeBackend
             }
         }
 
-        static async Task<IActionResult> RunTests(string exerciseId)
+        static async Task<IActionResult> RunTests(string exerciseId, [FromBody] JsonObject snippetSection)
         {
             string apiUrl = $"http://localhost:8000/api/execute/{exerciseId}";
             HttpResponseMessage response = null;
@@ -161,7 +164,7 @@ namespace LeoCodeBackend
                     HttpContent content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
 
                     // Send a POST request
-                    response = await httpClient.PostAsync(apiUrl, null);
+                    response = await httpClient.PostAsync(apiUrl, content);
 
                     // Check if the request was successful
                     if (response.IsSuccessStatusCode)
@@ -225,9 +228,10 @@ namespace LeoCodeBackend
         {
             var cwd = Directory.GetCurrentDirectory();
             Console.WriteLine($"{cwd}");
-            string expressServerFilePath = $@"{cwd}\..\languages\Typescript\docker-compose.yml";
+            string expressServerFilePath = $@"{cwd}\..\languages\Typescript";
             Console.WriteLine(expressServerFilePath);
-            string command = $"compose -f {expressServerFilePath} up -d";
+            Directory.SetCurrentDirectory(expressServerFilePath);
+            string command = $"compose up -d";
             var processInfo = new ProcessStartInfo("docker", command)
             {
                 CreateNoWindow = true,

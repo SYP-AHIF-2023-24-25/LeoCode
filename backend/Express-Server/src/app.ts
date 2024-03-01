@@ -28,23 +28,13 @@ app.get('/', (req: Request, res: Response) => {
 app.post('/api/execute/:exerciseId', async (req: Request, res: Response) => {
   const exerciseId = req.params.exerciseId;
   const code = req.body.code;
-  const templateFilePath = `/templates/${exerciseId}`;
-  console.log(templateFilePath);
-  const result = await runTs(exerciseId, templateFilePath);
+  console.log(code);
+  console.log("11111111111111111111111111111111111111");
+  const templateFilePath = `./templates/${exerciseId}`;
+  const result = await runTs(exerciseId, templateFilePath,code);
   res.status(200).json(result);
 });
 
 app.listen(port, () => {
   console.log(`Server is running at http://localhost:${port}`);
 });
-
-function replaceCode(code: string): void {
-  console.log("in replace code function");
-  const cwd = process.cwd();
-  console.log(cwd);
-  const templateFilePath = path.join(cwd, '../languages/Typescript/PasswordChecker/src/passwordChecker.ts');
-  let templateCode = fs.readFileSync(templateFilePath, 'utf-8');
-  templateCode = code;
-  fs.writeFileSync(templateFilePath, templateCode);
-  console.log("finished replacing code");
-}
