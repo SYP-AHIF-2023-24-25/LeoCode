@@ -44,12 +44,12 @@ namespace LeoCodeBackend
 
             app.UseHttpsRedirection();
 
-            /*app.MapPost("/runtest", RunTests)
-                .WithName("RunTests")
-                .WithOpenApi();*/
-
             app.MapPost("/runtest", RunTests)
                 .WithName("RunTest")
+                .WithOpenApi();
+
+            app.MapPost("/concatsnippets", ConcatSnippets)
+                .WithName("ConcatSnippets")
                 .WithOpenApi();
 
             InstallingNodeModulesForExpressServer();
@@ -149,15 +149,16 @@ namespace LeoCodeBackend
         {
             string apiUrl = $"http://localhost:8000/api/execute/{exerciseId}";
             HttpResponseMessage response = null;
+            Snippet snippet = JsonConvert.DeserializeObject<Snippet>(snippetSection.ToString());
+            string code = ConcatSnippets(snippet);
 
             // Create an instance of HttpClient
             using (HttpClient httpClient = new HttpClient())
             {
                 try
                 {
-                    // Define the content to be sent in the POST request (replace with your actual content)
-                    //string jsonContent = $"{{\"code\":\"{code}\",\"language\":\"{language}\",\"programName\":\"{ProgramName}\"}}";
-                    //HttpContent content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
+                    string jsonContent = $"{{\"code\":\"{code}\",\"exerciseId\":\"{exerciseId}\"}}";
+                    HttpContent content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
 
                     // Send a POST request
                     response = await httpClient.PostAsync(apiUrl, null);
@@ -245,5 +246,35 @@ namespace LeoCodeBackend
                 });
             }
         }
+        static string ConcatSnippets(Snippet snippet)
+        {
+            try
+            {
+                
+
+                string concatedCode = "";
+                foreach (SnippetSection snippetSection in snippet.SnippetSection)
+                {
+                    concatedCode += snippetSection.Code;
+                }
+
+                return concatedCode;
+            }
+            catch (System.Text.Json.JsonException ex)
+            {
+                Console.WriteLine($"Fehler beim Deserialisieren: {ex.Message}");
+                return null;
+            }
+        }
+    }
+    public class SnippetSection
+    {
+        public string Code { get; set; }
+        public bool ReadonlySection { get; set; }
+    }
+
+    public class Snippet
+    {
+        public SnippetSection[] SnippetSection { get; set; }
     }
 }
