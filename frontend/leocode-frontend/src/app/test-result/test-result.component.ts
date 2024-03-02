@@ -67,13 +67,13 @@ export class TestResultComponent  implements OnInit{
     this.codeSections = codeSections;
   }
   
-  parseCodeSectionsToTemplate(codeSections: CodeSection[]) {
+  /*parseCodeSectionsToTemplate(codeSections: CodeSection[]) {
       let template: string = "";
       for(let i = 0; i < codeSections.length; i++) {
         template += codeSections[i].code + "\n";
       }
       this.testTemplate = template;
-    }
+    }*/
 
   // parse from json new
   convertFromJsonV2(value: Value): ResultV2 {// mit neuen json format
@@ -122,16 +122,16 @@ export class TestResultComponent  implements OnInit{
 
   // start tests for new json format
   startTestV2() {
-    console.log(this.codeSections);
-    this.parseCodeSectionsToTemplate(this.codeSections);
-    console.log(this.testTemplate);
+    //console.log(this.codeSections);
+    //this.parseCodeSectionsToTemplate(this.codeSections);
+    //console.log(this.testTemplate);
 
     this.resetFieldsV2();
     this.loading = true;
     const timeLogger = new TimeLoggerService();
     timeLogger.start();
 
-    this.rest.runTests('Typescript', 'PasswordChecker', this.testTemplate).subscribe(
+    this.rest.runTests('PasswordChecker', this.codeSections).subscribe(
         (data) => {
           console.log(data);
           

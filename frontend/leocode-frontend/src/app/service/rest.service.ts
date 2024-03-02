@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { CodeSection } from '../model/code-sections';
 
 @Injectable({
   providedIn: 'root'
@@ -11,13 +12,17 @@ export class RestService {
 
   constructor(private httpClient: HttpClient) { }
 
-  runTests(language: string, ProgramName: string, code:string):Observable<any> {
+  runTests(ProgramName: string, code:CodeSection[]):Observable<any> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Access-Control-Allow-Origin': '*' // Erlaubt alle Ursprünge ()
     });
 
+    const requestBody = {
+      "snippetSection": code
+    }
 
-    return this.httpClient.post(`${this.baseUrl}runtest?code=${code}&language=${language}&ProgramName=${ProgramName}`, null, { headers: headers });
+
+    return this.httpClient.post(`${this.baseUrl}runtest?exerciseId=${ProgramName}`, requestBody, { headers: headers });
   }
 }
