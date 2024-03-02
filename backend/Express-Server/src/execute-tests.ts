@@ -1,12 +1,11 @@
 import { promisify } from 'util';
 import { exec } from 'child_process';
-import { readFile,mkdtemp,mkdir } from 'fs/promises';
-import * as path from 'path';
+import { readFile,mkdtemp} from 'fs/promises';
 import * as fs from 'fs';
 const ncp = require('ncp').ncp;
 
-export async function runTs(exerciseId: string, templateFilePath:string,code:string): Promise<any> {
-  const solutionDir = await createTempDirAndCopyTemplate(exerciseId, templateFilePath);
+export async function runTs(exerciseName: string, templateFilePath:string,code:string): Promise<any> {
+  const solutionDir = await createTempDirAndCopyTemplate(exerciseName, templateFilePath);
   await replaceCode(code, solutionDir);
 
   await runCommands(`/usr/src/app/${solutionDir}`, `npm install`);
@@ -14,8 +13,7 @@ export async function runTs(exerciseId: string, templateFilePath:string,code:str
   await runCommands(`/usr/src/app/${solutionDir}`, `npm test -- --reporter json --reporter-options output=/usr/src/app/${solutionDir}/results/testresults.json`);
 
   const result = await readFile(`/usr/src/app/${solutionDir}/results/testresults.json`, 'utf-8');
-  const jsonData = JSON.parse(result);
-  return jsonData;
+  return JSON.parse(result);
 }
 
 async function replaceCode(code: string, filePath: string): Promise<void> {
@@ -36,17 +34,14 @@ async function replaceCode(code: string, filePath: string): Promise<void> {
 async function runCommands(path: string, command: string): Promise<void> {
   try {
     const { stdout, stderr } = await promisify(exec)(command, { cwd: path });
-    console.log('Alles richtig:');
   } catch (error: any) {
-    console.error('Nicht alles richtig:');
-    // Handle the error as needed (you can log it or take other actions)
-    // For now, we're not rethrowing the error to prevent it from propagating
+    console.error(error.message);
   }
 }
 
 
-async function createTempDirAndCopyTemplate(exerciseId: string, templateFilePath: string): Promise<string> {
-  let solutionDir = await mkdtemp(exerciseId);
+async function createTempDirAndCopyTemplate(exerciseName: string, templateFilePath: string): Promise<string> {
+  let solutionDir = await mkdtemp(exerciseName);
 
   await new Promise<void>((resolve, reject) => {
     ncp(templateFilePath, solutionDir, { clobber: false }, function (err: any) {

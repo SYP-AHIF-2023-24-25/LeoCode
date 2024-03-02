@@ -19,10 +19,10 @@ export class RestService {
     });
 
     const requestBody = {
-      "snippetSection": code
+      "ArrayOfSnippets": code
     }
 
 
-    return this.httpClient.post(`${this.baseUrl}runtest?exerciseId=${ProgramName}`, requestBody, { headers: headers });
+    return this.httpClient.post(`${this.baseUrl}api/runtest?exerciseName=${ProgramName}`, requestBody, { headers: headers });
   }
 }

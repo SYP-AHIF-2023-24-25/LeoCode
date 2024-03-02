@@ -46,12 +46,8 @@ namespace LeoCodeBackend
 
             app.UseHttpsRedirection();
 
-            app.MapPost("/runtest", RunTests)
+            app.MapPost("/api/runtest", RunTests)
                 .WithName("RunTest")
-                .WithOpenApi();
-
-            app.MapPost("/concatsnippets", ConcatSnippets)
-                .WithName("ConcatSnippets")
                 .WithOpenApi();
 
             CompileExpressServerAsync();
@@ -65,8 +61,8 @@ namespace LeoCodeBackend
 
         private static async Task CompileExpressServerAsync()
         {
-            var cwd = Directory.GetCurrentDirectory();
-            string expressServerFilePath = $@"{cwd}\..\Express-Server";
+            var currentDirectory = Directory.GetCurrentDirectory();
+            string expressServerFilePath = $@"{currentDirectory}\..\Express-Server";
             Directory.SetCurrentDirectory(expressServerFilePath);
             string command = $"tsc";
             var processInfo = new ProcessStartInfo("npx", command)
@@ -77,25 +73,25 @@ namespace LeoCodeBackend
                 RedirectStandardError = true
             };
 
-            using (var proc = new Process { StartInfo = processInfo, EnableRaisingEvents = true })
+            using (var process = new Process { StartInfo = processInfo, EnableRaisingEvents = true })
             {
-                proc.Start();
+                process.Start();
 
                 await Task.Run(() =>
                 {
-                    proc.WaitForExit();
+                    process.WaitForExit();
                 });
             }
-            Directory.SetCurrentDirectory(cwd);
+            Directory.SetCurrentDirectory(currentDirectory);
         }
 
         static async void BuildImageExpressServer(){
             try 
             {
-                var cwd = Directory.GetCurrentDirectory();
-                var dockerFilePath = $@"{cwd}\..\Express-Server\Dockerfile";
-                var projectBuildPath = $@"{cwd}\..\Express-Server";
-                var command = $"build -f {dockerFilePath} -t ts-runner {projectBuildPath}";
+                var currentDirectory = Directory.GetCurrentDirectory();
+                var dockerFilePath = $@"{currentDirectory}\..\Express-Server\Dockerfile";
+                var expressServerFilePath = $@"{currentDirectory}\..\Express-Server";
+                var command = $"build -f {dockerFilePath} -t ts-runner {expressServerFilePath}";
                 var processInfo = new ProcessStartInfo("docker", command)
                 {
                     CreateNoWindow = true,
@@ -104,22 +100,12 @@ namespace LeoCodeBackend
                     RedirectStandardError = true
                 };
 
-                using (var proc = new Process { StartInfo = processInfo, EnableRaisingEvents = true })
+                using (var process = new Process { StartInfo = processInfo, EnableRaisingEvents = true })
                 {
-                    proc.Start();
-                    await proc.WaitForExitAsync();
-                    var code = proc.ExitCode;
-                
-                    if (code == 0)
-                    {
-                        Console.WriteLine("Image builed successfully.");
-                    }
-                    else
-                    {
-                        Console.WriteLine($"Image builed not successfully.");
-                    }
+                    process.Start();
+                    await process.WaitForExitAsync();
                 }
-                Directory.SetCurrentDirectory(cwd);
+                Directory.SetCurrentDirectory(currentDirectory);
             } 
             catch (Exception ex) 
             {
@@ -127,25 +113,23 @@ namespace LeoCodeBackend
             }
         }
 
-        static async Task<IActionResult> RunTests(string exerciseId, [FromBody] JsonObject snippetSection)
+        static async Task<IActionResult> RunTests(string exerciseName, [FromBody] JsonObject ArrayOfSnippets)
         {
-            string apiUrl = $"http://localhost:8000/api/execute/{exerciseId}";
+            string apiUrl = $"http://localhost:8000/api/execute/{exerciseName}";
             HttpResponseMessage response = null;
-            Snippet snippet = JsonConvert.DeserializeObject<Snippet>(snippetSection.ToString());
-            string code = ConcatSnippets(snippet);
+            Snippets snippets = JsonConvert.DeserializeObject<Snippets>(ArrayOfSnippets.ToString());
 
             using (HttpClient httpClient = new HttpClient())
             {
                 try
                 {
-                    string jsonContent = $"{{\"code\":\"{code}\",\"exerciseId\":\"{exerciseId}\"}}";
+                    string jsonContent = $"{{\"code\":\"{ConcatSnippets(snippets)}\",\"exerciseId\":\"{exerciseName}\"}}";
                     HttpContent content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
                     response = await httpClient.PostAsync(apiUrl, content);
 
                     if (response.IsSuccessStatusCode)
                     {
                         string responseBody = await response.Content.ReadAsStringAsync();
-                        var jsonDocument = JsonDocument.Parse(responseBody);
                         ResultFileHelperTypescript resultFileHelperTypescript = new ResultFileHelperTypescript();
                         var result = JsonDocument.Parse(resultFileHelperTypescript.formatData(responseBody));
                         var value = result.RootElement;
@@ -166,8 +150,8 @@ namespace LeoCodeBackend
 
         static async void InstallingNodeModulesForExpressServer()
         {
-            var cwd = Directory.GetCurrentDirectory();
-            var path = $@"{cwd}\..\Express-Server";
+            var currentDirectory = Directory.GetCurrentDirectory();
+            var expressServerFilePath = $@"{currentDirectory}\..\Express-Server";
             Process process = new Process();
             ProcessStartInfo startInfo = new ProcessStartInfo
             {
@@ -177,7 +161,7 @@ namespace LeoCodeBackend
                 RedirectStandardError = true,
                 UseShellExecute = false,
                 CreateNoWindow = true,
-                WorkingDirectory = path
+                WorkingDirectory = expressServerFilePath
             };
 
             process.StartInfo = startInfo;
@@ -186,13 +170,13 @@ namespace LeoCodeBackend
             process.StandardInput.Flush();
             process.StandardInput.Close();
             process.WaitForExit();
-            Directory.SetCurrentDirectory(cwd);
+            Directory.SetCurrentDirectory(currentDirectory);
         }
 
         static async void StartExpressServer()
         {
-            var cwd = Directory.GetCurrentDirectory();
-            string expressServerFilePath = $@"{cwd}\..\languages\Typescript";
+            var currentDirectory = Directory.GetCurrentDirectory();
+            string expressServerFilePath = $@"{currentDirectory}\..\languages\Typescript";
             Directory.SetCurrentDirectory(expressServerFilePath);
             string command = $"compose up -d";
             var processInfo = new ProcessStartInfo("docker", command)
@@ -203,23 +187,23 @@ namespace LeoCodeBackend
                 RedirectStandardError = true
             };
 
-            using (var proc = new Process { StartInfo = processInfo, EnableRaisingEvents = true })
+            using (var process = new Process { StartInfo = processInfo, EnableRaisingEvents = true })
             {
-                proc.Start();
+                process.Start();
 
                 await Task.Run(() =>
                 {
-                    proc.WaitForExit();
+                    process.WaitForExit();
                 });
             }
-            Directory.SetCurrentDirectory(cwd);
+            Directory.SetCurrentDirectory(currentDirectory);
         }
-        static string ConcatSnippets(Snippet snippet)
+        static string ConcatSnippets(Snippets snippets)
         {
             try
             {
                 string concatedCode = "";
-                foreach (SnippetSection snippetSection in snippet.SnippetSection)
+                foreach (Snippet snippetSection in snippets.ArrayOfSnippets)
                 {
                     concatedCode += snippetSection.Code;
                 }
@@ -228,18 +212,18 @@ namespace LeoCodeBackend
             catch (System.Text.Json.JsonException ex)
             {
                 Console.WriteLine($"Fehler beim Deserialisieren: {ex.Message}");
-                return null;
+                return ex.Message;
             }
         }
     }
-    public class SnippetSection
+    public class Snippet
     {
         public string Code { get; set; }
         public bool ReadonlySection { get; set; }
     }
 
-    public class Snippet
+    public class Snippets
     {
-        public SnippetSection[] SnippetSection { get; set; }
+        public Snippet[] ArrayOfSnippets { get; set; }
     }
 }
