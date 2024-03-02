@@ -12,8 +12,6 @@ namespace LeoCodeBackend
         {
             TestResults testResults = JsonConvert.DeserializeObject<TestResults>(json);
 
-
-
             var customResults = new CustomResults
             {
                 Summary = new Summary
@@ -38,7 +36,6 @@ namespace LeoCodeBackend
                     }))
                 .ToList()
             };
-
             return JsonConvert.SerializeObject(customResults, Newtonsoft.Json.Formatting.Indented);
         }
     }
