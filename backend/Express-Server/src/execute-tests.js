@@ -38,53 +38,61 @@ const child_process_1 = require("child_process");
 const promises_1 = require("fs/promises");
 const fs = __importStar(require("fs"));
 const ncp = require('ncp').ncp;
-function replaceCode(code, filePath) {
-    return __awaiter(this, void 0, void 0, function* () {
-        console.log("in replace code function");
-        //`/usr/src/app/` + 
-        const templateFilePath = `/usr/src/app/` + filePath + `/src/passwordChecker.ts`;
-        fs.writeFile(templateFilePath, code, (err) => {
-            if (err) {
-                console.log("Error in replacing code");
-                console.error(err);
-            }
-            else {
-                console.log("Code replaced successfully.");
-            }
-        });
-        console.log("finished replacing code");
-    });
-}
 function runTs(exerciseId, templateFilePath, code) {
     return __awaiter(this, void 0, void 0, function* () {
-        let solutionDir = yield (0, promises_1.mkdtemp)(exerciseId);
-        console.log(solutionDir);
-        //templateFilePath = `usr/src/app/${templateFilePath}`;
-        ncp(templateFilePath, solutionDir, { clobber: false }, function (err) {
-            if (err) {
-                console.log("Error in copying");
-                return console.error(err);
-            }
-            console.log('Copy successful!');
-        });
+        const solutionDir = yield createTempDirAndCopyTemplate(exerciseId, templateFilePath);
         yield replaceCode(code, solutionDir);
-        let path = `/usr/src/app/${solutionDir}`;
-        let compile = `npm install`;
-        const { stdout, stderr } = yield (0, util_1.promisify)(child_process_1.exec)(compile, { cwd: path });
-        path = `/usr/src/app/${solutionDir}/`;
-        compile = `npx tsc`;
-        const { stdout: secondStdout, stderr: secondStderr } = yield (0, util_1.promisify)(child_process_1.exec)(compile, { cwd: path });
-        path = `/usr/src/app/${solutionDir}/`;
-        compile = `npm test -- --reporter json --reporter-options output=/usr/src/app/${solutionDir}/results/testresults.json`;
-        const { stdout: thirdStdout, stderr: thirdStderr } = yield (0, util_1.promisify)(child_process_1.exec)(compile, { cwd: path });
+        yield runCommands(`/usr/src/app/${solutionDir}`, `npm install`);
+        yield runCommands(`/usr/src/app/${solutionDir}`, `npx tsc`);
+        yield runCommands(`/usr/src/app/${solutionDir}`, `npm test -- --reporter json --reporter-options output=/usr/src/app/${solutionDir}/results/testresults.json`);
         const result = yield (0, promises_1.readFile)(`/usr/src/app/${solutionDir}/results/testresults.json`, 'utf-8');
-        console.log(`===============================`);
-        console.log(result);
-        console.log(`===============================`);
         const jsonData = JSON.parse(result);
-        console.log(jsonData);
-        console.log(`===============================`);
         return jsonData;
     });
 }
 exports.runTs = runTs;
+function replaceCode(code, filePath) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const templateFilePath = `/usr/src/app/${filePath}/src/passwordChecker.ts`;
+        return new Promise((resolve, reject) => {
+            fs.writeFile(templateFilePath, code, (err) => {
+                if (err) {
+                    console.error(err);
+                    reject(err);
+                }
+                else {
+                    resolve();
+                }
+            });
+        });
+    });
+}
+function runCommands(path, command) {
+    return __awaiter(this, void 0, void 0, function* () {
+        try {
+            const { stdout, stderr } = yield (0, util_1.promisify)(child_process_1.exec)(command, { cwd: path });
+            console.log('Alles richtig:');
+        }
+        catch (error) {
+            console.error('Nicht alles richtig:');
+            // Handle the error as needed (you can log it or take other actions)
+            // For now, we're not rethrowing the error to prevent it from propagating
+        }
+    });
+}
+function createTempDirAndCopyTemplate(exerciseId, templateFilePath) {
+    return __awaiter(this, void 0, void 0, function* () {
+        let solutionDir = yield (0, promises_1.mkdtemp)(exerciseId);
+        yield new Promise((resolve, reject) => {
+            ncp(templateFilePath, solutionDir, { clobber: false }, function (err) {
+                if (err) {
+                    reject(err);
+                }
+                else {
+                    resolve();
+                }
+            });
+        });
+        return solutionDir;
+    });
+}

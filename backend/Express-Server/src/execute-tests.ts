@@ -5,53 +5,58 @@ import * as path from 'path';
 import * as fs from 'fs';
 const ncp = require('ncp').ncp;
 
-async function replaceCode(code: string, filePath: string): Promise<void> {
-  console.log("in replace code function");
-  //`/usr/src/app/` + 
-  const templateFilePath =`/usr/src/app/` + filePath + `/src/passwordChecker.ts`;
-  fs.writeFile(templateFilePath, code, (err: any) => {
-    if (err) {
-      console.log("Error in replacing code");
-      console.error(err);
-    } else {
-      console.log("Code replaced successfully.");
-    }
-  });
-  console.log("finished replacing code");
+export async function runTs(exerciseId: string, templateFilePath:string,code:string): Promise<any> {
+  const solutionDir = await createTempDirAndCopyTemplate(exerciseId, templateFilePath);
+  await replaceCode(code, solutionDir);
+
+  await runCommands(`/usr/src/app/${solutionDir}`, `npm install`);
+  await runCommands(`/usr/src/app/${solutionDir}`, `npx tsc`);
+  await runCommands(`/usr/src/app/${solutionDir}`, `npm test -- --reporter json --reporter-options output=/usr/src/app/${solutionDir}/results/testresults.json`);
+
+  const result = await readFile(`/usr/src/app/${solutionDir}/results/testresults.json`, 'utf-8');
+  const jsonData = JSON.parse(result);
+  return jsonData;
 }
 
-export async function runTs(exerciseId: string, templateFilePath:string,code:string): Promise<any> {
-    let solutionDir = await mkdtemp(exerciseId);
-    console.log(solutionDir);
-    
-    //templateFilePath = `usr/src/app/${templateFilePath}`;
-    ncp(templateFilePath, solutionDir, { clobber: false }, function(err: any) {
-    if (err) {
-      console.log("Error in copying");
-      return console.error(err);
-    }
-    console.log('Copy successful!');
-    
+async function replaceCode(code: string, filePath: string): Promise<void> {
+  const templateFilePath = `/usr/src/app/${filePath}/src/passwordChecker.ts`;
+
+  return new Promise<void>((resolve, reject) => {
+    fs.writeFile(templateFilePath, code, (err: any) => {
+      if (err) {
+        console.error(err);
+        reject(err);
+      } else {
+        resolve();
+      }
     });
-    await replaceCode(code, solutionDir);
-    let path = `/usr/src/app/${solutionDir}`;
-    let compile = `npm install`;
-    const { stdout, stderr } = await promisify(exec)(compile, { cwd: path });
+  });
+}
 
-    path = `/usr/src/app/${solutionDir}/`;
-    compile = `npx tsc`;
-    const { stdout: secondStdout, stderr: secondStderr } = await promisify(exec)(compile, { cwd: path });
-
-    path = `/usr/src/app/${solutionDir}/`;
-    compile = `npm test -- --reporter json --reporter-options output=/usr/src/app/${solutionDir}/results/testresults.json`;
-    const { stdout: thirdStdout, stderr: thirdStderr } = await promisify(exec)(compile, { cwd: path });
-
-    const result = await readFile(`/usr/src/app/${solutionDir}/results/testresults.json`,'utf-8');
-    console.log(`===============================`);
-    console.log(result);
-    console.log(`===============================`);
-    const jsonData = JSON.parse(result);
-    console.log(jsonData);
-    console.log(`===============================`);
-    return jsonData;
+async function runCommands(path: string, command: string): Promise<void> {
+  try {
+    const { stdout, stderr } = await promisify(exec)(command, { cwd: path });
+    console.log('Alles richtig:');
+  } catch (error: any) {
+    console.error('Nicht alles richtig:');
+    // Handle the error as needed (you can log it or take other actions)
+    // For now, we're not rethrowing the error to prevent it from propagating
   }
+}
+
+
+async function createTempDirAndCopyTemplate(exerciseId: string, templateFilePath: string): Promise<string> {
+  let solutionDir = await mkdtemp(exerciseId);
+
+  await new Promise<void>((resolve, reject) => {
+    ncp(templateFilePath, solutionDir, { clobber: false }, function (err: any) {
+      if (err) {
+        reject(err);
+      } else {
+        resolve();
+      }
+    });
+  });
+
+  return solutionDir;
+}
