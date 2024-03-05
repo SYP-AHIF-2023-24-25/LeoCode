@@ -52,3 +52,6 @@ Unser Ziel ist es, eine funktionelle Anwendung zu programmieren, die von allen L
    - Ersten funktionierenden Prototyp programmieren
    - Webseite mit 3D Applikation verknüpfen
 
+## Gui Mock Ups
+https://www.figma.com/file/c6eRRcaLliFm8lMynvRMaq/LeoCodeFrontendV2?type=design&node-id=0-1&mode=design&t=XuqPzU1q13q96dwi-0
+
