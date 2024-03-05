@@ -6,7 +6,7 @@ const ncp = require('ncp').ncp;
 
 export async function runCSharp(exerciseName: string, templateFilePath:string,code:string, fileName: string): Promise<any> {
   const solutionDir = await createTempDirAndCopyTemplate(exerciseName, templateFilePath);
-  await replaceCode(code, solutionDir,fileName);
+  await replaceCode(code, solutionDir,exerciseName,fileName);
 
   await runCommands(`/usr/src/app/${solutionDir}`, `dotnet restore`);
   await runCommands(`/usr/src/app/${solutionDir}`, `dotnet test -l:trx;LogFileName=TestOutput.xml`);
@@ -15,8 +15,8 @@ export async function runCSharp(exerciseName: string, templateFilePath:string,co
   return JSON.parse(result);
 }
 
-async function replaceCode(code: string, filePath: string, fileName:string): Promise<void> {
-  const templateFilePath = `/usr/src/app/${filePath}/src/${fileName}`;
+async function replaceCode(code: string, filePath: string, programName:string,fileName:string): Promise<void> {
+  const templateFilePath = `/usr/src/app/${filePath}/${programName}/${fileName}`;
 
   return new Promise<void>((resolve, reject) => {
     fs.writeFile(templateFilePath, code, (err: any) => {

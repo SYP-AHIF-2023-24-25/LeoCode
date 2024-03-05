@@ -6,7 +6,7 @@ namespace LeoCodeBackend
 {
     public class ResultFileHelperCSharp
     {
-        public void ConvertTrxToJson()
+        public void ConvertTrxToJson(string json)
         {
             string trxFilePath = "C:\\Schule\\4AHIF\\LeoCode\\backend\\languages\\CSharp\\PasswordTest\\results\\_0d34c18ff43e_2023-12-29_22_41_05.trx";
             string jsonFilePath = "C:\\test.json";

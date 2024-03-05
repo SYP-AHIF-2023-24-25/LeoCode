@@ -1,6 +1,6 @@
 services:
-  ts-runner:
-    image: chsarp-runner
+  csharp-runner:
+    image: csharp-runner
     volumes:
       - ./templates:/usr/src/app/templates
     ports:

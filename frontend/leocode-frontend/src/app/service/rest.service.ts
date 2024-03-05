@@ -37,15 +37,7 @@ export class RestService {
       "ArrayOfSnippets": code
     }
 
-    if (language === 'Typescript') {
-      return this.httpClient.post(`${this.baseUrl}api/runTsTests?exerciseName=${programName}`, requestBody, { headers: headers });
-    } else if (language === 'CSharp') {
-      return this.httpClient.post(`${this.baseUrl}api/runCSharpTests?exerciseName=${programName}`, requestBody, { headers: headers });
-    } else if (language === 'Java') {
-      return this.httpClient.post(`${this.baseUrl}api/runJavaTests?exerciseName=${programName}`, requestBody, { headers: headers });
-    } else {
-      return new Observable<any>(); // Return an empty observable
-    }
+    return this.httpClient.post(`${this.baseUrl}api/runTests?exerciseName=${programName}&language=${language}`, requestBody, { headers: headers });
   }
 
   startRunner(language: string):Observable<any> {
@@ -55,17 +47,6 @@ export class RestService {
     });
 
     console.log("Start Runner");
-
-    if (language === 'Typescript') {
-      console.log("Jaa");
-      return this.httpClient.post(`${this.baseUrl}api/startTsRunner`, {}, { headers: headers });
-    } else if (language === 'CSharp') {
-      return this.httpClient.post(`${this.baseUrl}api/startCSharpRunner`, null, { headers: headers });
-    } else if (language === 'Java') {
-      return this.httpClient.post(`${this.baseUrl}api/startJavaRunner`, null, { headers: headers });
-    } else {
-      return new Observable<any>(); // Return an empty observable
-    }
-    
+    return this.httpClient.post(`${this.baseUrl}api/startRunner?language=${language}`, null, { headers: headers });
   }
 }

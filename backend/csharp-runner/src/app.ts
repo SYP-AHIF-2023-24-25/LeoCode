@@ -3,7 +3,7 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 import { runCSharp } from './execute-tests';
 
-const swaggerDocument = require('../swagger.json');
+//const swaggerDocument = require('../swagger.json');
 
 const app = express();
 const port = 3000;
@@ -17,6 +17,7 @@ app.get('/', (req: Request, res: Response) => {
 });
 
 app.post('/api/execute/:exerciseName', async (req: Request, res: Response) => {
+  console.log("hahahahahahahahah");
   const exerciseName = req.params.exerciseName;
   const fileName = req.body.fileName;
   const code = req.body.code;

@@ -1,5 +1,4 @@
-﻿
-public class PasswordChecker
+﻿public class PasswordChecker
 {
     public static void Main()
     {

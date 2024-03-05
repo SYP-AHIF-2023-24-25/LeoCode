@@ -46,29 +46,14 @@ namespace LeoCodeBackend
 
             app.UseHttpsRedirection();
 
-            app.MapPost("/api/runTSTests", RunTsTests)
-                .WithName("RunTsTests")
-                .WithOpenApi();
-
-            app.MapPost("/api/runCSharpTests", RunCSharpTests)
-                .WithName("RunCSharpTests")
-                .WithOpenApi();
-
-            app.MapPost("/api/runJavaTests", RunJavaTests)
+            app.MapPost("/api/runTests", RunTests)
                 .WithName("RunJavaTests")
                 .WithOpenApi();
             //      return this.httpClient.post(`${this.baseUrl}api/startTsRunner`, null, { headers: headers });
 
-            app.MapPost("/api/startTsRunner", StartTsRunner)
+
+            app.MapPost("/api/startRunner", StartRunner)
                 .WithName("StartTsRunner")
-                .WithOpenApi();
-
-            app.MapPost("/api/startCSharpRunner", StartCSharpRunner)
-                .WithName("StartCSharpRunner")
-                .WithOpenApi();
-
-            app.MapPost("/api/startJavaRunner", StartJavaRunner)
-                .WithName("StartJavaRunner")
                 .WithOpenApi();
 
             app.MapDelete("/api/stopRunner", StopRunner)
@@ -109,39 +94,27 @@ namespace LeoCodeBackend
             
         }
 
-        private static async Task StartCSharpRunner()
+        private static async Task StartRunner(string language) 
         {
             try
             {
-                //TODO: Implement Start CSharp Runner
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error: {ex.Message}");
-            }
+                var currentDirectory = Directory.GetCurrentDirectory();
+                if (language == "Typescript")
+                {
+                    var dockerFilePath = $@"{currentDirectory}\..\ts-runner\Dockerfile";
+                    var expressServerFilePath = $@"{currentDirectory}\..\ts-runner";
+                    await BuildImageServer(dockerFilePath, expressServerFilePath, "ts-runner");
+                    await StartContainer("Typescript");
+                }
+                else if(language == "CSharp")
+                {
+                    var dockerFilePath = $@"{currentDirectory}\..\csharp-runner\Dockerfile";
+                    var expressServerFilePath = $@"{currentDirectory}\..\csharp-runner";
+                    await BuildImageServer(dockerFilePath, expressServerFilePath, "csharp-runner");
+                    await StartContainer("CSharp");
+                }
 
-        }
-
-        private static async Task StartJavaRunner()
-        {
-            try
-            {
-                //TODO: Implement Start Java Runner
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error: {ex.Message}");
-            }
-
-        }
-
-        private static async Task StartTsRunner() 
-        {
-            try
-            {
-                Console.WriteLine("angekommen");
-                await BuildImageExpressServer();
-                await StartExpressServer();
+                Directory.SetCurrentDirectory(currentDirectory); 
             } 
             catch(Exception ex) 
             {
@@ -150,13 +123,13 @@ namespace LeoCodeBackend
             
         }
 
-        private static async Task BuildImageExpressServer(){
+        private static async Task BuildImageServer(string dockerFilePath, string expressServerFilePath, string imageName){
             try 
             {
                 var currentDirectory = Directory.GetCurrentDirectory();
-                var dockerFilePath = $@"{currentDirectory}\..\ts-runner\Dockerfile";
-                var expressServerFilePath = $@"{currentDirectory}\..\ts-runner";
-                var command = $"build -f {dockerFilePath} -t ts-runner {expressServerFilePath}";
+                /*var dockerFilePath = $@"{currentDirectory}\..\ts-runner\Dockerfile";
+                var expressServerFilePath = $@"{currentDirectory}\..\ts-runner";*/
+                var command = $"build -f {dockerFilePath} -t {imageName} {expressServerFilePath}";
                 var processInfo = new ProcessStartInfo("docker", command)
                 {
                     CreateNoWindow = true,
@@ -178,9 +151,17 @@ namespace LeoCodeBackend
             }
         }
 
-        static async Task<IActionResult> RunTsTests(string exerciseName, [FromBody] JsonObject arrayOfSnippets)
+        static async Task<IActionResult> RunTests(string exerciseName,string language, [FromBody] JsonObject arrayOfSnippets)
         {
-            string apiUrl = $"http://localhost:8000/api/execute/{exerciseName}";
+            string apiUrl = "";
+            if(language == "Typescript"){
+                apiUrl = $"http://localhost:8000/api/execute/{exerciseName}";
+            } else if(language == "CSharp"){
+                apiUrl = $"http://localhost:8001/api/execute/{exerciseName}";
+            } else if(language == "Java"){
+                apiUrl = $"http://localhost:8002/api/execute/{exerciseName}";
+            }
+            
             HttpResponseMessage response = null;
             Snippets snippets = JsonConvert.DeserializeObject<Snippets>(arrayOfSnippets.ToString());
             //Console.WriteLine(snippets.ArrayOfSnippets[0].FileName);
@@ -196,9 +177,27 @@ namespace LeoCodeBackend
                     if (response.IsSuccessStatusCode)
                     {
                         string responseBody = await response.Content.ReadAsStringAsync();
-                        ResultFileHelperTypescript resultFileHelperTypescript = new ResultFileHelperTypescript();
-                        var result = JsonDocument.Parse(resultFileHelperTypescript.formatData(responseBody));
-                        var value = result.RootElement;
+                        JsonDocument result = null;
+                        JsonElement value = new JsonElement();
+                        if (language == "Typescript")
+                        {
+                            ResultFileHelperTypescript resultFileHelperTypescript = new ResultFileHelperTypescript();
+                            result = JsonDocument.Parse(resultFileHelperTypescript.formatData(responseBody));
+                            value = result.RootElement;
+                        }
+                        else if (language == "CSharp")
+                        {
+                            /*ResultFileHelperCSharp resultFileHelperTypescript = new ResultFileHelperCSharp();
+                            result = JsonDocument.Parse(resultFileHelperTypescript.ConvertTrxToJson(responseBody));
+                            value = result.RootElement;*/
+                        }
+                        else if (language == "Java")
+                        {
+                            /*ResultFileHelperTypescript resultFileHelperTypescript = new ResultFileHelperTypescript();
+                            result = JsonDocument.Parse(resultFileHelperTypescript.formatData(responseBody));
+                            value = result.RootElement;*/
+                        }
+
                         return new OkObjectResult(value);
                     }
                     else
@@ -213,86 +212,11 @@ namespace LeoCodeBackend
             }
             return new OkObjectResult(response.Content.ReadAsStringAsync());
         }
-        static async Task<IActionResult> RunCSharpTests(string exerciseName, [FromBody] JsonObject arrayOfSnippets)
-        {
-            /*string apiUrl = $"http://localhost:8001/api/execute/{exerciseName}";
-            HttpResponseMessage response = null;
-            Snippets snippets = JsonConvert.DeserializeObject<Snippets>(arrayOfSnippets.ToString());
 
-            using (HttpClient httpClient = new HttpClient())
-            {
-                try
-                {
-                    string jsonContent = $"{{\"snippets\":\"{snippets}\"}}";
-                    HttpContent content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
-                    response = await httpClient.PostAsync(apiUrl, content);
-
-                    if (response.IsSuccessStatusCode)
-                    {
-                        string responseBody = await response.Content.ReadAsStringAsync();
-                        ResultFileHelperTypescript resultFileHelperTypescript = new ResultFileHelperTypescript();
-                        var result = JsonDocument.Parse(resultFileHelperTypescript.formatData(responseBody));
-                        var value = result.RootElement;
-                        return new OkObjectResult(value);
-                    }
-                    else
-                    {
-                        Console.WriteLine($"Request failed with status code {response.StatusCode}");
-                    }
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine($"An error occurred: {ex.Message}");
-                }
-            }
-            
-            return new OkObjectResult(response.Content.ReadAsStringAsync());*/
-            //TODO: Implementierung der C#-Tests
-            return null;
-        }
-
-        static async Task<IActionResult> RunJavaTests(string exerciseName, [FromBody] JsonObject arrayOfSnippets)
-        {
-            /*
-            string apiUrl = $"http://localhost:8000/api/execute/{exerciseName}";
-            HttpResponseMessage response = null;
-            Snippets snippets = JsonConvert.DeserializeObject<Snippets>(arrayOfSnippets.ToString());
-
-            using (HttpClient httpClient = new HttpClient())
-            {
-                try
-                {
-                    string jsonContent = $"{{\"snippets\":\"{snippets}\"}}";
-                    HttpContent content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
-                    response = await httpClient.PostAsync(apiUrl, content);
-
-                    if (response.IsSuccessStatusCode)
-                    {
-                        string responseBody = await response.Content.ReadAsStringAsync();
-                        ResultFileHelperTypescript resultFileHelperTypescript = new ResultFileHelperTypescript();
-                        var result = JsonDocument.Parse(resultFileHelperTypescript.formatData(responseBody));
-                        var value = result.RootElement;
-                        return new OkObjectResult(value);
-                    }
-                    else
-                    {
-                        Console.WriteLine($"Request failed with status code {response.StatusCode}");
-                    }
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine($"An error occurred: {ex.Message}");
-                }
-            }
-            return new OkObjectResult(response.Content.ReadAsStringAsync());*/
-            //TODO: Impementierung der Java-Tests
-            return null;
-        }
-
-        private static async Task StartExpressServer()
+        private static async Task StartContainer(string language)
         {
             var currentDirectory = Directory.GetCurrentDirectory();
-            string expressServerFilePath = $@"{currentDirectory}\..\languages\Typescript";
+            string expressServerFilePath = $@"{currentDirectory}\..\languages\{language}";
             Directory.SetCurrentDirectory(expressServerFilePath);
             string command = $"compose up -d";
             var processInfo = new ProcessStartInfo("docker", command)
