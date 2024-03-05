@@ -71,7 +71,7 @@ namespace LeoCodeBackend
         private static async Task CompileExpressServerAsync()
         {
             var currentDirectory = Directory.GetCurrentDirectory();
-            string expressServerFilePath = $@"{currentDirectory}\..\Express-Server";
+            string expressServerFilePath = $@"{currentDirectory}\..\ts-runner";
             Directory.SetCurrentDirectory(expressServerFilePath);
             string command = $"tsc";
             var processInfo = new ProcessStartInfo("npx", command)
@@ -98,9 +98,9 @@ namespace LeoCodeBackend
             try 
             {
                 var currentDirectory = Directory.GetCurrentDirectory();
-                var dockerFilePath = $@"{currentDirectory}\..\Express-Server\Dockerfile";
-                var expressServerFilePath = $@"{currentDirectory}\..\Express-Server";
-                var command = $"build -f {dockerFilePath} -t ts-runner {expressServerFilePath}";
+                var dockerFilePath = $@"{currentDirectory}\..\ts-runner\Dockerfile";
+                var expressServerFilePath = $@"{currentDirectory}\..\ts-runner";
+                var command = $"build -f {dockerFilePath} -t ts-runner2 {expressServerFilePath}";
                 var processInfo = new ProcessStartInfo("docker", command)
                 {
                     CreateNoWindow = true,
@@ -236,7 +236,7 @@ namespace LeoCodeBackend
         static async void InstallingNodeModulesForExpressServer()
         {
             var currentDirectory = Directory.GetCurrentDirectory();
-            var expressServerFilePath = $@"{currentDirectory}\..\Express-Server";
+            var expressServerFilePath = $@"{currentDirectory}\..\ts-runner";
             Process process = new Process();
             ProcessStartInfo startInfo = new ProcessStartInfo
             {

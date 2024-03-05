@@ -1,6 +1,6 @@
 services:
   ts-runner:
-    image: ts-runner
+    image: ts-runner2
     volumes:
       - ./templates:/usr/src/app/templates
     ports:
