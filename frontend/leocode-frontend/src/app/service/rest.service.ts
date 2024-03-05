@@ -7,6 +7,21 @@ import { CodeSection } from '../model/code-sections';
   providedIn: 'root'
 })
 export class RestService {
+  stopRunner(language: string) {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*' // Erlaubt alle Ursprünge ()
+    });
+    if (language === 'Typescript') {
+      return this.httpClient.delete(`${this.baseUrl}api/stopRunner?language=${language}`, { headers: headers });
+    } else if (language === 'CSharp') {
+      return this.httpClient.delete(`${this.baseUrl}api/stopRunner?language=${language}`, { headers: headers });
+    } else if (language === 'Java') {
+      return this.httpClient.delete(`${this.baseUrl}api/stopRunner?language=${language}`, { headers: headers });
+    } else {
+      return new Observable<any>(); // Return an empty observable
+    }
+  }
 
   private baseUrl: string = 'http://localhost:5080/';
 
@@ -43,7 +58,7 @@ export class RestService {
 
     if (language === 'Typescript') {
       console.log("Jaa");
-      return this.httpClient.post(`${this.baseUrl}api/startTsRunner`, null, { headers: headers });
+      return this.httpClient.post(`${this.baseUrl}api/startTsRunner`, {}, { headers: headers });
     } else if (language === 'CSharp') {
       return this.httpClient.post(`${this.baseUrl}api/startCSharpRunner`, null, { headers: headers });
     } else if (language === 'Java') {

@@ -45,8 +45,21 @@ export class TestResultComponent  implements OnInit{
   }
 
   ngOnInit(): void {
-    this.rest.startRunner("Typescript");
+    this.rest.startRunner("Typescript").subscribe((data) => {
+      console.log(data);
+    
+    },
+    (error) => {
+        console.error("Error in API request", error);
+        this.loading = false;
+    });
     this.parseTemplateToCodeSections(this.testTemplate, "passwordChecker.ts");
+  }
+  ngOnDestroy(): void {
+    this.rest.stopRunner("Typescript").subscribe((data) => {
+      console.log(data);
+    }
+    );
   }
 
 // Code Editor Funcions
