@@ -80,6 +80,7 @@ namespace LeoCodeBackend
 
         private static async Task StopRunner(string language)
         {
+            Console.WriteLine("gekommen");
             try
             {
                 var currentDirectory = Directory.GetCurrentDirectory();
@@ -99,11 +100,13 @@ namespace LeoCodeBackend
                     process.Start();
                     await process.WaitForExitAsync();
                 }
+                Directory.SetCurrentDirectory(currentDirectory);
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Error: {ex.Message}");
             }
+            
         }
 
         private static async Task StartCSharpRunner()

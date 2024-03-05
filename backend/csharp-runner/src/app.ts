@@ -3,6 +3,7 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 import { runCSharp } from './execute-tests';
 
+const swaggerDocument = require('../swagger.json');
 
 const app = express();
 const port = 3000;
@@ -17,10 +18,12 @@ app.get('/', (req: Request, res: Response) => {
 
 app.post('/api/execute/:exerciseName', async (req: Request, res: Response) => {
   const exerciseName = req.params.exerciseName;
+  const fileName = req.body.fileName;
   const code = req.body.code;
-  const fileName = req.params.fileName;
   const templateFilePath = `./templates/${exerciseName}`;
-  const result = await runCSharp(exerciseName, templateFilePath,code, fileName);
+  console.log(fileName);
+  console.log(code);
+  const result = await runCSharp(exerciseName, templateFilePath,code,fileName);
   res.status(200).json(result);
 });
 

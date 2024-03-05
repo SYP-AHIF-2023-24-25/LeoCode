@@ -1,0 +1,7 @@
+services:
+  ts-runner:
+    image: chsarp-runner
+    volumes:
+      - ./templates:/usr/src/app/templates
+    ports:
+      - "8001:3000"

@@ -8,9 +8,8 @@ export async function runCSharp(exerciseName: string, templateFilePath:string,co
   const solutionDir = await createTempDirAndCopyTemplate(exerciseName, templateFilePath);
   await replaceCode(code, solutionDir,fileName);
 
-  await runCommands(`/usr/src/app/${solutionDir}`, `npm install`);
-  await runCommands(`/usr/src/app/${solutionDir}`, `npx tsc`);
-  await runCommands(`/usr/src/app/${solutionDir}`, `npm test -- --reporter json --reporter-options output=/usr/src/app/${solutionDir}/results/testresults.json`);
+  await runCommands(`/usr/src/app/${solutionDir}`, `dotnet restore`);
+  await runCommands(`/usr/src/app/${solutionDir}`, `dotnet test -l:trx;LogFileName=TestOutput.xml`);
 
   const result = await readFile(`/usr/src/app/${solutionDir}/results/testresults.json`, 'utf-8');
   return JSON.parse(result);
