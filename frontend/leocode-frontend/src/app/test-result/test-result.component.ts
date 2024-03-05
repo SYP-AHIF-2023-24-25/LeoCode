@@ -45,11 +45,11 @@ export class TestResultComponent  implements OnInit{
   }
 
   ngOnInit(): void {
-    this.parseTemplateToCodeSections(this.testTemplate);
+    this.parseTemplateToCodeSections(this.testTemplate, "passwordChecker.ts");
   }
 
 // Code Editor Funcions
-  parseTemplateToCodeSections(template: string) {
+  parseTemplateToCodeSections(template: string, programName: string) {
 
     let stringCodeSections: string[]= template.split("\n");
 
@@ -58,9 +58,9 @@ export class TestResultComponent  implements OnInit{
 
     for(let i = 0; i < stringCodeSections.length; i++) {
       if(stringCodeSections[i].includes("Todo Implementation")) {
-        codeSections.push({ code: stringCodeSections[i], readonly: false });
+        codeSections.push({ code: stringCodeSections[i], readonly: false, fileName: programName});
       }else {
-        codeSections.push({ code: stringCodeSections[i], readonly: true });
+        codeSections.push({ code: stringCodeSections[i], readonly: true, fileName: programName});
       }
     }
 
@@ -122,16 +122,12 @@ export class TestResultComponent  implements OnInit{
 
   // start tests for new json format
   startTestV2() {
-    //console.log(this.codeSections);
-    //this.parseCodeSectionsToTemplate(this.codeSections);
-    //console.log(this.testTemplate);
-
     this.resetFieldsV2();
     this.loading = true;
     const timeLogger = new TimeLoggerService();
     timeLogger.start();
 
-    this.rest.runTests('PasswordChecker', this.codeSections).subscribe(
+    this.rest.runTests('passwordChecker.ts', this.codeSections, "Typescript").subscribe(
         (data) => {
           console.log(data);
           

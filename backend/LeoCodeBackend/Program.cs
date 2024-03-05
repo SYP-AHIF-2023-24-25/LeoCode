@@ -46,9 +46,18 @@ namespace LeoCodeBackend
 
             app.UseHttpsRedirection();
 
-            app.MapPost("/api/runtest", RunTests)
-                .WithName("RunTest")
+            app.MapPost("/api/runTSTests", RunTsTests)
+                .WithName("RunTsTests")
                 .WithOpenApi();
+
+            app.MapPost("/api/runCSharpTests", RunCSharpTests)
+                .WithName("RunCSharpTests")
+                .WithOpenApi();
+
+            app.MapPost("/api/runJavaTests", RunJavaTests)
+                .WithName("RunJavaTests")
+                .WithOpenApi();
+
 
             CompileExpressServerAsync();
             InstallingNodeModulesForExpressServer();
@@ -113,17 +122,17 @@ namespace LeoCodeBackend
             }
         }
 
-        static async Task<IActionResult> RunTests(string exerciseName, [FromBody] JsonObject ArrayOfSnippets)
+        static async Task<IActionResult> RunTsTests(string exerciseName, [FromBody] JsonObject arrayOfSnippets)
         {
             string apiUrl = $"http://localhost:8000/api/execute/{exerciseName}";
             HttpResponseMessage response = null;
-            Snippets snippets = JsonConvert.DeserializeObject<Snippets>(ArrayOfSnippets.ToString());
+            Snippets snippets = JsonConvert.DeserializeObject<Snippets>(arrayOfSnippets.ToString());
 
             using (HttpClient httpClient = new HttpClient())
             {
                 try
                 {
-                    string jsonContent = $"{{\"code\":\"{ConcatSnippets(snippets)}\",\"exerciseId\":\"{exerciseName}\"}}";
+                    string jsonContent = $"{{\"snippets\":\"{snippets}\"}}";
                     HttpContent content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
                     response = await httpClient.PostAsync(apiUrl, content);
 
@@ -147,6 +156,82 @@ namespace LeoCodeBackend
             }
             return new OkObjectResult(response.Content.ReadAsStringAsync());
         }
+        static async Task<IActionResult> RunCSharpTests(string exerciseName, [FromBody] JsonObject arrayOfSnippets)
+        {
+            /*string apiUrl = $"http://localhost:8001/api/execute/{exerciseName}";
+            HttpResponseMessage response = null;
+            Snippets snippets = JsonConvert.DeserializeObject<Snippets>(arrayOfSnippets.ToString());
+
+            using (HttpClient httpClient = new HttpClient())
+            {
+                try
+                {
+                    string jsonContent = $"{{\"snippets\":\"{snippets}\"}}";
+                    HttpContent content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
+                    response = await httpClient.PostAsync(apiUrl, content);
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        string responseBody = await response.Content.ReadAsStringAsync();
+                        ResultFileHelperTypescript resultFileHelperTypescript = new ResultFileHelperTypescript();
+                        var result = JsonDocument.Parse(resultFileHelperTypescript.formatData(responseBody));
+                        var value = result.RootElement;
+                        return new OkObjectResult(value);
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Request failed with status code {response.StatusCode}");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"An error occurred: {ex.Message}");
+                }
+            }
+            
+            return new OkObjectResult(response.Content.ReadAsStringAsync());*/
+            //TODO: Implementierung der C#-Tests
+            return null;
+        }
+
+        static async Task<IActionResult> RunJavaTests(string exerciseName, [FromBody] JsonObject arrayOfSnippets)
+        {
+            /*
+            string apiUrl = $"http://localhost:8000/api/execute/{exerciseName}";
+            HttpResponseMessage response = null;
+            Snippets snippets = JsonConvert.DeserializeObject<Snippets>(arrayOfSnippets.ToString());
+
+            using (HttpClient httpClient = new HttpClient())
+            {
+                try
+                {
+                    string jsonContent = $"{{\"snippets\":\"{snippets}\"}}";
+                    HttpContent content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
+                    response = await httpClient.PostAsync(apiUrl, content);
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        string responseBody = await response.Content.ReadAsStringAsync();
+                        ResultFileHelperTypescript resultFileHelperTypescript = new ResultFileHelperTypescript();
+                        var result = JsonDocument.Parse(resultFileHelperTypescript.formatData(responseBody));
+                        var value = result.RootElement;
+                        return new OkObjectResult(value);
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Request failed with status code {response.StatusCode}");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"An error occurred: {ex.Message}");
+                }
+            }
+            return new OkObjectResult(response.Content.ReadAsStringAsync());*/
+            //TODO: Impementierung der Java-Tests
+            return null;
+        }
+
 
         static async void InstallingNodeModulesForExpressServer()
         {
@@ -220,6 +305,7 @@ namespace LeoCodeBackend
     {
         public string Code { get; set; }
         public bool ReadonlySection { get; set; }
+        public string FileName { get; set; }
     }
 
     public class Snippets

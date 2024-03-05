@@ -12,7 +12,7 @@ export class RestService {
 
   constructor(private httpClient: HttpClient) { }
 
-  runTests(ProgramName: string, code:CodeSection[]):Observable<any> {
+  runTests(programName: string, code:CodeSection[], language: string):Observable<any> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Access-Control-Allow-Origin': '*' // Erlaubt alle Ursprünge ()
@@ -22,7 +22,14 @@ export class RestService {
       "ArrayOfSnippets": code
     }
 
-
-    return this.httpClient.post(`${this.baseUrl}api/runtest?exerciseName=${ProgramName}`, requestBody, { headers: headers });
+    if (language === 'Typescript') {
+      return this.httpClient.post(`${this.baseUrl}api/runTsTests?exerciseName=${programName}`, requestBody, { headers: headers });
+    } else if (language === 'CSharp') {
+      return this.httpClient.post(`${this.baseUrl}api/runCSharpTests?exerciseName=${programName}`, requestBody, { headers: headers });
+    } else if (language === 'Java') {
+      return this.httpClient.post(`${this.baseUrl}api/runJavaTests?exerciseName=${programName}`, requestBody, { headers: headers });
+    } else {
+      return new Observable<any>(); // Return an empty observable
+    }
   }
 }
