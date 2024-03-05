@@ -22,14 +22,15 @@ app.get('/', (req: Request, res: Response) => {
 
 app.post('/api/execute/:exerciseName', async (req: Request, res: Response) => {
   const exerciseName = req.params.exerciseName;
-  console.log("1");
-  const snippets:Snippets = req.body.snippets;
+  const fileName = req.body.fileName;
+  const code = req.body.code;
   const templateFilePath = `./templates/${exerciseName}`;
-  const result = await runTs(exerciseName, templateFilePath,snippets);
+  console.log(fileName);
+  console.log(code);
+  const result = await runTs(exerciseName, templateFilePath,code,fileName);
   res.status(200).json(result);
 });
 
 app.listen(port, () => {
   console.log(`Server is running at http://localhost:${port}`);
-  console.log("bitte");
 });

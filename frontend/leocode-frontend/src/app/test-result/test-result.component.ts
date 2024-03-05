@@ -127,7 +127,7 @@ export class TestResultComponent  implements OnInit{
     const timeLogger = new TimeLoggerService();
     timeLogger.start();
 
-    this.rest.runTests('passwordChecker.ts', this.codeSections, "Typescript").subscribe(
+    this.rest.runTests('PasswordChecker', this.codeSections, "Typescript").subscribe(
         (data) => {
           console.log(data);
           

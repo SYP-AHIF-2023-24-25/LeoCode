@@ -127,15 +127,16 @@ namespace LeoCodeBackend
             string apiUrl = $"http://localhost:8000/api/execute/{exerciseName}";
             HttpResponseMessage response = null;
             Snippets snippets = JsonConvert.DeserializeObject<Snippets>(arrayOfSnippets.ToString());
+            //Console.WriteLine(snippets.ArrayOfSnippets[0].FileName);
 
             using (HttpClient httpClient = new HttpClient())
             {
                 try
                 {
-                    string jsonContent = $"{{\"snippets\":\"{snippets}\"}}";
+                    string jsonContent = $"{{\"code\":\"{ConcatSnippets(snippets)}\", \"fileName\":\"{snippets.ArrayOfSnippets[0].FileName}\"}}";
                     HttpContent content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
                     response = await httpClient.PostAsync(apiUrl, content);
-
+                    Console.WriteLine(arrayOfSnippets.ToString());
                     if (response.IsSuccessStatusCode)
                     {
                         string responseBody = await response.Content.ReadAsStringAsync();

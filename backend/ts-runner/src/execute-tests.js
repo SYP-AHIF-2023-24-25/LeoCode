@@ -38,22 +38,23 @@ const child_process_1 = require("child_process");
 const promises_1 = require("fs/promises");
 const fs = __importStar(require("fs"));
 const ncp = require('ncp').ncp;
-function runTs(exerciseId, templateFilePath, code) {
+function runTs(exerciseName, templateFilePath, code, fileName) {
     return __awaiter(this, void 0, void 0, function* () {
-        const solutionDir = yield createTempDirAndCopyTemplate(exerciseId, templateFilePath);
-        yield replaceCode(code, solutionDir);
+        const solutionDir = yield createTempDirAndCopyTemplate(exerciseName, templateFilePath);
+        yield replaceCode(code, solutionDir, fileName);
+        console.log("3");
         yield runCommands(`/usr/src/app/${solutionDir}`, `npm install`);
         yield runCommands(`/usr/src/app/${solutionDir}`, `npx tsc`);
         yield runCommands(`/usr/src/app/${solutionDir}`, `npm test -- --reporter json --reporter-options output=/usr/src/app/${solutionDir}/results/testresults.json`);
         const result = yield (0, promises_1.readFile)(`/usr/src/app/${solutionDir}/results/testresults.json`, 'utf-8');
-        const jsonData = JSON.parse(result);
-        return jsonData;
+        return JSON.parse(result);
     });
 }
 exports.runTs = runTs;
-function replaceCode(code, filePath) {
+function replaceCode(code, filePath, fileName) {
     return __awaiter(this, void 0, void 0, function* () {
-        const templateFilePath = `/usr/src/app/${filePath}/src/passwordChecker.ts`;
+        console.log("happyyyyyyy");
+        const templateFilePath = `/usr/src/app/${filePath}/src/${fileName}`;
         return new Promise((resolve, reject) => {
             fs.writeFile(templateFilePath, code, (err) => {
                 if (err) {
@@ -71,18 +72,15 @@ function runCommands(path, command) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             const { stdout, stderr } = yield (0, util_1.promisify)(child_process_1.exec)(command, { cwd: path });
-            console.log('Alles richtig:');
         }
         catch (error) {
-            console.error('Nicht alles richtig:');
-            // Handle the error as needed (you can log it or take other actions)
-            // For now, we're not rethrowing the error to prevent it from propagating
+            console.error(error.message);
         }
     });
 }
-function createTempDirAndCopyTemplate(exerciseId, templateFilePath) {
+function createTempDirAndCopyTemplate(exerciseName, templateFilePath) {
     return __awaiter(this, void 0, void 0, function* () {
-        let solutionDir = yield (0, promises_1.mkdtemp)(exerciseId);
+        let solutionDir = yield (0, promises_1.mkdtemp)(exerciseName);
         yield new Promise((resolve, reject) => {
             ncp(templateFilePath, solutionDir, { clobber: false }, function (err) {
                 if (err) {

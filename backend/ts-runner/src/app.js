@@ -26,13 +26,14 @@ app.use(body_parser_1.default.json());
 app.get('/', (req, res) => {
     res.send('Hello, Express!');
 });
-app.post('/api/execute/:exerciseId', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const exerciseId = req.params.exerciseId;
+app.post('/api/execute/:exerciseName', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const exerciseName = req.params.exerciseName;
+    const fileName = req.body.fileName;
     const code = req.body.code;
+    const templateFilePath = `./templates/${exerciseName}`;
+    console.log(fileName);
     console.log(code);
-    console.log("11111111111111111111111111111111111111");
-    const templateFilePath = `./templates/${exerciseId}`;
-    const result = yield (0, execute_tests_1.runTs)(exerciseId, templateFilePath, code);
+    const result = yield (0, execute_tests_1.runTs)(exerciseName, templateFilePath, code, fileName);
     res.status(200).json(result);
 }));
 app.listen(port, () => {
