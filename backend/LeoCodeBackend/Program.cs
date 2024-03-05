@@ -57,50 +57,103 @@ namespace LeoCodeBackend
             app.MapPost("/api/runJavaTests", RunJavaTests)
                 .WithName("RunJavaTests")
                 .WithOpenApi();
+            //      return this.httpClient.post(`${this.baseUrl}api/startTsRunner`, null, { headers: headers });
 
+            app.MapPost("/api/startTsRunner", StartTsRunner)
+                .WithName("StartTsRunner")
+                .WithOpenApi();
 
-            CompileExpressServerAsync();
-            InstallingNodeModulesForExpressServer();
-            BuildImageExpressServer();
-            Thread.Sleep(5000);
-            StartExpressServer();
+            app.MapPost("/api/startCSharpRunner", StartCSharpRunner)
+                .WithName("StartCSharpRunner")
+                .WithOpenApi();
+
+            app.MapPost("/api/startJavaRunner", StartJavaRunner)
+                .WithName("StartJavaRunner")
+                .WithOpenApi();
+
+            app.MapDelete("/api/stopRunner", StopRunner)
+                .WithName("StopRunner")
+                .WithOpenApi();
 
             app.Run();
         }
 
-        private static async Task CompileExpressServerAsync()
+        private static async Task StopRunner(string language)
         {
-            var currentDirectory = Directory.GetCurrentDirectory();
-            string expressServerFilePath = $@"{currentDirectory}\..\ts-runner";
-            Directory.SetCurrentDirectory(expressServerFilePath);
-            string command = $"tsc";
-            var processInfo = new ProcessStartInfo("npx", command)
+            try
             {
-                CreateNoWindow = true,
-                UseShellExecute = false,
-                RedirectStandardOutput = true,
-                RedirectStandardError = true
-            };
+                var currentDirectory = Directory.GetCurrentDirectory();
+                string pathToDockerComposeFile = $@"{currentDirectory}\..\languages\{language}";
+                Directory.SetCurrentDirectory(pathToDockerComposeFile);
 
-            using (var process = new Process { StartInfo = processInfo, EnableRaisingEvents = true })
-            {
-                process.Start();
-
-                await Task.Run(() =>
+                var processInfo = new ProcessStartInfo("docker", "compose down")
                 {
-                    process.WaitForExit();
-                });
+                    CreateNoWindow = true,
+                    UseShellExecute = false,
+                    RedirectStandardOutput = true,
+                    RedirectStandardError = true
+                };
+
+                using (var process = new Process { StartInfo = processInfo, EnableRaisingEvents = true })
+                {
+                    process.Start();
+                    await process.WaitForExitAsync();
+                }
             }
-            Directory.SetCurrentDirectory(currentDirectory);
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}");
+            }
         }
 
-        static async void BuildImageExpressServer(){
+        private static async Task StartCSharpRunner()
+        {
+            try
+            {
+                //TODO: Implement Start CSharp Runner
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}");
+            }
+
+        }
+
+        private static async Task StartJavaRunner()
+        {
+            try
+            {
+                //TODO: Implement Start Java Runner
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}");
+            }
+
+        }
+
+        private static async Task StartTsRunner() 
+        {
+            try
+            {
+                Console.WriteLine("angekommen");
+                await BuildImageExpressServer();
+                await StartExpressServer();
+            } 
+            catch(Exception ex) 
+            {
+                Console.WriteLine($"Error: {ex.Message}");
+            }
+            
+        }
+
+        private static async Task BuildImageExpressServer(){
             try 
             {
                 var currentDirectory = Directory.GetCurrentDirectory();
                 var dockerFilePath = $@"{currentDirectory}\..\ts-runner\Dockerfile";
                 var expressServerFilePath = $@"{currentDirectory}\..\ts-runner";
-                var command = $"build -f {dockerFilePath} -t ts-runner2 {expressServerFilePath}";
+                var command = $"build -f {dockerFilePath} -t ts-runner {expressServerFilePath}";
                 var processInfo = new ProcessStartInfo("docker", command)
                 {
                     CreateNoWindow = true,
@@ -233,33 +286,7 @@ namespace LeoCodeBackend
             return null;
         }
 
-
-        static async void InstallingNodeModulesForExpressServer()
-        {
-            var currentDirectory = Directory.GetCurrentDirectory();
-            var expressServerFilePath = $@"{currentDirectory}\..\ts-runner";
-            Process process = new Process();
-            ProcessStartInfo startInfo = new ProcessStartInfo
-            {
-                FileName = "cmd.exe",
-                RedirectStandardInput = true,
-                RedirectStandardOutput = true,
-                RedirectStandardError = true,
-                UseShellExecute = false,
-                CreateNoWindow = true,
-                WorkingDirectory = expressServerFilePath
-            };
-
-            process.StartInfo = startInfo;
-            process.Start();
-            process.StandardInput.WriteLine("npm install");
-            process.StandardInput.Flush();
-            process.StandardInput.Close();
-            process.WaitForExit();
-            Directory.SetCurrentDirectory(currentDirectory);
-        }
-
-        static async void StartExpressServer()
+        private static async Task StartExpressServer()
         {
             var currentDirectory = Directory.GetCurrentDirectory();
             string expressServerFilePath = $@"{currentDirectory}\..\languages\Typescript";

@@ -45,6 +45,7 @@ export class TestResultComponent  implements OnInit{
   }
 
   ngOnInit(): void {
+    this.rest.startRunner("Typescript");
     this.parseTemplateToCodeSections(this.testTemplate, "passwordChecker.ts");
   }
 
