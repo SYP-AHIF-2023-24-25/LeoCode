@@ -1,20 +1,26 @@
-# Use the official Node.js image as base
-FROM node:latest
+# Use the official Microsoft .NET SDK as a base image
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 
-# Create and set the working directory
+# Set the working directory inside the container
 WORKDIR /usr/src/app
 
-# Copy package.json and package-lock.json to the working directory
-COPY package*.json ./
-
-# Install dependencies
-RUN npm install
-
-# Copy the rest of the application code to the working directory
+# Copy the project files into the container
 COPY . .
 
-# Expose the port that the app will run on
-EXPOSE 3000
+# Build the C# project
+RUN dotnet build -c Release -o /app
 
-# Command to run the application
-CMD ["node", "src/app.js"]
+# Stage for the final image
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
+
+# Set the working directory inside the container
+WORKDIR /app
+
+# Copy the built files from the build stage
+COPY --from=build /app .
+
+# Expose the port the app will run on
+EXPOSE 8000
+
+# Define the entry point for the application
+ENTRYPOINT ["dotnet", "csharp-runner.dll"]

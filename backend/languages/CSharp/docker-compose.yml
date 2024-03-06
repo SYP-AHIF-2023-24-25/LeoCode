@@ -4,4 +4,4 @@ services:
     volumes:
       - ./templates:/usr/src/app/templates
     ports:
-      - "8001:3000"
+      - "8001:8000"

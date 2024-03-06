@@ -47,7 +47,7 @@ namespace LeoCodeBackend
             app.UseHttpsRedirection();
 
             app.MapPost("/api/runTests", RunTests)
-                .WithName("RunJavaTests")
+                .WithName("RunTests")
                 .WithOpenApi();
             //      return this.httpClient.post(`${this.baseUrl}api/startTsRunner`, null, { headers: headers });
 
