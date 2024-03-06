@@ -1,0 +1,7 @@
+services:
+  java-runner:
+    image: java-runner
+    volumes:
+      - ./templates:/usr/src/app/templates
+    ports:
+      - "8002:8088"

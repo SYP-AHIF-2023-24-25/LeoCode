@@ -65,7 +65,6 @@ namespace LeoCodeBackend
 
         private static async Task StopRunner(string language)
         {
-            Console.WriteLine("gekommen");
             try
             {
                 var currentDirectory = Directory.GetCurrentDirectory();
@@ -112,6 +111,11 @@ namespace LeoCodeBackend
                     var expressServerFilePath = $@"{currentDirectory}\..\csharp-runner";
                     await BuildImageServer(dockerFilePath, expressServerFilePath, "csharp-runner");
                     await StartContainer("CSharp");
+                } else if(language == "Java") {
+                    var dockerFilePath = $@"{currentDirectory}\..\java-runner\src\main\docker\Dockerfile.jvm";
+                    var quarkusServerFilePath = $@"{currentDirectory}\..\java-runner";
+                    await BuildImageServer(dockerFilePath, quarkusServerFilePath, "java-runner");
+                    await StartContainer("Java");
                 }
 
                 Directory.SetCurrentDirectory(currentDirectory); 
