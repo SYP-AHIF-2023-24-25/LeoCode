@@ -1,0 +1,182 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Meine API",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/runtests": {
+      "post": {
+        "summary": "Führt Unittests aus",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "code": {
+                    "type": "string",
+                    "description": "Der zu testende Code"
+                  },
+                  "language": {
+                    "type": "string",
+                    "description": "Die Sprache des Codes"
+                  },
+                  "programName": {
+                    "type": "string",
+                    "description": "Der Program Name"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "UnitTest erfolgreich ausgeführt!",
+            "content": {
+              "application/json": {
+                "example": {
+                  "stats": {
+                    "suites": 1,
+                    "tests": 4,
+                    "passes": 4,
+                    "pending": 0,
+                    "failures": 0,
+                    "start": "2024-02-05T21:15:50.071Z",
+                    "end": "2024-02-05T21:15:50.073Z",
+                    "duration": 2
+                  },
+                  "tests": [
+                    {
+                      "title": "should return true for a valid password",
+                      "fullTitle": "CheckPassword Function should return true for a valid password",
+                      "file": "/usr/src/project/Typescript/PasswordChecker/test/passwordChecker.spec.js",
+                      "duration": 1,
+                      "currentRetry": 0,
+                      "speed": "fast",
+                      "err": {}
+                    },
+                    {
+                      "title": "should return false for an invalid password (too short)",
+                      "fullTitle": "CheckPassword Function should return false for an invalid password (too short)",
+                      "file": "/usr/src/project/Typescript/PasswordChecker/test/passwordChecker.spec.js",
+                      "duration": 0,
+                      "currentRetry": 0,
+                      "speed": "fast",
+                      "err": {}
+                    },
+                    {
+                      "title": "should return false for an invalid password (too long)",
+                      "fullTitle": "CheckPassword Function should return false for an invalid password (too long)",
+                      "file": "/usr/src/project/Typescript/PasswordChecker/test/passwordChecker.spec.js",
+                      "duration": 0,
+                      "currentRetry": 0,
+                      "speed": "fast",
+                      "err": {}
+                    },
+                    {
+                      "title": "should return false for an invalid password",
+                      "fullTitle": "CheckPassword Function should return false for an invalid password",
+                      "file": "/usr/src/project/Typescript/PasswordChecker/test/passwordChecker.spec.js",
+                      "duration": 0,
+                      "currentRetry": 0,
+                      "speed": "fast",
+                      "err": {}
+                    }
+                  ],
+                  "pending": [],
+                  "failures": [],
+                  "passes": [
+                    {
+                      "title": "should return true for a valid password",
+                      "fullTitle": "CheckPassword Function should return true for a valid password",
+                      "file": "/usr/src/project/Typescript/PasswordChecker/test/passwordChecker.spec.js",
+                      "duration": 1,
+                      "currentRetry": 0,
+                      "speed": "fast",
+                      "err": {}
+                    },
+                    {
+                      "title": "should return false for an invalid password (too short)",
+                      "fullTitle": "CheckPassword Function should return false for an invalid password (too short)",
+                      "file": "/usr/src/project/Typescript/PasswordChecker/test/passwordChecker.spec.js",
+                      "duration": 0,
+                      "currentRetry": 0,
+                      "speed": "fast",
+                      "err": {}
+                    },
+                    {
+                      "title": "should return false for an invalid password (too long)",
+                      "fullTitle": "CheckPassword Function should return false for an invalid password (too long)",
+                      "file": "/usr/src/project/Typescript/PasswordChecker/test/passwordChecker.spec.js",
+                      "duration": 0,
+                      "currentRetry": 0,
+                      "speed": "fast",
+                      "err": {}
+                    },
+                    {
+                      "title": "should return false for an invalid password",
+                      "fullTitle": "CheckPassword Function should return false for an invalid password",
+                      "file": "/usr/src/project/Typescript/PasswordChecker/test/passwordChecker.spec.js",
+                      "duration": 0,
+                      "currentRetry": 0,
+                      "speed": "fast",
+                      "err": {}
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }        
+      }
+    },
+    "/helloworld": {
+      "get": {
+        "summary": "Gibt Helloworld zurück",
+        "responses": {
+          "200": {
+            "description": "UnitTest erfolgreich ausgeführt!",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Hello World testen"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/execute/{exerciseId}": {
+      "post": {
+        "summary": "Führt Unit Tests aus",
+        "parameters": [
+          {
+            "name": "exerciseId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Hier die Beschreibung des Parameters einfügen"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "UnitTest erfolgreich ausgeführt!",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Hello World testen"
+                }
+              }
+            }
+          }
+        }
+      }
+    }     
+  }
+}

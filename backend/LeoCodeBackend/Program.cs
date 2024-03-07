@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using System.Text;
+using Newtonsoft.Json;
+using System.Text.Json.Nodes;
 
 namespace LeoCodeBackend
 {
@@ -44,51 +46,162 @@ namespace LeoCodeBackend
 
             app.UseHttpsRedirection();
 
-            app.MapPost("/runtests", RunTestsApi)
-                .WithName("RunTestsApi")
-                .WithOpenApi();
-
-            app.MapPost("/runtest", runTests)
+            app.MapPost("/api/runTests", RunTests)
                 .WithName("RunTests")
                 .WithOpenApi();
+            //      return this.httpClient.post(`${this.baseUrl}api/startTsRunner`, null, { headers: headers });
 
-            InstallingNodeModulesForExpressServer();
-            InstallingNodeModulesForProjectTemplate("Typescript", "PasswordChecker");
-            BuildImage("typescript");
-            StartExpressServer();
+
+            app.MapPost("/api/startRunner", StartRunner)
+                .WithName("StartTsRunner")
+                .WithOpenApi();
+
+            app.MapDelete("/api/stopRunner", StopRunner)
+                .WithName("StopRunner")
+                .WithOpenApi();
 
             app.Run();
         }
 
-        static async Task<IActionResult> runTests(string code,string language, string ProgramName){
-            string apiUrl = "http://localhost:3000/runtests";
-            HttpResponseMessage response = null;
+        private static async Task StopRunner(string language)
+        {
+            try
+            {
+                var currentDirectory = Directory.GetCurrentDirectory();
+                string pathToDockerComposeFile = $@"{currentDirectory}\..\languages\{language}";
+                Directory.SetCurrentDirectory(pathToDockerComposeFile);
 
-            // Create an instance of HttpClient
+                var processInfo = new ProcessStartInfo("docker", "compose down")
+                {
+                    CreateNoWindow = true,
+                    UseShellExecute = false,
+                    RedirectStandardOutput = true,
+                    RedirectStandardError = true
+                };
+
+                using (var process = new Process { StartInfo = processInfo, EnableRaisingEvents = true })
+                {
+                    process.Start();
+                    await process.WaitForExitAsync();
+                }
+                Directory.SetCurrentDirectory(currentDirectory);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}");
+            }
+            
+        }
+
+        private static async Task StartRunner(string language) 
+        {
+            try
+            {
+                var currentDirectory = Directory.GetCurrentDirectory();
+                if (language == "Typescript")
+                {
+                    var dockerFilePath = $@"{currentDirectory}\..\ts-runner\Dockerfile";
+                    var expressServerFilePath = $@"{currentDirectory}\..\ts-runner";
+                    await BuildImageServer(dockerFilePath, expressServerFilePath, "ts-runner");
+                    await StartContainer("Typescript");
+                }
+                else if(language == "CSharp")
+                {
+                    var dockerFilePath = $@"{currentDirectory}\..\csharp-runner\Dockerfile";
+                    var expressServerFilePath = $@"{currentDirectory}\..\csharp-runner";
+                    await BuildImageServer(dockerFilePath, expressServerFilePath, "csharp-runner");
+                    await StartContainer("CSharp");
+                } else if(language == "Java") {
+                    var dockerFilePath = $@"{currentDirectory}\..\java-runner\Dockerfile";
+                    var quarkusServerFilePath = $@"{currentDirectory}\..\java-runner";
+                    await BuildImageServer(dockerFilePath, quarkusServerFilePath, "java-runner");
+                    await StartContainer("Java");
+                }
+
+                Directory.SetCurrentDirectory(currentDirectory); 
+            } 
+            catch(Exception ex) 
+            {
+                Console.WriteLine($"Error: {ex.Message}");
+            }
+            
+        }
+
+        private static async Task BuildImageServer(string dockerFilePath, string expressServerFilePath, string imageName){
+            try 
+            {
+                var currentDirectory = Directory.GetCurrentDirectory();
+                /*var dockerFilePath = $@"{currentDirectory}\..\ts-runner\Dockerfile";
+                var expressServerFilePath = $@"{currentDirectory}\..\ts-runner";*/
+                var command = $"build -f {dockerFilePath} -t {imageName} {expressServerFilePath}";
+                var processInfo = new ProcessStartInfo("docker", command)
+                {
+                    CreateNoWindow = true,
+                    UseShellExecute = false,
+                    RedirectStandardOutput = true,
+                    RedirectStandardError = true
+                };
+
+                using (var process = new Process { StartInfo = processInfo, EnableRaisingEvents = true })
+                {
+                    process.Start();
+                    await process.WaitForExitAsync();
+                }
+                Directory.SetCurrentDirectory(currentDirectory);
+            } 
+            catch (Exception ex) 
+            {
+                Console.WriteLine($"Error: {ex.Message}");
+            }
+        }
+
+        static async Task<IActionResult> RunTests(string exerciseName,string language, [FromBody] JsonObject arrayOfSnippets)
+        {
+            string apiUrl = "";
+            if(language == "Typescript"){
+                apiUrl = $"http://localhost:8000/api/execute/{exerciseName}";
+            } else if(language == "CSharp"){
+                apiUrl = $"http://localhost:8001/api/execute/{exerciseName}";
+            } else if(language == "Java"){
+                apiUrl = $"http://localhost:8002/api/execute/{exerciseName}";
+            }
+            
+            HttpResponseMessage response = null;
+            Snippets snippets = JsonConvert.DeserializeObject<Snippets>(arrayOfSnippets.ToString());
+            //Console.WriteLine(snippets.ArrayOfSnippets[0].FileName);
+
             using (HttpClient httpClient = new HttpClient())
             {
-                
                 try
                 {
-                    // Define the content to be sent in the POST request (replace with your actual content)
-                    string jsonContent = $"{{\"code\":\"{code}\",\"language\":\"{language}\",\"programName\":\"{ProgramName}\"}}";
+                    string jsonContent = $"{{\"code\":\"{ConcatSnippets(snippets)}\", \"fileName\":\"{snippets.ArrayOfSnippets[0].FileName}\"}}";
                     HttpContent content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
-
-                    // Send a POST request
                     response = await httpClient.PostAsync(apiUrl, content);
-
-                    // Check if the request was successful
+                    Console.WriteLine(arrayOfSnippets.ToString());
                     if (response.IsSuccessStatusCode)
                     {
-                        // Read and output the response content as a string
                         string responseBody = await response.Content.ReadAsStringAsync();
-                        var jsonDocument = JsonDocument.Parse(responseBody);
-                        ResultFileHelperTypescript resultFileHelperTypescript = new ResultFileHelperTypescript();
-                        var result = JsonDocument.Parse(resultFileHelperTypescript.formatData(responseBody));
-                        Console.WriteLine(result);
-                        Console.WriteLine("=======================================");
-                        var value = result.RootElement;
-                        Console.WriteLine(value);
+                        JsonDocument result = null;
+                        JsonElement value = new JsonElement();
+                        if (language == "Typescript")
+                        {
+                            ResultFileHelperTypescript resultFileHelperTypescript = new ResultFileHelperTypescript();
+                            result = JsonDocument.Parse(resultFileHelperTypescript.formatData(responseBody));
+                            value = result.RootElement;
+                        }
+                        else if (language == "CSharp")
+                        {
+                            /*ResultFileHelperCSharp resultFileHelperTypescript = new ResultFileHelperCSharp();
+                            result = JsonDocument.Parse(resultFileHelperTypescript.ConvertTrxToJson(responseBody));
+                            value = result.RootElement;*/
+                        }
+                        else if (language == "Java")
+                        {
+                            /*ResultFileHelperTypescript resultFileHelperTypescript = new ResultFileHelperTypescript();
+                            result = JsonDocument.Parse(resultFileHelperTypescript.formatData(responseBody));
+                            value = result.RootElement;*/
+                        }
+
                         return new OkObjectResult(value);
                     }
                     else
@@ -103,165 +216,14 @@ namespace LeoCodeBackend
             }
             return new OkObjectResult(response.Content.ReadAsStringAsync());
         }
-        
-        static async Task<IActionResult> RunTestsApi(string language, string ProgramName)
+
+        private static async Task StartContainer(string language)
         {
-            try
-            {
-                var cwd = Directory.GetCurrentDirectory();
-
-                var path = $@"{cwd}\..\languages";
-
-                cwd = $@"{path}\{language}\{ProgramName}";
-
-                var command = $"run --rm -v {path}:/usr/src/project -w /usr/src/project pwdtest {language} {ProgramName}";
-                var processInfo = new ProcessStartInfo("docker", command)
-                {
-                    CreateNoWindow = true,
-                    UseShellExecute = false,
-                    RedirectStandardOutput = true,
-                    RedirectStandardError = true
-                };
-
-                using (var proc = new Process { StartInfo = processInfo, EnableRaisingEvents = true })
-                {
-                    proc.Start();
-                    await proc.WaitForExitAsync();
-
-                    var code = proc.ExitCode;
-                    ResultFileHelperCSharp resultFileHelperCSharp = new ResultFileHelperCSharp();
-                    var resultsFile = Directory.GetFiles($"{cwd}\\results", "*.json").FirstOrDefault();
-
-                    if (resultsFile != null)
-                    {
-                        string jsonString = await File.ReadAllTextAsync(resultsFile);
-
-                        var jsonDocument = JsonDocument.Parse(jsonString);
-                        var rootElement = jsonDocument.RootElement;
-
-                        var responseObject = new { data = rootElement };
-
-                        return new OkObjectResult(responseObject);
-                    }
-                    else
-                    {
-                        var errorObject = new { error = "No results file found." };
-                        return new BadRequestObjectResult(errorObject);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                var errorObject = new { error = $"An error occurred: {ex.Message}" };
-                return new BadRequestObjectResult(errorObject);
-            }
-        }
-
-
-
-        static async void InstallingNodeModulesForProjectTemplate(string language, string projectName) {
-            var cwd = Directory.GetCurrentDirectory();
-
-            var path = $@"{cwd}\..\languages\{language}\{projectName}";
-
-            Process process = new Process();
-            ProcessStartInfo startInfo = new ProcessStartInfo
-            {
-                FileName = "cmd.exe",
-                RedirectStandardInput = true,
-                RedirectStandardOutput = true,
-                RedirectStandardError = true,
-                UseShellExecute = false,
-                CreateNoWindow = true,
-                WorkingDirectory = path
-            };
-
-            process.StartInfo = startInfo;
-            process.Start();
-
-            process.StandardInput.WriteLine("npm install");
-            process.StandardInput.Flush();
-            process.StandardInput.Close();
-
-            process.WaitForExit();
-        }
-
-        static async void BuildImage(string language) 
-        {
-            try 
-            {
-                var cwd = Directory.GetCurrentDirectory();
-                var dockerFilePath = $@"{cwd}\..\languages\Dockerfile.{language}";
-                var projectBuildPath = $@"{cwd}\..\languages";
-                Console.WriteLine(dockerFilePath);
-                Console.WriteLine(projectBuildPath);
-                var command = $"build -f {dockerFilePath} -t  gutersprint {projectBuildPath}";
-                var processInfo = new ProcessStartInfo("docker", command)
-                {
-                    CreateNoWindow = true,
-                    UseShellExecute = false,
-                    RedirectStandardOutput = true,
-                    RedirectStandardError = true
-                };
-
-                using (var proc = new Process { StartInfo = processInfo, EnableRaisingEvents = true })
-                {
-                    proc.Start();
-                    await proc.WaitForExitAsync();
-
-                    var code = proc.ExitCode;
-                
-
-                    if (code == 0)
-                    {
-                        Console.WriteLine("Image builed successfully.");
-                    }
-                    else
-                    {
-                        //Console.WriteLine($"Image builed not successfully. Exit Code: {backendProcess.ExitCode}");
-                    }
-                }
-
-            } 
-            catch (Exception ex) 
-            {
-                Console.WriteLine($"Error: {ex.Message}");
-            }
-        }
-
-        static async void InstallingNodeModulesForExpressServer()
-        {
-            var cwd = Directory.GetCurrentDirectory();
-
-            var path = $@"{cwd}\..\Express-Server";
-            Console.WriteLine(path);
-            Process process = new Process();
-            ProcessStartInfo startInfo = new ProcessStartInfo
-            {
-                FileName = "cmd.exe",
-                RedirectStandardInput = true,
-                RedirectStandardOutput = true,
-                RedirectStandardError = true,
-                UseShellExecute = false,
-                CreateNoWindow = true,
-                WorkingDirectory = path
-            };
-
-            process.StartInfo = startInfo;
-            process.Start();
-
-            process.StandardInput.WriteLine("npm install");
-            process.StandardInput.Flush();
-            process.StandardInput.Close();
-
-            process.WaitForExit();
-        }
-
-        static async void StartExpressServer()
-        {
-            var cwd = Directory.GetCurrentDirectory();
-            string expressServerFilePath = $@"{cwd}/../Express-Server/src/app.js";
-            var processInfo = new ProcessStartInfo("node", expressServerFilePath)
+            var currentDirectory = Directory.GetCurrentDirectory();
+            string expressServerFilePath = $@"{currentDirectory}\..\languages\{language}";
+            Directory.SetCurrentDirectory(expressServerFilePath);
+            string command = $"compose up -d";
+            var processInfo = new ProcessStartInfo("docker", command)
             {
                 CreateNoWindow = true,
                 UseShellExecute = false,
@@ -269,66 +231,44 @@ namespace LeoCodeBackend
                 RedirectStandardError = true
             };
 
-            using (var proc = new Process { StartInfo = processInfo, EnableRaisingEvents = true })
+            using (var process = new Process { StartInfo = processInfo, EnableRaisingEvents = true })
             {
-                proc.Start();
+                process.Start();
 
-                // Verwende Task.Run, um die Ausführung asynchron zu machen
                 await Task.Run(() =>
                 {
-                    proc.WaitForExit();
+                    process.WaitForExit();
                 });
             }
+            Directory.SetCurrentDirectory(currentDirectory);
         }
-
-        static async void StopExpressServer()
+        static string ConcatSnippets(Snippets snippets)
         {
-            //TODO: Stop Express Server
-        }
-
-        static int GetProcessIdByPort(int portNumber)
-        {
-            int processId = -1;
-
             try
             {
-                var processStartInfo = new ProcessStartInfo
+                string concatedCode = "";
+                foreach (Snippet snippetSection in snippets.ArrayOfSnippets)
                 {
-                    FileName = "tasklist",
-                    RedirectStandardOutput = true,
-                    UseShellExecute = false,
-                    CreateNoWindow = true
-                };
-
-                using (var process = new Process { StartInfo = processStartInfo, EnableRaisingEvents = true })
-                {
-                    process.Start();
-                    string output = process.StandardOutput.ReadToEnd();
-                    process.WaitForExit();
-
-                    string[] lines = output.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
-
-                    foreach (var line in lines)
-                    {
-                        // Überprüfen, ob die Zeile den Port enthält
-                        if (line.Contains($":{portNumber}"))
-                        {
-                            // Die PID sollte in den ersten Teilen der Zeile sein
-                            string[] parts = line.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-                            if (int.TryParse(parts[1], out processId))
-                            {
-                                break; // Nur die erste gefundene PID zurückgeben
-                            }
-                        }
-                    }
+                    concatedCode += snippetSection.Code;
                 }
+                return concatedCode;
             }
-            catch (Exception ex)
+            catch (System.Text.Json.JsonException ex)
             {
-                Console.WriteLine($"Fehler beim Abrufen der PID: {ex.Message}");
+                Console.WriteLine($"Fehler beim Deserialisieren: {ex.Message}");
+                return ex.Message;
             }
-
-            return processId;
         }
+    }
+    public class Snippet
+    {
+        public string Code { get; set; }
+        public bool ReadonlySection { get; set; }
+        public string FileName { get; set; }
+    }
+
+    public class Snippets
+    {
+        public Snippet[] ArrayOfSnippets { get; set; }
     }
 }

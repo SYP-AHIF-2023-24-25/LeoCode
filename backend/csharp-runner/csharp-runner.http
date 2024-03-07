@@ -1,0 +1,6 @@
+@csharp_runner_HostAddress = http://localhost:5269
+
+GET {{csharp_runner_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

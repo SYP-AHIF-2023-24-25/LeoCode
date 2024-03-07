@@ -1,0 +1,7 @@
+services:
+  csharp-runner:
+    image: csharp-runner
+    volumes:
+      - ./templates:/usr/src/app/templates
+    ports:
+      - "8001:8000"
