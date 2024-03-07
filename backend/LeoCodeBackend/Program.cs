@@ -112,7 +112,7 @@ namespace LeoCodeBackend
                     await BuildImageServer(dockerFilePath, expressServerFilePath, "csharp-runner");
                     await StartContainer("CSharp");
                 } else if(language == "Java") {
-                    var dockerFilePath = $@"{currentDirectory}\..\java-runner\src\main\docker\Dockerfile.jvm";
+                    var dockerFilePath = $@"{currentDirectory}\..\java-runner\Dockerfile";
                     var quarkusServerFilePath = $@"{currentDirectory}\..\java-runner";
                     await BuildImageServer(dockerFilePath, quarkusServerFilePath, "java-runner");
                     await StartContainer("Java");
