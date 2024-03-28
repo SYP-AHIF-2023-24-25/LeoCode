@@ -1,0 +1,23 @@
+.step-indicator {
+  display: flex; /* Verwenden der Flexbox */
+  justify-content: space-between; /* Platzieren der Rechtecke mit gleichmäßigem Abstand */
+}
+
+.step-indicator-item {
+  flex: 1; /* Jedes Rechteck nimmt gleich viel Platz ein */
+  padding: 10px 20px;
+  background-color: #ccc; /* Dunkelgrau für Standard-Hintergrundfarbe */
+  border: 1px solid #ccc;
+  text-align: center;
+  transition: background-color 0.3s; /* Übergangseffekt für eine sanfte Änderung der Hintergrundfarbe */
+
+}
+
+.step-indicator-item:hover {
+  background-color: #999; /* Dunkelgrau bei Hover */
+}
+
+.current-step {
+  background-color: #007bff; /* Blau für Hintergrundfarbe des aktuellen Schritts */
+  color: #fff; /* Weiß für Textfarbe im aktuellen Schritt */
+}

@@ -1,0 +1,115 @@
+<div class = "container mt-4">
+
+  <!-- Schritte als Rechtecke -->
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="step-indicator">
+        <div *ngFor="let step of [1, 2, 3, 4, 5]" 
+             class="step-indicator-item" 
+             [ngClass]="{ 'current-step': currentStep === step }"
+             (click)="goToStep(step)">
+          {{ 'Step ' + step }}
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="container">
+    <!-- Schritt 1: Anleitung hinzufügen -->
+    <div *ngIf="currentStep === 1">
+      <div class="row justify-content-center">
+        <div class="col-md-12">
+          <div class="card mt-5">
+            <div class="card-body">
+              <h2 class="card-title">Step 1: Add Introduction</h2>
+              <div class="form-group">
+                <textarea class="form-control" rows="5" style="height: 300px; width: 1000px"  [(ngModel)]="instructions" placeholder="Geben Sie hier Ihre Anleitung ein"></textarea>
+              </div>
+              <button class="btn btn-primary" (click)="nextStep()">Weiter</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Schritt 2: Sprache auswählen -->
+    <div *ngIf="currentStep === 2">
+      <div class="row justify-content-center">
+        <div class="col-md-12">
+          <div class="card mt-5">
+            <div class="card-body" style="height: 300px; width: 1000px">
+              <h2 class="card-title">Step 2: Chose Language</h2>
+              <div class="form-group">
+                <select class="form-control"  [(ngModel)]="selectedLanguage">
+                  <option value="TypeScript">TypeScript/option>
+                  <option value="Csharp">Csharp</option>
+                  <option value="Java">Java</option>
+                </select>
+              </div>
+              <button class="btn btn-primary" (click)="nextStep()">Weiter</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="currentStep === 3" >
+      <div class="row justify-content-center">
+        <div class="col-md-12">
+        <div class="card mt-5">
+          <div class="card-body">
+            <h2 class="card-title">Schritt 3: Chose Tags</h2>
+            <div class="form-group">
+              <label for="tagsSelect">Tags auswählen:</label>
+              <select id="tagsSelect" class="form-control"style="height: 300px; width: 1000px" multiple [(ngModel)]="selectedTags">
+                <option *ngFor="let tag of availableTags" [value]="tag">{{ tag }}</option>
+              </select>
+            </div>
+            <button class="btn btn-primary" (click)="nextStep()">Weiter</button>
+          </div>
+        </div>
+        </div>
+      </div>
+    </div>
+      
+    <div *ngIf="currentStep === 4">
+      <div class="row justify-content-center">
+        <div class="col-md-12">
+        <div class="card mt-5">
+          <div class="card-body" style="height: 300px; width: 1000px">
+            <h2 class="card-title">Step 4: Upload Template as ZIP</h2>
+            <input type="file" (change)="uploadZipFile($event)" class="form-control-file mt-3">
+          </div>
+          <button class="btn btn-primary" (click)="nextStep()">Weiter</button>
+        </div>
+        </div>
+      </div>
+    </div>
+
+    
+     <!-- Schritt 5: Senden an Backend -->
+<div *ngIf="currentStep === 5" class="row justify-content-center align-items-center">
+  <div class="col-md-12">
+    <div class="card mt-5">
+      <div class="card-body"style="height: 300px; width: 1000px">
+        <h2 class="card-title">Overview</h2>
+        <p><strong>Anleitung:</strong> {{ instructions }}</p>
+        <p><strong>Sprache:</strong> {{ selectedLanguage }}</p>
+        <p><strong>Ausgewählte Tags:</strong> {{ selectedTags.join(', ') }}</p>
+        <p><strong>ZIP-Datei:</strong> {{ zipFile?.name }}</p>
+        <button class="btn btn-primary" (click)="sendCodeToBackend()">Upload Exercise</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+      
+
+</div>
+
+
+
+  
+  

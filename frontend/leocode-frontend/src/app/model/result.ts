@@ -1,7 +1,7 @@
 import { Summary } from './summary';
 import { TestResults } from './test-results';
 
-export interface ResultV2 {
+export interface Result {
     Summary: Summary;
     TestResults: TestResults[];
 }

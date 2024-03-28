@@ -1,6 +1,6 @@
-import { ResultV2 } from './result-v2';
+import { Result } from './result';
 export interface Value {
-    value: ResultV2
+    value: Result
     formatters: any[],
     contentTypes: any[],
     declaredType: any,

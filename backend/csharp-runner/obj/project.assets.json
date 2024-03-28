@@ -593,19 +593,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\dap03\\.nuget\\packages\\": {}
+    "C:\\Users\\Kelit\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Schule\\4AHIF\\LeoCode\\backend\\csharp-runner\\csharp-runner.csproj",
+      "projectUniqueName": "C:\\Users\\Kelit\\Schule2023-24\\syp\\LeoCode\\backend\\csharp-runner\\csharp-runner.csproj",
       "projectName": "csharp-runner",
-      "projectPath": "C:\\Schule\\4AHIF\\LeoCode\\backend\\csharp-runner\\csharp-runner.csproj",
-      "packagesPath": "C:\\Users\\dap03\\.nuget\\packages\\",
-      "outputPath": "C:\\Schule\\4AHIF\\LeoCode\\backend\\csharp-runner\\obj\\",
+      "projectPath": "C:\\Users\\Kelit\\Schule2023-24\\syp\\LeoCode\\backend\\csharp-runner\\csharp-runner.csproj",
+      "packagesPath": "C:\\Users\\Kelit\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Kelit\\Schule2023-24\\syp\\LeoCode\\backend\\csharp-runner\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\dap03\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Kelit\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

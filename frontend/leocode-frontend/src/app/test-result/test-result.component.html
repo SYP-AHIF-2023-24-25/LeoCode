@@ -27,9 +27,9 @@
     <tbody>
       <tr>
           <td>{{"Tests"}}</td>
-          <td>{{resultV2.Summary.PassedTests}}</td>
-          <td>{{resultV2.Summary.FailedTests}}</td>
-          <td>{{resultV2.Summary.TotalTests}}</td>
+          <td>{{result.Summary.PassedTests}}</td>
+          <td>{{result.Summary.FailedTests}}</td>
+          <td>{{result.Summary.TotalTests}}</td>
           <td>{{timer}}</td>
           <td>
 
@@ -39,7 +39,7 @@
         </td>
       </tr>
       <tr>
-        <option *ngFor="let testResult of resultV2.TestResults" [value]="testResult.TestName">
+        <option *ngFor="let testResult of result.TestResults" [value]="testResult.TestName">
          <td> {{ testResult.TestName }} | </td>
          <td></td>
          <td></td>
@@ -49,7 +49,7 @@
       </tr>
   </table>
   
-  <button (click)="startTestV2()" class="btn btn-primary" [disabled]="loading">StartTests</button>
+  <button (click)="startTest()" class="btn btn-primary" [disabled]="loading">StartTests</button>
   <buttont routerLink="/result-history" class="btn btn-primary" style="margin-left: 10px;">Result History</buttont>
 
 </div>
