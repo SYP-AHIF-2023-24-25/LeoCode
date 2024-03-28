@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {Tags} from '../model/tags.enum';
 
 
+
 @Component({
   selector: 'app-create-exercise',
   templateUrl: './create-exercise.component.html',
@@ -37,6 +38,18 @@ export class CreateExerciseComponent {
     this.nextStep(); // Nächster Schritt
   }
 
+  toggleTagSelection(tag: string) {
+    if (this.selectedTags.includes(tag)) {
+      this.selectedTags = this.selectedTags.filter(t => t !== tag);
+    } else {
+      this.selectedTags.push(tag);
+    }
+  }
+
+  isSelectedTag(tag: string): boolean {
+    return this.selectedTags.includes(tag);
+  }
+
   uploadZipFile(event: any) {
     const inputElement = event.target as HTMLInputElement;
     if (inputElement && inputElement.files && inputElement.files.length > 0) {
@@ -49,7 +62,14 @@ export class CreateExerciseComponent {
   
 
   sendCodeToBackend() {
+    let exercise = {
+      instructions: this.instructions,
+      language: this.selectedLanguage,
+      tags: this.selectedTags,
+      zipFile: this.zipFile
+    };
 
+    console.log('Exercise:', exercise);
     
     // Hier den Code zum Senden des extrahierten Codes und anderer Informationen an das Backend implementieren
     console.log('Anleitung:', this.instructions);

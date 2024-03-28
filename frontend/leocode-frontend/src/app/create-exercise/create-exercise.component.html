@@ -43,7 +43,7 @@
               <h2 class="card-title">Step 2: Chose Language</h2>
               <div class="form-group">
                 <select class="form-control"  [(ngModel)]="selectedLanguage">
-                  <option value="TypeScript">TypeScript/option>
+                  <option value="TypeScript">TypeScript</option>
                   <option value="Csharp">Csharp</option>
                   <option value="Java">Java</option>
                 </select>
@@ -55,25 +55,34 @@
       </div>
     </div>
 
-    <div *ngIf="currentStep === 3" >
-      <div class="row justify-content-center">
-        <div class="col-md-12">
-        <div class="card mt-5">
-          <div class="card-body">
-            <h2 class="card-title">Schritt 3: Chose Tags</h2>
-            <div class="form-group">
-              <label for="tagsSelect">Tags auswählen:</label>
-              <select id="tagsSelect" class="form-control"style="height: 300px; width: 1000px" multiple [(ngModel)]="selectedTags">
-                <option *ngFor="let tag of availableTags" [value]="tag">{{ tag }}</option>
-              </select>
+    <!-- Schritt 3: Tags auswählen -->
+<div *ngIf="currentStep === 3">
+  <div class="row justify-content-center">
+    <div class="col-md-12">
+      <div class="card mt-5">
+        <div class="card-body">
+          <h2 class="card-title">Step 3: Choose Tags</h2>
+          <div class="form-group">
+            <label for="tagsSelect">Chose Tags:</label>
+            <div class="tags-list">
+              <div *ngFor="let tag of availableTags" class="tag-item">
+                <label class="tag-label">
+                  <input type="checkbox" [value]="tag" (change)="toggleTagSelection(tag)">
+                  {{ tag }}
+                </label>
+              </div>
             </div>
-            <button class="btn btn-primary" (click)="nextStep()">Weiter</button>
           </div>
-        </div>
+          <button class="btn btn-primary" (click)="nextStep()">Weiter</button>
         </div>
       </div>
     </div>
-      
+  </div>
+</div>
+
+
+
+  
     <div *ngIf="currentStep === 4">
       <div class="row justify-content-center">
         <div class="col-md-12">
