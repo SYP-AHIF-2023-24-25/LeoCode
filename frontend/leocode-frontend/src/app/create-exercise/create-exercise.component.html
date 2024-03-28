@@ -63,12 +63,11 @@
             <div class="card-body" style="height: 625px; width: 1000px">
               <h2 class="card-title">Step 3: Chose Tags</h2>
               <!-- Ausgewählte Tags anzeigen -->
-              <div class="selected-tags">
-                <p>Chosen tags:
-                <span *ngFor="let selectedTag of selectedTags" class="selected-tag">
-                 {{ selectedTag }}
-                </span>
-                </p>
+              <div class="selected-tags d-flex flex-wrap">
+                <p>Chosen tags:</p>
+                <div *ngFor="let selectedTag of selectedTags" class="selected-tag mr-2 mb-2">
+                  <span class="badge badge-primary">{{ selectedTag }}</span>
+                </div>
               </div>
               <!-- Verfügbare Tags anzeigen -->
               <div class="available-tags">
