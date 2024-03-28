@@ -27,7 +27,7 @@
               <div class="form-group">
                 <textarea class="form-control" rows="5" style="height: 300px; width: 1000px"  [(ngModel)]="instructions" placeholder="Geben Sie hier Ihre Anleitung ein"></textarea>
               </div>
-              <button class="btn btn-primary" (click)="nextStep()">Weiter</button>
+              <button class="btn btn-primary" (click)="nextStep()">Next</button>
             </div>
           </div>
         </div>
@@ -48,7 +48,7 @@
                   <option value="Java">Java</option>
                 </select>
               </div>
-              <button class="btn btn-primary" (click)="nextStep()">Weiter</button>
+              <button class="btn btn-primary" (click)="nextStep()">Next</button>
             </div>
           </div>
         </div>
@@ -56,33 +56,41 @@
     </div>
 
     <!-- Schritt 3: Tags auswählen -->
-<div *ngIf="currentStep === 3">
-  <div class="row justify-content-center">
-    <div class="col-md-12">
-      <div class="card mt-5">
-        <div class="card-body">
-          <h2 class="card-title">Step 3: Choose Tags</h2>
-          <div class="form-group">
-            <label for="tagsSelect">Chose Tags:</label>
-            <div class="tags-list">
-              <div *ngFor="let tag of availableTags" class="tag-item">
-                <label class="tag-label">
-                  <input type="checkbox" [value]="tag" (change)="toggleTagSelection(tag)">
-                  {{ tag }}
-                </label>
+    <div *ngIf="currentStep === 3">
+      <div class="row justify-content-center">
+        <div class="col-md-12">
+          <div class="card mt-5">
+            <div class="card-body" style="height: 625px; width: 1000px">
+              <h2 class="card-title">Step 3: Chose Tags</h2>
+              <!-- Ausgewählte Tags anzeigen -->
+              <div class="selected-tags">
+                <p>Chosen tags:
+                <span *ngFor="let selectedTag of selectedTags" class="selected-tag">
+                 {{ selectedTag }}
+                </span>
+                </p>
               </div>
+              <!-- Verfügbare Tags anzeigen -->
+              <div class="available-tags">
+                <div *ngFor="let tag of availableTags" class="form-check">
+                  <input class="form-check-input" type="checkbox" [value]="tag" (change)="toggleTagSelection(tag)">
+                  <label class="form-check-label">
+                    {{ tag }}
+                  </label>
+                </div>
+              </div>
+              <button class="btn btn-primary" (click)="nextStep()">Next</button>
             </div>
           </div>
-          <button class="btn btn-primary" (click)="nextStep()">Weiter</button>
         </div>
       </div>
     </div>
-  </div>
-</div>
+    
 
 
 
-  
+
+    <!-- Schritt 4: ZIP-Datei hochladen -->
     <div *ngIf="currentStep === 4">
       <div class="row justify-content-center">
         <div class="col-md-12">
@@ -91,7 +99,7 @@
             <h2 class="card-title">Step 4: Upload Template as ZIP</h2>
             <input type="file" (change)="uploadZipFile($event)" class="form-control-file mt-3">
           </div>
-          <button class="btn btn-primary" (click)="nextStep()">Weiter</button>
+          <button class="btn btn-primary" (click)="nextStep()">Next</button>
         </div>
         </div>
       </div>
@@ -113,9 +121,6 @@
     </div>
   </div>
 </div>
-
-      
-
 </div>
 
 
