@@ -1,6 +1,6 @@
-export interface exercise {
+export interface Exercise {
     instruction: string;
     language: string;
     tags: string[];
-    zipFile: File ;
+    zipFile: File | null;
 }

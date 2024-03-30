@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Tags} from '../model/tags.enum';
-import { exercise } from '../model/exercise';
+import { Exercise } from '../model/exercise';
 
 
 
@@ -13,17 +13,28 @@ import { exercise } from '../model/exercise';
 export class CreateExerciseComponent {
 
   currentStep: number = 1;
-  instructions: string = '';
+  instruction: string = '';
   selectedLanguage: string = '';
   selectedTags: string[] = [];
   zipFile: File | null = null;
 
-  exercises : exercise[]= []
+  exercises : Exercise[]= [
+    {
+      instruction: 'Schreibe eine Funktion, die die Summe von zwei Zahlen berechnet.',
+      language: 'Typescript',
+      tags: ['PosE'],
+      zipFile: null
+    },
+    {
+      instruction: 'Schreibe eine Funktion, die die Summe von zwei Zahlen berechnet.',
+      language: 'Csharp',
+      tags: ['WMC'],
+      zipFile: null
+    },
+  ]
 
   // Hier die verfügbaren Tags aus dem Enum abrufen
   availableTags: string[] = Object.values(Tags);
-
-
 
   ngOnInit(): void {
     document.addEventListener("DOMContentLoaded", () => {
@@ -42,7 +53,6 @@ export class CreateExerciseComponent {
   }
 
 
-
   nextStep() {
     this.currentStep++;
   }
@@ -53,7 +63,7 @@ export class CreateExerciseComponent {
 
 
   addInstructions(instructions: string) {
-    this.instructions = instructions;
+    this.instruction = instructions;
     this.nextStep(); // Nächster Schritt
   }
 
@@ -86,37 +96,41 @@ export class CreateExerciseComponent {
   
 
   sendCodeToBackend() {
-    let exercise = {
-      instructions: this.instructions,
+     let exercise  = {
+      instruction: this.instruction,
       language: this.selectedLanguage,
       tags: this.selectedTags,
       zipFile: this.zipFile
     };
 
-  
+    this.exercises.push(exercise);
+
+    /*if(this.instruction === '' || this.selectedLanguage === '' || this.selectedTags.length === 0 || this.zipFile === null){
+      alert('Bitte füllen Sie alle Felder aus!');
+      return;
+    }else{
+      this.exercises.push(exercise);
+    }*/
 
     console.log('Exercise:', exercise);
-    
-    // Hier den Code zum Senden des extrahierten Codes und anderer Informationen an das Backend implementieren
-    console.log('Anleitung:', this.instructions);
-    console.log('Sprache:', this.selectedLanguage);
-    console.log('Tags:', this.selectedTags);
-    console.log('Zip-Datei:', this.zipFile);
-    // Hier kannst du den Code und andere Informationen an das Backend senden
+    console.log('____________________________')
+    for(let i = 0; i < this.exercises.length; i++){
+      console.log('Exercise:', this.exercises[i]);
+    }
+    this.resetForm();
+  
   }
 
+  runTest(exercise: Exercise) {
+    console.log('Running test for exercise:', exercise);
+  }
 
+  resetForm() {
+    this.currentStep = 1;
+    this.instruction = '';
+    this.selectedLanguage = '';
+    this.selectedTags = [];
+    this.zipFile = null;
+  }
 
-
- /* document.addEventListener("DOMContentLoaded", function() {
-    const mainMenuLinks = document.querySelectorAll('.main-menu-link');
-    
-    mainMenuLinks.forEach(function(link) {
-      link.addEventListener('click', function(event) {
-        event.preventDefault();
-        const subMenu = this.nextElementSibling;
-        subMenu.classList.toggle('show');
-      });
-    });
-  });*/
 }

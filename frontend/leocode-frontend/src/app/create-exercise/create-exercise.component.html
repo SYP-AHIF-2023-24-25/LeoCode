@@ -20,44 +20,44 @@
         <ul class="nav flex-column">
 
           <li class="nav-item">
-            <a class="nav-link main-menu-link" >1. Jahrgang</a>
+            <a class="nav-link main-menu-link" >1. Vintage</a>
             <ul class="sub-menu">
-              <li><a [routerLink]="['/introdcution']">Übersicht</a></li>
+              <li><a [routerLink]="['/introdcution']">Overview</a></li>
               <li><a [routerLink]="['/introdcution']">Csharp</a></li>
             </ul>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link main-menu-link" >2. Jahrgang</a>
+            <a class="nav-link main-menu-link" >2. Vintage</a>
             <ul class="sub-menu">
-              <li><a [routerLink]="['/introdcution']">Übersicht</a></li>
+              <li><a [routerLink]="['/introdcution']">Overview</a></li>
               <li><a [routerLink]="['/introdcution']">Csharp</a></li>
               <li><a [routerLink]="['/introdcution']">Typescript</a></li>
             </ul>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link main-menu-link" >3. Jahrgang</a>
+            <a class="nav-link main-menu-link" >3. Vintage</a>
             <ul class="sub-menu">
-              <li><a [routerLink]="['/introdcution']">Übersicht</a></li>
+              <li><a [routerLink]="['/introdcution']">Overview</a></li>
               <li><a [routerLink]="['/introdcution']">Java</a></li>
               <li><a [routerLink]="['/introdcution']">Typescript</a></li>
             </ul>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link main-menu-link" >4. Jahrgang</a>
+            <a class="nav-link main-menu-link" >4. Vintage</a>
             <ul class="sub-menu">
-              <li><a [routerLink]="['/introdcution']">Übersicht</a></li>
+              <li><a [routerLink]="['/introdcution']">Overview</a></li>
               <li><a [routerLink]="['/introdcution']">Csharp</a></li>
               <li><a [routerLink]="['/introdcution']">Typescript</a></li>
             </ul>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link main-menu-link" >5. Jahrgang</a>
+            <a class="nav-link main-menu-link" >5. Vintage</a>
             <ul class="sub-menu">
-              <li><a [routerLink]="['/introdcution']">Übersicht</a></li>
+              <li><a [routerLink]="['/introdcution']">Overview</a></li>
               <li><a [routerLink]="['/introdcution']">Java</a></li>
               <li><a [routerLink]="['/introdcution']">Typescript</a></li>
               <li><a [routerLink]="['/introdcution']">Csharp</a></li>
@@ -93,7 +93,7 @@
                   <div class="card-body">
                     <h2 class="card-title">Step 1: Add Introduction</h2>
                     <div class="form-group">
-                      <textarea class="form-control" rows="5" style="height: 300px; width: 1000px"  [(ngModel)]="instructions" placeholder="Geben Sie hier Ihre Anleitung ein"></textarea>
+                      <textarea class="form-control" rows="5" style="height: 300px; width: 1000px"  [(ngModel)]="instruction" placeholder="Geben Sie hier Ihre Anleitung ein"></textarea>
                     </div>
                     <button class="btn btn-primary" (click)="nextStep()">Next</button>
                   </div>
@@ -181,7 +181,7 @@
     <div class="card mt-5">
       <div class="card-body"style="height: 300px; width: 1000px">
         <h2 class="card-title">Overview</h2>
-        <p><strong>Anleitung:</strong> {{ instructions }}</p>
+        <p><strong>Anleitung:</strong> {{ instruction }}</p>
         <p><strong>Sprache:</strong> {{ selectedLanguage }}</p>
         <p><strong>Ausgewählte Tags:</strong> {{ selectedTags.join(', ') }}</p>
         <p><strong>ZIP-Datei:</strong> {{ zipFile?.name }}</p>
@@ -189,6 +189,49 @@
       </div>
     </div>
   </div>
+</div>
+
+<br>
+<br>
+<br>
+
+
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Anweisung</th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th>Sprache</th>
+            <th>Testrun</th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngFor="let exercise of exercises">
+            <tr>
+              <td>{{ exercise.instruction }}</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td>{{ exercise.language }}</td>
+              <td>
+                <button class="btn btn-primary" (click)="runTest(exercise)">Run Test</button>
+            </tr>
+          </ng-container>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+
+</div>
+</div>
 </div>
 
 
