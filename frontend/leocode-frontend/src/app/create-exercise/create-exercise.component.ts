@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {Tags} from '../model/tags.enum';
+import { exercise } from '../model/exercise';
+
 
 
 
@@ -16,8 +18,30 @@ export class CreateExerciseComponent {
   selectedTags: string[] = [];
   zipFile: File | null = null;
 
+  exercises : exercise[]= []
+
   // Hier die verfügbaren Tags aus dem Enum abrufen
   availableTags: string[] = Object.values(Tags);
+
+
+
+  ngOnInit(): void {
+    document.addEventListener("DOMContentLoaded", () => {
+      const mainMenuLinks = document.querySelectorAll('.main-menu-link');
+      
+      mainMenuLinks.forEach(link => {
+        link.addEventListener('click', (event) => {
+          event.preventDefault();
+          const subMenu = link.nextElementSibling;
+          if (subMenu) {
+            subMenu.classList.toggle('show');
+          }
+        });
+      });
+    });
+  }
+
+
 
   nextStep() {
     this.currentStep++;
@@ -69,6 +93,8 @@ export class CreateExerciseComponent {
       zipFile: this.zipFile
     };
 
+  
+
     console.log('Exercise:', exercise);
     
     // Hier den Code zum Senden des extrahierten Codes und anderer Informationen an das Backend implementieren
@@ -78,4 +104,19 @@ export class CreateExerciseComponent {
     console.log('Zip-Datei:', this.zipFile);
     // Hier kannst du den Code und andere Informationen an das Backend senden
   }
+
+
+
+
+ /* document.addEventListener("DOMContentLoaded", function() {
+    const mainMenuLinks = document.querySelectorAll('.main-menu-link');
+    
+    mainMenuLinks.forEach(function(link) {
+      link.addEventListener('click', function(event) {
+        event.preventDefault();
+        const subMenu = this.nextElementSibling;
+        subMenu.classList.toggle('show');
+      });
+    });
+  });*/
 }

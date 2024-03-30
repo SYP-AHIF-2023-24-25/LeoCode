@@ -21,3 +21,17 @@
   background-color: #007bff; /* Blau für Hintergrundfarbe des aktuellen Schritts */
   color: #fff; /* Weiß für Textfarbe im aktuellen Schritt */
 }
+
+.sub-menu-link {
+  color: #888; /* Graue Farbe für Untermenüpunkte */
+  font-size: 14px; /* Kleinere Schriftgröße für Untermenüpunkte */
+}
+
+
+.sub-menu {
+  display: none;
+}
+
+.sub-menu.show {
+  display: block;
+}

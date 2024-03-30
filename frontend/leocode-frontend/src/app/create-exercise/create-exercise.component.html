@@ -1,66 +1,136 @@
-<div class = "container mt-4">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">LeoCode</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
 
-  <!-- Schritte als Rechtecke -->
-  <div class="row justify-content-center">
-    <div class="col-md-8">
-      <div class="step-indicator">
-        <div *ngFor="let step of [1, 2, 3, 4, 5]" 
-             class="step-indicator-item" 
-             [ngClass]="{ 'current-step': currentStep === step }"
-             (click)="goToStep(step)">
-          {{ 'Step ' + step }}
-
-        </div>
-      </div>
-    </div>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        
+      </li>
+    </ul>
   </div>
+</nav>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-2 d-none d-md-block bg-light sidebar">
+      <div class="sidebar-sticky">
+        <ul class="nav flex-column">
+
+          <li class="nav-item">
+            <a class="nav-link main-menu-link" >1. Jahrgang</a>
+            <ul class="sub-menu">
+              <li><a [routerLink]="['/introdcution']">Übersicht</a></li>
+              <li><a [routerLink]="['/introdcution']">Csharp</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link main-menu-link" >2. Jahrgang</a>
+            <ul class="sub-menu">
+              <li><a [routerLink]="['/introdcution']">Übersicht</a></li>
+              <li><a [routerLink]="['/introdcution']">Csharp</a></li>
+              <li><a [routerLink]="['/introdcution']">Typescript</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link main-menu-link" >3. Jahrgang</a>
+            <ul class="sub-menu">
+              <li><a [routerLink]="['/introdcution']">Übersicht</a></li>
+              <li><a [routerLink]="['/introdcution']">Java</a></li>
+              <li><a [routerLink]="['/introdcution']">Typescript</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link main-menu-link" >4. Jahrgang</a>
+            <ul class="sub-menu">
+              <li><a [routerLink]="['/introdcution']">Übersicht</a></li>
+              <li><a [routerLink]="['/introdcution']">Csharp</a></li>
+              <li><a [routerLink]="['/introdcution']">Typescript</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link main-menu-link" >5. Jahrgang</a>
+            <ul class="sub-menu">
+              <li><a [routerLink]="['/introdcution']">Übersicht</a></li>
+              <li><a [routerLink]="['/introdcution']">Java</a></li>
+              <li><a [routerLink]="['/introdcution']">Typescript</a></li>
+              <li><a [routerLink]="['/introdcution']">Csharp</a></li>
+            </ul>
+        </ul>
+      </div>
+    </div>
 
 
-  <div class="container">
-    <!-- Schritt 1: Anleitung hinzufügen -->
-    <div *ngIf="currentStep === 1">
-      <div class="row justify-content-center">
-        <div class="col-md-12">
-          <div class="card mt-5">
-            <div class="card-body">
-              <h2 class="card-title">Step 1: Add Introduction</h2>
-              <div class="form-group">
-                <textarea class="form-control" rows="5" style="height: 300px; width: 1000px"  [(ngModel)]="instructions" placeholder="Geben Sie hier Ihre Anleitung ein"></textarea>
+    <div class="col-md-10">
+      <div class="container mt-4">
+        <!-- Schritte als Rechtecke -->
+        <div class="row justify-content-center">
+          <div class="col-md-8">
+            <div class="step-indicator">
+              <div *ngFor="let step of [1, 2, 3, 4, 5]" 
+                   class="step-indicator-item" 
+                   [ngClass]="{ 'current-step': currentStep === step }"
+                   (click)="goToStep(step)">
+                {{ 'Step ' + step }}
               </div>
-              <button class="btn btn-primary" (click)="nextStep()">Next</button>
             </div>
           </div>
         </div>
-      </div>
-    </div>
-  
-    <!-- Schritt 2: Sprache auswählen -->
-    <div *ngIf="currentStep === 2">
-      <div class="row justify-content-center">
-        <div class="col-md-12">
-          <div class="card mt-5">
-            <div class="card-body" style="height: 300px; width: 1000px">
-              <h2 class="card-title">Step 2: Chose Language</h2>
-              <div class="form-group">
-                <select class="form-control"  [(ngModel)]="selectedLanguage">
-                  <option value="TypeScript">TypeScript</option>
-                  <option value="Csharp">Csharp</option>
-                  <option value="Java">Java</option>
-                </select>
+
+
+        <div class="container">
+          <!-- Schritt 1: Anleitung hinzufügen -->
+          <div *ngIf="currentStep === 1">
+            <div class="row justify-content-center">
+              <div class="col-md-12">
+                <div class="card mt-5">
+                  <div class="card-body">
+                    <h2 class="card-title">Step 1: Add Introduction</h2>
+                    <div class="form-group">
+                      <textarea class="form-control" rows="5" style="height: 300px; width: 1000px"  [(ngModel)]="instructions" placeholder="Geben Sie hier Ihre Anleitung ein"></textarea>
+                    </div>
+                    <button class="btn btn-primary" (click)="nextStep()">Next</button>
+                  </div>
+                </div>
               </div>
-              <button class="btn btn-primary" (click)="nextStep()">Next</button>
             </div>
           </div>
-        </div>
-      </div>
-    </div>
 
-    <!-- Schritt 3: Tags auswählen -->
+
+          <!-- Schritt 2: Sprache auswählen -->
+          <div *ngIf="currentStep === 2">
+            <div class="row justify-content-center">
+              <div class="col-md-12">
+                <div class="card mt-5">
+                  <div class="card-body" style="height: 300px; width: 1000px">
+                    <h2 class="card-title">Step 2: Chose Language</h2>
+                    <div class="form-group">
+                      <select class="form-control"  [(ngModel)]="selectedLanguage">
+                        <option value="TypeScript">TypeScript</option>
+                        <option value="Csharp">Csharp</option>
+                        <option value="Java">Java</option>
+                      </select>
+                    </div>
+                    <button class="btn btn-primary" (click)="nextStep()">Next</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- Schritt 3: Tags auswählen -->
     <div *ngIf="currentStep === 3">
       <div class="row justify-content-center">
         <div class="col-md-12">
           <div class="card mt-5">
-            <div class="card-body" style="height: 625px; width: 1000px">
+            <div class="card-body" style="height: 500px; width: 1000px">
               <h2 class="card-title">Step 3: Chose Tags</h2>
               <!-- Ausgewählte Tags anzeigen -->
               <div class="selected-tags d-flex flex-wrap">
@@ -120,9 +190,6 @@
     </div>
   </div>
 </div>
-</div>
 
 
 
-  
-  
