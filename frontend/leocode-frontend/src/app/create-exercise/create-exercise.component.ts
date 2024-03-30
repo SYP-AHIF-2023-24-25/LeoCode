@@ -18,17 +18,19 @@ export class CreateExerciseComponent {
   selectedTags: string[] = [];
   zipFile: File | null = null;
 
+  searchTag: string = '';
+
   exercises : Exercise[]= [
     {
       instruction: 'Schreibe eine Funktion, die die Summe von zwei Zahlen berechnet.',
       language: 'Typescript',
-      tags: ['PosE'],
+      tags: ['POSE', 'TYPESCRIPT'],
       zipFile: null
     },
     {
       instruction: 'Schreibe eine Funktion, die die Summe von zwei Zahlen berechnet.',
       language: 'Csharp',
-      tags: ['WMC'],
+      tags: ['WMC', 'CSHARP'],
       zipFile: null
     },
   ]
@@ -50,6 +52,13 @@ export class CreateExerciseComponent {
         });
       });
     });
+  }
+
+  // Getter-Funktion für gefilterte Übungen basierend auf dem Suchbegriff für Tags
+  get filteredExercises(): Exercise[] {
+    return this.exercises.filter(exercise =>
+      exercise.tags.includes(this.searchTag.toUpperCase())
+    );
   }
 
 
@@ -103,14 +112,7 @@ export class CreateExerciseComponent {
       zipFile: this.zipFile
     };
 
-    this.exercises.push(exercise);
-
-    /*if(this.instruction === '' || this.selectedLanguage === '' || this.selectedTags.length === 0 || this.zipFile === null){
-      alert('Bitte füllen Sie alle Felder aus!');
-      return;
-    }else{
-      this.exercises.push(exercise);
-    }*/
+    this.filteredExercises.push(exercise);
 
     console.log('Exercise:', exercise);
     console.log('____________________________')
@@ -118,6 +120,8 @@ export class CreateExerciseComponent {
       console.log('Exercise:', this.exercises[i]);
     }
     this.resetForm();
+
+    console.log(this.filteredExercises);
   
   }
 
