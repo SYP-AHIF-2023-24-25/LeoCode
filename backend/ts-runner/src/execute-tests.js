@@ -45,7 +45,7 @@ function runTs(exerciseName, templateFilePath, code, fileName) {
         console.log("3");
         yield runCommands(`/usr/src/app/${solutionDir}`, `npm install`);
         yield runCommands(`/usr/src/app/${solutionDir}`, `npx tsc`);
-        yield runCommands(`/usr/src/app/${solutionDir}`, `npm test -- --reporter json --reporter-options output=/usr/src/app/${solutionDir}/results/testresults.json`);
+        yield runCommands(`/usr/src/app/${solutionDir}`, `npm test --prefix ../modules -- --reporter json --reporter-options output=/usr/src/app/${solutionDir}/results/testresults.json`);
         const result = yield (0, promises_1.readFile)(`/usr/src/app/${solutionDir}/results/testresults.json`, 'utf-8');
         return JSON.parse(result);
     });
@@ -53,7 +53,6 @@ function runTs(exerciseName, templateFilePath, code, fileName) {
 exports.runTs = runTs;
 function replaceCode(code, filePath, fileName) {
     return __awaiter(this, void 0, void 0, function* () {
-        console.log("happyyyyyyy");
         const templateFilePath = `/usr/src/app/${filePath}/src/${fileName}`;
         return new Promise((resolve, reject) => {
             fs.writeFile(templateFilePath, code, (err) => {

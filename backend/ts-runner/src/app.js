@@ -31,9 +31,7 @@ app.post('/api/execute/:exerciseName', (req, res) => __awaiter(void 0, void 0, v
     const fileName = req.body.fileName;
     const code = req.body.code;
     const templateFilePath = `./templates/${exerciseName}`;
-    console.log(fileName);
-    console.log(code);
-    const result = yield (0, execute_tests_1.runTs)(exerciseName, templateFilePath, code, fileName);
+    let result = yield (0, execute_tests_1.runTs)(exerciseName, templateFilePath, code, fileName);
     res.status(200).json(result);
 }));
 app.listen(port, () => {

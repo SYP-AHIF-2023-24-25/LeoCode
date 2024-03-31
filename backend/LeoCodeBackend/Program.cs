@@ -131,8 +131,6 @@ namespace LeoCodeBackend
             try 
             {
                 var currentDirectory = Directory.GetCurrentDirectory();
-                /*var dockerFilePath = $@"{currentDirectory}\..\ts-runner\Dockerfile";
-                var expressServerFilePath = $@"{currentDirectory}\..\ts-runner";*/
                 var command = $"build -f {dockerFilePath} -t {imageName} {expressServerFilePath}";
                 var processInfo = new ProcessStartInfo("docker", command)
                 {
