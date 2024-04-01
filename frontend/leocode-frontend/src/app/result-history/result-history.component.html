@@ -1,13 +1,54 @@
-
-
-
-
-<div class="container mt-4" >
-  <h1>Result-History</h1>
-  <ul>
-      <li *ngFor="let entry of resultHistory">
-        {{ entry.timestamp | date }} - {{ entry.message }} - {{entry.passed}} - {{entry.notPassed}} - {{entry.total}}- {{entry.timer}}
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">LeoCode</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/test-results']">Typescript</a>
       </li>
     </ul>
-    <button class="btn btn-primary" (click)="clearHistory()">Clear History</button>
+  </div>
+</nav>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-2 d-none d-md-block bg-light sidebar">
+      <div class="sidebar-sticky">
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a class="nav-link active" [routerLink]="['/introdcution']">
+              Introduction
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="['/test-results']">
+              Implementation
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="['/result-history']">
+              Result-History
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="container mt-4" >
+      <h1>Result-History</h1>
+      <ul>
+          <li *ngFor="let entry of resultHistory">
+            {{ entry.timestamp | date }} - {{ entry.message }} - {{entry.passed}} - {{entry.notPassed}} - {{entry.total}}- {{entry.timer}}
+          </li>
+        </ul>
+        <button class="btn btn-primary" (click)="clearHistory()">Clear History</button>
+    </div>
+  </div>
 </div>
+
+
+
+
+

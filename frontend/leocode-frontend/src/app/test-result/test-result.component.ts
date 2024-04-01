@@ -3,7 +3,7 @@ import { Component, ElementRef, AfterViewInit, ViewChild, OnInit } from '@angula
 import { RestService } from '../service/rest.service';
 import { TimeLoggerService } from '../service/time-logger.service';
 import { ResultHistoryService } from '../service/result-history.service';
-import { ResultV2 } from '../model/result-v2';
+import { Result } from '../model/result';
 import { Summary } from '../model/summary';
 import { TestResults } from '../model/test-results';
 
@@ -32,7 +32,7 @@ export class TestResultComponent  implements OnInit{
   loading: boolean = false;
 
   // result with new json format
-  resultV2: ResultV2 = {
+  result: Result = {
     Summary: {
       TotalTests: 0,
       PassedTests: 0,
@@ -90,7 +90,7 @@ export class TestResultComponent  implements OnInit{
     }*/
 
   // parse from json new
-  convertFromJsonV2(value: Value): ResultV2 {// mit neuen json format
+  convertFromJsonV2(value: Value): Result {// mit neuen json format
    
     const TotalTests: number = value.value.Summary.TotalTests;
     const PassedTests: number = value.value.Summary.PassedTests;
@@ -112,7 +112,7 @@ export class TestResultComponent  implements OnInit{
         };
     });
 
-    const result: ResultV2 = {
+    const result: Result = {
         Summary: summary,
         TestResults: testResults
     };
@@ -122,8 +122,8 @@ export class TestResultComponent  implements OnInit{
 
 
     //reset fields for new json format
-    resetFieldsV2() {
-      this.resultV2 = {
+    resetFields() {
+      this.result = {
         Summary: {
           TotalTests: 0,
           PassedTests: 0,
@@ -135,8 +135,8 @@ export class TestResultComponent  implements OnInit{
     }
 
   // start tests for new json format
-  startTestV2() {
-    this.resetFieldsV2();
+  startTest() {
+    this.resetFields();
     this.loading = true;
     const timeLogger = new TimeLoggerService();
     timeLogger.start();
@@ -147,15 +147,15 @@ export class TestResultComponent  implements OnInit{
           
             const d = data
             console.log(d);
-            this.resultV2 = this.convertFromJsonV2(d as Value);
+            this.result = this.convertFromJsonV2(d as Value);
             
             this.timer = timeLogger.stop();
             const logEntry = {
-                message: `Unitests : ${this.resultV2.Summary.PassedTests}/${this.resultV2.Summary.TotalTests} test completed.`,
+                message: `Unitests : ${this.result.Summary.PassedTests}/${this.result.Summary.TotalTests} test completed.`,
                 timestamp: new Date(),
-                passed: this.resultV2.Summary.PassedTests,
-                notPassed: this.resultV2.Summary.FailedTests,
-                total: this.resultV2.Summary.TotalTests,
+                passed: this.result.Summary.PassedTests,
+                notPassed: this.result.Summary.FailedTests,
+                total: this.result.Summary.TotalTests,
                 timer: this.timer
             };
 
