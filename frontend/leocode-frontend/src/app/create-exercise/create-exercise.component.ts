@@ -56,12 +56,17 @@ export class CreateExerciseComponent {
 
   // Getter-Funktion für gefilterte Übungen basierend auf dem Suchbegriff für Tags
   get filteredExercises(): Exercise[] {
-    return this.exercises.filter(exercise =>
-      exercise.tags.includes(this.searchTag.toUpperCase())
-    );
+    if (!this.searchTag) {
+      return this.exercises;
+    }else{
+      return this.exercises.filter(exercise =>
+        exercise.tags.includes(this.searchTag.toUpperCase())
+      );
+    }
   }
 
 
+  // navigaton zwischen den schritten
   nextStep() {
     this.currentStep++;
   }
@@ -73,14 +78,15 @@ export class CreateExerciseComponent {
 
   addInstructions(instructions: string) {
     this.instruction = instructions;
-    this.nextStep(); // Nächster Schritt
+    this.nextStep(); 
   }
 
   selectLanguage(language: string) {
     this.selectedLanguage = language;
-    this.nextStep(); // Nächster Schritt
+    this.nextStep(); 
   }
 
+  // tags auwählen
   toggleTagSelection(tag: string) {
     if (this.selectedTags.includes(tag)) {
       this.selectedTags = this.selectedTags.filter(t => t !== tag);
@@ -112,7 +118,7 @@ export class CreateExerciseComponent {
       zipFile: this.zipFile
     };
 
-    this.filteredExercises.push(exercise);
+    this.exercises.push(exercise);
 
     console.log('Exercise:', exercise);
     console.log('____________________________')

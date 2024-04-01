@@ -206,26 +206,25 @@
   <thead>
     <tr>
       <th>Introduction</th>
-      <th></th>
-      <th></th>
-      <th></th>
       <th>Tags</th>
       <th>Testrun</th>
     </tr>
   </thead>
   <tbody>
-    <ng-container *ngFor="let exercise of exercises">
-      <tr>
-        <td>{{ exercise.instruction }}</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td>{{ exercise.tags }}</td>
-        <td>
-          <button class="btn btn-primary" (click)="runTest(exercise)">Run Test</button>
-        </td>
-      </tr>
+    <ng-container *ngIf="exercises.length > 0">
+      <ng-container *ngFor="let exercise of filteredExercises">
+        <tr>
+          <td>{{ exercise.instruction }}</td>
+          <td>{{ exercise.tags }}</td>
+          <td>
+            <button class="btn btn-primary" (click)="runTest(exercise)">Run Test</button>
+          </td>
+        </tr>
+      </ng-container>
     </ng-container>
+    <tr *ngIf="exercises.length === 0">
+      <td colspan="3">No exercises found</td>
+    </tr>
   </tbody>
 </table>
 </div>
