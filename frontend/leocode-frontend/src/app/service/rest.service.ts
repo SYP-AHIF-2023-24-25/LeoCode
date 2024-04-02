@@ -56,9 +56,12 @@ export class RestService {
     formData.append('file', file);
     formData.append('language', language);
 
-    const headers = new HttpHeaders().set('X-XSRF-TOKEN', token); // Set the anti-forgery token
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*' // Erlaubt alle Ursprünge ()
+    });
 
-    return this.httpClient.post<any>(`${this.baseUrl}api/testTemplate`, formData, { headers });
+    return this.httpClient.post<any>(`http://localhost:8000/api/testTemplate`, formData, { headers });
   }
   
 }

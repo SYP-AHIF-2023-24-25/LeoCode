@@ -16,7 +16,11 @@ const express_1 = __importDefault(require("express"));
 const body_parser_1 = __importDefault(require("body-parser"));
 const cors_1 = __importDefault(require("cors"));
 const execute_tests_1 = require("./execute-tests");
+const fs_1 = __importDefault(require("fs"));
 const swagger_ui_express_1 = __importDefault(require("swagger-ui-express"));
+const path_1 = __importDefault(require("path"));
+const util_1 = require("util");
+const child_process_1 = require("child_process");
 const swaggerDocument = require('../swagger.json');
 const app = (0, express_1.default)();
 const port = 3000;
@@ -35,6 +39,39 @@ app.post('/api/execute/:exerciseName', (req, res) => __awaiter(void 0, void 0, v
     console.log(code);
     const result = yield (0, execute_tests_1.runTs)(exerciseName, templateFilePath, code, fileName);
     res.status(200).json(result);
+}));
+app.post('/api/testTemplate', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const language = req.body.language;
+    console.log(language);
+    console.log("drinnen");
+    const file = req.body.file;
+    console.log(file);
+    console.log(File.name);
+    res.status(200).send('Test template received.');
+}));
+app.post('/api/process-zip', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    console.log("Processing ZIP file");
+    try {
+        const zipData = req.body;
+        const zipFilePath = path_1.default.join(__dirname, 'uploaded.zip');
+        fs_1.default.writeFileSync(zipFilePath, zipData);
+        const extractPath = path_1.default.join(__dirname, 'extracted');
+        yield (0, util_1.promisify)(require('extract-zip'))(zipFilePath, { dir: extractPath });
+        (0, child_process_1.exec)('npm test', { cwd: extractPath }, (error, stdout, stderr) => {
+            if (error) {
+                console.error('Error running npm test:', error);
+                res.status(500).send('Error running npm test.');
+            }
+            else {
+                console.log('npm test output:', stdout);
+                res.status(200).send('npm test completed successfully.');
+            }
+        });
+    }
+    catch (error) {
+        console.error('Error processing ZIP file:', error);
+        res.status(500).send('Internal server error.');
+    }
 }));
 app.listen(port, () => {
     console.log(`Server is running at http://localhost:${port}`);

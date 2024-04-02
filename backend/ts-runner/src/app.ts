@@ -35,6 +35,16 @@ app.post('/api/execute/:exerciseName', async (req: Request, res: Response) => {
   res.status(200).json(result);
 });
 
+app.post('/api/testTemplate', async (req: Request, res: Response) => {
+  const language = req.body.language;
+  console.log(language);
+  console.log("drinnen");
+  const file: File = req.body.file;
+  console.log(file);
+  console.log(File.name);
+  res.status(200).send('Test template received.');
+});
+
 app.post('/api/process-zip', async (req: Request, res: Response) => {
   console.log("Processing ZIP file");
   try {
