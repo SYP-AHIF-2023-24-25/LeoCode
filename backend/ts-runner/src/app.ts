@@ -2,11 +2,15 @@ import express, { Request, Response } from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import { runTs } from './execute-tests';
-
+import fs from 'fs';
 import swaggerUi from 'swagger-ui-express';
 import { Snippets } from './model/snippets';
+import path from 'path';
+import { promisify } from 'util';
+import { exec } from 'child_process';
 
 const swaggerDocument = require('../swagger.json');
+
 
 const app = express();
 const port = 3000;
@@ -29,6 +33,32 @@ app.post('/api/execute/:exerciseName', async (req: Request, res: Response) => {
   console.log(code);
   const result = await runTs(exerciseName, templateFilePath,code,fileName);
   res.status(200).json(result);
+});
+
+app.post('/api/process-zip', async (req: Request, res: Response) => {
+  console.log("Processing ZIP file");
+  try {
+      const zipData = req.body;
+
+      const zipFilePath = path.join(__dirname, 'uploaded.zip');
+      fs.writeFileSync(zipFilePath, zipData);
+
+      const extractPath = path.join(__dirname, 'extracted');
+      await promisify(require('extract-zip'))(zipFilePath, { dir: extractPath });
+
+      exec('npm test', { cwd: extractPath }, (error, stdout, stderr) => {
+          if (error) {
+              console.error('Error running npm test:', error);
+              res.status(500).send('Error running npm test.');
+          } else {
+              console.log('npm test output:', stdout);
+              res.status(200).send('npm test completed successfully.');
+          }
+      });
+  } catch (error) {
+      console.error('Error processing ZIP file:', error);
+      res.status(500).send('Internal server error.');
+  }
 });
 
 app.listen(port, () => {

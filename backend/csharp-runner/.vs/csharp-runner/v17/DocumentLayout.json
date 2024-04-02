@@ -1,0 +1,96 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Schule\\4AHIF\\LeoCode\\backend\\csharp-runner\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{99B77547-4D08-4D9C-92B7-59C8BB4DA83E}|csharp-runner\\csharp-runner.csproj|c:\\schule\\4ahif\\leocode\\backend\\csharp-runner\\csharp-runner\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{99B77547-4D08-4D9C-92B7-59C8BB4DA83E}|csharp-runner\\csharp-runner.csproj|solutionrelative:csharp-runner\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{99B77547-4D08-4D9C-92B7-59C8BB4DA83E}|csharp-runner\\csharp-runner.csproj|c:\\schule\\4ahif\\leocode\\backend\\csharp-runner\\csharp-runner\\executetests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{99B77547-4D08-4D9C-92B7-59C8BB4DA83E}|csharp-runner\\csharp-runner.csproj|solutionrelative:csharp-runner\\executetests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{99B77547-4D08-4D9C-92B7-59C8BB4DA83E}|csharp-runner\\csharp-runner.csproj|c:\\schule\\4ahif\\leocode\\backend\\csharp-runner\\csharp-runner\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{99B77547-4D08-4D9C-92B7-59C8BB4DA83E}|csharp-runner\\csharp-runner.csproj|solutionrelative:csharp-runner\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{99B77547-4D08-4D9C-92B7-59C8BB4DA83E}|csharp-runner\\csharp-runner.csproj|c:\\schule\\4ahif\\leocode\\backend\\csharp-runner\\csharp-runner\\csharp-runner.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{99B77547-4D08-4D9C-92B7-59C8BB4DA83E}|csharp-runner\\csharp-runner.csproj|solutionrelative:csharp-runner\\csharp-runner.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 2,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "launchSettings.json",
+              "DocumentMoniker": "C:\\Schule\\4AHIF\\LeoCode\\backend\\csharp-runner\\csharp-runner\\Properties\\launchSettings.json",
+              "RelativeDocumentMoniker": "csharp-runner\\Properties\\launchSettings.json",
+              "ToolTip": "C:\\Schule\\4AHIF\\LeoCode\\backend\\csharp-runner\\csharp-runner\\Properties\\launchSettings.json",
+              "RelativeToolTip": "csharp-runner\\Properties\\launchSettings.json",
+              "ViewState": "AQIAABUAAAAAAAAAAAAAACkAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-03-13T08:24:40.643Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "csharp-runner",
+              "DocumentMoniker": "C:\\Schule\\4AHIF\\LeoCode\\backend\\csharp-runner\\csharp-runner\\csharp-runner.csproj",
+              "RelativeDocumentMoniker": "csharp-runner\\csharp-runner.csproj",
+              "ToolTip": "C:\\Schule\\4AHIF\\LeoCode\\backend\\csharp-runner\\csharp-runner\\csharp-runner.csproj",
+              "RelativeToolTip": "csharp-runner\\csharp-runner.csproj",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2024-03-13T08:21:24.302Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Schule\\4AHIF\\LeoCode\\backend\\csharp-runner\\csharp-runner\\Program.cs",
+              "RelativeDocumentMoniker": "csharp-runner\\Program.cs",
+              "ToolTip": "C:\\Schule\\4AHIF\\LeoCode\\backend\\csharp-runner\\csharp-runner\\Program.cs",
+              "RelativeToolTip": "csharp-runner\\Program.cs",
+              "ViewState": "AQIAABkAAAAAAAAAAAAQwCcAAAAQAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-13T08:20:36.677Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "executeTests.cs",
+              "DocumentMoniker": "C:\\Schule\\4AHIF\\LeoCode\\backend\\csharp-runner\\csharp-runner\\executeTests.cs",
+              "RelativeDocumentMoniker": "csharp-runner\\executeTests.cs",
+              "ToolTip": "C:\\Schule\\4AHIF\\LeoCode\\backend\\csharp-runner\\csharp-runner\\executeTests.cs",
+              "RelativeToolTip": "csharp-runner\\executeTests.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAQAAAAdAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-13T08:20:50.958Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

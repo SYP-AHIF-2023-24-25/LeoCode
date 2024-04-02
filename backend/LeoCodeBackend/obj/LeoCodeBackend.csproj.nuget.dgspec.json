@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Kelit\\Schule2023-24\\syp\\LeoCode\\backend\\LeoCodeBackend\\LeoCodeBackend.csproj": {}
+    "C:\\Schule\\4AHIF\\LeoCode\\backend\\LeoCodeBackend\\LeoCodeBackend.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Kelit\\Schule2023-24\\syp\\LeoCode\\backend\\LeoCodeBackend\\LeoCodeBackend.csproj": {
+    "C:\\Schule\\4AHIF\\LeoCode\\backend\\LeoCodeBackend\\LeoCodeBackend.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Kelit\\Schule2023-24\\syp\\LeoCode\\backend\\LeoCodeBackend\\LeoCodeBackend.csproj",
+        "projectUniqueName": "C:\\Schule\\4AHIF\\LeoCode\\backend\\LeoCodeBackend\\LeoCodeBackend.csproj",
         "projectName": "LeoCodeBackend",
-        "projectPath": "C:\\Users\\Kelit\\Schule2023-24\\syp\\LeoCode\\backend\\LeoCodeBackend\\LeoCodeBackend.csproj",
-        "packagesPath": "C:\\Users\\Kelit\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Kelit\\Schule2023-24\\syp\\LeoCode\\backend\\LeoCodeBackend\\obj\\",
+        "projectPath": "C:\\Schule\\4AHIF\\LeoCode\\backend\\LeoCodeBackend\\LeoCodeBackend.csproj",
+        "packagesPath": "C:\\Users\\David Pröller\\.nuget\\packages\\",
+        "outputPath": "C:\\Schule\\4AHIF\\LeoCode\\backend\\LeoCodeBackend\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Kelit\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\David Pröller\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -34,15 +34,32 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "Microsoft.AspNet.Mvc": {
+              "target": "Package",
+              "version": "[5.3.0, )"
+            },
+            "Microsoft.AspNetCore.Http": {
+              "target": "Package",
+              "version": "[2.2.2, )"
+            },
             "Microsoft.AspNetCore.OpenApi": {
               "target": "Package",
               "version": "[8.0.0, )"
+            },
+            "Microsoft.OpenApi": {
+              "target": "Package",
+              "version": "[1.6.14, )"
             },
             "Newtonsoft.Json": {
               "target": "Package",
@@ -52,9 +69,29 @@
               "target": "Package",
               "version": "[6.4.0, )"
             },
+            "System.IO": {
+              "target": "Package",
+              "version": "[4.3.0, )"
+            },
+            "System.Net.Http": {
+              "target": "Package",
+              "version": "[4.3.4, )"
+            },
             "System.Text.Json": {
               "target": "Package",
               "version": "[8.0.0, )"
+            },
+            "System.Threading.Tasks": {
+              "target": "Package",
+              "version": "[4.3.0, )"
+            },
+            "System.Threading.Tasks.Extensions": {
+              "target": "Package",
+              "version": "[4.5.4, )"
+            },
+            "Vit.Net.Http.FormFile": {
+              "target": "Package",
+              "version": "[2.1.20, )"
             }
           },
           "imports": [
@@ -76,7 +113,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.200/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

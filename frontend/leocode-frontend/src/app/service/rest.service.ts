@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { CodeSection } from '../model/code-sections';
+import { languages } from 'monaco-editor';
 
 @Injectable({
   providedIn: 'root'
@@ -50,14 +51,14 @@ export class RestService {
     return this.httpClient.post(`${this.baseUrl}api/startRunner?language=${language}`, null, { headers: headers });
   }
 
-  uploadZipFile(file: File | null, language: string): Observable<any> {
+  uploadZipFile(file: File, language: string, token: string) {
     const formData = new FormData();
-    if (file === null) {
-      return new Observable<any>();
-    }
     formData.append('file', file);
-  
-    return this.httpClient.post(`${this.baseUrl}api/uploadZipFile?language=${language}`, formData);
+    formData.append('language', language);
+
+    const headers = new HttpHeaders().set('X-XSRF-TOKEN', token); // Set the anti-forgery token
+
+    return this.httpClient.post<any>(`${this.baseUrl}api/testTemplate`, formData, { headers });
   }
   
 }

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {Tags} from '../model/tags.enum';
 import { Exercise } from '../model/exercise';
 import { RestService } from '../service/rest.service';
+import * as JSZip from 'jszip';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 
 
@@ -36,7 +38,7 @@ export class CreateExerciseComponent {
     },
   ]
 
-  constructor(private rest: RestService) {
+  constructor(private rest: RestService,private http: HttpClient) {
   }
 
   // Hier die verfügbaren Tags aus dem Enum abrufen
@@ -112,6 +114,39 @@ export class CreateExerciseComponent {
     }
   }
 
+  zipFilesUpload(event: any) {
+    console.log('ZIP-Datei hochgeladen');
+    const zipFile: File = event.target.files[0];
+    const zip = new JSZip();
+    zip.loadAsync(zipFile).then((zipData) => {
+      // Hier kannst du auf die Dateien innerhalb der ZIP-Datei zugreifen
+      zipData.forEach((relativePath, file) => {
+        console.log(`Datei gefunden: ${relativePath}`);
+      });
+    });
+    this.requestBackend(zipFile);
+  }
+  private baseUrl: string = 'http://localhost:5080/';
+
+  requestBackend(zipFile: File) {
+    const formData = new FormData();
+    formData.append('zipFile', zipFile, 'deine_datei.zip');
+
+    // Keine Notwendigkeit für Access-Control-Allow-Origin
+
+    this.http.post(`${this.baseUrl}api/testTemplate`, formData).subscribe(
+        (response) => {
+            console.log('Antwort vom Backend:', response);
+        },
+        (error) => {
+            console.error('Fehler beim Hochladen:', error);
+        }
+    );
+}
+
+
+
+
   
 
   sendCodeToBackend() {
@@ -133,12 +168,18 @@ export class CreateExerciseComponent {
 
     console.log(this.filteredExercises);
     console.log('____________________________');
-    this.rest.uploadZipFile(exercise.zipFile, exercise.language).subscribe((data) => {
-      console.log(data);
-    },
-    (error) => {
-        console.error("Error in API request", error);
-    });
+    if(exercise.zipFile === null){
+      console.log('No file selected');
+    }
+    else{
+      this.rest.uploadZipFile(exercise.zipFile, exercise.language,"X-CSRF-TOKEN").subscribe((data) => {
+        console.log(data);
+      },
+      (error) => {
+          console.error("Error in API request", error);
+      });
+    }
+    
   
   }
 
