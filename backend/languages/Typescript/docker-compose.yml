@@ -3,6 +3,6 @@ services:
     image: ts-runner
     volumes:
       - ./templates:/usr/src/app/templates
-      - ./node_modules:/usr/src/app/modules
+      - ./node_modules:/usr/src/app/modules/node_modules
     ports:
       - "8000:3000"

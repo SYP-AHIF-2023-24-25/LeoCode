@@ -8,18 +8,18 @@ const ncp = require('ncp').ncp;
 
 export async function runTs(exerciseName: string, templateFilePath:string,code:string,fileName:string): Promise<any> {
   const solutionDir = await createTempDirAndCopyTemplate(exerciseName, templateFilePath);
+  await runCommands(`/usr/src/app/${solutionDir}`, `ln -s /usr/src/app/modules/node_modules /usr/src/app/${solutionDir}/node_modules`);
   await replaceCode(code, solutionDir,fileName);
-  console.log("3");
-
-  await runCommands(`/usr/src/app/${solutionDir}`, `npm install`);
   await runCommands(`/usr/src/app/${solutionDir}`, `npx tsc`);
-  await runCommands(`/usr/src/app/${solutionDir}`, `npm test --prefix ../modules -- --reporter json --reporter-options output=/usr/src/app/${solutionDir}/results/testresults.json`);
+
+  await runCommands(`/usr/src/app/${solutionDir}`, `npm test -- --reporter json --reporter-options output=/usr/src/app/${solutionDir}/results/testresults.json`);
 
   const result = await readFile(`/usr/src/app/${solutionDir}/results/testresults.json`, 'utf-8');
   return JSON.parse(result);
 }
 
 async function replaceCode(code: string, filePath: string,fileName:string): Promise<void> {
+  console.log("happyyyyyyy");
   const templateFilePath = `/usr/src/app/${filePath}/src/${fileName}`;
 
   return new Promise<void>((resolve, reject) => {
