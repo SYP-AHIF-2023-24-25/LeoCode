@@ -49,4 +49,15 @@ export class RestService {
     console.log("Start Runner");
     return this.httpClient.post(`${this.baseUrl}api/startRunner?language=${language}`, null, { headers: headers });
   }
+
+  uploadZipFile(file: File | null, language: string): Observable<any> {
+    const formData = new FormData();
+    if (file === null) {
+      return new Observable<any>();
+    }
+    formData.append('file', file);
+  
+    return this.httpClient.post(`${this.baseUrl}api/uploadZipFile?language=${language}`, formData);
+  }
+  
 }

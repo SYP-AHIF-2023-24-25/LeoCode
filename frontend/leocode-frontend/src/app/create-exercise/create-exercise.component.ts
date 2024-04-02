@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Tags} from '../model/tags.enum';
 import { Exercise } from '../model/exercise';
+import { RestService } from '../service/rest.service';
 
 
 
@@ -34,6 +35,9 @@ export class CreateExerciseComponent {
       zipFile: null
     },
   ]
+
+  constructor(private rest: RestService) {
+  }
 
   // Hier die verfügbaren Tags aus dem Enum abrufen
   availableTags: string[] = Object.values(Tags);
@@ -128,6 +132,13 @@ export class CreateExerciseComponent {
     this.resetForm();
 
     console.log(this.filteredExercises);
+    console.log('____________________________');
+    this.rest.uploadZipFile(exercise.zipFile, exercise.language).subscribe((data) => {
+      console.log(data);
+    },
+    (error) => {
+        console.error("Error in API request", error);
+    });
   
   }
 
