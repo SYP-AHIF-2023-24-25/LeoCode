@@ -13,6 +13,7 @@ const swaggerDocument = require('../swagger.json');
 
 
 const app = express();
+const multer = require('multer');
 const port = 3000;
 
 app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
@@ -35,9 +36,24 @@ app.post('/api/execute/:exerciseName', async (req: Request, res: Response) => {
   res.status(200).json(result);
 });
 
+const storage = multer.diskStorage({
+  destination: function (req:any, file:any, cb:any) {
+    cb(null, './templates'); // Save uploaded files to the "uploads" directory
+  },
+  filename: function (req:any, file:any, cb:any) {
+    cb(null, file.originalname);
+  }
+});
+
+const upload = multer({ storage: storage });
+
+// Upload route
+app.post('/upload', upload.single('file'), (req, res) => {
+  res.json({ message: 'File uploaded successfully' });
+});
+
+
 app.post('/api/testTemplate', async (req: Request, res: Response) => {
-  const language = req.body.language;
-  console.log(language);
   console.log("drinnen");
   const file: File = req.body.file;
   console.log(file);

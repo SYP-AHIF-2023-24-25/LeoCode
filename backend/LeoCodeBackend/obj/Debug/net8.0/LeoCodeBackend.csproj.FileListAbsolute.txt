@@ -69,7 +69,6 @@ C:\Schule\4AHIF\LeoCode\backend\LeoCodeBackend\obj\Debug\net8.0\staticwebassets\
 C:\Schule\4AHIF\LeoCode\backend\LeoCodeBackend\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.LeoCodeBackend.props
 C:\Schule\4AHIF\LeoCode\backend\LeoCodeBackend\obj\Debug\net8.0\staticwebassets.pack.json
 C:\Schule\4AHIF\LeoCode\backend\LeoCodeBackend\obj\Debug\net8.0\scopedcss\bundle\LeoCodeBackend.styles.css
-C:\Schule\4AHIF\LeoCode\backend\LeoCodeBackend\obj\Debug\net8.0\LeoCodeB.4B5F1E93.Up2Date
 C:\Schule\4AHIF\LeoCode\backend\LeoCodeBackend\obj\Debug\net8.0\LeoCodeBackend.dll
 C:\Schule\4AHIF\LeoCode\backend\LeoCodeBackend\obj\Debug\net8.0\refint\LeoCodeBackend.dll
 C:\Schule\4AHIF\LeoCode\backend\LeoCodeBackend\obj\Debug\net8.0\LeoCodeBackend.pdb
@@ -125,3 +124,4 @@ C:\Schule\LeoCode\backend\LeoCodeBackend\obj\Debug\net8.0\refint\LeoCodeBackend.
 C:\Schule\LeoCode\backend\LeoCodeBackend\obj\Debug\net8.0\LeoCodeBackend.pdb
 C:\Schule\LeoCode\backend\LeoCodeBackend\obj\Debug\net8.0\LeoCodeBackend.genruntimeconfig.cache
 C:\Schule\LeoCode\backend\LeoCodeBackend\obj\Debug\net8.0\ref\LeoCodeBackend.dll
+C:\Schule\4AHIF\LeoCode\backend\LeoCodeBackend\obj\Debug\net8.0\LeoCodeBackend.csproj.CopyComplete

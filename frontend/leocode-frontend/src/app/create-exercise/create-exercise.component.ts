@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import {Tags} from '../model/tags.enum';
 import { Exercise } from '../model/exercise';
-import { RestService } from '../service/rest.service';
 import * as JSZip from 'jszip';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-
-
+import { Inject } from '@angular/core';
+import { RestService } from '../service/rest.service';
+import { FileUploadService } from '../service/file-upload-service.service';
 
 
 @Component({
@@ -14,6 +14,15 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
   styleUrls: ['./create-exercise.component.css']
 })
 export class CreateExerciseComponent {
+
+  constructor(private fileUploadService: FileUploadService, private rest: RestService, private http: HttpClient) { }
+
+  onFileSelected(event: any) {
+    const file: File = event.target.files[0];
+    this.fileUploadService.uploadFile(file).subscribe((response: any) => { // Explicitly type 'response' as 'any'
+      console.log(response);
+    });
+  }
 
   currentStep: number = 1;
   instruction: string = '';
@@ -37,9 +46,6 @@ export class CreateExerciseComponent {
       zipFile: null
     },
   ]
-
-  constructor(private rest: RestService,private http: HttpClient) {
-  }
 
   // Hier die verfügbaren Tags aus dem Enum abrufen
   availableTags: string[] = Object.values(Tags);
@@ -115,7 +121,6 @@ export class CreateExerciseComponent {
   }
 
   zipFilesUpload(event: any) {
-    console.log('ZIP-Datei hochgeladen');
     const zipFile: File = event.target.files[0];
     const zip = new JSZip();
     zip.loadAsync(zipFile).then((zipData) => {
@@ -124,9 +129,15 @@ export class CreateExerciseComponent {
         console.log(`Datei gefunden: ${relativePath}`);
       });
     });
-    this.requestBackend(zipFile);
+    //this.requestBackend(zipFile);
+    this.rest.uploadZipFile(zipFile).subscribe((data) => {
+      console.log(data);
+    },
+    (error) => {
+        console.error("Error in API request", error);
+    });
   }
-  private baseUrl: string = 'http://localhost:5080/';
+  private baseUrl: string = 'http://localhost:8000/';
 
   requestBackend(zipFile: File) {
     const formData = new FormData();
@@ -168,17 +179,6 @@ export class CreateExerciseComponent {
 
     console.log(this.filteredExercises);
     console.log('____________________________');
-    if(exercise.zipFile === null){
-      console.log('No file selected');
-    }
-    else{
-      this.rest.uploadZipFile(exercise.zipFile, exercise.language,"X-CSRF-TOKEN").subscribe((data) => {
-        console.log(data);
-      },
-      (error) => {
-          console.error("Error in API request", error);
-      });
-    }
     
   
   }

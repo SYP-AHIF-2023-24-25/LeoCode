@@ -51,10 +51,10 @@ export class RestService {
     return this.httpClient.post(`${this.baseUrl}api/startRunner?language=${language}`, null, { headers: headers });
   }
 
-  uploadZipFile(file: File, language: string, token: string) {
+  uploadZipFile(file: File) {
+    console.log("Uploading ZIP file");
     const formData = new FormData();
     formData.append('file', file);
-    formData.append('language', language);
 
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',

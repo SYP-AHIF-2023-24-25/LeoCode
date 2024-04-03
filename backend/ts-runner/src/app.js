@@ -23,6 +23,7 @@ const util_1 = require("util");
 const child_process_1 = require("child_process");
 const swaggerDocument = require('../swagger.json');
 const app = (0, express_1.default)();
+const multer = require('multer');
 const port = 3000;
 app.use('/swagger', swagger_ui_express_1.default.serve, swagger_ui_express_1.default.setup(swaggerDocument));
 app.use((0, cors_1.default)());
@@ -40,9 +41,20 @@ app.post('/api/execute/:exerciseName', (req, res) => __awaiter(void 0, void 0, v
     const result = yield (0, execute_tests_1.runTs)(exerciseName, templateFilePath, code, fileName);
     res.status(200).json(result);
 }));
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, './templates'); // Save uploaded files to the "uploads" directory
+    },
+    filename: function (req, file, cb) {
+        cb(null, file.originalname);
+    }
+});
+const upload = multer({ storage: storage });
+// Upload route
+app.post('/upload', upload.single('file'), (req, res) => {
+    res.json({ message: 'File uploaded successfully' });
+});
 app.post('/api/testTemplate', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const language = req.body.language;
-    console.log(language);
     console.log("drinnen");
     const file = req.body.file;
     console.log(file);
