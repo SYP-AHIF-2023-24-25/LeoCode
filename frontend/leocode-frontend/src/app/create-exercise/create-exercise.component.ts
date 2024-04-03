@@ -17,12 +17,7 @@ export class CreateExerciseComponent {
 
   constructor(private fileUploadService: FileUploadService, private rest: RestService, private http: HttpClient) { }
 
-  onFileSelected(event: any) {
-    const file: File = event.target.files[0];
-    this.fileUploadService.uploadFile(file).subscribe((response: any) => { // Explicitly type 'response' as 'any'
-      console.log(response);
-    });
-  }
+  
 
   currentStep: number = 1;
   instruction: string = '';
@@ -120,44 +115,23 @@ export class CreateExerciseComponent {
     }
   }
 
-  zipFilesUpload(event: any) {
-    const zipFile: File = event.target.files[0];
-    const zip = new JSZip();
-    zip.loadAsync(zipFile).then((zipData) => {
-      // Hier kannst du auf die Dateien innerhalb der ZIP-Datei zugreifen
-      zipData.forEach((relativePath, file) => {
-        console.log(`Datei gefunden: ${relativePath}`);
-      });
-    });
-    //this.requestBackend(zipFile);
-    this.rest.uploadZipFile(zipFile).subscribe((data) => {
-      console.log(data);
-    },
-    (error) => {
-        console.error("Error in API request", error);
+  onFileSelected(event: any) {
+    const file: File = event.target.files[0];
+    this.fileUploadService.uploadFile(file).subscribe((response: any) => { // Explicitly type 'response' as 'any'
+      console.log(response);
     });
   }
-  private baseUrl: string = 'http://localhost:8000/';
 
-  requestBackend(zipFile: File) {
-    const formData = new FormData();
-    formData.append('zipFile', zipFile, 'deine_datei.zip');
+  uploadZipToTsRunner(exercise: Exercise) {
 
-    // Keine Notwendigkeit für Access-Control-Allow-Origin
-
-    this.http.post(`${this.baseUrl}api/testTemplate`, formData).subscribe(
-        (response) => {
-            console.log('Antwort vom Backend:', response);
-        },
-        (error) => {
-            console.error('Fehler beim Hochladen:', error);
-        }
-    );
-}
-
-
-
-
+    if(!exercise.zipFile) {
+      console.error('No file selected');
+      return;
+    }
+    this.fileUploadService.uploadFile(exercise.zipFile).subscribe((response: any) => { // Explicitly type 'response' as 'any'
+      console.log(response);
+    });
+  }
   
 
   sendCodeToBackend() {
@@ -178,8 +152,8 @@ export class CreateExerciseComponent {
     this.resetForm();
 
     console.log(this.filteredExercises);
-    console.log('____________________________');
     
+    this.uploadZipToTsRunner(exercise);
   
   }
 
@@ -196,3 +170,5 @@ export class CreateExerciseComponent {
   }
 
 }
+
+
