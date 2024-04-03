@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "ALsWcCTSbX05REJRmSz4NqAJwjW9LrYzhjizMSq0W+o=",
+  "Source": "csharp-runner",
+  "BasePath": "_content/csharp-runner",
+  "Mode": "Default",
+  "ManifestType": "Publish",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

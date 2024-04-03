@@ -26,9 +26,9 @@ C:\Schule\4AHIF\LeoCode\backend\csharp-runner\obj\Debug\net8.0\staticwebassets\m
 C:\Schule\4AHIF\LeoCode\backend\csharp-runner\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.csharp-runner.props
 C:\Schule\4AHIF\LeoCode\backend\csharp-runner\obj\Debug\net8.0\staticwebassets.pack.json
 C:\Schule\4AHIF\LeoCode\backend\csharp-runner\obj\Debug\net8.0\scopedcss\bundle\csharp-runner.styles.css
-C:\Schule\4AHIF\LeoCode\backend\csharp-runner\obj\Debug\net8.0\csharp-runner.csproj.CopyComplete
 C:\Schule\4AHIF\LeoCode\backend\csharp-runner\obj\Debug\net8.0\csharp-runner.dll
 C:\Schule\4AHIF\LeoCode\backend\csharp-runner\obj\Debug\net8.0\refint\csharp-runner.dll
 C:\Schule\4AHIF\LeoCode\backend\csharp-runner\obj\Debug\net8.0\csharp-runner.pdb
 C:\Schule\4AHIF\LeoCode\backend\csharp-runner\obj\Debug\net8.0\csharp-runner.genruntimeconfig.cache
 C:\Schule\4AHIF\LeoCode\backend\csharp-runner\obj\Debug\net8.0\ref\csharp-runner.dll
+C:\Schule\4AHIF\LeoCode\backend\csharp-runner\obj\Debug\net8.0\csharp-r.8091536D.Up2Date

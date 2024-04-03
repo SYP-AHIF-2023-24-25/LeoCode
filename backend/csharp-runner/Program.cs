@@ -17,7 +17,7 @@ namespace csharp_runner
             {
                 options.AddPolicy("AllowOtherCSharpBackend", builder =>
                 {
-                    builder.WithOrigins("http://localhost:7215")
+                    builder.AllowAnyOrigin()
                         .AllowAnyHeader()
                         .AllowAnyMethod()
                         .AllowAnyOrigin();
@@ -50,11 +50,16 @@ namespace csharp_runner
         {
             try
             {
-                /*Console.WriteLine("drinen");
+                Console.WriteLine("Unit Test für C# am ausführen");
+                var currentDirectory = Directory.GetCurrentDirectory();
+                Console.WriteLine("Current Directory: " + currentDirectory);
                 Body body = JsonConvert.DeserializeObject<Body>(jsonContent.ToString());
-                string templateFilePath = "./templates/" + exerciseName;
-                var result = await executeTests.runCSharp(exerciseName, templateFilePath, body.code, body.fileName);*/
-                return new OkObjectResult(null);
+                string templateFilePath = @$"{currentDirectory}/templates/{exerciseName}";
+                Console.WriteLine($"Template File Path: {templateFilePath}");
+                string filePathForRandomDirectory = @$"{currentDirectory}";
+                var result = await executeTests.runCSharp(exerciseName, templateFilePath, filePathForRandomDirectory, body.code, body.fileName);
+                Console.WriteLine($"Result: {result}");
+                return new OkObjectResult(result);
             }
             catch (Exception ex)
             {

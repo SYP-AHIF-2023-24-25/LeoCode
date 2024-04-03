@@ -15,7 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("csharp-runner")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9dc913dbd7dcaa2c946a1510d3d59f3f57335a6e")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c5ab40580acd67a64fbfdd67a85a2cea99387970")]
 [assembly: System.Reflection.AssemblyProductAttribute("csharp-runner")]
 [assembly: System.Reflection.AssemblyTitleAttribute("csharp-runner")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

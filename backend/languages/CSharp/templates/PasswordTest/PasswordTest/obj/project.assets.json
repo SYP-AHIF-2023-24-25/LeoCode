@@ -8,19 +8,19 @@
     "net7.0": []
   },
   "packageFolders": {
-    "C:\\Users\\dap03\\.nuget\\packages\\": {}
+    "C:\\Users\\Florian\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Schule\\4AHIF\\LeoCode\\backend\\languages\\CSharp\\PasswordTest\\PasswordTest\\PasswordTest.csproj",
+      "projectUniqueName": "C:\\Schule\\4AHIF\\LeoCode\\backend\\languages\\CSharp\\templates\\PasswordTest\\PasswordTest\\PasswordTest.csproj",
       "projectName": "PasswordTest",
-      "projectPath": "C:\\Schule\\4AHIF\\LeoCode\\backend\\languages\\CSharp\\PasswordTest\\PasswordTest\\PasswordTest.csproj",
-      "packagesPath": "C:\\Users\\dap03\\.nuget\\packages\\",
-      "outputPath": "C:\\Schule\\4AHIF\\LeoCode\\backend\\languages\\CSharp\\PasswordTest\\PasswordTest\\obj\\",
+      "projectPath": "C:\\Schule\\4AHIF\\LeoCode\\backend\\languages\\CSharp\\templates\\PasswordTest\\PasswordTest\\PasswordTest.csproj",
+      "packagesPath": "C:\\Users\\Florian\\.nuget\\packages\\",
+      "outputPath": "C:\\Schule\\4AHIF\\LeoCode\\backend\\languages\\CSharp\\templates\\PasswordTest\\PasswordTest\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\dap03\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Florian\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -40,6 +40,11 @@
         "warnAsError": [
           "NU1605"
         ]
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
       }
     },
     "frameworks": {
@@ -61,7 +66,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.203\\RuntimeIdentifierGraph.json"
       }
     }
   }
