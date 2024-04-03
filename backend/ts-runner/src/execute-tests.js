@@ -32,7 +32,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.runTs = void 0;
+exports.runTemplate = exports.runTs = void 0;
 const util_1 = require("util");
 const child_process_1 = require("child_process");
 const promises_1 = require("fs/promises");
@@ -41,9 +41,8 @@ const ncp = require('ncp').ncp;
 function runTs(exerciseName, templateFilePath, code, fileName) {
     return __awaiter(this, void 0, void 0, function* () {
         const solutionDir = yield createTempDirAndCopyTemplate(exerciseName, templateFilePath);
+        yield runCommands(`/usr/src/app/${solutionDir}`, `ln -s /usr/src/app/modules/node_modules /usr/src/app/${solutionDir}/node_modules`);
         yield replaceCode(code, solutionDir, fileName);
-        console.log("3");
-        yield runCommands(`/usr/src/app/${solutionDir}`, `npm install`);
         yield runCommands(`/usr/src/app/${solutionDir}`, `npx tsc`);
         yield runCommands(`/usr/src/app/${solutionDir}`, `npm test -- --reporter json --reporter-options output=/usr/src/app/${solutionDir}/results/testresults.json`);
         const result = yield (0, promises_1.readFile)(`/usr/src/app/${solutionDir}/results/testresults.json`, 'utf-8');
@@ -51,6 +50,19 @@ function runTs(exerciseName, templateFilePath, code, fileName) {
     });
 }
 exports.runTs = runTs;
+function runTemplate(path) {
+    return __awaiter(this, void 0, void 0, function* () {
+        console.log("before testing");
+        yield runCommands(`/usr/src/app/${path}`, `ln -s /usr/src/app/modules/node_modules /usr/src/app/${path}/node_modules`);
+        yield runCommands(`/usr/src/app/${path}`, `npx tsc`);
+        yield runCommands(`/usr/src/app/${path}`, `npm test -- --reporter json --reporter-options output=/usr/src/app/${path}/results/testresults.json`);
+        console.log("after testing");
+        const result = yield (0, promises_1.readFile)(`/usr/src/app/${path}/results/testresults.json`, 'utf-8');
+        console.log("after reading file");
+        return JSON.parse(result);
+    });
+}
+exports.runTemplate = runTemplate;
 function replaceCode(code, filePath, fileName) {
     return __awaiter(this, void 0, void 0, function* () {
         console.log("happyyyyyyy");

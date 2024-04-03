@@ -87,7 +87,7 @@
     "Parameters": [
       {
         "Name": "file",
-        "Type": "Vit.Net.Http.FormFile.FormFile",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
         "IsRequired": true
       }
     ],

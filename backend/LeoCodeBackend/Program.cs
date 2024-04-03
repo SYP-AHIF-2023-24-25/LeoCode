@@ -47,7 +47,7 @@ namespace LeoCodeBackend
 
             app.UseRouting();
 
-            app.UseAntiforgery(); // Hinzufügen der Anti-Forgery-Middleware
+            app.UseAntiforgery(); // Hinzufï¿½gen der Anti-Forgery-Middleware
 
             // Andere Middleware...
             app.UseCors(builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
@@ -105,7 +105,7 @@ namespace LeoCodeBackend
                 Console.WriteLine($"Fehler: {ex.Message}");
             }
 
-            return new OkObjectResult("TestTemplate wurde mit Antiforgery-Token ausgeführt");
+            return new OkObjectResult("TestTemplate wurde mit Antiforgery-Token ausgefÃ¼hrt");
         }
 
 

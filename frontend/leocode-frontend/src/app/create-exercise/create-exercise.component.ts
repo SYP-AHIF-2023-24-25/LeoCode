@@ -24,6 +24,7 @@ export class CreateExerciseComponent {
   selectedLanguage: string = '';
   selectedTags: string[] = [];
   zipFile: File | null = null;
+  emptyZipFile: File | null = null;
 
   searchTag: string = '';
 
@@ -32,13 +33,15 @@ export class CreateExerciseComponent {
       instruction: 'Schreibe eine Funktion, die die Summe von zwei Zahlen berechnet.',
       language: 'Typescript',
       tags: ['POSE', 'TYPESCRIPT'],
-      zipFile: null
+      zipFile: null,
+      emptyZipFile: null
     },
     {
       instruction: 'Schreibe eine Funktion, die die Summe von zwei Zahlen berechnet.',
       language: 'Csharp',
       tags: ['WMC', 'CSHARP'],
-      zipFile: null
+      zipFile: null,
+      emptyZipFile: null
     },
   ]
 
@@ -106,6 +109,15 @@ export class CreateExerciseComponent {
     return this.selectedTags.includes(tag);
   }
 
+  uploadEmptyZipFile(event: any) {
+    const inputElement = event.target as HTMLInputElement;
+    if (inputElement && inputElement.files && inputElement.files.length > 0) {
+      this.emptyZipFile = inputElement.files[0];
+    } else {
+      console.error('No file selected');
+    }
+  }
+
   uploadZipFile(event: any) {
     const inputElement = event.target as HTMLInputElement;
     if (inputElement && inputElement.files && inputElement.files.length > 0) {
@@ -131,6 +143,7 @@ export class CreateExerciseComponent {
     this.fileUploadService.uploadFile(exercise.zipFile).subscribe((response: any) => { // Explicitly type 'response' as 'any'
       console.log(response);
     });
+    
   }
   
 
@@ -139,7 +152,8 @@ export class CreateExerciseComponent {
       instruction: this.instruction,
       language: this.selectedLanguage,
       tags: this.selectedTags,
-      zipFile: this.zipFile
+      zipFile: this.zipFile,
+      emptyZipFile: this.emptyZipFile
     };
 
     this.exercises.push(exercise);
@@ -167,6 +181,7 @@ export class CreateExerciseComponent {
     this.selectedLanguage = '';
     this.selectedTags = [];
     this.zipFile = null;
+    this.emptyZipFile = null;
   }
 
 }

@@ -68,6 +68,7 @@ import { promisify } from 'util';
 import { exec } from 'child_process';
 import multer from 'multer';
 import unzipper from 'unzipper'; // Add unzipper import
+import { runTemplate } from './execute-tests';
 
 const swaggerDocument = require('../swagger.json');
 
@@ -95,7 +96,7 @@ app.post('/api/execute/:exerciseName', async (req: Request, res: Response) => {
 
 const storage = multer.diskStorage({
   destination: function (req: any, file: any, cb: any) {
-    cb(null, './testExercises'); // Save uploaded files to the "uploads" directory
+    cb(null, './templates'); // Save uploaded files to the "uploads" directory
   },
   filename: function (req: any, file: any, cb: any) {
     cb(null, file.originalname);
@@ -105,26 +106,44 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 // Upload route with zip file extraction
-app.post('/upload', upload.single('file'), (req, res) => {
+app.post('/uploadFullTemplate', upload.single('file'), async (req, res) => {
   // Check if a file was uploaded
-  console.log("in the method");
+
   if (!req.file) {
     return res.status(400).json({ error: 'No file uploaded' });
   }
-  console.log("file is there");
   // Extract the uploaded zip file
-  /*const zipFilePath = path.join(__dirname, '../testExercises', req.file.filename);
-  console.log(zipFilePath);
-  fs.createReadStream(zipFilePath)
-    .pipe(unzipper.Extract({ path: path.join(__dirname, './testExercises') }))
-    .on('close', () => {
-      res.json({ message: 'Zip file extracted successfully' });
-    })
-    .on('error', (err) => {
-      console.error('Error extracting zip file:', err);
-      res.status(500).json({ error: 'Error extracting zip file' });
-    });*/
+  const zipFilePath = path.join(__dirname, '../templates', req.file.filename);
+  await unZip(zipFilePath);
+  console.log("after unzipping ...");
+    const fileNameSplitted: string [] = req.file.filename.split('.');
+    console.log(fileNameSplitted[0]);
+    const result = await runTemplate(`templates/${fileNameSplitted[0]}`);
+    console.log(result);
+    console.log("before the end ...");
+    await deleteFolders(`templates/${fileNameSplitted[0]}`);
+    await deleteFolders(`templates/${fileNameSplitted[0]}.zip`);
+    res.status(200).json(result);
 });
+
+async function deleteFolders(dirName: string): Promise<void> {
+  fs.rmdirSync(dirName, { recursive: true });
+}
+
+async function unZip(zipFilePath: string): Promise<void> {
+  return new Promise<void>((resolve, reject) => {
+    fs.createReadStream(zipFilePath)
+      .pipe(unzipper.Extract({path: `/usr/src/app/templates`}))
+      .on('close', () => {
+        console.log('Zip file extracted successfully');
+        resolve();
+      })
+      .on('error', (err) => {
+        console.error('Error extracting zip file:', err);
+        reject(err);
+      });
+  });
+}
 
 app.listen(port, () => {
   console.log(`Server is running at http://localhost:${port}`);

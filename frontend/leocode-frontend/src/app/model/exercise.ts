@@ -3,4 +3,5 @@ export interface Exercise {
     language: string;
     tags: string[];
     zipFile: File | null;
+    emptyZipFile: File | null;
 }
