@@ -190,9 +190,9 @@ namespace LeoCodeBackend
                         }
                         else if (language == "CSharp")
                         {
-                            /*ResultFileHelperCSharp resultFileHelperTypescript = new ResultFileHelperCSharp();
-                            result = JsonDocument.Parse(resultFileHelperTypescript.ConvertTrxToJson(responseBody));
-                            value = result.RootElement;*/
+                            ResultFileHelperCSharp resultFileHelperCSharp = new ResultFileHelperCSharp();
+                            result = JsonDocument.Parse(resultFileHelperCSharp.ConvertTrxToJson(responseBody));
+                            value = result.RootElement;
                         }
                         else if (language == "Java")
                         {

@@ -67,4 +67,4 @@ C:\Users\Kelit\Schule2023-24\syp\LeoCode\backend\LeoCodeBackend\obj\Debug\net8.0
 C:\Users\Kelit\Schule2023-24\syp\LeoCode\backend\LeoCodeBackend\obj\Debug\net8.0\LeoCodeBackend.pdb
 C:\Users\Kelit\Schule2023-24\syp\LeoCode\backend\LeoCodeBackend\obj\Debug\net8.0\LeoCodeBackend.genruntimeconfig.cache
 C:\Users\Kelit\Schule2023-24\syp\LeoCode\backend\LeoCodeBackend\obj\Debug\net8.0\ref\LeoCodeBackend.dll
-C:\Schule\4AHIF\LeoCode\backend\LeoCodeBackend\obj\Debug\net8.0\LeoCodeB.4B5F1E93.Up2Date
+C:\Schule\4AHIF\LeoCode\backend\LeoCodeBackend\obj\Debug\net8.0\LeoCodeBackend.csproj.CopyComplete

@@ -16,13 +16,5 @@ namespace Tests
             string password = "1234567";
             Assert.IsTrue(PasswordChecker.CheckPassword(password));
         }
-
-        [TestMethod()]
-        public void T02_checkPassword_invalid()
-        {
-            Assert.IsTrue(PasswordChecker.CheckPassword("1"));
-            Assert.IsTrue(PasswordChecker.CheckPassword("12345"));
-            Assert.IsTrue(PasswordChecker.CheckPassword("12345678910"));
-        }
     }
 }
