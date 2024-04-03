@@ -5,7 +5,6 @@ C:\Schule\4AHIF\LeoCode\backend\csharp-runner\bin\Debug\net8.0\csharp-runner.dep
 C:\Schule\4AHIF\LeoCode\backend\csharp-runner\bin\Debug\net8.0\csharp-runner.runtimeconfig.json
 C:\Schule\4AHIF\LeoCode\backend\csharp-runner\bin\Debug\net8.0\csharp-runner.dll
 C:\Schule\4AHIF\LeoCode\backend\csharp-runner\bin\Debug\net8.0\csharp-runner.pdb
-C:\Schule\4AHIF\LeoCode\backend\csharp-runner\bin\Debug\net8.0\Microsoft.AspNetCore.OpenApi.dll
 C:\Schule\4AHIF\LeoCode\backend\csharp-runner\bin\Debug\net8.0\Microsoft.OpenApi.dll
 C:\Schule\4AHIF\LeoCode\backend\csharp-runner\bin\Debug\net8.0\Newtonsoft.Json.dll
 C:\Schule\4AHIF\LeoCode\backend\csharp-runner\bin\Debug\net8.0\Swashbuckle.AspNetCore.Swagger.dll

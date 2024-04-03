@@ -109,7 +109,7 @@ namespace LeoCodeBackend
                 {
                     var dockerFilePath = $@"{currentDirectory}\..\csharp-runner\Dockerfile";
                     var expressServerFilePath = $@"{currentDirectory}\..\csharp-runner";
-                    await BuildImageServer(dockerFilePath, expressServerFilePath, "csharp-runner");
+                    //await BuildImageServer(dockerFilePath, expressServerFilePath, "csharp-runner");
                     await StartContainer("CSharp");
                 } else if(language == "Java") {
                     var dockerFilePath = $@"{currentDirectory}\..\java-runner\Dockerfile";
@@ -159,6 +159,7 @@ namespace LeoCodeBackend
             if(language == "Typescript"){
                 apiUrl = $"http://localhost:8000/api/execute/{exerciseName}";
             } else if(language == "CSharp"){
+                //apiUrl = $"http://localhost:5168/api/execute/{exerciseName}";
                 apiUrl = $"http://localhost:8001/api/execute/{exerciseName}";
             } else if(language == "Java"){
                 apiUrl = $"http://localhost:8002/api/execute/{exerciseName}";
