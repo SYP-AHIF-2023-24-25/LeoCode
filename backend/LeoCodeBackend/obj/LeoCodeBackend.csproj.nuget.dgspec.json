@@ -10,11 +10,11 @@
         "projectUniqueName": "C:\\Schule\\4AHIF\\LeoCode\\backend\\LeoCodeBackend\\LeoCodeBackend.csproj",
         "projectName": "LeoCodeBackend",
         "projectPath": "C:\\Schule\\4AHIF\\LeoCode\\backend\\LeoCodeBackend\\LeoCodeBackend.csproj",
-        "packagesPath": "C:\\Users\\Florian\\.nuget\\packages\\",
+        "packagesPath": "C:\\Users\\dap03\\.nuget\\packages\\",
         "outputPath": "C:\\Schule\\4AHIF\\LeoCode\\backend\\LeoCodeBackend\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Florian\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\dap03\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -40,9 +40,21 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "Microsoft.AspNet.Mvc": {
+              "target": "Package",
+              "version": "[5.3.0, )"
+            },
+            "Microsoft.AspNetCore.Http": {
+              "target": "Package",
+              "version": "[2.2.2, )"
+            },
             "Microsoft.AspNetCore.OpenApi": {
               "target": "Package",
               "version": "[8.0.0, )"
+            },
+            "Microsoft.OpenApi": {
+              "target": "Package",
+              "version": "[1.6.14, )"
             },
             "Newtonsoft.Json": {
               "target": "Package",
@@ -52,9 +64,29 @@
               "target": "Package",
               "version": "[6.4.0, )"
             },
+            "System.IO": {
+              "target": "Package",
+              "version": "[4.3.0, )"
+            },
+            "System.Net.Http": {
+              "target": "Package",
+              "version": "[4.3.4, )"
+            },
             "System.Text.Json": {
               "target": "Package",
               "version": "[8.0.0, )"
+            },
+            "System.Threading.Tasks": {
+              "target": "Package",
+              "version": "[4.3.0, )"
+            },
+            "System.Threading.Tasks.Extensions": {
+              "target": "Package",
+              "version": "[4.5.4, )"
+            },
+            "Vit.Net.Http.FormFile": {
+              "target": "Package",
+              "version": "[2.1.20, )"
             }
           },
           "imports": [
@@ -76,7 +108,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { CodeSection } from '../model/code-sections';
+import { languages } from 'monaco-editor';
 
 @Injectable({
   providedIn: 'root'
@@ -49,4 +50,18 @@ export class RestService {
     console.log("Start Runner");
     return this.httpClient.post(`${this.baseUrl}api/startRunner?language=${language}`, null, { headers: headers });
   }
+
+  uploadZipFile(file: File) {
+    console.log("Uploading ZIP file");
+    const formData = new FormData();
+    formData.append('file', file);
+
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*' // Erlaubt alle Ursprünge ()
+    });
+
+    return this.httpClient.post<any>(`http://localhost:8000/api/testTemplate`, formData, { headers });
+  }
+  
 }

@@ -8,14 +8,24 @@ const ncp = require('ncp').ncp;
 
 export async function runTs(exerciseName: string, templateFilePath:string,code:string,fileName:string): Promise<any> {
   const solutionDir = await createTempDirAndCopyTemplate(exerciseName, templateFilePath);
+  await runCommands(`/usr/src/app/${solutionDir}`, `ln -s /usr/src/app/modules/node_modules /usr/src/app/${solutionDir}/node_modules`);
   await replaceCode(code, solutionDir,fileName);
-  console.log("3");
-
-  await runCommands(`/usr/src/app/${solutionDir}`, `npm install`);
   await runCommands(`/usr/src/app/${solutionDir}`, `npx tsc`);
+
   await runCommands(`/usr/src/app/${solutionDir}`, `npm test -- --reporter json --reporter-options output=/usr/src/app/${solutionDir}/results/testresults.json`);
 
   const result = await readFile(`/usr/src/app/${solutionDir}/results/testresults.json`, 'utf-8');
+  return JSON.parse(result);
+}
+
+export async function runTemplate(path:string): Promise<any> {
+  console.log("before testing");
+  await runCommands(`/usr/src/app/${path}`, `ln -s /usr/src/app/modules/node_modules /usr/src/app/${path}/node_modules`);
+  await runCommands(`/usr/src/app/${path}`, `npx tsc`);
+  await runCommands(`/usr/src/app/${path}`, `npm test -- --reporter json --reporter-options output=/usr/src/app/${path}/results/testresults.json`);
+  console.log("after testing");
+  const result = await readFile(`/usr/src/app/${path}/results/testresults.json`, 'utf-8');
+  console.log("after reading file");
   return JSON.parse(result);
 }
 
