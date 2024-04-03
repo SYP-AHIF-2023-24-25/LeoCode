@@ -127,27 +127,24 @@ export class CreateExerciseComponent {
     }
   }
 
-  onFileSelected(event: any) {
-    const file: File = event.target.files[0];
-    this.fileUploadService.uploadFile(file).subscribe((response: any) => { // Explicitly type 'response' as 'any'
-      console.log(response);
-    });
-  }
-
-  uploadZipToTsRunner(exercise: Exercise) {
-
-    if(!exercise.zipFile) {
+  async uploadZipToTsRunner(file: File, content: string): Promise<void > {
+    if (!file) {
       console.error('No file selected');
-      return;
+      return; // Return early if no file is selected
     }
-    this.fileUploadService.uploadFile(exercise.zipFile).subscribe((response: any) => { // Explicitly type 'response' as 'any'
+  
+    try {
+      const response: any = await this.fileUploadService.uploadFile(file, content).toPromise();
       console.log(response);
-    });
-    
+      return response;
+    } catch (error) {
+      console.error('Error occurred during file upload:', error);
+      throw error; // Rethrow the error for handling in the calling function
+    }
   }
   
 
-  sendCodeToBackend() {
+  async sendCodeToBackend() {
      let exercise  = {
       instruction: this.instruction,
       language: this.selectedLanguage,
@@ -166,9 +163,30 @@ export class CreateExerciseComponent {
     this.resetForm();
 
     console.log(this.filteredExercises);
+
+    if (exercise.zipFile) {
+      const fullResponse = await this.uploadZipToTsRunner(exercise.zipFile, "full");
+      console.log(this.testsMatchPasses(fullResponse));
+      if (exercise.emptyZipFile && this.testsMatchPasses(fullResponse)) {
+        await this.uploadZipToTsRunner(exercise.emptyZipFile, "empty");
+      }
+    }
     
-    this.uploadZipToTsRunner(exercise);
-  
+    // Function to check if the number of tests matches the number of passes
+    
+    
+    /*console.log('Before sleep');
+      await this.sleep(20000);
+      console.log('After sleep');*/
+  }
+
+  testsMatchPasses(response: any): boolean {
+    return response && response.tests && response.passes &&
+           response.tests.length === response.passes.length;
+  }
+
+  sleep(ms: number) {
+    return new Promise(resolve => setTimeout(resolve, ms));
   }
 
   runTest(exercise: Exercise) {

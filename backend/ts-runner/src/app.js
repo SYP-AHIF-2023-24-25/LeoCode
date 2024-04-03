@@ -120,15 +120,39 @@ app.post('/uploadFullTemplate', upload.single('file'), (req, res) => __awaiter(v
     console.log("after unzipping ...");
     const fileNameSplitted = req.file.filename.split('.');
     console.log(fileNameSplitted[0]);
-    const result = yield (0, execute_tests_2.runTemplate)(`templates/${fileNameSplitted[0]}`);
-    console.log(result);
+    let result = "...";
+    console.log(req.body.content);
+    if (req.body.content === "full") {
+        result = yield (0, execute_tests_2.runTemplate)(`templates/${fileNameSplitted[0]}`);
+        console.log(result);
+    }
+    else {
+        result = "empty template uploaded";
+    }
     console.log("before the end ...");
-    deleteFolders(`templates/${fileNameSplitted[0]}`);
-    deleteFolders(`templates/${fileNameSplitted[0]}.zip`);
+    // Remove the unzipped directory
+    if (req.body.content === "full") {
+        const unzippedDirPath = path_1.default.join(__dirname, '../templates', fileNameSplitted[0]);
+        yield deleteFolderRecursive(unzippedDirPath);
+    }
+    fs_1.default.unlinkSync(zipFilePath);
     res.status(200).json(result);
 }));
-function deleteFolders(dirName) {
-    fs_1.default.rmdirSync(dirName, { recursive: true });
+function deleteFolderRecursive(path) {
+    return __awaiter(this, void 0, void 0, function* () {
+        if (fs_1.default.existsSync(path)) {
+            fs_1.default.readdirSync(path).forEach((file, index) => {
+                const curPath = path + "/" + file;
+                if (fs_1.default.lstatSync(curPath).isDirectory()) { // recurse
+                    deleteFolderRecursive(curPath);
+                }
+                else { // delete file
+                    fs_1.default.unlinkSync(curPath);
+                }
+            });
+            fs_1.default.rmdirSync(path);
+        }
+    });
 }
 function unZip(zipFilePath) {
     return __awaiter(this, void 0, void 0, function* () {
