@@ -50,7 +50,7 @@ namespace csharp_runner
         {
             try
             {
-                Console.WriteLine("Unit Test für C# am ausführen");
+                Console.WriteLine("Unit Test fÃ¼r C# am ausfÃ¼hren");
                 var currentDirectory = Directory.GetCurrentDirectory();
                 Console.WriteLine("Current Directory: " + currentDirectory);
                 Body body = JsonConvert.DeserializeObject<Body>(jsonContent.ToString());

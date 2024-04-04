@@ -171,13 +171,6 @@ export class CreateExerciseComponent {
         await this.uploadZipToTsRunner(exercise.emptyZipFile, "empty");
       }
     }
-    
-    // Function to check if the number of tests matches the number of passes
-    
-    
-    /*console.log('Before sleep');
-      await this.sleep(20000);
-      console.log('After sleep');*/
   }
 
   testsMatchPasses(response: any): boolean {
