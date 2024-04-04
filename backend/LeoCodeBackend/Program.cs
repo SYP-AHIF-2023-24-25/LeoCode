@@ -109,7 +109,7 @@ namespace LeoCodeBackend
                 {
                     var dockerFilePath = $@"{currentDirectory}\..\csharp-runner\Dockerfile";
                     var expressServerFilePath = $@"{currentDirectory}\..\csharp-runner";
-                    //await BuildImageServer(dockerFilePath, expressServerFilePath, "csharp-runner");
+                    await BuildImageServer(dockerFilePath, expressServerFilePath, "csharp-runner");
                     await StartContainer("CSharp");
                 } else if(language == "Java") {
                     var dockerFilePath = $@"{currentDirectory}\..\java-runner\Dockerfile";
@@ -176,7 +176,6 @@ namespace LeoCodeBackend
                     string jsonContent = $"{{\"code\":\"{ConcatSnippets(snippets)}\", \"fileName\":\"{snippets.ArrayOfSnippets[0].FileName}\"}}";
                     HttpContent content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
                     response = await httpClient.PostAsync(apiUrl, content);
-                    Console.WriteLine(arrayOfSnippets.ToString());
                     if (response.IsSuccessStatusCode)
                     {
                         string responseBody = await response.Content.ReadAsStringAsync();
@@ -190,8 +189,9 @@ namespace LeoCodeBackend
                         }
                         else if (language == "CSharp")
                         {
+                            Console.WriteLine(responseBody);
                             ResultFileHelperCSharp resultFileHelperCSharp = new ResultFileHelperCSharp();
-                            result = JsonDocument.Parse(resultFileHelperCSharp.ConvertTrxToJson(responseBody));
+                            result = JsonDocument.Parse(resultFileHelperCSharp.formatXMLToJson(responseBody));
                             value = result.RootElement;
                         }
                         else if (language == "Java")
