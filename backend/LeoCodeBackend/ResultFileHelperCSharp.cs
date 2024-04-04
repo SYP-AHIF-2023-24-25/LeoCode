@@ -1,93 +1,75 @@
 ﻿using Newtonsoft.Json;
-using System.Xml;
+using System;
+using System.Collections.Generic;
 using System.Xml.Linq;
 
 namespace LeoCodeBackend
 {
     public class ResultFileHelperCSharp
     {
-        public void ConvertTrxToJson(string json)
+        public string formatXMLToJson(string responseBody)
         {
-            string trxFilePath = "C:\\Schule\\4AHIF\\LeoCode\\backend\\languages\\CSharp\\PasswordTest\\results\\_0d34c18ff43e_2023-12-29_22_41_05.trx";
-            string jsonFilePath = "C:\\test.json";
+            // Deserialize the JSON string into a dynamic object
+            dynamic jsonResponse = JsonConvert.DeserializeObject(responseBody);
 
-            try
+            // Access the XML value from the dynamic object
+            string xmlData = jsonResponse.value;
+
+            var summary = new Dictionary<string, int>
             {
-                var testResults = LoadTestResults(trxFilePath);
+                { "TotalTests", 0 },
+                { "PassedTests", 0 },
+                { "FailedTests", 0 }
+            };
 
-                string jsonResult = ConvertTestResultsToJson(testResults);
+            var testResults = new List<Dictionary<string, string>>();
 
-                File.WriteAllText(jsonFilePath, jsonResult);
-            }
-            catch (Exception ex)
+            XElement xml = XElement.Parse(xmlData);
+
+            foreach (var testResult in xml.Descendants("{http://microsoft.com/schemas/VisualStudio/TeamTest/2010}UnitTestResult"))
             {
-                Console.WriteLine($"Error: {ex.Message}");
-            }
-        }
-        static List<TestResult> LoadTestResults(string trxFilePath)
-        {
-            var testResults = new List<TestResult>();
+                string testName = testResult.Attribute("testName")?.Value;
+                string outcome = testResult.Attribute("outcome")?.Value;
+                string errorMessage = "";
 
-            XDocument trxDocument = XDocument.Load(trxFilePath);
-
-            XNamespace ns = "http://microsoft.com/schemas/VisualStudio/TeamTest/2010";
-
-            foreach (var testResultElement in trxDocument.Descendants(ns + "UnitTestResult"))
-            {
-                var testResult = new TestResult
+                if (outcome == "Failed")
                 {
-                    TestName = testResultElement.Attribute("testName").Value,
-                    Outcome = testResultElement.Attribute("outcome").Value,
-                    ErrorMessage = testResultElement.Attribute("errorMessage")?.Value
+                    errorMessage = testResult.Descendants("Message").FirstOrDefault()?.Value ?? "";
+                }
+
+                // Debug output
+                Console.WriteLine($"TestName: {testName}, Outcome: {outcome}, ErrorMessage: {errorMessage}");
+
+                if (outcome == "Passed")
+                {
+                    summary["PassedTests"]++;
+                }
+                else if (outcome == "Failed")
+                {
+                    summary["FailedTests"]++;
+                }
+
+                summary["TotalTests"]++;
+
+                var result = new Dictionary<string, string>
+                {
+                    { "TestName", testName },
+                    { "Outcome", outcome },
+                    { "ErrorMessage", errorMessage }
                 };
 
-                testResults.Add(testResult);
+                testResults.Add(result);
             }
 
-            return testResults;
-        }
-
-        static string ConvertTestResultsToJson(List<TestResult> testResults)
-        {
-            Summary summary = new Summary()
+            var jsonData = new Dictionary<string, object>
             {
-                TotalTests = testResults.Count,
-                PassedTests = testResults.Count(result => result.Outcome == "Passed"),
-                FailedTests = testResults.Count(result => result.Outcome == "Failed")
+                { "Summary", summary },
+                { "TestResults", testResults }
             };
 
-            var jsonResults = new
-            {
-                Summary = summary,
-                TestResults = testResults.Select(result =>
-                    new TestResult
-                    {
-                        TestName = result.TestName,
-                        Outcome = result.Outcome,
-                        ErrorMessage = result.ErrorMessage
-                    })
-            };
-
-            return JsonConvert.SerializeObject(jsonResults, Newtonsoft.Json.Formatting.Indented);
+            string json = JsonConvert.SerializeObject(jsonData, Newtonsoft.Json.Formatting.Indented);
+            Console.WriteLine(json);
+            return json;
         }
-    }
-    public class TestResult
-    {
-        public string TestName { get; set; }
-        public string Outcome { get; set; }
-        public string ErrorMessage { get; set; }
-    }
-
-    public class Summary
-    {
-        public int TotalTests { get; set; }
-        public int PassedTests { get; set; }
-        public int FailedTests { get; set; }
-    }
-
-    public class CustomResults
-    {
-        public Summary Summary { get; set; }
-        public List<TestResult> TestResults { get; set; }
     }
 }

@@ -1,0 +1,12 @@
+C:\Schule\4AHIF\LeoCode\backend\csharp-runner\bin\Release\net8.0\publish\csharp-runner.exe
+C:\Schule\4AHIF\LeoCode\backend\csharp-runner\bin\Release\net8.0\publish\appsettings.Development.json
+C:\Schule\4AHIF\LeoCode\backend\csharp-runner\bin\Release\net8.0\publish\appsettings.json
+C:\Schule\4AHIF\LeoCode\backend\csharp-runner\bin\Release\net8.0\publish\csharp-runner.dll
+C:\Schule\4AHIF\LeoCode\backend\csharp-runner\bin\Release\net8.0\publish\csharp-runner.deps.json
+C:\Schule\4AHIF\LeoCode\backend\csharp-runner\bin\Release\net8.0\publish\csharp-runner.runtimeconfig.json
+C:\Schule\4AHIF\LeoCode\backend\csharp-runner\bin\Release\net8.0\publish\csharp-runner.pdb
+C:\Schule\4AHIF\LeoCode\backend\csharp-runner\bin\Release\net8.0\publish\Microsoft.OpenApi.dll
+C:\Schule\4AHIF\LeoCode\backend\csharp-runner\bin\Release\net8.0\publish\Newtonsoft.Json.dll
+C:\Schule\4AHIF\LeoCode\backend\csharp-runner\bin\Release\net8.0\publish\Swashbuckle.AspNetCore.Swagger.dll
+C:\Schule\4AHIF\LeoCode\backend\csharp-runner\bin\Release\net8.0\publish\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Schule\4AHIF\LeoCode\backend\csharp-runner\bin\Release\net8.0\publish\Swashbuckle.AspNetCore.SwaggerUI.dll

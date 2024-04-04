@@ -1,26 +1,17 @@
-# Use the official Microsoft .NET SDK as a base image
-FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
-
-# Set the working directory inside the container
+# Build-Stage
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build-env
 WORKDIR /usr/src/app
 
-# Copy the project files into the container
-COPY . .
+# Kopiere alles
+COPY . ./
 
-# Build the C# project
-RUN dotnet build -c Release -o /app
+# Restore als separate Schichten
+RUN dotnet restore
+# Baue und veröffentliche ein Release
+RUN dotnet publish -c Release -o out
 
-# Stage for the final image
-FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
-
-# Set the working directory inside the container
-WORKDIR /app
-
-# Copy the built files from the build stage
-COPY --from=build /app .
-
-# Expose the port the app will run on
-EXPOSE 8000
-
-# Define the entry point for the application
+# Runtime-Stage
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS runtime
+WORKDIR /usr/src/app
+COPY --from=build-env /usr/src/app/out .
 ENTRYPOINT ["dotnet", "csharp-runner.dll"]

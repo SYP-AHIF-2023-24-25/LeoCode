@@ -10,11 +10,6 @@ using Microsoft.Extensions.DependencyInjection;
 using System.Text;
 using Newtonsoft.Json;
 using System.Text.Json.Nodes;
-using System.Net.Http;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc.ViewFeatures;
-using Microsoft.AspNetCore.Antiforgery;
-using Vit.Net.Http.FormFile;
 
 namespace LeoCodeBackend
 {
@@ -23,6 +18,7 @@ namespace LeoCodeBackend
         static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
             builder.Services.AddCors(options =>
             {
                 options.AddPolicy("AllowAngularFrontend", builder =>
@@ -33,41 +29,20 @@ namespace LeoCodeBackend
                         .AllowAnyOrigin();
                 });
             });
-            builder.Services.AddAntiforgery();
+
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
             builder.Services.AddSignalR();
-            builder.Services.AddControllers();
-            
 
             var app = builder.Build();
 
-
-
-
-            app.UseRouting();
-
-            app.UseAntiforgery(); // Hinzuf�gen der Anti-Forgery-Middleware
-
-            // Andere Middleware...
-            app.UseCors(builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
-            app.UseCors(builder => builder.WithOrigins("http://localhost:4200").AllowAnyMethod().AllowAnyHeader());
-
             app.UseCors("AllowAngularFrontend");
+
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
-
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-                // Weitere Endpunkte...
-            });
-            app.UseAuthentication();
-            app.UseAuthorization();
-            
 
             app.UseHttpsRedirection();
 
@@ -85,39 +60,7 @@ namespace LeoCodeBackend
                 .WithName("StopRunner")
                 .WithOpenApi();
 
-            app.MapPost("/api/testTemplate", TestTemplate)
-                .WithName("testTemplate")
-                .DisableAntiforgery();
             app.Run();
-        }
-        public static async Task<IActionResult> TestTemplate([FromForm] IFormFile file)
-        {
-            Console.WriteLine("TestTemplate wurde aufgerufen");
-            try
-            {
-                using var httpClient = new HttpClient();
-                //var response = await httpClient.PostAsync("http://localhost:8000/api/testZip", new StreamContent(file.OpenReadStream()));
-                //var responseString = await response.Content.ReadAsStringAsync();
-                //Console.WriteLine(responseString);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Fehler: {ex.Message}");
-            }
-
-            return new OkObjectResult("TestTemplate wurde mit Antiforgery-Token ausgeführt");
-        }
-
-
-
-
-        private static async Task<Task> testTemplate(string language, IFormFile file)
-        {
-            var httpClient = new HttpClient();
-            var response = await httpClient.PostAsync("http://localhost:8000/api/testZip", new StreamContent(file.OpenReadStream()));
-            var responseString = await response.Content.ReadAsStringAsync();
-            Console.WriteLine(responseString);
-            return Task.CompletedTask;
         }
 
         private static async Task StopRunner(string language)
@@ -188,8 +131,6 @@ namespace LeoCodeBackend
             try 
             {
                 var currentDirectory = Directory.GetCurrentDirectory();
-                /*var dockerFilePath = $@"{currentDirectory}\..\ts-runner\Dockerfile";
-                var expressServerFilePath = $@"{currentDirectory}\..\ts-runner";*/
                 var command = $"build -f {dockerFilePath} -t {imageName} {expressServerFilePath}";
                 var processInfo = new ProcessStartInfo("docker", command)
                 {
@@ -218,6 +159,7 @@ namespace LeoCodeBackend
             if(language == "Typescript"){
                 apiUrl = $"http://localhost:8000/api/execute/{exerciseName}";
             } else if(language == "CSharp"){
+                //apiUrl = $"http://localhost:5168/api/execute/{exerciseName}";
                 apiUrl = $"http://localhost:8001/api/execute/{exerciseName}";
             } else if(language == "Java"){
                 apiUrl = $"http://localhost:8002/api/execute/{exerciseName}";
@@ -234,7 +176,6 @@ namespace LeoCodeBackend
                     string jsonContent = $"{{\"code\":\"{ConcatSnippets(snippets)}\", \"fileName\":\"{snippets.ArrayOfSnippets[0].FileName}\"}}";
                     HttpContent content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
                     response = await httpClient.PostAsync(apiUrl, content);
-                    Console.WriteLine(arrayOfSnippets.ToString());
                     if (response.IsSuccessStatusCode)
                     {
                         string responseBody = await response.Content.ReadAsStringAsync();
@@ -248,9 +189,10 @@ namespace LeoCodeBackend
                         }
                         else if (language == "CSharp")
                         {
-                            /*ResultFileHelperCSharp resultFileHelperTypescript = new ResultFileHelperCSharp();
-                            result = JsonDocument.Parse(resultFileHelperTypescript.ConvertTrxToJson(responseBody));
-                            value = result.RootElement;*/
+                            Console.WriteLine(responseBody);
+                            ResultFileHelperCSharp resultFileHelperCSharp = new ResultFileHelperCSharp();
+                            result = JsonDocument.Parse(resultFileHelperCSharp.formatXMLToJson(responseBody));
+                            value = result.RootElement;
                         }
                         else if (language == "Java")
                         {

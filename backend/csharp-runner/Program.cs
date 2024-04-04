@@ -1,6 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
+using System.Text.Json;
+using System.Text;
 using System.Text.Json.Nodes;
+using System.Net.Http.Json;
+using Newtonsoft.Json;
 
 namespace csharp_runner
 {
@@ -10,43 +13,66 @@ namespace csharp_runner
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
-            builder.Services.AddAuthorization();
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowOtherCSharpBackend", builder =>
+                {
+                    builder.AllowAnyOrigin()
+                        .AllowAnyHeader()
+                        .AllowAnyMethod()
+                        .AllowAnyOrigin();
+                });
+            });
 
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+            builder.Services.AddSignalR();
 
             var app = builder.Build();
 
-            // Configure the HTTP request pipeline.
+            app.UseCors("AllowOtherCSharpBackend");
+
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
-        
+
             app.UseHttpsRedirection();
 
-            app.UseAuthorization();
+            app.MapPost("/api/execute/{exerciseName}", RunTests)
+                .WithName("RunTests");
 
-            app.MapGet("/api/hello", () => "Hello World!");
-
-            app.MapGet("/api/execute/:exerciseName", async (string exerciseName, [FromBody] JsonObject jsonBody) =>
-            {
-                Console.WriteLine("ininininini");
-                Body body = JsonConvert.DeserializeObject<Body>(jsonBody.ToString());
-                string templateFilePath = "./templates/" + exerciseName;
-                var result = await executeTests.runCSharp(exerciseName, templateFilePath, body.code, body.fileName);
-            });
-            Console.WriteLine("ininininini");
             app.Run();
         }
-    }
 
+        static async Task<IActionResult> RunTests(string exerciseName, [FromBody] JsonObject jsonContent)
+        {
+            try
+            {
+                Console.WriteLine("Unit Test für C# am ausführen");
+                var currentDirectory = Directory.GetCurrentDirectory();
+                Console.WriteLine("Current Directory: " + currentDirectory);
+                Body body = JsonConvert.DeserializeObject<Body>(jsonContent.ToString());
+                string templateFilePath = @$"{currentDirectory}/templates/{exerciseName}";
+                Console.WriteLine($"Template File Path: {templateFilePath}");
+                string filePathForRandomDirectory = @$"{currentDirectory}";
+                var result = await executeTests.runCSharp(exerciseName, templateFilePath, filePathForRandomDirectory, body.code, body.fileName);
+                Console.WriteLine($"Result: {result}");
+                return new OkObjectResult(result);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}");
+                return new BadRequestObjectResult(ex.Message);
+            }
+        }
+    }
     public class Body
     {
         public string code { get; set; }
         public string fileName { get; set; }
     }
 }
+
+
