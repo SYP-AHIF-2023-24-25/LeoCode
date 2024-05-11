@@ -3,5 +3,6 @@ services:
     image: csharp-runner
     volumes:
       - ./templates:/usr/src/app/templates
+      - ./nuget.config:/usr/src/app/config/nuget.config
     ports:
-      - "8001:8000"
+      - "8001:8080"

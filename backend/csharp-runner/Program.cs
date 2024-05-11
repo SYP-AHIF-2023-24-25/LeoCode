@@ -57,6 +57,7 @@ namespace csharp_runner
                 string templateFilePath = @$"{currentDirectory}/templates/{exerciseName}";
                 Console.WriteLine($"Template File Path: {templateFilePath}");
                 string filePathForRandomDirectory = @$"{currentDirectory}";
+                string filePathForNuGetConfigFile = @$"{currentDirectory}/config";
                 var result = await executeTests.runCSharp(exerciseName, templateFilePath, filePathForRandomDirectory, body.code, body.fileName);
                 Console.WriteLine($"Result: {result}");
                 return new OkObjectResult(result);
