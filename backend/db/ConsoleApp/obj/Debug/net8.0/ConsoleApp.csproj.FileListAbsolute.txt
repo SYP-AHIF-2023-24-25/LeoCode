@@ -1,0 +1,15 @@
+C:\Schule\4AHIF\LeoCode\backend\db\ConsoleApp\bin\Debug\net8.0\ConsoleApp.exe
+C:\Schule\4AHIF\LeoCode\backend\db\ConsoleApp\bin\Debug\net8.0\ConsoleApp.deps.json
+C:\Schule\4AHIF\LeoCode\backend\db\ConsoleApp\bin\Debug\net8.0\ConsoleApp.runtimeconfig.json
+C:\Schule\4AHIF\LeoCode\backend\db\ConsoleApp\bin\Debug\net8.0\ConsoleApp.dll
+C:\Schule\4AHIF\LeoCode\backend\db\ConsoleApp\bin\Debug\net8.0\ConsoleApp.pdb
+C:\Schule\4AHIF\LeoCode\backend\db\ConsoleApp\obj\Debug\net8.0\ConsoleApp.GeneratedMSBuildEditorConfig.editorconfig
+C:\Schule\4AHIF\LeoCode\backend\db\ConsoleApp\obj\Debug\net8.0\ConsoleApp.AssemblyInfoInputs.cache
+C:\Schule\4AHIF\LeoCode\backend\db\ConsoleApp\obj\Debug\net8.0\ConsoleApp.AssemblyInfo.cs
+C:\Schule\4AHIF\LeoCode\backend\db\ConsoleApp\obj\Debug\net8.0\ConsoleApp.csproj.CoreCompileInputs.cache
+C:\Schule\4AHIF\LeoCode\backend\db\ConsoleApp\obj\Debug\net8.0\ConsoleApp.sourcelink.json
+C:\Schule\4AHIF\LeoCode\backend\db\ConsoleApp\obj\Debug\net8.0\ConsoleApp.dll
+C:\Schule\4AHIF\LeoCode\backend\db\ConsoleApp\obj\Debug\net8.0\refint\ConsoleApp.dll
+C:\Schule\4AHIF\LeoCode\backend\db\ConsoleApp\obj\Debug\net8.0\ConsoleApp.pdb
+C:\Schule\4AHIF\LeoCode\backend\db\ConsoleApp\obj\Debug\net8.0\ConsoleApp.genruntimeconfig.cache
+C:\Schule\4AHIF\LeoCode\backend\db\ConsoleApp\obj\Debug\net8.0\ref\ConsoleApp.dll
