@@ -1,9 +1,12 @@
 using Microsoft.AspNetCore.Mvc;
-using System.Text.Json;
-using System.Text;
-using System.Text.Json.Nodes;
-using System.Net.Http.Json;
+using System;
+using System.IO; // Ergänzung
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http; // Ergänzung
+using Microsoft.Extensions.DependencyInjection; // Ergänzung
+using Microsoft.Extensions.Hosting;
 using Newtonsoft.Json;
+using System.Text.Json.Nodes; // Ergänzung
 
 namespace csharp_runner
 {
@@ -15,22 +18,31 @@ namespace csharp_runner
 
             builder.Services.AddCors(options =>
             {
-                options.AddPolicy("AllowOtherCSharpBackend", builder =>
-                {
-                    builder.AllowAnyOrigin()
-                        .AllowAnyHeader()
-                        .AllowAnyMethod()
-                        .AllowAnyOrigin();
-                });
+                options.AddPolicy("AllowOrigin",
+                    builder =>
+                    {
+                        builder.WithOrigins("http://localhost:4200") // Hier geben Sie die URL Ihrer Angular-Anwendung an
+                            .AllowAnyHeader()
+                            .AllowAnyMethod();
+                    });
             });
 
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
             builder.Services.AddSignalR();
 
+            // Ergänzung: Add Controllers and NewtonsoftJson
+            builder.Services.AddControllers();
+
+            // Ergänzung: Add Antiforgery
+            builder.Services.AddAntiforgery(options =>
+            {
+                // Konfigurationsoptionen hier einfügen, falls erforderlich
+            });
+
             var app = builder.Build();
 
-            app.UseCors("AllowOtherCSharpBackend");
+            app.UseCors("AllowOrigin");
 
             if (app.Environment.IsDevelopment())
             {
@@ -40,16 +52,35 @@ namespace csharp_runner
 
             app.UseHttpsRedirection();
 
-            app.MapPost("/api/execute/{exerciseName}", RunTests)
-                .WithName("RunTests");
+            // Ergänzung: Use Routing
+            app.UseRouting();
 
+            // Ergänzung: Use Authentication and Authorization if needed
+            // app.UseAuthentication();
+            // app.UseAuthorization();
+
+            // Ergänzung: Use Antiforgery
+            app.UseAntiforgery();
+
+            app.MapPost("/api/execute/{exerciseName}", RunTests)
+                    .WithName("RunTests");
             app.MapPost("/api/uploadTemplate", UploadTemplate)
                 .WithName("UploadTemplate");
+            app.MapGet("/test", TEST)
+                .WithName("TEST");
 
             app.Run();
         }
-        static async Task<IActionResult> UploadTemplate([FromBody] TemplateUploadModel model)
+        static async Task<IActionResult> TEST()
         {
+            return new OkObjectResult("AAAAAAAAAAAAAAAAAAAAAAAAA");
+        }
+
+        static async Task<IActionResult> UploadTemplate([FromForm] TemplateUploadModel model)
+        {
+            Console.WriteLine("AAAAAAAAAAAAA");
+            Console.WriteLine("AAAAAAAAAAAAA");
+            Console.WriteLine("AAAAAAAAAAAAA");
             Console.WriteLine(model.Content);
             Console.WriteLine(model.File.FileName);
             if (model == null || model.File == null || model.File.Length == 0)
@@ -57,7 +88,7 @@ namespace csharp_runner
                 // Handle invalid input (missing file or content)
                 return new BadRequestObjectResult("Fail");
             }
-            
+
             // Process the uploaded ZIP file (e.g., save it, extract its contents, etc.)
             // Access the file using 'model.File' and the content using 'model.Content'
 
@@ -87,6 +118,7 @@ namespace csharp_runner
             }
         }
     }
+
     public class Body
     {
         public string code { get; set; }
@@ -99,5 +131,3 @@ namespace csharp_runner
         public IFormFile File { get; set; }
     }
 }
-
-

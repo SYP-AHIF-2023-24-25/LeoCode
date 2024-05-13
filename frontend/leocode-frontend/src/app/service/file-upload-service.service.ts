@@ -21,5 +21,4 @@ export class FileUploadService {
     formData.append('content', content);
     return this.http.post('http://localhost:8001/api/uploadTemplate', formData);
   }
-
 }
