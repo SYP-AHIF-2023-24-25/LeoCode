@@ -14,4 +14,12 @@ export class FileUploadService {
     formData.append('content', content);
     return this.http.post('http://localhost:8000/uploadFullTemplate', formData);
   }
+
+  uploadCSharpTemplate(file: File, content: string) {
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('content', content);
+    return this.http.post('http://localhost:8001/api/uploadTemplate', formData);
+  }
+
 }

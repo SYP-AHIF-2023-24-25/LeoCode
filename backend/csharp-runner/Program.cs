@@ -43,7 +43,26 @@ namespace csharp_runner
             app.MapPost("/api/execute/{exerciseName}", RunTests)
                 .WithName("RunTests");
 
+            app.MapPost("/api/uploadTemplate", UploadTemplate)
+                .WithName("UploadTemplate");
+
             app.Run();
+        }
+        static async Task<IActionResult> UploadTemplate([FromBody] TemplateUploadModel model)
+        {
+            Console.WriteLine(model.Content);
+            Console.WriteLine(model.File.FileName);
+            if (model == null || model.File == null || model.File.Length == 0)
+            {
+                // Handle invalid input (missing file or content)
+                return new BadRequestObjectResult("Fail");
+            }
+            
+            // Process the uploaded ZIP file (e.g., save it, extract its contents, etc.)
+            // Access the file using 'model.File' and the content using 'model.Content'
+
+            // Return an appropriate response (e.g., Ok, Created, etc.)
+            return new OkObjectResult("Good");
         }
 
         static async Task<IActionResult> RunTests(string exerciseName, [FromBody] JsonObject jsonContent)
@@ -72,6 +91,12 @@ namespace csharp_runner
     {
         public string code { get; set; }
         public string fileName { get; set; }
+    }
+
+    public class TemplateUploadModel
+    {
+        public string Content { get; set; }
+        public IFormFile File { get; set; }
     }
 }
 

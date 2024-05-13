@@ -1,0 +1,55 @@
+[
+  {
+    "ContainingType": "csharp_runner.Program",
+    "Method": "RunTests",
+    "RelativePath": "api/execute/{exerciseName}",
+    "HttpMethod": "POST",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "exerciseName",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "jsonContent",
+        "Type": "System.Text.Json.Nodes.JsonObject",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.IActionResult",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "csharp_runner.Program",
+    "Method": "UploadTemplate",
+    "RelativePath": "api/uploadTemplate",
+    "HttpMethod": "POST",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "csharp_runner.TemplateUploadModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.IActionResult",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  }
+]

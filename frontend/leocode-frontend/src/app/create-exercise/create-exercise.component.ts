@@ -127,6 +127,22 @@ export class CreateExerciseComponent {
     }
   }
 
+  async uploadZipFileToCSharpRunner(file: File, content: string): Promise<void > {
+    if (!file) {
+      console.error('No file selected');
+      return; // Return early if no file is selected
+    }
+  
+    try {
+      const response: any = await this.fileUploadService.uploadCSharpTemplate(file, content).toPromise();
+      console.log(response);
+      return response;
+    } catch (error) {
+      console.error('Error occurred during file upload:', error);
+      throw error; // Rethrow the error for handling in the calling function
+    }
+  }
+
   async uploadZipToTsRunner(file: File, content: string): Promise<void > {
     if (!file) {
       console.error('No file selected');
@@ -165,11 +181,21 @@ export class CreateExerciseComponent {
     console.log(this.filteredExercises);
 
     if (exercise.zipFile) {
-      const fullResponse = await this.uploadZipToTsRunner(exercise.zipFile, "full");
-      console.log(this.testsMatchPasses(fullResponse));
-      if (exercise.emptyZipFile && this.testsMatchPasses(fullResponse)) {
-        await this.uploadZipToTsRunner(exercise.emptyZipFile, "empty");
+      if(exercise.language === 'Typescript'){
+        const fullResponse = await this.uploadZipToTsRunner(exercise.zipFile, "full");
+        console.log(this.testsMatchPasses(fullResponse));
+        if (exercise.emptyZipFile && this.testsMatchPasses(fullResponse)) {
+          await this.uploadZipToTsRunner(exercise.emptyZipFile, "empty");
+        }
       }
+      else if(exercise.language === 'Csharp'){
+        const fullResponse = await this.uploadZipFileToCSharpRunner(exercise.zipFile, "full");
+        console.log(this.testsMatchPasses(fullResponse));
+        if (exercise.emptyZipFile && this.testsMatchPasses(fullResponse)) {
+          await this.uploadZipFileToCSharpRunner(exercise.emptyZipFile, "empty");
+        }
+      }
+      
     }
   }
 
