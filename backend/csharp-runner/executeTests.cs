@@ -6,22 +6,23 @@ namespace csharp_runner
     {
         public static async Task<string> runCSharp(string exerciseName, string templateFilePath, string filePathForRandomDirectory, string code, string fileName)
         {
-            Console.WriteLine("in Methode runCSharp in execute Tests");
             string solutionDir = createTempDir(filePathForRandomDirectory);
-            Console.WriteLine($"Solution Directory: {solutionDir}");
             await CopyAsync(templateFilePath, solutionDir);
             solutionDir = $@"{solutionDir}/{exerciseName}";
             await ReplaceCodeAsync(solutionDir, code, fileName, exerciseName);
 
-            Console.WriteLine("dotnet restore anfangen");
-            Console.Write($"Solution dir für ausführen von dotnet restore: {solutionDir}");
             int exitCode = await RunCommandsAsync(solutionDir, "restore");
-            Console.WriteLine($"dotnet restore fertig und code ist: {exitCode}");
             exitCode = await RunCommandsAsync(solutionDir, "test -l:trx;LogFileName=TestOutput.xml");
-            Console.WriteLine($"tests ausführen fertig und code ist: {exitCode}");
 
             string testOutput = await File.ReadAllTextAsync(Path.Combine(solutionDir, $"{exerciseName}Tests/TestResults/TestOutput.xml"));
-            Console.WriteLine($"TestOutput: {testOutput}");
+            return testOutput;
+        }
+
+        public static async Task<string> testTemplate(string path, string exerciseName)
+        {
+            await RunCommandsAsync(path, "restore");
+            await RunCommandsAsync(path, "test -l:trx;LogFileName=TestOutput.xml");
+            string testOutput = await File.ReadAllTextAsync(Path.Combine(path, $"{exerciseName}Tests/TestResults/TestOutput.xml"));
             return testOutput;
         }
 
@@ -29,22 +30,20 @@ namespace csharp_runner
         {
             try
             {
-                // Erstellen Sie den Prozess zur Ausführung des dotnet test-Befehls
                 Process process = new Process
                 {
                     StartInfo = new ProcessStartInfo
                     {
                         FileName = "dotnet",
-                        Arguments = $"{command}", // Argumente für den dotnet test-Befehl
+                        Arguments = $"{command}",
                         RedirectStandardOutput = true,
                         RedirectStandardError = true,
                         UseShellExecute = false,
                         CreateNoWindow = true,
-                        WorkingDirectory = solutionDir // Arbeitsverzeichnis festlegen
+                        WorkingDirectory = solutionDir
                     }
                 };
 
-                // Ereignishandler für die Ausgabe festlegen
                 var outputBuilder = new System.Text.StringBuilder();
                 var errorBuilder = new System.Text.StringBuilder();
 
@@ -64,24 +63,16 @@ namespace csharp_runner
                     }
                 };
 
-                // Starten Sie den Prozess und beginnen Sie mit dem Lesen von stdout/stderr
                 process.Start();
                 process.BeginOutputReadLine();
                 process.BeginErrorReadLine();
 
-                // Warten Sie, bis der Prozess beendet ist
                 await process.WaitForExitAsync();
 
-                // Konsolenrückgabewert abrufen
                 int exitCode = process.ExitCode;
 
-                // Ergebnisse verarbeiten (optional)
                 string output = outputBuilder.ToString();
                 string error = errorBuilder.ToString();
-
-                // Hier können Sie die Ausgabe verarbeiten oder sie zurückgeben
-                Console.WriteLine("Dotnet test output:");
-                Console.WriteLine(output);
 
                 if (!string.IsNullOrEmpty(error))
                 {
@@ -94,14 +85,13 @@ namespace csharp_runner
             catch (Exception ex)
             {
                 Console.WriteLine($"An error occurred: {ex.Message}");
-                return -1; // Rückgabewert für Fehler
+                return -1;
             }
         }
 
         private static async Task ReplaceCodeAsync(string solutionDir, string code, string fileName, string exerciseName)
         {
             string filePath = $@"{solutionDir}/{exerciseName}/{fileName}";
-            // Schreiben Sie die Daten in die Datei
             using (StreamWriter writer = new StreamWriter(filePath))
             {
                 await writer.WriteLineAsync(code);
@@ -110,7 +100,6 @@ namespace csharp_runner
 
         private static string createTempDir(string filePathForRandomDirectory)
         {
-            // Erstelle einen zufälligen Ordnernamen
             string randomFolderName = Path.GetRandomFileName();
             string fullPath = Path.Combine(filePathForRandomDirectory, randomFolderName);
             Directory.CreateDirectory(fullPath);
@@ -123,7 +112,7 @@ namespace csharp_runner
         static async Task CopyAsync(string sourceDir, string targetDir)
         {
             Process process = new Process();
-            process.StartInfo.FileName = "/bin/cp"; // Pfad zu cp-Befehl
+            process.StartInfo.FileName = "/bin/cp";
             process.StartInfo.Arguments = $"-r {sourceDir} {targetDir}";
             process.StartInfo.UseShellExecute = false;
             process.StartInfo.RedirectStandardOutput = true;
@@ -131,7 +120,6 @@ namespace csharp_runner
 
             process.Start();
 
-            // Asynchrones Lesen von StandardOutput und StandardError
             Task<string> outputReader = process.StandardOutput.ReadToEndAsync();
             Task<string> errorReader = process.StandardError.ReadToEndAsync();
 

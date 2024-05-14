@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -15,10 +16,15 @@ export class FileUploadService {
     return this.http.post('http://localhost:8000/uploadFullTemplate', formData);
   }
 
-  uploadCSharpTemplate(file: File, content: string) {
+  async uploadCSharpTemplate(file: File, content: string):Promise<Observable<any>> {
     const formData = new FormData();
     formData.append('file', file);
     formData.append('content', content);
-    return this.http.post('http://localhost:8001/api/uploadTemplate', formData);
+  
+    const headers = new HttpHeaders();
+    headers.set('Content-Type', 'multipart/form-data');
+
+    return await this.http.post('http://localhost:8001/CSharpExercises/UploadTemplate', formData, { headers });
+
   }
 }

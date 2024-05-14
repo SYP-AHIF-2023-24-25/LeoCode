@@ -21,7 +21,7 @@ namespace csharp_runner
                 options.AddPolicy("AllowOrigin",
                     builder =>
                     {
-                        builder.WithOrigins("http://localhost:4200") // Hier geben Sie die URL Ihrer Angular-Anwendung an
+                        builder.WithOrigins("http://localhost:4200")
                             .AllowAnyHeader()
                             .AllowAnyMethod();
                     });
@@ -31,14 +31,7 @@ namespace csharp_runner
             builder.Services.AddSwaggerGen();
             builder.Services.AddSignalR();
 
-            // Ergänzung: Add Controllers and NewtonsoftJson
             builder.Services.AddControllers();
-
-            // Ergänzung: Add Antiforgery
-            builder.Services.AddAntiforgery(options =>
-            {
-                // Konfigurationsoptionen hier einfügen, falls erforderlich
-            });
 
             var app = builder.Build();
 
@@ -52,48 +45,16 @@ namespace csharp_runner
 
             app.UseHttpsRedirection();
 
-            // Ergänzung: Use Routing
             app.UseRouting();
-
-            // Ergänzung: Use Authentication and Authorization if needed
-            // app.UseAuthentication();
-            // app.UseAuthorization();
-
-            // Ergänzung: Use Antiforgery
-            app.UseAntiforgery();
 
             app.MapPost("/api/execute/{exerciseName}", RunTests)
                     .WithName("RunTests");
-            app.MapPost("/api/uploadTemplate", UploadTemplate)
-                .WithName("UploadTemplate");
-            app.MapGet("/test", TEST)
-                .WithName("TEST");
+
+            app.UseAuthorization();
+
+            app.MapControllers();
 
             app.Run();
-        }
-        static async Task<IActionResult> TEST()
-        {
-            return new OkObjectResult("AAAAAAAAAAAAAAAAAAAAAAAAA");
-        }
-
-        static async Task<IActionResult> UploadTemplate([FromForm] TemplateUploadModel model)
-        {
-            Console.WriteLine("AAAAAAAAAAAAA");
-            Console.WriteLine("AAAAAAAAAAAAA");
-            Console.WriteLine("AAAAAAAAAAAAA");
-            Console.WriteLine(model.Content);
-            Console.WriteLine(model.File.FileName);
-            if (model == null || model.File == null || model.File.Length == 0)
-            {
-                // Handle invalid input (missing file or content)
-                return new BadRequestObjectResult("Fail");
-            }
-
-            // Process the uploaded ZIP file (e.g., save it, extract its contents, etc.)
-            // Access the file using 'model.File' and the content using 'model.Content'
-
-            // Return an appropriate response (e.g., Ok, Created, etc.)
-            return new OkObjectResult("Good");
         }
 
         static async Task<IActionResult> RunTests(string exerciseName, [FromBody] JsonObject jsonContent)

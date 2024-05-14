@@ -6,6 +6,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Inject } from '@angular/core';
 import { RestService } from '../service/rest.service';
 import { FileUploadService } from '../service/file-upload-service.service';
+import { ElementCompact, xml2js } from 'xml-js';
 
 
 @Component({
@@ -127,16 +128,15 @@ export class CreateExerciseComponent {
     }
   }
 
-  async uploadZipFileToCSharpRunner(file: File, content: string): Promise<void > {
+  async uploadZipFileToCSharpRunner(file: File, content: string): Promise<any> {
     if (!file) {
       console.error('No file selected');
       return; // Return early if no file is selected
     }
-  
     try {
-      const response: any = await this.fileUploadService.uploadCSharpTemplate(file, content).toPromise();
-      console.log(response);
-      return response;
+      let result = await (await this.fileUploadService.uploadCSharpTemplate(file, content)).toPromise();
+      console.log(result);
+      return result;
     } catch (error) {
       console.error('Error occurred during file upload:', error);
       throw error; // Rethrow the error for handling in the calling function
@@ -190,8 +190,13 @@ export class CreateExerciseComponent {
       }
       else if(exercise.language === 'Csharp'){
         const fullResponse = await this.uploadZipFileToCSharpRunner(exercise.zipFile, "full");
-        console.log(this.testsMatchPasses(fullResponse));
-        if (exercise.emptyZipFile && this.testsMatchPasses(fullResponse)) {
+        const xmlString = fullResponse;
+        const xmlObject = xml2js(xmlString, { compact: true }) as ElementCompact; // Add type assertion
+        console.log(xmlObject);
+        const totalTests = xmlObject['TestRun'].ResultSummary.Counters._attributes.total;
+        const failedTests = xmlObject['TestRun'].ResultSummary.Counters._attributes.failed;
+        const passedTests = xmlObject['TestRun'].ResultSummary.Counters._attributes.passed;
+        if (totalTests === passedTests && exercise.emptyZipFile) {
           await this.uploadZipFileToCSharpRunner(exercise.emptyZipFile, "empty");
         }
       }
