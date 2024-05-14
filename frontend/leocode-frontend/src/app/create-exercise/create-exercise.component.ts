@@ -160,7 +160,7 @@ export class CreateExerciseComponent {
   }
   
 
-  async sendCodeToBackend() {
+  async sendCodeToRunner() {
      let exercise  = {
       instruction: this.instruction,
       language: this.selectedLanguage,
@@ -170,12 +170,6 @@ export class CreateExerciseComponent {
     };
 
     this.exercises.push(exercise);
-
-    console.log('Exercise:', exercise);
-    console.log('____________________________')
-    for(let i = 0; i < this.exercises.length; i++){
-      console.log('Exercise:', this.exercises[i]);
-    }
     this.resetForm();
 
     console.log(this.filteredExercises);
@@ -183,25 +177,26 @@ export class CreateExerciseComponent {
     if (exercise.zipFile) {
       if(exercise.language === 'Typescript'){
         const fullResponse = await this.uploadZipToTsRunner(exercise.zipFile, "full");
-        console.log(this.testsMatchPasses(fullResponse));
         if (exercise.emptyZipFile && this.testsMatchPasses(fullResponse)) {
           await this.uploadZipToTsRunner(exercise.emptyZipFile, "empty");
         }
       }
       else if(exercise.language === 'Csharp'){
         const fullResponse = await this.uploadZipFileToCSharpRunner(exercise.zipFile, "full");
-        const xmlString = fullResponse;
-        const xmlObject = xml2js(xmlString, { compact: true }) as ElementCompact; // Add type assertion
-        console.log(xmlObject);
-        const totalTests = xmlObject['TestRun'].ResultSummary.Counters._attributes.total;
-        const failedTests = xmlObject['TestRun'].ResultSummary.Counters._attributes.failed;
-        const passedTests = xmlObject['TestRun'].ResultSummary.Counters._attributes.passed;
-        if (totalTests === passedTests && exercise.emptyZipFile) {
+
+        if (this.testsMatchPassesCSharp(fullResponse) && exercise.emptyZipFile) {
           await this.uploadZipFileToCSharpRunner(exercise.emptyZipFile, "empty");
         }
       }
       
     }
+  }
+  testsMatchPassesCSharp(response: any): boolean {
+    const xmlString = response;
+    const xmlObject = xml2js(xmlString, { compact: true }) as ElementCompact; // Add type assertion
+    const totalTests = xmlObject['TestRun'].ResultSummary.Counters._attributes.total;
+    const passedTests = xmlObject['TestRun'].ResultSummary.Counters._attributes.passed;
+    return totalTests === passedTests;
   }
 
   testsMatchPasses(response: any): boolean {
