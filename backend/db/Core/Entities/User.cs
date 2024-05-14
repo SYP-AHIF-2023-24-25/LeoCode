@@ -12,6 +12,7 @@ namespace Core.Entities
     {
         public string Username { get; set; }
         public string Password { get; set; }
-        public Exercise[] Exercises { get; set; }
+        public List<Exercise> Exercises { get; set; } = [];
+        public List<ArrayOfSnippets> ArrayOfSnippets { get; set; } = [];
     }
 }

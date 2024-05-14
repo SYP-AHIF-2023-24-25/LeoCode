@@ -11,10 +11,11 @@ namespace Core.Entities
 {
     public class Exercise : EntityObject
     {
-        public int UserId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        [ForeignKey(nameof(UserId))]
-        public User User { get; set; }
+        public byte[] Project { get; set; }
+        public Language Language { get; set; }
+        public Year Year { get; set; }
+        public Subject Subject { get; set; }
     }
 }

@@ -8,7 +8,11 @@ using System.Diagnostics;
 namespace Persistence;
 public class ApplicationDbContext : DbContext
 {
-    //TODO Db Sets
+    public DbSet<User> Users { get; set; }
+    public DbSet<Exercise> Exercises { get; set; }
+    public DbSet<Snippet> Snippets { get; set; }
+    public DbSet<ArrayOfSnippets> ArrayOfSnippets { get; set; }
+
     
 
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
