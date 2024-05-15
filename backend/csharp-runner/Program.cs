@@ -1,9 +1,12 @@
 using Microsoft.AspNetCore.Mvc;
-using System.Text.Json;
-using System.Text;
-using System.Text.Json.Nodes;
-using System.Net.Http.Json;
+using System;
+using System.IO; // Ergänzung
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http; // Ergänzung
+using Microsoft.Extensions.DependencyInjection; // Ergänzung
+using Microsoft.Extensions.Hosting;
 using Newtonsoft.Json;
+using System.Text.Json.Nodes; // Ergänzung
 
 namespace csharp_runner
 {
@@ -15,22 +18,24 @@ namespace csharp_runner
 
             builder.Services.AddCors(options =>
             {
-                options.AddPolicy("AllowOtherCSharpBackend", builder =>
-                {
-                    builder.AllowAnyOrigin()
-                        .AllowAnyHeader()
-                        .AllowAnyMethod()
-                        .AllowAnyOrigin();
-                });
+                options.AddPolicy("AllowOrigin",
+                    builder =>
+                    {
+                        builder.WithOrigins("http://localhost:4200")
+                            .AllowAnyHeader()
+                            .AllowAnyMethod();
+                    });
             });
 
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
             builder.Services.AddSignalR();
 
+            builder.Services.AddControllers();
+
             var app = builder.Build();
 
-            app.UseCors("AllowOtherCSharpBackend");
+            app.UseCors("AllowOrigin");
 
             if (app.Environment.IsDevelopment())
             {
@@ -40,8 +45,14 @@ namespace csharp_runner
 
             app.UseHttpsRedirection();
 
+            app.UseRouting();
+
             app.MapPost("/api/execute/{exerciseName}", RunTests)
-                .WithName("RunTests");
+                    .WithName("RunTests");
+
+            app.UseAuthorization();
+
+            app.MapControllers();
 
             app.Run();
         }
@@ -68,11 +79,16 @@ namespace csharp_runner
             }
         }
     }
+
     public class Body
     {
         public string code { get; set; }
         public string fileName { get; set; }
     }
+
+    public class TemplateUploadModel
+    {
+        public string Content { get; set; }
+        public IFormFile File { get; set; }
+    }
 }
-
-

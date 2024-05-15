@@ -6,6 +6,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Inject } from '@angular/core';
 import { RestService } from '../service/rest.service';
 import { FileUploadService } from '../service/file-upload-service.service';
+import { ElementCompact, xml2js } from 'xml-js';
 
 
 @Component({
@@ -127,6 +128,21 @@ export class CreateExerciseComponent {
     }
   }
 
+  async uploadZipFileToCSharpRunner(file: File, content: string): Promise<any> {
+    if (!file) {
+      console.error('No file selected');
+      return; // Return early if no file is selected
+    }
+    try {
+      let result = await (await this.fileUploadService.uploadCSharpTemplate(file, content)).toPromise();
+      console.log(result);
+      return result;
+    } catch (error) {
+      console.error('Error occurred during file upload:', error);
+      throw error; // Rethrow the error for handling in the calling function
+    }
+  }
+
   async uploadZipToTsRunner(file: File, content: string): Promise<void > {
     if (!file) {
       console.error('No file selected');
@@ -144,7 +160,7 @@ export class CreateExerciseComponent {
   }
   
 
-  async sendCodeToBackend() {
+  async sendCodeToRunner() {
      let exercise  = {
       instruction: this.instruction,
       language: this.selectedLanguage,
@@ -154,23 +170,33 @@ export class CreateExerciseComponent {
     };
 
     this.exercises.push(exercise);
-
-    console.log('Exercise:', exercise);
-    console.log('____________________________')
-    for(let i = 0; i < this.exercises.length; i++){
-      console.log('Exercise:', this.exercises[i]);
-    }
     this.resetForm();
 
     console.log(this.filteredExercises);
 
     if (exercise.zipFile) {
-      const fullResponse = await this.uploadZipToTsRunner(exercise.zipFile, "full");
-      console.log(this.testsMatchPasses(fullResponse));
-      if (exercise.emptyZipFile && this.testsMatchPasses(fullResponse)) {
-        await this.uploadZipToTsRunner(exercise.emptyZipFile, "empty");
+      if(exercise.language === 'Typescript'){
+        const fullResponse = await this.uploadZipToTsRunner(exercise.zipFile, "full");
+        if (exercise.emptyZipFile && this.testsMatchPasses(fullResponse)) {
+          await this.uploadZipToTsRunner(exercise.emptyZipFile, "empty");
+        }
       }
+      else if(exercise.language === 'Csharp'){
+        const fullResponse = await this.uploadZipFileToCSharpRunner(exercise.zipFile, "full");
+
+        if (this.testsMatchPassesCSharp(fullResponse) && exercise.emptyZipFile) {
+          await this.uploadZipFileToCSharpRunner(exercise.emptyZipFile, "empty");
+        }
+      }
+      
     }
+  }
+  testsMatchPassesCSharp(response: any): boolean {
+    const xmlString = response;
+    const xmlObject = xml2js(xmlString, { compact: true }) as ElementCompact; // Add type assertion
+    const totalTests = xmlObject['TestRun'].ResultSummary.Counters._attributes.total;
+    const passedTests = xmlObject['TestRun'].ResultSummary.Counters._attributes.passed;
+    return totalTests === passedTests;
   }
 
   testsMatchPasses(response: any): boolean {
