@@ -20,7 +20,7 @@ namespace csharp_runner
             Console.WriteLine($"tests ausführen fertig und code ist: {exitCode}");
 
             string testOutput = await File.ReadAllTextAsync(Path.Combine(solutionDir, $"{exerciseName}Tests/TestResults/TestOutput.xml"));
-            Console.WriteLine($"TestOutput: {testOutput}");
+            Console.WriteLine($"SUCCESS: CSharp {exerciseName} were successful");
             return testOutput;
         }
 

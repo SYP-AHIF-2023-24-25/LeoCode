@@ -103,3 +103,4 @@ C:\Users\Florian\Desktop\changes\LeoCode\backend\LeoCodeBackend\obj\Debug\net8.0
 C:\Users\Florian\Desktop\changes\LeoCode\backend\LeoCodeBackend\obj\Debug\net8.0\LeoCodeBackend.genruntimeconfig.cache
 C:\Users\Florian\Desktop\changes\LeoCode\backend\LeoCodeBackend\obj\Debug\net8.0\ref\LeoCodeBackend.dll
 C:\Schule\4AHIF\LeoCode\backend\LeoCodeBackend\obj\Debug\net8.0\LeoCodeBackend.csproj.CopyComplete
+C:\Schule\4AHIF\LeoCode\backend\LeoCodeBackend\bin\Debug\net8.0\Jackletter.Microsoft.Extensions.Logging.File.dll

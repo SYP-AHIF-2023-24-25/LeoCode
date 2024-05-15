@@ -15,6 +15,9 @@ namespace LeoCodeBackend
 {
     class Program
     {
+        private static readonly string _logFilePath = @"../logging/logs.txt";
+        private static readonly FileLogger _fileLogger = new FileLogger(_logFilePath);
+
         static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
@@ -60,10 +63,19 @@ namespace LeoCodeBackend
                 .WithName("StopRunner")
                 .WithOpenApi();
 
+            using var loggerFactory = LoggerFactory.Create(builder =>
+            {
+                builder
+                    .AddConsole(); // Hier kannst du auch andere Provider wie z.B. AddDebug() verwenden
+            });
+
+            var logger = loggerFactory.CreateLogger<Program>();
 
 
             app.Run();
         }
+
+
 
         private static async Task StopRunner(string language)
         {
@@ -149,7 +161,7 @@ namespace LeoCodeBackend
                 }
                 Directory.SetCurrentDirectory(currentDirectory);
             } 
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 Console.WriteLine($"Error: {ex.Message}");
             }
@@ -180,7 +192,7 @@ namespace LeoCodeBackend
                     response = await httpClient.PostAsync(apiUrl, content);
                     if (response.IsSuccessStatusCode)
                     {
-                        // log success
+                        _fileLogger.Log($"SUCCESS: Response from {language}-runner was successful");
                         string responseBody = await response.Content.ReadAsStringAsync();
                         JsonDocument result = null;
                         JsonElement value = new JsonElement();
@@ -208,13 +220,13 @@ namespace LeoCodeBackend
                     }
                     else
                     {
-                        //log error
+                        _fileLogger.Log($"ERROR: Response from {language}-runner wasn't successful");
                         Console.WriteLine($"Request failed with status code {response.StatusCode}");
                     }
                 }
                 catch (Exception ex)
                 {
-                    //log error
+                    _fileLogger.Log($"ERROR: Response from {language}-runner wasn't successful. Error Message: {ex.Message}");
                     Console.WriteLine($"An error occurred: {ex.Message}");
                 }
             }
