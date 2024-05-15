@@ -41,27 +41,28 @@ namespace csharp_runner.Controllers
                 ZipFile.ExtractToDirectory(templateFilePath, destinationFilePath);
 
                 System.IO.File.Delete(templateFilePath);
-
-                string[] parts = templateFilePath.Split(".");
-                string[] name = fileName.Split(".");
-                var resultTask = executeTests.testTemplate(parts[0], name[0]);
-                var result = await resultTask;
-                var jsonResult = JsonConvert.SerializeObject(result);
-                Console.WriteLine(content);
-                if (content == "full")
+                if(content == "full")
                 {
+                    string[] parts = templateFilePath.Split(".");
+                    string[] name = fileName.Split(".");
+                    var resultTask = executeTests.testTemplate(parts[0], name[0]);
+                    var result = await resultTask;
+                    var jsonResult = JsonConvert.SerializeObject(result);
+                    Console.WriteLine(content);
                     await resultTask;
 
                     Directory.Delete(parts[0], true);
+                    return Ok(jsonResult);
                 }
 
-                return Ok(jsonResult);
+                return Ok();
+                
 
 
             }
             catch (Exception ex)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, "Internal server error.");
+                return StatusCode(StatusCodes.Status400BadRequest, "Something went wrong while Template upload");
             }
         }
     }
