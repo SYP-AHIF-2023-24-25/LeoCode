@@ -26,14 +26,22 @@ app.get('/', (req: Request, res: Response) => {
 });
 
 app.post('/api/execute/:exerciseName', async (req: Request, res: Response) => {
-  const exerciseName = req.params.exerciseName;
-  const fileName = req.body.fileName;
-  const code = req.body.code;
-  const templateFilePath = `./templates/${exerciseName}`;
-  console.log(fileName);
-  console.log(code);
-  const result = await runTs(exerciseName, templateFilePath, code, fileName);
-  res.status(200).json(result);
+  try{
+    const exerciseName = req.params.exerciseName;
+    const fileName = req.body.fileName;
+    const code = req.body.code;
+    const templateFilePath = `./templates/${exerciseName}`;
+    console.log(fileName);
+    console.log(code);
+    const result = await runTs(exerciseName, templateFilePath, code, fileName);
+    //log success
+    res.status(200).json(result);
+  }
+  catch(err){
+    //log error
+    res.status(500).json(err);
+  }
+  
 });
 
 const storage = multer.diskStorage({
@@ -50,36 +58,43 @@ const upload = multer({ storage: storage });
 // Upload route with zip file extraction
 app.post('/uploadFullTemplate', upload.single('file'), async (req, res) => {
   // Check if a file was uploaded
-
-  if (!req.file) {
-    return res.status(400).json({ error: 'No file uploaded' });
+  try{
+    if (!req.file) {
+      return res.status(400).json({ error: 'No file uploaded' });
+    }
+    // Extract the uploaded zip file
+    const zipFilePath = path.join(__dirname, '../templates', req.file.filename);
+    await unZip(zipFilePath);
+    console.log("after unzipping ...");
+      const fileNameSplitted: string [] = req.file.filename.split('.');
+      console.log(fileNameSplitted[0]);
+      let result = "...";
+      console.log(req.body.content);
+      if(req.body.content === "full") {
+  
+        result = await runTemplate(`templates/${fileNameSplitted[0]}`);
+        console.log(result);
+      }
+      else{
+        result = "empty template uploaded";
+      }
+      console.log("before the end ...");
+  
+      // Remove the unzipped directory
+      if(req.body.content === "full") {
+        const unzippedDirPath = path.join(__dirname, '../templates', fileNameSplitted[0]);
+        await deleteFolderRecursive(unzippedDirPath);
+      }
+  
+      fs.unlinkSync(zipFilePath);
+      //log success
+      res.status(200).json(result);
   }
-  // Extract the uploaded zip file
-  const zipFilePath = path.join(__dirname, '../templates', req.file.filename);
-  await unZip(zipFilePath);
-  console.log("after unzipping ...");
-    const fileNameSplitted: string [] = req.file.filename.split('.');
-    console.log(fileNameSplitted[0]);
-    let result = "...";
-    console.log(req.body.content);
-    if(req.body.content === "full") {
-
-      result = await runTemplate(`templates/${fileNameSplitted[0]}`);
-      console.log(result);
-    }
-    else{
-      result = "empty template uploaded";
-    }
-    console.log("before the end ...");
-
-    // Remove the unzipped directory
-    if(req.body.content === "full") {
-      const unzippedDirPath = path.join(__dirname, '../templates', fileNameSplitted[0]);
-      await deleteFolderRecursive(unzippedDirPath);
-    }
-
-    fs.unlinkSync(zipFilePath);
-    res.status(200).json(result);
+  catch(err){
+    //log error
+    res.status(500).json(err);
+  }
+  
 });
 
 async function deleteFolderRecursive(path:string) {

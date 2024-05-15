@@ -180,6 +180,7 @@ namespace LeoCodeBackend
                     response = await httpClient.PostAsync(apiUrl, content);
                     if (response.IsSuccessStatusCode)
                     {
+                        // log success
                         string responseBody = await response.Content.ReadAsStringAsync();
                         JsonDocument result = null;
                         JsonElement value = new JsonElement();
@@ -207,11 +208,13 @@ namespace LeoCodeBackend
                     }
                     else
                     {
+                        //log error
                         Console.WriteLine($"Request failed with status code {response.StatusCode}");
                     }
                 }
                 catch (Exception ex)
                 {
+                    //log error
                     Console.WriteLine($"An error occurred: {ex.Message}");
                 }
             }

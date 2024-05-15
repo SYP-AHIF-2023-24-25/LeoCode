@@ -71,10 +71,12 @@ namespace csharp_runner
                 string filePathForNuGetConfigFile = @$"{currentDirectory}/config";
                 var result = await executeTests.runCSharp(exerciseName, templateFilePath, filePathForRandomDirectory, body.code, body.fileName);
                 Console.WriteLine($"Result: {result}");
+                //log succes
                 return new OkObjectResult(result);
             }
             catch (Exception ex)
             {
+                //log error
                 Console.WriteLine($"Error: {ex.Message}");
                 return new BadRequestObjectResult(ex.Message);
             }

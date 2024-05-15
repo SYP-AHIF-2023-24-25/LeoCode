@@ -52,6 +52,7 @@ namespace csharp_runner.Controllers
                     await resultTask;
 
                     Directory.Delete(parts[0], true);
+                    //log succes
                     return Ok(jsonResult);
                 }
 
@@ -62,6 +63,7 @@ namespace csharp_runner.Controllers
             }
             catch (Exception ex)
             {
+                //log error
                 return StatusCode(StatusCodes.Status400BadRequest, "Something went wrong while Template upload");
             }
         }
