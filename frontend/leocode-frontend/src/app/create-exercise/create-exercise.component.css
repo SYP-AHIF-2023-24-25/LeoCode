@@ -35,3 +35,27 @@
 .sub-menu.show {
   display: block;
 }
+
+.example-chip-list {
+  width: 100%;
+}
+
+.mt-4{
+  width: 100%;
+}
+
+.drag-drop-area {
+  border: 2px dashed #ccc;
+  border-radius: 5px;
+  padding: 20px;
+  text-align: center;
+  margin: 10px;
+  background-color: #f9f9f9;
+}
+
+.btn-ZipFile {
+  background-color: #007bff;
+  border-color: #007bff;
+  border-radius: 10px;
+  color: #fff;
+}

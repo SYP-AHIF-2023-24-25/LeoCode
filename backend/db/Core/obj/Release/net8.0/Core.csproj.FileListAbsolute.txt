@@ -1,0 +1,16 @@
+C:\Schule\4AHIF\POSEO\15-roombooking-Florian-Hagmair\Core\bin\Release\net8.0\Core.deps.json
+C:\Schule\4AHIF\POSEO\15-roombooking-Florian-Hagmair\Core\bin\Release\net8.0\Core.dll
+C:\Schule\4AHIF\POSEO\15-roombooking-Florian-Hagmair\Core\bin\Release\net8.0\Core.pdb
+C:\Schule\4AHIF\POSEO\15-roombooking-Florian-Hagmair\Core\bin\Release\net8.0\Base.dll
+C:\Schule\4AHIF\POSEO\15-roombooking-Florian-Hagmair\Core\bin\Release\net8.0\Base.pdb
+C:\Schule\4AHIF\POSEO\15-roombooking-Florian-Hagmair\Core\obj\Release\net8.0\Core.csproj.AssemblyReference.cache
+C:\Schule\4AHIF\POSEO\15-roombooking-Florian-Hagmair\Core\obj\Release\net8.0\Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\Schule\4AHIF\POSEO\15-roombooking-Florian-Hagmair\Core\obj\Release\net8.0\Core.AssemblyInfoInputs.cache
+C:\Schule\4AHIF\POSEO\15-roombooking-Florian-Hagmair\Core\obj\Release\net8.0\Core.AssemblyInfo.cs
+C:\Schule\4AHIF\POSEO\15-roombooking-Florian-Hagmair\Core\obj\Release\net8.0\Core.csproj.CoreCompileInputs.cache
+C:\Schule\4AHIF\POSEO\15-roombooking-Florian-Hagmair\Core\obj\Release\net8.0\Core.sourcelink.json
+C:\Schule\4AHIF\POSEO\15-roombooking-Florian-Hagmair\Core\obj\Release\net8.0\Core.csproj.Up2Date
+C:\Schule\4AHIF\POSEO\15-roombooking-Florian-Hagmair\Core\obj\Release\net8.0\Core.dll
+C:\Schule\4AHIF\POSEO\15-roombooking-Florian-Hagmair\Core\obj\Release\net8.0\refint\Core.dll
+C:\Schule\4AHIF\POSEO\15-roombooking-Florian-Hagmair\Core\obj\Release\net8.0\Core.pdb
+C:\Schule\4AHIF\POSEO\15-roombooking-Florian-Hagmair\Core\obj\Release\net8.0\ref\Core.dll

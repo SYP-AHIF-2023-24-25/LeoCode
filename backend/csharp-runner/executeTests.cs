@@ -6,15 +6,21 @@ namespace csharp_runner
     {
         public static async Task<string> runCSharp(string exerciseName, string templateFilePath, string filePathForRandomDirectory, string code, string fileName)
         {
+            Console.WriteLine("in Methode runCSharp in execute Tests");
             string solutionDir = createTempDir(filePathForRandomDirectory);
+            Console.WriteLine($"Solution Directory: {solutionDir}");
             await CopyAsync(templateFilePath, solutionDir);
+            int exitCode = await RunCommandsAsyncCommandLine(solutionDir, $"ln -s /usr/src/app/config/nuget.config {solutionDir}/{exerciseName}/nuget.config");
             solutionDir = $@"{solutionDir}/{exerciseName}";
             await ReplaceCodeAsync(solutionDir, code, fileName, exerciseName);
 
-            int exitCode = await RunCommandsAsync(solutionDir, "restore");
-            exitCode = await RunCommandsAsync(solutionDir, "test -l:trx;LogFileName=TestOutput.xml");
+            Console.WriteLine("dotnet restore anfangen");
+            Console.Write($"Solution dir für ausführen von dotnet restore: {solutionDir}");
+            exitCode = await RunCommandsAsyncForDotnet(solutionDir, "test -l:trx;LogFileName=TestOutput.xml");
+            Console.WriteLine($"tests ausführen fertig und code ist: {exitCode}");
 
             string testOutput = await File.ReadAllTextAsync(Path.Combine(solutionDir, $"{exerciseName}Tests/TestResults/TestOutput.xml"));
+            Console.WriteLine($"TestOutput: {testOutput}");
             return testOutput;
         }
 
@@ -86,6 +92,151 @@ namespace csharp_runner
             {
                 Console.WriteLine($"An error occurred: {ex.Message}");
                 return -1;
+            }
+        }
+
+        private static async Task<int> RunCommandsAsyncForDotnet(string solutionDir, string command)
+        {
+            try
+            {
+                // Erstellen Sie den Prozess zur Ausführung des dotnet test-Befehls
+                Process process = new Process
+                {
+                    StartInfo = new ProcessStartInfo
+                    {
+                        FileName = "dotnet",
+                        Arguments = $"{command}", // Argumente für den dotnet test-Befehl
+                        RedirectStandardOutput = true,
+                        RedirectStandardError = true,
+                        UseShellExecute = false,
+                        CreateNoWindow = true,
+                        WorkingDirectory = solutionDir // Arbeitsverzeichnis festlegen
+                    }
+                };
+
+                // Ereignishandler für die Ausgabe festlegen
+                var outputBuilder = new System.Text.StringBuilder();
+                var errorBuilder = new System.Text.StringBuilder();
+
+                process.OutputDataReceived += (sender, args) =>
+                {
+                    if (!string.IsNullOrEmpty(args.Data))
+                    {
+                        outputBuilder.AppendLine(args.Data);
+                    }
+                };
+
+                process.ErrorDataReceived += (sender, args) =>
+                {
+                    if (!string.IsNullOrEmpty(args.Data))
+                    {
+                        errorBuilder.AppendLine(args.Data);
+                    }
+                };
+
+                // Starten Sie den Prozess und beginnen Sie mit dem Lesen von stdout/stderr
+                process.Start();
+                process.BeginOutputReadLine();
+                process.BeginErrorReadLine();
+
+                // Warten Sie, bis der Prozess beendet ist
+                await process.WaitForExitAsync();
+
+                // Konsolenrückgabewert abrufen
+                int exitCode = process.ExitCode;
+
+                // Ergebnisse verarbeiten (optional)
+                string output = outputBuilder.ToString();
+                string error = errorBuilder.ToString();
+
+                // Hier können Sie die Ausgabe verarbeiten oder sie zurückgeben
+                Console.WriteLine("Dotnet test output:");
+                Console.WriteLine(output);
+
+                if (!string.IsNullOrEmpty(error))
+                {
+                    Console.WriteLine("Dotnet test errors:");
+                    Console.WriteLine(error);
+                }
+
+                return exitCode;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An error occurred: {ex.Message}");
+                return -1; // Rückgabewert für Fehler
+            }
+        }
+
+        private static async Task<int> RunCommandsAsyncCommandLine(string solutionDir, string command)
+        {
+            try
+            {
+                // Erstellen Sie den Prozess zur Ausführung des dotnet test-Befehls
+                Process process = new Process
+                {
+                    StartInfo = new ProcessStartInfo
+                    {
+                        FileName = "/bin/sh",
+                        Arguments = $"-c \"{command}\"", // Befehl für das Symbolic Link setzen                        RedirectStandardOutput = true,
+                        RedirectStandardError = true,
+                        UseShellExecute = false,
+                        CreateNoWindow = true,
+                        WorkingDirectory = solutionDir // Arbeitsverzeichnis festlegen
+                    }
+                };
+
+                // Ereignishandler für die Ausgabe festlegen
+                var outputBuilder = new System.Text.StringBuilder();
+                var errorBuilder = new System.Text.StringBuilder();
+
+                process.OutputDataReceived += (sender, args) =>
+                {
+                    if (!string.IsNullOrEmpty(args.Data))
+                    {
+                        outputBuilder.AppendLine(args.Data);
+                    }
+                };
+
+                process.ErrorDataReceived += (sender, args) =>
+                {
+                    if (!string.IsNullOrEmpty(args.Data))
+                    {
+                        errorBuilder.AppendLine(args.Data);
+                    }
+                };
+
+                // Starten Sie den Prozess und beginnen Sie mit dem Lesen von stdout/stderr
+                process.Start();
+                process.BeginOutputReadLine();
+                process.BeginErrorReadLine();
+
+                // Warten Sie, bis der Prozess beendet ist
+                await process.WaitForExitAsync();
+
+                // Konsolenrückgabewert abrufen
+                int exitCode = process.ExitCode;
+
+                // Ergebnisse verarbeiten (optional)
+                string output = outputBuilder.ToString();
+                string error = errorBuilder.ToString();
+
+                // Hier können Sie die Ausgabe verarbeiten oder sie zurückgeben
+                Console.WriteLine("Dotnet test output:");
+                Console.WriteLine(output);
+
+                if (!string.IsNullOrEmpty(error))
+                {
+                    Console.WriteLine("Dotnet test errors:");
+                    Console.WriteLine(error);
+                }
+
+                return exitCode;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An error occurred: {ex.Message}");
+                return -1; // Rückgabewert für Fehler
             }
         }
 

@@ -20,7 +20,7 @@
         <ul class="nav flex-column">
 
           <li class="nav-item">
-            <a class="nav-link main-menu-link" >1. Vintage</a>
+            <a class="nav-link main-menu-link" >1. Class</a>
             <ul class="sub-menu">
               <li><a [routerLink]="['/introdcution']">Overview</a></li>
               <li><a [routerLink]="['/introdcution']">Csharp</a></li>
@@ -28,7 +28,7 @@
           </li>
 
           <li class="nav-item">
-            <a class="nav-link main-menu-link" >2. Vintage</a>
+            <a class="nav-link main-menu-link" >2. Class</a>
             <ul class="sub-menu">
               <li><a [routerLink]="['/introdcution']">Overview</a></li>
               <li><a [routerLink]="['/introdcution']">Csharp</a></li>
@@ -37,7 +37,7 @@
           </li>
 
           <li class="nav-item">
-            <a class="nav-link main-menu-link" >3. Vintage</a>
+            <a class="nav-link main-menu-link" >3. Class</a>
             <ul class="sub-menu">
               <li><a [routerLink]="['/introdcution']">Overview</a></li>
               <li><a [routerLink]="['/introdcution']">Java</a></li>
@@ -46,7 +46,7 @@
           </li>
 
           <li class="nav-item">
-            <a class="nav-link main-menu-link" >4. Vintage</a>
+            <a class="nav-link main-menu-link" >4. Class</a>
             <ul class="sub-menu">
               <li><a [routerLink]="['/introdcution']">Overview</a></li>
               <li><a [routerLink]="['/introdcution']">Csharp</a></li>
@@ -55,7 +55,7 @@
           </li>
 
           <li class="nav-item">
-            <a class="nav-link main-menu-link" >5. Vintage</a>
+            <a class="nav-link main-menu-link" >5. Class</a>
             <ul class="sub-menu">
               <li><a [routerLink]="['/introdcution']">Overview</a></li>
               <li><a [routerLink]="['/introdcution']">Java</a></li>
@@ -65,6 +65,7 @@
         </ul>
       </div>
     </div>
+
 
 
     <div class="col-md-10">
@@ -93,7 +94,7 @@
                   <div class="card-body">
                     <h2 class="card-title">Step 1: Add Introduction</h2>
                     <div class="form-group">
-                      <textarea class="form-control" rows="5" style="height: 300px; width: 1000px"  [(ngModel)]="instruction" placeholder="Geben Sie hier Ihre Anleitung ein"></textarea>
+                      <textarea class="form-control" rows="5" style="height: 300px; width: 1000px"  [(ngModel)]="instruction" placeholder="Write your Introduction here"></textarea>
                     </div>
                     <button class="btn btn-primary" (click)="nextStep()">Next</button>
                   </div>
@@ -126,112 +127,151 @@
 
 
           <!-- Schritt 3: Tags auswählen -->
-    <div *ngIf="currentStep === 3">
-      <div class="row justify-content-center">
-        <div class="col-md-12">
-          <div class="card mt-5">
-            <div class="card-body" style="height: 500px; width: 1000px">
-              <h2 class="card-title">Step 3: Chose Tags</h2>
-              <!-- Ausgewählte Tags anzeigen -->
-              <div class="selected-tags d-flex flex-wrap">
-                <p>Chosen tags:</p>
-                <div *ngFor="let selectedTag of selectedTags" class="selected-tag mr-2 mb-2">
-                  <span class="badge badge-primary">{{ selectedTag }}</span>
+        <div *ngIf="currentStep === 3">
+          <div class="row justify-content-center">
+            <div class="col-md-12">
+              <div class="card mt-5">
+                <div class="card-body" style="height: 500px; width: 1000px">
+                  <h2 class="card-title">Step 3: Chose Tags</h2>
+                  <!-- Ausgewählte Tags anzeigen -->
+                  <form>
+                    <mat-form-field class="example-chip-list">
+                      <mat-label>Chosen Tags</mat-label>
+                      <mat-chip-grid #chipGrid aria-label="Tag selection">
+                        <mat-chip-row *ngFor="let tag of selectedTags" (removed)="removeTag(tag)">
+                          {{tag}}
+                          <button matChipRemove [attr.aria-label]="'remove ' + tag">
+                            <mat-icon>cancel</mat-icon>
+                          </button>
+                        </mat-chip-row>
+                      </mat-chip-grid>
+                      <input placeholder="New Tag..." #tagInput [formControl]="tagCtrl"
+                        [matChipInputFor]="chipGrid" [matAutocomplete]="auto"
+                        [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                        (matChipInputTokenEnd)="addTag($event)"/>
+                      <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+                        <mat-option *ngFor="let tag of filteredTags | async" [value]="tag">
+                          {{tag}}
+                        </mat-option>
+                      </mat-autocomplete>
+                    </mat-form-field>
+                  </form>
+                  <button class="btn btn-primary" (click)="nextStep()">Next</button>
                 </div>
               </div>
-              <!-- Verfügbare Tags anzeigen -->
-              <div class="available-tags">
-                <div *ngFor="let tag of availableTags" class="form-check">
-                  <input class="form-check-input" type="checkbox" [value]="tag" (change)="toggleTagSelection(tag)">
-                  <label class="form-check-label">
-                    {{ tag }}
-                  </label>
-                </div>
-              </div>
-              <button class="btn btn-primary" (click)="nextStep()">Next</button>
             </div>
           </div>
         </div>
-      </div>
-    </div>
-    
-
-
 
 
     <!-- Schritt 4: ZIP-Datei hochladen -->
     <div *ngIf="currentStep === 4">
       <div class="row justify-content-center">
         <div class="col-md-12">
-        <div class="card mt-5">
-          <div class="card-body" style="height: 300px; width: 1000px">
-            <h2 class="card-title">Step 4: Upload Template as ZIP</h2>
-            <!--<input type="file" (change)="onFileSelected($event)" class="form-control-file mt-3">-->
-            <p>Upload the complete Template:</p>
-            <input type="file" (change)="uploadZipFile($event)" class="form-control-file mt-3"><br><br>
-            <p>Upload the empty Template:</p>
-            <input type="file" (change)="uploadEmptyZipFile($event)" class="form-control-file mt-3">
+          <div class="card mt-5">
+            <div class="card-body" style="height: 400px; width: 1000px">
+              <h2 class="card-title">Step 4: Upload Template as ZIP</h2>
+              <p>Upload the complete Zip-File:</p>
+              <div class="drag-drop-area" 
+                  (drop)="uploadZipFile($event); $event.preventDefault();" 
+                  (dragover)="$event.preventDefault();">
+                <p *ngIf="!zipFile">Drag & Drop your file here</p>
+                <button class="btn-ZipFile" *ngIf="zipFile" (click)="clearZipFile()" >
+                  <p>{{zipFile.name}} <mat-icon>cancel</mat-icon></p>
+                </button>             
+              </div>
+ 
+              <br><br>
+              <p>Upload the empty Zip-File:</p>
+              <div class="drag-drop-area" 
+                  (drop)="uploadEmptyZipFile($event); $event.preventDefault();" 
+                  (dragover)="$event.preventDefault();">
+                <p *ngIf="!emptyZipFile">Drag & Drop your file here</p>
+                <button class="btn-ZipFile" *ngIf="emptyZipFile" (click)="clearEmptyZipFile()">
+                  <p>{{emptyZipFile.name}} <mat-icon>cancel</mat-icon></p>
+                </button>
+              </div>
+            </div>
+            <button class="btn btn-primary" [disabled]="!ZipFileUploaded || !emptyZipFileUploaded" (click)="nextStep()">Next</button>
           </div>
-          <button class="btn btn-primary" (click)="nextStep()">Next</button>
-        </div>
         </div>
       </div>
     </div>
+
+
+
+  
 
     
      <!-- Schritt 5: Senden an Backend -->
-<div *ngIf="currentStep === 5" class="row justify-content-center align-items-center">
-  <div class="col-md-12">
-    <div class="card mt-5">
-      <div class="card-body"style="height: 300px; width: 1000px">
-        <h2 class="card-title">Overview</h2>
-        <p><strong>Anleitung:</strong> {{ instruction }}</p>
-        <p><strong>Sprache:</strong> {{ selectedLanguage }}</p>
-        <p><strong>Ausgewählte Tags:</strong> {{ selectedTags.join(', ') }}</p>
-        <p><strong>ZIP-Datei:</strong> {{ zipFile?.name }}</p>
-        <button class="btn btn-primary" (click)="sendCodeToRunner()">Upload Exercise</button>
+    <div *ngIf="currentStep === 5" class="row justify-content-center align-items-center">
+      <div class="col-md-12">
+        <div class="card mt-5">
+          <div class="card-body"style="height: 300px; width: 1000px">
+            <h2 class="card-title">Overview</h2>
+            <p><strong>introdcution</strong> {{ instruction }}</p>
+            <p><strong>Language:</strong> {{ selectedLanguage }}</p>
+            <p><strong>Chosen Tags:</strong> {{ selectedTags.join(', ') }}</p>
+            <p><strong>Complete Zip-File:</strong> {{ zipFile?.name }}</p>
+            <p><strong>Empty Zip-File</strong> {{ emptyZipFile?.name }}</p>
+          
+            <button class="btn btn-primary" (click)="sendCodeToRunner()">Upload Exercise</button>
+          </div>
+        </div>
       </div>
     </div>
+    <mat-progress-bar mode="indeterminate" *ngIf="isUploading"></mat-progress-bar>
+
+    <br>
+    <br>
+    <br>
+
+
+    <form>
+      <mat-form-field class="example-chip-list">
+        <mat-label>Chose tags to sort</mat-label>
+        <mat-chip-grid #chipGrid aria-label="Tag selection">
+          <mat-chip-row *ngFor="let tag of selectedSearchTags" (removed)="removeSearchTag(tag)">
+            {{tag}}
+            <button matChipRemove [attr.aria-label]="'remove ' + tag">
+              <mat-icon>cancel</mat-icon>
+            </button>
+          </mat-chip-row>
+        </mat-chip-grid>
+        <input placeholder="Search..." #tagInput [formControl]="tagCtrl"
+          [matChipInputFor]="chipGrid" [matAutocomplete]="auto"
+          [matChipInputSeparatorKeyCodes]="separatorKeysCodes"/>
+        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectedSearch($event)">
+          <mat-option *ngFor="let tag of filteredSearchTags | async" [value]="tag">
+            {{tag}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+    </form>
+
+
+    <!-- Tabelle mit gefilterten Übungen -->
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Introduction</th>
+          <th>Tags</th>
+          <th>Testrun</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let exercise of filteredExercises">
+          <td>{{exercise.instruction}}</td>
+          <td>{{exercise.tags.join(', ')}}</td>
+          <td><button class="btn btn-primary" (click)="runTest(exercise)">Run Test</button></td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </div>
-
-<br>
-<br>
-<br>
+</div>
+</div>
 
 
-<!-- Suchleiste für Tags -->
-<div class="form-group mt-4">
-  <input type="text" class="form-control" placeholder="Tags filtern..." [(ngModel)]="searchTag">
-</div>
 
-<!-- Tabelle mit gefilterten Übungen -->
-<table class="table">
-  <thead>
-    <tr>
-      <th>Introduction</th>
-      <th>Tags</th>
-      <th>Testrun</th>
-    </tr>
-  </thead>
-  <tbody>
-    <ng-container *ngIf="exercises.length > 0">
-      <ng-container *ngFor="let exercise of filteredExercises">
-        <tr>
-          <td>{{ exercise.instruction }}</td>
-          <td>{{ exercise.tags }}</td>
-          <td>
-            <button class="btn btn-primary" (click)="runTest(exercise)">Run Test</button>
-          </td>
-        </tr>
-      </ng-container>
-    </ng-container>
-    <tr *ngIf="exercises.length === 0">
-      <td colspan="3">No exercises found</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-</div>
-</div>
-</div>
+
