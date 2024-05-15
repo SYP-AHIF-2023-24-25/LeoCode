@@ -10,7 +10,7 @@ Console.WriteLine("Migrate Database");
         await uow.DeleteDatabaseAsync();
         await uow.MigrateDatabaseAsync();
 
-        var data = await ImportController.ImportDemoDataAsync();
+        var data = ImportController.ImportDemoData();
 
         Console.WriteLine($"- {data.Exercises.Count} / 2 Exercises wurden erzeugt");
         Console.WriteLine($"- {data.Users.Count} / 2 Users wurden erzeugt");

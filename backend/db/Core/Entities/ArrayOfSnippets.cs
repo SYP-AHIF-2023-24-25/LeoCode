@@ -10,7 +10,7 @@ namespace Core.Entities
 {
     public class ArrayOfSnippets : EntityObject
     {
-        public List<Snippet> Snippets { get; set; } = [];
+        public List<Snippet> Snippets { get; set; } = new List<Snippet>();
 
         [ForeignKey(nameof(UserId))]
         public User? User { get; set; }

@@ -16,6 +16,8 @@ public class UnitOfWork : BaseUnitOfWork, IUnitOfWork
     {
         Users = new UserRepository(dBContext);
         Exercises = new ExerciseRepository(dBContext);
+        Snippets = new SnippetRepository(dBContext);
+        ArrayOfSnippets = new ArrayOfSnippetsRepository(dBContext);
     }
 
     public IUserRepository Users  { get; }

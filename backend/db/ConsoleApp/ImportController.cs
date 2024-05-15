@@ -9,7 +9,7 @@ namespace Import
 {
     public class ImportController
     {
-        public static async Task<ImportData> ImportDemoDataAsync()
+        public static ImportData ImportDemoData()
         {
             User user1 = new User
             {
@@ -120,10 +120,10 @@ namespace Import
 
             return new ImportData
             {
-                Users = users,
                 Exercises = exercises,
-                ArrayOfSnippets = arrayOfSnippets,
-                Snippets = snippets
+                Users = users,
+                Snippets = snippets,
+                ArrayOfSnippets = arrayOfSnippets
             };
         }
     }

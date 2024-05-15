@@ -9,9 +9,10 @@ namespace Import
 {
     public class ImportData
     {
-        public List<Exercise> Exercises { get; set; }
-        public List<User> Users { get; set; }
-        public List<Snippet> Snippets { get; set; }
-        public List<ArrayOfSnippets> ArrayOfSnippets { get; set; }
+
+        public List<Exercise> Exercises { get; set; } = [];
+        public List<User> Users { get; set; } = [];
+        public List<Snippet> Snippets { get; set; } = [];
+        public List<ArrayOfSnippets> ArrayOfSnippets { get; set; } = [];
     }
 }
