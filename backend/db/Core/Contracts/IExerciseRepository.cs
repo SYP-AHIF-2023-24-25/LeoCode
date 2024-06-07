@@ -1,4 +1,5 @@
 ﻿using Base.Core.Contracts;
+using Core.Dto;
 using Core.Entities;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,6 @@ namespace Core.Contracts
 {
     public interface IExerciseRepository : IGenericRepository<Exercise>
     {
-
+        public Task<List<ExerciseDto>> GetExersiceByUsernameAsync(User user, string? exerciseName);
     }
 }

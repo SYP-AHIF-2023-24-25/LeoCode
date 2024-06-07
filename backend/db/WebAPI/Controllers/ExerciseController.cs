@@ -1,6 +1,7 @@
 ﻿namespace WebAPI.Controllers;
 
 using Core.Contracts;
+using Core.Dto;
 using Core.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Persistence;
@@ -16,8 +17,9 @@ public class ExerciseController : Controller
         _unitOfWork = unitOfWork;
     }
 
-    public record SnippetDto(string Code, bool ReadOnlySection, string FileName);
+    /*public record SnippetDto(string Code, bool ReadOnlySection, string FileName);
     public record ArrayOfSnippetsDto(SnippetDto[] snippets);
+    public record ExerciseDto(string Name, string Description, Language Language, Year Year, Subject Subject, ArrayOfSnippetsDto[] arrayOfSnippets);*/
 
     [HttpPost]
     public async Task<IActionResult> AddExerciseAsync([FromBody] ArrayOfSnippetsDto arrayOfSnippets,string name,string description,Language language, Year year,Subject subject,string username)
@@ -66,4 +68,18 @@ public class ExerciseController : Controller
         return Ok();
     }
 
+    [HttpGet]
+    public async Task<IActionResult> GetExersiceByUsername(string username, string? exercisenName)
+    {
+        try
+        {
+            User user = _unitOfWork.Users.GetByUsername(username);
+            List<ExerciseDto> exercises = await _unitOfWork.Exercises.GetExersiceByUsernameAsync(user, exercisenName);
+            return Ok(exercises);
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
+    }
 }
