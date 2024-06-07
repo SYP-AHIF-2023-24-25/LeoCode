@@ -5,7 +5,7 @@
 namespace Persistence.Migrations
 {
     /// <inheritdoc />
-    public partial class MigrationV1 : Migration
+    public partial class MigrationV8 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -26,26 +26,6 @@ namespace Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ArrayOfSnippets",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<int>(type: "int", nullable: false),
-                    RowVersion = table.Column<byte[]>(type: "rowversion", rowVersion: true, nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ArrayOfSnippets", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_ArrayOfSnippets_Users_UserId",
-                        column: x => x.UserId,
-                        principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Exercises",
                 columns: table => new
                 {
@@ -53,11 +33,10 @@ namespace Persistence.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Project = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
                     Language = table.Column<int>(type: "int", nullable: false),
                     Year = table.Column<int>(type: "int", nullable: false),
                     Subject = table.Column<int>(type: "int", nullable: false),
-                    UserId = table.Column<int>(type: "int", nullable: true),
+                    UserId = table.Column<int>(type: "int", nullable: false),
                     RowVersion = table.Column<byte[]>(type: "rowversion", rowVersion: true, nullable: true)
                 },
                 constraints: table =>
@@ -67,11 +46,32 @@ namespace Persistence.Migrations
                         name: "FK_Exercises_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Snippets",
+                name: "ArrayOfSnippets",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ExerciseId = table.Column<int>(type: "int", nullable: false),
+                    RowVersion = table.Column<byte[]>(type: "rowversion", rowVersion: true, nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ArrayOfSnippets", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ArrayOfSnippets_Exercises_ExerciseId",
+                        column: x => x.ExerciseId,
+                        principalTable: "Exercises",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Snippet",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -79,37 +79,25 @@ namespace Persistence.Migrations
                     Code = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ReadonlySection = table.Column<bool>(type: "bit", nullable: false),
                     FileName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UserId = table.Column<int>(type: "int", nullable: false),
-                    ExerciseId = table.Column<int>(type: "int", nullable: false),
-                    ArrayOfSnippetsId = table.Column<int>(type: "int", nullable: true),
+                    ArrayOfSnippetsId = table.Column<int>(type: "int", nullable: false),
                     RowVersion = table.Column<byte[]>(type: "rowversion", rowVersion: true, nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Snippets", x => x.Id);
+                    table.PrimaryKey("PK_Snippet", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Snippets_ArrayOfSnippets_ArrayOfSnippetsId",
+                        name: "FK_Snippet_ArrayOfSnippets_ArrayOfSnippetsId",
                         column: x => x.ArrayOfSnippetsId,
                         principalTable: "ArrayOfSnippets",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_Snippets_Exercises_ExerciseId",
-                        column: x => x.ExerciseId,
-                        principalTable: "Exercises",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Snippets_Users_UserId",
-                        column: x => x.UserId,
-                        principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_ArrayOfSnippets_UserId",
+                name: "IX_ArrayOfSnippets_ExerciseId",
                 table: "ArrayOfSnippets",
-                column: "UserId");
+                column: "ExerciseId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Exercises_UserId",
@@ -117,26 +105,16 @@ namespace Persistence.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Snippets_ArrayOfSnippetsId",
-                table: "Snippets",
+                name: "IX_Snippet_ArrayOfSnippetsId",
+                table: "Snippet",
                 column: "ArrayOfSnippetsId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Snippets_ExerciseId",
-                table: "Snippets",
-                column: "ExerciseId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Snippets_UserId",
-                table: "Snippets",
-                column: "UserId");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Snippets");
+                name: "Snippet");
 
             migrationBuilder.DropTable(
                 name: "ArrayOfSnippets");

@@ -10,8 +10,6 @@ public class ApplicationDbContext : DbContext
 {
     public DbSet<User> Users { get; set; }
     public DbSet<Exercise> Exercises { get; set; }
-    public DbSet<Snippet> Snippets { get; set; }
-    public DbSet<ArrayOfSnippets> ArrayOfSnippets { get; set; }
 
     
 

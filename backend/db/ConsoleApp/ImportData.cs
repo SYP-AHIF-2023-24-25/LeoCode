@@ -12,7 +12,7 @@ namespace Import
 
         public List<Exercise> Exercises { get; set; } = [];
         public List<User> Users { get; set; } = [];
-        public List<Snippet> Snippets { get; set; } = [];
         public List<ArrayOfSnippets> ArrayOfSnippets { get; set; } = [];
+        public List<Snippet> Snippets { get; set; } = [];
     }
 }

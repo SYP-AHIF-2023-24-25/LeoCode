@@ -68,7 +68,6 @@ C:\Schule\4AHIF\LeoCode\backend\db\ConsoleApp\obj\Debug\net8.0\Import.AssemblyIn
 C:\Schule\4AHIF\LeoCode\backend\db\ConsoleApp\obj\Debug\net8.0\Import.AssemblyInfo.cs
 C:\Schule\4AHIF\LeoCode\backend\db\ConsoleApp\obj\Debug\net8.0\Import.csproj.CoreCompileInputs.cache
 C:\Schule\4AHIF\LeoCode\backend\db\ConsoleApp\obj\Debug\net8.0\Import.sourcelink.json
-C:\Schule\4AHIF\LeoCode\backend\db\ConsoleApp\obj\Debug\net8.0\Import.csproj.Up2Date
 C:\Schule\4AHIF\LeoCode\backend\db\ConsoleApp\obj\Debug\net8.0\Import.dll
 C:\Schule\4AHIF\LeoCode\backend\db\ConsoleApp\obj\Debug\net8.0\refint\Import.dll
 C:\Schule\4AHIF\LeoCode\backend\db\ConsoleApp\obj\Debug\net8.0\Import.pdb
@@ -143,3 +142,4 @@ C:\Schule\4AHIF\LeoCode\backend\db\ConsoleApp\bin\Debug\net8.0\ru\Microsoft.Code
 C:\Schule\4AHIF\LeoCode\backend\db\ConsoleApp\bin\Debug\net8.0\tr\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\Schule\4AHIF\LeoCode\backend\db\ConsoleApp\bin\Debug\net8.0\zh-Hans\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\Schule\4AHIF\LeoCode\backend\db\ConsoleApp\bin\Debug\net8.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Schule\4AHIF\LeoCode\backend\db\ConsoleApp\obj\Debug\net8.0\Import.csproj.CopyComplete

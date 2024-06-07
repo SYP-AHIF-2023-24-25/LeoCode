@@ -146,9 +146,9 @@ C:\Schule\4AHIF\LeoCode\backend\db\WebAPI\obj\Debug\net8.0\staticwebassets\msbui
 C:\Schule\4AHIF\LeoCode\backend\db\WebAPI\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.WebAPI.props
 C:\Schule\4AHIF\LeoCode\backend\db\WebAPI\obj\Debug\net8.0\staticwebassets.pack.json
 C:\Schule\4AHIF\LeoCode\backend\db\WebAPI\obj\Debug\net8.0\scopedcss\bundle\WebAPI.styles.css
-C:\Schule\4AHIF\LeoCode\backend\db\WebAPI\obj\Debug\net8.0\WebAPI.csproj.Up2Date
 C:\Schule\4AHIF\LeoCode\backend\db\WebAPI\obj\Debug\net8.0\WebAPI.dll
 C:\Schule\4AHIF\LeoCode\backend\db\WebAPI\obj\Debug\net8.0\refint\WebAPI.dll
 C:\Schule\4AHIF\LeoCode\backend\db\WebAPI\obj\Debug\net8.0\WebAPI.pdb
 C:\Schule\4AHIF\LeoCode\backend\db\WebAPI\obj\Debug\net8.0\WebAPI.genruntimeconfig.cache
 C:\Schule\4AHIF\LeoCode\backend\db\WebAPI\obj\Debug\net8.0\ref\WebAPI.dll
+C:\Schule\4AHIF\LeoCode\backend\db\WebAPI\obj\Debug\net8.0\WebAPI.csproj.CopyComplete

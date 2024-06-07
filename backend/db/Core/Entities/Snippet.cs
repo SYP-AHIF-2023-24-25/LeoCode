@@ -16,15 +16,8 @@ namespace Core.Entities
         public bool ReadonlySection { get; set; }
         public string FileName { get; set; }
 
-
-        [ForeignKey(nameof(UserId))]
-        public User? User { get; set; }
-        public int UserId { get; set; }
-
-
-        [ForeignKey(nameof(ExerciseId))]
-        public Exercise? Exercise { get; set; }
-        public int ExerciseId { get; set; }
-        
+        [ForeignKey(nameof(ArrayOfSnippetsId))]
+        public ArrayOfSnippets? ArrayOfSnippets { get; set; }
+        public int ArrayOfSnippetsId { get; set; }
     }
 }

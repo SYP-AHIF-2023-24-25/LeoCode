@@ -1,4 +1,5 @@
-﻿using Base.Persistence;
+﻿using Base.Core.Contracts;
+using Base.Persistence;
 using Core.Contracts;
 using Core.Entities;
 using System;

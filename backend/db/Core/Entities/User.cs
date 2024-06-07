@@ -12,7 +12,6 @@ namespace Core.Entities
     {
         public string Username { get; set; }
         public string Password { get; set; }
-        public ICollection<Exercise> Exercises { get; set; } = [];
-        public ICollection<ArrayOfSnippets> ArrayOfSnippets { get; set; } = [];
+        public ICollection<Exercise> Exercise { get; set; } = [];
     }
 }

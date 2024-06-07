@@ -10,6 +10,6 @@ namespace Core.Contracts
 {
     public interface IUserRepository : IGenericRepository<User>
     {
-
+        User GetByUsername(string username);
     }
 }

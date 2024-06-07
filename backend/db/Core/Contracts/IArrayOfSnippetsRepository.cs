@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Core.Contracts
 {
-    public interface IArrayOfSnippets : IGenericRepository<ArrayOfSnippets>
+    public interface IArrayOfSnippetsRepository : IGenericRepository<ArrayOfSnippets>
     {
 
     }
