@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>Import</id>
+    <version>1.0.0</version>
+    <authors>Import</authors>
+    <description>Package Description</description>
+    <repository type="git" commit="6066f1f4fedc9c2788a20fecc21430454fa7d8cf" />
+    <dependencies>
+      <group targetFramework="net8.0">
+        <dependency id="Persistence" version="1.0.0" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.EntityFrameworkCore" version="8.0.6" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.EntityFrameworkCore.Relational" version="8.0.6" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+    <contentFiles>
+      <files include="any/net8.0/appsettings.json" buildAction="Content" />
+    </contentFiles>
+  </metadata>
+  <files>
+    <file src="C:\Users\Kelit\Schule2023-24\syp\LeoCode\backend\db\ConsoleApp\bin\Debug\net8.0\Import.runtimeconfig.json" target="lib\net8.0\Import.runtimeconfig.json" />
+    <file src="C:\Users\Kelit\Schule2023-24\syp\LeoCode\backend\db\ConsoleApp\bin\Debug\net8.0\Import.dll" target="lib\net8.0\Import.dll" />
+    <file src="C:\Users\Kelit\Schule2023-24\syp\LeoCode\backend\db\ConsoleApp\appsettings.json" target="content\appsettings.json" />
+    <file src="C:\Users\Kelit\Schule2023-24\syp\LeoCode\backend\db\ConsoleApp\appsettings.json" target="contentFiles\any\net8.0\appsettings.json" />
+  </files>
+</package>

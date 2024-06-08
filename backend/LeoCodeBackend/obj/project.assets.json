@@ -1232,19 +1232,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Florian\\.nuget\\packages\\": {}
+    "C:\\Users\\Kelit\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Schule\\4AHIF\\LeoCode\\backend\\LeoCodeBackend\\LeoCodeBackend.csproj",
+      "projectUniqueName": "C:\\Users\\Kelit\\Schule2023-24\\syp\\LeoCode\\backend\\LeoCodeBackend\\LeoCodeBackend.csproj",
       "projectName": "LeoCodeBackend",
-      "projectPath": "C:\\Schule\\4AHIF\\LeoCode\\backend\\LeoCodeBackend\\LeoCodeBackend.csproj",
-      "packagesPath": "C:\\Users\\Florian\\.nuget\\packages\\",
-      "outputPath": "C:\\Schule\\4AHIF\\LeoCode\\backend\\LeoCodeBackend\\obj\\",
+      "projectPath": "C:\\Users\\Kelit\\Schule2023-24\\syp\\LeoCode\\backend\\LeoCodeBackend\\LeoCodeBackend.csproj",
+      "packagesPath": "C:\\Users\\Kelit\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Kelit\\Schule2023-24\\syp\\LeoCode\\backend\\LeoCodeBackend\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Florian\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Kelit\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -1264,6 +1264,11 @@
         "warnAsError": [
           "NU1605"
         ]
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
       }
     },
     "frameworks": {
@@ -1314,7 +1319,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.202/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
