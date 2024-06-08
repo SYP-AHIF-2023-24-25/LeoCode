@@ -318,12 +318,10 @@ export class CreateExerciseComponent {
         horizontalPosition: 'center',
         verticalPosition: 'top',
       });
-     
-      this.exercises.push(exercise);
 
-      /*this.dbRest.AddExercise([], exercise.name, exercise.instruction, exercise.language, exercise.tags, 'Default').subscribe((data: Exercise) => {
+      this.dbRest.AddExercise([], exercise.name, exercise.instruction, exercise.language, exercise.tags, 'Default').subscribe((data: Exercise) => {
         console.log(data);
-      });*/
+      });
 
       this.router.navigate(['/start-screen']);
       

@@ -25,7 +25,6 @@ export class DbService {
       params = params.set('exerciseName', exerciseName);
     }
     return this.http.get<ExerciseDto[]>(`${this.apiUrl}/Exercise`, { params });
-    //https://localhost:7269/api/Exercise?username=Default' \
   }
 
   AddExercise(codeSections: CodeSection[], exerciseName: string, introduction : string, language: string, tags: string[], username: string) {
@@ -37,6 +36,8 @@ export class DbService {
       tags: tags,
       username: username
     }
+
+    
     return this.http.post<Exercise>(`${this.apiUrl}/exercise`, exercise, httpOptions);
   }
 

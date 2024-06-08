@@ -78,14 +78,14 @@ public class ExerciseController : Controller
         return Ok();
     }
 
-    [HttpGet]
-    public async Task<IActionResult> GetExersiceByUsername(string username, string? exerciseName)
+   [HttpGet]
+    public async Task<ExerciseDto[]> GetExersiceByUsername(string username, string? exerciseName)
     {
         try
         {
             User user = _unitOfWork.Users.GetByUsername(username);
             List<Exercise> exercises = await _unitOfWork.Exercises.GetExersiceByUsernameAsync(user, exerciseName);
-            return Ok(exercises.Select(exercise => new ExerciseDto(
+            return exercises.Select(exercise => new ExerciseDto(
             exercise.Name,
             exercise.Description,
             ((Language)exercise.Language).ToString(),
@@ -96,11 +96,11 @@ public class ExerciseController : Controller
                     snippet.ReadonlySection,
                     snippet.FileName)).ToArray()
             )
-            )));
+            )).ToArray();
         }
         catch (Exception ex)
         {
-            return BadRequest(ex.Message);
+            return [];
         }
     }
 

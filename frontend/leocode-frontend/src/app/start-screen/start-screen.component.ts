@@ -52,17 +52,7 @@ export class StartScreenComponent {
 
   ngOnInit(): void {
     this.rest.getExerciseByUsername(this.defaultUser.username).subscribe((data: ExerciseDto[]) => {
-      if (typeof data === 'object' && data !== null) {
-        this.exercises = Object.values(data) as ExerciseDto[];
-      } else {
-        console.error('Unexpected data format:', data);
-      }
-      console.log(this.exercises);
-
-      for (let i = 0; i < this.exercises.length; i++) {
-        console.log(this.exercises[i].name);
-      } //funktioniert nicht 
-      
+      this.exercises = data;
     });
   }
 
