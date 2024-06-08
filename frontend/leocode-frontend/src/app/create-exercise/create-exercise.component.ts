@@ -16,6 +16,7 @@ import { startWith } from 'rxjs/operators';
 import { map } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { DbService } from '../service/db-service.service';
 
 @Component({
   selector: 'app-create-exercise',
@@ -24,7 +25,7 @@ import { Router } from '@angular/router';
 })
 export class CreateExerciseComponent {
 
-  constructor(private fileUploadService: FileUploadService, private rest: RestService, private http: HttpClient, private snackBar: MatSnackBar, private router: Router) {
+  constructor(private fileUploadService: FileUploadService, private rest: RestService, private dbRest: DbService, private http: HttpClient, private snackBar: MatSnackBar, private router: Router) {
     this.filteredTags = this.tagCtrl.valueChanges.pipe(
       startWith(null),
       map((tag: string | null) => tag ? this._filter(tag) : this.availableTags.slice()));  
@@ -320,6 +321,11 @@ export class CreateExerciseComponent {
       });
      
       this.exercises.push(exercise);
+
+      /*this.dbRest.AddExercise([], exercise.name, exercise.instruction, exercise.language, exercise.tags, 'Default').subscribe((data: Exercise) => {
+        console.log(data);
+      });*/
+
       this.router.navigate(['/start-screen']);
       
     }else{

@@ -15,6 +15,8 @@ import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { startWith } from 'rxjs/operators';
 import { map } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { DbService } from '../service/db-service.service';
+import { User } from '../model/user';
 
 @Component({
   selector: 'app-start-screen',
@@ -24,7 +26,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class StartScreenComponent {
 
 
-  constructor(private fileUploadService: FileUploadService, private rest: RestService, private http: HttpClient, private snackBar: MatSnackBar) {
+  constructor(private fileUploadService: FileUploadService, private rest: DbService, private http: HttpClient, private snackBar: MatSnackBar) {
     this.filteredTags = this.tagCtrl.valueChanges.pipe(
       startWith(null),
       map((tag: string | null) => tag ? this._filter(tag) : this.availableTags.slice()));  
@@ -35,7 +37,11 @@ export class StartScreenComponent {
       map((tag: string | null) => tag ? this._filter(tag) : this.availableTags.slice())); 
    }
 
-
+   defaulUser :User = {
+    username: "Default",
+    password: "Default",
+    exercises: []
+  }
 
 
   //für Suche in der Liste
@@ -49,24 +55,13 @@ export class StartScreenComponent {
   filteredTags: Observable<string[]> | undefined;
   separatorKeysCodes: number[] = [13, 188]; // Enter und Komma
 
-  exercises : Exercise[]= [
-    {
-      name: 'Exercise 1',
-      instruction: 'Schreibe eine Funktion, die die Summe von zwei Zahlen berechnet.',
-      language: 'Typescript',
-      tags: ['POSE', 'TYPESCRIPT'],
-      zipFile: null,
-      emptyZipFile: null
-    },
-    {
-      name: 'Exercise 2',
-      instruction: 'Schreibe eine Funktion, die die Summe von zwei Zahlen berechnet.',
-      language: 'Csharp',
-      tags: ['WMC', 'CSHARP'],
-      zipFile: null,
-      emptyZipFile: null
-    },
-  ]
+  exercises : Exercise[]= [];
+
+  ngOnInit(): void {
+    this.rest.getExerciseByUsername(this.defaulUser.username).subscribe((data: Exercise[]) => {
+      this.exercises = data;
+    });
+  }
 
   
 
