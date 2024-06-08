@@ -19,9 +19,11 @@ namespace Persistence
             _dbContext = dbContext;
         }
 
-        public async Task<List<ExerciseDto>> GetExersiceByUsernameAsync(User user, string? exerciseName)
+        public async Task<List<Exercise>> GetExersiceByUsernameAsync(User user, string? exerciseName)
         {
-            IQueryable<Exercise> exerciseQuery = _dbContext.Exercises;
+            IQueryable<Exercise> exerciseQuery = _dbContext.Exercises
+                .Include(exercise => exercise.ArrayOfSnippets)
+                .ThenInclude(arrayOfSnippets => arrayOfSnippets.Snippets);
 
             if (exerciseName != null)
             {
@@ -32,20 +34,7 @@ namespace Persistence
                 exerciseQuery = exerciseQuery.Where(exercise => exercise.UserId == user.Id);
             }
 
-            return await exerciseQuery.Select(exercise => new ExerciseDto(
-            exercise.Name,
-            exercise.Description,
-            ((Language)exercise.Language).ToString(),
-            exercise.Year,
-            ((Subject)exercise.Subject).ToString(),
-            new ArrayOfSnippetsDto(
-                exercise.ArrayOfSnippets.Snippets.Select(snippet => new SnippetDto(
-                    snippet.Code,
-                    snippet.ReadonlySection,
-                    snippet.FileName)).ToArray()
-            )
-            )).ToListAsync();
-
+            return await exerciseQuery.ToListAsync();
         }
     }
 }
