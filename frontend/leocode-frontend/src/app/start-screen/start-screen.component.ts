@@ -1,22 +1,14 @@
 import { Component } from '@angular/core';
-import { ElementCompact, xml2js } from 'xml-js';
 import {Tags} from '../model/tags.enum';
 import { Exercise } from '../model/exercise';
-import * as JSZip from 'jszip';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Inject } from '@angular/core';
-import { RestService } from '../service/rest.service';
-import { FileUploadService } from '../service/file-upload-service.service';
-import {MatChipsModule} from '@angular/material/chips';
 import { FormControl } from '@angular/forms';
-import { MatChipInputEvent } from '@angular/material/chips';
 import { Observable } from 'rxjs';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { startWith } from 'rxjs/operators';
 import { map } from 'rxjs/operators';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { DbService } from '../service/db-service.service';
 import { User } from '../model/user';
+import { ExerciseDto } from '../model/exerciseDto';
 
 @Component({
   selector: 'app-start-screen',
@@ -26,7 +18,7 @@ import { User } from '../model/user';
 export class StartScreenComponent {
 
 
-  constructor(private fileUploadService: FileUploadService, private rest: DbService, private http: HttpClient, private snackBar: MatSnackBar) {
+  constructor( private rest: DbService) {
     this.filteredTags = this.tagCtrl.valueChanges.pipe(
       startWith(null),
       map((tag: string | null) => tag ? this._filter(tag) : this.availableTags.slice()));  
@@ -37,7 +29,7 @@ export class StartScreenComponent {
       map((tag: string | null) => tag ? this._filter(tag) : this.availableTags.slice())); 
    }
 
-   defaulUser :User = {
+   defaultUser :User = {
     username: "Default",
     password: "Default",
     exercises: []
@@ -55,11 +47,22 @@ export class StartScreenComponent {
   filteredTags: Observable<string[]> | undefined;
   separatorKeysCodes: number[] = [13, 188]; // Enter und Komma
 
-  exercises : Exercise[]= [];
+  exercises : ExerciseDto[]= [];
+  
 
   ngOnInit(): void {
-    this.rest.getExerciseByUsername(this.defaulUser.username).subscribe((data: Exercise[]) => {
-      this.exercises = data;
+    this.rest.getExerciseByUsername(this.defaultUser.username).subscribe((data: ExerciseDto[]) => {
+      if (typeof data === 'object' && data !== null) {
+        this.exercises = Object.values(data) as ExerciseDto[];
+      } else {
+        console.error('Unexpected data format:', data);
+      }
+      console.log(this.exercises);
+
+      for (let i = 0; i < this.exercises.length; i++) {
+        console.log(this.exercises[i].name);
+      } //funktioniert nicht 
+      
     });
   }
 

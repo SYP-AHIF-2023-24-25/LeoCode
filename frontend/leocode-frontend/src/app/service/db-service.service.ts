@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Exercise } from '../model/exercise';
 import { HttpHeaders,HttpParams } from '@angular/common/http';
 import { CodeSection } from '../model/code-sections';
+import { ExerciseDto } from '../model/exerciseDto';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -23,7 +24,7 @@ export class DbService {
     if (exerciseName) {
       params = params.set('exerciseName', exerciseName);
     }
-    return this.http.get<Exercise[]>(`${this.apiUrl}/Exercise`, { params });
+    return this.http.get<ExerciseDto[]>(`${this.apiUrl}/Exercise`, { params });
     //https://localhost:7269/api/Exercise?username=Default' \
   }
 

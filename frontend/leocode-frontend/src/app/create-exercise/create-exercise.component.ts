@@ -79,7 +79,6 @@ export class CreateExerciseComponent {
     },
   ]
 
-  // Hier die verfügbaren Tags aus dem Enum abrufen
 
   ngOnInit(): void {
     document.addEventListener("DOMContentLoaded", () => {

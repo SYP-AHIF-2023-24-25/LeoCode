@@ -13,6 +13,17 @@ builder.Services.AddControllers()
         options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
         options.JsonSerializerOptions.WriteIndented = true; // Optional: macht die JSON-Ausgabe lesbarer
     });
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAngularFrontend", builder =>
+    {
+        builder.WithOrigins("http://localhost:4200/test-results", "http://localhost:4200")
+            .AllowAnyHeader()
+            .AllowAnyMethod()
+            .AllowAnyOrigin();
+    });
+});
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -26,7 +37,7 @@ var app = builder.Build();
     app.UseSwagger();
     app.UseSwaggerUI();
 }*/
-
+app.UseCors("AllowAngularFrontend");
 app.UseSwagger();
 app.UseSwaggerUI();
 
