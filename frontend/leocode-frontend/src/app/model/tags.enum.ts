@@ -8,10 +8,10 @@ export enum Tags {
     EASY = 'EASY',
     MEDIUM = 'MEDIUM',
     HARD = 'HARD',
-    JAHRGANG1 = 'JAHRGANG1',
-    JAHRGANG2 = 'JAHRGANG2',
-    JAHRGANG3 = 'JAHRGANG3',
-    JAHRGANG4 = 'JAHRGANG4',
-    JAHRGANG5 = 'JAHRGANG5',
+    JAHRGANG1 = 'Class1',
+    JAHRGANG2 = 'Class2',
+    JAHRGANG3 = 'Class3',
+    JAHRGANG4 = 'Class4',
+    JAHRGANG5 = 'Class5',
 }
 

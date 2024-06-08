@@ -15,7 +15,7 @@ import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { startWith } from 'rxjs/operators';
 import { map } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material/snack-bar';
-
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-exercise',
@@ -24,7 +24,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class CreateExerciseComponent {
 
-  constructor(private fileUploadService: FileUploadService, private rest: RestService, private http: HttpClient, private snackBar: MatSnackBar) {
+  constructor(private fileUploadService: FileUploadService, private rest: RestService, private http: HttpClient, private snackBar: MatSnackBar, private router: Router) {
     this.filteredTags = this.tagCtrl.valueChanges.pipe(
       startWith(null),
       map((tag: string | null) => tag ? this._filter(tag) : this.availableTags.slice()));  
@@ -318,8 +318,9 @@ export class CreateExerciseComponent {
         horizontalPosition: 'center',
         verticalPosition: 'top',
       });
-      this.resetForm();
+     
       this.exercises.push(exercise);
+      this.router.navigate(['/start-screen']);
       
     }else{
       console.error('No file selected');

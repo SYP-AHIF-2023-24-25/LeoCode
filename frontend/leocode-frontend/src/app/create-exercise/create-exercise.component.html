@@ -95,7 +95,7 @@
                   <div class="card-body">
                     <h2 class="card-title">Step 1: Add Introduction and Name</h2>
                     <div class="form-group">
-                      <textarea class="form-control" rows="5" style="height: 50px; width: 250px"  [(ngModel)]="instruction" placeholder="Write your Name here"></textarea>
+                      <textarea class="form-control" rows="5" style="height: 50px; width: 250px"  [(ngModel)]="exerciseName" placeholder="Write your Name here"></textarea>
                     </div>
                     <br>
                     <div class="form-group">
@@ -212,9 +212,10 @@
     <div *ngIf="currentStep === 5" class="row justify-content-center align-items-center">
       <div class="col-md-12">
         <div class="card mt-5">
-          <div class="card-body"style="height: 300px; width: 1000px">
+          <div class="card-body"style="height: 350px; width: 1000px">
             <h2 class="card-title">Overview</h2>
-            <p><strong>introdcution</strong> {{ instruction }}</p>
+            <p><strong>Exercise Name</strong> {{exerciseName}}</p>
+            <p><strong>Introdcution</strong> {{ instruction }}</p>
             <p><strong>Language:</strong> {{ selectedLanguage }}</p>
             <p><strong>Chosen Tags:</strong> {{ selectedTags.join(', ') }}</p>
             <p><strong>Complete Zip-File:</strong> {{ zipFile?.name }}</p>
