@@ -7,7 +7,6 @@
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav">
       <li class="nav-item">
-        
       </li>
     </ul>
   </div>
@@ -70,9 +69,11 @@
 
     <div class="col-md-10">
       <div class="container mt-4">
+        <h1>Create Exercise</h1>
         <!-- Schritte als Rechtecke -->
         <div class="row justify-content-center">
           <div class="col-md-8">
+           
             <div class="step-indicator">
               <div *ngFor="let step of [1, 2, 3, 4, 5]" 
                    class="step-indicator-item" 
@@ -92,7 +93,11 @@
               <div class="col-md-12">
                 <div class="card mt-5">
                   <div class="card-body">
-                    <h2 class="card-title">Step 1: Add Introduction</h2>
+                    <h2 class="card-title">Step 1: Add Introduction and Name</h2>
+                    <div class="form-group">
+                      <textarea class="form-control" rows="5" style="height: 50px; width: 250px"  [(ngModel)]="instruction" placeholder="Write your Name here"></textarea>
+                    </div>
+                    <br>
                     <div class="form-group">
                       <textarea class="form-control" rows="5" style="height: 300px; width: 1000px"  [(ngModel)]="instruction" placeholder="Write your Introduction here"></textarea>
                     </div>
@@ -261,7 +266,7 @@
       </thead>
       <tbody>
         <tr *ngFor="let exercise of filteredExercises">
-          <td>{{exercise.instruction}}</td>
+          <td>{{exercise.name}}</td>
           <td>{{exercise.tags.join(', ')}}</td>
           <td><button class="btn btn-primary" (click)="runTest(exercise)">Run Test</button></td>
         </tr>

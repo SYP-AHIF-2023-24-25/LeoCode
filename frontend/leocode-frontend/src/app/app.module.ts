@@ -17,6 +17,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSelectModule } from '@angular/material/select';
+import { StartScreenComponent } from './start-screen/start-screen.component';
 
 
 
@@ -27,7 +28,8 @@ import { MatSelectModule } from '@angular/material/select';
     TestResultComponent,
     ResultHistoryComponent,
     IntroductionComponent,
-    CreateExerciseComponent
+    CreateExerciseComponent,
+    StartScreenComponent
   ],
   imports: [
     BrowserModule,

@@ -37,7 +37,7 @@ export class CreateExerciseComponent {
     
    }
   
-
+  exerciseName: string = '';
   currentStep: number = 1;
   instruction: string = '';
   selectedLanguage: string = '';
@@ -61,6 +61,7 @@ export class CreateExerciseComponent {
 
   exercises : Exercise[]= [
     {
+      name: 'Exercise 1',
       instruction: 'Schreibe eine Funktion, die die Summe von zwei Zahlen berechnet.',
       language: 'Typescript',
       tags: ['POSE', 'TYPESCRIPT'],
@@ -68,6 +69,7 @@ export class CreateExerciseComponent {
       emptyZipFile: null
     },
     {
+      name: 'Exercise 2',
       instruction: 'Schreibe eine Funktion, die die Summe von zwei Zahlen berechnet.',
       language: 'Csharp',
       tags: ['WMC', 'CSHARP'],
@@ -287,6 +289,7 @@ export class CreateExerciseComponent {
 
   async sendCodeToRunner() {
      let exercise  = {
+      name: this.exerciseName,
       instruction: this.instruction,
       language: this.selectedLanguage,
       tags: this.selectedTags,
