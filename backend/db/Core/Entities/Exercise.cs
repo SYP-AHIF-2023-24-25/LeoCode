@@ -14,8 +14,7 @@ namespace Core.Entities
         public string Name { get; set; }
         public string Description { get; set; }
         public Language Language { get; set; }
-        public Year Year { get; set; }
-        public Subject Subject { get; set; }
+        public string[] Tags { get; set; }
 
         [ForeignKey(nameof(UserId))]
         public User? User { get; set; }

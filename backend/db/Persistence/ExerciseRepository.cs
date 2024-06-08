@@ -36,8 +36,7 @@ namespace Persistence
             exercise.Name,
             exercise.Description,
             ((Language)exercise.Language).ToString(),
-            exercise.Year,
-            ((Subject)exercise.Subject).ToString(),
+            exercise.Tags,
             new ArrayOfSnippetsDto(
                 exercise.ArrayOfSnippets.Snippets.Select(snippet => new SnippetDto(
                     snippet.Code,

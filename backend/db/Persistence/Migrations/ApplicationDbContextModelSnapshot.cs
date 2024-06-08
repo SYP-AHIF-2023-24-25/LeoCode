@@ -67,13 +67,10 @@ namespace Persistence.Migrations
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("rowversion");
 
-                    b.Property<int>("Subject")
-                        .HasColumnType("int");
+                    b.Property<string>("Tags")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Year")
                         .HasColumnType("int");
 
                     b.HasKey("Id");

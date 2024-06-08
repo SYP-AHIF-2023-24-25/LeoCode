@@ -17,12 +17,8 @@ public class ExerciseController : Controller
         _unitOfWork = unitOfWork;
     }
 
-    /*public record SnippetDto(string Code, bool ReadOnlySection, string FileName);
-    public record ArrayOfSnippetsDto(SnippetDto[] snippets);
-    public record ExerciseDto(string Name, string Description, Language Language, Year Year, Subject Subject, ArrayOfSnippetsDto[] arrayOfSnippets);*/
-
     [HttpPost]
-    public async Task<IActionResult> AddExerciseAsync([FromBody] ArrayOfSnippetsDto arrayOfSnippets,string name,string description,Language language, Year year,Subject subject,string username)
+    public async Task<IActionResult> AddExerciseAsync([FromBody] ArrayOfSnippetsDto arrayOfSnippets,string name,string description,Language language, string[] tags,string username)
     {
        User user = _unitOfWork.Users.GetByUsername(username);
        try
@@ -32,8 +28,7 @@ public class ExerciseController : Controller
                 Name = name,
                 Description = description,
                 Language = language,
-                Year = year,
-                Subject = subject,
+                Tags = tags,
                 UserId = user.Id,
                 User = user
             };

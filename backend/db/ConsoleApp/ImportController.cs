@@ -28,8 +28,7 @@ namespace Import
                 Name = "BubbleSort",
                 Description = "Implement the BubbleSort algorithm",
                 Language = Language.CSharp,
-                Year = Year.First,
-                Subject = Subject.CSharp,
+                Tags = new string[] { "1. Jahrgang", "POSE" }
             };
 
             exercise1.ArrayOfSnippets =
@@ -72,9 +71,7 @@ namespace Import
                 Name = "QuickSort",
                 Description = "Implement the QuickSort algorithm",
                 Language = Language.Java,
-                Year = Year.Second,
-                Subject = Subject.POSE,
-                
+                Tags = new string[] { "2. Jahrgang", "JAVA" }
             };
             exercise2.ArrayOfSnippets =
                     new ArrayOfSnippets
@@ -125,8 +122,7 @@ namespace Import
                 Name = "BubbleSort",
                 Description = "Implement the BubbleSort algorithm",
                 Language = Language.CSharp,
-                Year = Year.First,
-                Subject = Subject.CSharp,
+                Tags = new string[] { "1. Jahrgang", "POSE" }
             };
 
             exercise3.ArrayOfSnippets =
@@ -169,9 +165,7 @@ namespace Import
                 Name = "QuickSort",
                 Description = "Implement the QuickSort algorithm",
                 Language = Language.Java,
-                Year = Year.Second,
-                Subject = Subject.POSE,
-
+                Tags = new string[] { "2. Jahrgang", "JAVA" }
             };
             exercise4.ArrayOfSnippets =
                     new ArrayOfSnippets
