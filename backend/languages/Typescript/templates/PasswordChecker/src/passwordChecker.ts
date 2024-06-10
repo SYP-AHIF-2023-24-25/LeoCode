@@ -1,1 +1,1 @@
-export function CheckPassword(password: string): boolean{  return false;}
+export function CheckPassword(password: string): boolean{ throw new Error("Method not implemented."); }

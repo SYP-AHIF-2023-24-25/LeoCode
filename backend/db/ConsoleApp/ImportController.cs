@@ -25,10 +25,10 @@ namespace Import
 
             Exercise exercise1 = new Exercise
             {
-                Name = "BubbleSort",
-                Description = "Implement the BubbleSort algorithm",
+                Name = "Addition",
+                Description = "Implement the a addition calculator",
                 Language = Language.CSharp,
-                Tags = new string[] { "1. Jahrgang", "POSE" }
+                Tags = new string[] { "Class1", "POSE" }
             };
 
             exercise1.ArrayOfSnippets =
@@ -42,7 +42,7 @@ namespace Import
                         {
                             new Snippet
                             {
-                                Code = "public class BubbleSort{public static void Main(){}public static int[] BubbleSort(int[] array){",
+                                Code = "public class Addition{public static void Main(){}public static int AdditionCalculation(int firstNumber, int secondNumber){",
                                 ReadonlySection = true,
                                 FileName = "Program.cs",
                                 ArrayOfSnippets = exercise1.ArrayOfSnippets,
@@ -50,7 +50,7 @@ namespace Import
                             },
                             new Snippet
                             {
-                                Code = "return array;",
+                                Code = "throw new NotImplementedException();",
                                 ReadonlySection = false,
                                 FileName = "Program.cs",
                                 ArrayOfSnippets = exercise1.ArrayOfSnippets,
@@ -58,7 +58,7 @@ namespace Import
                             },
                             new Snippet
                             {
-                                Code = "}",
+                                Code = "}}",
                                 ReadonlySection = true,
                                 FileName = "Program.cs",
                                 ArrayOfSnippets = exercise1.ArrayOfSnippets,
@@ -68,10 +68,10 @@ namespace Import
 
             Exercise exercise2 = new Exercise
             {
-                Name = "QuickSort",
-                Description = "Implement the QuickSort algorithm",
-                Language = Language.Java,
-                Tags = new string[] { "2. Jahrgang", "JAVA" }
+                Name = "PasswordChecker",
+                Description = "Implement a password checker",
+                Language = Language.TypeScript,
+                Tags = new string[] { "Class2", "WMC" }
             };
             exercise2.ArrayOfSnippets =
                     new ArrayOfSnippets
@@ -84,17 +84,17 @@ namespace Import
                         {
                             new Snippet
                             {
-                                Code = "public class QuickSort{public static void Main(){}public static int[] QuickSort(int[] array){",
+                                Code = "export function CheckPassword(password: string): boolean{",
                                 ReadonlySection = true,
-                                FileName = "App.java",
+                                FileName = "passwordChecker.ts",
                                 ArrayOfSnippets = exercise2.ArrayOfSnippets,
                                 ArrayOfSnippetsId = exercise2.ArrayOfSnippets.Id
                             },
                             new Snippet
                             {
-                                Code = "return array;",
+                                Code = "throw new Error('Method not implemented.');",
                                 ReadonlySection = false,
-                                FileName = "App.java",
+                                FileName = "passwordChecker.ts",
                                 ArrayOfSnippets = exercise2.ArrayOfSnippets,
                                 ArrayOfSnippetsId = exercise2.ArrayOfSnippets.Id
                             },
@@ -102,7 +102,7 @@ namespace Import
                             {
                                 Code = "}",
                                 ReadonlySection = true,
-                                FileName = "App.java",
+                                FileName = "passwordChecker.ts",
                                 ArrayOfSnippets = exercise2.ArrayOfSnippets,
                                 ArrayOfSnippetsId = exercise2.ArrayOfSnippets.Id
                             }
@@ -119,10 +119,10 @@ namespace Import
 
             Exercise exercise3 = new Exercise
             {
-                Name = "BubbleSort",
-                Description = "Implement the BubbleSort algorithm",
+                Name = "SubtractionEmpty",
+                Description = "Implement the a subtraction calculator",
                 Language = Language.CSharp,
-                Tags = new string[] { "1. Jahrgang", "POSE" }
+                Tags = new string[] { "Class1", "POSE" }
             };
 
             exercise3.ArrayOfSnippets =
@@ -136,7 +136,7 @@ namespace Import
                         {
                             new Snippet
                             {
-                                Code = "public class BubbleSort{public static void Main(){}public static int[] BubbleSort(int[] array){",
+                                Code = "public class Program { static void Main(string[] args) {} public static int Subtract(int a, int b){",
                                 ReadonlySection = true,
                                 FileName = "Program.cs",
                                 ArrayOfSnippets = exercise3.ArrayOfSnippets,
@@ -144,7 +144,7 @@ namespace Import
                             },
                             new Snippet
                             {
-                                Code = "return array;",
+                                Code = "throw new NotImplementedException();",
                                 ReadonlySection = false,
                                 FileName = "Program.cs",
                                 ArrayOfSnippets = exercise3.ArrayOfSnippets,
@@ -152,7 +152,7 @@ namespace Import
                             },
                             new Snippet
                             {
-                                Code = "}",
+                                Code = "}}",
                                 ReadonlySection = true,
                                 FileName = "Program.cs",
                                 ArrayOfSnippets = exercise3.ArrayOfSnippets,
@@ -160,67 +160,19 @@ namespace Import
                             }
                         };
 
-            Exercise exercise4 = new Exercise
-            {
-                Name = "QuickSort",
-                Description = "Implement the QuickSort algorithm",
-                Language = Language.Java,
-                Tags = new string[] { "2. Jahrgang", "JAVA" }
-            };
-            exercise4.ArrayOfSnippets =
-                    new ArrayOfSnippets
-                    {
-                        Exercise = exercise4,
-                        ExerciseId = exercise4.Id
-                    };
 
-            exercise4.ArrayOfSnippets.Snippets = new List<Snippet>
-                        {
-                            new Snippet
-                            {
-                                Code = "public class QuickSort{public static void Main(){}public static int[] QuickSort(int[] array){",
-                                ReadonlySection = true,
-                                FileName = "App.java",
-                                ArrayOfSnippets = exercise4.ArrayOfSnippets,
-                                ArrayOfSnippetsId = exercise4.ArrayOfSnippets.Id
-                            },
-                            new Snippet
-                            {
-                                Code = "return array;",
-                                ReadonlySection = false,
-                                FileName = "App.java",
-                                ArrayOfSnippets = exercise4.ArrayOfSnippets,
-                                ArrayOfSnippetsId = exercise4.ArrayOfSnippets.Id
-                            },
-                            new Snippet
-                            {
-                                Code = "}",
-                                ReadonlySection = true,
-                                FileName = "App.java",
-                                ArrayOfSnippets = exercise4.ArrayOfSnippets,
-                                ArrayOfSnippetsId = exercise4.ArrayOfSnippets.Id
-                            }
-                        };
+            exercise3.UserId = user1.Id;
+            exercise3.User = user1;
 
-            exercise3.UserId = user2.Id;
-            exercise4.UserId = user2.Id;
-            exercise3.User = user2;
-            exercise4.User = user2;
-
-            /*exercise1.User = user1;
-            exercise2.User = user1;
-            exercise1.UserId = user1.Id;
-            exercise2.UserId = user1.Id;*/
-
-            var exercises = new List<Exercise> { exercise1, exercise2, exercise3, exercise4 };
+            var exercises = new List<Exercise> { exercise1, exercise2, exercise3};
 
             var users = new List<User> { user1, user2 };
             return new ImportData
             {
                 Exercises = exercises,
                 Users = users,
-                ArrayOfSnippets = new List<ArrayOfSnippets> { exercise1.ArrayOfSnippets, exercise2.ArrayOfSnippets, exercise3.ArrayOfSnippets, exercise4.ArrayOfSnippets },
-                Snippets = new List<Snippet> { exercise1.ArrayOfSnippets.Snippets[0], exercise1.ArrayOfSnippets.Snippets[1], exercise1.ArrayOfSnippets.Snippets[2], exercise2.ArrayOfSnippets.Snippets[0], exercise2.ArrayOfSnippets.Snippets[1], exercise2.ArrayOfSnippets.Snippets[2], exercise3.ArrayOfSnippets.Snippets[0], exercise3.ArrayOfSnippets.Snippets[1], exercise3.ArrayOfSnippets.Snippets[2], exercise4.ArrayOfSnippets.Snippets[0], exercise4.ArrayOfSnippets.Snippets[1], exercise4.ArrayOfSnippets.Snippets[2] }
+                ArrayOfSnippets = new List<ArrayOfSnippets> { exercise1.ArrayOfSnippets, exercise2.ArrayOfSnippets, exercise3.ArrayOfSnippets},
+                Snippets = new List<Snippet> { exercise1.ArrayOfSnippets.Snippets[0], exercise1.ArrayOfSnippets.Snippets[1], exercise1.ArrayOfSnippets.Snippets[2], exercise2.ArrayOfSnippets.Snippets[0], exercise2.ArrayOfSnippets.Snippets[1], exercise2.ArrayOfSnippets.Snippets[2], exercise3.ArrayOfSnippets.Snippets[0], exercise3.ArrayOfSnippets.Snippets[1], exercise3.ArrayOfSnippets.Snippets[2]}
             };
         }
     }

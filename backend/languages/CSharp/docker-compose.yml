@@ -4,5 +4,6 @@ services:
     volumes:
       - ./templates:/usr/src/app/templates
       - ./nuget.config:/usr/src/app/config/nuget.config
+      - ./nugget-packages:/usr/src/app/nugget-packages
     ports:
       - "8001:8080"
