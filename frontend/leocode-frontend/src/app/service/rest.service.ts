@@ -47,7 +47,7 @@ export class RestService {
       'Access-Control-Allow-Origin': '*' // Erlaubt alle Ursprünge ()
     });
 
-    return this.httpClient.get(`http://localhost:8000/api/code/${programName}/`, { headers: headers });
+    return this.httpClient.get(`http://localhost:8000/api/code/${programName}`, { headers: headers });
   }
 
   getCodeCSharp(programName: string){
