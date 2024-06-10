@@ -86,47 +86,8 @@ export class TestResultComponent  implements OnInit{
         this.exercise = data[0];
     });
     }
-
-
-// this.rest.startRunner("Typescript").subscribe((data) => {
-    this.rest.startRunner(this.exercise.language).subscribe((data) => {
-      console.log(data);
-    
-    },
-    (error) => {
-        console.error("Error in API request", error);
-        this.loading = false;
-    });
-   
+  }
   
-  }
-  ngOnDestroy(): void {
-    // this.rest.stopRunner(this.exercise.language).subscribe((data) => {
-    this.rest.stopRunner("Typescript").subscribe((data) => {
-      console.log(data);
-    });
-    
-  }
-
-/* Code Editor Funcions
-  parseTemplateToCodeSections(template: string, programName: string) {
-
-    let stringCodeSections: string[]= template.split("\n");
-
-    let codeSections: CodeSection[] = [];
-
-
-    for(let i = 0; i < stringCodeSections.length; i++) {
-      if(stringCodeSections[i].includes("Todo Implementation")) {
-        codeSections.push({ code: stringCodeSections[i], readOnlySection: false, fileName: programName});
-      }else {
-        codeSections.push({ code: stringCodeSections[i], readOnlySection: true, fileName: programName});
-      }
-    }
-
-    this.codeSections = codeSections;
-  }*/
-
   // parse from json new
   convertFromJsonV2(value: Value): Result {// mit neuen json format
    

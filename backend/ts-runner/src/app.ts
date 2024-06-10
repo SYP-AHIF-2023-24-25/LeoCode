@@ -12,6 +12,7 @@ import multer from 'multer';
 import unzipper from 'unzipper'; // Add unzipper import
 import { runTemplate } from './execute-tests';
 
+
 const swaggerDocument = require('../swagger.json');
 
 const app = express();
@@ -24,6 +25,38 @@ app.use(bodyParser.json());
 app.get('/', (req: Request, res: Response) => {
   res.send('Hello, Express!');
 });
+
+app.get('/api/code/:exerciseName', async (req: Request, res: Response) => {
+  try{
+    console.log("before suchen ...");
+    const exerciseName = req.params.exerciseName;
+    const result = await searchForTsFile(exerciseName);
+    console.log("============================");
+    console.log(result);
+    console.log("============================");
+    res.status(200).json(result);
+  }
+  catch(err){
+    res.status(400).json(err);
+  }
+});
+
+async function searchForTsFile(exerciseName: string): Promise<string> {
+  const directoryPath = `/usr/src/app/templates/${exerciseName}/src`;
+  const files = await fs.promises.readdir(directoryPath);
+  const tsFiles = files.filter(file => file.endsWith('.ts'));
+  if (tsFiles.length > 0) {
+  const tsFilePath = path.join(directoryPath, tsFiles[0]);
+  const fileContent = await fs.promises.readFile(tsFilePath, 'utf-8');
+  return fileContent;
+  } else {
+  throw new Error('No .ts file found in the specified directory');
+  }
+}
+
+
+
+
 
 app.post('/api/execute/:exerciseName', async (req: Request, res: Response) => {
   try{

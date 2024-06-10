@@ -4,6 +4,7 @@ import { Exercise } from '../model/exercise';
 import { HttpHeaders,HttpParams } from '@angular/common/http';
 import { CodeSection } from '../model/code-sections';
 import { ExerciseDto } from '../model/exerciseDto';
+import { ArrayOfSnippetsDto } from '../model/arrayOfSnippetsDto';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -27,9 +28,8 @@ export class DbService {
     return this.http.get<ExerciseDto[]>(`${this.apiUrl}/Exercise`, { params });
   }
 
-  AddExercise(codeSections: CodeSection[], exerciseName: string, introduction : string, language: string, tags: string[], username: string) {
+  AddExercise(arrayOfSnippets: ArrayOfSnippetsDto, exerciseName: string, introduction : string, language: string, tags: string[], username: string) {
     let exercise = {
-      codeSections: codeSections,
       exerciseName: exerciseName,
       introduction: introduction,
       language: language,
@@ -37,8 +37,12 @@ export class DbService {
       username: username
     }
 
+    const requestBody = {
+      "arrayOfSnippets": arrayOfSnippets
+    }
+
     
-    return this.http.post<Exercise>(`${this.apiUrl}/exercise`, exercise, httpOptions);
+    return this.http.post<Exercise>(`${this.apiUrl}/exercise?name=${exercise.exerciseName}&description=${exercise.introduction}&language=${exercise.language}&tags=${exercise.tags}&username=${exercise.username}`, arrayOfSnippets, httpOptions);
   }
 
   UpdateExercise( username: string, introduction : string, language: string, tags: string[], exerciseName: string, codeSections: CodeSection[]) {

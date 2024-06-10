@@ -17,6 +17,9 @@ import { map } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { DbService } from '../service/db-service.service';
+import { CodeSection } from '../model/code-sections';
+import { ArrayOfSnippetsDto } from '../model/arrayOfSnippetsDto';
+
 
 @Component({
   selector: 'app-create-exercise',
@@ -235,6 +238,24 @@ export class CreateExerciseComponent {
         const fullResponse = await this.uploadZipToTsRunner(exercise.zipFile, "full");
         if (exercise.emptyZipFile && this.testsMatchPasses(fullResponse)) {
           await this.uploadZipToTsRunner(exercise.emptyZipFile, "empty");
+          let name: string[] = exercise.emptyZipFile.name.split('.');
+          console.log(name[0]);
+          const response: any = await this.rest.getCode(name[0]).toPromise();
+          console.log(response);
+          let codeSections: CodeSection[] = this.parseTemplateToCodeSections(response, name[0]);
+          console.log(codeSections);
+
+          let arrayOfSnippets : ArrayOfSnippetsDto = {
+            snippets: codeSections
+          }
+          
+          console.log(arrayOfSnippets);
+            
+
+          this.dbRest.AddExercise(arrayOfSnippets, exercise.name, exercise.instruction, exercise.language, exercise.tags, "Default").subscribe((data: Exercise) => {
+            console.log(data);
+          });
+
         }
       }
       else if(exercise.language === 'Csharp'){
@@ -248,10 +269,6 @@ export class CreateExerciseComponent {
         duration: 5000,
         horizontalPosition: 'center',
         verticalPosition: 'top',
-      });
-
-      this.dbRest.AddExercise([], exercise.name, exercise.instruction, exercise.language, exercise.tags, 'Default').subscribe((data: Exercise) => {
-        console.log(data);
       });
 
       this.router.navigate(['/start-screen']);
@@ -300,6 +317,23 @@ export class CreateExerciseComponent {
     this.zipFile = null;
     this.ZipFileUploaded = false;
     console.log(this.zipFile);
+  }
+
+  parseTemplateToCodeSections(template: string, programName: string) :CodeSection[]{
+
+    let stringCodeSections: string[]= template.split("\n");
+
+    let codeSections: CodeSection[] = [];
+
+
+    for(let i = 0; i < stringCodeSections.length; i++) {
+      if(stringCodeSections[i].includes("Todo Implementation") || stringCodeSections[i].includes("throw new NotImplementedException()")) {
+        codeSections.push({ code: stringCodeSections[i], readOnlySection: false, fileName: programName});
+      }else {
+        codeSections.push({ code: stringCodeSections[i], readOnlySection: true, fileName: programName});
+      }
+    }
+    return codeSections;
   }
 
 }
