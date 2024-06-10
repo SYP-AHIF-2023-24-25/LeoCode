@@ -2,3 +2,15 @@
 05/15/2024 23:00:00: SUCCESS: Response from CSharp-runner was successful
 06/10/2024 15:19:32: SUCCESS: Response from CSharp-runner was successful
 06/10/2024 15:19:34: ERROR: Response from CSharp-runner wasn't successful. Error Message: Data at the root level is invalid. Line 1, position 1.
+06/10/2024 17:47:16: SUCCESS: Response from Typescript-runner was successful
+06/10/2024 17:50:24: SUCCESS: Response from Typescript-runner was successful
+06/10/2024 17:52:48: SUCCESS: Response from Typescript-runner was successful
+06/10/2024 17:55:00: SUCCESS: Response from Typescript-runner was successful
+06/10/2024 17:56:08: SUCCESS: Response from Typescript-runner was successful
+06/10/2024 17:57:57: SUCCESS: Response from Typescript-runner was successful
+06/10/2024 17:58:46: SUCCESS: Response from Typescript-runner was successful
+06/10/2024 17:59:39: SUCCESS: Response from Typescript-runner was successful
+06/10/2024 18:02:24: SUCCESS: Response from Typescript-runner was successful
+06/10/2024 18:03:44: SUCCESS: Response from Typescript-runner was successful
+06/10/2024 18:07:39: SUCCESS: Response from CSharp-runner was successful
+06/10/2024 18:07:39: ERROR: Response from CSharp-runner wasn't successful. Error Message: Data at the root level is invalid. Line 1, position 1.
