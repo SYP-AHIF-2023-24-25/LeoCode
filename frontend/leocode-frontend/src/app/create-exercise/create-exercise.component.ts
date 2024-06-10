@@ -263,6 +263,23 @@ export class CreateExerciseComponent {
 
         if (this.testsMatchPassesCSharp(fullResponse) && exercise.emptyZipFile) {
           await this.uploadZipFileToCSharpRunner(exercise.emptyZipFile, "empty");
+          let name: string[] = exercise.emptyZipFile.name.split('.');
+          console.log(name[0]);
+          const response: any = await this.rest.getCodeCSharp(name[0]).toPromise();
+          console.log(response);
+          let codeSections: CodeSection[] = this.parseTemplateToCodeSections(response, name[0]);
+          console.log(codeSections);
+
+          let arrayOfSnippets : ArrayOfSnippetsDto = {
+            snippets: codeSections
+          }
+          
+          console.log(arrayOfSnippets);
+            
+
+          this.dbRest.AddExercise(arrayOfSnippets, exercise.name, exercise.instruction, exercise.language, exercise.tags, "Default").subscribe((data: Exercise) => {
+            console.log(data);
+          });
         }
       }
       this.snackBar.open('Exercise created successfully', 'Close', {
@@ -327,7 +344,7 @@ export class CreateExerciseComponent {
 
 
     for(let i = 0; i < stringCodeSections.length; i++) {
-      if(stringCodeSections[i].includes("Todo Implementation") || stringCodeSections[i].includes("throw new NotImplementedException()")) {
+      if(stringCodeSections[i].includes("Todo") || stringCodeSections[i].includes("throw new NotImplementedException()")) {
         codeSections.push({ code: stringCodeSections[i], readOnlySection: false, fileName: programName});
       }else {
         codeSections.push({ code: stringCodeSections[i], readOnlySection: true, fileName: programName});

@@ -32,7 +32,7 @@ public class ExerciseController : Controller
             case "Java":
                 enumLanguage = Language.Java;
                 break;
-            case "Typescript":
+            case "TypeScript":
                 enumLanguage = Language.TypeScript;
                 break;
         }

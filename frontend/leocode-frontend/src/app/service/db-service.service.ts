@@ -36,11 +36,6 @@ export class DbService {
       tags: tags,
       username: username
     }
-
-    const requestBody = {
-      "arrayOfSnippets": arrayOfSnippets
-    }
-
     
     return this.http.post<Exercise>(`${this.apiUrl}/exercise?name=${exercise.exerciseName}&description=${exercise.introduction}&language=${exercise.language}&tags=${exercise.tags}&username=${exercise.username}`, arrayOfSnippets, httpOptions);
   }
