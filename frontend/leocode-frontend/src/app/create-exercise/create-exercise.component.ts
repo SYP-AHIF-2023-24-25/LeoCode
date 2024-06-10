@@ -267,7 +267,7 @@ export class CreateExerciseComponent {
           console.log(name[0]);
           const response: any = await this.rest.getCodeCSharp(name[0]).toPromise();
           console.log(response);
-          let codeSections: CodeSection[] = this.parseTemplateToCodeSections(response, name[0]);
+          let codeSections: CodeSection[] = this.parseTemplateToCodeSections(response.value, name[0]);
           console.log(codeSections);
 
           let arrayOfSnippets : ArrayOfSnippetsDto = {
@@ -288,7 +288,9 @@ export class CreateExerciseComponent {
         verticalPosition: 'top',
       });
 
-      this.router.navigate(['/start-screen']);
+      this.router.navigate(['/start-screen']).then(() => {
+        window.location.reload();
+      });
       
     }else{
       console.error('No file selected');
