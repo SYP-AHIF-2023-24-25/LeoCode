@@ -301,6 +301,10 @@ export class CreateExerciseComponent {
         const fullResponse = await this.uploadZipToTsRunner(exercise.zipFile, "full");
         if (exercise.emptyZipFile && this.testsMatchPasses(fullResponse)) {
           await this.uploadZipToTsRunner(exercise.emptyZipFile, "empty");
+          let name: string[] = exercise.emptyZipFile.name.split('.');
+          console.log(name[0]);
+          const response: any = await this.rest.getCode(name[0]).toPromise();
+          console.log(response);
         }
       }
       else if(exercise.language === 'Csharp'){
@@ -308,6 +312,10 @@ export class CreateExerciseComponent {
 
         if (this.testsMatchPassesCSharp(fullResponse) && exercise.emptyZipFile) {
           await this.uploadZipFileToCSharpRunner(exercise.emptyZipFile, "empty");
+          let name: string[] = exercise.emptyZipFile.name.split('.');
+          console.log(name[0]);
+          const response: any = await this.rest.getCodeCSharp(name[0]).toPromise();
+          console.log(response.value); //response.value nehmen
         }
       }
       this.snackBar.open('Exercise created successfully', 'Close', {
