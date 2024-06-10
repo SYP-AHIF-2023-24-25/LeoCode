@@ -3,3 +3,39 @@
     padding-left: 15px; /* Abstand links */
     padding-right: 15px; /* Abstand rechts */
   }
+
+  html, body {
+    height: 100%;
+    margin: 0;
+}
+
+.container-fluid {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.row.flex-nowrap {
+    flex: 1;
+}
+
+.sidebar {
+    height: 100%;
+    background-color: gray; /* Ensure background color is applied */
+    position: relative;
+}
+
+
+.sub-menu-link {
+  color: #888; /* Graue Farbe für Untermenüpunkte */
+  font-size: 14px; /* Kleinere Schriftgröße für Untermenüpunkte */
+}
+
+
+.sub-menu {
+  display: none;
+}
+
+.sub-menu.show {
+  display: block;
+}

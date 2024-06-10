@@ -29,16 +29,10 @@ export class CreateExerciseComponent {
     this.filteredTags = this.tagCtrl.valueChanges.pipe(
       startWith(null),
       map((tag: string | null) => tag ? this._filter(tag) : this.availableTags.slice()));  
-
-    
-    this.filteredSearchTags = this.tagCtrl.valueChanges.pipe(
-      startWith(null),
-      map((tag: string | null) => tag ? this._filter(tag) : this.availableTags.slice()));
-
     
    }
   
-  exerciseName: string = '';
+  exerciseName: string = ''; 
   currentStep: number = 1;
   instruction: string = '';
   selectedLanguage: string = '';
@@ -49,36 +43,13 @@ export class CreateExerciseComponent {
   ZipFileUploaded: boolean = false;
   isUploading = false;
 
-  //für Suche in der Liste
-  selectedSearchTags: string[] = [];
-  filteredSearchTags: Observable<string[]> | undefined;
 
   // property für die ausgewählten Tags
   tagCtrl = new FormControl();
-  selectedTags: string[] = [];
+  selectedTags: string[] = [];  
   availableTags: string[] = Object.values(Tags); // ersetzen Sie dies durch Ihre tatsächlichen Tags
-  filteredTags: Observable<string[]> | undefined;
-  separatorKeysCodes: number[] = [13, 188]; // Enter und Komma
-
-  exercises : Exercise[]= [
-    {
-      name: 'Exercise 1',
-      instruction: 'Schreibe eine Funktion, die die Summe von zwei Zahlen berechnet.',
-      language: 'Typescript',
-      tags: ['POSE', 'TYPESCRIPT'],
-      zipFile: null,
-      emptyZipFile: null
-    },
-    {
-      name: 'Exercise 2',
-      instruction: 'Schreibe eine Funktion, die die Summe von zwei Zahlen berechnet.',
-      language: 'Csharp',
-      tags: ['WMC', 'CSHARP'],
-      zipFile: null,
-      emptyZipFile: null
-    },
-  ]
-
+  filteredTags: Observable<string[]> | undefined;  
+  separatorKeysCodes: number[] = [13, 188]; // Enter und Komma  
 
   ngOnInit(): void {
     document.addEventListener("DOMContentLoaded", () => {
@@ -144,23 +115,6 @@ export class CreateExerciseComponent {
     this.tagCtrl.setValue(null);
   }
 
-  addSearchTag(event: MatChipInputEvent): void {
-    const input = event.input;
-    const value = event.value;
-
-    // Add our tag
-    if ((value || '').trim()) {
-      this.selectedSearchTags.push(value.trim().toUpperCase());
-      this.availableTags.push(value.trim().toUpperCase());
-    }
-
-    // Reset the input value
-    if (input) {
-      input.value = '';
-    }
-
-    this.tagCtrl.setValue(null);
-  }
 
   isSelectedTag(tag: string): boolean {
     return this.selectedTags.includes(tag);

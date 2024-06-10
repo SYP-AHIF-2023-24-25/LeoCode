@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import {Tags} from '../model/tags.enum';
-import { Exercise } from '../model/exercise';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
@@ -56,6 +55,20 @@ export class StartScreenComponent {
     });
 
     sessionStorage.setItem("userName", this.defaultUser.username);
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const mainMenuLinks = document.querySelectorAll('.main-menu-link');
+      
+      mainMenuLinks.forEach(link => {
+        link.addEventListener('click', (event) => {
+          event.preventDefault();
+          const subMenu = link.nextElementSibling;
+          if (subMenu) {
+            subMenu.classList.toggle('show');
+          }
+        });
+      });
+    });
     
   }
 
