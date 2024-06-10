@@ -96,17 +96,6 @@ export class CreateExerciseComponent {
     });
   }
 
-  // Getter-Funktion für gefilterte Übungen basierend auf dem Suchbegriff für Tags
-  get filteredExercises() {
-    if (!this.selectedSearchTags.length) {
-      return this.exercises;
-    }
-  
-    return this.exercises.filter(exercise =>
-      exercise.tags.some(tag => this.selectedSearchTags.includes(tag))
-    );
-  }
-
 
   // navigaton zwischen den schritten
   nextStep() {
@@ -185,23 +174,13 @@ export class CreateExerciseComponent {
     }
   }
 
-  removeSearchTag(tag: string): void {
-    const index = this.selectedSearchTags.indexOf(tag);
-
-    if (index >= 0) {
-      this.selectedSearchTags.splice(index, 1);
-    }
-  }
 
   selected(event: MatAutocompleteSelectedEvent): void {
     this.selectedTags.push(event.option.viewValue);
     this.tagCtrl.setValue(null);
   }
 
-  selectedSearch(event: MatAutocompleteSelectedEvent): void {
-    this.selectedSearchTags.push(event.option.viewValue);
-    this.tagCtrl.setValue(null);
-  }
+
 
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
@@ -297,8 +276,6 @@ export class CreateExerciseComponent {
       emptyZipFile: this.emptyZipFile
     };
 
-    console.log(this.filteredExercises);
-
     if (exercise.zipFile) {
       if(exercise.language === 'TypeScript'){
         const fullResponse = await this.uploadZipToTsRunner(exercise.zipFile, "full");
@@ -350,11 +327,6 @@ export class CreateExerciseComponent {
   sleep(ms: number) {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
-
-  runTest(exercise: Exercise) {
-    console.log('Running test for exercise:', exercise);
-  }
-
   resetForm() {
     this.currentStep = 1;
     this.instruction = '';

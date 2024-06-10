@@ -54,6 +54,9 @@ export class StartScreenComponent {
     this.rest.getExerciseByUsername(this.defaultUser.username).subscribe((data: ExerciseDto[]) => {
       this.exercises = data;
     });
+
+    sessionStorage.setItem("userName", this.defaultUser.username);
+    
   }
 
   
@@ -85,5 +88,9 @@ export class StartScreenComponent {
       return this.exercises.filter(exercise =>
         exercise.tags.some(tag => this.selectedSearchTags.includes(tag))
       );
+    }
+
+    addExerciseNameToSessionStorage(exerciseName: string){
+      sessionStorage.setItem("exerciseName", exerciseName);
     }
 }

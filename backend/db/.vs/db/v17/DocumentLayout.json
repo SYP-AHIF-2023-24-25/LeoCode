@@ -3,8 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\Kelit\\Schule2023-24\\syp\\LeoCode\\backend\\db\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{B35848D2-D6F7-4DBA-B87F-0BBE118D756D}|WebAPI\\WebAPI.csproj|c:\\users\\kelit\\schule2023-24\\syp\\leocode\\backend\\db\\webapi\\controllers\\exercisecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B35848D2-D6F7-4DBA-B87F-0BBE118D756D}|WebAPI\\WebAPI.csproj|solutionrelative:webapi\\controllers\\exercisecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{06B9D709-2243-426B-AE88-F2F8B871DDDF}|ConsoleApp\\Import.csproj|c:\\users\\kelit\\schule2023-24\\syp\\leocode\\backend\\db\\consoleapp\\importcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{06B9D709-2243-426B-AE88-F2F8B871DDDF}|ConsoleApp\\Import.csproj|solutionrelative:consoleapp\\importcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B35848D2-D6F7-4DBA-B87F-0BBE118D756D}|WebAPI\\WebAPI.csproj|c:\\users\\kelit\\schule2023-24\\syp\\leocode\\backend\\db\\webapi\\controllers\\snippetcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B35848D2-D6F7-4DBA-B87F-0BBE118D756D}|WebAPI\\WebAPI.csproj|solutionrelative:webapi\\controllers\\snippetcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{B35848D2-D6F7-4DBA-B87F-0BBE118D756D}|WebAPI\\WebAPI.csproj|c:\\users\\kelit\\schule2023-24\\syp\\leocode\\backend\\db\\webapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -27,19 +35,45 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "ExerciseController.cs",
+              "DocumentMoniker": "C:\\Users\\Kelit\\Schule2023-24\\syp\\LeoCode\\backend\\db\\WebAPI\\Controllers\\ExerciseController.cs",
+              "RelativeDocumentMoniker": "WebAPI\\Controllers\\ExerciseController.cs",
+              "ToolTip": "C:\\Users\\Kelit\\Schule2023-24\\syp\\LeoCode\\backend\\db\\WebAPI\\Controllers\\ExerciseController.cs",
+              "RelativeToolTip": "WebAPI\\Controllers\\ExerciseController.cs",
+              "ViewState": "AQIAAEgAAAAAAAAAAAAYwAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-10T10:32:33.257Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "SnippetController.cs",
+              "DocumentMoniker": "C:\\Users\\Kelit\\Schule2023-24\\syp\\LeoCode\\backend\\db\\WebAPI\\Controllers\\SnippetController.cs",
+              "RelativeDocumentMoniker": "WebAPI\\Controllers\\SnippetController.cs",
+              "ToolTip": "C:\\Users\\Kelit\\Schule2023-24\\syp\\LeoCode\\backend\\db\\WebAPI\\Controllers\\SnippetController.cs",
+              "RelativeToolTip": "WebAPI\\Controllers\\SnippetController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-10T10:32:23.31Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "ImportController.cs",
               "DocumentMoniker": "C:\\Users\\Kelit\\Schule2023-24\\syp\\LeoCode\\backend\\db\\ConsoleApp\\ImportController.cs",
               "RelativeDocumentMoniker": "ConsoleApp\\ImportController.cs",
               "ToolTip": "C:\\Users\\Kelit\\Schule2023-24\\syp\\LeoCode\\backend\\db\\ConsoleApp\\ImportController.cs",
               "RelativeToolTip": "ConsoleApp\\ImportController.cs",
-              "ViewState": "AQIAAAsAAAAAAAAAAAAxwMcAAABKAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABIAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-06-08T18:36:53.781Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\Kelit\\Schule2023-24\\syp\\LeoCode\\backend\\db\\WebAPI\\Program.cs",
               "RelativeDocumentMoniker": "WebAPI\\Program.cs",

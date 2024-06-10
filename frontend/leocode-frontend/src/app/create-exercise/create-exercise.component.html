@@ -70,16 +70,15 @@
     <div class="col-md-10">
       <div class="container mt-4">
         <h1>Create Exercise</h1>
-        <!-- Schritte als Rechtecke -->
+         <!-- Schritte als Punkte -->
         <div class="row justify-content-center">
           <div class="col-md-8">
-           
             <div class="step-indicator">
               <div *ngFor="let step of [1, 2, 3, 4, 5]" 
-                   class="step-indicator-item" 
-                   [ngClass]="{ 'current-step': currentStep === step }"
-                   (click)="goToStep(step)">
-                {{ 'Step ' + step }}
+                  class="step-indicator-item" 
+                  [ngClass]="{ 'current-step': currentStep === step }"
+                  (click)="goToStep(step)">
+                <span class="step-dot"></span>
               </div>
             </div>
           </div>
@@ -231,48 +230,6 @@
     <br>
     <br>
     <br>
-
-
-    <form>
-      <mat-form-field class="example-chip-list">
-        <mat-label>Chose tags to sort</mat-label>
-        <mat-chip-grid #chipGrid aria-label="Tag selection">
-          <mat-chip-row *ngFor="let tag of selectedSearchTags" (removed)="removeSearchTag(tag)">
-            {{tag}}
-            <button matChipRemove [attr.aria-label]="'remove ' + tag">
-              <mat-icon>cancel</mat-icon>
-            </button>
-          </mat-chip-row>
-        </mat-chip-grid>
-        <input placeholder="Search..." #tagInput [formControl]="tagCtrl"
-          [matChipInputFor]="chipGrid" [matAutocomplete]="auto"
-          [matChipInputSeparatorKeyCodes]="separatorKeysCodes"/>
-        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectedSearch($event)">
-          <mat-option *ngFor="let tag of filteredSearchTags | async" [value]="tag">
-            {{tag}}
-          </mat-option>
-        </mat-autocomplete>
-      </mat-form-field>
-    </form>
-
-
-    <!-- Tabelle mit gefilterten Übungen -->
-    <table class="table">
-      <thead>
-        <tr>
-          <th>Introduction</th>
-          <th>Tags</th>
-          <th>Testrun</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let exercise of filteredExercises">
-          <td>{{exercise.name}}</td>
-          <td>{{exercise.tags.join(', ')}}</td>
-          <td><button class="btn btn-primary" (click)="runTest(exercise)">Run Test</button></td>
-        </tr>
-      </tbody>
-    </table>
   </div>
 </div>
 </div>

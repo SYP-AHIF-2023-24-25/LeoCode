@@ -4,5 +4,5 @@ export interface ExerciseDto {
     description:string,
     language:string,
     tags:string[],
-    arrayOfCodeSections:CodeSection[]
+    arrayOfSnippets: CodeSection[]
 }

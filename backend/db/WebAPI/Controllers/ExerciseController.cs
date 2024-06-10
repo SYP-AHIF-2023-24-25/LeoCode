@@ -90,12 +90,10 @@ public class ExerciseController : Controller
             exercise.Description,
             ((Language)exercise.Language).ToString(),
             exercise.Tags,
-            new ArrayOfSnippetsDto(
                 exercise.ArrayOfSnippets.Snippets.Select(snippet => new SnippetDto(
                     snippet.Code,
                     snippet.ReadonlySection,
                     snippet.FileName)).ToArray()
-            )
             )).ToArray();
         }
         catch (Exception ex)
@@ -103,7 +101,6 @@ public class ExerciseController : Controller
             return [];
         }
     }
-
     [HttpPut]
     public async Task<IActionResult> UpdateExerciseForUser(string username, string description, string[] tags, string language, string subject, string exerciseName, [FromBody] ArrayOfSnippetsDto arrayOfSnippets)
     {

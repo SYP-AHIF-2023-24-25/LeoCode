@@ -28,7 +28,7 @@ namespace Import
                 Name = "BubbleSort",
                 Description = "Implement the BubbleSort algorithm",
                 Language = Language.CSharp,
-                Tags = new string[] { "1. Jahrgang", "POSE" }
+                Tags = new string[] { "Class1", "POSE" }
             };
 
             exercise1.ArrayOfSnippets =
@@ -50,7 +50,7 @@ namespace Import
                             },
                             new Snippet
                             {
-                                Code = "return array;",
+                                Code = "Todo Implementation;",
                                 ReadonlySection = false,
                                 FileName = "Program.cs",
                                 ArrayOfSnippets = exercise1.ArrayOfSnippets,
@@ -71,7 +71,7 @@ namespace Import
                 Name = "QuickSort",
                 Description = "Implement the QuickSort algorithm",
                 Language = Language.Java,
-                Tags = new string[] { "2. Jahrgang", "JAVA" }
+                Tags = new string[] { "Class2", "JAVA" }
             };
             exercise2.ArrayOfSnippets =
                     new ArrayOfSnippets
@@ -92,7 +92,7 @@ namespace Import
                             },
                             new Snippet
                             {
-                                Code = "return array;",
+                                Code = "Todo Implementation;",
                                 ReadonlySection = false,
                                 FileName = "App.java",
                                 ArrayOfSnippets = exercise2.ArrayOfSnippets,
@@ -122,7 +122,7 @@ namespace Import
                 Name = "BubbleSort",
                 Description = "Implement the BubbleSort algorithm",
                 Language = Language.CSharp,
-                Tags = new string[] { "1. Jahrgang", "POSE" }
+                Tags = new string[] { "Class1", "POSE" }
             };
 
             exercise3.ArrayOfSnippets =
@@ -144,7 +144,7 @@ namespace Import
                             },
                             new Snippet
                             {
-                                Code = "return array;",
+                                Code = "Todo Implementation",
                                 ReadonlySection = false,
                                 FileName = "Program.cs",
                                 ArrayOfSnippets = exercise3.ArrayOfSnippets,
@@ -165,7 +165,7 @@ namespace Import
                 Name = "QuickSort",
                 Description = "Implement the QuickSort algorithm",
                 Language = Language.Java,
-                Tags = new string[] { "2. Jahrgang", "JAVA" }
+                Tags = new string[] { "Class2", "JAVA" }
             };
             exercise4.ArrayOfSnippets =
                     new ArrayOfSnippets
@@ -186,7 +186,7 @@ namespace Import
                             },
                             new Snippet
                             {
-                                Code = "return array;",
+                                Code = "Todo Implementation;",
                                 ReadonlySection = false,
                                 FileName = "App.java",
                                 ArrayOfSnippets = exercise4.ArrayOfSnippets,

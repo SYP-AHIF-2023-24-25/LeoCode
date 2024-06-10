@@ -9,6 +9,13 @@ import { TestResults } from '../model/test-results';
 
 import { CodeSection } from '../model/code-sections';
 import { Value } from '../model/value';
+import { ActivatedRoute, Params } from '@angular/router';
+import { User } from '../model/user';
+import { DbService } from '../service/db-service.service';
+import { Exercise } from '../model/exercise';
+import { ExerciseDto } from '../model/exerciseDto';
+
+
 
 
 
@@ -22,10 +29,22 @@ import { Value } from '../model/value';
 
 export class TestResultComponent  implements OnInit{
 
+ userName: string | null= "";
+ exerciseName: string |null = "";
+
+  exercise : ExerciseDto = {
+    name: "",
+    description: "",
+    language: "",
+    tags: [],
+    arrayOfSnippets: []
+  }
+
   //Code Editor
-  testTemplate: string = 'export function CheckPassword(password: string): boolean{\n  Todo Implementation \n}'
+ // testTemplate: string = 'export function CheckPassword(password: string): boolean{\n  Todo Implementation \n}'
   editorOptions = { theme: 'vs-dark', language: 'typescrip'}; // language auswählen
-  codeSections: CodeSection[] = [];
+ // codeSections: CodeSection[] = [];
+
 
   // timer
   timer: string = "";
@@ -41,11 +60,36 @@ export class TestResultComponent  implements OnInit{
     TestResults: []
   };
 
-  constructor(private rest: RestService, private resultHistoryService: ResultHistoryService) {
+  constructor(private rest: RestService, private resultHistoryService: ResultHistoryService, private route: ActivatedRoute, private restDb: DbService) {
   }
 
   ngOnInit(): void {
-    this.rest.startRunner("Typescript").subscribe((data) => {
+
+   // this.parseTemplateToCodeSections(this.testTemplate, "passwordChecker.ts");
+
+
+    this.route.queryParams.subscribe((params: Params) => {
+      this.userName = params['userName'];
+      this.exerciseName = params['exerciseName'];
+
+      if(this.userName != null && this.exerciseName != null){
+        sessionStorage.setItem("userName", this.userName);
+        sessionStorage.setItem("exerciseName", this.exerciseName);
+      }else{
+        this.userName = sessionStorage.getItem('userName');
+        this.exerciseName = sessionStorage.getItem('exerciseName');
+      }
+    });
+
+     if(this.userName != null && this.exerciseName != null){
+      this.restDb.getExerciseByUsername(this.userName, this.exerciseName).subscribe((data: ExerciseDto[]) => {
+        this.exercise = data[0];
+    });
+    }
+
+
+// this.rest.startRunner("Typescript").subscribe((data) => {
+    this.rest.startRunner(this.exercise.language).subscribe((data) => {
       console.log(data);
     
     },
@@ -53,16 +97,18 @@ export class TestResultComponent  implements OnInit{
         console.error("Error in API request", error);
         this.loading = false;
     });
-    this.parseTemplateToCodeSections(this.testTemplate, "passwordChecker.ts");
+   
+  
   }
   ngOnDestroy(): void {
+    // this.rest.stopRunner(this.exercise.language).subscribe((data) => {
     this.rest.stopRunner("Typescript").subscribe((data) => {
       console.log(data);
-    }
-    );
+    });
+    
   }
 
-// Code Editor Funcions
+/* Code Editor Funcions
   parseTemplateToCodeSections(template: string, programName: string) {
 
     let stringCodeSections: string[]= template.split("\n");
@@ -72,22 +118,14 @@ export class TestResultComponent  implements OnInit{
 
     for(let i = 0; i < stringCodeSections.length; i++) {
       if(stringCodeSections[i].includes("Todo Implementation")) {
-        codeSections.push({ code: stringCodeSections[i], readonly: false, fileName: programName});
+        codeSections.push({ code: stringCodeSections[i], readOnlySection: false, fileName: programName});
       }else {
-        codeSections.push({ code: stringCodeSections[i], readonly: true, fileName: programName});
+        codeSections.push({ code: stringCodeSections[i], readOnlySection: true, fileName: programName});
       }
     }
 
     this.codeSections = codeSections;
-  }
-  
-  /*parseCodeSectionsToTemplate(codeSections: CodeSection[]) {
-      let template: string = "";
-      for(let i = 0; i < codeSections.length; i++) {
-        template += codeSections[i].code + "\n";
-      }
-      this.testTemplate = template;
-    }*/
+  }*/
 
   // parse from json new
   convertFromJsonV2(value: Value): Result {// mit neuen json format
@@ -141,7 +179,9 @@ export class TestResultComponent  implements OnInit{
     const timeLogger = new TimeLoggerService();
     timeLogger.start();
 
-    this.rest.runTests('PasswordChecker', this.codeSections, "Typescript").subscribe(
+
+    //this.rest.runTests('PasswordChecker', this.codeSections, "Typescript").subscribe(
+      this.rest.runTests("PasswordChecker", this.exercise.arrayOfSnippets, "Typescript").subscribe(
         (data) => {
           console.log(data);
           
@@ -168,6 +208,5 @@ export class TestResultComponent  implements OnInit{
             this.loading = false;
         }
     );
-}
-
+  }
 }

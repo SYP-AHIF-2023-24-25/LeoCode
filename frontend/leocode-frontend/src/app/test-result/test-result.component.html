@@ -7,7 +7,7 @@
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav">
       <li class="nav-item">
-        <a class="nav-link" [routerLink]="['/test-results']">Typescript</a>
+        <a class="nav-link" [routerLink]="['/test-results']">{{exercise.name}}</a>
       </li>
     </ul>
   </div>
@@ -22,7 +22,7 @@
           <li class="nav-item">
             <a class="nav-link active" [routerLink]="['/introdcution']">
               Introduction
-            </a>
+            </a> 
           </li>
           <li class="nav-item">
             <a class="nav-link" [routerLink]="['/test-results']">
@@ -40,11 +40,11 @@
 
 <div class="container mt-4">
   <h2>Playground</h2>
-  <div *ngFor="let codeSection of codeSections">
-      <div *ngIf="codeSection.readonly">
+  <div *ngFor="let codeSection of exercise.arrayOfSnippets">
+      <div *ngIf="codeSection.readOnlySection">
           <mark>{{codeSection.code }}</mark> 
       </div>
-      <div *ngIf="!codeSection.readonly" style="height: 300px">
+      <div *ngIf="!codeSection.readOnlySection" style="height: 300px">
           <ngx-monaco-editor style="height: 300px; width: 1000px"  [options]="editorOptions"
           [(ngModel)]="codeSection.code"></ngx-monaco-editor>
       </div>
