@@ -79,28 +79,26 @@ public class ExerciseController : Controller
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetExersiceByUsername(string username, string? exerciseName)
+    public async Task<ExerciseDto[]> GetExersiceByUsername(string username, string? exerciseName)
     {
         try
         {
             User user = _unitOfWork.Users.GetByUsername(username);
             List<Exercise> exercises = await _unitOfWork.Exercises.GetExersiceByUsernameAsync(user, exerciseName);
-            return Ok(exercises.Select(exercise => new ExerciseDto(
+            return exercises.Select(exercise => new ExerciseDto(
             exercise.Name,
             exercise.Description,
             ((Language)exercise.Language).ToString(),
             exercise.Tags,
-            new ArrayOfSnippetsDto(
                 exercise.ArrayOfSnippets.Snippets.Select(snippet => new SnippetDto(
                     snippet.Code,
                     snippet.ReadonlySection,
                     snippet.FileName)).ToArray()
-            )
-            )));
+            )).ToArray();
         }
         catch (Exception ex)
         {
-            return BadRequest(ex.Message);
+            return [];
         }
     }
 
