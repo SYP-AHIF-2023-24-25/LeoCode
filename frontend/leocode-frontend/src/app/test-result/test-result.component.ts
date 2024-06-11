@@ -6,7 +6,7 @@ import { ResultHistoryService } from '../service/result-history.service';
 import { Result } from '../model/result';
 import { Summary } from '../model/summary';
 import { TestResults } from '../model/test-results';
-
+import { ArrayOfSnippetsDto } from '../model/arrayOfSnippetsDto';
 import { CodeSection } from '../model/code-sections';
 import { Value } from '../model/value';
 import { ActivatedRoute, Params } from '@angular/router';
@@ -15,17 +15,11 @@ import { DbService } from '../service/db-service.service';
 import { Exercise } from '../model/exercise';
 import { ExerciseDto } from '../model/exerciseDto';
 
-
-
-
-
-
 @Component({
   selector: 'app-test-result',
   templateUrl: './test-result.component.html',
   styleUrls: ['./test-result.component.css']
 })
-
 
 export class TestResultComponent  implements OnInit{
 
@@ -84,6 +78,8 @@ export class TestResultComponent  implements OnInit{
      if(this.userName != null && this.exerciseName != null){
       this.restDb.getExerciseByUsername(this.userName, this.exerciseName).subscribe((data: ExerciseDto[]) => {
         this.exercise = data[0];
+        console.log("TAGS")
+        console.log(this.exercise.tags.length);
     });
     }
   }
@@ -170,5 +166,18 @@ export class TestResultComponent  implements OnInit{
             this.loading = false;
         }
     );
+    let subject = "";
+    if(this.exercise.tags.includes("WMC")){
+      subject = "WMC";
+    }else if(this.exercise.tags.includes("POSE")){
+      subject = "POSE";
+    }
+    let arrayOfSnippets: ArrayOfSnippetsDto = {
+      snippets: this.exercise.arrayOfSnippets
+    }
+    let usrname = "Default";
+    console.log(this.exercise.name);
+    console.log(this.exercise.tags.length);
+    this.restDb.UpdateExercise(usrname, this.exercise.description, this.exercise.language, this.exercise.tags, this.exercise.name, arrayOfSnippets, subject).subscribe();
   }
 }

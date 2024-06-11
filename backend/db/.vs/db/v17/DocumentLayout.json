@@ -3,8 +3,21 @@
   "WorkspaceRootPath": "C:\\Schule\\4AHIF\\LeoCode\\backend\\db\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/LeoCodeDb/True/SqlTable/dbo.Snippet.sql||{0058A1F7-65F3-4DB9-B3D0-CA7E64DD73CD}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/LeoCodeDb/True/SqlTable/dbo.Exercises.sql||{0058A1F7-65F3-4DB9-B3D0-CA7E64DD73CD}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{B35848D2-D6F7-4DBA-B87F-0BBE118D756D}|WebAPI\\WebAPI.csproj|c:\\schule\\4ahif\\leocode\\backend\\db\\webapi\\controllers\\exercisecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B35848D2-D6F7-4DBA-B87F-0BBE118D756D}|WebAPI\\WebAPI.csproj|solutionrelative:webapi\\controllers\\exercisecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{00B8AE76-D38B-4A7B-AAD4-1D1BBA3D544B}|Core\\Core.csproj|c:\\schule\\4ahif\\leocode\\backend\\db\\core\\entities\\language.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{00B8AE76-D38B-4A7B-AAD4-1D1BBA3D544B}|Core\\Core.csproj|solutionrelative:core\\entities\\language.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/LeoCodeDb/True/SqlTable/dbo.Users.sql||{0058A1F7-65F3-4DB9-B3D0-CA7E64DD73CD}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{06B9D709-2243-426B-AE88-F2F8B871DDDF}|ConsoleApp\\Import.csproj|c:\\schule\\4ahif\\leocode\\backend\\db\\consoleapp\\importcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -26,7 +39,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
@@ -38,20 +51,63 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Language.cs",
+              "DocumentMoniker": "C:\\Schule\\4AHIF\\LeoCode\\backend\\db\\Core\\Entities\\Language.cs",
+              "RelativeDocumentMoniker": "Core\\Entities\\Language.cs",
+              "ToolTip": "C:\\Schule\\4AHIF\\LeoCode\\backend\\db\\Core\\Entities\\Language.cs",
+              "RelativeToolTip": "Core\\Entities\\Language.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAASAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-11T09:01:20.023Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "dbo.Snippet [Daten]",
+              "DocumentMoniker": "ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/LeoCodeDb/True/SqlTable/dbo.Snippet.sql",
+              "ToolTip": "dbo.Snippet [Daten]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
+              "WhenOpened": "2024-06-11T08:55:56.853Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "dbo.Users [Daten]",
+              "DocumentMoniker": "ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/LeoCodeDb/True/SqlTable/dbo.Users.sql",
+              "ToolTip": "dbo.Users [Daten]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
+              "WhenOpened": "2024-06-11T07:54:01.733Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "dbo.Exercises [Daten]",
+              "DocumentMoniker": "ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/LeoCodeDb/True/SqlTable/dbo.Exercises.sql",
+              "ToolTip": "dbo.Exercises [Daten]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
+              "WhenOpened": "2024-06-11T07:30:15.546Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "ExerciseController.cs",
               "DocumentMoniker": "C:\\Schule\\4AHIF\\LeoCode\\backend\\db\\WebAPI\\Controllers\\ExerciseController.cs",
               "RelativeDocumentMoniker": "WebAPI\\Controllers\\ExerciseController.cs",
               "ToolTip": "C:\\Schule\\4AHIF\\LeoCode\\backend\\db\\WebAPI\\Controllers\\ExerciseController.cs",
               "RelativeToolTip": "WebAPI\\Controllers\\ExerciseController.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAANAAAA",
+              "ViewState": "AQIAAFgAAAAAAAAAAAD4v1oAAAA1AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-06-10T10:32:33.257Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 6,
               "Title": "SnippetController.cs",
               "DocumentMoniker": "C:\\Schule\\4AHIF\\LeoCode\\backend\\db\\WebAPI\\Controllers\\SnippetController.cs",
               "RelativeDocumentMoniker": "WebAPI\\Controllers\\SnippetController.cs",
@@ -63,7 +119,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 5,
               "Title": "ImportController.cs",
               "DocumentMoniker": "C:\\Schule\\4AHIF\\LeoCode\\backend\\db\\ConsoleApp\\ImportController.cs",
               "RelativeDocumentMoniker": "ConsoleApp\\ImportController.cs",
@@ -71,12 +127,11 @@
               "RelativeToolTip": "ConsoleApp\\ImportController.cs",
               "ViewState": "AQIAALMAAAAAAAAAAAAAABIAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-08T18:36:53.781Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-06-08T18:36:53.781Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 7,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Schule\\4AHIF\\LeoCode\\backend\\db\\WebAPI\\Program.cs",
               "RelativeDocumentMoniker": "WebAPI\\Program.cs",

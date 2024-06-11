@@ -91,7 +91,7 @@
       },
       {
         "Name": "tags",
-        "Type": "System.String[]",
+        "Type": "System.String",
         "IsRequired": false
       },
       {

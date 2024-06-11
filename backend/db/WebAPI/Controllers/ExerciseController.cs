@@ -102,8 +102,9 @@ public class ExerciseController : Controller
         }
     }
     [HttpPut]
-    public async Task<IActionResult> UpdateExerciseForUser(string username, string description, string[] tags, string language, string subject, string exerciseName, [FromBody] ArrayOfSnippetsDto arrayOfSnippets)
+    public async Task<IActionResult> UpdateExerciseForUser(string username, string description, string tags, string language, string subject, string exerciseName, [FromBody] ArrayOfSnippetsDto arrayOfSnippets)
     {
+        string[] splitted = tags.Split(",");
         try
         {
             User user = _unitOfWork.Users.GetByUsername(username);
@@ -114,7 +115,7 @@ public class ExerciseController : Controller
 
             if (exercises.IsNullOrEmpty())
             {
-                await AddExerciseAsync(arrayOfSnippets, exerciseName, description, language, tags, username);
+                await AddExerciseAsync(arrayOfSnippets, exerciseName, description, language, splitted, username);
                 return Ok();
             }
 

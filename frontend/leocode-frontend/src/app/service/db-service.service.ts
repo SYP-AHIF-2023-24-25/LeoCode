@@ -40,16 +40,18 @@ export class DbService {
     return this.http.post<Exercise>(`${this.apiUrl}/exercise?name=${exercise.exerciseName}&description=${exercise.introduction}&language=${exercise.language}&tags=${exercise.tags}&username=${exercise.username}`, arrayOfSnippets, httpOptions);
   }
 
-  UpdateExercise( username: string, introduction : string, language: string, tags: string[], exerciseName: string, codeSections: CodeSection[]) {
+  UpdateExercise( username: string, introduction : string, language: string, tags: string[], exerciseName: string, arrayOfSnippets: ArrayOfSnippetsDto, subject: string) {
     let exercise = {
-      codeSections: codeSections,
       exerciseName: exerciseName,
       introduction: introduction,
       language: language,
       tags: tags,
       username: username
     }
-    return this.http.put<Exercise>(`${this.apiUrl}/exercise`, exercise, httpOptions);
+    console.log("TAGS: " + exercise.tags.length);
+    console.log("TAGS: " + exercise.tags[0])
+    console.log("TAGS: " + exercise.tags[1])
+    return this.http.put<Exercise>(`${this.apiUrl}/exercise?username=${exercise.username}&description=${exercise.introduction}&tags=${exercise.tags}&language=${exercise.language}&subject=${subject}&exerciseName=${exercise.exerciseName}`, arrayOfSnippets, httpOptions);
   }
 
 }
