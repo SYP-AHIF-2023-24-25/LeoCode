@@ -170,7 +170,7 @@ namespace LeoCodeBackend
         static async Task<IActionResult> RunTests(string exerciseName,string language, [FromBody] JsonObject arrayOfSnippets)
         {
             string apiUrl = "";
-            if(language == "Typescript"){
+            if(language == "TypeScript"){
                 apiUrl = $"http://localhost:8000/api/execute/{exerciseName}";
             } else if(language == "CSharp"){
                 //apiUrl = $"http://localhost:5168/api/execute/{exerciseName}";
@@ -196,7 +196,7 @@ namespace LeoCodeBackend
                         string responseBody = await response.Content.ReadAsStringAsync();
                         JsonDocument result = null;
                         JsonElement value = new JsonElement();
-                        if (language == "Typescript")
+                        if (language == "TypeScript")
                         {
                             ResultFileHelperTypescript resultFileHelperTypescript = new ResultFileHelperTypescript();
                             result = JsonDocument.Parse(resultFileHelperTypescript.formatData(responseBody));

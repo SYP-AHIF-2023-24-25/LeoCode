@@ -16,3 +16,7 @@
 06/10/2024 18:07:39: ERROR: Response from CSharp-runner wasn't successful. Error Message: Data at the root level is invalid. Line 1, position 1.
 06/10/2024 19:43:05: SUCCESS: Response from CSharp-runner was successful
 06/10/2024 19:43:06: ERROR: Response from CSharp-runner wasn't successful. Error Message: Data at the root level is invalid. Line 1, position 1.
+06/11/2024 08:23:33: ERROR: Response from TypeScript-runner wasn't successful. Error Message: An invalid request URI was provided. Either the request URI must be an absolute URI or BaseAddress must be set.
+06/11/2024 08:32:38: SUCCESS: Response from TypeScript-runner was successful
+06/11/2024 08:33:49: SUCCESS: Response from TypeScript-runner was successful
+06/11/2024 08:34:26: SUCCESS: Response from TypeScript-runner was successful

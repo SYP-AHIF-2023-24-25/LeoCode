@@ -142,6 +142,7 @@ export class TestResultComponent  implements OnInit{
 
 
     //this.rest.runTests('PasswordChecker', this.codeSections, "Typescript").subscribe(
+    console.log(this.exercise.language);
       this.rest.runTests(this.exercise.name, this.exercise.arrayOfSnippets, this.exercise.language).subscribe(
         (data) => {
           console.log(data);

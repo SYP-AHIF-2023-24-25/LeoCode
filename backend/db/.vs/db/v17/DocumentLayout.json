@@ -1,21 +1,21 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\Kelit\\Schule2023-24\\syp\\LeoCode\\backend\\db\\",
+  "WorkspaceRootPath": "C:\\Schule\\4AHIF\\LeoCode\\backend\\db\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{B35848D2-D6F7-4DBA-B87F-0BBE118D756D}|WebAPI\\WebAPI.csproj|c:\\users\\kelit\\schule2023-24\\syp\\leocode\\backend\\db\\webapi\\controllers\\exercisecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{B35848D2-D6F7-4DBA-B87F-0BBE118D756D}|WebAPI\\WebAPI.csproj|c:\\schule\\4ahif\\leocode\\backend\\db\\webapi\\controllers\\exercisecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B35848D2-D6F7-4DBA-B87F-0BBE118D756D}|WebAPI\\WebAPI.csproj|solutionrelative:webapi\\controllers\\exercisecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{06B9D709-2243-426B-AE88-F2F8B871DDDF}|ConsoleApp\\Import.csproj|c:\\users\\kelit\\schule2023-24\\syp\\leocode\\backend\\db\\consoleapp\\importcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{06B9D709-2243-426B-AE88-F2F8B871DDDF}|ConsoleApp\\Import.csproj|c:\\schule\\4ahif\\leocode\\backend\\db\\consoleapp\\importcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{06B9D709-2243-426B-AE88-F2F8B871DDDF}|ConsoleApp\\Import.csproj|solutionrelative:consoleapp\\importcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B35848D2-D6F7-4DBA-B87F-0BBE118D756D}|WebAPI\\WebAPI.csproj|c:\\users\\kelit\\schule2023-24\\syp\\leocode\\backend\\db\\webapi\\controllers\\snippetcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{B35848D2-D6F7-4DBA-B87F-0BBE118D756D}|WebAPI\\WebAPI.csproj|c:\\schule\\4ahif\\leocode\\backend\\db\\webapi\\controllers\\snippetcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B35848D2-D6F7-4DBA-B87F-0BBE118D756D}|WebAPI\\WebAPI.csproj|solutionrelative:webapi\\controllers\\snippetcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B35848D2-D6F7-4DBA-B87F-0BBE118D756D}|WebAPI\\WebAPI.csproj|c:\\users\\kelit\\schule2023-24\\syp\\leocode\\backend\\db\\webapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{B35848D2-D6F7-4DBA-B87F-0BBE118D756D}|WebAPI\\WebAPI.csproj|c:\\schule\\4ahif\\leocode\\backend\\db\\webapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B35848D2-D6F7-4DBA-B87F-0BBE118D756D}|WebAPI\\WebAPI.csproj|solutionrelative:webapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -26,21 +26,25 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
             },
             {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
+            },
+            {
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "ExerciseController.cs",
-              "DocumentMoniker": "C:\\Users\\Kelit\\Schule2023-24\\syp\\LeoCode\\backend\\db\\WebAPI\\Controllers\\ExerciseController.cs",
+              "DocumentMoniker": "C:\\Schule\\4AHIF\\LeoCode\\backend\\db\\WebAPI\\Controllers\\ExerciseController.cs",
               "RelativeDocumentMoniker": "WebAPI\\Controllers\\ExerciseController.cs",
-              "ToolTip": "C:\\Users\\Kelit\\Schule2023-24\\syp\\LeoCode\\backend\\db\\WebAPI\\Controllers\\ExerciseController.cs",
+              "ToolTip": "C:\\Schule\\4AHIF\\LeoCode\\backend\\db\\WebAPI\\Controllers\\ExerciseController.cs",
               "RelativeToolTip": "WebAPI\\Controllers\\ExerciseController.cs",
-              "ViewState": "AQIAABIAAAAAAAAAAAAswCIAAAAXAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAANAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-06-10T10:32:33.257Z",
               "EditorCaption": ""
@@ -49,9 +53,9 @@
               "$type": "Document",
               "DocumentIndex": 2,
               "Title": "SnippetController.cs",
-              "DocumentMoniker": "C:\\Users\\Kelit\\Schule2023-24\\syp\\LeoCode\\backend\\db\\WebAPI\\Controllers\\SnippetController.cs",
+              "DocumentMoniker": "C:\\Schule\\4AHIF\\LeoCode\\backend\\db\\WebAPI\\Controllers\\SnippetController.cs",
               "RelativeDocumentMoniker": "WebAPI\\Controllers\\SnippetController.cs",
-              "ToolTip": "C:\\Users\\Kelit\\Schule2023-24\\syp\\LeoCode\\backend\\db\\WebAPI\\Controllers\\SnippetController.cs",
+              "ToolTip": "C:\\Schule\\4AHIF\\LeoCode\\backend\\db\\WebAPI\\Controllers\\SnippetController.cs",
               "RelativeToolTip": "WebAPI\\Controllers\\SnippetController.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAAABAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -61,21 +65,22 @@
               "$type": "Document",
               "DocumentIndex": 1,
               "Title": "ImportController.cs",
-              "DocumentMoniker": "C:\\Users\\Kelit\\Schule2023-24\\syp\\LeoCode\\backend\\db\\ConsoleApp\\ImportController.cs",
+              "DocumentMoniker": "C:\\Schule\\4AHIF\\LeoCode\\backend\\db\\ConsoleApp\\ImportController.cs",
               "RelativeDocumentMoniker": "ConsoleApp\\ImportController.cs",
-              "ToolTip": "C:\\Users\\Kelit\\Schule2023-24\\syp\\LeoCode\\backend\\db\\ConsoleApp\\ImportController.cs",
+              "ToolTip": "C:\\Schule\\4AHIF\\LeoCode\\backend\\db\\ConsoleApp\\ImportController.cs",
               "RelativeToolTip": "ConsoleApp\\ImportController.cs",
-              "ViewState": "AQIAANkAAAAAAAAAAAAQwBIAAAAAAAAA",
+              "ViewState": "AQIAALMAAAAAAAAAAAAAABIAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-08T18:36:53.781Z"
+              "WhenOpened": "2024-06-08T18:36:53.781Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
               "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\Kelit\\Schule2023-24\\syp\\LeoCode\\backend\\db\\WebAPI\\Program.cs",
+              "DocumentMoniker": "C:\\Schule\\4AHIF\\LeoCode\\backend\\db\\WebAPI\\Program.cs",
               "RelativeDocumentMoniker": "WebAPI\\Program.cs",
-              "ToolTip": "C:\\Users\\Kelit\\Schule2023-24\\syp\\LeoCode\\backend\\db\\WebAPI\\Program.cs",
+              "ToolTip": "C:\\Schule\\4AHIF\\LeoCode\\backend\\db\\WebAPI\\Program.cs",
               "RelativeToolTip": "WebAPI\\Program.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAABQAAABYAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
