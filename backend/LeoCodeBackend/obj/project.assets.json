@@ -275,6 +275,19 @@
           }
         }
       },
+      "Serilog/4.0.0": {
+        "type": "package",
+        "compile": {
+          "lib/net8.0/Serilog.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0/Serilog.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "Swashbuckle.AspNetCore/6.4.0": {
         "type": "package",
         "dependencies": {
@@ -1031,6 +1044,29 @@
         "packageIcon.png"
       ]
     },
+    "Serilog/4.0.0": {
+      "sha512": "2jDkUrSh5EofOp7Lx5Zgy0EB+7hXjjxE2ktTb1WVQmU00lDACR2TdROGKU0K1pDTBSJBN1PqgYpgOZF8mL7NJw==",
+      "type": "package",
+      "path": "serilog/4.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "icon.png",
+        "lib/net462/Serilog.dll",
+        "lib/net462/Serilog.xml",
+        "lib/net471/Serilog.dll",
+        "lib/net471/Serilog.xml",
+        "lib/net6.0/Serilog.dll",
+        "lib/net6.0/Serilog.xml",
+        "lib/net8.0/Serilog.dll",
+        "lib/net8.0/Serilog.xml",
+        "lib/netstandard2.0/Serilog.dll",
+        "lib/netstandard2.0/Serilog.xml",
+        "serilog.4.0.0.nupkg.sha512",
+        "serilog.nuspec"
+      ]
+    },
     "Swashbuckle.AspNetCore/6.4.0": {
       "sha512": "eUBr4TW0up6oKDA5Xwkul289uqSMgY0xGN4pnbOIBqCcN9VKGGaPvHX3vWaG/hvocfGDP+MGzMA0bBBKz2fkmQ==",
       "type": "package",
@@ -1227,12 +1263,13 @@
       "Microsoft.AspNetCore.OpenApi >= 8.0.0",
       "Microsoft.Extensions.Logging >= 8.0.0",
       "Newtonsoft.Json >= 13.0.3",
+      "Serilog >= 4.0.0",
       "Swashbuckle.AspNetCore >= 6.4.0",
       "System.Text.Json >= 8.0.0"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\dap03\\.nuget\\packages\\": {}
+    "C:\\Users\\Florian\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
@@ -1240,11 +1277,11 @@
       "projectUniqueName": "C:\\Schule\\4AHIF\\LeoCode\\backend\\LeoCodeBackend\\LeoCodeBackend.csproj",
       "projectName": "LeoCodeBackend",
       "projectPath": "C:\\Schule\\4AHIF\\LeoCode\\backend\\LeoCodeBackend\\LeoCodeBackend.csproj",
-      "packagesPath": "C:\\Users\\dap03\\.nuget\\packages\\",
+      "packagesPath": "C:\\Users\\Florian\\.nuget\\packages\\",
       "outputPath": "C:\\Schule\\4AHIF\\LeoCode\\backend\\LeoCodeBackend\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\dap03\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Florian\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -1264,6 +1301,11 @@
         "warnAsError": [
           "NU1605"
         ]
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
       }
     },
     "frameworks": {
@@ -1285,6 +1327,10 @@
           "Newtonsoft.Json": {
             "target": "Package",
             "version": "[13.0.3, )"
+          },
+          "Serilog": {
+            "target": "Package",
+            "version": "[4.0.0, )"
           },
           "Swashbuckle.AspNetCore": {
             "target": "Package",
@@ -1314,7 +1360,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.203/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

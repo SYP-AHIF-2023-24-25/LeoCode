@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using Serilog;
 
 namespace csharp_runner
 {
@@ -85,6 +86,7 @@ namespace csharp_runner
             }
             catch (Exception ex)
             {
+                Log.Error("Run Commands Async was not successfull", ex.Message);
                 Console.WriteLine($"An error occurred: {ex.Message}");
                 return -1;
             }
@@ -158,6 +160,7 @@ namespace csharp_runner
             }
             catch (Exception ex)
             {
+                Log.Error("Runs Command as Async for Dotnet was not successful", ex.Message);
                 Console.WriteLine($"An error occurred: {ex.Message}");
                 return -1; // Rückgabewert für Fehler
             }
@@ -230,6 +233,7 @@ namespace csharp_runner
             }
             catch (Exception ex)
             {
+                Log.Error("Runs Command Async for Command Line was not successful", ex.Message);
                 Console.WriteLine($"An error occurred: {ex.Message}");
                 return -1; // Rückgabewert für Fehler
             }

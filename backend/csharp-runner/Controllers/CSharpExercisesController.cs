@@ -6,6 +6,7 @@ using System;
 using System.IO;
 using Microsoft.AspNetCore.Http;
 using System.Threading.Tasks;
+using Serilog;
 
 namespace csharp_runner.Controllers
 {
@@ -53,6 +54,7 @@ namespace csharp_runner.Controllers
 
                     Directory.Delete(parts[0], true);
                     //log succes
+                    Log.Information($"Template uploaded");
                     return Ok(jsonResult);
                 }
 
@@ -64,6 +66,7 @@ namespace csharp_runner.Controllers
             catch (Exception ex)
             {
                 //log error
+                Log.Error("Template upload was not successful");
                 return StatusCode(StatusCodes.Status400BadRequest, "Something went wrong while Template upload");
             }
         }

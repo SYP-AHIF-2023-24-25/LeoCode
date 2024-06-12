@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.Http;
 using System.Threading.Tasks;
 using System.Text;
 using Microsoft.AspNetCore.Http.HttpResults;
+using Serilog;
 
 namespace csharp_runner
 {
@@ -87,6 +88,7 @@ namespace csharp_runner
                     string csFilePath = csFiles[0];
                     string fileContent = await System.IO.File.ReadAllTextAsync(csFilePath);
                     Console.WriteLine(fileContent);
+                    Log.Information($"Content of Cs File: {fileContent}");
                     return new OkObjectResult(fileContent);
                 }
                 else
@@ -96,6 +98,7 @@ namespace csharp_runner
             }
             catch (Exception ex)
             {
+                Log.Error("Get First Cs File Content was not successful", ex.Message);
                 return new StatusCodeResult(500);
             }
         }
@@ -115,11 +118,13 @@ namespace csharp_runner
                 var result = await executeTests.runCSharp(exerciseName, templateFilePath, filePathForRandomDirectory, body.code, body.fileName);
                 Console.WriteLine($"Result: {result}");
                 //log succes
+                Log.Information($"Runned Tests: {result}");
                 return new OkObjectResult(result);
             }
             catch (Exception ex)
             {
                 //log error
+                Log.Error("Running Tests were not successful", ex.Message);
                 Console.WriteLine($"Error: {ex.Message}");
                 return new BadRequestObjectResult(ex.Message);
             }

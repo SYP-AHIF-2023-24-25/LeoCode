@@ -10,14 +10,12 @@ using Microsoft.Extensions.DependencyInjection;
 using System.Text;
 using Newtonsoft.Json;
 using System.Text.Json.Nodes;
+using Serilog;
 
 namespace LeoCodeBackend
 {
     class Program
     {
-        private static readonly string _logFilePath = @"../logging/logs.txt";
-        private static readonly FileLogger _fileLogger = new FileLogger(_logFilePath);
-
         static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
@@ -118,6 +116,7 @@ namespace LeoCodeBackend
                     var expressServerFilePath = $@"{currentDirectory}\..\ts-runner";
                     await BuildImageServer(dockerFilePath, expressServerFilePath, "ts-runner");
                     await StartContainer("Typescript");
+                    
                 }
                 else if(language == "CSharp")
                 {
@@ -132,11 +131,14 @@ namespace LeoCodeBackend
                     await StartContainer("Java");
                 }
 
-                Directory.SetCurrentDirectory(currentDirectory); 
+                Log.Information($"{language}-runner started");
+
+                Directory.SetCurrentDirectory(currentDirectory);
             } 
             catch(Exception ex) 
             {
                 Console.WriteLine($"Error: {ex.Message}");
+                Log.Error($"{language}-runner started");
             }
             
         }
@@ -159,11 +161,13 @@ namespace LeoCodeBackend
                     process.Start();
                     await process.WaitForExitAsync();
                 }
+                Log.Error($"{imageName} was builded");
                 Directory.SetCurrentDirectory(currentDirectory);
             } 
             catch (Exception ex)
             {
                 Console.WriteLine($"Error: {ex.Message}");
+                Log.Error($"{imageName} was not builded");
             }
         }
 
@@ -192,7 +196,7 @@ namespace LeoCodeBackend
                     response = await httpClient.PostAsync(apiUrl, content);
                     if (response.IsSuccessStatusCode)
                     {
-                        _fileLogger.Log($"SUCCESS: Response from {language}-runner was successful");
+                        Log.Information($"Response from {language}-runner was successful");
                         string responseBody = await response.Content.ReadAsStringAsync();
                         JsonDocument result = null;
                         JsonElement value = new JsonElement();
@@ -220,13 +224,13 @@ namespace LeoCodeBackend
                     }
                     else
                     {
-                        _fileLogger.Log($"ERROR: Response from {language}-runner wasn't successful");
+                        Log.Error($"Response from {language}-runner wasn't successful");
                         Console.WriteLine($"Request failed with status code {response.StatusCode}");
                     }
                 }
                 catch (Exception ex)
                 {
-                    _fileLogger.Log($"ERROR: Response from {language}-runner wasn't successful. Error Message: {ex.Message}");
+                    Log.Error($"ERROR: Response from {language}-runner wasn't successful. Error Message: {ex.Message}");
                     Console.WriteLine($"An error occurred: {ex.Message}");
                 }
             }
@@ -256,6 +260,7 @@ namespace LeoCodeBackend
                     process.WaitForExit();
                 });
             }
+            Log.Information("Container of {language} started");
             Directory.SetCurrentDirectory(currentDirectory);
         }
         static string ConcatSnippets(Snippets snippets)
@@ -272,6 +277,7 @@ namespace LeoCodeBackend
             catch (System.Text.Json.JsonException ex)
             {
                 Console.WriteLine($"Fehler beim Deserialisieren: {ex.Message}");
+                Log.Error($"Fehler beim Deserialisieren der Snippets: {ex.Message}");
                 return ex.Message;
             }
         }
