@@ -10,11 +10,11 @@
         "projectUniqueName": "C:\\Schule\\4AHIF\\LeoCode\\backend\\db\\Base\\Base.csproj",
         "projectName": "Base",
         "projectPath": "C:\\Schule\\4AHIF\\LeoCode\\backend\\db\\Base\\Base.csproj",
-        "packagesPath": "C:\\Users\\David Pröller\\.nuget\\packages\\",
+        "packagesPath": "C:\\Users\\dap03\\.nuget\\packages\\",
         "outputPath": "C:\\Schule\\4AHIF\\LeoCode\\backend\\db\\Base\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\David Pröller\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\dap03\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -34,11 +34,6 @@
           "warnAsError": [
             "NU1605"
           ]
-        },
-        "restoreAuditProperties": {
-          "enableAudit": "true",
-          "auditLevel": "low",
-          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -88,7 +83,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.200/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
@@ -98,11 +93,11 @@
         "projectUniqueName": "C:\\Schule\\4AHIF\\LeoCode\\backend\\db\\ConsoleApp\\Import.csproj",
         "projectName": "Import",
         "projectPath": "C:\\Schule\\4AHIF\\LeoCode\\backend\\db\\ConsoleApp\\Import.csproj",
-        "packagesPath": "C:\\Users\\David Pröller\\.nuget\\packages\\",
+        "packagesPath": "C:\\Users\\dap03\\.nuget\\packages\\",
         "outputPath": "C:\\Schule\\4AHIF\\LeoCode\\backend\\db\\ConsoleApp\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\David Pröller\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\dap03\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -126,11 +121,6 @@
           "warnAsError": [
             "NU1605"
           ]
-        },
-        "restoreAuditProperties": {
-          "enableAudit": "true",
-          "auditLevel": "low",
-          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -168,7 +158,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.200/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
@@ -178,11 +168,11 @@
         "projectUniqueName": "C:\\Schule\\4AHIF\\LeoCode\\backend\\db\\Core\\Core.csproj",
         "projectName": "Core",
         "projectPath": "C:\\Schule\\4AHIF\\LeoCode\\backend\\db\\Core\\Core.csproj",
-        "packagesPath": "C:\\Users\\David Pröller\\.nuget\\packages\\",
+        "packagesPath": "C:\\Users\\dap03\\.nuget\\packages\\",
         "outputPath": "C:\\Schule\\4AHIF\\LeoCode\\backend\\db\\Core\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\David Pröller\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\dap03\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -206,11 +196,6 @@
           "warnAsError": [
             "NU1605"
           ]
-        },
-        "restoreAuditProperties": {
-          "enableAudit": "true",
-          "auditLevel": "low",
-          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -248,7 +233,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.200/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
@@ -258,11 +243,11 @@
         "projectUniqueName": "C:\\Schule\\4AHIF\\LeoCode\\backend\\db\\Persistence\\Persistence.csproj",
         "projectName": "Persistence",
         "projectPath": "C:\\Schule\\4AHIF\\LeoCode\\backend\\db\\Persistence\\Persistence.csproj",
-        "packagesPath": "C:\\Users\\David Pröller\\.nuget\\packages\\",
+        "packagesPath": "C:\\Users\\dap03\\.nuget\\packages\\",
         "outputPath": "C:\\Schule\\4AHIF\\LeoCode\\backend\\db\\Persistence\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\David Pröller\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\dap03\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -286,11 +271,6 @@
           "warnAsError": [
             "NU1605"
           ]
-        },
-        "restoreAuditProperties": {
-          "enableAudit": "true",
-          "auditLevel": "low",
-          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -340,7 +320,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.200/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

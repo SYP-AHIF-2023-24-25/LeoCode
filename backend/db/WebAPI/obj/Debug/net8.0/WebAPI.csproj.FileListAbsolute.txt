@@ -228,4 +228,4 @@ C:\Users\Kelit\Schule2023-24\syp\LeoCode\backend\db\WebAPI\obj\Debug\net8.0\refi
 C:\Users\Kelit\Schule2023-24\syp\LeoCode\backend\db\WebAPI\obj\Debug\net8.0\WebAPI.pdb
 C:\Users\Kelit\Schule2023-24\syp\LeoCode\backend\db\WebAPI\obj\Debug\net8.0\WebAPI.genruntimeconfig.cache
 C:\Users\Kelit\Schule2023-24\syp\LeoCode\backend\db\WebAPI\obj\Debug\net8.0\ref\WebAPI.dll
-C:\Schule\4AHIF\LeoCode\backend\db\WebAPI\obj\Debug\net8.0\WebAPI.csproj.Up2Date
+C:\Schule\4AHIF\LeoCode\backend\db\WebAPI\obj\Debug\net8.0\WebAPI.csproj.CopyComplete

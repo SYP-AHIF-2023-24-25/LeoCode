@@ -49,4 +49,4 @@ C:\Users\Kelit\Schule2023-24\syp\LeoCode\backend\db\Core\obj\Debug\net8.0\refint
 C:\Users\Kelit\Schule2023-24\syp\LeoCode\backend\db\Core\obj\Debug\net8.0\Core.pdb
 C:\Users\Kelit\Schule2023-24\syp\LeoCode\backend\db\Core\obj\Debug\net8.0\Core.genruntimeconfig.cache
 C:\Users\Kelit\Schule2023-24\syp\LeoCode\backend\db\Core\obj\Debug\net8.0\ref\Core.dll
-C:\Schule\4AHIF\LeoCode\backend\db\Core\obj\Debug\net8.0\Core.csproj.Up2Date
+C:\Schule\4AHIF\LeoCode\backend\db\Core\obj\Debug\net8.0\Core.csproj.CopyComplete

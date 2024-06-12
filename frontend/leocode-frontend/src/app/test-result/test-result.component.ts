@@ -148,6 +148,7 @@ export class TestResultComponent  implements OnInit{
             this.result = this.convertFromJsonV2(d as Value);
             
             this.timer = timeLogger.stop();
+            console.log(this.result.Summary.TotalTests);
             const logEntry = {
                 message: `Unitests : ${this.result.Summary.PassedTests}/${this.result.Summary.TotalTests} test completed.`,
                 timestamp: new Date(),

@@ -47,3 +47,11 @@
 06/11/2024 12:12:46: SUCCESS: Response from TypeScript-runner was successful
 06/11/2024 12:18:53: SUCCESS: Response from TypeScript-runner was successful
 06/11/2024 12:20:02: SUCCESS: Response from CSharp-runner was successful
+06/13/2024 00:38:00: ERROR: Response from CSharp-runner wasn't successful
+06/13/2024 00:40:18: ERROR: Response from CSharp-runner wasn't successful
+06/13/2024 00:49:32: ERROR: Response from CSharp-runner wasn't successful
+06/13/2024 00:56:48: SUCCESS: Response from TypeScript-runner was successful
+06/13/2024 00:57:39: SUCCESS: Response from TypeScript-runner was successful
+06/13/2024 01:01:01: SUCCESS: Response from TypeScript-runner was successful
+06/13/2024 01:01:15: SUCCESS: Response from TypeScript-runner was successful
+06/13/2024 01:01:25: ERROR: Response from TypeScript-runner wasn't successful

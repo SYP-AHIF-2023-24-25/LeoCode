@@ -253,7 +253,15 @@ export class CreateExerciseComponent {
             
 
           this.dbRest.AddExercise(arrayOfSnippets, exercise.name, exercise.instruction, exercise.language, exercise.tags, "Default").subscribe((data: Exercise) => {
-            console.log(data);
+            this.snackBar.open('Exercise created successfully', 'Close', {
+              duration: 5000,
+              horizontalPosition: 'center',
+              verticalPosition: 'top',
+            });
+      
+            this.router.navigate(['/start-screen']).then(() => {
+              window.location.reload();
+            });
           });
 
         }
@@ -278,19 +286,19 @@ export class CreateExerciseComponent {
             
 
           this.dbRest.AddExercise(arrayOfSnippets, exercise.name, exercise.instruction, exercise.language, exercise.tags, "Default").subscribe((data: Exercise) => {
-            console.log(data);
+            this.snackBar.open('Exercise created successfully', 'Close', {
+              duration: 5000,
+              horizontalPosition: 'center',
+              verticalPosition: 'top',
+            });
+      
+            this.router.navigate(['/start-screen']).then(() => {
+              window.location.reload();
+            });
           });
         }
       }
-      this.snackBar.open('Exercise created successfully', 'Close', {
-        duration: 5000,
-        horizontalPosition: 'center',
-        verticalPosition: 'top',
-      });
-
-      this.router.navigate(['/start-screen']).then(() => {
-        window.location.reload();
-      });
+      
       
     }else{
       console.error('No file selected');

@@ -3512,7 +3512,7 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\David Pröller\\.nuget\\packages\\": {}
+    "C:\\Users\\dap03\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
@@ -3520,11 +3520,11 @@
       "projectUniqueName": "C:\\Schule\\4AHIF\\LeoCode\\backend\\db\\WebAPI\\WebAPI.csproj",
       "projectName": "WebAPI",
       "projectPath": "C:\\Schule\\4AHIF\\LeoCode\\backend\\db\\WebAPI\\WebAPI.csproj",
-      "packagesPath": "C:\\Users\\David Pröller\\.nuget\\packages\\",
+      "packagesPath": "C:\\Users\\dap03\\.nuget\\packages\\",
       "outputPath": "C:\\Schule\\4AHIF\\LeoCode\\backend\\db\\WebAPI\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\David Pröller\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\dap03\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -3548,11 +3548,6 @@
         "warnAsError": [
           "NU1605"
         ]
-      },
-      "restoreAuditProperties": {
-        "enableAudit": "true",
-        "auditLevel": "low",
-        "auditMode": "direct"
       }
     },
     "frameworks": {
@@ -3591,7 +3586,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.200/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
