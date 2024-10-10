@@ -12,7 +12,6 @@ import { Value } from '../model/value';
 import { ActivatedRoute, Params } from '@angular/router';
 import { User } from '../model/user';
 import { DbService } from '../service/db-service.service';
-import { Exercise } from '../model/exercise';
 import { ExerciseDto } from '../model/exerciseDto';
 
 @Component({
@@ -28,10 +27,13 @@ export class TestResultComponent  implements OnInit{
 
   exercise : ExerciseDto = {
     name: "",
+    creator: "",
     description: "",
     language: "",
     tags: [],
-    arrayOfSnippets: []
+    arrayOfSnippets: [],
+    dateCreated: new Date(),
+    dateUpdated: new Date()
   }
 
   //Code Editor
@@ -58,10 +60,6 @@ export class TestResultComponent  implements OnInit{
   }
 
   ngOnInit(): void {
-
-   // this.parseTemplateToCodeSections(this.testTemplate, "passwordChecker.ts");
-
-
     this.route.queryParams.subscribe((params: Params) => {
       this.userName = params['userName'];
       this.exerciseName = params['exerciseName'];
@@ -80,6 +78,8 @@ export class TestResultComponent  implements OnInit{
         this.exercise = data[0];
         console.log("TAGS")
         console.log(this.exercise.tags.length);
+        console.log(this.exercise.creator);
+        console.log(this.exercise.dateCreated);
     });
     }
   }

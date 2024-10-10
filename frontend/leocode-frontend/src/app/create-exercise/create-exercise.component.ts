@@ -226,11 +226,14 @@ export class CreateExerciseComponent {
   async sendCodeToRunner() {
      let exercise  = {
       name: this.exerciseName,
+      creator: 'Default',
       instruction: this.instruction,
       language: this.selectedLanguage,
       tags: this.selectedTags,
       zipFile: this.zipFile,
-      emptyZipFile: this.emptyZipFile
+      emptyZipFile: this.emptyZipFile,
+      dateCreated: new Date(),
+      dateUpdated: new Date()
     };
 
     if (exercise.zipFile) {
@@ -252,7 +255,7 @@ export class CreateExerciseComponent {
           console.log(arrayOfSnippets);
             
 
-          this.dbRest.AddExercise(arrayOfSnippets, exercise.name, exercise.instruction, exercise.language, exercise.tags, "Default").subscribe((data: Exercise) => {
+          this.dbRest.AddExercise(arrayOfSnippets, exercise.name, exercise.instruction, exercise.language, exercise.tags, exercise.creator, exercise.dateCreated, exercise.dateUpdated).subscribe((data: Exercise) => {
             this.snackBar.open('Exercise created successfully', 'Close', {
               duration: 5000,
               horizontalPosition: 'center',
@@ -283,9 +286,10 @@ export class CreateExerciseComponent {
           }
           
           console.log(arrayOfSnippets);
+
             
 
-          this.dbRest.AddExercise(arrayOfSnippets, exercise.name, exercise.instruction, exercise.language, exercise.tags, "Default").subscribe((data: Exercise) => {
+          this.dbRest.AddExercise(arrayOfSnippets, exercise.name, exercise.instruction, exercise.language, exercise.tags, exercise.creator, exercise.dateCreated, exercise.dateUpdated ).subscribe((data: Exercise) => {
             this.snackBar.open('Exercise created successfully', 'Close', {
               duration: 5000,
               horizontalPosition: 'center',
