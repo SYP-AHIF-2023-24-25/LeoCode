@@ -1,0 +1,58 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\dap03\\OneDrive\\Desktop\\YourNameIsAEmpty\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{EDBFC310-3821-480F-AF6A-F8416459CBD4}|YourNameIsAEmpty\\YourNameIsAEmpty.csproj|c:\\users\\dap03\\onedrive\\desktop\\yournameisaempty\\yournameisaempty\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EDBFC310-3821-480F-AF6A-F8416459CBD4}|YourNameIsAEmpty\\YourNameIsAEmpty.csproj|solutionrelative:yournameisaempty\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3800E671-A845-4861-9A67-4C59E9856D8D}|YourNameIsAEmptyTests\\YourNameIsAEmptyTests.csproj|c:\\users\\dap03\\onedrive\\desktop\\yournameisaempty\\yournameisaemptytests\\programtests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3800E671-A845-4861-9A67-4C59E9856D8D}|YourNameIsAEmptyTests\\YourNameIsAEmptyTests.csproj|solutionrelative:yournameisaemptytests\\programtests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 2,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ProgramTests.cs",
+              "DocumentMoniker": "C:\\Users\\dap03\\OneDrive\\Desktop\\YourNameIsAEmpty\\YourNameIsAEmptyTests\\ProgramTests.cs",
+              "RelativeDocumentMoniker": "YourNameIsAEmptyTests\\ProgramTests.cs",
+              "ToolTip": "C:\\Users\\dap03\\OneDrive\\Desktop\\YourNameIsAEmpty\\YourNameIsAEmptyTests\\ProgramTests.cs",
+              "RelativeToolTip": "YourNameIsAEmptyTests\\ProgramTests.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-10T16:22:36.512Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\dap03\\OneDrive\\Desktop\\YourNameIsAEmpty\\YourNameIsAEmpty\\Program.cs",
+              "RelativeDocumentMoniker": "YourNameIsAEmpty\\Program.cs",
+              "ToolTip": "C:\\Users\\dap03\\OneDrive\\Desktop\\YourNameIsAEmpty\\YourNameIsAEmpty\\Program.cs",
+              "RelativeToolTip": "YourNameIsAEmpty\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAA3AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-10T16:22:00.901Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

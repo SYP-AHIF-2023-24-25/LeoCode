@@ -172,6 +172,8 @@ export class TestResultComponent  implements OnInit{
       subject = "WMC";
     }else if(this.exercise.tags.includes("POSE")){
       subject = "POSE";
+    }else if(this.exercise.tags.includes("TYPESCRIPT")){
+      subject = "TYPESCRIPT";
     }
     let arrayOfSnippets: ArrayOfSnippetsDto = {
       snippets: this.exercise.arrayOfSnippets

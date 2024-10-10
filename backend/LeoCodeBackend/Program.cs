@@ -187,8 +187,19 @@ namespace LeoCodeBackend
             {
                 try
                 {
-                    string jsonContent = $"{{\"code\":\"{ConcatSnippets(snippets)}\", \"fileName\":\"{snippets.ArrayOfSnippets[0].FileName}\"}}";
+                    var body = new
+                    {
+                        code = ConcatSnippets(snippets),  // Assuming ConcatSnippets creates the full code string
+                        fileName = snippets.ArrayOfSnippets[0].FileName  // Getting the first snippet's file name
+                    };
+
+                    // Use JsonConvert to serialize the body into a proper JSON string
+                    string jsonContent = JsonConvert.SerializeObject(body);
+
+                    // Create the HTTP content with the proper content type
                     HttpContent content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
+
+                    // Send the POST request
                     response = await httpClient.PostAsync(apiUrl, content);
                     if (response.IsSuccessStatusCode)
                     {

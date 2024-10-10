@@ -113,7 +113,6 @@ namespace csharp_runner
                 string filePathForRandomDirectory = @$"{currentDirectory}";
                 string filePathForNuGetConfigFile = @$"{currentDirectory}/config";
                 var result = await executeTests.runCSharp(exerciseName, templateFilePath, filePathForRandomDirectory, body.code, body.fileName);
-                Console.WriteLine($"Result: {result}");
                 //log succes
                 return new OkObjectResult(result);
             }

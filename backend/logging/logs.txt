@@ -55,3 +55,35 @@
 06/13/2024 01:01:01: SUCCESS: Response from TypeScript-runner was successful
 06/13/2024 01:01:15: SUCCESS: Response from TypeScript-runner was successful
 06/13/2024 01:01:25: ERROR: Response from TypeScript-runner wasn't successful
+10/10/2024 16:54:29: SUCCESS: Response from CSharp-runner was successful
+10/10/2024 16:58:22: SUCCESS: Response from CSharp-runner was successful
+10/10/2024 16:58:25: ERROR: Response from CSharp-runner wasn't successful. Error Message: Data at the root level is invalid. Line 1, position 1.
+10/10/2024 17:01:44: SUCCESS: Response from CSharp-runner was successful
+10/10/2024 17:01:56: ERROR: Response from CSharp-runner wasn't successful. Error Message: Data at the root level is invalid. Line 1, position 1.
+10/10/2024 17:05:06: SUCCESS: Response from TypeScript-runner was successful
+10/10/2024 17:05:16: SUCCESS: Response from TypeScript-runner was successful
+10/10/2024 17:05:38: SUCCESS: Response from CSharp-runner was successful
+10/10/2024 17:06:01: SUCCESS: Response from CSharp-runner was successful
+10/10/2024 17:06:21: SUCCESS: Response from CSharp-runner was successful
+10/10/2024 17:06:30: SUCCESS: Response from CSharp-runner was successful
+10/10/2024 17:09:04: ERROR: Response from TypeScript-runner wasn't successful
+10/10/2024 17:26:34: ERROR: Response from TypeScript-runner wasn't successful
+10/10/2024 17:31:44: ERROR: Response from TypeScript-runner wasn't successful
+10/10/2024 17:56:49: ERROR: Response from CSharp-runner wasn't successful
+10/10/2024 18:01:00: SUCCESS: Response from CSharp-runner was successful
+10/10/2024 18:04:05: SUCCESS: Response from CSharp-runner was successful
+10/10/2024 18:05:58: ERROR: Response from CSharp-runner wasn't successful
+10/10/2024 18:10:46: SUCCESS: Response from CSharp-runner was successful
+10/10/2024 18:34:33: SUCCESS: Response from CSharp-runner was successful
+10/10/2024 18:35:54: SUCCESS: Response from CSharp-runner was successful
+10/10/2024 18:56:38: SUCCESS: Response from TypeScript-runner was successful
+10/10/2024 19:05:36: SUCCESS: Response from CSharp-runner was successful
+10/10/2024 19:07:31: SUCCESS: Response from TypeScript-runner was successful
+10/10/2024 19:07:45: SUCCESS: Response from TypeScript-runner was successful
+10/10/2024 19:07:58: SUCCESS: Response from TypeScript-runner was successful
+10/10/2024 19:14:29: SUCCESS: Response from CSharp-runner was successful
+10/10/2024 19:14:29: ERROR: Response from CSharp-runner wasn't successful. Error Message: Data at the root level is invalid. Line 1, position 1.
+10/10/2024 19:18:22: SUCCESS: Response from CSharp-runner was successful
+10/10/2024 19:18:40: SUCCESS: Response from TypeScript-runner was successful
+10/10/2024 19:20:21: SUCCESS: Response from TypeScript-runner was successful
+10/10/2024 19:20:31: SUCCESS: Response from CSharp-runner was successful

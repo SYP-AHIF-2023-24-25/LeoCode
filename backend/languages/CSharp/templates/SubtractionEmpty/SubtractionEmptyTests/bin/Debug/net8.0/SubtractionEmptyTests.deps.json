@@ -350,7 +350,10 @@
       "System.Reflection.Metadata/1.6.0": {},
       "SubtractionEmpty/1.0.0": {
         "runtime": {
-          "SubtractionEmpty.dll": {}
+          "SubtractionEmpty.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         }
       },
       "Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions/14.0.0.0": {

@@ -12,3 +12,17 @@ C:\Users\David Pröller\Desktop\SubtractionEmpty\SubtractionEmpty\obj\Debug\net8
 C:\Users\David Pröller\Desktop\SubtractionEmpty\SubtractionEmpty\obj\Debug\net8.0\SubtractionEmpty.pdb
 C:\Users\David Pröller\Desktop\SubtractionEmpty\SubtractionEmpty\obj\Debug\net8.0\SubtractionEmpty.genruntimeconfig.cache
 C:\Users\David Pröller\Desktop\SubtractionEmpty\SubtractionEmpty\obj\Debug\net8.0\ref\SubtractionEmpty.dll
+C:\Users\David Pröller\Desktop\SubtractionEmpty\SubtractionEmpty\SubtractionEmpty\bin\Debug\net8.0\SubtractionEmpty.exe
+C:\Users\David Pröller\Desktop\SubtractionEmpty\SubtractionEmpty\SubtractionEmpty\bin\Debug\net8.0\SubtractionEmpty.deps.json
+C:\Users\David Pröller\Desktop\SubtractionEmpty\SubtractionEmpty\SubtractionEmpty\bin\Debug\net8.0\SubtractionEmpty.runtimeconfig.json
+C:\Users\David Pröller\Desktop\SubtractionEmpty\SubtractionEmpty\SubtractionEmpty\bin\Debug\net8.0\SubtractionEmpty.dll
+C:\Users\David Pröller\Desktop\SubtractionEmpty\SubtractionEmpty\SubtractionEmpty\bin\Debug\net8.0\SubtractionEmpty.pdb
+C:\Users\David Pröller\Desktop\SubtractionEmpty\SubtractionEmpty\SubtractionEmpty\obj\Debug\net8.0\SubtractionEmpty.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\David Pröller\Desktop\SubtractionEmpty\SubtractionEmpty\SubtractionEmpty\obj\Debug\net8.0\SubtractionEmpty.AssemblyInfoInputs.cache
+C:\Users\David Pröller\Desktop\SubtractionEmpty\SubtractionEmpty\SubtractionEmpty\obj\Debug\net8.0\SubtractionEmpty.AssemblyInfo.cs
+C:\Users\David Pröller\Desktop\SubtractionEmpty\SubtractionEmpty\SubtractionEmpty\obj\Debug\net8.0\SubtractionEmpty.csproj.CoreCompileInputs.cache
+C:\Users\David Pröller\Desktop\SubtractionEmpty\SubtractionEmpty\SubtractionEmpty\obj\Debug\net8.0\SubtractionEmpty.dll
+C:\Users\David Pröller\Desktop\SubtractionEmpty\SubtractionEmpty\SubtractionEmpty\obj\Debug\net8.0\refint\SubtractionEmpty.dll
+C:\Users\David Pröller\Desktop\SubtractionEmpty\SubtractionEmpty\SubtractionEmpty\obj\Debug\net8.0\SubtractionEmpty.pdb
+C:\Users\David Pröller\Desktop\SubtractionEmpty\SubtractionEmpty\SubtractionEmpty\obj\Debug\net8.0\SubtractionEmpty.genruntimeconfig.cache
+C:\Users\David Pröller\Desktop\SubtractionEmpty\SubtractionEmpty\SubtractionEmpty\obj\Debug\net8.0\ref\SubtractionEmpty.dll

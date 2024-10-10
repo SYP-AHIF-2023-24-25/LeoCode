@@ -354,7 +354,7 @@ export class CreateExerciseComponent {
 
 
     for(let i = 0; i < stringCodeSections.length; i++) {
-      if(stringCodeSections[i].includes("Todo") || stringCodeSections[i].includes("throw new NotImplementedException()")) {
+      if(stringCodeSections[i].includes("Todo") || stringCodeSections[i].includes("throw new System.NotImplementedException();")) {
         codeSections.push({ code: stringCodeSections[i], readOnlySection: false, fileName: programName});
       }else {
         codeSections.push({ code: stringCodeSections[i], readOnlySection: true, fileName: programName});

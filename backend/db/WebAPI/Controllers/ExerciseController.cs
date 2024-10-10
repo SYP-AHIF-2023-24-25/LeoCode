@@ -110,7 +110,7 @@ public class ExerciseController : Controller
             User user = _unitOfWork.Users.GetByUsername(username);
             List<Exercise> exercises = await _unitOfWork.Exercises.GetExersiceByUsernameAsync(user, exerciseName);
             exercises = exercises
-                .Where(exercise => ((Language)exercise.Language).ToString() == language && exercise.Tags.Contains(subject))
+                .Where(exercise => exerciseName == exercise.Name)
                 .ToList();
 
             if (exercises.IsNullOrEmpty())

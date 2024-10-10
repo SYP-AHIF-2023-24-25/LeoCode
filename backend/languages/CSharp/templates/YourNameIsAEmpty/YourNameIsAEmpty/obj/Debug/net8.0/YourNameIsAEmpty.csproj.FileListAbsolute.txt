@@ -1,0 +1,14 @@
+C:\Users\dap03\OneDrive\Desktop\YourNameIsAEmpty\YourNameIsAEmpty\obj\Debug\net8.0\YourNameIsAEmpty.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\dap03\OneDrive\Desktop\YourNameIsAEmpty\YourNameIsAEmpty\obj\Debug\net8.0\YourNameIsAEmpty.AssemblyInfoInputs.cache
+C:\Users\dap03\OneDrive\Desktop\YourNameIsAEmpty\YourNameIsAEmpty\obj\Debug\net8.0\YourNameIsAEmpty.AssemblyInfo.cs
+C:\Users\dap03\OneDrive\Desktop\YourNameIsAEmpty\YourNameIsAEmpty\obj\Debug\net8.0\YourNameIsAEmpty.csproj.CoreCompileInputs.cache
+C:\Users\dap03\OneDrive\Desktop\YourNameIsAEmpty\YourNameIsAEmpty\bin\Debug\net8.0\YourNameIsAEmpty.exe
+C:\Users\dap03\OneDrive\Desktop\YourNameIsAEmpty\YourNameIsAEmpty\bin\Debug\net8.0\YourNameIsAEmpty.deps.json
+C:\Users\dap03\OneDrive\Desktop\YourNameIsAEmpty\YourNameIsAEmpty\bin\Debug\net8.0\YourNameIsAEmpty.runtimeconfig.json
+C:\Users\dap03\OneDrive\Desktop\YourNameIsAEmpty\YourNameIsAEmpty\bin\Debug\net8.0\YourNameIsAEmpty.dll
+C:\Users\dap03\OneDrive\Desktop\YourNameIsAEmpty\YourNameIsAEmpty\bin\Debug\net8.0\YourNameIsAEmpty.pdb
+C:\Users\dap03\OneDrive\Desktop\YourNameIsAEmpty\YourNameIsAEmpty\obj\Debug\net8.0\YourNameIsAEmpty.dll
+C:\Users\dap03\OneDrive\Desktop\YourNameIsAEmpty\YourNameIsAEmpty\obj\Debug\net8.0\refint\YourNameIsAEmpty.dll
+C:\Users\dap03\OneDrive\Desktop\YourNameIsAEmpty\YourNameIsAEmpty\obj\Debug\net8.0\YourNameIsAEmpty.pdb
+C:\Users\dap03\OneDrive\Desktop\YourNameIsAEmpty\YourNameIsAEmpty\obj\Debug\net8.0\YourNameIsAEmpty.genruntimeconfig.cache
+C:\Users\dap03\OneDrive\Desktop\YourNameIsAEmpty\YourNameIsAEmpty\obj\Debug\net8.0\ref\YourNameIsAEmpty.dll

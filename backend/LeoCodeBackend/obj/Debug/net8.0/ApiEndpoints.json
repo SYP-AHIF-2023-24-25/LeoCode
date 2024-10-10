@@ -31,7 +31,8 @@
         ],
         "StatusCode": 200
       }
-    ]
+    ],
+    "EndpointName": "RunTests"
   },
   {
     "ContainingType": "LeoCodeBackend.Program",
@@ -53,7 +54,8 @@
         "MediaTypes": [],
         "StatusCode": 200
       }
-    ]
+    ],
+    "EndpointName": "StartTsRunner"
   },
   {
     "ContainingType": "LeoCodeBackend.Program",
@@ -75,6 +77,7 @@
         "MediaTypes": [],
         "StatusCode": 200
       }
-    ]
+    ],
+    "EndpointName": "StopRunner"
   }
 ]
