@@ -1,0 +1,20 @@
+.welcome-text {
+    font-size: 72px; /* Sehr großer Text */
+    font-weight: bold;
+    color: #2c3e50; /* Dunklerer Blauton */
+    text-align: center;
+    margin-top: 20vh; /* Vertikal zentriert */
+}
+
+.navbar-nav {
+    align-items: center;
+  }
+  
+  .navbar-text {
+    margin-right: 15px;
+  }
+  
+  .btn {
+    padding: 5px 10px;
+    font-size: 14px;
+  }

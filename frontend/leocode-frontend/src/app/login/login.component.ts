@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {KeycloakService} from "keycloak-angular";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -8,28 +9,40 @@ import {KeycloakService} from "keycloak-angular";
 })
 export class LoginComponent{
   isLoggedIn = false;
-
-  constructor(private keycloakService: KeycloakService) {
-    this.keycloakService.isLoggedIn().then(isLoggedIn => {
-      this.isLoggedIn = isLoggedIn;
-    });
-    this.keycloakService.getToken().then(token => {
-      console.log(token);
-    });
+  constructor(private keycloakService: KeycloakService, private router: Router) {
+    this.checkLoginStatus();
   }
 
-  async login(): Promise<void> {
+  async checkLoginStatus(): Promise<void> {
+    this.isLoggedIn = await this.keycloakService.isLoggedIn();
     if (this.isLoggedIn) {
-      return
+      await this.setUserData();
+      this.router.navigate(['/student-start-screen']);
+    } else {
+      await this.login();
     }
-    await this.keycloakService.login();
+  }
 
+
+  async login(): Promise<void> {
+    if (!this.isLoggedIn) {
+      await this.keycloakService.login();
+      await this.setUserData();
+      this.router.navigate(['/student-start-screen']);
+      //TODO rolle abfragen
+    }
+  }
+
+  async setUserData(): Promise<void> {
+    const user = await this.keycloakService.loadUserProfile();
+    sessionStorage.setItem('firstName', user.firstName!);
+    sessionStorage.setItem('userName', user.username!);
   }
 
   async logout(): Promise<void> {
-    if (!this.isLoggedIn) {
-      return;
+    if (this.isLoggedIn) {
+      await this.keycloakService.logout();
+      this.router.navigate(['/login']);
     }
-    await this.keycloakService.logout();
   }
 }

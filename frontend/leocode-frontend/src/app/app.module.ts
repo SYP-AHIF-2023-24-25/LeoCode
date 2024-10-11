@@ -20,6 +20,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { StartScreenComponent } from './start-screen/start-screen.component';
 import { LoginComponent } from './login/login.component';
 import { KeycloakBearerInterceptor, KeycloakService } from 'keycloak-angular';
+import { StudentStartScreenComponent } from './student-start-screen/student-start-screen.component';
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () => keycloak.init({
@@ -47,7 +48,8 @@ function initializeKeycloak(keycloak: KeycloakService) {
     IntroductionComponent,
     CreateExerciseComponent,
     StartScreenComponent,
-    LoginComponent
+    LoginComponent,
+    StudentStartScreenComponent
   ],
   imports: [
     BrowserModule,
