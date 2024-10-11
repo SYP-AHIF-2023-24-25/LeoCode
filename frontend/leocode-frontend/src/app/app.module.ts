@@ -18,6 +18,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSelectModule } from '@angular/material/select';
 import { StartScreenComponent } from './start-screen/start-screen.component';
+import { ExerciseDetailsComponent } from './exercise-details/exercise-details.component';
 
 
 
@@ -29,7 +30,8 @@ import { StartScreenComponent } from './start-screen/start-screen.component';
     ResultHistoryComponent,
     IntroductionComponent,
     CreateExerciseComponent,
-    StartScreenComponent
+    StartScreenComponent,
+    ExerciseDetailsComponent
   ],
   imports: [
     BrowserModule,

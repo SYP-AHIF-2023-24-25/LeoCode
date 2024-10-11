@@ -16,12 +16,11 @@
       <div class="col-md-10">
         <!-- Gemeinsame Card für Suchleiste und Grid -->
         <div class="card mt-3">
-          <div class="card-body">
-            <h1>Exercises</h1>
-            
+          <div class="card-body" >
+            <h1>Exercises</h1>        
             <!-- Suchleiste -->
             <form>
-              <mat-form-field class="example-chip-list">
+              <mat-form-field class="example-chip-list" style="width: 1000px">
                 <mat-label>Chose tags to sort</mat-label>
                 <mat-chip-grid #chipGrid aria-label="Tag selection">
                   <mat-chip-row *ngFor="let tag of selectedSearchTags" (removed)="removeSearchTag(tag)">
@@ -47,10 +46,10 @@
                   <th>Exercise Name</th>
                   <th>Creator Name</th>
                   <th>Tags</th>
-                  <th>RunTest</th>
-                  <th>Details</th>
                   <th>Date created</th>
                   <th>Date edited</th>
+                  <th>Details</th>
+              
                 </tr>
               </thead>
               <tbody>
@@ -58,14 +57,11 @@
                   <td>{{exercise.name}}</td>
                   <td>{{exercise.creator}}</td>
                   <td>{{exercise.tags}}</td>
-                  <td>
-                    <button class="btn btn-primary" [routerLink]="['/test-results']" [queryParams]="{userName: defaultUser.username, exerciseName: exercise.name}">Run Test</button>
-                  </td>
-                  <td>
-                    <button class="btn btn-primary" [routerLink]="['/exercise-details']" [queryParams]="{exerciseName: exercise.name}">Details</button>
-                  </td>
                   <td>{{exercise.dateCreated}}</td>
                   <td>{{exercise.dateUpdated}}</td>
+                  <td>
+                    <button class="btn btn-primary" [routerLink]="['/exercise-details']" [queryParams]="{userName: defaultUser.username, exerciseName: exercise.name}">Details</button>
+                  </td>
                 </tr>
               </tbody>
             </table>

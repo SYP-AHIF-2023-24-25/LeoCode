@@ -5,6 +5,7 @@ import { ResultHistoryComponent } from './result-history/result-history.componen
 import { IntroductionComponent } from './introduction/introduction.component';
 import { CreateExerciseComponent } from './create-exercise/create-exercise.component';
 import { StartScreenComponent } from './start-screen/start-screen.component';
+import { ExerciseDetailsComponent } from './exercise-details/exercise-details.component';
 
 
 const routes: Routes = [
@@ -13,7 +14,8 @@ const routes: Routes = [
   {path: 'result-history', component: ResultHistoryComponent},
   {path: 'introdcution', component: IntroductionComponent},
   {path: 'create-exercise', component: CreateExerciseComponent},
-  {path: 'start-screen', component: StartScreenComponent}
+  {path: 'start-screen', component: StartScreenComponent},
+  {path: 'exercise-details', component: ExerciseDetailsComponent}
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

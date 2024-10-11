@@ -60,8 +60,7 @@
               "RelativeToolTip": "Core\\Dto\\ExerciseDto.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-10T15:54:55.82Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-10T15:54:55.82Z"
             },
             {
               "$type": "Document",
@@ -73,8 +72,7 @@
               "RelativeToolTip": "Core\\Entities\\Exercise.cs",
               "ViewState": "AgIAAA8AAAAAAAAAAAAYwBkAAAAHAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-10T15:53:26.88Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-10T15:53:26.88Z"
             },
             {
               "$type": "Document",
@@ -86,8 +84,7 @@
               "RelativeToolTip": "Core\\Entities\\Language.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAASAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-11T09:01:20.023Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-06-11T09:01:20.023Z"
             },
             {
               "$type": "Document",
@@ -115,7 +112,7 @@
               "RelativeDocumentMoniker": "WebAPI\\Controllers\\ExerciseController.cs",
               "ToolTip": "C:\\Users\\Kelit\\Schule2024_25\\Syp\\LeoCode\\backend\\db\\WebAPI\\Controllers\\ExerciseController.cs",
               "RelativeToolTip": "WebAPI\\Controllers\\ExerciseController.cs",
-              "ViewState": "AgIAABYAAAAAAAAAAAAQwBcAAAAFAAAAAAAAAA==",
+              "ViewState": "AgIAABcAAAAAAAAAAAAAwBcAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-06-10T10:32:33.257Z",
               "EditorCaption": ""
@@ -130,8 +127,7 @@
               "RelativeToolTip": "WebAPI\\Controllers\\SnippetController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-10T10:32:23.31Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-06-10T10:32:23.31Z"
             },
             {
               "$type": "Document",
@@ -143,8 +139,7 @@
               "RelativeToolTip": "ConsoleApp\\ImportController.cs",
               "ViewState": "AgIAALAAAAAAAAAAAIBJwBIAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-08T18:36:53.781Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-06-08T18:36:53.781Z"
             },
             {
               "$type": "Document",
@@ -156,8 +151,7 @@
               "RelativeToolTip": "WebAPI\\Program.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAABYAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-13T21:46:28.105Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-13T21:46:28.105Z"
             }
           ]
         }

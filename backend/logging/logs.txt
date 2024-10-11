@@ -55,3 +55,12 @@
 06/13/2024 01:01:01: SUCCESS: Response from TypeScript-runner was successful
 06/13/2024 01:01:15: SUCCESS: Response from TypeScript-runner was successful
 06/13/2024 01:01:25: ERROR: Response from TypeScript-runner wasn't successful
+10/11/2024 14:44:05: ERROR: Response from TypeScript-runner wasn't successful
+10/11/2024 14:50:46: ERROR: Response from TypeScript-runner wasn't successful
+10/11/2024 14:51:11: ERROR: Response from TypeScript-runner wasn't successful
+10/11/2024 14:53:43: SUCCESS: Response from TypeScript-runner was successful
+10/11/2024 14:54:24: ERROR: Response from TypeScript-runner wasn't successful
+10/11/2024 14:57:42: ERROR: Response from CSharp-runner wasn't successful. Error Message: Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte. (localhost:8001)
+10/11/2024 15:00:35: SUCCESS: Response from TypeScript-runner was successful
+10/11/2024 15:23:11: SUCCESS: Response from TypeScript-runner was successful
+10/11/2024 15:24:12: ERROR: Response from TypeScript-runner wasn't successful
