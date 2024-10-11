@@ -29,6 +29,31 @@
             <div class="form-group">
               <textarea class="form-control" rows="5" style="height: 300px; width: 1000px" [(ngModel)]="exercise.description" placeholder={{exercise.description}}></textarea>
             </div>
+
+             <!-- Ausgewählte Tags anzeigen -->
+             <form>
+              <mat-form-field class="example-chip-list" style="width: 1000px">
+                <mat-label>Chosen Tags</mat-label>
+                <mat-chip-grid #chipGrid aria-label="Tag selection">
+                  <mat-chip-row *ngFor="let tag of exercise.tags" (removed)="removeTag(tag)">
+                    {{tag}}
+                    <button matChipRemove [attr.aria-label]="'remove ' + tag">
+                      <mat-icon>cancel</mat-icon>
+                    </button>
+                  </mat-chip-row>
+                </mat-chip-grid>
+                <input placeholder="New Tag..." #tagInput [formControl]="tagCtrl"
+                  [matChipInputFor]="chipGrid" [matAutocomplete]="auto"
+                  [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                  (matChipInputTokenEnd)="addTag($event)"/>
+                <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+                  <mat-option *ngFor="let tag of filteredTags | async" [value]="tag">
+                    {{tag}}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+            </form>
+
           </div>
 
           <div *ngIf="userName != exercise.creator">
@@ -41,14 +66,14 @@
             <div class="form-group">
               <textarea readonly="true" class="form-control" rows="5" style="height: 300px; width: 1000px" [(ngModel)]="exercise.description" placeholder={{exercise.description}}></textarea>
             </div>
-          </div>
 
-          <h1>Tags</h1>
-          <ul>
-            <li *ngFor="let tag of exercise.tags">
-              {{ tag }}
-            </li>
-          </ul>
+            <h1>Tags</h1>
+            <ul>
+              <li *ngFor="let tag of exercise.tags">
+                {{ tag }}
+              </li>
+            </ul>
+          </div>
 
           <div class="d-flex">
             <button class="btn btn-primary" [routerLink]="['/test-results']" [queryParams]="{userName: userName, exerciseName: exercise.name}">Run Test</button>

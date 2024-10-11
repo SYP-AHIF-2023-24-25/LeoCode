@@ -57,8 +57,8 @@
                   <td>{{exercise.name}}</td>
                   <td>{{exercise.creator}}</td>
                   <td>{{exercise.tags}}</td>
-                  <td>{{exercise.dateCreated}}</td>
-                  <td>{{exercise.dateUpdated}}</td>
+                  <td>{{exercise.dateCreated | date: 'mediumDate'}}</td>
+                  <td>{{exercise.dateUpdated | date: 'mediumDate'}}</td>
                   <td>
                     <button class="btn btn-primary" [routerLink]="['/exercise-details']" [queryParams]="{userName: defaultUser.username, exerciseName: exercise.name}">Details</button>
                   </td>
