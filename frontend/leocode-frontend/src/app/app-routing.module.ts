@@ -5,10 +5,12 @@ import { ResultHistoryComponent } from './result-history/result-history.componen
 import { IntroductionComponent } from './introduction/introduction.component';
 import { CreateExerciseComponent } from './create-exercise/create-exercise.component';
 import { StartScreenComponent } from './start-screen/start-screen.component';
+import { LoginComponent } from './login/login.component';
 
 
-const routes: Routes = [
-  {path: '', redirectTo: 'start-screen', pathMatch: 'full' },
+export const routes: Routes = [
+  {path: '', redirectTo: '/start-screen', pathMatch: 'full' },
+  {path: 'login', component: LoginComponent},
   {path: 'test-results', component: TestResultComponent},
   {path: 'result-history', component: ResultHistoryComponent},
   {path: 'introdcution', component: IntroductionComponent},

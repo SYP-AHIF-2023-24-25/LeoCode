@@ -1,6 +1,6 @@
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TestResultComponent } from './test-result/test-result.component';
@@ -18,9 +18,26 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSelectModule } from '@angular/material/select';
 import { StartScreenComponent } from './start-screen/start-screen.component';
+import { LoginComponent } from './login/login.component';
+import { KeycloakBearerInterceptor, KeycloakService } from 'keycloak-angular';
 
-
-
+function initializeKeycloak(keycloak: KeycloakService) {
+  return () => keycloak.init({
+    config: {
+      url: 'https://auth.htl-leonding.ac.at',
+      realm: 'htlleonding',
+      clientId: 'htlleonding-service',
+    },
+    initOptions: {
+      onLoad: 'check-sso',
+      pkceMethod: 'S256',
+      flow: 'implicit',
+      silentCheckSsoRedirectUri: window.location.origin + '/assets/silent-check-sso.html',
+    },
+    enableBearerInterceptor: true,
+    bearerPrefix: 'Bearer',
+  });
+}
 
 @NgModule({
   declarations: [
@@ -29,15 +46,16 @@ import { StartScreenComponent } from './start-screen/start-screen.component';
     ResultHistoryComponent,
     IntroductionComponent,
     CreateExerciseComponent,
-    StartScreenComponent
+    StartScreenComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    MonacoEditorModule.forRoot(),
     ReactiveFormsModule,
+    MonacoEditorModule.forRoot(),
     BrowserAnimationsModule,
     MatChipsModule,
     MatFormFieldModule,
@@ -47,7 +65,18 @@ import { StartScreenComponent } from './start-screen/start-screen.component';
     MatProgressBarModule,
     MatSelectModule
   ],
-  providers: [],
+  providers: [KeycloakService,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initializeKeycloak,
+      deps: [KeycloakService],
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: KeycloakBearerInterceptor,
+      multi: true
+    }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
