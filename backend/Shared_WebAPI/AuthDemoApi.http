@@ -4,10 +4,10 @@ POST https://auth.htl-leonding.ac.at/realms/htl-leonding/protocol/openid-connect
 Content-Type: application/x-www-form-urlencoded
 
 client_id = htlleonding-service &
-client_secret = AkIRaaboJ23Q64jSjtN9gkmfMumUybD8 &
+client_secret =  &
 grant_type = password &
-username = IF200183 &
-password = GuIFrynO20 &
+username =  &
+password =  &
 scope = openid
 
 > {%

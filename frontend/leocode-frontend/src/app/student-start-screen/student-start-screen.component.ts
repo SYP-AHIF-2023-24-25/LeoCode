@@ -15,7 +15,7 @@ export class StudentStartScreenComponent implements OnInit {
 
   ngOnInit(): void {
     this.firstName = sessionStorage.getItem('firstName');
-    this.username = sessionStorage.getItem('username');
+    this.username = sessionStorage.getItem('userName');
   }
 
   async logout(): Promise<void> {

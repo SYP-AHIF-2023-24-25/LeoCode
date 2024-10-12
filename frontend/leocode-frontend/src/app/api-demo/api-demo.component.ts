@@ -1,6 +1,8 @@
 import { Component, computed, inject, Signal, signal, WritableSignal } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { finalize } from "rxjs";
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-api-demo',
@@ -12,6 +14,9 @@ export class ApiDemoComponent {
   public readonly response: WritableSignal<string | null> = signal(null);
   public readonly loading: WritableSignal<boolean> = signal(false);
   public readonly showResponse: Signal<boolean> = computed(() => this.response() !== null);
+  constructor(private router: Router) {
+    this.performCall('at-least-student');
+  }
 
   public performCall(action: string): void {
     const route = `http://localhost:5050/api/demo/${action}`;
@@ -24,11 +29,15 @@ export class ApiDemoComponent {
       .subscribe({
         next: (res) => {
           this.response.update(() => res);
-          console.log(res);
+          if (res === 'You are at least a student') {
+            this.router.navigate(['/student-start-screen']);
+          } else {
+            this.router.navigate(['/start-screen']);
+          }
         },
         error: err => {
           this.response.update(() => `Backend says no: ${err.status}`);
-          console.log(err);
+          this.router.navigate(['/start-screen']);
         }
       });
   }
