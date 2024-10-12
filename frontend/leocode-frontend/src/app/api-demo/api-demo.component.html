@@ -1,0 +1,13 @@
+<div>
+    <button mat-raised-button (click)="performCall('at-least-student')" [disabled]="loading()"
+            color="primary">
+      Check if backend recognizes you as a student
+    </button>
+    <button mat-raised-button (click)="performCall('is-teacher')" [disabled]="loading()"
+            color="primary">
+      Check if backend recognizes you as a teacher
+    </button>
+  
+    <!-- Verwende *ngIf anstelle von @if -->
+    <p *ngIf="showResponse()">{{ response() }}</p>
+</div>

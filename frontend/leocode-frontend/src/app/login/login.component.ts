@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {KeycloakService} from "keycloak-angular";
 import { Router } from '@angular/router';
+import { ApiDemoComponent } from '../api-demo/api-demo.component';
 
 @Component({
   selector: 'app-login',
@@ -16,8 +17,8 @@ export class LoginComponent{
   async checkLoginStatus(): Promise<void> {
     this.isLoggedIn = await this.keycloakService.isLoggedIn();
     if (this.isLoggedIn) {
-      await this.setUserData();
-      this.router.navigate(['/student-start-screen']);
+      //await this.setUserData();
+      this.router.navigate(['/api-demo']);
     } else {
       await this.login();
     }
@@ -27,8 +28,10 @@ export class LoginComponent{
   async login(): Promise<void> {
     if (!this.isLoggedIn) {
       await this.keycloakService.login();
-      await this.setUserData();
-      this.router.navigate(['/student-start-screen']);
+      this.router.navigate(['/api-demo']);
+      // perfom call methode aufrufen?
+      //await this.setUserData();
+      //this.router.navigate(['/student-start-screen']);
       //TODO rolle abfragen
     }
   }

@@ -8,6 +8,7 @@ import { StartScreenComponent } from './start-screen/start-screen.component';
 import { LoginComponent } from './login/login.component';
 import { StudentStartScreenComponent } from './student-start-screen/student-start-screen.component';
 import { AuthGuard } from '../core/util/auth-guard';
+import { ApiDemoComponent } from './api-demo/api-demo.component';
 
 export const routes: Routes = [
   {path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -17,6 +18,7 @@ export const routes: Routes = [
   {path: 'introdcution', component: IntroductionComponent},
   {path: 'create-exercise', component: CreateExerciseComponent},
   {path: 'start-screen', component: StartScreenComponent},
+  {path: 'api-demo', component: ApiDemoComponent},
   {path: 'student-start-screen', component: StudentStartScreenComponent, canActivate: [AuthGuard]}
 ];
 @NgModule({

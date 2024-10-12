@@ -2,13 +2,26 @@ using AuthDemoApi;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// CORS hinzufügen
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAngularApp",
+        policy =>
+        {
+            policy.WithOrigins("http://localhost:4200") // Erlaubt Anfragen von Angular-Frontend
+                  .AllowAnyHeader()                     // Erlaubt beliebige Header
+                  .AllowAnyMethod()                     // Erlaubt alle HTTP-Methoden
+                  .AllowCredentials();                  // Erlaubt Anfragen mit Anmeldeinformationen (z.B. Cookies)
+        });
+});
+
 builder.Services.AddLeoAuthentication();
 builder.Services.AddBasicLeoAuthorization();
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerWithAuth();
-builder.Services.AddLenientCors();
+// Keine Notwendigkeit für AddLenientCors, da wir AddCors explizit konfigurieren
 
 var app = builder.Build();
 
@@ -18,10 +31,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseCors(Setup.CorsPolicyName);
-
-// when not using a reverse proxy (e.g. nginx) - which you should - uncomment the following line
-// app.UseHttpsRedirection();
+// Verwende die konfigurierte CORS-Policy
+app.UseCors("AllowAngularApp");
 
 app.UseAuthentication();
 app.UseAuthorization();
