@@ -13,13 +13,17 @@ export class IntroductionComponent {
 
   userName: string|null = sessionStorage.getItem('userName');
   exerciseName: string | null = sessionStorage.getItem('exerciseName');
+  date: Date = new Date();
 
   exercise : ExerciseDto = {
     name: "",
+    creator: "",
     description: "",
     language: "",
     tags: [],
-    arrayOfSnippets: []
+    arrayOfSnippets: [],
+    dateCreated: new Date(),
+    dateUpdated: new Date()
   }
   constructor( private route: ActivatedRoute, private restDb: DbService) {
   }
@@ -28,6 +32,7 @@ export class IntroductionComponent {
     if(this.userName != null && this.exerciseName != null){
       this.restDb.getExerciseByUsername(this.userName, this.exerciseName).subscribe((data: ExerciseDto[]) => {
         this.exercise = data[0];
+       
         console.log(this.exercise.name);
         console.log(this.exercise.arrayOfSnippets);
         console.log(this.exercise.language);

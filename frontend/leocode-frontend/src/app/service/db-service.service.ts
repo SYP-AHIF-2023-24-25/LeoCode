@@ -28,16 +28,18 @@ export class DbService {
     return this.http.get<ExerciseDto[]>(`${this.apiUrl}/Exercise`, { params });
   }
 
-  AddExercise(arrayOfSnippets: ArrayOfSnippetsDto, exerciseName: string, introduction : string, language: string, tags: string[], username: string) {
+  AddExercise(arrayOfSnippets: ArrayOfSnippetsDto, exerciseName: string, introduction : string, language: string, tags: string[], username: string, dateCreated: Date, dateUpdated: Date) {
     let exercise = {
       exerciseName: exerciseName,
       introduction: introduction,
       language: language,
       tags: tags,
-      username: username
+      username: username,
+      dateCreated: dateCreated.toISOString(),
+      dateUpdated: dateUpdated.toISOString()
     }
     
-    return this.http.post<Exercise>(`${this.apiUrl}/exercise?name=${exercise.exerciseName}&description=${exercise.introduction}&language=${exercise.language}&tags=${exercise.tags}&username=${exercise.username}`, arrayOfSnippets, httpOptions);
+    return this.http.post<Exercise>(`${this.apiUrl}/exercise?name=${exercise.exerciseName}&description=${exercise.introduction}&language=${exercise.language}&tags=${exercise.tags}&username=${exercise.username}&dateCreated=${exercise.dateCreated}&dateUpdated=${exercise.dateUpdated}`, arrayOfSnippets, httpOptions);
   }
 
   UpdateExercise( username: string, introduction : string, language: string, tags: string[], exerciseName: string, arrayOfSnippets: ArrayOfSnippetsDto, subject: string) {
@@ -46,7 +48,7 @@ export class DbService {
       introduction: introduction,
       language: language,
       tags: tags,
-      username: username
+      username: username,
     }
     console.log("TAGS: " + exercise.tags.length);
     console.log("TAGS: " + exercise.tags[0])

@@ -52,6 +52,7 @@ export class StartScreenComponent {
   ngOnInit(): void {
     this.rest.getExerciseByUsername(this.defaultUser.username).subscribe((data: ExerciseDto[]) => {
       this.exercises = data;
+      console.log(this.exercises);
     });
 
     sessionStorage.setItem("userName", this.defaultUser.username);
@@ -69,7 +70,6 @@ export class StartScreenComponent {
         });
       });
     });
-    
   }
 
   
