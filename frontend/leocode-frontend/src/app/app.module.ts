@@ -1,6 +1,6 @@
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TestResultComponent } from './test-result/test-result.component';
@@ -18,10 +18,28 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSelectModule } from '@angular/material/select';
 import { StartScreenComponent } from './start-screen/start-screen.component';
+import { LoginComponent } from './login/login.component';
+import { KeycloakBearerInterceptor, KeycloakService } from 'keycloak-angular';
+import { StudentStartScreenComponent } from './student-start-screen/student-start-screen.component';
 import { ExerciseDetailsComponent } from './exercise-details/exercise-details.component';
 
-
-
+function initializeKeycloak(keycloak: KeycloakService) {
+  return () => keycloak.init({
+    config: {
+      url: 'https://auth.htl-leonding.ac.at',
+      realm: 'htlleonding',
+      clientId: 'htlleonding-service',
+    },
+    initOptions: {
+      onLoad: 'check-sso',
+      pkceMethod: 'S256',
+      flow: 'implicit',
+      silentCheckSsoRedirectUri: window.location.origin + '/assets/silent-check-sso.html',
+    },
+    enableBearerInterceptor: true,
+    bearerPrefix: 'Bearer',
+  });
+}
 
 @NgModule({
   declarations: [
@@ -31,6 +49,8 @@ import { ExerciseDetailsComponent } from './exercise-details/exercise-details.co
     IntroductionComponent,
     CreateExerciseComponent,
     StartScreenComponent,
+    LoginComponent,
+    StudentStartScreenComponent,
     ExerciseDetailsComponent
   ],
   imports: [
@@ -38,8 +58,8 @@ import { ExerciseDetailsComponent } from './exercise-details/exercise-details.co
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    MonacoEditorModule.forRoot(),
     ReactiveFormsModule,
+    MonacoEditorModule.forRoot(),
     BrowserAnimationsModule,
     MatChipsModule,
     MatFormFieldModule,
@@ -49,7 +69,18 @@ import { ExerciseDetailsComponent } from './exercise-details/exercise-details.co
     MatProgressBarModule,
     MatSelectModule
   ],
-  providers: [],
+  providers: [KeycloakService,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initializeKeycloak,
+      deps: [KeycloakService],
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: KeycloakBearerInterceptor,
+      multi: true
+    }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

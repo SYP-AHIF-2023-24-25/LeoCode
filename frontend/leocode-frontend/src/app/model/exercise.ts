@@ -1,6 +1,6 @@
 export interface Exercise {
     name: string,
-    creator: string,
+    creator: string;
     instruction: string;
     language: string;
     tags: string[];

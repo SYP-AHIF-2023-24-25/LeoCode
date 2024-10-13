@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ExerciseDto } from '../model/exerciseDto';
 import { RestService } from '../service/rest.service';
 import { DbService } from '../service/db-service.service';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { FormControl } from '@angular/forms';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { MatChipInputEvent } from '@angular/material/chips';
@@ -16,9 +16,8 @@ import { forEach } from 'jszip';
   styleUrls: ['./exercise-details.component.css']
 })
 export class ExerciseDetailsComponent implements OnInit {
-
+  ifUserName: string | null = '';
   exerciseName: string|null = ""; 
-  userName: string |null = "";
 
   tagCtrl = new FormControl();
   availableTags: string[] = Object.values(Tags); // ersetzen Sie dies durch Ihre tatsächlichen Tags
@@ -36,35 +35,41 @@ export class ExerciseDetailsComponent implements OnInit {
     dateUpdated: new Date()
   }
 
-  constructor(private rest: RestService,private route: ActivatedRoute, private restDb: DbService) {
+  constructor(private rest: RestService,private route: ActivatedRoute, private restDb: DbService, private router: Router) {
     this.filteredTags = this.tagCtrl.valueChanges.pipe(
       startWith(null),
       map((tag: string | null) => tag ? this._filter(tag) : this.availableTags.slice()));  
   }
 
+  async logout(): Promise<void> {
+    sessionStorage.setItem('shouldLogOut', 'true');
+    this.router.navigate(['/login']);
+  }
+
   ngOnInit(): void {
+    this.ifUserName = sessionStorage.getItem('ifUserName');
     this.route.queryParams.subscribe((params: Params) => {
-      this.userName = params['userName'];
       this.exerciseName = params['exerciseName'];
 
-      if(this.userName != null && this.exerciseName != null){
-        sessionStorage.setItem("userName", this.userName);
+      if(this.ifUserName != null && this.exerciseName != null){
         sessionStorage.setItem("exerciseName", this.exerciseName);
       }else{
-        this.userName = sessionStorage.getItem('userName');
         this.exerciseName = sessionStorage.getItem('exerciseName');
       }
     });
 
-     if(this.userName != null && this.exerciseName != null){
-      this.restDb.getExerciseByUsername(this.userName, this.exerciseName).subscribe((data: ExerciseDto[]) => {
+     if(this.ifUserName != null && this.exerciseName != null){
+      this.restDb.getExerciseByUsername(this.exercise.creator, this.exerciseName).subscribe((data: ExerciseDto[]) => {
+        console.log("response von db für data:" + data);
         this.exercise = data[0];
         console.log(this.exercise.tags.length);
         console.log(this.exercise.creator);
         console.log(this.exercise.dateCreated);
-        console.log(this.userName);
+        console.log(this.ifUserName);
+        console.log(this.exercise.tags);
     });
     }
+
   }
 
 
