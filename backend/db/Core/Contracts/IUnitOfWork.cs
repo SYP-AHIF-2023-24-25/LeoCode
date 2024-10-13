@@ -8,4 +8,5 @@ public interface IUnitOfWork : IBaseUnitOfWork
     public IExerciseRepository Exercises { get; }
     public IArrayOfSnippetsRepository ArrayOfSnippets { get; }
     public ISnippetRepository Snippets { get; }
+    public IAssignmentsRepository Assignments { get; }
 }

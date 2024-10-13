@@ -461,6 +461,9 @@ C:\Schule\5AHIF\david\LeoCode\backend\db\WebAPI\obj\Debug\net8.0\WebAPI.pdb
 C:\Schule\5AHIF\david\LeoCode\backend\db\WebAPI\obj\Debug\net8.0\WebAPI.genruntimeconfig.cache
 C:\Schule\5AHIF\david\LeoCode\backend\db\WebAPI\obj\Debug\net8.0\ref\WebAPI.dll
 C:\Schule\5AHIF\david\LeoCode\backend\db\WebAPI\bin\Debug\net8.0\libman.json
+<<<<<<< HEAD
+C:\Schule\5AHIF\LeoCode\backend\db\WebAPI\bin\Debug\net8.0\libman.json
+=======
 C:\Users\Kelit\Schule2024_25\Syp\LeoCode\backend\db\WebAPI\bin\Debug\net8.0\appsettings.Development.json
 C:\Users\Kelit\Schule2024_25\Syp\LeoCode\backend\db\WebAPI\bin\Debug\net8.0\libman.json
 C:\Users\Kelit\Schule2024_25\Syp\LeoCode\backend\db\WebAPI\bin\Debug\net8.0\WebAPI.exe
@@ -539,3 +542,4 @@ C:\Users\Kelit\Schule2024_25\Syp\LeoCode\backend\db\WebAPI\obj\Debug\net8.0\refi
 C:\Users\Kelit\Schule2024_25\Syp\LeoCode\backend\db\WebAPI\obj\Debug\net8.0\WebAPI.pdb
 C:\Users\Kelit\Schule2024_25\Syp\LeoCode\backend\db\WebAPI\obj\Debug\net8.0\WebAPI.genruntimeconfig.cache
 C:\Users\Kelit\Schule2024_25\Syp\LeoCode\backend\db\WebAPI\obj\Debug\net8.0\ref\WebAPI.dll
+>>>>>>> 1ecbdd7fd5bbbecab1bf427201edc10714cf2219

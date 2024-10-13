@@ -3512,19 +3512,31 @@
     ]
   },
   "packageFolders": {
+<<<<<<< HEAD
+    "C:\\Users\\dap03\\.nuget\\packages\\": {}
+=======
     "C:\\Users\\Kelit\\.nuget\\packages\\": {}
+>>>>>>> 1ecbdd7fd5bbbecab1bf427201edc10714cf2219
   },
   "project": {
     "version": "1.0.0",
     "restore": {
+<<<<<<< HEAD
+      "projectUniqueName": "C:\\Schule\\5AHIF\\LeoCode\\backend\\db\\WebAPI\\WebAPI.csproj",
+=======
       "projectUniqueName": "C:\\Users\\Kelit\\Schule2024_25\\Syp\\LeoCode\\backend\\db\\WebAPI\\WebAPI.csproj",
+>>>>>>> 1ecbdd7fd5bbbecab1bf427201edc10714cf2219
       "projectName": "WebAPI",
       "projectPath": "C:\\Users\\Kelit\\Schule2024_25\\Syp\\LeoCode\\backend\\db\\WebAPI\\WebAPI.csproj",
       "packagesPath": "C:\\Users\\Kelit\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\Kelit\\Schule2024_25\\Syp\\LeoCode\\backend\\db\\WebAPI\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
+<<<<<<< HEAD
+        "C:\\Users\\dap03\\AppData\\Roaming\\NuGet\\NuGet.Config",
+=======
         "C:\\Users\\Kelit\\AppData\\Roaming\\NuGet\\NuGet.Config",
+>>>>>>> 1ecbdd7fd5bbbecab1bf427201edc10714cf2219
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -3539,8 +3551,13 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
+<<<<<<< HEAD
+            "C:\\Schule\\5AHIF\\LeoCode\\backend\\db\\Persistence\\Persistence.csproj": {
+              "projectPath": "C:\\Schule\\5AHIF\\LeoCode\\backend\\db\\Persistence\\Persistence.csproj"
+=======
             "C:\\Users\\Kelit\\Schule2024_25\\Syp\\LeoCode\\backend\\db\\Persistence\\Persistence.csproj": {
               "projectPath": "C:\\Users\\Kelit\\Schule2024_25\\Syp\\LeoCode\\backend\\db\\Persistence\\Persistence.csproj"
+>>>>>>> 1ecbdd7fd5bbbecab1bf427201edc10714cf2219
             }
           }
         }
@@ -3595,5 +3612,13 @@
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400/PortableRuntimeIdentifierGraph.json"
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "Undefined",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Problem beim Lesen der Cachedatei \"C:\\Schule\\5AHIF\\LeoCode\\backend\\db\\WebAPI\\obj\\project.nuget.cache\": Invalid property identifier character: <. Path 'version', line 3, position 0."
+    }
+  ]
 }

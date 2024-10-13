@@ -1,7 +1,11 @@
 {
   "format": 1,
   "restore": {
+<<<<<<< HEAD
+    "C:\\Schule\\5AHIF\\LeoCode\\backend\\db\\WebAPI\\WebAPI.csproj": {}
+=======
     "C:\\Users\\Kelit\\Schule2024_25\\Syp\\LeoCode\\backend\\db\\WebAPI\\WebAPI.csproj": {}
+>>>>>>> 1ecbdd7fd5bbbecab1bf427201edc10714cf2219
   },
   "projects": {
     "C:\\Users\\Kelit\\Schule2024_25\\Syp\\LeoCode\\backend\\db\\Base\\Base.csproj": {
@@ -14,7 +18,11 @@
         "outputPath": "C:\\Users\\Kelit\\Schule2024_25\\Syp\\LeoCode\\backend\\db\\Base\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
+<<<<<<< HEAD
+          "C:\\Users\\dap03\\AppData\\Roaming\\NuGet\\NuGet.Config",
+=======
           "C:\\Users\\Kelit\\AppData\\Roaming\\NuGet\\NuGet.Config",
+>>>>>>> 1ecbdd7fd5bbbecab1bf427201edc10714cf2219
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -93,7 +101,11 @@
         }
       }
     },
+<<<<<<< HEAD
+    "C:\\Schule\\5AHIF\\LeoCode\\backend\\db\\Core\\Core.csproj": {
+=======
     "C:\\Users\\Kelit\\Schule2024_25\\Syp\\LeoCode\\backend\\db\\Core\\Core.csproj": {
+>>>>>>> 1ecbdd7fd5bbbecab1bf427201edc10714cf2219
       "version": "1.0.0",
       "restore": {
         "projectUniqueName": "C:\\Users\\Kelit\\Schule2024_25\\Syp\\LeoCode\\backend\\db\\Core\\Core.csproj",
@@ -103,7 +115,11 @@
         "outputPath": "C:\\Users\\Kelit\\Schule2024_25\\Syp\\LeoCode\\backend\\db\\Core\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
+<<<<<<< HEAD
+          "C:\\Users\\dap03\\AppData\\Roaming\\NuGet\\NuGet.Config",
+=======
           "C:\\Users\\Kelit\\AppData\\Roaming\\NuGet\\NuGet.Config",
+>>>>>>> 1ecbdd7fd5bbbecab1bf427201edc10714cf2219
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -118,8 +134,13 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
+<<<<<<< HEAD
+              "C:\\Schule\\5AHIF\\LeoCode\\backend\\db\\Base\\Base.csproj": {
+                "projectPath": "C:\\Schule\\5AHIF\\LeoCode\\backend\\db\\Base\\Base.csproj"
+=======
               "C:\\Users\\Kelit\\Schule2024_25\\Syp\\LeoCode\\backend\\db\\Base\\Base.csproj": {
                 "projectPath": "C:\\Users\\Kelit\\Schule2024_25\\Syp\\LeoCode\\backend\\db\\Base\\Base.csproj"
+>>>>>>> 1ecbdd7fd5bbbecab1bf427201edc10714cf2219
               }
             }
           }
@@ -174,7 +195,11 @@
         }
       }
     },
+<<<<<<< HEAD
+    "C:\\Schule\\5AHIF\\LeoCode\\backend\\db\\Persistence\\Persistence.csproj": {
+=======
     "C:\\Users\\Kelit\\Schule2024_25\\Syp\\LeoCode\\backend\\db\\Persistence\\Persistence.csproj": {
+>>>>>>> 1ecbdd7fd5bbbecab1bf427201edc10714cf2219
       "version": "1.0.0",
       "restore": {
         "projectUniqueName": "C:\\Users\\Kelit\\Schule2024_25\\Syp\\LeoCode\\backend\\db\\Persistence\\Persistence.csproj",
@@ -184,7 +209,11 @@
         "outputPath": "C:\\Users\\Kelit\\Schule2024_25\\Syp\\LeoCode\\backend\\db\\Persistence\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
+<<<<<<< HEAD
+          "C:\\Users\\dap03\\AppData\\Roaming\\NuGet\\NuGet.Config",
+=======
           "C:\\Users\\Kelit\\AppData\\Roaming\\NuGet\\NuGet.Config",
+>>>>>>> 1ecbdd7fd5bbbecab1bf427201edc10714cf2219
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -199,8 +228,13 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
+<<<<<<< HEAD
+              "C:\\Schule\\5AHIF\\LeoCode\\backend\\db\\Core\\Core.csproj": {
+                "projectPath": "C:\\Schule\\5AHIF\\LeoCode\\backend\\db\\Core\\Core.csproj"
+=======
               "C:\\Users\\Kelit\\Schule2024_25\\Syp\\LeoCode\\backend\\db\\Core\\Core.csproj": {
                 "projectPath": "C:\\Users\\Kelit\\Schule2024_25\\Syp\\LeoCode\\backend\\db\\Core\\Core.csproj"
+>>>>>>> 1ecbdd7fd5bbbecab1bf427201edc10714cf2219
               }
             }
           }
@@ -267,7 +301,11 @@
         }
       }
     },
+<<<<<<< HEAD
+    "C:\\Schule\\5AHIF\\LeoCode\\backend\\db\\WebAPI\\WebAPI.csproj": {
+=======
     "C:\\Users\\Kelit\\Schule2024_25\\Syp\\LeoCode\\backend\\db\\WebAPI\\WebAPI.csproj": {
+>>>>>>> 1ecbdd7fd5bbbecab1bf427201edc10714cf2219
       "version": "1.0.0",
       "restore": {
         "projectUniqueName": "C:\\Users\\Kelit\\Schule2024_25\\Syp\\LeoCode\\backend\\db\\WebAPI\\WebAPI.csproj",
@@ -277,7 +315,11 @@
         "outputPath": "C:\\Users\\Kelit\\Schule2024_25\\Syp\\LeoCode\\backend\\db\\WebAPI\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
+<<<<<<< HEAD
+          "C:\\Users\\dap03\\AppData\\Roaming\\NuGet\\NuGet.Config",
+=======
           "C:\\Users\\Kelit\\AppData\\Roaming\\NuGet\\NuGet.Config",
+>>>>>>> 1ecbdd7fd5bbbecab1bf427201edc10714cf2219
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -292,8 +334,13 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
+<<<<<<< HEAD
+              "C:\\Schule\\5AHIF\\LeoCode\\backend\\db\\Persistence\\Persistence.csproj": {
+                "projectPath": "C:\\Schule\\5AHIF\\LeoCode\\backend\\db\\Persistence\\Persistence.csproj"
+=======
               "C:\\Users\\Kelit\\Schule2024_25\\Syp\\LeoCode\\backend\\db\\Persistence\\Persistence.csproj": {
                 "projectPath": "C:\\Users\\Kelit\\Schule2024_25\\Syp\\LeoCode\\backend\\db\\Persistence\\Persistence.csproj"
+>>>>>>> 1ecbdd7fd5bbbecab1bf427201edc10714cf2219
               }
             }
           }
