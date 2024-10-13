@@ -8,6 +8,7 @@ import { map } from 'rxjs/operators';
 import { DbService } from '../service/db-service.service';
 import { User } from '../model/user';
 import { ExerciseDto } from '../model/exerciseDto';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-start-screen',
@@ -17,7 +18,7 @@ import { ExerciseDto } from '../model/exerciseDto';
 export class StartScreenComponent {
 
 
-  constructor( private rest: DbService) {
+  constructor( private rest: DbService, private router: Router) {
     this.filteredTags = this.tagCtrl.valueChanges.pipe(
       startWith(null),
       map((tag: string | null) => tag ? this._filter(tag) : this.availableTags.slice()));  
@@ -28,12 +29,20 @@ export class StartScreenComponent {
       map((tag: string | null) => tag ? this._filter(tag) : this.availableTags.slice())); 
    }
 
+   
+
    defaultUser :User = {
     username: "Default",
     password: "Default",
     exercises: []
   }
 
+    ifUserName: string | null = '';
+
+    async logout(): Promise<void> {
+      sessionStorage.setItem('shouldLogOut', 'true');
+      this.router.navigate(['/login']);
+    }
 
   //für Suche in der Liste
   selectedSearchTags: string[] = [];
@@ -50,6 +59,8 @@ export class StartScreenComponent {
   
 
   ngOnInit(): void {
+    this.ifUserName = sessionStorage.getItem('ifUserName');
+    sessionStorage.setItem("userName", this.defaultUser.username);
     this.rest.getExerciseByUsername(this.defaultUser.username).subscribe((data: ExerciseDto[]) => {
       this.exercises = data;
       console.log(this.exercises);

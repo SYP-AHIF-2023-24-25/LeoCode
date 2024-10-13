@@ -3,6 +3,19 @@
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
+
+  <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <span class="navbar-text text-light">
+          {{ ifUserName }}
+        </span>
+      </li>
+      <li class="nav-item">
+        <button class="btn btn-outline-light ml-3" (click)="logout()">Logout</button>
+      </li>
+    </ul>
+  </div>
 </nav>
 
 <div class="container-fluid">
@@ -19,7 +32,7 @@
         </div>
 
         <div class="card-body">
-          <div *ngIf="userName == exercise.creator">
+          <div *ngIf="ifUserName == exercise.creator">
             <h1>Exercise Name</h1>  
             <div class="form-group">
               <textarea class="form-control" rows="5" style="height: 50px; width: 300px" [(ngModel)]="exercise.name" placeholder={{exercise.name}}></textarea>
@@ -56,7 +69,7 @@
 
           </div>
 
-          <div *ngIf="userName != exercise.creator">
+          <div *ngIf="ifUserName != exercise.creator">
             <h1>Exercise Name</h1>
             <div class="form-group">
               <textarea readonly="true" class="form-control" rows="5" style="height: 50px; width: 300px" [(ngModel)]="exerciseName" placeholder={{exerciseName}}></textarea>
@@ -76,9 +89,9 @@
           </div>
 
           <div class="d-flex">
-            <button class="btn btn-primary" [routerLink]="['/test-results']" [queryParams]="{userName: userName, exerciseName: exercise.name}">Run Test</button>
+            <button class="btn btn-primary" [routerLink]="['/test-results']" [queryParams]="{exerciseName: exercise.name}">Run Test</button>
 
-            <div *ngIf="userName == exercise.creator">
+            <div *ngIf="ifUserName == exercise.creator">
               <button class="btn btn-primary ml-2" (click)="SaveChanges()">Save Changes</button>
             </div>
           </div>

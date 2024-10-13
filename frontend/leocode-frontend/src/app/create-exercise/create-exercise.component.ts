@@ -27,7 +27,11 @@ import { ArrayOfSnippetsDto } from '../model/arrayOfSnippetsDto';
   styleUrls: ['./create-exercise.component.css']
 })
 export class CreateExerciseComponent {
-
+  ifUserName: string | null = '';
+  async logout(): Promise<void> {
+    sessionStorage.setItem('shouldLogOut', 'true');
+    this.router.navigate(['/login']);
+  }
   constructor(private fileUploadService: FileUploadService, private rest: RestService, private dbRest: DbService, private http: HttpClient, private snackBar: MatSnackBar, private router: Router) {
     this.filteredTags = this.tagCtrl.valueChanges.pipe(
       startWith(null),
@@ -55,6 +59,7 @@ export class CreateExerciseComponent {
   separatorKeysCodes: number[] = [13, 188]; // Enter und Komma  
 
   ngOnInit(): void {
+    this.ifUserName = sessionStorage.getItem('ifUserName');
     document.addEventListener("DOMContentLoaded", () => {
       const mainMenuLinks = document.querySelectorAll('.main-menu-link');
       
@@ -226,7 +231,7 @@ export class CreateExerciseComponent {
   async sendCodeToRunner() {
      let exercise  = {
       name: this.exerciseName,
-      creator: 'Default',
+      creator: this.ifUserName || '',
       instruction: this.instruction,
       language: this.selectedLanguage,
       tags: this.selectedTags,

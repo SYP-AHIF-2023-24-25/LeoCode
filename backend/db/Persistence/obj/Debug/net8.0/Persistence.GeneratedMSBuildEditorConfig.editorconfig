@@ -8,6 +8,10 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = Persistence
+<<<<<<< HEAD
 build_property.ProjectDir = C:\Schule\5AHIF\LeoCode\backend\db\Persistence\
+=======
+build_property.ProjectDir = C:\Schule\5AHIF\david\LeoCode\backend\db\Persistence\
+>>>>>>> d8461a37ceedd2097ade16090e12797c1a455b80
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
