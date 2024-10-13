@@ -19,7 +19,6 @@ export class StudentStartScreenComponent implements OnInit {
   }
 
   async logout(): Promise<void> {
-    //await this.keycloakService.logout();
     sessionStorage.setItem('shouldLogOut', 'true');
     this.router.navigate(['/login']);
   }
