@@ -98,3 +98,15 @@
 10/10/2024 23:56:39: SUCCESS: Response from TypeScript-runner was successful
 10/10/2024 23:57:06: SUCCESS: Response from TypeScript-runner was successful
 10/13/2024 18:11:06: ERROR: Response from TypeScript-runner wasn't successful. Error Message: The request was canceled due to the configured HttpClient.Timeout of 100 seconds elapsing.
+10/13/2024 22:01:32: SUCCESS: Response from CSharp-runner was successful
+10/13/2024 22:01:33: ERROR: Response from CSharp-runner wasn't successful. Error Message: Data at the root level is invalid. Line 1, position 1.
+10/13/2024 22:02:13: SUCCESS: Response from CSharp-runner was successful
+10/13/2024 22:11:34: SUCCESS: Response from CSharp-runner was successful
+10/13/2024 22:19:12: SUCCESS: Response from CSharp-runner was successful
+10/13/2024 22:19:12: ERROR: Response from CSharp-runner wasn't successful. Error Message: Data at the root level is invalid. Line 1, position 1.
+10/13/2024 22:23:40: SUCCESS: Response from CSharp-runner was successful
+10/13/2024 22:23:40: ERROR: Response from CSharp-runner wasn't successful. Error Message: Data at the root level is invalid. Line 1, position 1.
+10/13/2024 22:27:36: SUCCESS: Response from CSharp-runner was successful
+10/13/2024 22:27:37: ERROR: Response from CSharp-runner wasn't successful. Error Message: Data at the root level is invalid. Line 1, position 1.
+10/13/2024 22:29:40: SUCCESS: Response from CSharp-runner was successful
+10/13/2024 22:30:47: SUCCESS: Response from CSharp-runner was successful

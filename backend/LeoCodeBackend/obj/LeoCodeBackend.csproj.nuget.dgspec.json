@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Kelit\\Schule2024_25\\Syp\\LeoCode\\backend\\LeoCodeBackend\\LeoCodeBackend.csproj": {}
+    "C:\\Schule\\5AHIF\\david\\LeoCode\\backend\\LeoCodeBackend\\LeoCodeBackend.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Kelit\\Schule2024_25\\Syp\\LeoCode\\backend\\LeoCodeBackend\\LeoCodeBackend.csproj": {
+    "C:\\Schule\\5AHIF\\david\\LeoCode\\backend\\LeoCodeBackend\\LeoCodeBackend.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Kelit\\Schule2024_25\\Syp\\LeoCode\\backend\\LeoCodeBackend\\LeoCodeBackend.csproj",
+        "projectUniqueName": "C:\\Schule\\5AHIF\\david\\LeoCode\\backend\\LeoCodeBackend\\LeoCodeBackend.csproj",
         "projectName": "LeoCodeBackend",
-        "projectPath": "C:\\Users\\Kelit\\Schule2024_25\\Syp\\LeoCode\\backend\\LeoCodeBackend\\LeoCodeBackend.csproj",
-        "packagesPath": "C:\\Users\\Kelit\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Kelit\\Schule2024_25\\Syp\\LeoCode\\backend\\LeoCodeBackend\\obj\\",
+        "projectPath": "C:\\Schule\\5AHIF\\david\\LeoCode\\backend\\LeoCodeBackend\\LeoCodeBackend.csproj",
+        "packagesPath": "C:\\Users\\Florian\\.nuget\\packages\\",
+        "outputPath": "C:\\Schule\\5AHIF\\david\\LeoCode\\backend\\LeoCodeBackend\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Kelit\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Florian\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -22,7 +22,6 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -35,11 +34,6 @@
           "warnAsError": [
             "NU1605"
           ]
-        },
-        "restoreAuditProperties": {
-          "enableAudit": "true",
-          "auditLevel": "low",
-          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -90,7 +84,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

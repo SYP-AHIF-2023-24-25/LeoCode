@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Schule\\4AHIF\\LeoCode\\backend\\csharp-runner\\csharp-runner.csproj": {}
+    "C:\\Schule\\5AHIF\\david\\LeoCode\\backend\\csharp-runner\\csharp-runner.csproj": {}
   },
   "projects": {
-    "C:\\Schule\\4AHIF\\LeoCode\\backend\\csharp-runner\\csharp-runner.csproj": {
+    "C:\\Schule\\5AHIF\\david\\LeoCode\\backend\\csharp-runner\\csharp-runner.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Schule\\4AHIF\\LeoCode\\backend\\csharp-runner\\csharp-runner.csproj",
+        "projectUniqueName": "C:\\Schule\\5AHIF\\david\\LeoCode\\backend\\csharp-runner\\csharp-runner.csproj",
         "projectName": "csharp-runner",
-        "projectPath": "C:\\Schule\\4AHIF\\LeoCode\\backend\\csharp-runner\\csharp-runner.csproj",
+        "projectPath": "C:\\Schule\\5AHIF\\david\\LeoCode\\backend\\csharp-runner\\csharp-runner.csproj",
         "packagesPath": "C:\\Users\\Florian\\.nuget\\packages\\",
-        "outputPath": "C:\\Schule\\4AHIF\\LeoCode\\backend\\csharp-runner\\obj\\",
+        "outputPath": "C:\\Schule\\5AHIF\\david\\LeoCode\\backend\\csharp-runner\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Florian\\AppData\\Roaming\\NuGet\\NuGet.Config",

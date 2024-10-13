@@ -7,20 +7,37 @@ namespace csharp_runner
         public static async Task<string> runCSharp(string exerciseName, string templateFilePath, string filePathForRandomDirectory, string code, string fileName)
         {
             Console.WriteLine("in Methode runCSharp in execute Tests");
+
+            // Erstellen eines temporären Verzeichnisses
             string solutionDir = createTempDir(filePathForRandomDirectory);
             Console.WriteLine($"Solution Directory: {solutionDir}");
+
+            // Kopieren der Vorlagendatei ins temporäre Verzeichnis
             await CopyAsync(templateFilePath, solutionDir);
+
+            // Erstellen eines Symlinks zur NuGet-Konfigurationsdatei (falls notwendig)
             int exitCode = await RunCommandsAsyncCommandLine(solutionDir, $"ln -s /usr/src/app/config/nuget.config {solutionDir}/{exerciseName}/nuget.config");
+            exitCode = await RunCommandsAsyncCommandLine(solutionDir, $"ln -s /usr/src/app/nuget-packages {solutionDir}/{exerciseName}/nuget-packages");
             solutionDir = $@"{solutionDir}/{exerciseName}";
+
+            // Den Code in das entsprechende Verzeichnis einfügen
             await ReplaceCodeAsync(solutionDir, code, fileName, exerciseName);
 
-            Console.WriteLine("dotnet restore anfangen");
-            Console.Write($"Solution dir für ausführen von dotnet restore: {solutionDir}");
-            exitCode = await RunCommandsAsyncForDotnet(solutionDir, "test -l:trx;LogFileName=TestOutput.xml");
+            // NuGet-Paket-Verzeichnis angeben (hier sollte der gemountete Ordner angegeben werden)
+            string nugetPackagesPath = $@"{solutionDir}/nuget-packages";  // Diesen Pfad auf den gemounteten Pfad setzen
+
+            // Prüfen, ob Pakete bereits im gemounteten Verzeichnis vorhanden sind
+            exitCode = await RunCommandsAsyncForDotnet(solutionDir, $"restore --no-cache --packages {nugetPackagesPath}");
+
+            // Testausführung ohne Restore, um Zeit zu sparen
+            exitCode = await RunCommandsAsyncForDotnet(solutionDir, "test --no-restore -l:trx;LogFileName=TestOutput.xml");
+
             Console.WriteLine($"tests ausführen fertig und code ist: {exitCode}");
 
+            // Ergebnis der Tests einlesen und zurückgeben
             string testOutput = await File.ReadAllTextAsync(Path.Combine(solutionDir, $"{exerciseName}Tests/TestResults/TestOutput.xml"));
             Console.WriteLine($"SUCCESS: CSharp {exerciseName} were successful");
+
             return testOutput;
         }
 
