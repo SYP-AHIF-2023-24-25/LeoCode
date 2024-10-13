@@ -19,7 +19,7 @@ namespace Import
 
             User user2 = new User
             {
-                Username = "IF200182",
+                Username = "if200183",
                 Password = "123"
             };
 
@@ -28,7 +28,10 @@ namespace Import
                 Name = "Addition",
                 Description = "Implement the a addition calculator",
                 Language = Language.CSharp,
-                Tags = new string[] { "Class1", "POSE" }
+                Tags = new string[] { "Class1", "POSE" },
+                Creator = "Florian Hagmair",
+                DateCreated = DateTime.Now,
+                DateUpdated = DateTime.Now
             };
 
             exercise1.ArrayOfSnippets =
@@ -71,7 +74,10 @@ namespace Import
                 Name = "PasswordChecker",
                 Description = "Implement a password checker",
                 Language = Language.TypeScript,
-                Tags = new string[] { "Class2", "WMC" }
+                Tags = new string[] { "Class2", "WMC" },
+                Creator = "Florian Hagmair",
+                DateCreated = DateTime.Now,
+                DateUpdated = DateTime.Now
             };
             exercise2.ArrayOfSnippets =
                     new ArrayOfSnippets
@@ -110,9 +116,9 @@ namespace Import
 
 
 
-            exercise1.UserId = user1.Id;
+            exercise1.UserId = user2.Id;
             exercise2.UserId = user1.Id;
-            exercise1.User = user1;
+            exercise1.User = user2;
             exercise2.User = user1;
 
 
@@ -122,7 +128,10 @@ namespace Import
                 Name = "SubtractionEmpty",
                 Description = "Implement the a subtraction calculator",
                 Language = Language.CSharp,
-                Tags = new string[] { "Class1", "POSE" }
+                Tags = new string[] { "Class1", "POSE" },
+                Creator = "Lukas Hoyer",
+                DateCreated = DateTime.Now,
+                DateUpdated = DateTime.Now
             };
 
             exercise3.ArrayOfSnippets =

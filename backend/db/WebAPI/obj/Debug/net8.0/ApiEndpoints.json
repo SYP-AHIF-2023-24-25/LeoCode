@@ -36,6 +36,16 @@
         "Name": "username",
         "Type": "System.String",
         "IsRequired": false
+      },
+      {
+        "Name": "datecreated",
+        "Type": "System.DateTime",
+        "IsRequired": false
+      },
+      {
+        "Name": "dateupdated",
+        "Type": "System.DateTime",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []
@@ -113,6 +123,52 @@
         "Name": "arrayOfSnippets",
         "Type": "Core.Dto.ArrayOfSnippetsDto",
         "IsRequired": true
+      },
+      {
+        "Name": "dateCreated",
+        "Type": "System.DateTime",
+        "IsRequired": false
+      },
+      {
+        "Name": "dateUpdated",
+        "Type": "System.DateTime",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebAPI.Controllers.ExerciseController",
+    "Method": "UpdateDetails",
+    "RelativePath": "api/Exercise/UpdateDetails",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "description",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "tags",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "exerciseName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "username",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "newExerciseName",
+        "Type": "System.String",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []

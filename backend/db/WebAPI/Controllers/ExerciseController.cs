@@ -19,6 +19,30 @@ public class ExerciseController : Controller
         _unitOfWork = unitOfWork;
     }
 
+    [HttpPut("UpdateDetails")]
+    public async Task<IActionResult> UpdateDetails(string description, string tags, string exerciseName, string username, string newExerciseName)
+    {
+        string[] splitted = tags.Split(",");
+        try
+        {
+            User user = _unitOfWork.Users.GetByUsername(username);
+            List<Exercise> exercises = await _unitOfWork.Exercises.GetExersiceByUsernameAsync(user, exerciseName);
+            exercises = exercises
+                .Where(exercise => exerciseName == exercise.Name)
+                .ToList();
+
+            exercises[0].Description = description;
+            exercises[0].Tags = splitted;
+            exercises[0].Name = newExerciseName;
+            await _unitOfWork.SaveChangesAsync();
+            return Ok();
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
+    }
+
     [HttpPost]
     public async Task<IActionResult> AddExerciseAsync([FromBody] ArrayOfSnippetsDto arrayOfSnippets, string name, string description, string language, string[] tags, string username, DateTime datecreated, DateTime dateupdated)
     {
@@ -82,12 +106,32 @@ public class ExerciseController : Controller
     }
 
    [HttpGet]
-    public async Task<ExerciseDto[]> GetExersiceByUsername(string username, string? exerciseName)
+    public async Task<ExerciseDto[]> GetExersiceByUsername(string? username, string? exerciseName)
     {
         try
         {
+            List<Exercise> exercises;
+            if (username == null && exerciseName == null)
+            {
+                exercises = await _unitOfWork.Exercises.GetAll();
+                return exercises.Select(exercise => new ExerciseDto(
+                exercise.Name,
+                exercise.Creator,
+                exercise.Description,
+                ((Language)exercise.Language).ToString(),
+                exercise.Tags,
+
+                exercise.ArrayOfSnippets.Snippets.Select(snippet => new SnippetDto(
+                        snippet.Code,
+                        snippet.ReadonlySection,
+                        snippet.FileName)).ToArray(),
+                exercise.DateCreated,
+                exercise.DateUpdated
+
+                )).ToArray();
+            }
             User user = _unitOfWork.Users.GetByUsername(username);
-            List<Exercise> exercises = await _unitOfWork.Exercises.GetExersiceByUsernameAsync(user, exerciseName);
+            exercises = await _unitOfWork.Exercises.GetExersiceByUsernameAsync(user, exerciseName);
             return exercises.Select(exercise => new ExerciseDto(
             exercise.Name,
             exercise.Creator,

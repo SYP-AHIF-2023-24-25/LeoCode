@@ -19,6 +19,14 @@ namespace Persistence
             _dbContext = dbContext;
         }
 
+        public async Task<List<Exercise>> GetAll()
+        {
+            return await _dbContext.Exercises
+                .Include(exercise => exercise.ArrayOfSnippets)
+                .ThenInclude(arrayOfSnippets => arrayOfSnippets.Snippets)
+                .ToListAsync();
+        }
+
         public async Task<List<Exercise>> GetExersiceByUsernameAsync(User user, string? exerciseName)
         {
             IQueryable<Exercise> exerciseQuery = _dbContext.Exercises
