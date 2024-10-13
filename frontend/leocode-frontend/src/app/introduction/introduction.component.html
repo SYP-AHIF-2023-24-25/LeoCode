@@ -18,12 +18,12 @@
         <div class="sidebar-sticky">
           <ul class="nav flex-column">
             <li class="nav-item">
-              <a class="nav-link active" [routerLink]="['/introdcution']">
+              <a class="nav-link active" [routerLink]="['/introdcution']" [queryParams]="{ creator: exercise.creator}">
                 Introduction
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" [routerLink]="['/test-results']">
+              <a class="nav-link" [routerLink]="['/test-results']"  [queryParams]="{ creator: exercise.creator}">
                 Implementation
               </a>
             </li>

@@ -24,6 +24,7 @@ export class TestResultComponent  implements OnInit{
 
  userName: string | null= "";
  exerciseName: string |null = "";
+ creator: string | undefined = "";
 
   exercise : ExerciseDto = {
     name: "",
@@ -63,6 +64,8 @@ export class TestResultComponent  implements OnInit{
     this.route.queryParams.subscribe((params: Params) => {
       this.userName = params['userName'];
       this.exerciseName = params['exerciseName'];
+      this.creator = params['creator'];
+
 
       if(this.userName != null && this.exerciseName != null){
         sessionStorage.setItem("userName", this.userName);
@@ -74,7 +77,7 @@ export class TestResultComponent  implements OnInit{
     });
 
      if(this.userName != null && this.exerciseName != null){
-      this.restDb.getExerciseByUsername(this.userName, this.exerciseName).subscribe((data: ExerciseDto[]) => {
+      this.restDb.getExerciseByUsername(this.creator, this.exerciseName).subscribe((data: ExerciseDto[]) => {
         this.exercise = data[0];
         console.log("TAGS")
         console.log(this.exercise.tags.length);

@@ -117,9 +117,9 @@ namespace Import
 
 
             exercise1.UserId = user2.Id;
-            exercise2.UserId = user1.Id;
+            exercise2.UserId = user2.Id;
             exercise1.User = user2;
-            exercise2.User = user1;
+            exercise2.User = user2;
 
 
 

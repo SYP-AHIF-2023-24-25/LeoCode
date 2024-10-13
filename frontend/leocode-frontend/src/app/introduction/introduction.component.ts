@@ -14,6 +14,7 @@ export class IntroductionComponent {
   userName: string|null = sessionStorage.getItem('userName');
   exerciseName: string | null = sessionStorage.getItem('exerciseName');
   date: Date = new Date();
+  creator: string | undefined = "";
 
   exercise : ExerciseDto = {
     name: "",
@@ -29,8 +30,15 @@ export class IntroductionComponent {
   }
 
   ngOnInit(): void {
-    if(this.userName != null && this.exerciseName != null){
-      this.restDb.getExerciseByUsername(this.userName, this.exerciseName).subscribe((data: ExerciseDto[]) => {
+    this.route.queryParams.subscribe((params: Params) => {
+      this.creator = params['creator'];   
+    });
+    
+console.log(this.creator);
+console.log(this.exerciseName);
+
+    if(this.creator != null && this.exerciseName != null){
+      this.restDb.getExerciseByUsername(this.creator, this.exerciseName).subscribe((data: ExerciseDto[]) => {
         this.exercise = data[0];
        
         console.log(this.exercise.name);

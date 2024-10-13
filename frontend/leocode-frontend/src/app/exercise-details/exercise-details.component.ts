@@ -9,6 +9,7 @@ import { MatChipInputEvent } from '@angular/material/chips';
 import {Tags} from '../model/tags.enum';
 import { map, Observable, startWith } from 'rxjs';
 import { forEach } from 'jszip';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-exercise-details',
@@ -18,7 +19,9 @@ import { forEach } from 'jszip';
 export class ExerciseDetailsComponent implements OnInit {
   ifUserName: string | null = '';
   creator: string | undefined = '';
-  exerciseName: string|null = ""; 
+  exerciseName: string|null = "";
+  currentName: string = "";
+ 
 
   tagCtrl = new FormControl();
   availableTags: string[] = Object.values(Tags); // ersetzen Sie dies durch Ihre tatsächlichen Tags
@@ -36,7 +39,7 @@ export class ExerciseDetailsComponent implements OnInit {
     dateUpdated: new Date()
   }
 
-  constructor(private rest: RestService,private route: ActivatedRoute, private restDb: DbService, private router: Router) {
+  constructor(private rest: RestService,private route: ActivatedRoute, private restDb: DbService, private router: Router,private snackBar: MatSnackBar) {
     this.filteredTags = this.tagCtrl.valueChanges.pipe(
       startWith(null),
       map((tag: string | null) => tag ? this._filter(tag) : this.availableTags.slice()));  
@@ -51,6 +54,7 @@ export class ExerciseDetailsComponent implements OnInit {
     this.ifUserName = sessionStorage.getItem('ifUserName');
     this.route.queryParams.subscribe((params: Params) => {
       this.exerciseName = params['exerciseName'];
+      this.currentName = params['exerciseName'];
       this.creator = params['creator'];
 
       if(this.ifUserName != null && this.exerciseName != null){
@@ -58,7 +62,12 @@ export class ExerciseDetailsComponent implements OnInit {
       }else{
         this.exerciseName = sessionStorage.getItem('exerciseName');
       }
+      
+
     });
+    console.log(this.creator);
+    console.log(this.exerciseName);
+    
 
      if(this.ifUserName != null && this.exerciseName != null){
       //todo: den creator dieser task abfragen
@@ -134,8 +143,12 @@ export class ExerciseDetailsComponent implements OnInit {
   SaveChanges(){
     this.exercise.dateUpdated = new Date;
     console.log(this.exercise)
-
-    //this.restDb.UpdateExercise(this.exercise.creator,this.exercise.description,this.exercise.language,this.exercise.tags,this.exercise.name,this.exercise.arrayOfSnippets)
-   
+    this.restDb.UpdateDetails(this.exercise.creator,this.exercise.description,this.exercise.tags,this.currentName,this.exercise.name).subscribe((data: any) => {
+      this.snackBar.open('Exercise successfully updated', 'Close', {
+        duration: 5000,
+        horizontalPosition: 'center',
+        verticalPosition: 'top',
+      });
+    });
   }
 }

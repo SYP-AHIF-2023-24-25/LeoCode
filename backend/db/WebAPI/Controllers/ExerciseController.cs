@@ -34,6 +34,7 @@ public class ExerciseController : Controller
             exercises[0].Description = description;
             exercises[0].Tags = splitted;
             exercises[0].Name = newExerciseName;
+            exercises[0].DateUpdated = DateTime.Now;
             await _unitOfWork.SaveChangesAsync();
             return Ok();
         }

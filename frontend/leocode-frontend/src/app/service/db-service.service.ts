@@ -59,4 +59,17 @@ export class DbService {
     return this.http.put<Exercise>(`${this.apiUrl}/exercise?username=${exercise.username}&description=${exercise.introduction}&tags=${exercise.tags}&language=${exercise.language}&subject=${subject}&exerciseName=${exercise.exerciseName}`, arrayOfSnippets, httpOptions);
   }
 
+  UpdateDetails(username: string, description: string, tags: string[], exerciseName: string, newExerciseName: string) {
+    // Konvertiere das Array der Tags in einen kommagetrennten String
+    const tagsString = tags.join(',');
+
+    // Logge wichtige Informationen zur Überprüfung
+    console.log("Tags length: " + tags.length);
+    console.log("First Tag: " + tags[0]);
+
+    // HTTP PUT Request an den passenden API-Endpunkt
+    return this.http.put(`${this.apiUrl}/exercise/UpdateDetails?username=${username}&description=${description}&tags=${tagsString}&exerciseName=${exerciseName}&newExerciseName=${newExerciseName}`, null, httpOptions);
+}
+
+
 }

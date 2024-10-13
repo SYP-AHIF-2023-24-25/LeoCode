@@ -97,3 +97,4 @@
 10/10/2024 23:54:51: SUCCESS: Response from CSharp-runner was successful
 10/10/2024 23:56:39: SUCCESS: Response from TypeScript-runner was successful
 10/10/2024 23:57:06: SUCCESS: Response from TypeScript-runner was successful
+10/13/2024 18:11:06: ERROR: Response from TypeScript-runner wasn't successful. Error Message: The request was canceled due to the configured HttpClient.Timeout of 100 seconds elapsing.
