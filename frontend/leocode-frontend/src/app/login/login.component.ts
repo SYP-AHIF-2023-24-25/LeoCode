@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
 import { KeycloakService } from 'keycloak-angular';
 import { Router } from '@angular/router';
+import { Component, computed, inject, Signal, signal, WritableSignal, OnInit } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
+import { finalize } from "rxjs";
 
 @Component({
   selector: 'app-login',
@@ -8,9 +10,12 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit  {
-  //isLoggedIn = false;
+  private readonly httpClient: HttpClient = inject(HttpClient);
+  public readonly response: WritableSignal<string | null> = signal(null);
+  public readonly loading: WritableSignal<boolean> = signal(false);
+  public readonly showResponse: Signal<boolean> = computed(() => this.response() !== null);
   constructor(private keycloakService: KeycloakService, private router: Router) {
-    //this.checkLoginStatus();
+
   }
 
   async ngOnInit(): Promise<void> {
@@ -21,32 +26,41 @@ export class LoginComponent implements OnInit  {
       const isLoggedIn = await this.keycloakService.isLoggedIn();
       if (isLoggedIn) {
         await this.setUserData();
-        this.router.navigate(['/api-demo']);
       } else {
         await this.keycloakService.login();
-        this.router.navigate(['/api-demo']);
       }
+      this.performCall('at-least-student');
     }
   }
 
-  /*async checkLoginStatus(): Promise<void> {
-    this.isLoggedIn = await this.keycloakService.isLoggedIn();
-    if (this.isLoggedIn) {
-      await this.setUserData();
-      this.router.navigate(['/api-demo']);
-    } else {
-      await this.login();
-    }
-  }*/
+  public performCall(action: string): void {
+    const route = `http://localhost:5050/api/demo/${action}`;
 
+    this.loading.set(true);
 
-  /*async login(): Promise<void> {
-    if (!this.isLoggedIn) {
-      await this.keycloakService.login();
-      await this.setUserData();
-      this.router.navigate(['/api-demo']);
-    }
-  }*/
+    // bearer token is automatically added by the interceptor
+    this.httpClient.get(route, { responseType: "text" })
+      .pipe(finalize(() => this.loading.set(false)))
+      .subscribe({
+        next: (res) => {
+          this.response.update(() => res);
+          if (res === 'You are at least a student') {
+            if (sessionStorage.getItem('ifUserName') === 'if200183') {
+              this.router.navigate(['/start-screen']);
+              //this.router.navigate(['/student-start-screen']);
+            } else {
+              this.router.navigate(['/student-start-screen']);
+            }
+          } else {
+            this.router.navigate(['/start-screen']);
+          }
+        },
+        error: err => {
+          this.response.update(() => `Backend says no: ${err.status}`);
+          this.router.navigate(['/start-screen']);
+        }
+      });
+  }
 
   async setUserData(): Promise<void> {
     const user = await this.keycloakService.loadUserProfile();
