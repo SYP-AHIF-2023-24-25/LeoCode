@@ -9,7 +9,7 @@ import { TestResults } from '../model/test-results';
 import { ArrayOfSnippetsDto } from '../model/arrayOfSnippetsDto';
 import { CodeSection } from '../model/code-sections';
 import { Value } from '../model/value';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { User } from '../model/user';
 import { DbService } from '../service/db-service.service';
 import { ExerciseDto } from '../model/exerciseDto';
@@ -57,10 +57,18 @@ export class TestResultComponent  implements OnInit{
     TestResults: []
   };
 
-  constructor(private rest: RestService, private resultHistoryService: ResultHistoryService, private route: ActivatedRoute, private restDb: DbService) {
+  constructor(private rest: RestService, private resultHistoryService: ResultHistoryService, private route: ActivatedRoute, private restDb: DbService, private router: Router) {
+  }
+
+  ifUserName: string | null = '';
+  async logout(): Promise<void> {
+    sessionStorage.setItem('shouldLogOut', 'true');
+    this.router.navigate(['/login']);
   }
 
   ngOnInit(): void {
+    this.ifUserName = sessionStorage.getItem('ifUserName');
+
     this.route.queryParams.subscribe((params: Params) => {
       this.userName = params['userName'];
       this.exerciseName = params['exerciseName'];

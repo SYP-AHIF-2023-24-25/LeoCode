@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ExerciseDto } from '../model/exerciseDto';
 import { Params } from '@angular/router';
 import { DbService } from '../service/db-service.service';
@@ -26,16 +26,24 @@ export class IntroductionComponent {
     dateCreated: new Date(),
     dateUpdated: new Date()
   }
-  constructor( private route: ActivatedRoute, private restDb: DbService) {
+  constructor( private route: ActivatedRoute, private restDb: DbService, private router: Router) {
+  }
+
+  ifUserName: string | null = '';
+  async logout(): Promise<void> {
+    sessionStorage.setItem('shouldLogOut', 'true');
+    this.router.navigate(['/login']);
   }
 
   ngOnInit(): void {
+    this.ifUserName = sessionStorage.getItem('ifUserName');
+
     this.route.queryParams.subscribe((params: Params) => {
       this.creator = params['creator'];   
     });
     
-console.log(this.creator);
-console.log(this.exerciseName);
+    console.log(this.creator);
+    console.log(this.exerciseName);
 
     if(this.creator != null && this.exerciseName != null){
       this.restDb.getExerciseByUsername(this.creator, this.exerciseName).subscribe((data: ExerciseDto[]) => {
