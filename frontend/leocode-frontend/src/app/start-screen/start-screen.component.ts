@@ -61,7 +61,7 @@ export class StartScreenComponent {
   ngOnInit(): void {
     this.ifUserName = sessionStorage.getItem('ifUserName');
     sessionStorage.setItem("userName", this.defaultUser.username);
-    this.rest.getExerciseByUsername(this.defaultUser.username).subscribe((data: ExerciseDto[]) => {
+    this.rest.getExerciseByUsername().subscribe((data: ExerciseDto[]) => {
       this.exercises = data;
       console.log(this.exercises);
     });

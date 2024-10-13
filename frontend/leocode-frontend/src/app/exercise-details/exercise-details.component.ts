@@ -17,6 +17,7 @@ import { forEach } from 'jszip';
 })
 export class ExerciseDetailsComponent implements OnInit {
   ifUserName: string | null = '';
+  creator: string | undefined = '';
   exerciseName: string|null = ""; 
 
   tagCtrl = new FormControl();
@@ -50,6 +51,7 @@ export class ExerciseDetailsComponent implements OnInit {
     this.ifUserName = sessionStorage.getItem('ifUserName');
     this.route.queryParams.subscribe((params: Params) => {
       this.exerciseName = params['exerciseName'];
+      this.creator = params['creator'];
 
       if(this.ifUserName != null && this.exerciseName != null){
         sessionStorage.setItem("exerciseName", this.exerciseName);
@@ -59,7 +61,8 @@ export class ExerciseDetailsComponent implements OnInit {
     });
 
      if(this.ifUserName != null && this.exerciseName != null){
-      this.restDb.getExerciseByUsername(this.exercise.creator, this.exerciseName).subscribe((data: ExerciseDto[]) => {
+      //todo: den creator dieser task abfragen
+      this.restDb.getExerciseByUsername(this.creator, this.exerciseName).subscribe((data: ExerciseDto[]) => {
         console.log("response von db für data:" + data);
         this.exercise = data[0];
         console.log(this.exercise.tags.length);

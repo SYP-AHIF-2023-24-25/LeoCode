@@ -67,7 +67,7 @@
                   <td>{{exercise.dateCreated | date: 'mediumDate'}}</td>
                   <td>{{exercise.dateUpdated | date: 'mediumDate'}}</td>
                   <td>
-                    <button class="btn btn-primary" [routerLink]="['/exercise-details']" [queryParams]="{exerciseName: exercise.name}">Details</button>
+                    <button class="btn btn-primary" [routerLink]="['/exercise-details']" [queryParams]="{exerciseName: exercise.name, creator: exercise.creator}">Details</button>
                   </td>
                 </tr>
               </tbody>

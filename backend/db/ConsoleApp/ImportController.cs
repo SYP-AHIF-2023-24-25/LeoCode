@@ -29,7 +29,7 @@ namespace Import
                 Description = "Implement the a addition calculator",
                 Language = Language.CSharp,
                 Tags = new string[] { "Class1", "POSE" },
-                Creator = "Florian Hagmair",
+                Creator = "if200183",
                 DateCreated = DateTime.Now,
                 DateUpdated = DateTime.Now
             };
@@ -75,7 +75,7 @@ namespace Import
                 Description = "Implement a password checker",
                 Language = Language.TypeScript,
                 Tags = new string[] { "Class2", "WMC" },
-                Creator = "Florian Hagmair",
+                Creator = "if200183",
                 DateCreated = DateTime.Now,
                 DateUpdated = DateTime.Now
             };
@@ -129,7 +129,7 @@ namespace Import
                 Description = "Implement the a subtraction calculator",
                 Language = Language.CSharp,
                 Tags = new string[] { "Class1", "POSE" },
-                Creator = "Lukas Hoyer",
+                Creator = "if200158",
                 DateCreated = DateTime.Now,
                 DateUpdated = DateTime.Now
             };

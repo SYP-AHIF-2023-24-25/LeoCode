@@ -20,8 +20,11 @@ export class DbService {
   private apiUrl ="https://localhost:7269/api"
   constructor(private http: HttpClient) { }
 
-  getExerciseByUsername(username: string, exerciseName?: string) {
-    let params = new HttpParams().set('username', username);
+  getExerciseByUsername(username?: string, exerciseName?: string) {
+    let params = new HttpParams();
+    if (username) {
+      params = new HttpParams().set('username', username);
+    }
     if (exerciseName) {
       params = params.set('exerciseName', exerciseName);
     }

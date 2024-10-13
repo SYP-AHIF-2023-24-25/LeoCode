@@ -4352,25 +4352,11 @@
     ]
   },
   "packageFolders": {
-<<<<<<< HEAD
-    "C:\\Users\\dap03\\.nuget\\packages\\": {}
-=======
     "C:\\Users\\Florian\\.nuget\\packages\\": {}
->>>>>>> d8461a37ceedd2097ade16090e12797c1a455b80
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-<<<<<<< HEAD
-      "projectUniqueName": "C:\\Schule\\5AHIF\\LeoCode\\backend\\db\\ConsoleApp\\Import.csproj",
-      "projectName": "Import",
-      "projectPath": "C:\\Schule\\5AHIF\\LeoCode\\backend\\db\\ConsoleApp\\Import.csproj",
-      "packagesPath": "C:\\Users\\dap03\\.nuget\\packages\\",
-      "outputPath": "C:\\Schule\\5AHIF\\LeoCode\\backend\\db\\ConsoleApp\\obj\\",
-      "projectStyle": "PackageReference",
-      "configFilePaths": [
-        "C:\\Users\\dap03\\AppData\\Roaming\\NuGet\\NuGet.Config",
-=======
       "projectUniqueName": "C:\\Schule\\5AHIF\\david\\LeoCode\\backend\\db\\ConsoleApp\\Import.csproj",
       "projectName": "Import",
       "projectPath": "C:\\Schule\\5AHIF\\david\\LeoCode\\backend\\db\\ConsoleApp\\Import.csproj",
@@ -4379,7 +4365,6 @@
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Florian\\AppData\\Roaming\\NuGet\\NuGet.Config",
->>>>>>> d8461a37ceedd2097ade16090e12797c1a455b80
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -4393,13 +4378,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-<<<<<<< HEAD
-            "C:\\Schule\\5AHIF\\LeoCode\\backend\\db\\Persistence\\Persistence.csproj": {
-              "projectPath": "C:\\Schule\\5AHIF\\LeoCode\\backend\\db\\Persistence\\Persistence.csproj"
-=======
             "C:\\Schule\\5AHIF\\david\\LeoCode\\backend\\db\\Persistence\\Persistence.csproj": {
               "projectPath": "C:\\Schule\\5AHIF\\david\\LeoCode\\backend\\db\\Persistence\\Persistence.csproj"
->>>>>>> d8461a37ceedd2097ade16090e12797c1a455b80
             }
           }
         }
@@ -4448,5 +4428,13 @@
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101/PortableRuntimeIdentifierGraph.json"
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "Undefined",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Problem beim Lesen der Cachedatei \"C:\\Schule\\5AHIF\\david\\LeoCode\\backend\\db\\ConsoleApp\\obj\\project.nuget.cache\": Invalid property identifier character: <. Path 'version', line 3, position 0."
+    }
+  ]
 }
