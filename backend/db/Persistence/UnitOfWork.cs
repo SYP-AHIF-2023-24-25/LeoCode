@@ -18,12 +18,14 @@ public class UnitOfWork : BaseUnitOfWork, IUnitOfWork
         ArrayOfSnippets = new ArrayOfSnippetsRepository(dBContext);
         Snippets = new SnippetRepository(dBContext);
         Exercises = new ExerciseRepository(dBContext);
+        Assignments = new AssignmentsRepository(dBContext);
     }
 
-    public IUserRepository Users  { get; }
+    public IUserRepository Users { get; }
     public IExerciseRepository Exercises { get; }
 
     public IArrayOfSnippetsRepository ArrayOfSnippets { get; }
 
     public ISnippetRepository Snippets { get; }
+    public IAssignmentsRepository Assignments { get; set; }
 }

@@ -1,73 +1,117 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\Kelit\\Schule2024_25\\Syp\\LeoCode\\backend\\db\\",
+  "WorkspaceRootPath": "C:\\Schule\\LeoCode\\backend\\db\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{B35848D2-D6F7-4DBA-B87F-0BBE118D756D}|WebAPI\\WebAPI.csproj|c:\\users\\kelit\\schule2024_25\\syp\\leocode\\backend\\db\\webapi\\controllers\\exercisecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B35848D2-D6F7-4DBA-B87F-0BBE118D756D}|WebAPI\\WebAPI.csproj|solutionrelative:webapi\\controllers\\exercisecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{45F75A38-5875-4635-A580-E6BEC4DD36F1}|Persistence\\Persistence.csproj|c:\\schule\\leocode\\backend\\db\\persistence\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{45F75A38-5875-4635-A580-E6BEC4DD36F1}|Persistence\\Persistence.csproj|solutionrelative:persistence\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{45F75A38-5875-4635-A580-E6BEC4DD36F1}|Persistence\\Persistence.csproj|c:\\users\\kelit\\schule2024_25\\syp\\leocode\\backend\\db\\persistence\\userrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{45F75A38-5875-4635-A580-E6BEC4DD36F1}|Persistence\\Persistence.csproj|solutionrelative:persistence\\userrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Schule\\LeoCode\\backend\\db\\Persistence\\Migrations\\20241013193141_MigrationV7.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Persistence\\Migrations\\20241013193141_MigrationV7.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{45F75A38-5875-4635-A580-E6BEC4DD36F1}|Persistence\\Persistence.csproj|c:\\users\\kelit\\schule2024_25\\syp\\leocode\\backend\\db\\persistence\\exerciserepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{45F75A38-5875-4635-A580-E6BEC4DD36F1}|Persistence\\Persistence.csproj|solutionrelative:persistence\\exerciserepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{B35848D2-D6F7-4DBA-B87F-0BBE118D756D}|WebAPI\\WebAPI.csproj|c:\\schule\\leocode\\backend\\db\\webapi\\controllers\\assignmentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B35848D2-D6F7-4DBA-B87F-0BBE118D756D}|WebAPI\\WebAPI.csproj|solutionrelative:webapi\\controllers\\assignmentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{06B9D709-2243-426B-AE88-F2F8B871DDDF}|ConsoleApp\\Import.csproj|c:\\users\\kelit\\schule2024_25\\syp\\leocode\\backend\\db\\consoleapp\\importcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{45F75A38-5875-4635-A580-E6BEC4DD36F1}|Persistence\\Persistence.csproj|c:\\schule\\leocode\\backend\\db\\persistence\\assignmentsrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{45F75A38-5875-4635-A580-E6BEC4DD36F1}|Persistence\\Persistence.csproj|solutionrelative:persistence\\assignmentsrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{45F75A38-5875-4635-A580-E6BEC4DD36F1}|Persistence\\Persistence.csproj|c:\\schule\\leocode\\backend\\db\\persistence\\arrayofsnippetsrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{45F75A38-5875-4635-A580-E6BEC4DD36F1}|Persistence\\Persistence.csproj|solutionrelative:persistence\\arrayofsnippetsrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{06B9D709-2243-426B-AE88-F2F8B871DDDF}|ConsoleApp\\Import.csproj|c:\\schule\\leocode\\backend\\db\\consoleapp\\importcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{06B9D709-2243-426B-AE88-F2F8B871DDDF}|ConsoleApp\\Import.csproj|solutionrelative:consoleapp\\importcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{00B8AE76-D38B-4A7B-AAD4-1D1BBA3D544B}|Core\\Core.csproj|c:\\users\\kelit\\schule2024_25\\syp\\leocode\\backend\\db\\core\\entities\\exercise.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{00B8AE76-D38B-4A7B-AAD4-1D1BBA3D544B}|Core\\Core.csproj|c:\\schule\\leocode\\backend\\db\\core\\entities\\assignments.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{00B8AE76-D38B-4A7B-AAD4-1D1BBA3D544B}|Core\\Core.csproj|solutionrelative:core\\entities\\assignments.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{00B8AE76-D38B-4A7B-AAD4-1D1BBA3D544B}|Core\\Core.csproj|c:\\schule\\leocode\\backend\\db\\core\\contracts\\iuserrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{00B8AE76-D38B-4A7B-AAD4-1D1BBA3D544B}|Core\\Core.csproj|solutionrelative:core\\contracts\\iuserrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{00B8AE76-D38B-4A7B-AAD4-1D1BBA3D544B}|Core\\Core.csproj|c:\\schule\\leocode\\backend\\db\\core\\contracts\\iunitofwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{00B8AE76-D38B-4A7B-AAD4-1D1BBA3D544B}|Core\\Core.csproj|solutionrelative:core\\contracts\\iunitofwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{00B8AE76-D38B-4A7B-AAD4-1D1BBA3D544B}|Core\\Core.csproj|c:\\schule\\leocode\\backend\\db\\core\\contracts\\isnippetrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{00B8AE76-D38B-4A7B-AAD4-1D1BBA3D544B}|Core\\Core.csproj|solutionrelative:core\\contracts\\isnippetrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{00B8AE76-D38B-4A7B-AAD4-1D1BBA3D544B}|Core\\Core.csproj|c:\\schule\\leocode\\backend\\db\\core\\contracts\\iexerciserepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{00B8AE76-D38B-4A7B-AAD4-1D1BBA3D544B}|Core\\Core.csproj|solutionrelative:core\\contracts\\iexerciserepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{00B8AE76-D38B-4A7B-AAD4-1D1BBA3D544B}|Core\\Core.csproj|c:\\schule\\leocode\\backend\\db\\core\\contracts\\iassignmentsrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{00B8AE76-D38B-4A7B-AAD4-1D1BBA3D544B}|Core\\Core.csproj|solutionrelative:core\\contracts\\iassignmentsrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{00B8AE76-D38B-4A7B-AAD4-1D1BBA3D544B}|Core\\Core.csproj|c:\\schule\\leocode\\backend\\db\\core\\contracts\\iarrayofsnippetsrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{00B8AE76-D38B-4A7B-AAD4-1D1BBA3D544B}|Core\\Core.csproj|solutionrelative:core\\contracts\\iarrayofsnippetsrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{45F75A38-5875-4635-A580-E6BEC4DD36F1}|Persistence\\Persistence.csproj|c:\\schule\\leocode\\backend\\db\\persistence\\unitofwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{45F75A38-5875-4635-A580-E6BEC4DD36F1}|Persistence\\Persistence.csproj|solutionrelative:persistence\\unitofwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{06B9D709-2243-426B-AE88-F2F8B871DDDF}|ConsoleApp\\Import.csproj|c:\\schule\\leocode\\backend\\db\\consoleapp\\importdata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{06B9D709-2243-426B-AE88-F2F8B871DDDF}|ConsoleApp\\Import.csproj|solutionrelative:consoleapp\\importdata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{06B9D709-2243-426B-AE88-F2F8B871DDDF}|ConsoleApp\\Import.csproj|c:\\schule\\leocode\\backend\\db\\consoleapp\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{06B9D709-2243-426B-AE88-F2F8B871DDDF}|ConsoleApp\\Import.csproj|solutionrelative:consoleapp\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B35848D2-D6F7-4DBA-B87F-0BBE118D756D}|WebAPI\\WebAPI.csproj|c:\\schule\\leocode\\backend\\db\\webapi\\controllers\\exercisecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B35848D2-D6F7-4DBA-B87F-0BBE118D756D}|WebAPI\\WebAPI.csproj|solutionrelative:webapi\\controllers\\exercisecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{45F75A38-5875-4635-A580-E6BEC4DD36F1}|Persistence\\Persistence.csproj|c:\\schule\\leocode\\backend\\db\\persistence\\userrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{45F75A38-5875-4635-A580-E6BEC4DD36F1}|Persistence\\Persistence.csproj|solutionrelative:persistence\\userrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{45F75A38-5875-4635-A580-E6BEC4DD36F1}|Persistence\\Persistence.csproj|c:\\schule\\leocode\\backend\\db\\persistence\\exerciserepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{45F75A38-5875-4635-A580-E6BEC4DD36F1}|Persistence\\Persistence.csproj|solutionrelative:persistence\\exerciserepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{00B8AE76-D38B-4A7B-AAD4-1D1BBA3D544B}|Core\\Core.csproj|c:\\schule\\leocode\\backend\\db\\core\\entities\\exercise.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{00B8AE76-D38B-4A7B-AAD4-1D1BBA3D544B}|Core\\Core.csproj|solutionrelative:core\\entities\\exercise.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/LeoCodeDb/True/SqlTable/dbo.Exercises.sql||{0058A1F7-65F3-4DB9-B3D0-CA7E64DD73CD}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B35848D2-D6F7-4DBA-B87F-0BBE118D756D}|WebAPI\\WebAPI.csproj|c:\\users\\kelit\\schule2024_25\\syp\\leocode\\backend\\db\\webapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{B35848D2-D6F7-4DBA-B87F-0BBE118D756D}|WebAPI\\WebAPI.csproj|c:\\schule\\leocode\\backend\\db\\webapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B35848D2-D6F7-4DBA-B87F-0BBE118D756D}|WebAPI\\WebAPI.csproj|solutionrelative:webapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B35848D2-D6F7-4DBA-B87F-0BBE118D756D}|WebAPI\\WebAPI.csproj|c:\\users\\kelit\\schule2024_25\\syp\\leocode\\backend\\db\\webapi\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "AbsoluteMoniker": "D:0:0:{B35848D2-D6F7-4DBA-B87F-0BBE118D756D}|WebAPI\\WebAPI.csproj|c:\\schule\\leocode\\backend\\db\\webapi\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{B35848D2-D6F7-4DBA-B87F-0BBE118D756D}|WebAPI\\WebAPI.csproj|solutionrelative:webapi\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{00B8AE76-D38B-4A7B-AAD4-1D1BBA3D544B}|Core\\Core.csproj|c:\\users\\kelit\\schule2024_25\\syp\\leocode\\backend\\db\\core\\contracts\\iexerciserepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{00B8AE76-D38B-4A7B-AAD4-1D1BBA3D544B}|Core\\Core.csproj|solutionrelative:core\\contracts\\iexerciserepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{45F75A38-5875-4635-A580-E6BEC4DD36F1}|Persistence\\Persistence.csproj|c:\\users\\kelit\\schule2024_25\\syp\\leocode\\backend\\db\\persistence\\unitofwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{45F75A38-5875-4635-A580-E6BEC4DD36F1}|Persistence\\Persistence.csproj|solutionrelative:persistence\\unitofwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{06B9D709-2243-426B-AE88-F2F8B871DDDF}|ConsoleApp\\Import.csproj|c:\\users\\kelit\\schule2024_25\\syp\\leocode\\backend\\db\\consoleapp\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{06B9D709-2243-426B-AE88-F2F8B871DDDF}|ConsoleApp\\Import.csproj|solutionrelative:consoleapp\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B35848D2-D6F7-4DBA-B87F-0BBE118D756D}|WebAPI\\WebAPI.csproj|c:\\users\\kelit\\schule2024_25\\syp\\leocode\\backend\\db\\webapi\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{B35848D2-D6F7-4DBA-B87F-0BBE118D756D}|WebAPI\\WebAPI.csproj|c:\\schule\\leocode\\backend\\db\\webapi\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B35848D2-D6F7-4DBA-B87F-0BBE118D756D}|WebAPI\\WebAPI.csproj|solutionrelative:webapi\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B35848D2-D6F7-4DBA-B87F-0BBE118D756D}|WebAPI\\WebAPI.csproj|c:\\users\\kelit\\schule2024_25\\syp\\leocode\\backend\\db\\webapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "AbsoluteMoniker": "D:0:0:{B35848D2-D6F7-4DBA-B87F-0BBE118D756D}|WebAPI\\WebAPI.csproj|c:\\schule\\leocode\\backend\\db\\webapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{B35848D2-D6F7-4DBA-B87F-0BBE118D756D}|WebAPI\\WebAPI.csproj|solutionrelative:webapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B35848D2-D6F7-4DBA-B87F-0BBE118D756D}|WebAPI\\WebAPI.csproj|c:\\users\\kelit\\schule2024_25\\syp\\leocode\\backend\\db\\webapi\\controllers\\snippetcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{B35848D2-D6F7-4DBA-B87F-0BBE118D756D}|WebAPI\\WebAPI.csproj|c:\\schule\\leocode\\backend\\db\\webapi\\controllers\\snippetcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B35848D2-D6F7-4DBA-B87F-0BBE118D756D}|WebAPI\\WebAPI.csproj|solutionrelative:webapi\\controllers\\snippetcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B35848D2-D6F7-4DBA-B87F-0BBE118D756D}|WebAPI\\WebAPI.csproj|c:\\users\\kelit\\schule2024_25\\syp\\leocode\\backend\\db\\webapi\\controllers\\arrayofsnippets.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{B35848D2-D6F7-4DBA-B87F-0BBE118D756D}|WebAPI\\WebAPI.csproj|c:\\schule\\leocode\\backend\\db\\webapi\\controllers\\arrayofsnippets.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B35848D2-D6F7-4DBA-B87F-0BBE118D756D}|WebAPI\\WebAPI.csproj|solutionrelative:webapi\\controllers\\arrayofsnippets.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{00B8AE76-D38B-4A7B-AAD4-1D1BBA3D544B}|Core\\Core.csproj|c:\\users\\kelit\\schule2024_25\\syp\\leocode\\backend\\db\\core\\entities\\arrayofsnippets.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{00B8AE76-D38B-4A7B-AAD4-1D1BBA3D544B}|Core\\Core.csproj|c:\\schule\\leocode\\backend\\db\\core\\entities\\arrayofsnippets.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{00B8AE76-D38B-4A7B-AAD4-1D1BBA3D544B}|Core\\Core.csproj|solutionrelative:core\\entities\\arrayofsnippets.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{00B8AE76-D38B-4A7B-AAD4-1D1BBA3D544B}|Core\\Core.csproj|c:\\users\\kelit\\schule2024_25\\syp\\leocode\\backend\\db\\core\\contracts\\iarrayofsnippetsrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{00B8AE76-D38B-4A7B-AAD4-1D1BBA3D544B}|Core\\Core.csproj|solutionrelative:core\\contracts\\iarrayofsnippetsrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/LeoCodeDb/True/SqlTable/dbo.ArrayOfSnippets.sql||{0058A1F7-65F3-4DB9-B3D0-CA7E64DD73CD}"
@@ -76,7 +120,7 @@
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/LeoCodeDb/True/SqlTable/dbo.Snippet.sql||{0058A1F7-65F3-4DB9-B3D0-CA7E64DD73CD}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{00B8AE76-D38B-4A7B-AAD4-1D1BBA3D544B}|Core\\Core.csproj|c:\\users\\kelit\\schule2024_25\\syp\\leocode\\backend\\db\\core\\entities\\language.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{00B8AE76-D38B-4A7B-AAD4-1D1BBA3D544B}|Core\\Core.csproj|c:\\schule\\leocode\\backend\\db\\core\\entities\\language.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{00B8AE76-D38B-4A7B-AAD4-1D1BBA3D544B}|Core\\Core.csproj|solutionrelative:core\\entities\\language.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -87,7 +131,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 7,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Bookmark",
@@ -95,7 +139,261 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "AssignmentsRepository.cs",
+              "DocumentMoniker": "C:\\Schule\\LeoCode\\backend\\db\\Persistence\\AssignmentsRepository.cs",
+              "RelativeDocumentMoniker": "Persistence\\AssignmentsRepository.cs",
+              "ToolTip": "C:\\Schule\\LeoCode\\backend\\db\\Persistence\\AssignmentsRepository.cs",
+              "RelativeToolTip": "Persistence\\AssignmentsRepository.cs",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAQwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-13T19:31:13.343Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ArrayOfSnippetsRepository.cs",
+              "DocumentMoniker": "C:\\Schule\\LeoCode\\backend\\db\\Persistence\\ArrayOfSnippetsRepository.cs",
+              "RelativeDocumentMoniker": "Persistence\\ArrayOfSnippetsRepository.cs",
+              "ToolTip": "C:\\Schule\\LeoCode\\backend\\db\\Persistence\\ArrayOfSnippetsRepository.cs",
+              "RelativeToolTip": "Persistence\\ArrayOfSnippetsRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-13T19:31:12.337Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "IUserRepository.cs",
+              "DocumentMoniker": "C:\\Schule\\LeoCode\\backend\\db\\Core\\Contracts\\IUserRepository.cs",
+              "RelativeDocumentMoniker": "Core\\Contracts\\IUserRepository.cs",
+              "ToolTip": "C:\\Schule\\LeoCode\\backend\\db\\Core\\Contracts\\IUserRepository.cs",
+              "RelativeToolTip": "Core\\Contracts\\IUserRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-13T19:30:58.997Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ApplicationDbContext.cs",
+              "DocumentMoniker": "C:\\Schule\\LeoCode\\backend\\db\\Persistence\\ApplicationDbContext.cs",
+              "RelativeDocumentMoniker": "Persistence\\ApplicationDbContext.cs",
+              "ToolTip": "C:\\Schule\\LeoCode\\backend\\db\\Persistence\\ApplicationDbContext.cs",
+              "RelativeToolTip": "Persistence\\ApplicationDbContext.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAAAoAAAAqAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-13T19:26:18.204Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "AssignmentController.cs",
+              "DocumentMoniker": "C:\\Schule\\LeoCode\\backend\\db\\WebAPI\\Controllers\\AssignmentController.cs",
+              "RelativeDocumentMoniker": "WebAPI\\Controllers\\AssignmentController.cs",
+              "ToolTip": "C:\\Schule\\LeoCode\\backend\\db\\WebAPI\\Controllers\\AssignmentController.cs",
+              "RelativeToolTip": "WebAPI\\Controllers\\AssignmentController.cs",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAgwB0AAAAOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-13T19:31:19.122Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "ISnippetRepository.cs",
+              "DocumentMoniker": "C:\\Schule\\LeoCode\\backend\\db\\Core\\Contracts\\ISnippetRepository.cs",
+              "RelativeDocumentMoniker": "Core\\Contracts\\ISnippetRepository.cs",
+              "ToolTip": "C:\\Schule\\LeoCode\\backend\\db\\Core\\Contracts\\ISnippetRepository.cs",
+              "RelativeToolTip": "Core\\Contracts\\ISnippetRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-13T19:30:56.801Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "20241013193141_MigrationV7.cs",
+              "DocumentMoniker": "C:\\Schule\\LeoCode\\backend\\db\\Persistence\\Migrations\\20241013193141_MigrationV7.cs",
+              "RelativeDocumentMoniker": "Persistence\\Migrations\\20241013193141_MigrationV7.cs",
+              "ToolTip": "C:\\Schule\\LeoCode\\backend\\db\\Persistence\\Migrations\\20241013193141_MigrationV7.cs",
+              "RelativeToolTip": "Persistence\\Migrations\\20241013193141_MigrationV7.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-13T19:31:41.95Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Assignments.cs",
+              "DocumentMoniker": "C:\\Schule\\LeoCode\\backend\\db\\Core\\Entities\\Assignments.cs",
+              "RelativeDocumentMoniker": "Core\\Entities\\Assignments.cs",
+              "ToolTip": "C:\\Schule\\LeoCode\\backend\\db\\Core\\Entities\\Assignments.cs",
+              "RelativeToolTip": "Core\\Entities\\Assignments.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-13T19:28:02.428Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "IExerciseRepository.cs",
+              "DocumentMoniker": "C:\\Schule\\LeoCode\\backend\\db\\Core\\Contracts\\IExerciseRepository.cs",
+              "RelativeDocumentMoniker": "Core\\Contracts\\IExerciseRepository.cs",
+              "ToolTip": "C:\\Schule\\LeoCode\\backend\\db\\Core\\Contracts\\IExerciseRepository.cs",
+              "RelativeToolTip": "Core\\Contracts\\IExerciseRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-13T13:26:18.549Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 5,
+              "Title": "ImportController.cs",
+              "DocumentMoniker": "C:\\Schule\\LeoCode\\backend\\db\\ConsoleApp\\ImportController.cs",
+              "RelativeDocumentMoniker": "ConsoleApp\\ImportController.cs",
+              "ToolTip": "C:\\Schule\\LeoCode\\backend\\db\\ConsoleApp\\ImportController.cs",
+              "RelativeToolTip": "ConsoleApp\\ImportController.cs",
+              "ViewState": "AgIAAD8AAAAAAAAAAAAAAK0AAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-08T18:36:53.781Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "ExerciseRepository.cs",
+              "DocumentMoniker": "C:\\Schule\\LeoCode\\backend\\db\\Persistence\\ExerciseRepository.cs",
+              "RelativeDocumentMoniker": "Persistence\\ExerciseRepository.cs",
+              "ToolTip": "C:\\Schule\\LeoCode\\backend\\db\\Persistence\\ExerciseRepository.cs",
+              "RelativeToolTip": "Persistence\\ExerciseRepository.cs",
+              "ViewState": "AgIAABAAAAAAAAAAAAAzwCUAAABdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-13T13:26:05.594Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "IArrayOfSnippetsRepository.cs",
+              "DocumentMoniker": "C:\\Schule\\LeoCode\\backend\\db\\Core\\Contracts\\IArrayOfSnippetsRepository.cs",
+              "RelativeDocumentMoniker": "Core\\Contracts\\IArrayOfSnippetsRepository.cs",
+              "ToolTip": "C:\\Schule\\LeoCode\\backend\\db\\Core\\Contracts\\IArrayOfSnippetsRepository.cs",
+              "RelativeToolTip": "Core\\Contracts\\IArrayOfSnippetsRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-10T15:12:18.818Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "launchSettings.json",
+              "DocumentMoniker": "C:\\Schule\\LeoCode\\backend\\db\\WebAPI\\Properties\\launchSettings.json",
+              "RelativeDocumentMoniker": "WebAPI\\Properties\\launchSettings.json",
+              "ToolTip": "C:\\Schule\\LeoCode\\backend\\db\\WebAPI\\Properties\\launchSettings.json",
+              "RelativeToolTip": "WebAPI\\Properties\\launchSettings.json",
+              "ViewState": "AgIAABUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-10-13T14:44:15.445Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "UnitOfWork.cs",
+              "DocumentMoniker": "C:\\Schule\\LeoCode\\backend\\db\\Persistence\\UnitOfWork.cs",
+              "RelativeDocumentMoniker": "Persistence\\UnitOfWork.cs",
+              "ToolTip": "C:\\Schule\\LeoCode\\backend\\db\\Persistence\\UnitOfWork.cs",
+              "RelativeToolTip": "Persistence\\UnitOfWork.cs",
+              "ViewState": "AgIAAAIAAAAAAAAAAAAwwBYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-10T15:12:10.811Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "IUnitOfWork.cs",
+              "DocumentMoniker": "C:\\Schule\\LeoCode\\backend\\db\\Core\\Contracts\\IUnitOfWork.cs",
+              "RelativeDocumentMoniker": "Core\\Contracts\\IUnitOfWork.cs",
+              "ToolTip": "C:\\Schule\\LeoCode\\backend\\db\\Core\\Contracts\\IUnitOfWork.cs",
+              "RelativeToolTip": "Core\\Contracts\\IUnitOfWork.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-13T19:26:22.697Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "IAssignmentsRepository.cs",
+              "DocumentMoniker": "C:\\Schule\\LeoCode\\backend\\db\\Core\\Contracts\\IAssignmentsRepository.cs",
+              "RelativeDocumentMoniker": "Core\\Contracts\\IAssignmentsRepository.cs",
+              "ToolTip": "C:\\Schule\\LeoCode\\backend\\db\\Core\\Contracts\\IAssignmentsRepository.cs",
+              "RelativeToolTip": "Core\\Contracts\\IAssignmentsRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-13T19:27:59.37Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "ArrayOfSnippets.cs",
+              "DocumentMoniker": "C:\\Schule\\LeoCode\\backend\\db\\WebAPI\\Controllers\\ArrayOfSnippets.cs",
+              "RelativeDocumentMoniker": "WebAPI\\Controllers\\ArrayOfSnippets.cs",
+              "ToolTip": "C:\\Schule\\LeoCode\\backend\\db\\WebAPI\\Controllers\\ArrayOfSnippets.cs",
+              "RelativeToolTip": "WebAPI\\Controllers\\ArrayOfSnippets.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-10T14:50:42.023Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "ExerciseController.cs",
+              "DocumentMoniker": "C:\\Schule\\LeoCode\\backend\\db\\WebAPI\\Controllers\\ExerciseController.cs",
+              "RelativeDocumentMoniker": "WebAPI\\Controllers\\ExerciseController.cs",
+              "ToolTip": "C:\\Schule\\LeoCode\\backend\\db\\WebAPI\\Controllers\\ExerciseController.cs",
+              "RelativeToolTip": "WebAPI\\Controllers\\ExerciseController.cs",
+              "ViewState": "AgIAAGcAAAAAAAAAAAAMwHIAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-10T10:32:33.257Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "ArrayOfSnippets.cs",
+              "DocumentMoniker": "C:\\Schule\\LeoCode\\backend\\db\\Core\\Entities\\ArrayOfSnippets.cs",
+              "RelativeDocumentMoniker": "Core\\Entities\\ArrayOfSnippets.cs",
+              "ToolTip": "C:\\Schule\\LeoCode\\backend\\db\\Core\\Entities\\ArrayOfSnippets.cs",
+              "RelativeToolTip": "Core\\Entities\\ArrayOfSnippets.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-10T15:12:22.073Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "Exercise.cs",
+              "DocumentMoniker": "C:\\Schule\\LeoCode\\backend\\db\\Core\\Entities\\Exercise.cs",
+              "RelativeDocumentMoniker": "Core\\Entities\\Exercise.cs",
+              "ToolTip": "C:\\Schule\\LeoCode\\backend\\db\\Core\\Entities\\Exercise.cs",
+              "RelativeToolTip": "Core\\Entities\\Exercise.cs",
+              "ViewState": "AgIAAAoAAAAAAAAAAAAqwA0AAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-10T15:12:31.254Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
               "Title": "dbo.Exercises.sql",
               "DocumentMoniker": "ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/LeoCodeDb/True/SqlTable/dbo.Exercises.sql",
               "ToolTip": "ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/LeoCodeDb/True/SqlTable/dbo.Exercises.sql",
@@ -104,123 +402,23 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "launchSettings.json",
-              "DocumentMoniker": "C:\\Users\\Kelit\\Schule2024_25\\Syp\\LeoCode\\backend\\db\\WebAPI\\Properties\\launchSettings.json",
-              "RelativeDocumentMoniker": "WebAPI\\Properties\\launchSettings.json",
-              "ToolTip": "C:\\Users\\Kelit\\Schule2024_25\\Syp\\LeoCode\\backend\\db\\WebAPI\\Properties\\launchSettings.json",
-              "RelativeToolTip": "WebAPI\\Properties\\launchSettings.json",
-              "ViewState": "AgIAABUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2024-10-13T14:44:15.445Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "IExerciseRepository.cs",
-              "DocumentMoniker": "C:\\Users\\Kelit\\Schule2024_25\\Syp\\LeoCode\\backend\\db\\Core\\Contracts\\IExerciseRepository.cs",
-              "RelativeDocumentMoniker": "Core\\Contracts\\IExerciseRepository.cs",
-              "ToolTip": "C:\\Users\\Kelit\\Schule2024_25\\Syp\\LeoCode\\backend\\db\\Core\\Contracts\\IExerciseRepository.cs",
-              "RelativeToolTip": "Core\\Contracts\\IExerciseRepository.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAYAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-13T13:26:18.549Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "ExerciseRepository.cs",
-              "DocumentMoniker": "C:\\Users\\Kelit\\Schule2024_25\\Syp\\LeoCode\\backend\\db\\Persistence\\ExerciseRepository.cs",
-              "RelativeDocumentMoniker": "Persistence\\ExerciseRepository.cs",
-              "ToolTip": "C:\\Users\\Kelit\\Schule2024_25\\Syp\\LeoCode\\backend\\db\\Persistence\\ExerciseRepository.cs",
-              "RelativeToolTip": "Persistence\\ExerciseRepository.cs",
-              "ViewState": "AgIAABAAAAAAAAAAAAAzwCUAAABdAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-13T13:26:05.594Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "UnitOfWork.cs",
-              "DocumentMoniker": "C:\\Users\\Kelit\\Schule2024_25\\Syp\\LeoCode\\backend\\db\\Persistence\\UnitOfWork.cs",
-              "RelativeDocumentMoniker": "Persistence\\UnitOfWork.cs",
-              "ToolTip": "C:\\Users\\Kelit\\Schule2024_25\\Syp\\LeoCode\\backend\\db\\Persistence\\UnitOfWork.cs",
-              "RelativeToolTip": "Persistence\\UnitOfWork.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAA6AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-10T15:12:10.811Z"
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 14,
-              "Title": "ArrayOfSnippets.cs",
-              "DocumentMoniker": "C:\\Users\\Kelit\\Schule2024_25\\Syp\\LeoCode\\backend\\db\\WebAPI\\Controllers\\ArrayOfSnippets.cs",
-              "RelativeDocumentMoniker": "WebAPI\\Controllers\\ArrayOfSnippets.cs",
-              "ToolTip": "C:\\Users\\Kelit\\Schule2024_25\\Syp\\LeoCode\\backend\\db\\WebAPI\\Controllers\\ArrayOfSnippets.cs",
-              "RelativeToolTip": "WebAPI\\Controllers\\ArrayOfSnippets.cs",
+              "Title": "ImportData.cs",
+              "DocumentMoniker": "C:\\Schule\\LeoCode\\backend\\db\\ConsoleApp\\ImportData.cs",
+              "RelativeDocumentMoniker": "ConsoleApp\\ImportData.cs",
+              "ToolTip": "C:\\Schule\\LeoCode\\backend\\db\\ConsoleApp\\ImportData.cs",
+              "RelativeToolTip": "ConsoleApp\\ImportData.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-10T14:50:42.023Z"
+              "WhenOpened": "2024-10-13T17:44:28.051Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "ExerciseController.cs",
-              "DocumentMoniker": "C:\\Users\\Kelit\\Schule2024_25\\Syp\\LeoCode\\backend\\db\\WebAPI\\Controllers\\ExerciseController.cs",
-              "RelativeDocumentMoniker": "WebAPI\\Controllers\\ExerciseController.cs",
-              "ToolTip": "C:\\Users\\Kelit\\Schule2024_25\\Syp\\LeoCode\\backend\\db\\WebAPI\\Controllers\\ExerciseController.cs",
-              "RelativeToolTip": "WebAPI\\Controllers\\ExerciseController.cs",
-              "ViewState": "AgIAAHkAAAAAAAAAAAAWwIYAAAAMAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-10T10:32:33.257Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 15,
-              "Title": "ArrayOfSnippets.cs",
-              "DocumentMoniker": "C:\\Users\\Kelit\\Schule2024_25\\Syp\\LeoCode\\backend\\db\\Core\\Entities\\ArrayOfSnippets.cs",
-              "RelativeDocumentMoniker": "Core\\Entities\\ArrayOfSnippets.cs",
-              "ToolTip": "C:\\Users\\Kelit\\Schule2024_25\\Syp\\LeoCode\\backend\\db\\Core\\Entities\\ArrayOfSnippets.cs",
-              "RelativeToolTip": "Core\\Entities\\ArrayOfSnippets.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-10T15:12:22.073Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Exercise.cs",
-              "DocumentMoniker": "C:\\Users\\Kelit\\Schule2024_25\\Syp\\LeoCode\\backend\\db\\Core\\Entities\\Exercise.cs",
-              "RelativeDocumentMoniker": "Core\\Entities\\Exercise.cs",
-              "ToolTip": "C:\\Users\\Kelit\\Schule2024_25\\Syp\\LeoCode\\backend\\db\\Core\\Entities\\Exercise.cs",
-              "RelativeToolTip": "Core\\Entities\\Exercise.cs",
-              "ViewState": "AgIAAAoAAAAAAAAAAAAqwA0AAAAoAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-10T15:12:31.254Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "ImportController.cs",
-              "DocumentMoniker": "C:\\Users\\Kelit\\Schule2024_25\\Syp\\LeoCode\\backend\\db\\ConsoleApp\\ImportController.cs",
-              "RelativeDocumentMoniker": "ConsoleApp\\ImportController.cs",
-              "ToolTip": "C:\\Users\\Kelit\\Schule2024_25\\Syp\\LeoCode\\backend\\db\\ConsoleApp\\ImportController.cs",
-              "RelativeToolTip": "ConsoleApp\\ImportController.cs",
-              "ViewState": "AgIAAHYAAAAAAAAAAAAQwGUAAAAwAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-08T18:36:53.781Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 21,
               "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\Kelit\\Schule2024_25\\Syp\\LeoCode\\backend\\db\\WebAPI\\Program.cs",
+              "DocumentMoniker": "C:\\Schule\\LeoCode\\backend\\db\\WebAPI\\Program.cs",
               "RelativeDocumentMoniker": "WebAPI\\Program.cs",
-              "ToolTip": "C:\\Users\\Kelit\\Schule2024_25\\Syp\\LeoCode\\backend\\db\\WebAPI\\Program.cs",
+              "ToolTip": "C:\\Schule\\LeoCode\\backend\\db\\WebAPI\\Program.cs",
               "RelativeToolTip": "WebAPI\\Program.cs",
               "ViewState": "AgIAAA8AAAAAAAAAAAAAABQAAABYAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -228,24 +426,23 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 17,
               "Title": "UserRepository.cs",
-              "DocumentMoniker": "C:\\Users\\Kelit\\Schule2024_25\\Syp\\LeoCode\\backend\\db\\Persistence\\UserRepository.cs",
+              "DocumentMoniker": "C:\\Schule\\LeoCode\\backend\\db\\Persistence\\UserRepository.cs",
               "RelativeDocumentMoniker": "Persistence\\UserRepository.cs",
-              "ToolTip": "C:\\Users\\Kelit\\Schule2024_25\\Syp\\LeoCode\\backend\\db\\Persistence\\UserRepository.cs",
+              "ToolTip": "C:\\Schule\\LeoCode\\backend\\db\\Persistence\\UserRepository.cs",
               "RelativeToolTip": "Persistence\\UserRepository.cs",
               "ViewState": "AgIAAAkAAAAAAAAAAAAWwBcAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-10T15:12:12.243Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-10T15:12:12.243Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 15,
               "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\Kelit\\Schule2024_25\\Syp\\LeoCode\\backend\\db\\ConsoleApp\\Program.cs",
+              "DocumentMoniker": "C:\\Schule\\LeoCode\\backend\\db\\ConsoleApp\\Program.cs",
               "RelativeDocumentMoniker": "ConsoleApp\\Program.cs",
-              "ToolTip": "C:\\Users\\Kelit\\Schule2024_25\\Syp\\LeoCode\\backend\\db\\ConsoleApp\\Program.cs",
+              "ToolTip": "C:\\Schule\\LeoCode\\backend\\db\\ConsoleApp\\Program.cs",
               "RelativeToolTip": "ConsoleApp\\Program.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAuAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -253,23 +450,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
-              "Title": "IArrayOfSnippetsRepository.cs",
-              "DocumentMoniker": "C:\\Users\\Kelit\\Schule2024_25\\Syp\\LeoCode\\backend\\db\\Core\\Contracts\\IArrayOfSnippetsRepository.cs",
-              "RelativeDocumentMoniker": "Core\\Contracts\\IArrayOfSnippetsRepository.cs",
-              "ToolTip": "C:\\Users\\Kelit\\Schule2024_25\\Syp\\LeoCode\\backend\\db\\Core\\Contracts\\IArrayOfSnippetsRepository.cs",
-              "RelativeToolTip": "Core\\Contracts\\IArrayOfSnippetsRepository.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-10T15:12:18.818Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 24,
               "Title": "appsettings.json",
-              "DocumentMoniker": "C:\\Users\\Kelit\\Schule2024_25\\Syp\\LeoCode\\backend\\db\\WebAPI\\appsettings.json",
+              "DocumentMoniker": "C:\\Schule\\LeoCode\\backend\\db\\WebAPI\\appsettings.json",
               "RelativeDocumentMoniker": "WebAPI\\appsettings.json",
-              "ToolTip": "C:\\Users\\Kelit\\Schule2024_25\\Syp\\LeoCode\\backend\\db\\WebAPI\\appsettings.json",
+              "ToolTip": "C:\\Schule\\LeoCode\\backend\\db\\WebAPI\\appsettings.json",
               "RelativeToolTip": "WebAPI\\appsettings.json",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
@@ -277,11 +462,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 23,
               "Title": "UserController.cs",
-              "DocumentMoniker": "C:\\Users\\Kelit\\Schule2024_25\\Syp\\LeoCode\\backend\\db\\WebAPI\\Controllers\\UserController.cs",
+              "DocumentMoniker": "C:\\Schule\\LeoCode\\backend\\db\\WebAPI\\Controllers\\UserController.cs",
               "RelativeDocumentMoniker": "WebAPI\\Controllers\\UserController.cs",
-              "ToolTip": "C:\\Users\\Kelit\\Schule2024_25\\Syp\\LeoCode\\backend\\db\\WebAPI\\Controllers\\UserController.cs",
+              "ToolTip": "C:\\Schule\\LeoCode\\backend\\db\\WebAPI\\Controllers\\UserController.cs",
               "RelativeToolTip": "WebAPI\\Controllers\\UserController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -289,7 +474,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 28,
               "Title": "dbo.ArrayOfSnippets.sql",
               "DocumentMoniker": "ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/LeoCodeDb/True/SqlTable/dbo.ArrayOfSnippets.sql",
               "ToolTip": "ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/LeoCodeDb/True/SqlTable/dbo.ArrayOfSnippets.sql",
@@ -298,11 +483,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 25,
               "Title": "SnippetController.cs",
-              "DocumentMoniker": "C:\\Users\\Kelit\\Schule2024_25\\Syp\\LeoCode\\backend\\db\\WebAPI\\Controllers\\SnippetController.cs",
+              "DocumentMoniker": "C:\\Schule\\LeoCode\\backend\\db\\WebAPI\\Controllers\\SnippetController.cs",
               "RelativeDocumentMoniker": "WebAPI\\Controllers\\SnippetController.cs",
-              "ToolTip": "C:\\Users\\Kelit\\Schule2024_25\\Syp\\LeoCode\\backend\\db\\WebAPI\\Controllers\\SnippetController.cs",
+              "ToolTip": "C:\\Schule\\LeoCode\\backend\\db\\WebAPI\\Controllers\\SnippetController.cs",
               "RelativeToolTip": "WebAPI\\Controllers\\SnippetController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -310,7 +495,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 29,
               "Title": "dbo.Snippet.sql",
               "DocumentMoniker": "ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/LeoCodeDb/True/SqlTable/dbo.Snippet.sql",
               "ToolTip": "ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/LeoCodeDb/True/SqlTable/dbo.Snippet.sql",
@@ -319,11 +504,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 30,
               "Title": "Language.cs",
-              "DocumentMoniker": "C:\\Users\\Kelit\\Schule2024_25\\Syp\\LeoCode\\backend\\db\\Core\\Entities\\Language.cs",
+              "DocumentMoniker": "C:\\Schule\\LeoCode\\backend\\db\\Core\\Entities\\Language.cs",
               "RelativeDocumentMoniker": "Core\\Entities\\Language.cs",
-              "ToolTip": "C:\\Users\\Kelit\\Schule2024_25\\Syp\\LeoCode\\backend\\db\\Core\\Entities\\Language.cs",
+              "ToolTip": "C:\\Schule\\LeoCode\\backend\\db\\Core\\Entities\\Language.cs",
               "RelativeToolTip": "Core\\Entities\\Language.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAASAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",

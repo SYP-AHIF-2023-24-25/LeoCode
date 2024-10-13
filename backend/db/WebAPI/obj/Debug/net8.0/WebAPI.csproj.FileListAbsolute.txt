@@ -539,3 +539,4 @@ C:\Users\Kelit\Schule2024_25\Syp\LeoCode\backend\db\WebAPI\obj\Debug\net8.0\refi
 C:\Users\Kelit\Schule2024_25\Syp\LeoCode\backend\db\WebAPI\obj\Debug\net8.0\WebAPI.pdb
 C:\Users\Kelit\Schule2024_25\Syp\LeoCode\backend\db\WebAPI\obj\Debug\net8.0\WebAPI.genruntimeconfig.cache
 C:\Users\Kelit\Schule2024_25\Syp\LeoCode\backend\db\WebAPI\obj\Debug\net8.0\ref\WebAPI.dll
+C:\Schule\LeoCode\backend\db\WebAPI\bin\Debug\net8.0\libman.json

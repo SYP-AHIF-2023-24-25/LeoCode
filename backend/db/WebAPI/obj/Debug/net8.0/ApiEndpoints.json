@@ -1,5 +1,67 @@
 [
   {
+    "ContainingType": "WebAPI.Controllers.AssignmentsController",
+    "Method": "GetAssignments",
+    "RelativePath": "api/Assignments",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebAPI.Controllers.AssignmentsController",
+    "Method": "AddAssignmentAsync",
+    "RelativePath": "api/Assignments",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "exerciseName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "creator",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "dateDue",
+        "Type": "System.DateTime",
+        "IsRequired": false
+      },
+      {
+        "Name": "Name",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebAPI.Controllers.AssignmentsController",
+    "Method": "GetOneAssignment",
+    "RelativePath": "api/Assignments/OneAssignment",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "creator",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "name",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "WebAPI.Controllers.ExerciseController",
     "Method": "AddExerciseAsync",
     "RelativePath": "api/Exercise",
