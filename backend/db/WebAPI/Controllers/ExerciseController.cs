@@ -20,7 +20,7 @@ public class ExerciseController : Controller
     }
 
     [HttpPost]
-    public async Task<IActionResult> AddExerciseAsync([FromBody] ArrayOfSnippetsDto arrayOfSnippets, string name, string description, string language, string[] tags, string username)
+    public async Task<IActionResult> AddExerciseAsync([FromBody] ArrayOfSnippetsDto arrayOfSnippets, string name, string description, string language, string[] tags, string username, DateTime datecreated, DateTime dateupdated)
     {
         User user = _unitOfWork.Users.GetByUsername(username);
         Language enumLanguage = Language.CSharp;
@@ -41,11 +41,14 @@ public class ExerciseController : Controller
             Exercise exercise = new Exercise
             {
                 Name = name,
+                Creator = username,
                 Description = description,
                 Language = enumLanguage,
                 Tags = tags,
                 UserId = user.Id,
-                User = user
+                User = user,
+                DateCreated = datecreated,
+                DateUpdated = dateupdated
             };
             exercise.ArrayOfSnippets = new ArrayOfSnippets
             {
@@ -87,13 +90,18 @@ public class ExerciseController : Controller
             List<Exercise> exercises = await _unitOfWork.Exercises.GetExersiceByUsernameAsync(user, exerciseName);
             return exercises.Select(exercise => new ExerciseDto(
             exercise.Name,
+            exercise.Creator,
             exercise.Description,
             ((Language)exercise.Language).ToString(),
             exercise.Tags,
-                exercise.ArrayOfSnippets.Snippets.Select(snippet => new SnippetDto(
+           
+            exercise.ArrayOfSnippets.Snippets.Select(snippet => new SnippetDto(
                     snippet.Code,
                     snippet.ReadonlySection,
-                    snippet.FileName)).ToArray()
+                    snippet.FileName)).ToArray(),
+            exercise.DateCreated,
+            exercise.DateUpdated
+
             )).ToArray();
         }
         catch (Exception ex)
@@ -102,7 +110,7 @@ public class ExerciseController : Controller
         }
     }
     [HttpPut]
-    public async Task<IActionResult> UpdateExerciseForUser(string username, string description, string tags, string language, string subject, string exerciseName, [FromBody] ArrayOfSnippetsDto arrayOfSnippets)
+    public async Task<IActionResult> UpdateExerciseForUser(string username, string description, string tags, string language, string subject, string exerciseName, [FromBody] ArrayOfSnippetsDto arrayOfSnippets, DateTime dateCreated, DateTime dateUpdated)
     {
         string[] splitted = tags.Split(",");
         try
@@ -115,7 +123,7 @@ public class ExerciseController : Controller
 
             if (exercises.IsNullOrEmpty())
             {
-                await AddExerciseAsync(arrayOfSnippets, exerciseName, description, language, splitted, username);
+                await AddExerciseAsync(arrayOfSnippets, exerciseName, description, language, splitted, username, dateCreated, dateUpdated);
                 return Ok();
             }
 
@@ -135,5 +143,4 @@ public class ExerciseController : Controller
             return BadRequest(ex.Message);
         }
     }
-
 }

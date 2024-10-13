@@ -7,6 +7,6 @@ using System.Threading.Tasks;
 
 namespace Core.Dto
 {
-public record ExerciseDto(string Name, string Description, string Language, string[] Tags, SnippetDto[] arrayOfSnippets);
+public record ExerciseDto(string Name, string Creator, string Description, string Language, string[] Tags, SnippetDto[] arrayOfSnippets, DateTime DateCreated, DateTime DateUpdated);
 
 }
