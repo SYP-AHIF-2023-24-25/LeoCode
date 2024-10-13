@@ -9,17 +9,18 @@ import { Router } from '@angular/router';
 })
 export class StudentStartScreenComponent implements OnInit {
   firstName: string | null = '';
-  username: string | null = '';
+  ifUserName: string | null = '';
 
   constructor(private keycloakService: KeycloakService, private router: Router) {}
 
   ngOnInit(): void {
     this.firstName = sessionStorage.getItem('firstName');
-    this.username = sessionStorage.getItem('userName');
+    this.ifUserName = sessionStorage.getItem('ifUserName');
   }
 
   async logout(): Promise<void> {
-    await this.keycloakService.logout();
+    //await this.keycloakService.logout();
+    sessionStorage.setItem('shouldLogOut', 'true');
     this.router.navigate(['/login']);
   }
 }

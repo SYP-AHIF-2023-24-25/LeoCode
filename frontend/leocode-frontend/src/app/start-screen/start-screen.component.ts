@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {Tags} from '../model/tags.enum';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
@@ -8,16 +8,16 @@ import { map } from 'rxjs/operators';
 import { DbService } from '../service/db-service.service';
 import { User } from '../model/user';
 import { ExerciseDto } from '../model/exerciseDto';
+import { KeycloakService } from 'keycloak-angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-start-screen',
   templateUrl: './start-screen.component.html',
   styleUrls: ['./start-screen.component.css']
 })
-export class StartScreenComponent {
-
-
-  constructor( private rest: DbService) {
+export class StartScreenComponent implements OnInit {
+  constructor( private rest: DbService, private keycloakService: KeycloakService, private router: Router) {
     this.filteredTags = this.tagCtrl.valueChanges.pipe(
       startWith(null),
       map((tag: string | null) => tag ? this._filter(tag) : this.availableTags.slice()));  
@@ -47,9 +47,16 @@ export class StartScreenComponent {
   separatorKeysCodes: number[] = [13, 188]; // Enter und Komma
 
   exercises : ExerciseDto[]= [];
-  
+  ifUserName: string | null = '';
+
+  async logout(): Promise<void> {
+    //await this.keycloakService.logout();
+    sessionStorage.setItem('shouldLogOut', 'true');
+    this.router.navigate(['/login']);
+  }
 
   ngOnInit(): void {
+    this.ifUserName = sessionStorage.getItem('ifUserName');
     this.rest.getExerciseByUsername(this.defaultUser.username).subscribe((data: ExerciseDto[]) => {
       this.exercises = data;
     });

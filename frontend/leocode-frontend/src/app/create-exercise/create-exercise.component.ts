@@ -19,6 +19,7 @@ import { Router } from '@angular/router';
 import { DbService } from '../service/db-service.service';
 import { CodeSection } from '../model/code-sections';
 import { ArrayOfSnippetsDto } from '../model/arrayOfSnippetsDto';
+import { KeycloakService } from 'keycloak-angular';
 
 
 @Component({
@@ -27,13 +28,18 @@ import { ArrayOfSnippetsDto } from '../model/arrayOfSnippetsDto';
   styleUrls: ['./create-exercise.component.css']
 })
 export class CreateExerciseComponent {
-
-  constructor(private fileUploadService: FileUploadService, private rest: RestService, private dbRest: DbService, private http: HttpClient, private snackBar: MatSnackBar, private router: Router) {
+  ifUserName: string | null = '';
+  constructor(private fileUploadService: FileUploadService, private rest: RestService, private dbRest: DbService, private http: HttpClient, private snackBar: MatSnackBar, private router: Router, private keycloakService: KeycloakService) {
     this.filteredTags = this.tagCtrl.valueChanges.pipe(
       startWith(null),
       map((tag: string | null) => tag ? this._filter(tag) : this.availableTags.slice()));  
     
    }
+
+  async logout(): Promise<void> {
+    await this.keycloakService.logout();
+    this.router.navigate(['/login']);
+  }
   
   exerciseName: string = ''; 
   currentStep: number = 1;
@@ -55,6 +61,7 @@ export class CreateExerciseComponent {
   separatorKeysCodes: number[] = [13, 188]; // Enter und Komma  
 
   ngOnInit(): void {
+    this.ifUserName = sessionStorage.getItem('ifUserName');
     document.addEventListener("DOMContentLoaded", () => {
       const mainMenuLinks = document.querySelectorAll('.main-menu-link');
       

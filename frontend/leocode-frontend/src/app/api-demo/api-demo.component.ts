@@ -30,7 +30,12 @@ export class ApiDemoComponent {
         next: (res) => {
           this.response.update(() => res);
           if (res === 'You are at least a student') {
-            this.router.navigate(['/student-start-screen']);
+            if (sessionStorage.getItem('ifUserName') === 'if200183') {
+              this.router.navigate(['/start-screen']);
+              //this.router.navigate(['/student-start-screen']);
+            } else {
+              this.router.navigate(['/student-start-screen']);
+            }
           } else {
             this.router.navigate(['/start-screen']);
           }
