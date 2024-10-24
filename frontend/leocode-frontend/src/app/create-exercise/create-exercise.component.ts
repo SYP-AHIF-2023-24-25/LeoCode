@@ -15,6 +15,10 @@ import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { startWith } from 'rxjs/operators';
 import { map } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
+import { DbService } from '../service/db-service.service';
+import { CodeSection } from '../model/code-sections';
+import { ArrayOfSnippetsDto } from '../model/arrayOfSnippetsDto';
 
 
 @Component({
@@ -23,21 +27,19 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./create-exercise.component.css']
 })
 export class CreateExerciseComponent {
-
-  constructor(private fileUploadService: FileUploadService, private rest: RestService, private http: HttpClient, private snackBar: MatSnackBar) {
+  ifUserName: string | null = '';
+  async logout(): Promise<void> {
+    sessionStorage.setItem('shouldLogOut', 'true');
+    this.router.navigate(['/login']);
+  }
+  constructor(private fileUploadService: FileUploadService, private rest: RestService, private dbRest: DbService, private http: HttpClient, private snackBar: MatSnackBar, private router: Router) {
     this.filteredTags = this.tagCtrl.valueChanges.pipe(
       startWith(null),
       map((tag: string | null) => tag ? this._filter(tag) : this.availableTags.slice()));  
-
-    
-    this.filteredSearchTags = this.tagCtrl.valueChanges.pipe(
-      startWith(null),
-      map((tag: string | null) => tag ? this._filter(tag) : this.availableTags.slice()));
-
     
    }
   
-
+  exerciseName: string = ''; 
   currentStep: number = 1;
   instruction: string = '';
   selectedLanguage: string = '';
@@ -48,37 +50,16 @@ export class CreateExerciseComponent {
   ZipFileUploaded: boolean = false;
   isUploading = false;
 
-  //für Suche in der Liste
-  selectedSearchTags: string[] = [];
-  filteredSearchTags: Observable<string[]> | undefined;
 
   // property für die ausgewählten Tags
   tagCtrl = new FormControl();
-  selectedTags: string[] = [];
+  selectedTags: string[] = [];  
   availableTags: string[] = Object.values(Tags); // ersetzen Sie dies durch Ihre tatsächlichen Tags
-  filteredTags: Observable<string[]> | undefined;
-  separatorKeysCodes: number[] = [13, 188]; // Enter und Komma
-
-  exercises : Exercise[]= [
-    {
-      instruction: 'Schreibe eine Funktion, die die Summe von zwei Zahlen berechnet.',
-      language: 'Typescript',
-      tags: ['POSE', 'TYPESCRIPT'],
-      zipFile: null,
-      emptyZipFile: null
-    },
-    {
-      instruction: 'Schreibe eine Funktion, die die Summe von zwei Zahlen berechnet.',
-      language: 'Csharp',
-      tags: ['WMC', 'CSHARP'],
-      zipFile: null,
-      emptyZipFile: null
-    },
-  ]
-
-  // Hier die verfügbaren Tags aus dem Enum abrufen
+  filteredTags: Observable<string[]> | undefined;  
+  separatorKeysCodes: number[] = [13, 188]; // Enter und Komma  
 
   ngOnInit(): void {
+    this.ifUserName = sessionStorage.getItem('ifUserName');
     document.addEventListener("DOMContentLoaded", () => {
       const mainMenuLinks = document.querySelectorAll('.main-menu-link');
       
@@ -92,17 +73,6 @@ export class CreateExerciseComponent {
         });
       });
     });
-  }
-
-  // Getter-Funktion für gefilterte Übungen basierend auf dem Suchbegriff für Tags
-  get filteredExercises() {
-    if (!this.selectedSearchTags.length) {
-      return this.exercises;
-    }
-  
-    return this.exercises.filter(exercise =>
-      exercise.tags.some(tag => this.selectedSearchTags.includes(tag))
-    );
   }
 
 
@@ -153,23 +123,6 @@ export class CreateExerciseComponent {
     this.tagCtrl.setValue(null);
   }
 
-  addSearchTag(event: MatChipInputEvent): void {
-    const input = event.input;
-    const value = event.value;
-
-    // Add our tag
-    if ((value || '').trim()) {
-      this.selectedSearchTags.push(value.trim().toUpperCase());
-      this.availableTags.push(value.trim().toUpperCase());
-    }
-
-    // Reset the input value
-    if (input) {
-      input.value = '';
-    }
-
-    this.tagCtrl.setValue(null);
-  }
 
   isSelectedTag(tag: string): boolean {
     return this.selectedTags.includes(tag);
@@ -183,23 +136,13 @@ export class CreateExerciseComponent {
     }
   }
 
-  removeSearchTag(tag: string): void {
-    const index = this.selectedSearchTags.indexOf(tag);
-
-    if (index >= 0) {
-      this.selectedSearchTags.splice(index, 1);
-    }
-  }
 
   selected(event: MatAutocompleteSelectedEvent): void {
     this.selectedTags.push(event.option.viewValue);
     this.tagCtrl.setValue(null);
   }
 
-  selectedSearch(event: MatAutocompleteSelectedEvent): void {
-    this.selectedSearchTags.push(event.option.viewValue);
-    this.tagCtrl.setValue(null);
-  }
+
 
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
@@ -287,20 +230,48 @@ export class CreateExerciseComponent {
 
   async sendCodeToRunner() {
      let exercise  = {
+      name: this.exerciseName,
+      creator: this.ifUserName || '',
       instruction: this.instruction,
       language: this.selectedLanguage,
       tags: this.selectedTags,
       zipFile: this.zipFile,
-      emptyZipFile: this.emptyZipFile
+      emptyZipFile: this.emptyZipFile,
+      dateCreated: new Date(),
+      dateUpdated: new Date()
     };
-
-    console.log(this.filteredExercises);
 
     if (exercise.zipFile) {
       if(exercise.language === 'TypeScript'){
         const fullResponse = await this.uploadZipToTsRunner(exercise.zipFile, "full");
         if (exercise.emptyZipFile && this.testsMatchPasses(fullResponse)) {
           await this.uploadZipToTsRunner(exercise.emptyZipFile, "empty");
+          let name: string[] = exercise.emptyZipFile.name.split('.');
+          console.log(name[0]);
+          const response: any = await this.rest.getCode(name[0]).toPromise();
+          console.log(response);
+          let codeSections: CodeSection[] = this.parseTemplateToCodeSections(response, name[0]);
+          console.log(codeSections);
+
+          let arrayOfSnippets : ArrayOfSnippetsDto = {
+            snippets: codeSections
+          }
+          
+          console.log(arrayOfSnippets);
+            
+
+          this.dbRest.AddExercise(arrayOfSnippets, exercise.name, exercise.instruction, exercise.language, exercise.tags, exercise.creator, exercise.dateCreated, exercise.dateUpdated).subscribe((data: Exercise) => {
+            this.snackBar.open('Exercise created successfully', 'Close', {
+              duration: 5000,
+              horizontalPosition: 'center',
+              verticalPosition: 'top',
+            });
+      
+            this.router.navigate(['/start-screen']).then(() => {
+              window.location.reload();
+            });
+          });
+
         }
       }
       else if(exercise.language === 'Csharp'){
@@ -308,15 +279,35 @@ export class CreateExerciseComponent {
 
         if (this.testsMatchPassesCSharp(fullResponse) && exercise.emptyZipFile) {
           await this.uploadZipFileToCSharpRunner(exercise.emptyZipFile, "empty");
+          let name: string[] = exercise.emptyZipFile.name.split('.');
+          console.log(name[0]);
+          const response: any = await this.rest.getCodeCSharp(name[0]).toPromise();
+          console.log(response);
+          let codeSections: CodeSection[] = this.parseTemplateToCodeSections(response.value, name[0]);
+          console.log(codeSections);
+
+          let arrayOfSnippets : ArrayOfSnippetsDto = {
+            snippets: codeSections
+          }
+          
+          console.log(arrayOfSnippets);
+
+            
+
+          this.dbRest.AddExercise(arrayOfSnippets, exercise.name, exercise.instruction, exercise.language, exercise.tags, exercise.creator, exercise.dateCreated, exercise.dateUpdated ).subscribe((data: Exercise) => {
+            this.snackBar.open('Exercise created successfully', 'Close', {
+              duration: 5000,
+              horizontalPosition: 'center',
+              verticalPosition: 'top',
+            });
+      
+            this.router.navigate(['/start-screen']).then(() => {
+              window.location.reload();
+            });
+          });
         }
       }
-      this.snackBar.open('Exercise created successfully', 'Close', {
-        duration: 5000,
-        horizontalPosition: 'center',
-        verticalPosition: 'top',
-      });
-      this.resetForm();
-      this.exercises.push(exercise);
+      
       
     }else{
       console.error('No file selected');
@@ -343,11 +334,6 @@ export class CreateExerciseComponent {
   sleep(ms: number) {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
-
-  runTest(exercise: Exercise) {
-    console.log('Running test for exercise:', exercise);
-  }
-
   resetForm() {
     this.currentStep = 1;
     this.instruction = '';
@@ -367,6 +353,23 @@ export class CreateExerciseComponent {
     this.zipFile = null;
     this.ZipFileUploaded = false;
     console.log(this.zipFile);
+  }
+
+  parseTemplateToCodeSections(template: string, programName: string) :CodeSection[]{
+
+    let stringCodeSections: string[]= template.split("\n");
+
+    let codeSections: CodeSection[] = [];
+
+
+    for(let i = 0; i < stringCodeSections.length; i++) {
+      if(stringCodeSections[i].includes("Todo") || stringCodeSections[i].includes("throw new System.NotImplementedException();")) {
+        codeSections.push({ code: stringCodeSections[i], readOnlySection: false, fileName: programName});
+      }else {
+        codeSections.push({ code: stringCodeSections[i], readOnlySection: true, fileName: programName});
+      }
+    }
+    return codeSections;
   }
 
 }

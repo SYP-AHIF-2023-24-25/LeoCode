@@ -4,81 +4,36 @@
     <span class="navbar-toggler-icon"></span>
   </button>
 
-  <div class="collapse navbar-collapse" id="navbarNav">
+  <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
     <ul class="navbar-nav">
       <li class="nav-item">
-        
+        <span class="navbar-text text-light">
+          {{ ifUserName }}
+        </span>
+      </li>
+      <li class="nav-item">
+        <button class="btn btn-outline-light ml-3" (click)="logout()">Logout</button>
       </li>
     </ul>
   </div>
 </nav>
 
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-md-2 d-none d-md-block bg-light sidebar">
-      <div class="sidebar-sticky">
-        <ul class="nav flex-column">
-
-          <li class="nav-item">
-            <a class="nav-link main-menu-link" >1. Class</a>
-            <ul class="sub-menu">
-              <li><a [routerLink]="['/introdcution']">Overview</a></li>
-              <li><a [routerLink]="['/introdcution']">Csharp</a></li>
-            </ul>
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link main-menu-link" >2. Class</a>
-            <ul class="sub-menu">
-              <li><a [routerLink]="['/introdcution']">Overview</a></li>
-              <li><a [routerLink]="['/introdcution']">Csharp</a></li>
-              <li><a [routerLink]="['/introdcution']">Typescript</a></li>
-            </ul>
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link main-menu-link" >3. Class</a>
-            <ul class="sub-menu">
-              <li><a [routerLink]="['/introdcution']">Overview</a></li>
-              <li><a [routerLink]="['/introdcution']">Java</a></li>
-              <li><a [routerLink]="['/introdcution']">Typescript</a></li>
-            </ul>
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link main-menu-link" >4. Class</a>
-            <ul class="sub-menu">
-              <li><a [routerLink]="['/introdcution']">Overview</a></li>
-              <li><a [routerLink]="['/introdcution']">Csharp</a></li>
-              <li><a [routerLink]="['/introdcution']">Typescript</a></li>
-            </ul>
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link main-menu-link" >5. Class</a>
-            <ul class="sub-menu">
-              <li><a [routerLink]="['/introdcution']">Overview</a></li>
-              <li><a [routerLink]="['/introdcution']">Java</a></li>
-              <li><a [routerLink]="['/introdcution']">Typescript</a></li>
-              <li><a [routerLink]="['/introdcution']">Csharp</a></li>
-            </ul>
-        </ul>
-      </div>
-    </div>
-
+<div class="container-fluid" >
+  <div class="row justify-content-center">
 
 
     <div class="col-md-10">
       <div class="container mt-4">
-        <!-- Schritte als Rechtecke -->
+        <h1>Create Exercise</h1>
+         <!-- Schritte als Punkte -->
         <div class="row justify-content-center">
           <div class="col-md-8">
             <div class="step-indicator">
               <div *ngFor="let step of [1, 2, 3, 4, 5]" 
-                   class="step-indicator-item" 
-                   [ngClass]="{ 'current-step': currentStep === step }"
-                   (click)="goToStep(step)">
-                {{ 'Step ' + step }}
+                  class="step-indicator-item" 
+                  [ngClass]="{ 'current-step': currentStep === step }"
+                  (click)="goToStep(step)">
+                <span class="step-dot"></span>
               </div>
             </div>
           </div>
@@ -92,7 +47,11 @@
               <div class="col-md-12">
                 <div class="card mt-5">
                   <div class="card-body">
-                    <h2 class="card-title">Step 1: Add Introduction</h2>
+                    <h2 class="card-title">Step 1: Add Introduction and Name</h2>
+                    <div class="form-group">
+                      <textarea class="form-control" rows="5" style="height: 50px; width: 250px"  [(ngModel)]="exerciseName" placeholder="Write your Name here"></textarea>
+                    </div>
+                    <br>
                     <div class="form-group">
                       <textarea class="form-control" rows="5" style="height: 300px; width: 1000px"  [(ngModel)]="instruction" placeholder="Write your Introduction here"></textarea>
                     </div>
@@ -207,9 +166,10 @@
     <div *ngIf="currentStep === 5" class="row justify-content-center align-items-center">
       <div class="col-md-12">
         <div class="card mt-5">
-          <div class="card-body"style="height: 300px; width: 1000px">
+          <div class="card-body"style="height: 350px; width: 1000px">
             <h2 class="card-title">Overview</h2>
-            <p><strong>introdcution</strong> {{ instruction }}</p>
+            <p><strong>Exercise Name</strong> {{exerciseName}}</p>
+            <p><strong>Introdcution</strong> {{ instruction }}</p>
             <p><strong>Language:</strong> {{ selectedLanguage }}</p>
             <p><strong>Chosen Tags:</strong> {{ selectedTags.join(', ') }}</p>
             <p><strong>Complete Zip-File:</strong> {{ zipFile?.name }}</p>
@@ -225,48 +185,6 @@
     <br>
     <br>
     <br>
-
-
-    <form>
-      <mat-form-field class="example-chip-list">
-        <mat-label>Chose tags to sort</mat-label>
-        <mat-chip-grid #chipGrid aria-label="Tag selection">
-          <mat-chip-row *ngFor="let tag of selectedSearchTags" (removed)="removeSearchTag(tag)">
-            {{tag}}
-            <button matChipRemove [attr.aria-label]="'remove ' + tag">
-              <mat-icon>cancel</mat-icon>
-            </button>
-          </mat-chip-row>
-        </mat-chip-grid>
-        <input placeholder="Search..." #tagInput [formControl]="tagCtrl"
-          [matChipInputFor]="chipGrid" [matAutocomplete]="auto"
-          [matChipInputSeparatorKeyCodes]="separatorKeysCodes"/>
-        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectedSearch($event)">
-          <mat-option *ngFor="let tag of filteredSearchTags | async" [value]="tag">
-            {{tag}}
-          </mat-option>
-        </mat-autocomplete>
-      </mat-form-field>
-    </form>
-
-
-    <!-- Tabelle mit gefilterten Übungen -->
-    <table class="table">
-      <thead>
-        <tr>
-          <th>Introduction</th>
-          <th>Tags</th>
-          <th>Testrun</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let exercise of filteredExercises">
-          <td>{{exercise.instruction}}</td>
-          <td>{{exercise.tags.join(', ')}}</td>
-          <td><button class="btn btn-primary" (click)="runTest(exercise)">Run Test</button></td>
-        </tr>
-      </tbody>
-    </table>
   </div>
 </div>
 </div>

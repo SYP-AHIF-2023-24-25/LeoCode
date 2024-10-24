@@ -17,5 +17,10 @@ namespace Persistence
         {
             _dbContext = dbContext;
         }
+
+        public User GetByUsername(string username)
+        {
+            return _dbContext.Users.SingleOrDefault(u => u.Username == username)!;
+        }
     }
 }

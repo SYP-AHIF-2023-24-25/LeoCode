@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Schule\\4AHIF\\LeoCode\\backend\\LeoCodeBackend\\LeoCodeBackend.csproj": {}
+    "C:\\Schule\\5AHIF\\david\\LeoCode\\backend\\LeoCodeBackend\\LeoCodeBackend.csproj": {}
   },
   "projects": {
-    "C:\\Schule\\4AHIF\\LeoCode\\backend\\LeoCodeBackend\\LeoCodeBackend.csproj": {
+    "C:\\Schule\\5AHIF\\david\\LeoCode\\backend\\LeoCodeBackend\\LeoCodeBackend.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Schule\\4AHIF\\LeoCode\\backend\\LeoCodeBackend\\LeoCodeBackend.csproj",
+        "projectUniqueName": "C:\\Schule\\5AHIF\\david\\LeoCode\\backend\\LeoCodeBackend\\LeoCodeBackend.csproj",
         "projectName": "LeoCodeBackend",
-        "projectPath": "C:\\Schule\\4AHIF\\LeoCode\\backend\\LeoCodeBackend\\LeoCodeBackend.csproj",
+        "projectPath": "C:\\Schule\\5AHIF\\david\\LeoCode\\backend\\LeoCodeBackend\\LeoCodeBackend.csproj",
         "packagesPath": "C:\\Users\\Florian\\.nuget\\packages\\",
-        "outputPath": "C:\\Schule\\4AHIF\\LeoCode\\backend\\LeoCodeBackend\\obj\\",
+        "outputPath": "C:\\Schule\\5AHIF\\david\\LeoCode\\backend\\LeoCodeBackend\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Florian\\AppData\\Roaming\\NuGet\\NuGet.Config",

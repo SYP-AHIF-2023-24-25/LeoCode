@@ -6,12 +6,13 @@ import { ResultHistoryService } from '../service/result-history.service';
 import { Result } from '../model/result';
 import { Summary } from '../model/summary';
 import { TestResults } from '../model/test-results';
-
+import { ArrayOfSnippetsDto } from '../model/arrayOfSnippetsDto';
 import { CodeSection } from '../model/code-sections';
 import { Value } from '../model/value';
-
-
-
+import { ActivatedRoute, Params, Router } from '@angular/router';
+import { User } from '../model/user';
+import { DbService } from '../service/db-service.service';
+import { ExerciseDto } from '../model/exerciseDto';
 
 @Component({
   selector: 'app-test-result',
@@ -19,13 +20,28 @@ import { Value } from '../model/value';
   styleUrls: ['./test-result.component.css']
 })
 
-
 export class TestResultComponent  implements OnInit{
 
+ userName: string | null= "";
+ exerciseName: string |null = "";
+ creator: string | undefined = "";
+
+  exercise : ExerciseDto = {
+    name: "",
+    creator: "",
+    description: "",
+    language: "",
+    tags: [],
+    arrayOfSnippets: [],
+    dateCreated: new Date(),
+    dateUpdated: new Date()
+  }
+
   //Code Editor
-  testTemplate: string = 'export function CheckPassword(password: string): boolean{\n  Todo Implementation \n}'
+ // testTemplate: string = 'export function CheckPassword(password: string): boolean{\n  Todo Implementation \n}'
   editorOptions = { theme: 'vs-dark', language: 'typescrip'}; // language auswählen
-  codeSections: CodeSection[] = [];
+ // codeSections: CodeSection[] = [];
+
 
   // timer
   timer: string = "";
@@ -41,54 +57,44 @@ export class TestResultComponent  implements OnInit{
     TestResults: []
   };
 
-  constructor(private rest: RestService, private resultHistoryService: ResultHistoryService) {
+  constructor(private rest: RestService, private resultHistoryService: ResultHistoryService, private route: ActivatedRoute, private restDb: DbService, private router: Router) {
+  }
+
+  ifUserName: string | null = '';
+  async logout(): Promise<void> {
+    sessionStorage.setItem('shouldLogOut', 'true');
+    this.router.navigate(['/login']);
   }
 
   ngOnInit(): void {
-    this.rest.startRunner("Typescript").subscribe((data) => {
-      console.log(data);
-    
-    },
-    (error) => {
-        console.error("Error in API request", error);
-        this.loading = false;
-    });
-    this.parseTemplateToCodeSections(this.testTemplate, "passwordChecker.ts");
-  }
-  ngOnDestroy(): void {
-    this.rest.stopRunner("Typescript").subscribe((data) => {
-      console.log(data);
-    }
-    );
-  }
+    this.ifUserName = sessionStorage.getItem('ifUserName');
 
-// Code Editor Funcions
-  parseTemplateToCodeSections(template: string, programName: string) {
-
-    let stringCodeSections: string[]= template.split("\n");
-
-    let codeSections: CodeSection[] = [];
+    this.route.queryParams.subscribe((params: Params) => {
+      this.userName = params['userName'];
+      this.exerciseName = params['exerciseName'];
+      this.creator = params['creator'];
 
 
-    for(let i = 0; i < stringCodeSections.length; i++) {
-      if(stringCodeSections[i].includes("Todo Implementation")) {
-        codeSections.push({ code: stringCodeSections[i], readonly: false, fileName: programName});
-      }else {
-        codeSections.push({ code: stringCodeSections[i], readonly: true, fileName: programName});
+      if(this.userName != null && this.exerciseName != null){
+        sessionStorage.setItem("userName", this.userName);
+        sessionStorage.setItem("exerciseName", this.exerciseName);
+      }else{
+        this.userName = sessionStorage.getItem('userName');
+        this.exerciseName = sessionStorage.getItem('exerciseName');
       }
-    }
+    });
 
-    this.codeSections = codeSections;
+     if(this.userName != null && this.exerciseName != null){
+      this.restDb.getExerciseByUsername(this.creator, this.exerciseName).subscribe((data: ExerciseDto[]) => {
+        this.exercise = data[0];
+        console.log("TAGS")
+        console.log(this.exercise.tags.length);
+        console.log(this.exercise.creator);
+        console.log(this.exercise.dateCreated);
+    });
+    }
   }
   
-  /*parseCodeSectionsToTemplate(codeSections: CodeSection[]) {
-      let template: string = "";
-      for(let i = 0; i < codeSections.length; i++) {
-        template += codeSections[i].code + "\n";
-      }
-      this.testTemplate = template;
-    }*/
-
   // parse from json new
   convertFromJsonV2(value: Value): Result {// mit neuen json format
    
@@ -141,7 +147,10 @@ export class TestResultComponent  implements OnInit{
     const timeLogger = new TimeLoggerService();
     timeLogger.start();
 
-    this.rest.runTests('PasswordChecker', this.codeSections, "Typescript").subscribe(
+
+    //this.rest.runTests('PasswordChecker', this.codeSections, "Typescript").subscribe(
+    console.log(this.exercise.language);
+      this.rest.runTests(this.exercise.name, this.exercise.arrayOfSnippets, this.exercise.language).subscribe(
         (data) => {
           console.log(data);
           
@@ -150,6 +159,7 @@ export class TestResultComponent  implements OnInit{
             this.result = this.convertFromJsonV2(d as Value);
             
             this.timer = timeLogger.stop();
+            console.log(this.result.Summary.TotalTests);
             const logEntry = {
                 message: `Unitests : ${this.result.Summary.PassedTests}/${this.result.Summary.TotalTests} test completed.`,
                 timestamp: new Date(),
@@ -168,6 +178,20 @@ export class TestResultComponent  implements OnInit{
             this.loading = false;
         }
     );
-}
-
+    let subject = "";
+    if(this.exercise.tags.includes("WMC")){
+      subject = "WMC";
+    }else if(this.exercise.tags.includes("POSE")){
+      subject = "POSE";
+    }else if(this.exercise.tags.includes("TYPESCRIPT")){
+      subject = "TYPESCRIPT";
+    }
+    let arrayOfSnippets: ArrayOfSnippetsDto = {
+      snippets: this.exercise.arrayOfSnippets
+    }
+    let usrname = "Default";
+    console.log(this.exercise.name);
+    console.log(this.exercise.tags.length);
+    this.restDb.UpdateExercise(usrname, this.exercise.description, this.exercise.language, this.exercise.tags, this.exercise.name, arrayOfSnippets, subject).subscribe();
+  }
 }

@@ -6,6 +6,7 @@ public interface IUnitOfWork : IBaseUnitOfWork
 {
     public IUserRepository Users { get; }
     public IExerciseRepository Exercises { get; }
+    public IArrayOfSnippetsRepository ArrayOfSnippets { get; }
     public ISnippetRepository Snippets { get; }
-    public IArrayOfSnippets ArrayOfSnippets { get; }
+    public IAssignmentsRepository Assignments { get; }
 }

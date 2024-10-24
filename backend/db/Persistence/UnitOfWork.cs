@@ -15,13 +15,17 @@ public class UnitOfWork : BaseUnitOfWork, IUnitOfWork
     public UnitOfWork(ApplicationDbContext dBContext) : base(dBContext)
     {
         Users = new UserRepository(dBContext);
-        Exercises = new ExerciseRepository(dBContext);
-        Snippets = new SnippetRepository(dBContext);
         ArrayOfSnippets = new ArrayOfSnippetsRepository(dBContext);
+        Snippets = new SnippetRepository(dBContext);
+        Exercises = new ExerciseRepository(dBContext);
+        Assignments = new AssignmentsRepository(dBContext);
     }
 
-    public IUserRepository Users  { get; }
+    public IUserRepository Users { get; }
     public IExerciseRepository Exercises { get; }
+
+    public IArrayOfSnippetsRepository ArrayOfSnippets { get; }
+
     public ISnippetRepository Snippets { get; }
-    public IArrayOfSnippets ArrayOfSnippets { get; }
+    public IAssignmentsRepository Assignments { get; set; }
 }

@@ -63,5 +63,23 @@ export class RestService {
 
     return this.httpClient.post<any>(`http://localhost:8000/api/testTemplate`, formData, { headers });
   }
+
+  getCode(programName: string){
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*' // Erlaubt alle Ursprünge ()
+    });
+
+      return this.httpClient.get(`http://localhost:8000/api/code/${programName}/`, { headers: headers });
+  }
+
+  getCodeCSharp(programName: string){
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*'
+    });
+
+    return this.httpClient.get(`http://localhost:8001/api/code?exerciseName=${programName}`, { headers: headers });
+  }
   
 }

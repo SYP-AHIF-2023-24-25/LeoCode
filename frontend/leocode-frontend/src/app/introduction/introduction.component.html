@@ -6,7 +6,20 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/test-results']">Typescript</a>
+          <a class="nav-link" [routerLink]="['/test-results']">{{exercise.name}}</a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <span class="navbar-text text-light">
+            {{ ifUserName }}
+          </span>
+        </li>
+        <li class="nav-item">
+          <button class="btn btn-outline-light ml-3" (click)="logout()">Logout</button>
         </li>
       </ul>
     </div>
@@ -18,12 +31,12 @@
         <div class="sidebar-sticky">
           <ul class="nav flex-column">
             <li class="nav-item">
-              <a class="nav-link active" [routerLink]="['/introdcution']">
+              <a class="nav-link active" [routerLink]="['/introdcution']" [queryParams]="{ creator: exercise.creator}">
                 Introduction
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" [routerLink]="['/test-results']">
+              <a class="nav-link" [routerLink]="['/test-results']"  [queryParams]="{ creator: exercise.creator}">
                 Implementation
               </a>
             </li>
@@ -37,8 +50,8 @@
       </div>
 
       <div class="container mt-4">
-        <h1>Introduction</h1>
-        <p> This is a simple application that allows to check your Password. </p>
+        <h1>{{exercise.name}}</h1>
+        <p> {{exercise.description}} </p>
       </div>
     </div>
   </div>

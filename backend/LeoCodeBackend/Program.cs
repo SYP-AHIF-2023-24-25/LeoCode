@@ -170,7 +170,7 @@ namespace LeoCodeBackend
         static async Task<IActionResult> RunTests(string exerciseName,string language, [FromBody] JsonObject arrayOfSnippets)
         {
             string apiUrl = "";
-            if(language == "Typescript"){
+            if(language == "TypeScript"){
                 apiUrl = $"http://localhost:8000/api/execute/{exerciseName}";
             } else if(language == "CSharp"){
                 //apiUrl = $"http://localhost:5168/api/execute/{exerciseName}";
@@ -187,8 +187,19 @@ namespace LeoCodeBackend
             {
                 try
                 {
-                    string jsonContent = $"{{\"code\":\"{ConcatSnippets(snippets)}\", \"fileName\":\"{snippets.ArrayOfSnippets[0].FileName}\"}}";
+                    var body = new
+                    {
+                        code = ConcatSnippets(snippets),  // Assuming ConcatSnippets creates the full code string
+                        fileName = snippets.ArrayOfSnippets[0].FileName  // Getting the first snippet's file name
+                    };
+
+                    // Use JsonConvert to serialize the body into a proper JSON string
+                    string jsonContent = JsonConvert.SerializeObject(body);
+
+                    // Create the HTTP content with the proper content type
                     HttpContent content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
+
+                    // Send the POST request
                     response = await httpClient.PostAsync(apiUrl, content);
                     if (response.IsSuccessStatusCode)
                     {
@@ -196,7 +207,7 @@ namespace LeoCodeBackend
                         string responseBody = await response.Content.ReadAsStringAsync();
                         JsonDocument result = null;
                         JsonElement value = new JsonElement();
-                        if (language == "Typescript")
+                        if (language == "TypeScript")
                         {
                             ResultFileHelperTypescript resultFileHelperTypescript = new ResultFileHelperTypescript();
                             result = JsonDocument.Parse(resultFileHelperTypescript.formatData(responseBody));

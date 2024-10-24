@@ -1,13 +1,13 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\David Pr\u00F6ller\\Desktop\\SubtractionEmpty\\",
+  "WorkspaceRootPath": "C:\\Users\\David Pr\u00F6ller\\Desktop\\SubtractionEmpty\\SubtractionEmpty\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{96684B39-8835-4649-B511-5467F9F554C2}|SubtractionEmpty\\SubtractionEmpty.csproj|c:\\users\\david pr\u00F6ller\\desktop\\subtractionempty\\subtractionempty\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{96684B39-8835-4649-B511-5467F9F554C2}|SubtractionEmpty\\SubtractionEmpty.csproj|c:\\users\\david pr\u00F6ller\\desktop\\subtractionempty\\subtractionempty\\subtractionempty\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{96684B39-8835-4649-B511-5467F9F554C2}|SubtractionEmpty\\SubtractionEmpty.csproj|solutionrelative:subtractionempty\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A33310DE-6175-4FE5-8AB4-8CBE85DE64CF}|SubtractionEmptyTests\\SubtractionEmptyTests.csproj|c:\\users\\david pr\u00F6ller\\desktop\\subtractionempty\\subtractionemptytests\\programtests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{A33310DE-6175-4FE5-8AB4-8CBE85DE64CF}|SubtractionEmptyTests\\SubtractionEmptyTests.csproj|c:\\users\\david pr\u00F6ller\\desktop\\subtractionempty\\subtractionempty\\subtractionemptytests\\programtests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A33310DE-6175-4FE5-8AB4-8CBE85DE64CF}|SubtractionEmptyTests\\SubtractionEmptyTests.csproj|solutionrelative:subtractionemptytests\\programtests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -18,38 +18,33 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
             },
             {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
-            },
-            {
               "$type": "Document",
               "DocumentIndex": 1,
               "Title": "ProgramTests.cs",
-              "DocumentMoniker": "C:\\Users\\David Pr\u00F6ller\\Desktop\\SubtractionEmpty\\SubtractionEmptyTests\\ProgramTests.cs",
+              "DocumentMoniker": "C:\\Users\\David Pr\u00F6ller\\Desktop\\SubtractionEmpty\\SubtractionEmpty\\SubtractionEmptyTests\\ProgramTests.cs",
               "RelativeDocumentMoniker": "SubtractionEmptyTests\\ProgramTests.cs",
-              "ToolTip": "C:\\Users\\David Pr\u00F6ller\\Desktop\\SubtractionEmpty\\SubtractionEmptyTests\\ProgramTests.cs",
+              "ToolTip": "C:\\Users\\David Pr\u00F6ller\\Desktop\\SubtractionEmpty\\SubtractionEmpty\\SubtractionEmptyTests\\ProgramTests.cs",
               "RelativeToolTip": "SubtractionEmptyTests\\ProgramTests.cs",
               "ViewState": "AQIAAAQAAAAAAAAAAADwvxgAAAAjAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-13T11:04:58.359Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-13T11:04:58.359Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\David Pr\u00F6ller\\Desktop\\SubtractionEmpty\\SubtractionEmpty\\Program.cs",
+              "DocumentMoniker": "C:\\Users\\David Pr\u00F6ller\\Desktop\\SubtractionEmpty\\SubtractionEmpty\\SubtractionEmpty\\Program.cs",
               "RelativeDocumentMoniker": "SubtractionEmpty\\Program.cs",
-              "ToolTip": "C:\\Users\\David Pr\u00F6ller\\Desktop\\SubtractionEmpty\\SubtractionEmpty\\Program.cs",
+              "ToolTip": "C:\\Users\\David Pr\u00F6ller\\Desktop\\SubtractionEmpty\\SubtractionEmpty\\SubtractionEmpty\\Program.cs",
               "RelativeToolTip": "SubtractionEmpty\\Program.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAA3AAAA",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAUAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-05-13T11:04:23.174Z",
               "EditorCaption": ""

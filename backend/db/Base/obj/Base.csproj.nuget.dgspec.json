@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Schule\\4AHIF\\LeoCode\\backend\\db\\Base\\Base.csproj": {}
+    "C:\\Schule\\5AHIF\\david\\LeoCode\\backend\\db\\Base\\Base.csproj": {}
   },
   "projects": {
-    "C:\\Schule\\4AHIF\\LeoCode\\backend\\db\\Base\\Base.csproj": {
+    "C:\\Schule\\5AHIF\\david\\LeoCode\\backend\\db\\Base\\Base.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Schule\\4AHIF\\LeoCode\\backend\\db\\Base\\Base.csproj",
+        "projectUniqueName": "C:\\Schule\\5AHIF\\david\\LeoCode\\backend\\db\\Base\\Base.csproj",
         "projectName": "Base",
-        "projectPath": "C:\\Schule\\4AHIF\\LeoCode\\backend\\db\\Base\\Base.csproj",
+        "projectPath": "C:\\Schule\\5AHIF\\david\\LeoCode\\backend\\db\\Base\\Base.csproj",
         "packagesPath": "C:\\Users\\Florian\\.nuget\\packages\\",
-        "outputPath": "C:\\Schule\\4AHIF\\LeoCode\\backend\\db\\Base\\obj\\",
+        "outputPath": "C:\\Schule\\5AHIF\\david\\LeoCode\\backend\\db\\Base\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Florian\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -34,11 +34,6 @@
           "warnAsError": [
             "NU1605"
           ]
-        },
-        "restoreAuditProperties": {
-          "enableAudit": "true",
-          "auditLevel": "low",
-          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -47,11 +42,11 @@
           "dependencies": {
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[8.0.0, )"
+              "version": "[8.0.6, )"
             },
             "Microsoft.EntityFrameworkCore.Relational": {
               "target": "Package",
-              "version": "[8.0.0, )"
+              "version": "[8.0.6, )"
             },
             "Microsoft.EntityFrameworkCore.Tools": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
@@ -88,7 +83,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.203/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

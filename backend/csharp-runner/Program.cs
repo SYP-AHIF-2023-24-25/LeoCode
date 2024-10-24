@@ -7,6 +7,14 @@ using Microsoft.Extensions.DependencyInjection; // Ergänzung
 using Microsoft.Extensions.Hosting;
 using Newtonsoft.Json;
 using System.Text.Json.Nodes; // Ergänzung
+using System.IO.Compression;
+using System.Net.Http.Json;
+using System;
+using System.IO;
+using Microsoft.AspNetCore.Http;
+using System.Threading.Tasks;
+using System.Text;
+using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace csharp_runner
 {
@@ -50,11 +58,46 @@ namespace csharp_runner
             app.MapPost("/api/execute/{exerciseName}", RunTests)
                     .WithName("RunTests");
 
+            app.MapGet("/api/code", GetFirstCsFileContent)
+                    .WithName("GetCode");
+
             app.UseAuthorization();
 
             app.MapControllers();
 
             app.Run();
+        }
+
+        public static async Task<IActionResult> GetFirstCsFileContent(string exerciseName)
+        {
+            try
+            {
+                string directoryPath = $"/usr/src/app/templates/{exerciseName}/{exerciseName}/";
+
+                if (!Directory.Exists(directoryPath))
+                {
+                    return new NotFoundObjectResult($"The directory {directoryPath} does not exist.");
+                }
+
+                string[] files = Directory.GetFiles(directoryPath);
+                string[] csFiles = files.Where(file => file.EndsWith(".cs")).ToArray();
+
+                if (csFiles.Length > 0)
+                {
+                    string csFilePath = csFiles[0];
+                    string fileContent = await System.IO.File.ReadAllTextAsync(csFilePath);
+                    Console.WriteLine(fileContent);
+                    return new OkObjectResult(fileContent);
+                }
+                else
+                {
+                    return new NotFoundObjectResult("No .cs file found in the specified directory");
+                }
+            }
+            catch (Exception ex)
+            {
+                return new StatusCodeResult(500);
+            }
         }
 
         static async Task<IActionResult> RunTests(string exerciseName, [FromBody] JsonObject jsonContent)
@@ -70,7 +113,6 @@ namespace csharp_runner
                 string filePathForRandomDirectory = @$"{currentDirectory}";
                 string filePathForNuGetConfigFile = @$"{currentDirectory}/config";
                 var result = await executeTests.runCSharp(exerciseName, templateFilePath, filePathForRandomDirectory, body.code, body.fileName);
-                Console.WriteLine($"Result: {result}");
                 //log succes
                 return new OkObjectResult(result);
             }

@@ -13,117 +13,175 @@ namespace Import
         {
             User user1 = new User
             {
-                Username = "IF200183",
-                Password = "123456"
-            };
-            User user2 = new User
-            {
-                Username = "IF200190",
-                Password = "123456"
+                Username = "Default",
+                Password = "Default"
             };
 
-            var users = new List<User> { user1, user2 };
+            User user2 = new User
+            {
+                Username = "if200183",
+                Password = "123"
+            };
 
             Exercise exercise1 = new Exercise
             {
-                Name = "BubbleSort",
-                Description = "Implement the BubbleSort algorithm",
+                Name = "Addition",
+                Description = "Implement the a addition calculator",
                 Language = Language.CSharp,
-                Project = new byte[] { 0x00, 0x01, 0x02, 0x03 },
-                Year = Year.First,
-                Subject = Subject.WMC
+                Tags = new string[] { "Class1", "POSE" },
+                Creator = "if200183",
+                DateCreated = DateTime.Now,
+                DateUpdated = DateTime.Now
             };
+
+            exercise1.ArrayOfSnippets =
+                    new ArrayOfSnippets
+                    {
+                        Exercise = exercise1,
+                        ExerciseId = exercise1.Id
+                    };
+
+            exercise1.ArrayOfSnippets.Snippets = new List<Snippet>
+                {
+                    new Snippet
+                    {
+                        Code = "public class Addition{public static void Main(){}public static int AdditionCalculation(int firstNumber, int secondNumber){",
+                        ReadonlySection = true,
+                        FileName = "Program.cs",
+                        ArrayOfSnippets = exercise1.ArrayOfSnippets,
+                        ArrayOfSnippetsId = exercise1.ArrayOfSnippets.Id
+                    },
+                    new Snippet
+                    {
+                        Code = "throw new NotImplementedException();",
+                        ReadonlySection = false,
+                        FileName = "Program.cs",
+                        ArrayOfSnippets = exercise1.ArrayOfSnippets,
+                        ArrayOfSnippetsId = exercise1.ArrayOfSnippets.Id
+                    },
+                    new Snippet
+                    {
+                        Code = "}}",
+                        ReadonlySection = true,
+                        FileName = "Program.cs",
+                        ArrayOfSnippets = exercise1.ArrayOfSnippets,
+                        ArrayOfSnippetsId = exercise1.ArrayOfSnippets.Id
+                    }
+                };
 
             Exercise exercise2 = new Exercise
             {
-                Name = "QuickSort",
-                Description = "Implement the QuickSort algorithm",
-                Language = Language.Java,
-                Project = new byte[] { 0x00, 0x01, 0x02, 0x03 },
-                Year = Year.Second,
-                Subject = Subject.POSE
+                Name = "PasswordChecker",
+                Description = "Implement a password checker",
+                Language = Language.TypeScript,
+                Tags = new string[] { "Class2", "WMC" },
+                Creator = "if200183",
+                DateCreated = DateTime.Now,
+                DateUpdated = DateTime.Now
             };
+            exercise2.ArrayOfSnippets =
+                    new ArrayOfSnippets
+                    {
+                        Exercise = exercise2,
+                        ExerciseId = exercise2.Id
+                    };
 
-            var exercises = new List<Exercise> { exercise1, exercise2 };
+            exercise2.ArrayOfSnippets.Snippets = new List<Snippet>
+                {
+                    new Snippet
+                    {
+                        Code = "export function CheckPassword(password: string): boolean{",
+                        ReadonlySection = true,
+                        FileName = "passwordChecker.ts",
+                        ArrayOfSnippets = exercise2.ArrayOfSnippets,
+                        ArrayOfSnippetsId = exercise2.ArrayOfSnippets.Id
+                    },
+                    new Snippet
+                    {
+                        Code = "throw new Error('Method not implemented.');",
+                        ReadonlySection = false,
+                        FileName = "passwordChecker.ts",
+                        ArrayOfSnippets = exercise2.ArrayOfSnippets,
+                        ArrayOfSnippetsId = exercise2.ArrayOfSnippets.Id
+                    },
+                    new Snippet
+                    {
+                        Code = "}",
+                        ReadonlySection = true,
+                        FileName = "passwordChecker.ts",
+                        ArrayOfSnippets = exercise2.ArrayOfSnippets,
+                        ArrayOfSnippetsId = exercise2.ArrayOfSnippets.Id
+                    }
+                };
 
-            var snippets1 = new List<Snippet>
+
+
+            exercise1.UserId = user2.Id;
+            exercise2.UserId = user2.Id;
+            exercise1.User = user2;
+            exercise2.User = user2;
+
+
+
+            Exercise exercise3 = new Exercise
             {
-                new Snippet
-                {
-                    Code = "public class Addition{public static void Main(){}public static int AdditionCalculation(int firstNumber, int secondNumber){",
-                    ReadonlySection = true,
-                    FileName = "Program.cs",
-                    User = user1,
-                    Exercise = exercise1,
-                },
-                new Snippet
-                {
-                    Code = "return firstNumber - secondNumber;",
-                    ReadonlySection = false,
-                    FileName = "Program.cs",
-                    User = user1,
-                    Exercise = exercise1,
-                },
-                new Snippet
-                {
-                    Code = "}}",
-                    ReadonlySection = true,
-                    FileName = "Program.cs",
-                    User = user1,
-                    Exercise = exercise1,
-                }
+                Name = "SubtractionEmpty",
+                Description = "Implement the a subtraction calculator",
+                Language = Language.CSharp,
+                Tags = new string[] { "Class1", "POSE" },
+                Creator = "if200158",
+                DateCreated = DateTime.Now,
+                DateUpdated = DateTime.Now
             };
 
-            var snippets2 = new List<Snippet>
-            {
-                new Snippet
+            exercise3.ArrayOfSnippets =
+                    new ArrayOfSnippets
+                    {
+                        Exercise = exercise3,
+                        ExerciseId = exercise3.Id
+                    };
+
+            exercise3.ArrayOfSnippets.Snippets = new List<Snippet>
                 {
-                    Code = "public class FalseOrTrueGenerator{public static void Main(){}public static bool FalseOrTrueGenerator(){",
-                    ReadonlySection = true,
-                    FileName = "Program.cs",
-                    User = user2,
-                    Exercise = exercise2,
-                },
-                new Snippet
-                {
-                    Code = "return true;",
-                    ReadonlySection = false,
-                    FileName = "Program.cs",
-                    User = user2,
-                    Exercise = exercise2,
-                },
-                new Snippet
-                {
-                    Code = "}}",
-                    ReadonlySection = true,
-                    FileName = "Program.cs",
-                    User = user2,
-                    Exercise = exercise2,
-                }
-            };
+                    new Snippet
+                    {
+                        Code = "public class Program { static void Main(string[] args) {} public static int Subtract(int a, int b){",
+                        ReadonlySection = true,
+                        FileName = "Program.cs",
+                        ArrayOfSnippets = exercise3.ArrayOfSnippets,
+                        ArrayOfSnippetsId = exercise3.ArrayOfSnippets.Id
+                    },
+                    new Snippet
+                    {
+                        Code = "throw new NotImplementedException();",
+                        ReadonlySection = false,
+                        FileName = "Program.cs",
+                        ArrayOfSnippets = exercise3.ArrayOfSnippets,
+                        ArrayOfSnippetsId = exercise3.ArrayOfSnippets.Id
+                    },
+                    new Snippet
+                    {
+                        Code = "}}",
+                        ReadonlySection = true,
+                        FileName = "Program.cs",
+                        ArrayOfSnippets = exercise3.ArrayOfSnippets,
+                        ArrayOfSnippetsId = exercise3.ArrayOfSnippets.Id
+                    }
+                };
 
-            var snippets = snippets1.Concat(snippets2).ToList();
 
-            var arrayOfSnippets1 = new ArrayOfSnippets
-            {
-                Snippets = snippets1,
-                User = user1,
-            };
+            exercise3.UserId = user1.Id;
+            exercise3.User = user1;
 
-            var arrayOfSnippets2 = new ArrayOfSnippets
-            {
-                Snippets = snippets2,
-                User = user2,
-            };
+            var exercises = new List<Exercise> { exercise1, exercise2, exercise3 };
 
-            var arrayOfSnippets = new List<ArrayOfSnippets> { arrayOfSnippets1, arrayOfSnippets2 };
-
+            var users = new List<User> { user1, user2 };
             return new ImportData
             {
                 Exercises = exercises,
                 Users = users,
-                Snippets = snippets,
-                ArrayOfSnippets = arrayOfSnippets
+                ArrayOfSnippets = new List<ArrayOfSnippets> { exercise1.ArrayOfSnippets, exercise2.ArrayOfSnippets, exercise3.ArrayOfSnippets },
+                Snippets = new List<Snippet> { exercise1.ArrayOfSnippets.Snippets[0], exercise1.ArrayOfSnippets.Snippets[1], exercise1.ArrayOfSnippets.Snippets[2], exercise2.ArrayOfSnippets.Snippets[0], exercise2.ArrayOfSnippets.Snippets[1], exercise2.ArrayOfSnippets.Snippets[2], exercise3.ArrayOfSnippets.Snippets[0], exercise3.ArrayOfSnippets.Snippets[1], exercise3.ArrayOfSnippets.Snippets[2] }
             };
         }
     }
