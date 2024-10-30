@@ -12,8 +12,8 @@ using Persistence;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241011074257_MigrationV2")]
-    partial class MigrationV2
+    [Migration("20241030153207_migrationv2")]
+    partial class migrationv2
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,6 +24,21 @@ namespace Persistence.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("AssignmentsStudent", b =>
+                {
+                    b.Property<int>("AssignmentsId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("StudentsId")
+                        .HasColumnType("int");
+
+                    b.HasKey("AssignmentsId", "StudentsId");
+
+                    b.HasIndex("StudentsId");
+
+                    b.ToTable("AssignmentsStudent");
+                });
 
             modelBuilder.Entity("Core.Entities.ArrayOfSnippets", b =>
                 {
@@ -49,7 +64,7 @@ namespace Persistence.Migrations
                     b.ToTable("ArrayOfSnippets");
                 });
 
-            modelBuilder.Entity("Core.Entities.Exercise", b =>
+            modelBuilder.Entity("Core.Entities.Assignments", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -57,8 +72,39 @@ namespace Persistence.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Creator")
+                    b.Property<DateTime>("DateDue")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("ExerciseId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte[]>("RowVersion")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("rowversion");
+
+                    b.Property<int>("TeacherId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ExerciseId");
+
+                    b.HasIndex("TeacherId");
+
+                    b.ToTable("Assignments");
+                });
+
+            modelBuilder.Entity("Core.Entities.Exercise", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("datetime2");
@@ -80,15 +126,12 @@ namespace Persistence.Migrations
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("rowversion");
 
-                    b.Property<string>("Tags")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("UserId")
+                    b.Property<int>("TeacherId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("TeacherId");
 
                     b.ToTable("Exercises");
                 });
@@ -125,7 +168,7 @@ namespace Persistence.Migrations
                     b.ToTable("Snippet");
                 });
 
-            modelBuilder.Entity("Core.Entities.User", b =>
+            modelBuilder.Entity("Core.Entities.Student", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -133,7 +176,10 @@ namespace Persistence.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Password")
+                    b.Property<string>("Firstname")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Lastname")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<byte[]>("RowVersion")
@@ -146,7 +192,75 @@ namespace Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users");
+                    b.ToTable("Students");
+                });
+
+            modelBuilder.Entity("Core.Entities.Tag", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int?>("ExerciseId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte[]>("RowVersion")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("rowversion");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ExerciseId");
+
+                    b.ToTable("Tags");
+                });
+
+            modelBuilder.Entity("Core.Entities.Teacher", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Firstname")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Lastname")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte[]>("RowVersion")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("rowversion");
+
+                    b.Property<string>("Username")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Teachers");
+                });
+
+            modelBuilder.Entity("AssignmentsStudent", b =>
+                {
+                    b.HasOne("Core.Entities.Assignments", null)
+                        .WithMany()
+                        .HasForeignKey("AssignmentsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Core.Entities.Student", null)
+                        .WithMany()
+                        .HasForeignKey("StudentsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Core.Entities.ArrayOfSnippets", b =>
@@ -160,15 +274,34 @@ namespace Persistence.Migrations
                     b.Navigation("Exercise");
                 });
 
-            modelBuilder.Entity("Core.Entities.Exercise", b =>
+            modelBuilder.Entity("Core.Entities.Assignments", b =>
                 {
-                    b.HasOne("Core.Entities.User", "User")
-                        .WithMany("Exercise")
-                        .HasForeignKey("UserId")
+                    b.HasOne("Core.Entities.Exercise", "Exercise")
+                        .WithMany()
+                        .HasForeignKey("ExerciseId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("User");
+                    b.HasOne("Core.Entities.Teacher", "Teacher")
+                        .WithMany("Assignments")
+                        .HasForeignKey("TeacherId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Exercise");
+
+                    b.Navigation("Teacher");
+                });
+
+            modelBuilder.Entity("Core.Entities.Exercise", b =>
+                {
+                    b.HasOne("Core.Entities.Teacher", "Teacher")
+                        .WithMany("Exercises")
+                        .HasForeignKey("TeacherId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Teacher");
                 });
 
             modelBuilder.Entity("Core.Entities.Snippet", b =>
@@ -182,6 +315,13 @@ namespace Persistence.Migrations
                     b.Navigation("ArrayOfSnippets");
                 });
 
+            modelBuilder.Entity("Core.Entities.Tag", b =>
+                {
+                    b.HasOne("Core.Entities.Exercise", null)
+                        .WithMany("Tags")
+                        .HasForeignKey("ExerciseId");
+                });
+
             modelBuilder.Entity("Core.Entities.ArrayOfSnippets", b =>
                 {
                     b.Navigation("Snippets");
@@ -190,11 +330,15 @@ namespace Persistence.Migrations
             modelBuilder.Entity("Core.Entities.Exercise", b =>
                 {
                     b.Navigation("ArrayOfSnippets");
+
+                    b.Navigation("Tags");
                 });
 
-            modelBuilder.Entity("Core.Entities.User", b =>
+            modelBuilder.Entity("Core.Entities.Teacher", b =>
                 {
-                    b.Navigation("Exercise");
+                    b.Navigation("Assignments");
+
+                    b.Navigation("Exercises");
                 });
 #pragma warning restore 612, 618
         }

@@ -12,14 +12,14 @@ namespace Core.Entities
     public class Exercise : EntityObject
     {
         public string Name { get; set; }
-        public string Creator { get; set; }
         public string Description { get; set; }
         public Language Language { get; set; }
-        public string[] Tags { get; set; }
+        public List<Tag> Tags { get; set; }
 
-        [ForeignKey(nameof(UserId))]
-        public User? User { get; set; }
-        public int UserId { get; set; }
+        [ForeignKey(nameof(TeacherId))]
+        public int TeacherId { get; set; }
+        public Teacher? Teacher { get; set; }
+        
 
         public ArrayOfSnippets ArrayOfSnippets { get; set; }
 

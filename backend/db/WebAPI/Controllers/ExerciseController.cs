@@ -25,14 +25,14 @@ public class ExerciseController : Controller
         string[] splitted = tags.Split(",");
         try
         {
-            User user = _unitOfWork.Users.GetByUsername(username);
+            Teacher user = _unitOfWork.Teachers.GetByUsername(username);
             List<Exercise> exercises = await _unitOfWork.Exercises.GetExersiceByUsernameAsync(user, exerciseName);
             exercises = exercises
                 .Where(exercise => exerciseName == exercise.Name)
                 .ToList();
 
             exercises[0].Description = description;
-            exercises[0].Tags = splitted;
+            //exercises[0].Tags = splitted;                 TODO: jedes Tag schauen ob es schon in der Datenbank ist wenn nicht neu erstellen
             exercises[0].Name = newExerciseName;
             exercises[0].DateUpdated = DateTime.Now;
             await _unitOfWork.SaveChangesAsync();
@@ -47,7 +47,7 @@ public class ExerciseController : Controller
     [HttpPost]
     public async Task<IActionResult> AddExerciseAsync([FromBody] ArrayOfSnippetsDto arrayOfSnippets, string name, string description, string language, string[] tags, string username, DateTime datecreated, DateTime dateupdated)
     {
-        User user = _unitOfWork.Users.GetByUsername(username);
+        Teacher teacher = _unitOfWork.Teachers.GetByUsername(username);
         Language enumLanguage = Language.CSharp;
         switch(language)
         {
@@ -66,12 +66,11 @@ public class ExerciseController : Controller
             Exercise exercise = new Exercise
             {
                 Name = name,
-                Creator = username,
                 Description = description,
                 Language = enumLanguage,
-                Tags = tags,
-                UserId = user.Id,
-                User = user,
+                Tags = [],                  //TODO: Tags neu erstellen
+                TeacherId = teacher.Id,
+                Teacher = teacher,
                 DateCreated = datecreated,
                 DateUpdated = dateupdated
             };
@@ -117,7 +116,7 @@ public class ExerciseController : Controller
                 exercises = await _unitOfWork.Exercises.GetAll();
                 return exercises.Select(exercise => new ExerciseDto(
                 exercise.Name,
-                exercise.Creator,
+                exercise.Teacher.Username,
                 exercise.Description,
                 ((Language)exercise.Language).ToString(),
                 exercise.Tags,
@@ -131,11 +130,11 @@ public class ExerciseController : Controller
 
                 )).ToArray();
             }
-            User user = _unitOfWork.Users.GetByUsername(username);
-            exercises = await _unitOfWork.Exercises.GetExersiceByUsernameAsync(user, exerciseName);
+            Teacher teacher = _unitOfWork.Teachers.GetByUsername(username);
+            exercises = await _unitOfWork.Exercises.GetExersiceByUsernameAsync(teacher, exerciseName);
             return exercises.Select(exercise => new ExerciseDto(
             exercise.Name,
-            exercise.Creator,
+            exercise.Teacher.Username,
             exercise.Description,
             ((Language)exercise.Language).ToString(),
             exercise.Tags,
@@ -155,12 +154,12 @@ public class ExerciseController : Controller
         }
     }
     [HttpPut]
-    public async Task<IActionResult> UpdateExerciseForUser(string username, string description, string tags, string language, string subject, string exerciseName, [FromBody] ArrayOfSnippetsDto arrayOfSnippets, DateTime dateCreated, DateTime dateUpdated)
+    public async Task<IActionResult> UpdateExerciseForTeacher(string username, string description, string tags, string language, string subject, string exerciseName, [FromBody] ArrayOfSnippetsDto arrayOfSnippets, DateTime dateCreated, DateTime dateUpdated)
     {
         string[] splitted = tags.Split(",");
         try
         {
-            User user = _unitOfWork.Users.GetByUsername(username);
+            Teacher user = _unitOfWork.Teachers.GetByUsername(username);
             List<Exercise> exercises = await _unitOfWork.Exercises.GetExersiceByUsernameAsync(user, exerciseName);
             exercises = exercises
                 .Where(exercise => exerciseName == exercise.Name)

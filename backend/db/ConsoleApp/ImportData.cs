@@ -11,7 +11,11 @@ namespace Import
     {
 
         public List<Exercise> Exercises { get; set; } = [];
-        public List<User> Users { get; set; } = [];
+        public List<Student> Students { get; set; } = [];
+        public List<Teacher> Teachers { get; set; } = [];
+        public List<Tag> Tags { get; set; } = [];
+
+
         public List<ArrayOfSnippets> ArrayOfSnippets { get; set; } = [];
         public List<Snippet> Snippets { get; set; } = [];
     }

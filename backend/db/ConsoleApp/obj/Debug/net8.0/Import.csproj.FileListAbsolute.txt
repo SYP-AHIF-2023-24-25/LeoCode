@@ -427,7 +427,6 @@ C:\Schule\5AHIF\LeoCode\backend\db\ConsoleApp\obj\Debug\net8.0\Import.AssemblyIn
 C:\Schule\5AHIF\LeoCode\backend\db\ConsoleApp\obj\Debug\net8.0\Import.AssemblyInfo.cs
 C:\Schule\5AHIF\LeoCode\backend\db\ConsoleApp\obj\Debug\net8.0\Import.csproj.CoreCompileInputs.cache
 C:\Schule\5AHIF\LeoCode\backend\db\ConsoleApp\obj\Debug\net8.0\Import.sourcelink.json
-C:\Schule\5AHIF\LeoCode\backend\db\ConsoleApp\obj\Debug\net8.0\Import.csproj.Up2Date
 C:\Schule\5AHIF\LeoCode\backend\db\ConsoleApp\obj\Debug\net8.0\Import.dll
 C:\Schule\5AHIF\LeoCode\backend\db\ConsoleApp\obj\Debug\net8.0\refint\Import.dll
 C:\Schule\5AHIF\LeoCode\backend\db\ConsoleApp\obj\Debug\net8.0\Import.pdb
@@ -868,3 +867,4 @@ C:\Users\Kelit\Schule2024_25\Syp\LeoCode\backend\db\ConsoleApp\obj\Debug\net8.0\
 C:\Users\Kelit\Schule2024_25\Syp\LeoCode\backend\db\ConsoleApp\obj\Debug\net8.0\Import.pdb
 C:\Users\Kelit\Schule2024_25\Syp\LeoCode\backend\db\ConsoleApp\obj\Debug\net8.0\Import.genruntimeconfig.cache
 C:\Users\Kelit\Schule2024_25\Syp\LeoCode\backend\db\ConsoleApp\obj\Debug\net8.0\ref\Import.dll
+C:\Schule\5AHIF\LeoCode\backend\db\ConsoleApp\obj\Debug\net8.0\Import.csproj.CopyComplete

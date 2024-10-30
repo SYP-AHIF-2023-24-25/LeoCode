@@ -8,9 +8,12 @@ using System.Diagnostics;
 namespace Persistence;
 public class ApplicationDbContext : DbContext
 {
-    public DbSet<User> Users { get; set; }
+    public DbSet<Student> Students { get; set; }
     public DbSet<Exercise> Exercises { get; set; }
     public DbSet<Assignments> Assignments { get; set; }
+    public DbSet<Teacher> Teachers { get; set; }
+    public DbSet<Tag> Tags { get; set; }
+
 
 
 

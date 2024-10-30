@@ -27,7 +27,7 @@ namespace Persistence
                 .ToListAsync();
         }
 
-        public async Task<List<Exercise>> GetExersiceByUsernameAsync(User user, string? exerciseName)
+        public async Task<List<Exercise>> GetExersiceByUsernameAsync(Teacher teacher, string? exerciseName)
         {
             IQueryable<Exercise> exerciseQuery = _dbContext.Exercises
                 .Include(exercise => exercise.ArrayOfSnippets)
@@ -35,11 +35,11 @@ namespace Persistence
 
             if (exerciseName != null)
             {
-                exerciseQuery = exerciseQuery.Where(exercise => exercise.UserId == user.Id && exercise.Name == exerciseName);
+                exerciseQuery = exerciseQuery.Where(exercise => exercise.TeacherId == teacher.Id && exercise.Name == exerciseName);
             }
             else
             {
-                exerciseQuery = exerciseQuery.Where(exercise => exercise.UserId == user.Id);
+                exerciseQuery = exerciseQuery.Where(exercise => exercise.TeacherId == teacher.Id);
             }
 
             return await exerciseQuery.ToListAsync();

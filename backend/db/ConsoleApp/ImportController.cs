@@ -11,16 +11,41 @@ namespace Import
     {
         public static ImportData ImportDemoData()
         {
-            User user1 = new User
+            Student student1 = new Student
             {
                 Username = "Default",
-                Password = "Default"
+                Firstname = "Default",
+                Lastname = "Default",
+                Assignments = new List<Assignments>()
             };
 
-            User user2 = new User
+            Teacher teacher1 = new Teacher
             {
                 Username = "if200183",
-                Password = "123"
+                Firstname = "Florian",
+                Lastname = "Hagmair",
+                Assignments = new List<Assignments>(),
+                Exercises = new List<Exercise>()
+            };
+
+            Tag tag1 = new Tag
+            {
+                Name = "Class1"
+            };
+
+            Tag tag2 = new Tag
+            {
+                Name = "POSE"
+            };
+
+            Tag tag3 = new Tag
+            {
+                Name = "WMC"
+            };
+
+            Tag tag4 = new Tag
+            {
+                Name = "Class2"
             };
 
             Exercise exercise1 = new Exercise
@@ -28,8 +53,8 @@ namespace Import
                 Name = "Addition",
                 Description = "Implement the a addition calculator",
                 Language = Language.CSharp,
-                Tags = new string[] { "Class1", "POSE" },
-                Creator = "if200183",
+                Tags = new List<Tag>() { tag1, tag2 },
+                
                 DateCreated = DateTime.Now,
                 DateUpdated = DateTime.Now
             };
@@ -69,13 +94,15 @@ namespace Import
                     }
                 };
 
+            exercise1.TeacherId = teacher1.Id;
+            exercise1.Teacher = teacher1;
+
             Exercise exercise2 = new Exercise
             {
                 Name = "PasswordChecker",
                 Description = "Implement a password checker",
                 Language = Language.TypeScript,
-                Tags = new string[] { "Class2", "WMC" },
-                Creator = "if200183",
+                Tags = new List<Tag>() { tag3, tag4 },
                 DateCreated = DateTime.Now,
                 DateUpdated = DateTime.Now
             };
@@ -114,22 +141,17 @@ namespace Import
                     }
                 };
 
-
-
-            exercise1.UserId = user2.Id;
-            exercise2.UserId = user2.Id;
-            exercise1.User = user2;
-            exercise2.User = user2;
-
-
+            exercise2.TeacherId = teacher1.Id;
+            exercise2.Teacher = teacher1;
 
             Exercise exercise3 = new Exercise
             {
                 Name = "SubtractionEmpty",
                 Description = "Implement the a subtraction calculator",
                 Language = Language.CSharp,
-                Tags = new string[] { "Class1", "POSE" },
-                Creator = "if200158",
+                Tags = new List<Tag>() { tag1, tag3 },
+
+                
                 DateCreated = DateTime.Now,
                 DateUpdated = DateTime.Now
             };
@@ -169,17 +191,22 @@ namespace Import
                     }
                 };
 
+            exercise3.TeacherId = teacher1.Id;
+            exercise3.Teacher = teacher1;
 
-            exercise3.UserId = user1.Id;
-            exercise3.User = user1;
+            var teachers = new List<Teacher> { teacher1 };
+            var students = new List<Student> { student1 };
+
+            var tags = new List<Tag> { tag1, tag2, tag3, tag4 };
 
             var exercises = new List<Exercise> { exercise1, exercise2, exercise3 };
 
-            var users = new List<User> { user1, user2 };
             return new ImportData
             {
+                Tags = tags,
+                Teachers = teachers,
+                Students = students,
                 Exercises = exercises,
-                Users = users,
                 ArrayOfSnippets = new List<ArrayOfSnippets> { exercise1.ArrayOfSnippets, exercise2.ArrayOfSnippets, exercise3.ArrayOfSnippets },
                 Snippets = new List<Snippet> { exercise1.ArrayOfSnippets.Snippets[0], exercise1.ArrayOfSnippets.Snippets[1], exercise1.ArrayOfSnippets.Snippets[2], exercise2.ArrayOfSnippets.Snippets[0], exercise2.ArrayOfSnippets.Snippets[1], exercise2.ArrayOfSnippets.Snippets[2], exercise3.ArrayOfSnippets.Snippets[0], exercise3.ArrayOfSnippets.Snippets[1], exercise3.ArrayOfSnippets.Snippets[2] }
             };

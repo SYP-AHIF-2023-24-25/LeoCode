@@ -20,11 +20,14 @@ namespace Persistence
 
         public void CreateAssignment(string exerciseName, string creator, DateTime dateDue, string Name)
         {
-            Exercise exercise = _dbContext.Exercises.FirstOrDefault(exercise => exercise.Name == exerciseName && exercise.Creator == creator);
+            Teacher teacher = _dbContext.Teachers.FirstOrDefault(teacher => teacher.Username == creator);
+            Exercise exercise = _dbContext.Exercises.FirstOrDefault(exercise => exercise.Name == exerciseName && exercise.Teacher.Username == teacher.Username);
             Assignments assignment = new Assignments
             {
                 Exercise = exercise,
-                Creator = creator,
+                ExerciseId = exercise.Id,
+                Teacher = teacher,
+                TeacherId = teacher.Id,
                 DateDue = dateDue,
                 Name = Name
             };
@@ -39,7 +42,8 @@ namespace Persistence
 
         public async Task<Assignments> GetOneAssignment(string Creator, string Name)
         {
-            return await _dbContext.Assignments.FirstOrDefaultAsync(assignment => assignment.Creator == Creator && assignment.Name == Name);
+            Teacher teacher = _dbContext.Teachers.FirstOrDefault(teacher => teacher.Username == Creator);
+            return await _dbContext.Assignments.FirstOrDefaultAsync(assignment => assignment.Teacher.Username == teacher.Username && assignment.Name == Name);
         }
     }
 }

@@ -78,7 +78,6 @@ C:\Schule\5AHIF\LeoCode\backend\db\Persistence\obj\Debug\net8.0\Persistence.Asse
 C:\Schule\5AHIF\LeoCode\backend\db\Persistence\obj\Debug\net8.0\Persistence.AssemblyInfo.cs
 C:\Schule\5AHIF\LeoCode\backend\db\Persistence\obj\Debug\net8.0\Persistence.csproj.CoreCompileInputs.cache
 C:\Schule\5AHIF\LeoCode\backend\db\Persistence\obj\Debug\net8.0\Persistence.sourcelink.json
-C:\Schule\5AHIF\LeoCode\backend\db\Persistence\obj\Debug\net8.0\Persiste.61C28332.Up2Date
 C:\Schule\5AHIF\LeoCode\backend\db\Persistence\obj\Debug\net8.0\Persistence.dll
 C:\Schule\5AHIF\LeoCode\backend\db\Persistence\obj\Debug\net8.0\refint\Persistence.dll
 C:\Schule\5AHIF\LeoCode\backend\db\Persistence\obj\Debug\net8.0\Persistence.pdb
@@ -150,3 +149,4 @@ C:\Users\Kelit\Schule2024_25\Syp\LeoCode\backend\db\Persistence\obj\Debug\net8.0
 C:\Users\Kelit\Schule2024_25\Syp\LeoCode\backend\db\Persistence\obj\Debug\net8.0\Persistence.pdb
 C:\Users\Kelit\Schule2024_25\Syp\LeoCode\backend\db\Persistence\obj\Debug\net8.0\Persistence.genruntimeconfig.cache
 C:\Users\Kelit\Schule2024_25\Syp\LeoCode\backend\db\Persistence\obj\Debug\net8.0\ref\Persistence.dll
+C:\Schule\5AHIF\LeoCode\backend\db\Persistence\obj\Debug\net8.0\Persistence.csproj.CopyComplete
