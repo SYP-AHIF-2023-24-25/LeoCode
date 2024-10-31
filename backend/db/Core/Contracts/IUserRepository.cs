@@ -8,8 +8,8 @@ using System.Threading.Tasks;
 
 namespace Core.Contracts
 {
-    public interface IStudentRepository : IGenericRepository<Student>
+    public interface IUserRepository : IGenericRepository<User>
     {
-        Student GetByUsername(string username);
+        User GetByUsername(string username);
     }
 }

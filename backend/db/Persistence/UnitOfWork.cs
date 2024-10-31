@@ -6,6 +6,7 @@ using Base.Persistence;
 using Core.Entities;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
+using System.Reflection.Metadata;
 
 public class UnitOfWork : BaseUnitOfWork, IUnitOfWork
 {
@@ -15,8 +16,7 @@ public class UnitOfWork : BaseUnitOfWork, IUnitOfWork
     }
     public UnitOfWork(ApplicationDbContext dBContext) : base(dBContext)
     {
-        Students = new StudentRepository(dBContext);
-        Teachers = new TeacherRepository(dBContext);
+        Users = new UserRepository(dBContext);
         ArrayOfSnippets = new ArrayOfSnippetsRepository(dBContext);
         Snippets = new SnippetRepository(dBContext);
         Exercises = new ExerciseRepository(dBContext);
@@ -24,9 +24,7 @@ public class UnitOfWork : BaseUnitOfWork, IUnitOfWork
         Tags = new TagRepository(dBContext);
     }
     public ITagRepository Tags { get; }
-    public IStudentRepository Students { get; }
-    public ITeacherRepository Teachers { get; }
-
+    public IUserRepository Users { get; }
     public IExerciseRepository Exercises { get; }
 
     public IArrayOfSnippetsRepository ArrayOfSnippets { get; }

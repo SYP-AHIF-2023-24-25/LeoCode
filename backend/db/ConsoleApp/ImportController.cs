@@ -11,21 +11,21 @@ namespace Import
     {
         public static ImportData ImportDemoData()
         {
-            Student student1 = new Student
-            {
-                Username = "Default",
-                Firstname = "Default",
-                Lastname = "Default",
-                Assignments = new List<Assignments>()
-            };
 
-            Teacher teacher1 = new Teacher
+            User user1 = new User
             {
                 Username = "if200183",
                 Firstname = "Florian",
                 Lastname = "Hagmair",
-                Assignments = new List<Assignments>(),
-                Exercises = new List<Exercise>()
+                IsTeacher = true,
+            };
+
+            User user2 = new User
+            {
+                Username = "if200182",
+                Firstname = "David",
+                Lastname = "Pröller",
+                IsTeacher = false,
             };
 
             Tag tag1 = new Tag
@@ -94,8 +94,8 @@ namespace Import
                     }
                 };
 
-            exercise1.TeacherId = teacher1.Id;
-            exercise1.Teacher = teacher1;
+            exercise1.TeacherId = user1.Id;
+            exercise1.Teacher = user1;
 
             Exercise exercise2 = new Exercise
             {
@@ -141,8 +141,8 @@ namespace Import
                     }
                 };
 
-            exercise2.TeacherId = teacher1.Id;
-            exercise2.Teacher = teacher1;
+            exercise2.TeacherId = user1.Id;
+            exercise2.Teacher = user1;
 
             Exercise exercise3 = new Exercise
             {
@@ -191,22 +191,32 @@ namespace Import
                     }
                 };
 
-            exercise3.TeacherId = teacher1.Id;
-            exercise3.Teacher = teacher1;
+            exercise3.TeacherId = user1.Id;
+            exercise3.Teacher = user1;
 
-            var teachers = new List<Teacher> { teacher1 };
-            var students = new List<Student> { student1 };
+            var users = new List<User> { user1 };
 
             var tags = new List<Tag> { tag1, tag2, tag3, tag4 };
 
             var exercises = new List<Exercise> { exercise1, exercise2, exercise3 };
 
+            Assignments assignment1 = new Assignments
+            {
+                Name = "Assignment1",
+                Exercise = exercise1,
+                ExerciseId = exercise1.Id,
+                DateDue = DateTime.Now,
+                Students = new List<User> { user2 },
+                TeacherId = user1.Id,
+                Teacher = user1
+            };
+
             return new ImportData
             {
                 Tags = tags,
-                Teachers = teachers,
-                Students = students,
+                Users = users,
                 Exercises = exercises,
+                Assignments = new List<Assignments> { assignment1 },
                 ArrayOfSnippets = new List<ArrayOfSnippets> { exercise1.ArrayOfSnippets, exercise2.ArrayOfSnippets, exercise3.ArrayOfSnippets },
                 Snippets = new List<Snippet> { exercise1.ArrayOfSnippets.Snippets[0], exercise1.ArrayOfSnippets.Snippets[1], exercise1.ArrayOfSnippets.Snippets[2], exercise2.ArrayOfSnippets.Snippets[0], exercise2.ArrayOfSnippets.Snippets[1], exercise2.ArrayOfSnippets.Snippets[2], exercise3.ArrayOfSnippets.Snippets[0], exercise3.ArrayOfSnippets.Snippets[1], exercise3.ArrayOfSnippets.Snippets[2] }
             };

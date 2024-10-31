@@ -12,8 +12,9 @@ namespace Core.Entities
     {
         public List<Snippet> Snippets { get; set; } = new List<Snippet>();
 
-        [ForeignKey(nameof(ExerciseId))]
+        
         public int ExerciseId { get; set; }
+        [ForeignKey(nameof(ExerciseId))]
         public Exercise? Exercise { get; set; }
         
     }

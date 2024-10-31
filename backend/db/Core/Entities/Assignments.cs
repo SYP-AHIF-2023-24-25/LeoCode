@@ -14,14 +14,13 @@ namespace Core.Entities
         [ForeignKey(nameof(ExerciseId))]
         public Exercise? Exercise { get; set; }
         public int ExerciseId { get; set; }
-
-        [ForeignKey(nameof(TeacherId))]
-        public int TeacherId { get; set; }
-        public Teacher? Teacher { get; set; }
-        
-
         public DateTime DateDue { get; set; }
-        public Student[] Students { get; set; }
+        public List<User> Students { get; set; }
+
+        public int TeacherId { get; set; }
+        [ForeignKey(nameof(TeacherId))]
+        public User? Teacher { get; set; }
+
         public string Name { get; set; }
     }
 }

@@ -8,11 +8,14 @@ using System.Diagnostics;
 namespace Persistence;
 public class ApplicationDbContext : DbContext
 {
-    public DbSet<Student> Students { get; set; }
+    public DbSet<User> Users { get; set; }
     public DbSet<Exercise> Exercises { get; set; }
     public DbSet<Assignments> Assignments { get; set; }
-    public DbSet<Teacher> Teachers { get; set; }
     public DbSet<Tag> Tags { get; set; }
+    public DbSet<Snippet> Snippets { get; set; }
+
+    public DbSet<ArrayOfSnippets> ArrayOfSnippets { get; set; }
+    
 
 
 
@@ -41,6 +44,25 @@ public class ApplicationDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        // Exercise-Teacher Beziehung
+        modelBuilder.Entity<Exercise>()
+            .HasOne(e => e.Teacher)
+            .WithMany() // Keine Rückbeziehung
+            .HasForeignKey(e => e.TeacherId)
+            .OnDelete(DeleteBehavior.NoAction); // Verhindert Cascade Delete
 
+        // Assignment-Teacher Beziehung
+        modelBuilder.Entity<Assignments>()
+            .HasOne(a => a.Teacher)
+            .WithMany() // Keine Rückbeziehung
+            .HasForeignKey(a => a.TeacherId)
+            .OnDelete(DeleteBehavior.NoAction); // Verhindert Cascade Delete
+
+        // Assignment-Exercise Beziehung
+        modelBuilder.Entity<Assignments>()
+            .HasOne(a => a.Exercise)
+            .WithMany()
+            .HasForeignKey(a => a.ExerciseId)
+            .OnDelete(DeleteBehavior.NoAction); // Verhindert Cascade Delete
     }
 }

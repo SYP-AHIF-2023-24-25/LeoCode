@@ -25,7 +25,7 @@ public class ExerciseController : Controller
         string[] splitted = tags.Split(",");
         try
         {
-            Teacher user = _unitOfWork.Teachers.GetByUsername(username);
+            User user = _unitOfWork.Users.GetByUsername(username);
             List<Exercise> exercises = await _unitOfWork.Exercises.GetExersiceByUsernameAsync(user, exerciseName);
             exercises = exercises
                 .Where(exercise => exerciseName == exercise.Name)
@@ -47,7 +47,7 @@ public class ExerciseController : Controller
     [HttpPost]
     public async Task<IActionResult> AddExerciseAsync([FromBody] ArrayOfSnippetsDto arrayOfSnippets, string name, string description, string language, string[] tags, string username, DateTime datecreated, DateTime dateupdated)
     {
-        Teacher teacher = _unitOfWork.Teachers.GetByUsername(username);
+        User teacher = _unitOfWork.Users.GetByUsername(username);
         Language enumLanguage = Language.CSharp;
         switch(language)
         {
@@ -119,8 +119,7 @@ public class ExerciseController : Controller
                 exercise.Teacher.Username,
                 exercise.Description,
                 ((Language)exercise.Language).ToString(),
-                exercise.Tags,
-
+                exercise.Tags.Select(tag => tag.Name).ToArray(),
                 exercise.ArrayOfSnippets.Snippets.Select(snippet => new SnippetDto(
                         snippet.Code,
                         snippet.ReadonlySection,
@@ -130,15 +129,15 @@ public class ExerciseController : Controller
 
                 )).ToArray();
             }
-            Teacher teacher = _unitOfWork.Teachers.GetByUsername(username);
-            exercises = await _unitOfWork.Exercises.GetExersiceByUsernameAsync(teacher, exerciseName);
+            User user = _unitOfWork.Users.GetByUsername(username);
+            exercises = await _unitOfWork.Exercises.GetExersiceByUsernameAsync(user, exerciseName);
             return exercises.Select(exercise => new ExerciseDto(
             exercise.Name,
             exercise.Teacher.Username,
             exercise.Description,
             ((Language)exercise.Language).ToString(),
-            exercise.Tags,
-           
+            exercise.Tags.Select(tag => tag.Name).ToArray(),
+
             exercise.ArrayOfSnippets.Snippets.Select(snippet => new SnippetDto(
                     snippet.Code,
                     snippet.ReadonlySection,
@@ -159,7 +158,7 @@ public class ExerciseController : Controller
         string[] splitted = tags.Split(",");
         try
         {
-            Teacher user = _unitOfWork.Teachers.GetByUsername(username);
+            User user = _unitOfWork.Users.GetByUsername(username);
             List<Exercise> exercises = await _unitOfWork.Exercises.GetExersiceByUsernameAsync(user, exerciseName);
             exercises = exercises
                 .Where(exercise => exerciseName == exercise.Name)

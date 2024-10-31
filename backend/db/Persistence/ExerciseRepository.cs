@@ -22,20 +22,24 @@ namespace Persistence
         public async Task<List<Exercise>> GetAll()
         {
             return await _dbContext.Exercises
-                .Include(exercise => exercise.ArrayOfSnippets)
-                .ThenInclude(arrayOfSnippets => arrayOfSnippets.Snippets)
+                .Include(e => e.Teacher)
+                .Include(e => e.Tags)
+                .Include(e => e.ArrayOfSnippets)
+                .ThenInclude(e => e.Snippets)
                 .ToListAsync();
         }
 
-        public async Task<List<Exercise>> GetExersiceByUsernameAsync(Teacher teacher, string? exerciseName)
+        public async Task<List<Exercise>> GetExersiceByUsernameAsync(User teacher, string? exerciseName)
         {
             IQueryable<Exercise> exerciseQuery = _dbContext.Exercises
+                .Include(exercise => exercise.Teacher)
+                .Include(exercise => exercise.Tags)
                 .Include(exercise => exercise.ArrayOfSnippets)
                 .ThenInclude(arrayOfSnippets => arrayOfSnippets.Snippets);
 
             if (exerciseName != null)
             {
-                exerciseQuery = exerciseQuery.Where(exercise => exercise.TeacherId == teacher.Id && exercise.Name == exerciseName);
+                exerciseQuery = exerciseQuery.Where(exercise => exercise.Teacher.Username == teacher.Username && exercise.Name == exerciseName);
             }
             else
             {

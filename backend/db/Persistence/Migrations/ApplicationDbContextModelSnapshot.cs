@@ -22,21 +22,6 @@ namespace Persistence.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("AssignmentsStudent", b =>
-                {
-                    b.Property<int>("AssignmentsId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("StudentsId")
-                        .HasColumnType("int");
-
-                    b.HasKey("AssignmentsId", "StudentsId");
-
-                    b.HasIndex("StudentsId");
-
-                    b.ToTable("AssignmentsStudent");
-                });
-
             modelBuilder.Entity("Core.Entities.ArrayOfSnippets", b =>
                 {
                     b.Property<int>("Id")
@@ -162,34 +147,7 @@ namespace Persistence.Migrations
 
                     b.HasIndex("ArrayOfSnippetsId");
 
-                    b.ToTable("Snippet");
-                });
-
-            modelBuilder.Entity("Core.Entities.Student", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Firstname")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Lastname")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<byte[]>("RowVersion")
-                        .IsConcurrencyToken()
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("rowversion");
-
-                    b.Property<string>("Username")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Students");
+                    b.ToTable("Snippets");
                 });
 
             modelBuilder.Entity("Core.Entities.Tag", b =>
@@ -218,7 +176,7 @@ namespace Persistence.Migrations
                     b.ToTable("Tags");
                 });
 
-            modelBuilder.Entity("Core.Entities.Teacher", b =>
+            modelBuilder.Entity("Core.Entities.User", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -226,8 +184,14 @@ namespace Persistence.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int?>("AssignmentsId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Firstname")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsTeacher")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Lastname")
                         .HasColumnType("nvarchar(max)");
@@ -242,22 +206,9 @@ namespace Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Teachers");
-                });
+                    b.HasIndex("AssignmentsId");
 
-            modelBuilder.Entity("AssignmentsStudent", b =>
-                {
-                    b.HasOne("Core.Entities.Assignments", null)
-                        .WithMany()
-                        .HasForeignKey("AssignmentsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Core.Entities.Student", null)
-                        .WithMany()
-                        .HasForeignKey("StudentsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("Core.Entities.ArrayOfSnippets", b =>
@@ -276,13 +227,13 @@ namespace Persistence.Migrations
                     b.HasOne("Core.Entities.Exercise", "Exercise")
                         .WithMany()
                         .HasForeignKey("ExerciseId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("Core.Entities.Teacher", "Teacher")
-                        .WithMany("Assignments")
+                    b.HasOne("Core.Entities.User", "Teacher")
+                        .WithMany()
                         .HasForeignKey("TeacherId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Exercise");
@@ -292,10 +243,10 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Core.Entities.Exercise", b =>
                 {
-                    b.HasOne("Core.Entities.Teacher", "Teacher")
-                        .WithMany("Exercises")
+                    b.HasOne("Core.Entities.User", "Teacher")
+                        .WithMany()
                         .HasForeignKey("TeacherId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Teacher");
@@ -319,9 +270,21 @@ namespace Persistence.Migrations
                         .HasForeignKey("ExerciseId");
                 });
 
+            modelBuilder.Entity("Core.Entities.User", b =>
+                {
+                    b.HasOne("Core.Entities.Assignments", null)
+                        .WithMany("Students")
+                        .HasForeignKey("AssignmentsId");
+                });
+
             modelBuilder.Entity("Core.Entities.ArrayOfSnippets", b =>
                 {
                     b.Navigation("Snippets");
+                });
+
+            modelBuilder.Entity("Core.Entities.Assignments", b =>
+                {
+                    b.Navigation("Students");
                 });
 
             modelBuilder.Entity("Core.Entities.Exercise", b =>
@@ -329,13 +292,6 @@ namespace Persistence.Migrations
                     b.Navigation("ArrayOfSnippets");
 
                     b.Navigation("Tags");
-                });
-
-            modelBuilder.Entity("Core.Entities.Teacher", b =>
-                {
-                    b.Navigation("Assignments");
-
-                    b.Navigation("Exercises");
                 });
 #pragma warning restore 612, 618
         }

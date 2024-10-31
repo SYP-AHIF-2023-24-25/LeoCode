@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace Core.Entities
 {
-    public class Student : EntityObject, IUser
+    public class User : EntityObject
     {
-        public string Username {get; set;}
+        public string Username { get; set; }
         public string Firstname { get; set; }
         public string Lastname { get; set; }
-        public List<Assignments> Assignments { get; set; }
+        public bool IsTeacher { get; set; }
     }
 }

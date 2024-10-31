@@ -17,8 +17,9 @@ namespace Core.Entities
         public string FileName { get; set; }
 
         [ForeignKey(nameof(ArrayOfSnippetsId))]
-        public int ArrayOfSnippetsId { get; set; }
         public ArrayOfSnippets? ArrayOfSnippets { get; set; }
+        public int ArrayOfSnippetsId { get; set; }
+        
         
     }
 }

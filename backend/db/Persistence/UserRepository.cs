@@ -9,17 +9,17 @@ using System.Threading.Tasks;
 
 namespace Persistence
 {
-    public class TeacherRepository : GenericRepository<Teacher>, ITeacherRepository
+    public class UserRepository : GenericRepository<User>, IUserRepository
     {
         private readonly ApplicationDbContext _dbContext;
-        public TeacherRepository(ApplicationDbContext dbContext) : base(dbContext)
+        public UserRepository(ApplicationDbContext dbContext) : base(dbContext)
         {
             _dbContext = dbContext;
         }
 
-        public Teacher GetByUsername(string username)
+        public User GetByUsername(string username)
         {
-            return _dbContext.Teachers.SingleOrDefault(u => u.Username == username)!;
+            return _dbContext.Users.SingleOrDefault(u => u.Username == username)!;
         }
     }
 }

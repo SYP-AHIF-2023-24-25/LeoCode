@@ -16,9 +16,10 @@ namespace Core.Entities
         public Language Language { get; set; }
         public List<Tag> Tags { get; set; }
 
-        [ForeignKey(nameof(TeacherId))]
+        
         public int TeacherId { get; set; }
-        public Teacher? Teacher { get; set; }
+        [ForeignKey(nameof(TeacherId))]
+        public User? Teacher { get; set; }
         
 
         public ArrayOfSnippets ArrayOfSnippets { get; set; }

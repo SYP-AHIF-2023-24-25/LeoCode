@@ -20,14 +20,13 @@ namespace Persistence
 
         public void CreateAssignment(string exerciseName, string creator, DateTime dateDue, string Name)
         {
-            Teacher teacher = _dbContext.Teachers.FirstOrDefault(teacher => teacher.Username == creator);
+            User teacher = _dbContext.Users.FirstOrDefault(teacher => teacher.Username == creator);
             Exercise exercise = _dbContext.Exercises.FirstOrDefault(exercise => exercise.Name == exerciseName && exercise.Teacher.Username == teacher.Username);
             Assignments assignment = new Assignments
             {
                 Exercise = exercise,
-                ExerciseId = exercise.Id,
-                Teacher = teacher,
-                TeacherId = teacher.Id,
+                ExerciseId = exercise!.Id,
+                Students = [],
                 DateDue = dateDue,
                 Name = Name
             };
@@ -37,13 +36,14 @@ namespace Persistence
 
         public async Task<List<Assignments>> GetAll()
         {
-            return await _dbContext.Assignments.ToListAsync();
+            return await _dbContext.Assignments.Include(a => a.Teacher).Include(a => a.Students).Include(a => a.Exercise).ThenInclude(a => a.Tags).ToListAsync();
         }
 
         public async Task<Assignments> GetOneAssignment(string Creator, string Name)
         {
-            Teacher teacher = _dbContext.Teachers.FirstOrDefault(teacher => teacher.Username == Creator);
-            return await _dbContext.Assignments.FirstOrDefaultAsync(assignment => assignment.Teacher.Username == teacher.Username && assignment.Name == Name);
+            User teacher = _dbContext.Users.FirstOrDefault(teacher => teacher.Username == Creator);
+            return await _dbContext.Assignments.Include(a => a.Students).Include(a => a.Teacher).Include(a => a.Exercise).ThenInclude(e => e.Tags).FirstOrDefaultAsync(assignment => assignment.Teacher.Username == teacher.Username && assignment.Name == Name);
+
         }
     }
 }

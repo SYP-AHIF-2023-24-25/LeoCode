@@ -11,20 +11,20 @@ await using (var uow = new UnitOfWork(new ApplicationDbContext()))
     var data = ImportController.ImportDemoData();
 
     Console.WriteLine($"- {data.Exercises.Count} Exercises wurden erzeugt");
-    Console.WriteLine($"- {data.Students.Count} Users wurden erzeugt");
+    Console.WriteLine($"- {data.Users.Count} Users wurden erzeugt");
     Console.WriteLine($"- {data.ArrayOfSnippets.Count} ArrayOfSnippets wurden erzeugt");
     Console.WriteLine($"- {data.Snippets.Count} Snippets wurden erzeugt");
 
-    Console.WriteLine(data.Students[0].Username);
+    Console.WriteLine(data.Users[0].Username);
 
     Console.WriteLine("Daten speichern");
 
-    await uow.Students.AddRangeAsync(data.Students);
-    await uow.Teachers.AddRangeAsync(data.Teachers);
+    await uow.Users.AddRangeAsync(data.Users);
     await uow.Tags.AddRangeAsync(data.Tags);
     await uow.Exercises.AddRangeAsync(data.Exercises);
     await uow.ArrayOfSnippets.AddRangeAsync(data.ArrayOfSnippets);
     await uow.Snippets.AddRangeAsync(data.Snippets);
+    await uow.Assignments.AddRangeAsync(data.Assignments);
 
     await uow.SaveChangesAsync();
 }
