@@ -6,9 +6,8 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { FormControl } from '@angular/forms';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { MatChipInputEvent } from '@angular/material/chips';
-import {Tags} from '../model/tags.enum';
+import { Tags } from '../model/tags.enum';
 import { map, Observable, startWith } from 'rxjs';
-import { forEach } from 'jszip';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
@@ -19,16 +18,18 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class ExerciseDetailsComponent implements OnInit {
   ifUserName: string | null = '';
   creator: string | undefined = '';
-  exerciseName: string|null = "";
+  exerciseName: string | null = "";
   currentName: string = "";
- 
+  isEditingName = false; // Bearbeitungsmodus für den Übungsnamen
+  isEditingDescription = false; // Bearbeitungsmodus für die Einführung
+  originalDescription: string = ""; // Originalbeschreibung für Abbrechen
 
   tagCtrl = new FormControl();
-  availableTags: string[] = Object.values(Tags); // ersetzen Sie dies durch Ihre tatsächlichen Tags
-  filteredTags: Observable<string[]> | undefined;  
-  separatorKeysCodes: number[] = [13, 188]; // Enter und Komma  
+  availableTags: string[] = Object.values(Tags);
+  filteredTags: Observable<string[]> | undefined;
+  separatorKeysCodes: number[] = [13, 188]; // Enter und Komma
 
-  exercise : ExerciseDto = {
+  exercise: ExerciseDto = {
     name: "",
     creator: "",
     description: "",
@@ -39,10 +40,17 @@ export class ExerciseDetailsComponent implements OnInit {
     dateUpdated: new Date()
   }
 
-  constructor(private rest: RestService,private route: ActivatedRoute, private restDb: DbService, private router: Router,private snackBar: MatSnackBar) {
+  constructor(
+    private rest: RestService,
+    private route: ActivatedRoute,
+    private restDb: DbService,
+    private router: Router,
+    private snackBar: MatSnackBar
+  ) {
     this.filteredTags = this.tagCtrl.valueChanges.pipe(
       startWith(null),
-      map((tag: string | null) => tag ? this._filter(tag) : this.availableTags.slice()));  
+      map((tag: string | null) => tag ? this._filter(tag) : this.availableTags.slice())
+    );
   }
 
   async logout(): Promise<void> {
@@ -57,35 +65,32 @@ export class ExerciseDetailsComponent implements OnInit {
       this.currentName = params['exerciseName'];
       this.creator = params['creator'];
 
-      if(this.ifUserName != null && this.exerciseName != null){
+      if (this.ifUserName != null && this.exerciseName != null) {
         sessionStorage.setItem("exerciseName", this.exerciseName);
-      }else{
+      } else {
         this.exerciseName = sessionStorage.getItem('exerciseName');
       }
-      
-
     });
-    console.log(this.creator);
-    console.log(this.exerciseName);
-    
 
-     if(this.ifUserName != null && this.exerciseName != null){
-      //todo: den creator dieser task abfragen
+    if (this.ifUserName != null && this.exerciseName != null) {
       this.restDb.getExerciseByUsername(this.creator, this.exerciseName).subscribe((data: ExerciseDto[]) => {
-        console.log("response von db für data:" + data);
         this.exercise = data[0];
-        console.log(this.exercise.tags.length);
-        console.log(this.exercise.creator);
-        console.log(this.exercise.dateCreated);
-        console.log(this.ifUserName);
-        console.log(this.exercise.tags);
-    });
+        this.originalDescription = this.exercise.description; // Speichert die Originalbeschreibung für Abbrechen
+      });
     }
-
   }
 
+  // Bearbeiten des Übungsnamens
+  editExerciseName() {
+    this.isEditingName = true;
+  }
 
-  // tags auwählen
+  // Bearbeiten der Beschreibung
+  editDescription() {
+    this.isEditingDescription = true;
+  }
+
+  // Tags auswählen
   toggleTagSelection(tag: string) {
     if (this.exercise.tags.includes(tag)) {
       this.exercise.tags = this.exercise.tags.filter(t => t !== tag);
@@ -98,20 +103,17 @@ export class ExerciseDetailsComponent implements OnInit {
     const input = event.input;
     const value = event.value;
 
-    // Add our tag
     if ((value || '').trim()) {
       this.exercise.tags.push(value.trim().toUpperCase());
       this.availableTags.push(value.trim().toUpperCase());
     }
 
-    // Reset the input value
     if (input) {
       input.value = '';
     }
 
     this.tagCtrl.setValue(null);
   }
-
 
   isSelectedTag(tag: string): boolean {
     return this.exercise.tags.includes(tag);
@@ -125,25 +127,19 @@ export class ExerciseDetailsComponent implements OnInit {
     }
   }
 
-
   selected(event: MatAutocompleteSelectedEvent): void {
     this.exercise.tags.push(event.option.viewValue);
     this.tagCtrl.setValue(null);
   }
 
-
-
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
-
     return this.availableTags.filter(tag => tag.toLowerCase().includes(filterValue));
   }
-  
 
-  SaveChanges(){
-    this.exercise.dateUpdated = new Date;
-    console.log(this.exercise)
-    this.restDb.UpdateDetails(this.exercise.creator,this.exercise.description,this.exercise.tags,this.currentName,this.exercise.name).subscribe((data: any) => {
+  SaveChanges() {
+    this.exercise.dateUpdated = new Date();
+    this.restDb.UpdateDetails(this.exercise.creator, this.exercise.description, this.exercise.tags, this.currentName, this.exercise.name).subscribe((data: any) => {
       this.snackBar.open('Exercise successfully updated', 'Close', {
         duration: 5000,
         horizontalPosition: 'center',

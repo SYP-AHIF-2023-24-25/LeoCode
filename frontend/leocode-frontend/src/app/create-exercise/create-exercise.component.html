@@ -130,7 +130,7 @@
           <div class="card mt-5">
             <div class="card-body" style="height: 400px; width: 1000px">
               <h2 class="card-title">Step 4: Upload Template as ZIP</h2>
-              <p>Upload the complete Zip-File:</p>
+              <p>Upload sample solution</p>
               <div class="drag-drop-area" 
                   (drop)="uploadZipFile($event); $event.preventDefault();" 
                   (dragover)="$event.preventDefault();">
@@ -141,7 +141,7 @@
               </div>
  
               <br><br>
-              <p>Upload the empty Zip-File:</p>
+              <p>Upload template solution:</p>
               <div class="drag-drop-area" 
                   (drop)="uploadEmptyZipFile($event); $event.preventDefault();" 
                   (dragover)="$event.preventDefault();">
@@ -168,14 +168,14 @@
         <div class="card mt-5">
           <div class="card-body"style="height: 350px; width: 1000px">
             <h2 class="card-title">Overview</h2>
-            <p><strong>Exercise Name</strong> {{exerciseName}}</p>
-            <p><strong>Introdcution</strong> {{ instruction }}</p>
+            <p><strong>Exercise Name:</strong> {{exerciseName}}</p>
+            <p><strong>Introdcution:</strong> {{ instruction }}</p>
             <p><strong>Language:</strong> {{ selectedLanguage }}</p>
             <p><strong>Chosen Tags:</strong> {{ selectedTags.join(', ') }}</p>
-            <p><strong>Complete Zip-File:</strong> {{ zipFile?.name }}</p>
-            <p><strong>Empty Zip-File</strong> {{ emptyZipFile?.name }}</p>
+            <p><strong>Sample Solution:</strong> {{ zipFile?.name }}</p>
+            <p><strong>Template Solution:</strong> {{ emptyZipFile?.name }}</p>
           
-            <button class="btn btn-primary" (click)="sendCodeToRunner()">Upload Exercise</button>
+            <button class="btn btn-primary" [disabled]="isDisabled" (click)="sendCodeToRunner()">Upload Exercise</button>
           </div>
         </div>
       </div>

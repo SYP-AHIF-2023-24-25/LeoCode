@@ -50,6 +50,8 @@ export class CreateExerciseComponent {
   ZipFileUploaded: boolean = false;
   isUploading = false;
 
+  isDisabled = false;
+
 
   // property für die ausgewählten Tags
   tagCtrl = new FormControl();
@@ -229,6 +231,7 @@ export class CreateExerciseComponent {
   
 
   async sendCodeToRunner() {
+    this.isDisabled = true;
      let exercise  = {
       name: this.exerciseName,
       creator: this.ifUserName || '',
@@ -260,18 +263,23 @@ export class CreateExerciseComponent {
           console.log(arrayOfSnippets);
             
 
-          this.dbRest.AddExercise(arrayOfSnippets, exercise.name, exercise.instruction, exercise.language, exercise.tags, exercise.creator, exercise.dateCreated, exercise.dateUpdated).subscribe((data: Exercise) => {
+          this.dbRest.AddExercise(arrayOfSnippets, exercise.name, exercise.instruction, exercise.language, exercise.tags, exercise.creator, exercise.dateCreated, exercise.dateUpdated)
+          .subscribe((data: Exercise) => {
             this.snackBar.open('Exercise created successfully', 'Close', {
               duration: 5000,
               horizontalPosition: 'center',
               verticalPosition: 'top',
             });
-      
-            this.router.navigate(['/start-screen']).then(() => {
+
+            this.router.navigate(['/exercise-details'], {
+              queryParams: {
+                exerciseName: exercise.name,
+                creator: exercise.creator
+              }
+            }).then(() => {
               window.location.reload();
             });
           });
-
         }
       }
       else if(exercise.language === 'Csharp'){
@@ -294,18 +302,26 @@ export class CreateExerciseComponent {
 
             
 
-          this.dbRest.AddExercise(arrayOfSnippets, exercise.name, exercise.instruction, exercise.language, exercise.tags, exercise.creator, exercise.dateCreated, exercise.dateUpdated ).subscribe((data: Exercise) => {
+          this.dbRest.AddExercise(arrayOfSnippets, exercise.name, exercise.instruction, exercise.language, exercise.tags, exercise.creator, exercise.dateCreated, exercise.dateUpdated)
+          .subscribe((data: Exercise) => {
             this.snackBar.open('Exercise created successfully', 'Close', {
               duration: 5000,
               horizontalPosition: 'center',
               verticalPosition: 'top',
             });
-      
-            this.router.navigate(['/start-screen']).then(() => {
+
+            this.router.navigate(['/exercise-details'], {
+              queryParams: {
+                exerciseName: exercise.name,
+                creator: exercise.creator
+              }
+            }).then(() => {
               window.location.reload();
             });
           });
+
         }
+        this.isDisabled = false;
       }
       
       
@@ -316,6 +332,7 @@ export class CreateExerciseComponent {
         horizontalPosition: 'center',
         verticalPosition: 'top',
       });
+      this.isDisabled=false;
     }
   }
   testsMatchPassesCSharp(response: any): boolean {
