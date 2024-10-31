@@ -12,5 +12,6 @@ namespace Core.Contracts
     {
         public User GetByUsername(string username);
         public void CreateUser(string username, string firstName, string lastName, bool isTeacher);
+        public Task<List<User>> GetAllUsers();
     }
 }

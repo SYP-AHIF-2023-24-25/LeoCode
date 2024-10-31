@@ -31,4 +31,11 @@ public class UserController : Controller
             return BadRequest(ex.Message);
         }
     }
+
+    [HttpGet()]
+    public async Task<IActionResult> GetAllUsers()
+    {
+        var users = await _unitOfWork.Users.GetAllUsers();
+        return Ok(users);
+    }
 }

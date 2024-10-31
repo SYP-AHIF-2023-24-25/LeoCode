@@ -1,6 +1,7 @@
 ﻿using Base.Persistence;
 using Core.Contracts;
 using Core.Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,6 +29,11 @@ namespace Persistence
             };
             _dbContext.Users.Add(user);
             _dbContext.SaveChanges();
+        }
+
+        public async Task<List<User>> GetAllUsers()
+        {
+            return await _dbContext.Users.ToListAsync();
         }
 
         public User GetByUsername(string username)
