@@ -10,6 +10,7 @@ namespace Core.Contracts
 {
     public interface IUserRepository : IGenericRepository<User>
     {
-        User GetByUsername(string username);
+        public User GetByUsername(string username);
+        public void CreateUser(string username, string firstName, string lastName, bool isTeacher);
     }
 }

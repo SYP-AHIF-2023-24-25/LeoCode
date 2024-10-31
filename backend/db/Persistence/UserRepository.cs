@@ -17,6 +17,19 @@ namespace Persistence
             _dbContext = dbContext;
         }
 
+        public void CreateUser(string username, string firstName, string lastName, bool isTeacher)
+        {
+            User user = new User
+            {
+                Username = username,
+                Firstname = firstName,
+                Lastname = lastName,
+                IsTeacher = isTeacher
+            };
+            _dbContext.Users.Add(user);
+            _dbContext.SaveChanges();
+        }
+
         public User GetByUsername(string username)
         {
             return _dbContext.Users.SingleOrDefault(u => u.Username == username)!;
