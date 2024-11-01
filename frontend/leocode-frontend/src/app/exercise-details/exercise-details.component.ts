@@ -24,6 +24,11 @@ export class ExerciseDetailsComponent implements OnInit {
   isEditingDescription = false; // Bearbeitungsmodus für die Einführung
   originalDescription: string = ""; // Originalbeschreibung für Abbrechen
 
+  zipFile: File | null = null;
+  emptyZipFile: File | null = null;
+  emptyZipFileUploaded: boolean = false;
+  ZipFileUploaded: boolean = false;
+
   tagCtrl = new FormControl();
   availableTags: string[] = Object.values(Tags);
   filteredTags: Observable<string[]> | undefined;
@@ -147,4 +152,46 @@ export class ExerciseDetailsComponent implements OnInit {
       });
     });
   }
+
+  clearEmptyZipFile() {
+    this.emptyZipFile = null;
+    this.emptyZipFileUploaded = false;
+    console.log(this.emptyZipFile);
+  }
+
+  clearZipFile() {
+    this.zipFile = null;
+    this.ZipFileUploaded = false;
+    console.log(this.zipFile);
+  }
+
+  uploadZipFile(event: DragEvent) {
+    const file = event.dataTransfer;
+
+    if (file && file.files && file.files.length > 0) {
+      this.zipFile = file.files[0];
+      this.ZipFileUploaded = true;
+    } else {
+      console.error('No file selected');
+      this.snackBar.open('No file selected', 'Close', {
+        duration: 5000,
+      });
+    }
+  }
+
+    uploadEmptyZipFile(event: DragEvent) {
+    const file = event.dataTransfer;
+
+    if (file && file.files && file.files.length > 0) {
+      this.emptyZipFile = file.files[0];
+      this.emptyZipFileUploaded = true;
+    } else {
+
+      console.error('No file selected');
+      this.snackBar.open('No file selected', 'Close', {
+        duration: 5000,
+      });
+    }
+  }
+
 }
