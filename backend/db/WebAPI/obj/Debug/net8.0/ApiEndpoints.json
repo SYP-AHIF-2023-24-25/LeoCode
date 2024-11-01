@@ -90,7 +90,7 @@
         "IsRequired": false
       },
       {
-        "Name": "tags",
+        "Name": "tagArray",
         "Type": "System.String[]",
         "IsRequired": false
       },
@@ -145,7 +145,7 @@
   },
   {
     "ContainingType": "WebAPI.Controllers.ExerciseController",
-    "Method": "UpdateExerciseForUser",
+    "Method": "UpdateExerciseForTeacher",
     "RelativePath": "api/Exercise",
     "HttpMethod": "PUT",
     "IsController": true,
@@ -213,7 +213,7 @@
         "IsRequired": false
       },
       {
-        "Name": "tags",
+        "Name": "tag",
         "Type": "System.String",
         "IsRequired": false
       },
@@ -233,6 +233,47 @@
         "IsRequired": false
       }
     ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "UserController",
+    "Method": "CreateUser",
+    "RelativePath": "api/User",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "username",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "firstname",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "lastname",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "isTeacher",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "UserController",
+    "Method": "GetAllUsers",
+    "RelativePath": "api/User",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
     "ReturnTypes": []
   }
 ]

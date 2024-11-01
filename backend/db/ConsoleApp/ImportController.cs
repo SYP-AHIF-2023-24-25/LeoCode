@@ -28,25 +28,13 @@ namespace Import
                 IsTeacher = false,
             };
 
-            Tag tag1 = new Tag
-            {
-                Name = "Class1"
-            };
+            Tag tag1 = new("Class1");
 
-            Tag tag2 = new Tag
-            {
-                Name = "POSE"
-            };
+            Tag tag2 = new("POSE");
 
-            Tag tag3 = new Tag
-            {
-                Name = "WMC"
-            };
+            Tag tag3 = new("WMC");
 
-            Tag tag4 = new Tag
-            {
-                Name = "Class2"
-            };
+            Tag tag4 = new("Class2");
 
             Exercise exercise1 = new Exercise
             {

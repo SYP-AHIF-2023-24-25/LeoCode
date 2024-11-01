@@ -20,13 +20,24 @@ namespace Persistence
 
         public void CreateAssignment(string exerciseName, string creator, DateTime dateDue, string Name)
         {
-            User teacher = _dbContext.Users.FirstOrDefault(teacher => teacher.Username == creator);
-            Exercise exercise = _dbContext.Exercises.FirstOrDefault(exercise => exercise.Name == exerciseName && exercise.Teacher.Username == teacher.Username);
+            User? teacher = _dbContext.Users.FirstOrDefault(teacher => teacher.Username == creator);
+            if (teacher == null)
+            {
+                throw new ArgumentException("Creator not found", nameof(creator));
+            }
+            Exercise? exercise = _dbContext.Exercises
+                .Include(e => e.Teacher)
+                .FirstOrDefault(exercise => exercise.Name == exerciseName && exercise.Teacher.Username == teacher.Username);
+            if (exercise == null)
+            {
+                throw new ArgumentException("Exercise not found", nameof(exerciseName));
+            }
+
             Assignments assignment = new Assignments
             {
                 Exercise = exercise,
-                ExerciseId = exercise!.Id,
-                Students = [],
+                ExerciseId = exercise.Id,
+                Students = new List<User>(),
                 DateDue = dateDue,
                 Name = Name
             };
@@ -39,11 +50,20 @@ namespace Persistence
             return await _dbContext.Assignments.Include(a => a.Teacher).Include(a => a.Students).Include(a => a.Exercise).ThenInclude(a => a.Tags).ToListAsync();
         }
 
-        public async Task<Assignments> GetOneAssignment(string Creator, string Name)
+        public async Task<Assignments?> GetOneAssignment(string Creator, string Name)
         {
-            User teacher = _dbContext.Users.FirstOrDefault(teacher => teacher.Username == Creator);
-            return await _dbContext.Assignments.Include(a => a.Students).Include(a => a.Teacher).Include(a => a.Exercise).ThenInclude(e => e.Tags).FirstOrDefaultAsync(assignment => assignment.Teacher.Username == teacher.Username && assignment.Name == Name);
+            User? teacher = _dbContext.Users.FirstOrDefault(teacher => teacher.Username == Creator);
+            if (teacher == null)
+            {
+                return null;
+            }
 
+            return await _dbContext.Assignments
+                .Include(a => a.Students)
+                .Include(a => a.Teacher)
+                .Include(a => a.Exercise)
+                .ThenInclude(e => e.Tags)
+                .FirstOrDefaultAsync(assignment => assignment.Teacher.Username == teacher.Username && assignment.Name == Name);
         }
     }
 }
