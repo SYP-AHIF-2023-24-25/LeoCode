@@ -4357,11 +4357,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Schule\\5AHIF\\david\\LeoCode\\backend\\db\\ConsoleApp\\Import.csproj",
+      "projectUniqueName": "C:\\Schule\\5AHIF\\LeoCode\\backend\\db\\ConsoleApp\\Import.csproj",
       "projectName": "Import",
-      "projectPath": "C:\\Schule\\5AHIF\\david\\LeoCode\\backend\\db\\ConsoleApp\\Import.csproj",
+      "projectPath": "C:\\Schule\\5AHIF\\LeoCode\\backend\\db\\ConsoleApp\\Import.csproj",
       "packagesPath": "C:\\Users\\Florian\\.nuget\\packages\\",
-      "outputPath": "C:\\Schule\\5AHIF\\david\\LeoCode\\backend\\db\\ConsoleApp\\obj\\",
+      "outputPath": "C:\\Schule\\5AHIF\\LeoCode\\backend\\db\\ConsoleApp\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Florian\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -4378,8 +4378,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Schule\\5AHIF\\david\\LeoCode\\backend\\db\\Persistence\\Persistence.csproj": {
-              "projectPath": "C:\\Schule\\5AHIF\\david\\LeoCode\\backend\\db\\Persistence\\Persistence.csproj"
+            "C:\\Schule\\5AHIF\\LeoCode\\backend\\db\\Persistence\\Persistence.csproj": {
+              "projectPath": "C:\\Schule\\5AHIF\\LeoCode\\backend\\db\\Persistence\\Persistence.csproj"
             }
           }
         }

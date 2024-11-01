@@ -5,6 +5,7 @@ import { HttpHeaders,HttpParams } from '@angular/common/http';
 import { CodeSection } from '../model/code-sections';
 import { ExerciseDto } from '../model/exerciseDto';
 import { ArrayOfSnippetsDto } from '../model/arrayOfSnippetsDto';
+import { User } from '../model/user';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -19,6 +20,10 @@ export class DbService {
 
   private apiUrl ="https://localhost:7269/api"
   constructor(private http: HttpClient) { }
+
+  AddUser(username: string, firstname: string, lastname: string, isTeacher: boolean) {
+    return this.http.post(`${this.apiUrl}/User?username=${username}&firstname=${firstname}&lastname=${lastname}&isTeacher=${isTeacher}`, httpOptions);
+  }
 
   getExerciseByUsername(username?: string, exerciseName?: string) {
     let params = new HttpParams();

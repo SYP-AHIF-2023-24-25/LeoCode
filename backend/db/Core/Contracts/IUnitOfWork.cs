@@ -9,4 +9,6 @@ public interface IUnitOfWork : IBaseUnitOfWork
     public IArrayOfSnippetsRepository ArrayOfSnippets { get; }
     public ISnippetRepository Snippets { get; }
     public IAssignmentsRepository Assignments { get; }
+    public ITagRepository Tags { get; }
+
 }

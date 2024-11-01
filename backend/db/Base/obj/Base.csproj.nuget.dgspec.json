@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Schule\\5AHIF\\david\\LeoCode\\backend\\db\\Base\\Base.csproj": {}
+    "C:\\Schule\\5AHIF\\LeoCode\\backend\\db\\Base\\Base.csproj": {}
   },
   "projects": {
-    "C:\\Schule\\5AHIF\\david\\LeoCode\\backend\\db\\Base\\Base.csproj": {
+    "C:\\Schule\\5AHIF\\LeoCode\\backend\\db\\Base\\Base.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Schule\\5AHIF\\david\\LeoCode\\backend\\db\\Base\\Base.csproj",
+        "projectUniqueName": "C:\\Schule\\5AHIF\\LeoCode\\backend\\db\\Base\\Base.csproj",
         "projectName": "Base",
-        "projectPath": "C:\\Schule\\5AHIF\\david\\LeoCode\\backend\\db\\Base\\Base.csproj",
+        "projectPath": "C:\\Schule\\5AHIF\\LeoCode\\backend\\db\\Base\\Base.csproj",
         "packagesPath": "C:\\Users\\Florian\\.nuget\\packages\\",
-        "outputPath": "C:\\Schule\\5AHIF\\david\\LeoCode\\backend\\db\\Base\\obj\\",
+        "outputPath": "C:\\Schule\\5AHIF\\LeoCode\\backend\\db\\Base\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Florian\\AppData\\Roaming\\NuGet\\NuGet.Config",

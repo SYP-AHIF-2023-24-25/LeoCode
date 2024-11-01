@@ -11,7 +11,8 @@ namespace Core.Entities
     public class User : EntityObject
     {
         public string Username { get; set; }
-        public string Password { get; set; }
-        public ICollection<Exercise> Exercise { get; set; } = [];
+        public string Firstname { get; set; }
+        public string Lastname { get; set; }
+        public bool IsTeacher { get; set; }
     }
 }

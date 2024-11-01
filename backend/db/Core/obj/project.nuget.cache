@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "FQMofX6u7XNIsh3TMNIAzv8fqh9TpdaxOWMu4ihKbb6p5lJeKVAw6m4NlhjGYLvIcv/9dOTx3WDhLsXDm5YjGw==",
+  "dgSpecHash": "8WYUR+nTlC4nOHsF7RsxKDnH87fWUoFgIWA6Tyr5GjDNeMo3632NLdwavojCv+mcKPj9gbvUVwOsFRysyFUfWw==",
   "success": true,
-  "projectFilePath": "C:\\Schule\\5AHIF\\david\\LeoCode\\backend\\db\\Core\\Core.csproj",
+  "projectFilePath": "C:\\Schule\\5AHIF\\LeoCode\\backend\\db\\Core\\Core.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Florian\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\Florian\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\6.0.0\\microsoft.bcl.asyncinterfaces.6.0.0.nupkg.sha512",

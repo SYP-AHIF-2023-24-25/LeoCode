@@ -12,8 +12,8 @@ using Persistence;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241013164503_MigrationV6")]
-    partial class MigrationV6
+    [Migration("20241031150033_migrationv1")]
+    partial class migrationv1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -57,13 +57,10 @@ namespace Persistence.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Creator")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime>("DateDue")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("ExerciseId")
+                    b.Property<int>("ExerciseId")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
@@ -74,9 +71,14 @@ namespace Persistence.Migrations
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("rowversion");
 
+                    b.Property<int>("TeacherId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("ExerciseId");
+
+                    b.HasIndex("TeacherId");
 
                     b.ToTable("Assignments");
                 });
@@ -88,9 +90,6 @@ namespace Persistence.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Creator")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("datetime2");
@@ -112,15 +111,12 @@ namespace Persistence.Migrations
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("rowversion");
 
-                    b.Property<string>("Tags")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("UserId")
+                    b.Property<int>("TeacherId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("TeacherId");
 
                     b.ToTable("Exercises");
                 });
@@ -154,7 +150,33 @@ namespace Persistence.Migrations
 
                     b.HasIndex("ArrayOfSnippetsId");
 
-                    b.ToTable("Snippet");
+                    b.ToTable("Snippets");
+                });
+
+            modelBuilder.Entity("Core.Entities.Tag", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int?>("ExerciseId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte[]>("RowVersion")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("rowversion");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ExerciseId");
+
+                    b.ToTable("Tags");
                 });
 
             modelBuilder.Entity("Core.Entities.User", b =>
@@ -168,7 +190,13 @@ namespace Persistence.Migrations
                     b.Property<int?>("AssignmentsId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Password")
+                    b.Property<string>("Firstname")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsTeacher")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Lastname")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<byte[]>("RowVersion")
@@ -201,20 +229,30 @@ namespace Persistence.Migrations
                 {
                     b.HasOne("Core.Entities.Exercise", "Exercise")
                         .WithMany()
-                        .HasForeignKey("ExerciseId");
+                        .HasForeignKey("ExerciseId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Core.Entities.User", "Teacher")
+                        .WithMany()
+                        .HasForeignKey("TeacherId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
 
                     b.Navigation("Exercise");
+
+                    b.Navigation("Teacher");
                 });
 
             modelBuilder.Entity("Core.Entities.Exercise", b =>
                 {
-                    b.HasOne("Core.Entities.User", "User")
-                        .WithMany("Exercise")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                    b.HasOne("Core.Entities.User", "Teacher")
+                        .WithMany()
+                        .HasForeignKey("TeacherId")
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.Navigation("User");
+                    b.Navigation("Teacher");
                 });
 
             modelBuilder.Entity("Core.Entities.Snippet", b =>
@@ -226,6 +264,13 @@ namespace Persistence.Migrations
                         .IsRequired();
 
                     b.Navigation("ArrayOfSnippets");
+                });
+
+            modelBuilder.Entity("Core.Entities.Tag", b =>
+                {
+                    b.HasOne("Core.Entities.Exercise", null)
+                        .WithMany("Tags")
+                        .HasForeignKey("ExerciseId");
                 });
 
             modelBuilder.Entity("Core.Entities.User", b =>
@@ -248,11 +293,8 @@ namespace Persistence.Migrations
             modelBuilder.Entity("Core.Entities.Exercise", b =>
                 {
                     b.Navigation("ArrayOfSnippets");
-                });
 
-            modelBuilder.Entity("Core.Entities.User", b =>
-                {
-                    b.Navigation("Exercise");
+                    b.Navigation("Tags");
                 });
 #pragma warning restore 612, 618
         }
