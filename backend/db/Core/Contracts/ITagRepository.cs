@@ -10,6 +10,7 @@ namespace Core.Contracts
 {
     public interface ITagRepository : IGenericRepository<Tag>
     {
-
+        public List<Tag> CheckIfTagsExistElseCreate(string[] tags);
+        public List<Tag> CreateTagsAndStoreInDB(string[] tags);
     }
 }
