@@ -122,6 +122,9 @@
           <div class="d-flex">
             <button class="btn btn-primary" [routerLink]="['/test-results']" [queryParams]="{ exerciseName: exercise.name, creator: exercise.creator }">Run Test</button>
             <button *ngIf="ifUserName == exercise.creator" class="btn btn-primary ml-2" (click)="SaveChanges()">Save Changes</button>
+            <div class="createAssignmentButton">
+              <button class="btn btn-primary" (click)="createAssignment()">Create Assignment</button>
+            </div>
           </div>
         </div>
       </div>

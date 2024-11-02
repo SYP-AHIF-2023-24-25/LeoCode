@@ -85,6 +85,9 @@ export class LoginComponent implements OnInit  {
   }
 
   async logout(): Promise<void> {
+    /*sessionStorage.setItem('ifUserName', '');
+    sessionStorage.setItem('firstName', '');
+    sessionStorage.setItem('lastName', '');*/
     await this.keycloakService.logout();
     //this.router.navigate(['/login']);
   }

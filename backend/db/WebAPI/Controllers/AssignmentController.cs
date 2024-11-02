@@ -30,7 +30,7 @@ public class AssignmentsController : Controller
     [HttpPost]
     public IActionResult AddAssignmentAsync(string exerciseName, string creator, DateTime dateDue, string Name)
     {
-        _unitOfWork.Assignments.CreateAssignment(exerciseName, creator, dateDue, Name); 
+        _unitOfWork.Assignments.CreateAssignment(exerciseName, creator, dateDue, Name);
         return Ok();
     }
 }
