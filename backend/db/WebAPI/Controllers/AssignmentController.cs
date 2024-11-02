@@ -3,6 +3,7 @@
 using Core.Contracts;
 using Core.Entities;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Persistence;
 
 [Route("api/[controller]")]
@@ -28,9 +29,29 @@ public class AssignmentsController : Controller
         return Ok(assignments);
     }
     [HttpPost]
-    public IActionResult AddAssignmentAsync(string exerciseName, string creator, DateTime dateDue, string Name)
+    public ActionResult<string> AddAssignmentAsync(string exerciseName, string creator, DateTime dateDue, string Name)
     {
-        _unitOfWork.Assignments.CreateAssignment(exerciseName, creator, dateDue, Name);
+        string link = _unitOfWork.Assignments.CreateAssignment(exerciseName, creator, dateDue, Name);
+        return Content(link, "text/plain");
+    }
+
+    [HttpPost("JoinAssignment")]
+    public async Task<IActionResult> JoinAssignmentAsync([FromBody] JoinAssignmentRequest request)
+    {
+        if (request == null || string.IsNullOrEmpty(request.IfStudentName))
+        {
+            return BadRequest("Invalid request data.");
+        }
+
+        _unitOfWork.Assignments.JoinAssignment(request.AssignmentId, request.IfStudentName);
         return Ok();
     }
+
+    public class JoinAssignmentRequest
+    {
+        public int AssignmentId { get; set; }
+        public string IfStudentName { get; set; }
+    }
+
+
 }

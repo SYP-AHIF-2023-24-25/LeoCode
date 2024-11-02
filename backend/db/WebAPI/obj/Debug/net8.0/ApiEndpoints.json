@@ -38,6 +38,32 @@
         "IsRequired": false
       }
     ],
+    "ReturnTypes": [
+      {
+        "Type": "System.String",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "WebAPI.Controllers.AssignmentsController",
+    "Method": "JoinAssignmentAsync",
+    "RelativePath": "api/Assignments/JoinAssignment",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "WebAPI.Controllers.AssignmentsController\u002BJoinAssignmentRequest",
+        "IsRequired": true
+      }
+    ],
     "ReturnTypes": []
   },
   {
@@ -90,7 +116,7 @@
         "IsRequired": false
       },
       {
-        "Name": "tagArray",
+        "Name": "tags",
         "Type": "System.String[]",
         "IsRequired": false
       },
@@ -213,8 +239,8 @@
         "IsRequired": false
       },
       {
-        "Name": "tag",
-        "Type": "System.String",
+        "Name": "tags",
+        "Type": "System.String[]",
         "IsRequired": false
       },
       {

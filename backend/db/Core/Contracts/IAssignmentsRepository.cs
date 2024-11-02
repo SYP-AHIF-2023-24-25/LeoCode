@@ -13,6 +13,7 @@ namespace Core.Contracts
     {
         public Task<List<Assignments>> GetAll();
         public Task<Assignments> GetOneAssignment(string Creator,string Name);
-        public void CreateAssignment(string exerciseName, string creator, DateTime dateDue, string Name);
+        public string CreateAssignment(string exerciseName, string creator, DateTime dateDue, string Name);
+        void JoinAssignment(int assignmentId, string ifStudentName);
     }
 }

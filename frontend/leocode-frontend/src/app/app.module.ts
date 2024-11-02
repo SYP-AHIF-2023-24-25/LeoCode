@@ -8,6 +8,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ResultHistoryComponent } from './result-history/result-history.component';
 import { IntroductionComponent } from './introduction/introduction.component';
 import { MonacoEditorModule } from 'ngx-monaco-editor-v2';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatInputModule } from '@angular/material/input';
+import { MatNativeDateModule } from '@angular/material/core';
 import { CreateExerciseComponent } from './create-exercise/create-exercise.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatChipsModule } from '@angular/material/chips';
@@ -22,6 +25,8 @@ import { LoginComponent } from './login/login.component';
 import { KeycloakBearerInterceptor, KeycloakService } from 'keycloak-angular';
 import { StudentStartScreenComponent } from './student-start-screen/student-start-screen.component';
 import { ExerciseDetailsComponent } from './exercise-details/exercise-details.component';
+import { CreateAssignmentComponent } from './create-assignment/create-assignment.component';
+import { JoinAssignmentComponentComponent } from './join-assignment-component/join-assignment-component.component';
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () => keycloak.init({
@@ -51,7 +56,9 @@ function initializeKeycloak(keycloak: KeycloakService) {
     StartScreenComponent,
     LoginComponent,
     StudentStartScreenComponent,
-    ExerciseDetailsComponent
+    ExerciseDetailsComponent,
+    CreateAssignmentComponent,
+    JoinAssignmentComponentComponent
   ],
   imports: [
     BrowserModule,
@@ -67,7 +74,13 @@ function initializeKeycloak(keycloak: KeycloakService) {
     MatAutocompleteModule,
     MatSnackBarModule,
     MatProgressBarModule,
-    MatSelectModule
+    MatSelectModule,
+    BrowserModule,
+    ReactiveFormsModule,
+    MatDatepickerModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatNativeDateModule
   ],
   providers: [KeycloakService,
     {

@@ -203,13 +203,22 @@ export class ExerciseDetailsComponent implements OnInit {
 
 
   createAssignment() {
-    this.restDb.AddAssignment(this.exerciseName!, this.ifUserName!, new Date(), 'Assignment ' + this.exerciseName).subscribe((data: any) => {
+    /*this.restDb.AddAssignment(this.exerciseName!, this.ifUserName!, new Date(), 'Assignment ' + this.exerciseName).subscribe((data: any) => {
       this.snackBar.open('Assignment successfully created', 'Close', {
         duration: 5000,
         horizontalPosition: 'center',
         verticalPosition: 'top',
       });
-    });
+      console.log(data);
+      this.router.navigate(['/create-assignment'], { state: { assignmentData: data } });
+    });*/
+    let data = {
+      exerciseName: this.exerciseName,
+      creator: this.ifUserName,
+      dateDue: new Date(),
+      name: 'Assignment ' + this.exerciseName
+    };
+    this.router.navigate(['/create-assignment'], { state: { assignmentData: data } });
   }
 
 }

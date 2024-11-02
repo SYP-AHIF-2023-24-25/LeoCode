@@ -18,16 +18,17 @@ namespace Persistence
             _dbContext = dbContext;
         }
 
-        public void CreateAssignment(string exerciseName, string creator, DateTime dateDue, string Name)
+        public string CreateAssignment(string exerciseName, string creator, DateTime dateDue, string Name)
         {
             User? teacher = _dbContext.Users.FirstOrDefault(teacher => teacher.Username == creator);
             if (teacher == null)
             {
                 throw new ArgumentException("Creator not found", nameof(creator));
             }
+
             Exercise? exercise = _dbContext.Exercises
                 .Include(e => e.Teacher)
-                .FirstOrDefault(exercise => exercise.Name == exerciseName && exercise.Teacher.Username == teacher.Username);
+                .FirstOrDefault(exercise => exercise.Name == exerciseName);
             if (exercise == null)
             {
                 throw new ArgumentException("Exercise not found", nameof(exerciseName));
@@ -42,11 +43,25 @@ namespace Persistence
                 Name = Name,
                 Teacher = teacher,
                 TeacherId = teacher.Id
-                
             };
+
             _dbContext.Assignments.Add(assignment);
             _dbContext.SaveChanges();
+
+            // Generate the link for students to join
+            string link = GenerateAssignmentLink(assignment.Id);
+
+            return link; // Return the generated link
         }
+
+        private string GenerateAssignmentLink(int assignmentId)
+        {
+            string baseUrl = "http://localhost:4200/join-assignment"; // Base URL of the Angular frontend
+            return $"{baseUrl}/{assignmentId}"; // Construct the full link with the assignmentId as a path parameter
+        }
+
+
+
 
         public async Task<List<Assignments>> GetAll()
         {
@@ -67,6 +82,11 @@ namespace Persistence
                 .Include(a => a.Exercise)
                 .ThenInclude(e => e.Tags)
                 .FirstOrDefaultAsync(assignment => assignment.Teacher.Username == teacher.Username && assignment.Name == Name);
+        }
+
+        public void JoinAssignment(int assignmentId, string ifStudentName)
+        {
+            //_dbContext.Assignments.Where(a => a.Id == assignmentId).FirstOrDefault()?.Students.Add(_dbContext.Users.FirstOrDefault(u => u.Username == ifStudentName));
         }
     }
 }

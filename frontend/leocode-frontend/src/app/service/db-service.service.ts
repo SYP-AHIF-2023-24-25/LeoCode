@@ -5,6 +5,7 @@ import { HttpHeaders,HttpParams } from '@angular/common/http';
 import { CodeSection } from '../model/code-sections';
 import { ExerciseDto } from '../model/exerciseDto';
 import { ArrayOfSnippetsDto } from '../model/arrayOfSnippetsDto';
+import { Observable } from 'rxjs/internal/Observable';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -24,9 +25,18 @@ export class DbService {
     return this.http.post(`${this.apiUrl}/User?username=${username}&firstname=${firstname}&lastname=${lastname}&isTeacher=${isTeacher}`, httpOptions);
   }
 
-  AddAssignment(exerciseName: string, creator: string, dateDue: Date, Name: string) {
-    return this.http.post(`${this.apiUrl}/Assignments?exerciseName=${exerciseName}&creator=${creator}&dateDue=${dateDue}&Name=${Name}`, httpOptions);
+  AddAssignment(exerciseName: string, creator: string, dateDue: Date, Name: string): Observable<any> {
+    const formattedDate = dateDue.toISOString();
+    return this.http.post(`${this.apiUrl}/Assignments?exerciseName=${exerciseName}&creator=${creator}&dateDue=${formattedDate}&Name=${Name}`, httpOptions, { responseType: 'text' as 'json' });
   }
+
+
+
+  joinAssignment(assignmentId: number, studentName: string): Observable<any> {
+    console.log("Joining assignment with ID " + assignmentId + " as " + studentName);
+    return this.http.post(`${this.apiUrl}/Assignments/JoinAssignment`, { assignmentId, ifStudentName: studentName });
+}
+
 
   getExerciseByUsername(username?: string, exerciseName?: string) {
     let params = new HttpParams();
