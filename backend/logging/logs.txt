@@ -113,3 +113,9 @@
 11/02/2024 14:40:49: SUCCESS: Response from CSharp-runner was successful
 11/02/2024 14:43:46: SUCCESS: Response from CSharp-runner was successful
 11/02/2024 15:58:30: SUCCESS: Response from CSharp-runner was successful
+11/02/2024 20:09:45: ERROR: Response from Java-runner wasn't successful. Error Message: Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte. (localhost:8002)
+11/02/2024 20:13:42: ERROR: Response from Java-runner wasn't successful. Error Message: Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte. (localhost:8002)
+11/02/2024 20:34:18: ERROR: Response from CSharp-runner wasn't successful. Error Message: The request was canceled due to the configured HttpClient.Timeout of 100 seconds elapsing.
+11/02/2024 20:46:34: SUCCESS: Response from TypeScript-runner was successful
+11/02/2024 20:51:05: SUCCESS: Response from CSharp-runner was successful
+11/02/2024 20:52:58: SUCCESS: Response from CSharp-runner was successful

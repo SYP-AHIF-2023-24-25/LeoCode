@@ -42,6 +42,22 @@
   },
   {
     "ContainingType": "WebAPI.Controllers.AssignmentsController",
+    "Method": "GetAssignmentsByUsername",
+    "RelativePath": "api/Assignments/GetAssignmentsByUsername",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "username",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebAPI.Controllers.AssignmentsController",
     "Method": "GetOneAssignment",
     "RelativePath": "api/Assignments/OneAssignment",
     "HttpMethod": "GET",
@@ -90,7 +106,7 @@
         "IsRequired": false
       },
       {
-        "Name": "tagArray",
+        "Name": "tags",
         "Type": "System.String[]",
         "IsRequired": false
       },
@@ -213,8 +229,8 @@
         "IsRequired": false
       },
       {
-        "Name": "tag",
-        "Type": "System.String",
+        "Name": "tags",
+        "Type": "System.String[]",
         "IsRequired": false
       },
       {

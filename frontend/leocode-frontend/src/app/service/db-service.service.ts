@@ -5,6 +5,7 @@ import { HttpHeaders,HttpParams } from '@angular/common/http';
 import { CodeSection } from '../model/code-sections';
 import { ExerciseDto } from '../model/exerciseDto';
 import { ArrayOfSnippetsDto } from '../model/arrayOfSnippetsDto';
+import { Assignment } from '../model/assignment';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -73,7 +74,9 @@ export class DbService {
 
     // HTTP PUT Request an den passenden API-Endpunkt
     return this.http.put(`${this.apiUrl}/exercise/UpdateDetails?username=${username}&description=${description}&tags=${tagsString}&exerciseName=${exerciseName}&newExerciseName=${newExerciseName}`, null, httpOptions);
-}
+  }
 
-
+  getAssignmentsByUsername(username: string|null) {
+    return this.http.get<Assignment[]>(`${this.apiUrl}/Assignments/GetAssignmentsByUsername?username=${username}`);
+  }
 }

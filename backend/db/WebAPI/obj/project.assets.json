@@ -3512,19 +3512,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Florian\\.nuget\\packages\\": {}
+    "C:\\Users\\Kelit\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Schule\\5AHIF\\FlorianUndLukas\\LeoCode\\backend\\db\\WebAPI\\WebAPI.csproj",
+      "projectUniqueName": "C:\\Users\\Kelit\\Schule2024_25\\Syp\\LeoCode\\backend\\db\\WebAPI\\WebAPI.csproj",
       "projectName": "WebAPI",
-      "projectPath": "C:\\Schule\\5AHIF\\FlorianUndLukas\\LeoCode\\backend\\db\\WebAPI\\WebAPI.csproj",
-      "packagesPath": "C:\\Users\\Florian\\.nuget\\packages\\",
-      "outputPath": "C:\\Schule\\5AHIF\\FlorianUndLukas\\LeoCode\\backend\\db\\WebAPI\\obj\\",
+      "projectPath": "C:\\Users\\Kelit\\Schule2024_25\\Syp\\LeoCode\\backend\\db\\WebAPI\\WebAPI.csproj",
+      "packagesPath": "C:\\Users\\Kelit\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Kelit\\Schule2024_25\\Syp\\LeoCode\\backend\\db\\WebAPI\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Florian\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Kelit\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -3532,14 +3532,15 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Schule\\5AHIF\\FlorianUndLukas\\LeoCode\\backend\\db\\Persistence\\Persistence.csproj": {
-              "projectPath": "C:\\Schule\\5AHIF\\FlorianUndLukas\\LeoCode\\backend\\db\\Persistence\\Persistence.csproj"
+            "C:\\Users\\Kelit\\Schule2024_25\\Syp\\LeoCode\\backend\\db\\Persistence\\Persistence.csproj": {
+              "projectPath": "C:\\Users\\Kelit\\Schule2024_25\\Syp\\LeoCode\\backend\\db\\Persistence\\Persistence.csproj"
             }
           }
         }
@@ -3548,6 +3549,11 @@
         "warnAsError": [
           "NU1605"
         ]
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
       }
     },
     "frameworks": {
@@ -3586,7 +3592,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

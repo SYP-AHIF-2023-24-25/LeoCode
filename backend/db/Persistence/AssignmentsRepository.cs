@@ -68,5 +68,20 @@ namespace Persistence
                 .ThenInclude(e => e.Tags)
                 .FirstOrDefaultAsync(assignment => assignment.Teacher.Username == teacher.Username && assignment.Name == Name);
         }
+
+        public async Task<IEnumerable<Assignments>> GetAssignmentsByUsername(string username)
+        {
+            return await _dbContext.Assignments
+                .Include(a => a.Students)
+                .Include(a => a.Teacher)
+                .Include(a => a.Exercise)
+                .ThenInclude(e=> e.Tags)
+                .Include(a => a.Exercise)
+                     .ThenInclude(e => e.ArrayOfSnippets)
+                     .ThenInclude(a=> a.Snippets)
+                .Where(a => a.Students.Any(s => s.Username == username))
+                .ToListAsync();
+        }
+
     }
 }
