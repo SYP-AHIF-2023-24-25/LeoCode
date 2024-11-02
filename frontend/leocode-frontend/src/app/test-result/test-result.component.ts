@@ -123,6 +123,8 @@ export class TestResultComponent  implements OnInit{
         TestResults: testResults
     };
 
+    console.log(result.TestResults);
+
     return result;
 }
 

@@ -39,7 +39,10 @@ namespace Persistence
                 ExerciseId = exercise.Id,
                 Students = new List<User>(),
                 DateDue = dateDue,
-                Name = Name
+                Name = Name,
+                Teacher = teacher,
+                TeacherId = teacher.Id
+                
             };
             _dbContext.Assignments.Add(assignment);
             _dbContext.SaveChanges();

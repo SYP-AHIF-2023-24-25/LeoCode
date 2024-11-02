@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "bmbQ+pjnjyIMuTc7r8LsUdZhl3Yiwu8nDrnPg+SsVUDS+DxyPPMm5Xr3OLsnqgDZ2x0ehGiyJAz0nzsEZsUzIw==",
+  "dgSpecHash": "4xnAbR9vxg4qfPeftzN5uSsBk9mVoNGx7GNRIUcCMybbZD06GIzn66G/BetZGRuDPaRU0QbGF7jbACffHbXEgQ==",
   "success": true,
-  "projectFilePath": "C:\\Schule\\5AHIF\\david\\LeoCode\\backend\\LeoCodeBackend\\LeoCodeBackend.csproj",
+  "projectFilePath": "C:\\Schule\\5AHIF\\LeoCode\\backend\\LeoCodeBackend\\LeoCodeBackend.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Florian\\.nuget\\packages\\jackletter.microsoft.extensions.logging.file\\2.1.0\\jackletter.microsoft.extensions.logging.file.2.1.0.nupkg.sha512",
     "C:\\Users\\Florian\\.nuget\\packages\\microsoft.aspnetcore.openapi\\8.0.0\\microsoft.aspnetcore.openapi.8.0.0.nupkg.sha512",
