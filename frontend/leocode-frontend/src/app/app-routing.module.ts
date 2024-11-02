@@ -9,6 +9,7 @@ import { ExerciseDetailsComponent } from './exercise-details/exercise-details.co
 import { StudentStartScreenComponent } from './student-start-screen/student-start-screen.component';
 import { AuthGuard } from '../core/util/auth-guard';
 import { LoginComponent } from './login/login.component';
+import { AssignmentOverviewComponent } from './assignment-overview/assignment-overview.component';
 
 
 
@@ -21,6 +22,7 @@ export const routes: Routes = [
   {path: 'create-exercise', component: CreateExerciseComponent},
   {path: 'start-screen', component: StartScreenComponent},
   {path: 'exercise-details', component: ExerciseDetailsComponent},
+  {path: 'assignment-overview', component: AssignmentOverviewComponent},
   {path: 'student-start-screen', component: StudentStartScreenComponent, canActivate: [AuthGuard]}
 ];
 @NgModule({

@@ -15,9 +15,9 @@ public class AssignmentsController : Controller
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetAssignments()
+    public async Task<IActionResult> GetAssignments(string? username)
     {
-        var assignments = await _unitOfWork.Assignments.GetAll();
+        var assignments = await _unitOfWork.Assignments.GetAll(username);
         return Ok(assignments);
     }
 

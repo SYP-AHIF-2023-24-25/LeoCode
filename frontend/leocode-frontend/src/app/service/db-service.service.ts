@@ -19,6 +19,10 @@ export class DbService {
 
   private apiUrl ="https://localhost:7269/api"
   constructor(private http: HttpClient) { }
+  
+  GetAssignmentsByUsername(username: string) {
+    return this.http.get(`${this.apiUrl}/Assignments?username=${username}`, httpOptions);
+  }
 
   AddUser(username: string, firstname: string, lastname: string, isTeacher: boolean) {
     return this.http.post(`${this.apiUrl}/User?username=${username}&firstname=${firstname}&lastname=${lastname}&isTeacher=${isTeacher}`, httpOptions);

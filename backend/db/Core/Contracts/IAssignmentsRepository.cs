@@ -1,4 +1,5 @@
 ﻿using Base.Core.Contracts;
+using Core.Dto;
 using Core.Entities;
 using System;
 using System.Collections.Generic;
@@ -11,7 +12,7 @@ namespace Core.Contracts
 {
     public interface IAssignmentsRepository : IGenericRepository<Assignments>
     {
-        public Task<List<Assignments>> GetAll();
+        public Task<List<AssignmentDto>> GetAll(string? username);
         public Task<Assignments> GetOneAssignment(string Creator,string Name);
         public void CreateAssignment(string exerciseName, string creator, DateTime dateDue, string Name);
     }

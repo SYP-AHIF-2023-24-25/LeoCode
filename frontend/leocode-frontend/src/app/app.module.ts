@@ -22,6 +22,7 @@ import { LoginComponent } from './login/login.component';
 import { KeycloakBearerInterceptor, KeycloakService } from 'keycloak-angular';
 import { StudentStartScreenComponent } from './student-start-screen/student-start-screen.component';
 import { ExerciseDetailsComponent } from './exercise-details/exercise-details.component';
+import { AssignmentOverviewComponent } from './assignment-overview/assignment-overview.component';
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () => keycloak.init({
@@ -51,7 +52,8 @@ function initializeKeycloak(keycloak: KeycloakService) {
     StartScreenComponent,
     LoginComponent,
     StudentStartScreenComponent,
-    ExerciseDetailsComponent
+    ExerciseDetailsComponent,
+    AssignmentOverviewComponent
   ],
   imports: [
     BrowserModule,

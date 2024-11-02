@@ -1,5 +1,6 @@
 ﻿using Base.Persistence;
 using Core.Contracts;
+using Core.Dto;
 using Core.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -37,7 +38,6 @@ namespace Persistence
             {
                 Exercise = exercise,
                 ExerciseId = exercise.Id,
-                Students = new List<User>(),
                 DateDue = dateDue,
                 Name = Name,
                 Teacher = teacher,
@@ -48,9 +48,43 @@ namespace Persistence
             _dbContext.SaveChanges();
         }
 
-        public async Task<List<Assignments>> GetAll()
+        public async Task<List<AssignmentDto>> GetAll(string? username)
         {
-            return await _dbContext.Assignments.Include(a => a.Teacher).Include(a => a.Students).Include(a => a.Exercise).ThenInclude(a => a.Tags).ToListAsync();
+            IQueryable<Assignments> query = _dbContext.Assignments
+                .Include(a => a.Teacher)
+                .Include(a => a.Exercise)
+                    .ThenInclude(e => e.Tags)
+                .Include(a => a.AssignmentUsers)
+                    .ThenInclude(au => au.User);
+
+            if (!string.IsNullOrEmpty(username))
+            {
+                query = query.Where(a => a.Teacher.Username == username);
+            }
+
+            var assignments = await query.ToListAsync();
+
+            // Transform to DTOs
+            var result = assignments.Select(a => new AssignmentDto
+            {
+                AssignmentName = a.Name,
+                DueDate = a.DateDue,
+                ExerciseName = a.Exercise.Name,
+                Teacher = new TeacherDto
+                {
+                    Firstname = a.Teacher.Firstname,
+                    Lastname = a.Teacher.Lastname,
+                    Username = a.Teacher.Username
+                },
+                Students = a.AssignmentUsers.Select(au => new StudentDto
+                {
+                    Firstname = au.User.Firstname,
+                    Lastname = au.User.Lastname,
+                    Username = au.User.Username
+                }).ToList()
+            }).ToList();
+
+            return result;
         }
 
         public async Task<Assignments?> GetOneAssignment(string Creator, string Name)
@@ -62,7 +96,7 @@ namespace Persistence
             }
 
             return await _dbContext.Assignments
-                .Include(a => a.Students)
+                //.Include(a => a.Students)
                 .Include(a => a.Teacher)
                 .Include(a => a.Exercise)
                 .ThenInclude(e => e.Tags)

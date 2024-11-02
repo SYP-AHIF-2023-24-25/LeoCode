@@ -25,6 +25,7 @@ await using (var uow = new UnitOfWork(new ApplicationDbContext()))
     await uow.ArrayOfSnippets.AddRangeAsync(data.ArrayOfSnippets);
     await uow.Snippets.AddRangeAsync(data.Snippets);
     await uow.Assignments.AddRangeAsync(data.Assignments);
+    await uow.AssignmentUser.AddRangeAsync(data.AssignmentUsers);
 
     await uow.SaveChangesAsync();
 }
