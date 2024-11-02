@@ -10,6 +10,8 @@ import { Tags } from '../model/tags.enum';
 import { map, Observable, startWith } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
+import { Exercise } from '../model/exercise';
+
 @Component({
   selector: 'app-exercise-details',
   templateUrl: './exercise-details.component.html',
@@ -34,16 +36,18 @@ export class ExerciseDetailsComponent implements OnInit {
   filteredTags: Observable<string[]> | undefined;
   separatorKeysCodes: number[] = [13, 188]; // Enter und Komma
 
-  exercise: ExerciseDto = {
-    name: "",
-    creator: "",
-    description: "",
-    language: "",
-    tags: [],
-    arrayOfSnippets: [],
-    dateCreated: new Date(),
-    dateUpdated: new Date()
-  }
+    exercise : Exercise={
+      name: "",
+      creator: "",
+      description: "",
+      language: "",
+      tags: [],
+      zipFile: null,
+      emptyZipFile: null,
+      arrayOfSnippets:[],
+      dateCreated: new Date(),
+      dateUpdated: new Date(),
+    };
 
   constructor(
     private rest: RestService,
@@ -65,6 +69,7 @@ export class ExerciseDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.ifUserName = sessionStorage.getItem('ifUserName');
+    console.log(this.ifUserName)
     this.route.queryParams.subscribe((params: Params) => {
       this.exerciseName = params['exerciseName'];
       this.currentName = params['exerciseName'];
@@ -78,8 +83,10 @@ export class ExerciseDetailsComponent implements OnInit {
     });
 
     if (this.ifUserName != null && this.exerciseName != null) {
-      this.restDb.getExerciseByUsername(this.creator, this.exerciseName).subscribe((data: ExerciseDto[]) => {
+      this.restDb.getExerciseByUsername(this.creator, this.exerciseName).subscribe((data: Exercise[]) => {
         this.exercise = data[0];
+        console.log(this.exercise);
+        console.log(this.exercise.zipFile);
         this.originalDescription = this.exercise.description; // Speichert die Originalbeschreibung für Abbrechen
       });
     }

@@ -18,6 +18,8 @@
   </div>
 </nav>
 
+
+
 <div class="container-fluid">
   <div class="row justify-content-center">
     <div class="col-md-10">
@@ -41,7 +43,7 @@
           <div *ngIf="ifUserName == exercise.creator">
 
             <!-- Ausgewählte Tags anzeigen -->
-            <form *ngIf="ifUserName == exercise.creator">
+            <form>
               <mat-form-field class="example-chip-list" style="width: 100%">
                 <mat-label>Chosen Tags</mat-label>
                 <mat-chip-grid #chipGrid aria-label="Tag selection">
@@ -75,44 +77,48 @@
             </ul>
           </div>
 
-            <h1 class="d-flex align-items-center">
-              Introduction
-              <button *ngIf="!isEditingDescription" class="btn" (click)="editDescription()" style="background: none; border: none; padding: 0;">
-                <mat-icon style="color: gray;">edit</mat-icon>
-              </button>
-            </h1>
+          <!-- Introduction Section -->
+          <h1 class="d-flex align-items-center">
+            Introduction
+            <button *ngIf="ifUserName == exercise.creator && !isEditingDescription" class="btn" (click)="editDescription()" style="background: none; border: none; padding: 0;">
+              <mat-icon style="color: gray;">edit</mat-icon>
+            </button>
+          </h1>
 
-            <div class="form-group">
-              <textarea *ngIf="isEditingDescription" class="form-control" rows="5" style="width: 100%" [(ngModel)]="exercise.description"></textarea>
-              <p *ngIf="!isEditingDescription" class="card-text" style="white-space: pre-wrap;">{{ exercise.description }}</p>
-            </div>
+          <div class="form-group">
+            <textarea *ngIf="isEditingDescription && ifUserName == exercise.creator" class="form-control" rows="5" style="width: 100%" [(ngModel)]="exercise.description"></textarea>
+            <p *ngIf="!isEditingDescription" class="card-text" style="white-space: pre-wrap;">{{ exercise.description }}</p>
+          </div>
 
-            <div class="row justify-content-center">
-              <div class="col-md-12">
-                <div class="card mt-5">
-                    <div class="drag-drop-area" 
-                        (drop)="uploadZipFile($event); $event.preventDefault();" 
-                        (dragover)="$event.preventDefault();">
-                      <p *ngIf="!zipFile">Drag & Drop your file here</p>
-                      <button class="btn-ZipFile" *ngIf="zipFile" (click)="clearZipFile()" >
-                        <p>{{zipFile.name}} <mat-icon>cancel</mat-icon></p>
-                      </button>             
-                    </div>
-       
-                    <br><br>
-                    <p>Upload template solution:</p>
-                    <div class="drag-drop-area" 
-                        (drop)="uploadEmptyZipFile($event); $event.preventDefault();" 
-                        (dragover)="$event.preventDefault();">
-                      <p *ngIf="!emptyZipFile">Drag & Drop your file here</p>
-                      <button class="btn-ZipFile" *ngIf="emptyZipFile" (click)="clearEmptyZipFile()">
-                        <p>{{emptyZipFile.name}} <mat-icon>cancel</mat-icon></p>
-                      </button>
-                    </div>
+          <!-- Drag & Drop Areas -->
+          <div class="row justify-content-center">
+            <div class="col-md-12">
+              <div class="card mt-5">
+                <p>  Edit solution solution:</p>
+                  <div class="drag-drop-area" 
+                      (drop)="uploadZipFile($event); $event.preventDefault();" 
+                      (dragover)="$event.preventDefault();">
+                    <p *ngIf="!zipFile">Drag & Drop your file here</p>
+                    <button class="btn-ZipFile" *ngIf="zipFile" (click)="clearZipFile()" >
+                      <p>{{zipFile.name}} <mat-icon>cancel</mat-icon></p>
+                    </button>             
+                  </div>
+     
+                  <br><br>
+                  <p>  Edit template solution:</p>
+                  <div class="drag-drop-area" 
+                      (drop)="uploadEmptyZipFile($event); $event.preventDefault();" 
+                      (dragover)="$event.preventDefault();">
+                    <p *ngIf="!emptyZipFile">Drag & Drop your file here</p>
+                    <button class="btn-ZipFile" *ngIf="emptyZipFile" (click)="clearEmptyZipFile()">
+                      <p>{{emptyZipFile.name}} <mat-icon>cancel</mat-icon></p>
+                    </button>
                   </div>
                 </div>
+              </div>
+          </div>
 
-
+          <!-- Action Buttons -->
           <div class="d-flex">
             <button class="btn btn-primary" [routerLink]="['/test-results']" [queryParams]="{ exerciseName: exercise.name, creator: exercise.creator }">Run Test</button>
             <button *ngIf="ifUserName == exercise.creator" class="btn btn-primary ml-2" (click)="SaveChanges()">Save Changes</button>

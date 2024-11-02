@@ -28,7 +28,7 @@ export class DbService {
     if (exerciseName) {
       params = params.set('exerciseName', exerciseName);
     }
-    return this.http.get<ExerciseDto[]>(`${this.apiUrl}/Exercise`, { params });
+    return this.http.get<Exercise[]>(`${this.apiUrl}/Exercise`, { params });
   }
 
   AddExercise(arrayOfSnippets: ArrayOfSnippetsDto, exerciseName: string, introduction : string, language: string, tags: string[], username: string, dateCreated: Date, dateUpdated: Date) {
