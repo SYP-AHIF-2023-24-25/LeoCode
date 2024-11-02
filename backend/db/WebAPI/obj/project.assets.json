@@ -3517,11 +3517,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Schule\\5AHIF\\LeoCode\\backend\\db\\WebAPI\\WebAPI.csproj",
+      "projectUniqueName": "C:\\Schule\\5AHIF\\FlorianUndLukas\\LeoCode\\backend\\db\\WebAPI\\WebAPI.csproj",
       "projectName": "WebAPI",
-      "projectPath": "C:\\Schule\\5AHIF\\LeoCode\\backend\\db\\WebAPI\\WebAPI.csproj",
+      "projectPath": "C:\\Schule\\5AHIF\\FlorianUndLukas\\LeoCode\\backend\\db\\WebAPI\\WebAPI.csproj",
       "packagesPath": "C:\\Users\\Florian\\.nuget\\packages\\",
-      "outputPath": "C:\\Schule\\5AHIF\\LeoCode\\backend\\db\\WebAPI\\obj\\",
+      "outputPath": "C:\\Schule\\5AHIF\\FlorianUndLukas\\LeoCode\\backend\\db\\WebAPI\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Florian\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -3538,8 +3538,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Schule\\5AHIF\\LeoCode\\backend\\db\\Persistence\\Persistence.csproj": {
-              "projectPath": "C:\\Schule\\5AHIF\\LeoCode\\backend\\db\\Persistence\\Persistence.csproj"
+            "C:\\Schule\\5AHIF\\FlorianUndLukas\\LeoCode\\backend\\db\\Persistence\\Persistence.csproj": {
+              "projectPath": "C:\\Schule\\5AHIF\\FlorianUndLukas\\LeoCode\\backend\\db\\Persistence\\Persistence.csproj"
             }
           }
         }

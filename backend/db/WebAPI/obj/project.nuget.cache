@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "3V1BN3Q1ZxjURlvqRVSiO0gdG8ItQV0fHx/sluFPmIe8rUljWrQ8c4cZCdIH1cnAUo2BgxbyyW2WR2C50Qi+nw==",
+  "dgSpecHash": "uLCPKXXLy6oTEtcAvqxvNQhD/L1o1CnURgTr8bp/Q7S82ga0LqbjmdO/NPyR2BMscmZcypPMVwZ1sClvU4Q96A==",
   "success": true,
-  "projectFilePath": "C:\\Schule\\5AHIF\\LeoCode\\backend\\db\\WebAPI\\WebAPI.csproj",
+  "projectFilePath": "C:\\Schule\\5AHIF\\FlorianUndLukas\\LeoCode\\backend\\db\\WebAPI\\WebAPI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Florian\\.nuget\\packages\\azure.core\\1.25.0\\azure.core.1.25.0.nupkg.sha512",
     "C:\\Users\\Florian\\.nuget\\packages\\azure.identity\\1.7.0\\azure.identity.1.7.0.nupkg.sha512",

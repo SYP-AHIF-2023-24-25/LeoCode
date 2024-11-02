@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "V/cRQ4bSosmkwJLd38FEZT4AkyDCyL6MApBsImalUxRKXDmO61eZI2LwirX2EOHNmeS1VUN6qY9y6mU8f+p4Gg==",
+  "dgSpecHash": "uJM0Y5z3YWlnALsYr3j+zkJWipxDbtThBoKBoamenq621PG5JpTggYjkxd0xDcnKa3S7NxUSAV0GNU3pOp1kRw==",
   "success": true,
-  "projectFilePath": "C:\\Schule\\5AHIF\\LeoCode\\backend\\db\\Persistence\\Persistence.csproj",
+  "projectFilePath": "C:\\Schule\\5AHIF\\FlorianUndLukas\\LeoCode\\backend\\db\\Persistence\\Persistence.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Florian\\.nuget\\packages\\azure.core\\1.25.0\\azure.core.1.25.0.nupkg.sha512",
     "C:\\Users\\Florian\\.nuget\\packages\\azure.identity\\1.7.0\\azure.identity.1.7.0.nupkg.sha512",

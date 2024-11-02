@@ -13,6 +13,9 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { User } from '../model/user';
 import { DbService } from '../service/db-service.service';
 import { ExerciseDto } from '../model/exerciseDto';
+import { languages } from 'monaco-editor';
+import { MatLabel } from '@angular/material/form-field';
+import { Exercise } from '../model/exercise';
 
 @Component({
   selector: 'app-test-result',
@@ -26,22 +29,22 @@ export class TestResultComponent  implements OnInit{
  exerciseName: string |null = "";
  creator: string | undefined = "";
 
-  exercise : ExerciseDto = {
-    name: "",
-    creator: "",
-    description: "",
-    language: "",
-    tags: [],
-    arrayOfSnippets: [],
-    dateCreated: new Date(),
-    dateUpdated: new Date()
-  }
+    exercise : Exercise={
+      name: "",
+      creator: "",
+      description: "",
+      language: "",
+      tags: [],
+      zipFile: null,
+      emptyZipFile: null,
+      arrayOfSnippets:[],
+      dateCreated: new Date(),
+      dateUpdated: new Date(),
+    };
+
 
   //Code Editor
- // testTemplate: string = 'export function CheckPassword(password: string): boolean{\n  Todo Implementation \n}'
-  editorOptions = { theme: 'vs-dark', language: 'typescrip'}; // language auswählen
- // codeSections: CodeSection[] = [];
-
+  editorOptions = { theme: 'vs-dark', language: this.exercise.language}; // language auswählen
 
   // timer
   timer: string = "";
@@ -85,7 +88,7 @@ export class TestResultComponent  implements OnInit{
     });
 
      if(this.userName != null && this.exerciseName != null){
-      this.restDb.getExerciseByUsername(this.creator, this.exerciseName).subscribe((data: ExerciseDto[]) => {
+      this.restDb.getExerciseByUsername(this.creator, this.exerciseName).subscribe((data: Exercise[]) => {
         this.exercise = data[0];
         console.log("TAGS")
         console.log(this.exercise.tags.length);
@@ -122,8 +125,6 @@ export class TestResultComponent  implements OnInit{
         Summary: summary,
         TestResults: testResults
     };
-
-    console.log(result.TestResults);
 
     return result;
 }

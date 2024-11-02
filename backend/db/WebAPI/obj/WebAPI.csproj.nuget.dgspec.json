@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Schule\\5AHIF\\LeoCode\\backend\\db\\WebAPI\\WebAPI.csproj": {}
+    "C:\\Schule\\5AHIF\\FlorianUndLukas\\LeoCode\\backend\\db\\WebAPI\\WebAPI.csproj": {}
   },
   "projects": {
-    "C:\\Schule\\5AHIF\\LeoCode\\backend\\db\\Base\\Base.csproj": {
+    "C:\\Schule\\5AHIF\\FlorianUndLukas\\LeoCode\\backend\\db\\Base\\Base.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Schule\\5AHIF\\LeoCode\\backend\\db\\Base\\Base.csproj",
+        "projectUniqueName": "C:\\Schule\\5AHIF\\FlorianUndLukas\\LeoCode\\backend\\db\\Base\\Base.csproj",
         "projectName": "Base",
-        "projectPath": "C:\\Schule\\5AHIF\\LeoCode\\backend\\db\\Base\\Base.csproj",
+        "projectPath": "C:\\Schule\\5AHIF\\FlorianUndLukas\\LeoCode\\backend\\db\\Base\\Base.csproj",
         "packagesPath": "C:\\Users\\Florian\\.nuget\\packages\\",
-        "outputPath": "C:\\Schule\\5AHIF\\LeoCode\\backend\\db\\Base\\obj\\",
+        "outputPath": "C:\\Schule\\5AHIF\\FlorianUndLukas\\LeoCode\\backend\\db\\Base\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Florian\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -87,14 +87,14 @@
         }
       }
     },
-    "C:\\Schule\\5AHIF\\LeoCode\\backend\\db\\Core\\Core.csproj": {
+    "C:\\Schule\\5AHIF\\FlorianUndLukas\\LeoCode\\backend\\db\\Core\\Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Schule\\5AHIF\\LeoCode\\backend\\db\\Core\\Core.csproj",
+        "projectUniqueName": "C:\\Schule\\5AHIF\\FlorianUndLukas\\LeoCode\\backend\\db\\Core\\Core.csproj",
         "projectName": "Core",
-        "projectPath": "C:\\Schule\\5AHIF\\LeoCode\\backend\\db\\Core\\Core.csproj",
+        "projectPath": "C:\\Schule\\5AHIF\\FlorianUndLukas\\LeoCode\\backend\\db\\Core\\Core.csproj",
         "packagesPath": "C:\\Users\\Florian\\.nuget\\packages\\",
-        "outputPath": "C:\\Schule\\5AHIF\\LeoCode\\backend\\db\\Core\\obj\\",
+        "outputPath": "C:\\Schule\\5AHIF\\FlorianUndLukas\\LeoCode\\backend\\db\\Core\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Florian\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -111,8 +111,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Schule\\5AHIF\\LeoCode\\backend\\db\\Base\\Base.csproj": {
-                "projectPath": "C:\\Schule\\5AHIF\\LeoCode\\backend\\db\\Base\\Base.csproj"
+              "C:\\Schule\\5AHIF\\FlorianUndLukas\\LeoCode\\backend\\db\\Base\\Base.csproj": {
+                "projectPath": "C:\\Schule\\5AHIF\\FlorianUndLukas\\LeoCode\\backend\\db\\Base\\Base.csproj"
               }
             }
           }
@@ -162,14 +162,14 @@
         }
       }
     },
-    "C:\\Schule\\5AHIF\\LeoCode\\backend\\db\\Persistence\\Persistence.csproj": {
+    "C:\\Schule\\5AHIF\\FlorianUndLukas\\LeoCode\\backend\\db\\Persistence\\Persistence.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Schule\\5AHIF\\LeoCode\\backend\\db\\Persistence\\Persistence.csproj",
+        "projectUniqueName": "C:\\Schule\\5AHIF\\FlorianUndLukas\\LeoCode\\backend\\db\\Persistence\\Persistence.csproj",
         "projectName": "Persistence",
-        "projectPath": "C:\\Schule\\5AHIF\\LeoCode\\backend\\db\\Persistence\\Persistence.csproj",
+        "projectPath": "C:\\Schule\\5AHIF\\FlorianUndLukas\\LeoCode\\backend\\db\\Persistence\\Persistence.csproj",
         "packagesPath": "C:\\Users\\Florian\\.nuget\\packages\\",
-        "outputPath": "C:\\Schule\\5AHIF\\LeoCode\\backend\\db\\Persistence\\obj\\",
+        "outputPath": "C:\\Schule\\5AHIF\\FlorianUndLukas\\LeoCode\\backend\\db\\Persistence\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Florian\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -186,8 +186,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Schule\\5AHIF\\LeoCode\\backend\\db\\Core\\Core.csproj": {
-                "projectPath": "C:\\Schule\\5AHIF\\LeoCode\\backend\\db\\Core\\Core.csproj"
+              "C:\\Schule\\5AHIF\\FlorianUndLukas\\LeoCode\\backend\\db\\Core\\Core.csproj": {
+                "projectPath": "C:\\Schule\\5AHIF\\FlorianUndLukas\\LeoCode\\backend\\db\\Core\\Core.csproj"
               }
             }
           }
@@ -249,14 +249,14 @@
         }
       }
     },
-    "C:\\Schule\\5AHIF\\LeoCode\\backend\\db\\WebAPI\\WebAPI.csproj": {
+    "C:\\Schule\\5AHIF\\FlorianUndLukas\\LeoCode\\backend\\db\\WebAPI\\WebAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Schule\\5AHIF\\LeoCode\\backend\\db\\WebAPI\\WebAPI.csproj",
+        "projectUniqueName": "C:\\Schule\\5AHIF\\FlorianUndLukas\\LeoCode\\backend\\db\\WebAPI\\WebAPI.csproj",
         "projectName": "WebAPI",
-        "projectPath": "C:\\Schule\\5AHIF\\LeoCode\\backend\\db\\WebAPI\\WebAPI.csproj",
+        "projectPath": "C:\\Schule\\5AHIF\\FlorianUndLukas\\LeoCode\\backend\\db\\WebAPI\\WebAPI.csproj",
         "packagesPath": "C:\\Users\\Florian\\.nuget\\packages\\",
-        "outputPath": "C:\\Schule\\5AHIF\\LeoCode\\backend\\db\\WebAPI\\obj\\",
+        "outputPath": "C:\\Schule\\5AHIF\\FlorianUndLukas\\LeoCode\\backend\\db\\WebAPI\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Florian\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -273,8 +273,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Schule\\5AHIF\\LeoCode\\backend\\db\\Persistence\\Persistence.csproj": {
-                "projectPath": "C:\\Schule\\5AHIF\\LeoCode\\backend\\db\\Persistence\\Persistence.csproj"
+              "C:\\Schule\\5AHIF\\FlorianUndLukas\\LeoCode\\backend\\db\\Persistence\\Persistence.csproj": {
+                "projectPath": "C:\\Schule\\5AHIF\\FlorianUndLukas\\LeoCode\\backend\\db\\Persistence\\Persistence.csproj"
               }
             }
           }

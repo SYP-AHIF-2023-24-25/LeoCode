@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "+i2cnq+RXgCddak2q4PhPpPG2QgQdStas1XN3Rv/84dwZ3uCffJUHWvHsWllePvfz56egKvwaFL0NVpDQ+Zb4Q==",
+  "dgSpecHash": "af5tH8UEdsWEjOprpLY8hBMRBxXXqJb35E19x5GN0hIkT2xjTLUOKdrHUa3qcx4CFl4amTWp8W03dKBlRq9hQw==",
   "success": true,
-  "projectFilePath": "C:\\Schule\\5AHIF\\LeoCode\\backend\\db\\ConsoleApp\\Import.csproj",
+  "projectFilePath": "C:\\Schule\\5AHIF\\FlorianUndLukas\\LeoCode\\backend\\db\\ConsoleApp\\Import.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Florian\\.nuget\\packages\\azure.core\\1.25.0\\azure.core.1.25.0.nupkg.sha512",
     "C:\\Users\\Florian\\.nuget\\packages\\azure.identity\\1.7.0\\azure.identity.1.7.0.nupkg.sha512",

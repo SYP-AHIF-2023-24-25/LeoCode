@@ -20,10 +20,9 @@ public class ExerciseController : Controller
     }
 
     [HttpPut("UpdateDetails")]
-    public async Task<IActionResult> UpdateDetails(string description, string tag, string exerciseName, string username, string newExerciseName)
+    public async Task<IActionResult> UpdateDetails(string description, string[] tags, string exerciseName, string username, string newExerciseName)
     {
-        string[] splittedTags = tag.Split(",");
-        List<Tag> tags = _unitOfWork.Tags.CheckIfTagsExistElseCreate(splittedTags);
+        List<Tag> allTags = _unitOfWork.Tags.CheckIfTagsExistElseCreate(tags);
         try
         {
             User user = _unitOfWork.Users.GetByUsername(username);
@@ -33,7 +32,7 @@ public class ExerciseController : Controller
                 .ToList();
 
             exercises[0].Description = description;
-            exercises[0].Tags = tags;                 //TODO: jedes Tag schauen ob es schon in der Datenbank ist wenn nicht neu erstellen
+            exercises[0].Tags = allTags;                 //TODO: jedes Tag schauen ob es schon in der Datenbank ist wenn nicht neu erstellen
             exercises[0].Name = newExerciseName;
             exercises[0].DateUpdated = DateTime.Now;
             await _unitOfWork.SaveChangesAsync();
@@ -46,9 +45,9 @@ public class ExerciseController : Controller
     }
 
     [HttpPost]
-    public async Task<IActionResult> AddExerciseAsync([FromBody] ArrayOfSnippetsDto arrayOfSnippets, string name, string description, string language, string[] tagArray, string username, DateTime datecreated, DateTime dateupdated)
+    public async Task<IActionResult> AddExerciseAsync([FromBody] ArrayOfSnippetsDto arrayOfSnippets, string name, string description, string language, string[] tags, string username, DateTime datecreated, DateTime dateupdated)
     {
-        List<Tag> tags = _unitOfWork.Tags.CreateTagsAndStoreInDB(tagArray);
+        List<Tag> allTags = _unitOfWork.Tags.CreateTagsAndStoreInDB(tags);
         User teacher = _unitOfWork.Users.GetByUsername(username);
         Language enumLanguage = Language.CSharp;
         switch(language)
@@ -70,7 +69,7 @@ public class ExerciseController : Controller
                 Name = name,
                 Description = description,
                 Language = enumLanguage,
-                Tags = tags,                  //TODO: Tags neu erstellen
+                Tags = allTags,                  //TODO: Tags neu erstellen
                 TeacherId = teacher.Id,
                 Teacher = teacher,
                 DateCreated = datecreated,
