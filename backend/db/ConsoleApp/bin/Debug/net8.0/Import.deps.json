@@ -991,10 +991,7 @@
           "Microsoft.Extensions.Configuration.Json": "8.0.0"
         },
         "runtime": {
-          "Base.dll": {
-            "assemblyVersion": "1.0.0",
-            "fileVersion": "1.0.0.0"
-          }
+          "Base.dll": {}
         }
       },
       "Core/1.0.0": {
@@ -1004,10 +1001,7 @@
           "Microsoft.EntityFrameworkCore.Relational": "8.0.6"
         },
         "runtime": {
-          "Core.dll": {
-            "assemblyVersion": "1.0.0",
-            "fileVersion": "1.0.0.0"
-          }
+          "Core.dll": {}
         }
       },
       "Persistence/1.0.0": {
@@ -1020,10 +1014,7 @@
           "Microsoft.Extensions.Configuration.Json": "8.0.0"
         },
         "runtime": {
-          "Persistence.dll": {
-            "assemblyVersion": "1.0.0",
-            "fileVersion": "1.0.0.0"
-          }
+          "Persistence.dll": {}
         }
       }
     }

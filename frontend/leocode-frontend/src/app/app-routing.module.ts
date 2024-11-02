@@ -17,7 +17,7 @@ export const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'test-results', component: TestResultComponent},
   {path: 'result-history', component: ResultHistoryComponent},
-  {path: 'introdcution', component: IntroductionComponent},
+  {path: 'introduction', component: IntroductionComponent},
   {path: 'create-exercise', component: CreateExerciseComponent},
   {path: 'start-screen', component: StartScreenComponent},
   {path: 'exercise-details', component: ExerciseDetailsComponent},

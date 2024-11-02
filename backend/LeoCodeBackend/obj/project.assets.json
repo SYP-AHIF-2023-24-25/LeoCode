@@ -1237,11 +1237,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Schule\\5AHIF\\david\\LeoCode\\backend\\LeoCodeBackend\\LeoCodeBackend.csproj",
+      "projectUniqueName": "C:\\Schule\\5AHIF\\FlorianUndLukas\\LeoCode\\backend\\LeoCodeBackend\\LeoCodeBackend.csproj",
       "projectName": "LeoCodeBackend",
-      "projectPath": "C:\\Schule\\5AHIF\\david\\LeoCode\\backend\\LeoCodeBackend\\LeoCodeBackend.csproj",
+      "projectPath": "C:\\Schule\\5AHIF\\FlorianUndLukas\\LeoCode\\backend\\LeoCodeBackend\\LeoCodeBackend.csproj",
       "packagesPath": "C:\\Users\\Florian\\.nuget\\packages\\",
-      "outputPath": "C:\\Schule\\5AHIF\\david\\LeoCode\\backend\\LeoCodeBackend\\obj\\",
+      "outputPath": "C:\\Schule\\5AHIF\\FlorianUndLukas\\LeoCode\\backend\\LeoCodeBackend\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Florian\\AppData\\Roaming\\NuGet\\NuGet.Config",
