@@ -201,4 +201,15 @@ export class ExerciseDetailsComponent implements OnInit {
     }
   }
 
+
+  createAssignment() {
+    this.restDb.AddAssignment(this.exerciseName!, this.ifUserName!, new Date(), 'Assignment ' + this.exerciseName).subscribe((data: any) => {
+      this.snackBar.open('Assignment successfully created', 'Close', {
+        duration: 5000,
+        horizontalPosition: 'center',
+        verticalPosition: 'top',
+      });
+    });
+  }
+
 }

@@ -24,6 +24,10 @@ export class DbService {
     return this.http.post(`${this.apiUrl}/User?username=${username}&firstname=${firstname}&lastname=${lastname}&isTeacher=${isTeacher}`, httpOptions);
   }
 
+  AddAssignment(exerciseName: string, creator: string, dateDue: Date, Name: string) {
+    return this.http.post(`${this.apiUrl}/Assignments?exerciseName=${exerciseName}&creator=${creator}&dateDue=${dateDue}&Name=${Name}`, httpOptions);
+  }
+
   getExerciseByUsername(username?: string, exerciseName?: string) {
     let params = new HttpParams();
     if (username) {
