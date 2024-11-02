@@ -81,10 +81,16 @@
               <td>{{ result.Summary.TotalTests }}</td>
               <td>{{ timer }}</td>
             </tr>
-            <tr *ngFor="let testResult of result.TestResults">
-              <td colspan="4">{{ testResult.TestName }}</td>
-              <td>{{ testResult.Outcome }}</td>
-            </tr>
+            <ng-container *ngFor="let testResult of result.TestResults">
+              <tr>
+                <td colspan="4">{{ testResult.TestName }}</td>
+                <td [ngStyle]="{'color': testResult.Outcome === 'Passed' ? 'green' : 'red'}">{{ testResult.Outcome }}</td>
+              </tr>
+              <!-- Error message row for failed tests -->
+              <tr *ngIf="testResult.Outcome === 'Failed' && testResult.ErrorMessage">
+                <td colspan="5" style="padding-left: 40px; color: red;">Error: {{ testResult.ErrorMessage }}</td>
+              </tr>
+            </ng-container>
           </tbody>
         </table>
         
