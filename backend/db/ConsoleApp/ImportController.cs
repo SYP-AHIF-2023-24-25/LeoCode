@@ -30,41 +30,33 @@ namespace Import
 
             User user3 = new User
             {
-                Username = "if200xx1",
-                Firstname = "Travis",
-                Lastname = "Scott",
-                IsTeacher = true,
+                Username = "if200104",
+                Firstname = "Christian",
+                Lastname = "Ekhator",
+                IsTeacher = false,
             };
 
             User user4 = new User
             {
-                Username = "if200xx2",
-                Firstname = "Hans",
-                Lastname = "Neumüller",
+                Username = "if200177",
+                Firstname = "Samuel",
+                Lastname = "Atzlesberger",
                 IsTeacher = false,
             };
 
             User user5 = new User
             {
-                Username = "if200xx3",
-                Firstname = "Max",
-                Lastname = "Mustermann",
+                Username = "if200145",
+                Firstname = "Michael",
+                Lastname = "Werner",
                 IsTeacher = false,
             };
 
             User user6 = new User
             {
-                Username = "if200xx4",
-                Firstname = "Gerd",
-                Lastname = "Müller",
-                IsTeacher = false,
-            };
-
-            User user7 = new User
-            {
-                Username = "if200xx5",
-                Firstname = "Tomas",
-                Lastname = "Brolin",
+                Username = "if200107",
+                Firstname = "Marcus",
+                Lastname = "Rabeder",
                 IsTeacher = false,
             };
 
@@ -224,20 +216,20 @@ namespace Import
 
             Assignments assignment1 = new Assignments
             {
-                Name = "Assignment1",
+                Name = "Assignment Addition",
                 Exercise = exercise1,
                 ExerciseId = exercise1.Id,
-                DateDue = DateTime.Now,
+                DateDue = new DateTime(2024, 11, 18),
                 TeacherId = user1.Id,
                 Teacher = user1
             };
 
             Assignments assignment2 = new Assignments
             {
-                Name = "Assignment2",
+                Name = "Assignment PasswordChecker",
                 Exercise = exercise2,
                 ExerciseId = exercise2.Id,
-                DateDue = DateTime.Now,
+                DateDue = new DateTime(2024, 12, 1),
                 TeacherId = user1.Id,
                 Teacher = user1
             };
@@ -245,17 +237,17 @@ namespace Import
             var assignmentUsers = new List<AssignmentUser>
             {
                 new AssignmentUser { Assignment = assignment1, User = user2 },
+                new AssignmentUser { Assignment = assignment1, User = user3 },
                 new AssignmentUser { Assignment = assignment1, User = user4 },
                 new AssignmentUser { Assignment = assignment1, User = user5 },
                 new AssignmentUser { Assignment = assignment1, User = user6 },
-                new AssignmentUser { Assignment = assignment1, User = user7 },
 
                 new AssignmentUser { Assignment = assignment2, User = user2 },
+                new AssignmentUser { Assignment = assignment2, User = user3 },
                 new AssignmentUser { Assignment = assignment2, User = user4 },
-                new AssignmentUser { Assignment = assignment2, User = user5 }
             };
 
-            var users = new List<User> { user1, user2, user3, user4, user5, user6, user7 };
+            var users = new List<User> { user1, user2, user3, user4, user5, user6 };
 
             var tags = new List<Tag> { tag1, tag2, tag3, tag4 };
 

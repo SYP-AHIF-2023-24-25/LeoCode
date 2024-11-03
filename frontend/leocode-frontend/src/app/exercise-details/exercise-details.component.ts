@@ -24,6 +24,7 @@ export class ExerciseDetailsComponent implements OnInit {
   currentName: string = "";
   isEditingName = false; // Bearbeitungsmodus für den Übungsnamen
   isEditingDescription = false; // Bearbeitungsmodus für die Einführung
+  isEditingTag=false;
   originalDescription: string = ""; // Originalbeschreibung für Abbrechen
 
   zipFile: File | null = null;
@@ -47,6 +48,7 @@ export class ExerciseDetailsComponent implements OnInit {
       arrayOfSnippets:[],
       dateCreated: new Date(),
       dateUpdated: new Date(),
+      teacher: undefined
     };
 
   constructor(
@@ -100,6 +102,10 @@ export class ExerciseDetailsComponent implements OnInit {
   // Bearbeiten der Beschreibung
   editDescription() {
     this.isEditingDescription = true;
+  }
+
+  editTag(){
+    this.isEditingTag = true;
   }
 
   // Tags auswählen
@@ -158,6 +164,9 @@ export class ExerciseDetailsComponent implements OnInit {
         verticalPosition: 'top',
       });
     });
+    this.isEditingDescription=false;
+    this.isEditingName=false;
+    this.isEditingTag = false;
   }
 
   clearEmptyZipFile() {
@@ -201,7 +210,6 @@ export class ExerciseDetailsComponent implements OnInit {
     }
   }
 
-
   createAssignment() {
     /*this.restDb.AddAssignment(this.exerciseName!, this.ifUserName!, new Date(), 'Assignment ' + this.exerciseName).subscribe((data: any) => {
       this.snackBar.open('Assignment successfully created', 'Close', {
@@ -220,5 +228,4 @@ export class ExerciseDetailsComponent implements OnInit {
     };
     this.router.navigate(['/create-assignment'], { state: { assignmentData: data } });
   }
-
 }

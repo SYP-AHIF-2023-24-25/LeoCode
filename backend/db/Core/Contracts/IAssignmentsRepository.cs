@@ -17,5 +17,7 @@ namespace Core.Contracts
         public string CreateAssignment(string exerciseName, string creator, DateTime dateDue, string Name);
         void JoinAssignment(int assignmentId, string ifStudentName);
         Task<List<User>?> GetAssignmentUsers(int assignmentId);
+        public Task<IEnumerable<Assignments>> GetAssignmentsByUsername(string username);
+
     }
 }

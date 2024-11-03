@@ -54,6 +54,13 @@ public class AssignmentsController : Controller
         return Ok(assignmentUsers);
     }
 
+    [HttpGet("GetAssignmentsByUsername")]
+    public async Task<IActionResult> GetAssignmentsByUsername(string username)
+    {
+        var assignments = await _unitOfWork.Assignments.GetAssignmentsByUsername(username);
+        return Ok(assignments);
+    }
+
     public class JoinAssignmentRequest
     {
         public int AssignmentId { get; set; }

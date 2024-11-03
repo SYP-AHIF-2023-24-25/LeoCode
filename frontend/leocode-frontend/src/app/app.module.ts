@@ -27,6 +27,8 @@ import { StudentStartScreenComponent } from './student-start-screen/student-star
 import { ExerciseDetailsComponent } from './exercise-details/exercise-details.component';
 import { CreateAssignmentComponent } from './create-assignment/create-assignment.component';
 import { JoinAssignmentComponentComponent } from './join-assignment-component/join-assignment-component.component';
+import { AssignmentOverviewComponent } from './assignment-overview/assignment-overview.component';
+
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () => keycloak.init({
@@ -58,7 +60,8 @@ function initializeKeycloak(keycloak: KeycloakService) {
     StudentStartScreenComponent,
     ExerciseDetailsComponent,
     CreateAssignmentComponent,
-    JoinAssignmentComponentComponent
+    JoinAssignmentComponentComponent,
+    AssignmentOverviewComponent
   ],
   imports: [
     BrowserModule,

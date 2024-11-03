@@ -28,7 +28,7 @@ namespace Persistence
             }
             Exercise? exercise = _dbContext.Exercises
                 .Include(e => e.Teacher)
-                .FirstOrDefault(exercise => exercise.Name == exerciseName && exercise.Teacher.Username == teacher.Username);
+                .FirstOrDefault(exercise => exercise.Name == exerciseName);
             if (exercise == null)
             {
                 throw new ArgumentException("Exercise not found", nameof(exerciseName));
@@ -145,6 +145,22 @@ namespace Persistence
                 .ToListAsync();
 
             return users;
+        }
+
+        public async Task<IEnumerable<Assignments>> GetAssignmentsByUsername(string username)
+        {
+            return await _dbContext.Assignments
+           .Include(a => a.AssignmentUsers)
+           .Include(a => a.Teacher)
+           .Include(a => a.Exercise)
+           .ThenInclude(e => e.Tags)
+           .Include(a => a.Exercise)
+                .ThenInclude(e => e.ArrayOfSnippets)
+                .ThenInclude(a => a.Snippets)
+           .Include(a => a.Exercise)
+               .ThenInclude(e => e.Teacher)
+           .Where(a => a.AssignmentUsers.Any(s => s.User.Username == username))
+           .ToListAsync();
         }
     }
 }

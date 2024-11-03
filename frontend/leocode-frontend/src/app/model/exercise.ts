@@ -1,4 +1,5 @@
 import { CodeSection} from './code-sections';
+import { User } from './user';
 
 export interface Exercise {
     name: string,
@@ -11,4 +12,5 @@ export interface Exercise {
     arrayOfSnippets: CodeSection[]
     dateCreated: Date;
     dateUpdated: Date;
+    teacher: User| undefined;
 }

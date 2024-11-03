@@ -40,6 +40,7 @@ export class TestResultComponent  implements OnInit{
       arrayOfSnippets:[],
       dateCreated: new Date(),
       dateUpdated: new Date(),
+      teacher: undefined
     };
 
 
@@ -101,6 +102,7 @@ export class TestResultComponent  implements OnInit{
   // parse from json new
   convertFromJsonV2(value: Value): Result {// mit neuen json format
    
+    console.log("Value:"+value);
     const TotalTests: number = value.value.Summary.TotalTests;
     const PassedTests: number = value.value.Summary.PassedTests;
     const FailedTests: number = value.value.Summary.FailedTests;
@@ -192,9 +194,13 @@ export class TestResultComponent  implements OnInit{
     let arrayOfSnippets: ArrayOfSnippetsDto = {
       snippets: this.exercise.arrayOfSnippets
     }
-    let usrname = "Default";
+    let usrname = sessionStorage.getItem('ifUserName');
     console.log(this.exercise.name);
     console.log(this.exercise.tags.length);
-    this.restDb.UpdateExercise(usrname, this.exercise.description, this.exercise.language, this.exercise.tags, this.exercise.name, arrayOfSnippets, subject).subscribe();
+    if (usrname) {
+      this.restDb.UpdateExercise(usrname, this.exercise.description, this.exercise.language, this.exercise.tags, this.exercise.name, arrayOfSnippets, subject).subscribe();
+    } else {
+      console.error("Username is null");
+    }
   }
 }

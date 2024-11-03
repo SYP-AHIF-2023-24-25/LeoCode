@@ -51,13 +51,13 @@
         <!-- Loop through code sections -->
         <div *ngFor="let codeSection of exercise.arrayOfSnippets" class="mb-3">
           <!-- Readonly code section -->
-          <div *ngIf="codeSection.readOnlySection">
+          <div *ngIf="codeSection.readonlySection">
              <pre class="p bg-light" style="border: 1px solid #ddd; white-space: pre-wrap;">
               {{ codeSection.code }}
             </pre>
           </div>
           <!-- Editable code section -->
-          <div *ngIf="!codeSection.readOnlySection" style="height: 300px;">
+          <div *ngIf="!codeSection.readonlySection" style="height: 300px;">
             <ngx-monaco-editor style="height: 300px; width: 100%;" [options]="editorOptions" [(ngModel)]="codeSection.code"></ngx-monaco-editor>
           </div>
         </div>
@@ -81,10 +81,16 @@
               <td>{{ result.Summary.TotalTests }}</td>
               <td>{{ timer }}</td>
             </tr>
-            <tr *ngFor="let testResult of result.TestResults">
-              <td colspan="4">{{ testResult.TestName }}</td>
-              <td>{{ testResult.Outcome }}</td>
-            </tr>
+            <ng-container *ngFor="let testResult of result.TestResults">
+              <tr>
+                <td colspan="4">{{ testResult.TestName }}</td>
+                <td [ngStyle]="{'color': testResult.Outcome === 'Passed' ? 'green' : 'red'}">{{ testResult.Outcome }}</td>
+              </tr>
+              <!-- Error message row for failed tests -->
+              <tr *ngIf="testResult.Outcome === 'Failed' && testResult.ErrorMessage">
+                <td colspan="5" style="padding-left: 40px; color: red;">Error: {{ testResult.ErrorMessage }}</td>
+              </tr>
+            </ng-container>
           </tbody>
         </table>
         

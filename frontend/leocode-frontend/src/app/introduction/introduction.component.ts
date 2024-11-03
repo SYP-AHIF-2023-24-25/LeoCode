@@ -17,16 +17,6 @@ export class IntroductionComponent {
   date: Date = new Date();
   creator: string | undefined = "";
 
-  /*exercise : ExerciseDto = {
-    name: "",
-    creator: "",
-    description: "",
-    language: "",
-    tags: [],
-    arrayOfSnippets: [],
-    dateCreated: new Date(),
-    dateUpdated: new Date()
-  }*/
     exercise : Exercise={
       name: "",
       creator: "",
@@ -38,6 +28,7 @@ export class IntroductionComponent {
       arrayOfSnippets:[],
       dateCreated: new Date(),
       dateUpdated: new Date(),
+      teacher: undefined
     };
 
   constructor( private route: ActivatedRoute, private restDb: DbService, private router: Router) {

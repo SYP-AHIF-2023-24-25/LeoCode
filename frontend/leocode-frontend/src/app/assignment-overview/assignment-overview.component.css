@@ -1,0 +1,20 @@
+.assignment-card {
+    border: 1px solid #ccc;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+  }
+  
+  .assignment-card h2 {
+    color: #333;
+  }
+  
+  .assignment-card ul {
+    list-style-type: none;
+    padding-left: 0;
+  }
+  
+  .assignment-card li {
+    padding: 5px 0;
+  }

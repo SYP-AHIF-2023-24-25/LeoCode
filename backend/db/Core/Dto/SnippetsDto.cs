@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Core.Dto
 {
-    public record class SnippetDto(string Code, bool ReadOnlySection, string FileName);
+    public record class SnippetDto(string Code, bool ReadonlySection, string FileName);
 
     public class AssignmentDto
     {
