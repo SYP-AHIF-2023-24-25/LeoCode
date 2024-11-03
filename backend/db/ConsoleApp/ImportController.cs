@@ -60,6 +60,22 @@ namespace Import
                 IsTeacher = false,
             };
 
+            User user7 = new User
+            {
+                Username = "if200153",
+                Firstname = "Julia",
+                Lastname = "Meyr",
+                IsTeacher = false,
+            };
+
+            User user8 = new User
+            {
+                Username = "if200160",
+                Firstname = "Julian",
+                Lastname = "Kapl",
+                IsTeacher = false,
+            };
+
             Tag tag1 = new("Class1");
 
             Tag tag2 = new("POSE");
@@ -241,10 +257,14 @@ namespace Import
                 new AssignmentUser { Assignment = assignment1, User = user4 },
                 new AssignmentUser { Assignment = assignment1, User = user5 },
                 new AssignmentUser { Assignment = assignment1, User = user6 },
+                new AssignmentUser { Assignment = assignment1, User = user7 },
+                new AssignmentUser { Assignment = assignment1, User = user8 },
 
                 new AssignmentUser { Assignment = assignment2, User = user2 },
                 new AssignmentUser { Assignment = assignment2, User = user3 },
                 new AssignmentUser { Assignment = assignment2, User = user4 },
+                new AssignmentUser { Assignment = assignment2, User = user5 },
+                new AssignmentUser { Assignment = assignment2, User = user8 },
             };
 
             var users = new List<User> { user1, user2, user3, user4, user5, user6 };

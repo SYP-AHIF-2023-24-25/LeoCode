@@ -33,8 +33,9 @@ export class AssignmentOverviewComponent implements OnInit {
           exerciseName: assignment.exerciseName,
           teacher: `${assignment.teacher.firstname} ${assignment.teacher.lastname}`,
           students: assignment.students.$values.map(student => ({
-            fullName: `${student.firstname} ${student.lastname}`,
-            username: student.username
+            studentFirstname: student.firstname,
+            studentLastname: student.lastname,
+            studentUsername: student.username
           }))
         }));
       }
