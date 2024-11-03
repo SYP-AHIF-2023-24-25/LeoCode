@@ -14,8 +14,10 @@ public class ApplicationDbContext : DbContext
     public DbSet<Tag> Tags { get; set; }
     public DbSet<Snippet> Snippets { get; set; }
 
+    public DbSet<AssignmentUser> AssignmentUsers { get; set; }
+
     public DbSet<ArrayOfSnippets> ArrayOfSnippets { get; set; }
-    
+
 
 
 
@@ -64,5 +66,18 @@ public class ApplicationDbContext : DbContext
             .WithMany()
             .HasForeignKey(a => a.ExerciseId)
             .OnDelete(DeleteBehavior.NoAction); // Verhindert Cascade Delete
+
+        modelBuilder.Entity<AssignmentUser>()
+            .HasKey(au => new { au.AssignmentId, au.UserId });
+
+        modelBuilder.Entity<AssignmentUser>()
+            .HasOne(au => au.Assignment)
+            .WithMany(a => a.AssignmentUsers)
+            .HasForeignKey(au => au.AssignmentId);
+
+        modelBuilder.Entity<AssignmentUser>()
+            .HasOne(au => au.User)
+            .WithMany(u => u.AssignmentUsers)
+            .HasForeignKey(au => au.UserId);
     }
 }

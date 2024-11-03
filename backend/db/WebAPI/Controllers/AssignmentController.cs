@@ -16,16 +16,16 @@ public class AssignmentsController : Controller
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetAssignments()
+    public async Task<IActionResult> GetAssignments(string? username)
     {
-        var assignments = await _unitOfWork.Assignments.GetAll();
+        var assignments = await _unitOfWork.Assignments.GetAll(username);
         return Ok(assignments);
     }
 
     [HttpGet("OneAssignment")]
     public async Task<IActionResult> GetOneAssignment(string creator, string name)
     {
-        var assignments = await _unitOfWork.Assignments.GetOneAssignment(creator,name);
+        var assignments = await _unitOfWork.Assignments.GetOneAssignment(creator, name);
         return Ok(assignments);
     }
     [HttpPost]
@@ -47,11 +47,16 @@ public class AssignmentsController : Controller
         return Ok();
     }
 
+    [HttpGet("GetAssignmentUsers")]
+    public async Task<IActionResult> GetAssignmentUsers(int assignmentId)
+    {
+        var assignmentUsers = await _unitOfWork.Assignments.GetAssignmentUsers(assignmentId);
+        return Ok(assignmentUsers);
+    }
+
     public class JoinAssignmentRequest
     {
         public int AssignmentId { get; set; }
         public string IfStudentName { get; set; }
     }
-
-
 }

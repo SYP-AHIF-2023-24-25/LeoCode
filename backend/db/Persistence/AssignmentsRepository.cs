@@ -2,6 +2,7 @@
 using Core.Contracts;
 using Core.Entities;
 using Microsoft.EntityFrameworkCore;
+using Core.Dto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,10 +26,9 @@ namespace Persistence
             {
                 throw new ArgumentException("Creator not found", nameof(creator));
             }
-
             Exercise? exercise = _dbContext.Exercises
                 .Include(e => e.Teacher)
-                .FirstOrDefault(exercise => exercise.Name == exerciseName);
+                .FirstOrDefault(exercise => exercise.Name == exerciseName && exercise.Teacher.Username == teacher.Username);
             if (exercise == null)
             {
                 throw new ArgumentException("Exercise not found", nameof(exerciseName));
@@ -38,13 +38,12 @@ namespace Persistence
             {
                 Exercise = exercise,
                 ExerciseId = exercise.Id,
-                Students = new List<User>(),
                 DateDue = dateDue,
                 Name = Name,
                 Teacher = teacher,
                 TeacherId = teacher.Id
-            };
 
+            };
             _dbContext.Assignments.Add(assignment);
             _dbContext.SaveChanges();
 
@@ -63,9 +62,43 @@ namespace Persistence
 
 
 
-        public async Task<List<Assignments>> GetAll()
+        public async Task<List<AssignmentDto>> GetAll(string? username)
         {
-            return await _dbContext.Assignments.Include(a => a.Teacher).Include(a => a.Students).Include(a => a.Exercise).ThenInclude(a => a.Tags).ToListAsync();
+            IQueryable<Assignments> query = _dbContext.Assignments
+                .Include(a => a.Teacher)
+                .Include(a => a.Exercise)
+                    .ThenInclude(e => e.Tags)
+                .Include(a => a.AssignmentUsers)
+                    .ThenInclude(au => au.User);
+
+            if (!string.IsNullOrEmpty(username))
+            {
+                query = query.Where(a => a.Teacher.Username == username);
+            }
+
+            var assignments = await query.ToListAsync();
+
+            // Transform to DTOs
+            var result = assignments.Select(a => new AssignmentDto
+            {
+                AssignmentName = a.Name,
+                DueDate = a.DateDue,
+                ExerciseName = a.Exercise.Name,
+                Teacher = new TeacherDto
+                {
+                    Firstname = a.Teacher.Firstname,
+                    Lastname = a.Teacher.Lastname,
+                    Username = a.Teacher.Username
+                },
+                Students = a.AssignmentUsers.Select(au => new StudentDto
+                {
+                    Firstname = au.User.Firstname,
+                    Lastname = au.User.Lastname,
+                    Username = au.User.Username
+                }).ToList()
+            }).ToList();
+
+            return result;
         }
 
         public async Task<Assignments?> GetOneAssignment(string Creator, string Name)
@@ -77,7 +110,7 @@ namespace Persistence
             }
 
             return await _dbContext.Assignments
-                .Include(a => a.Students)
+                //.Include(a => a.Students)
                 .Include(a => a.Teacher)
                 .Include(a => a.Exercise)
                 .ThenInclude(e => e.Tags)
@@ -86,7 +119,32 @@ namespace Persistence
 
         public void JoinAssignment(int assignmentId, string ifStudentName)
         {
-            //_dbContext.Assignments.Where(a => a.Id == assignmentId).FirstOrDefault()?.Students.Add(_dbContext.Users.FirstOrDefault(u => u.Username == ifStudentName));
+            var user = _dbContext.Users.FirstOrDefault(u => u.Username == ifStudentName);
+            if (user == null)
+            {
+                throw new ArgumentException("Student not found", nameof(ifStudentName));
+            }
+
+            AssignmentUser assignmentUser = new AssignmentUser
+            {
+                Assignment = _dbContext.Assignments.FirstOrDefault(a => a.Id == assignmentId),
+                User = user,
+                AssignmentId = assignmentId,
+                UserId = user.Id
+            };
+            _dbContext.Assignments.FirstOrDefault(a => a.Id == assignmentId)?.AssignmentUsers.Add(assignmentUser);
+            _dbContext.SaveChanges();
+        }
+
+        public async Task<List<User>?> GetAssignmentUsers(int assignmentId)
+        {
+            var users = await _dbContext.Assignments
+                .Where(a => a.Id == assignmentId)
+                .SelectMany(a => a.AssignmentUsers)
+                .Select(au => au.User)
+                .ToListAsync();
+
+            return users;
         }
     }
 }

@@ -46,6 +46,29 @@ namespace Persistence.Migrations
                     b.ToTable("ArrayOfSnippets");
                 });
 
+            modelBuilder.Entity("Core.Entities.AssignmentUser", b =>
+                {
+                    b.Property<int>("AssignmentId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
+
+                    b.Property<byte[]>("RowVersion")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("rowversion");
+
+                    b.HasKey("AssignmentId", "UserId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AssignmentUsers");
+                });
+
             modelBuilder.Entity("Core.Entities.Assignments", b =>
                 {
                     b.Property<int>("Id")
@@ -187,9 +210,6 @@ namespace Persistence.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("AssignmentsId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Firstname")
                         .HasColumnType("nvarchar(max)");
 
@@ -209,8 +229,6 @@ namespace Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AssignmentsId");
-
                     b.ToTable("Users");
                 });
 
@@ -223,6 +241,25 @@ namespace Persistence.Migrations
                         .IsRequired();
 
                     b.Navigation("Exercise");
+                });
+
+            modelBuilder.Entity("Core.Entities.AssignmentUser", b =>
+                {
+                    b.HasOne("Core.Entities.Assignments", "Assignment")
+                        .WithMany("AssignmentUsers")
+                        .HasForeignKey("AssignmentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Core.Entities.User", "User")
+                        .WithMany("AssignmentUsers")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Assignment");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Core.Entities.Assignments", b =>
@@ -273,13 +310,6 @@ namespace Persistence.Migrations
                         .HasForeignKey("ExerciseId");
                 });
 
-            modelBuilder.Entity("Core.Entities.User", b =>
-                {
-                    b.HasOne("Core.Entities.Assignments", null)
-                        .WithMany("Students")
-                        .HasForeignKey("AssignmentsId");
-                });
-
             modelBuilder.Entity("Core.Entities.ArrayOfSnippets", b =>
                 {
                     b.Navigation("Snippets");
@@ -287,7 +317,7 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Core.Entities.Assignments", b =>
                 {
-                    b.Navigation("Students");
+                    b.Navigation("AssignmentUsers");
                 });
 
             modelBuilder.Entity("Core.Entities.Exercise", b =>
@@ -295,6 +325,11 @@ namespace Persistence.Migrations
                     b.Navigation("ArrayOfSnippets");
 
                     b.Navigation("Tags");
+                });
+
+            modelBuilder.Entity("Core.Entities.User", b =>
+                {
+                    b.Navigation("AssignmentUsers");
                 });
 #pragma warning restore 612, 618
         }

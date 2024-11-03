@@ -31,5 +31,8 @@
   <ItemGroup>
     <ProjectReference Include="..\Persistence\Persistence.csproj" />
   </ItemGroup>
+	<ItemGroup>
+	    <ProjectReference Include="..\WebAPI\WebAPI.csproj" />
+	</ItemGroup>
 
 </Project>

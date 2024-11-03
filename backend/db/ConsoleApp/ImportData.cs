@@ -19,5 +19,7 @@ namespace Import
 
         public List<ArrayOfSnippets> ArrayOfSnippets { get; set; } = [];
         public List<Snippet> Snippets { get; set; } = [];
+
+        public List<AssignmentUser> AssignmentUsers { get; set; } = [];
     }
 }

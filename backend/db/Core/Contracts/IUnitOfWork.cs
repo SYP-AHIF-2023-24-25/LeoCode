@@ -10,5 +10,6 @@ public interface IUnitOfWork : IBaseUnitOfWork
     public ISnippetRepository Snippets { get; }
     public IAssignmentsRepository Assignments { get; }
     public ITagRepository Tags { get; }
+    public IAssignmentUserRepository AssignmentUser { get; }
 
 }

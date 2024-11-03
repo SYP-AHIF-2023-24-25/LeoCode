@@ -15,7 +15,7 @@ namespace Core.Entities
         public Exercise? Exercise { get; set; }
         public int ExerciseId { get; set; }
         public DateTime DateDue { get; set; }
-        public List<User> Students { get; set; }
+        public List<AssignmentUser> AssignmentUsers { get; set; } = new List<AssignmentUser>();
 
         public int TeacherId { get; set; }
         [ForeignKey(nameof(TeacherId))]

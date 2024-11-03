@@ -22,6 +22,7 @@ public class UnitOfWork : BaseUnitOfWork, IUnitOfWork
         Exercises = new ExerciseRepository(dBContext);
         Assignments = new AssignmentsRepository(dBContext);
         Tags = new TagRepository(dBContext);
+        AssignmentUser = new AssignmentUserRepository(dBContext);
     }
     public ITagRepository Tags { get; }
     public IUserRepository Users { get; }
@@ -31,4 +32,5 @@ public class UnitOfWork : BaseUnitOfWork, IUnitOfWork
 
     public ISnippetRepository Snippets { get; }
     public IAssignmentsRepository Assignments { get; set; }
+    public IAssignmentUserRepository AssignmentUser { get; set; }
 }
