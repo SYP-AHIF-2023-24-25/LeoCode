@@ -1,0 +1,81 @@
+/* Container for the form with padding and center alignment */
+.assignment-form {
+    max-width: 500px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Title styling */
+  .form-title {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  /* Full-width fields to make the form cleaner */
+  .full-width-field {
+    width: 100%;
+  }
+  
+  /* Button container for centering the button */
+  .button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  /* Styling the assignment link */
+  .assignment-link a {
+    color: #1e90ff; /* Bright blue color */
+    font-weight: bold;
+    text-decoration: none;
+  }
+  
+  .assignment-link a:hover {
+    text-decoration: underline;
+  }
+  
+  /* Center the button within the container */
+.button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  /* Style the button with a gradient, rounded corners, and shadow */
+  .styled-button {
+    padding: 10px 20px;
+    font-size: 1.1em;
+    font-weight: bold;
+    color: white;
+    border-radius: 30px;
+    background: linear-gradient(45deg, #4a90e2, #0052cc);
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  
+  /* Add a hover effect to make it pop */
+  .styled-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.3);
+  }
+  
+  /* Change the button style when it's clicked */
+  .styled-button:active {
+    transform: translateY(1px);
+    box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Style for disabled button */
+  .styled-button[disabled] {
+    background: #b3b3b3;
+    color: #666;
+    cursor: not-allowed;
+    box-shadow: none;
+  }
+  
