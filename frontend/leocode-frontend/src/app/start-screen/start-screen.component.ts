@@ -36,7 +36,8 @@ export class StartScreenComponent {
    defaultUser :User = {
     username: "Default",
     password: "Default",
-    exercises: []
+    exercises: [],
+    isTeacher: true
   }
 
     ifUserName: string | null = '';

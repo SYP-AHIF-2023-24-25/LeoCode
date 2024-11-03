@@ -101,6 +101,7 @@ export class TestResultComponent  implements OnInit{
   // parse from json new
   convertFromJsonV2(value: Value): Result {// mit neuen json format
    
+    console.log("Value:"+value);
     const TotalTests: number = value.value.Summary.TotalTests;
     const PassedTests: number = value.value.Summary.PassedTests;
     const FailedTests: number = value.value.Summary.FailedTests;

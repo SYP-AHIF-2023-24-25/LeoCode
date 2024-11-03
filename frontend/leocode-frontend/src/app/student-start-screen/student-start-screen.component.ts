@@ -215,6 +215,7 @@ export class StudentStartScreenComponent implements OnInit {
    loadAssignment(assignment: any): void {
     // Extract exercise details from the assignment
     const exercise = assignment.exercise;
+    
 
     // Check if exercise exists and extract its properties
     if (exercise) {

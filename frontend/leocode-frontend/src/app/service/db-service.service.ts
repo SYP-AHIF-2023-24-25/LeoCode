@@ -46,6 +46,7 @@ export class DbService {
       dateCreated: dateCreated.toISOString(),
       dateUpdated: dateUpdated.toISOString()
     }
+    console.log(tags);
     
     return this.http.post<Exercise>(`${this.apiUrl}/exercise?name=${exercise.exerciseName}&description=${exercise.introduction}&language=${exercise.language}&tags=${exercise.tags}&username=${exercise.username}&dateCreated=${exercise.dateCreated}&dateUpdated=${exercise.dateUpdated}`, arrayOfSnippets, httpOptions);
   }
@@ -59,8 +60,7 @@ export class DbService {
       username: username,
     }
     console.log("TAGS: " + exercise.tags.length);
-    console.log("TAGS: " + exercise.tags[0])
-    console.log("TAGS: " + exercise.tags[1])
+    console.log("TAGS: " + exercise.tags)
     return this.http.put<Exercise>(`${this.apiUrl}/exercise?username=${exercise.username}&description=${exercise.introduction}&tags=${exercise.tags}&language=${exercise.language}&subject=${subject}&exerciseName=${exercise.exerciseName}`, arrayOfSnippets, httpOptions);
   }
 
@@ -71,9 +71,10 @@ export class DbService {
     // Logge wichtige Informationen zur Überprüfung
     console.log("Tags length: " + tags.length);
     console.log("First Tag: " + tags[0]);
+    console.log(tags);
 
     // HTTP PUT Request an den passenden API-Endpunkt
-    return this.http.put(`${this.apiUrl}/exercise/UpdateDetails?username=${username}&description=${description}&tags=${tagsString}&exerciseName=${exerciseName}&newExerciseName=${newExerciseName}`, null, httpOptions);
+    return this.http.put(`${this.apiUrl}/exercise/UpdateDetails?username=${username}&description=${description}&tags=${tags}&exerciseName=${exerciseName}&newExerciseName=${newExerciseName}`, null, httpOptions);
   }
 
   getAssignmentsByUsername(username: string|null) {

@@ -24,6 +24,7 @@ export class ExerciseDetailsComponent implements OnInit {
   currentName: string = "";
   isEditingName = false; // Bearbeitungsmodus für den Übungsnamen
   isEditingDescription = false; // Bearbeitungsmodus für die Einführung
+  isEditingTag=false;
   originalDescription: string = ""; // Originalbeschreibung für Abbrechen
 
   zipFile: File | null = null;
@@ -102,6 +103,10 @@ export class ExerciseDetailsComponent implements OnInit {
     this.isEditingDescription = true;
   }
 
+  editTag(){
+    this.isEditingTag = true;
+  }
+
   // Tags auswählen
   toggleTagSelection(tag: string) {
     if (this.exercise.tags.includes(tag)) {
@@ -158,6 +163,12 @@ export class ExerciseDetailsComponent implements OnInit {
         verticalPosition: 'top',
       });
     });
+
+    console.log(this.exercise.name);
+    sessionStorage.setItem('exerciseName',this.exercise.name);
+    this.isEditingDescription=false;
+    this.isEditingName=false;
+    this.isEditingTag = false;
   }
 
   clearEmptyZipFile() {
