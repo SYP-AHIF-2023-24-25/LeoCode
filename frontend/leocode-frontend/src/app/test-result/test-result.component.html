@@ -36,7 +36,7 @@
             <a class="nav-link active" [routerLink]="['/introduction']" [queryParams]="{ creator: exercise.creator }">Introduction</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" [routerLink]="['/test-results']" [queryParams]="{ creator: exercise.creator }">Implementation</a>
+            <a class="nav-link" [routerLink]="['/test-results']" [queryParams]="{ creator: exercise.tags,}">Implementation</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" [routerLink]="['/result-history']">Result-History</a>

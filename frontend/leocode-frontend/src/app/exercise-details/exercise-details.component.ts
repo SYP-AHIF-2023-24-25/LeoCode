@@ -48,6 +48,7 @@ export class ExerciseDetailsComponent implements OnInit {
       arrayOfSnippets:[],
       dateCreated: new Date(),
       dateUpdated: new Date(),
+      teacher: undefined
     };
 
   constructor(
@@ -163,9 +164,6 @@ export class ExerciseDetailsComponent implements OnInit {
         verticalPosition: 'top',
       });
     });
-
-    console.log(this.exercise.name);
-    sessionStorage.setItem('exerciseName',this.exercise.name);
     this.isEditingDescription=false;
     this.isEditingName=false;
     this.isEditingTag = false;

@@ -41,6 +41,7 @@ export class StudentStartScreenComponent implements OnInit {
        arrayOfSnippets:[],
        dateCreated: new Date(),
        dateUpdated: new Date(),
+       teacher: undefined
      };
 
      assignments: Assignment[] = [];
@@ -239,8 +240,10 @@ export class StudentStartScreenComponent implements OnInit {
         }
 
         this.exercise.tags= exercise.tags.$values;
+        this.exercise.teacher = exercise.teacher;
         console.log(exercise.tags);
         this.editorOptions.language = this.exercise.language; 
+        sessionStorage.setItem("exerciseName",this.exercise.name);
 
         console.log('Loaded assignment with exercise:', this.exercise);
     } else {
