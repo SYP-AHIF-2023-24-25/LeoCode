@@ -11,25 +11,86 @@ namespace Import
     {
         public static ImportData ImportDemoData()
         {
+
             User user1 = new User
             {
-                Username = "Default",
-                Password = "Default"
+                Username = "if200183",
+                Firstname = "Florian",
+                Lastname = "Hagmair",
+                IsTeacher = true,
             };
 
             User user2 = new User
             {
-                Username = "if200183",
-                Password = "123"
+                Username = "if200182",
+                Firstname = "David",
+                Lastname = "Pröller",
+                IsTeacher = false,
             };
+
+            User user3 = new User
+            {
+                Username = "if200104",
+                Firstname = "Christian",
+                Lastname = "Ekhator",
+                IsTeacher = false,
+            };
+
+            User user4 = new User
+            {
+                Username = "if200177",
+                Firstname = "Samuel",
+                Lastname = "Atzlesberger",
+                IsTeacher = false,
+            };
+
+            User user5 = new User
+            {
+                Username = "if200145",
+                Firstname = "Michael",
+                Lastname = "Werner",
+                IsTeacher = false,
+            };
+
+            User user6 = new User
+            {
+                Username = "if200107",
+                Firstname = "Marcus",
+                Lastname = "Rabeder",
+                IsTeacher = false,
+            };
+
+            User user7 = new User
+            {
+                Username = "if200153",
+                Firstname = "Julia",
+                Lastname = "Meyr",
+                IsTeacher = false,
+            };
+
+            User user8 = new User
+            {
+                Username = "if200160",
+                Firstname = "Julian",
+                Lastname = "Kapl",
+                IsTeacher = false,
+            };
+
+            Tag tag1 = new("Class1");
+
+            Tag tag2 = new("POSE");
+
+            Tag tag3 = new("WMC");
+
+            Tag tag4 = new("Class2");
 
             Exercise exercise1 = new Exercise
             {
                 Name = "Addition",
                 Description = "Implement the a addition calculator",
                 Language = Language.CSharp,
-                Tags = new string[] { "Class1", "POSE" },
-                Creator = "if200183",
+                Tags = new List<Tag>() { tag1, tag2 },
+
                 DateCreated = DateTime.Now,
                 DateUpdated = DateTime.Now
             };
@@ -69,13 +130,15 @@ namespace Import
                     }
                 };
 
+            exercise1.TeacherId = user1.Id;
+            exercise1.Teacher = user1;
+
             Exercise exercise2 = new Exercise
             {
                 Name = "PasswordChecker",
                 Description = "Implement a password checker",
                 Language = Language.TypeScript,
-                Tags = new string[] { "Class2", "WMC" },
-                Creator = "if200183",
+                Tags = new List<Tag>() { tag3, tag4 },
                 DateCreated = DateTime.Now,
                 DateUpdated = DateTime.Now
             };
@@ -114,22 +177,17 @@ namespace Import
                     }
                 };
 
-
-
-            exercise1.UserId = user2.Id;
-            exercise2.UserId = user2.Id;
-            exercise1.User = user2;
-            exercise2.User = user2;
-
-
+            exercise2.TeacherId = user1.Id;
+            exercise2.Teacher = user1;
 
             Exercise exercise3 = new Exercise
             {
                 Name = "SubtractionEmpty",
                 Description = "Implement the a subtraction calculator",
                 Language = Language.CSharp,
-                Tags = new string[] { "Class1", "POSE" },
-                Creator = "if200158",
+                Tags = new List<Tag>() { tag1, tag3 },
+
+
                 DateCreated = DateTime.Now,
                 DateUpdated = DateTime.Now
             };
@@ -169,17 +227,61 @@ namespace Import
                     }
                 };
 
+            exercise3.TeacherId = user1.Id;
+            exercise3.Teacher = user1;
 
-            exercise3.UserId = user1.Id;
-            exercise3.User = user1;
+            Assignments assignment1 = new Assignments
+            {
+                Name = "Assignment Addition",
+                Exercise = exercise1,
+                ExerciseId = exercise1.Id,
+                DateDue = new DateTime(2024, 11, 18),
+                TeacherId = user1.Id,
+                Teacher = user1
+            };
+
+            Assignments assignment2 = new Assignments
+            {
+                Name = "Assignment PasswordChecker",
+                Exercise = exercise2,
+                ExerciseId = exercise2.Id,
+                DateDue = new DateTime(2024, 12, 1),
+                TeacherId = user1.Id,
+                Teacher = user1
+            };
+
+            var assignmentUsers = new List<AssignmentUser>
+            {
+                new AssignmentUser { Assignment = assignment1, User = user2 },
+                new AssignmentUser { Assignment = assignment1, User = user3 },
+                new AssignmentUser { Assignment = assignment1, User = user4 },
+                new AssignmentUser { Assignment = assignment1, User = user5 },
+                new AssignmentUser { Assignment = assignment1, User = user6 },
+                new AssignmentUser { Assignment = assignment1, User = user7 },
+                new AssignmentUser { Assignment = assignment1, User = user8 },
+
+                new AssignmentUser { Assignment = assignment2, User = user2 },
+                new AssignmentUser { Assignment = assignment2, User = user3 },
+                new AssignmentUser { Assignment = assignment2, User = user4 },
+                new AssignmentUser { Assignment = assignment2, User = user5 },
+                new AssignmentUser { Assignment = assignment2, User = user8 },
+            };
+
+            var users = new List<User> { user1, user2, user3, user4, user5, user6 };
+
+            var tags = new List<Tag> { tag1, tag2, tag3, tag4 };
 
             var exercises = new List<Exercise> { exercise1, exercise2, exercise3 };
 
-            var users = new List<User> { user1, user2 };
+
+
             return new ImportData
             {
-                Exercises = exercises,
+                AssignmentUsers = assignmentUsers,
+                Tags = tags,
                 Users = users,
+                Exercises = exercises,
+                Assignments = new List<Assignments> { assignment1, assignment2 },
                 ArrayOfSnippets = new List<ArrayOfSnippets> { exercise1.ArrayOfSnippets, exercise2.ArrayOfSnippets, exercise3.ArrayOfSnippets },
                 Snippets = new List<Snippet> { exercise1.ArrayOfSnippets.Snippets[0], exercise1.ArrayOfSnippets.Snippets[1], exercise1.ArrayOfSnippets.Snippets[2], exercise2.ArrayOfSnippets.Snippets[0], exercise2.ArrayOfSnippets.Snippets[1], exercise2.ArrayOfSnippets.Snippets[2], exercise3.ArrayOfSnippets.Snippets[0], exercise3.ArrayOfSnippets.Snippets[1], exercise3.ArrayOfSnippets.Snippets[2] }
             };

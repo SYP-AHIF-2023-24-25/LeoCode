@@ -6,5 +6,28 @@ using System.Threading.Tasks;
 
 namespace Core.Dto
 {
-    public record class SnippetDto(string Code, bool ReadOnlySection, string FileName);
+    public record class SnippetDto(string Code, bool ReadonlySection, string FileName);
+
+    public class AssignmentDto
+    {
+        public string AssignmentName { get; set; }
+        public DateTime DueDate { get; set; }
+        public string ExerciseName { get; set; }
+        public TeacherDto Teacher { get; set; }
+        public List<StudentDto> Students { get; set; }
+    }
+
+    public class TeacherDto
+    {
+        public string Firstname { get; set; }
+        public string Lastname { get; set; }
+        public string Username { get; set; }
+    }
+
+    public class StudentDto
+    {
+        public string Firstname { get; set; }
+        public string Lastname { get; set; }
+        public string Username { get; set; }
+    }
 }

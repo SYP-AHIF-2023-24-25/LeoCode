@@ -291,7 +291,8 @@ export class CreateExerciseComponent {
           console.log(name[0]);
           const response: any = await this.rest.getCodeCSharp(name[0]).toPromise();
           console.log(response);
-          let codeSections: CodeSection[] = this.parseTemplateToCodeSections(response.value, name[0]);
+          //let codeSections: CodeSection[] = this.parseTemplateToCodeSections(response.value, name[0]);
+          let codeSections: CodeSection[] = this.parseTemplateToCodeSections(response.value, "Program.cs");
           console.log(codeSections);
 
           let arrayOfSnippets : ArrayOfSnippetsDto = {
@@ -380,10 +381,10 @@ export class CreateExerciseComponent {
 
 
     for(let i = 0; i < stringCodeSections.length; i++) {
-      if(stringCodeSections[i].includes("Todo") || stringCodeSections[i].includes("throw new System.NotImplementedException();")) {
-        codeSections.push({ code: stringCodeSections[i], readOnlySection: false, fileName: programName});
+      if(stringCodeSections[i].includes("Todo") || stringCodeSections[i].includes("throw new System.NotImplementedException();") || stringCodeSections[i].includes("throw new NotImplementedException();")){
+        codeSections.push({ code: stringCodeSections[i], readonlySection: false, fileName: programName});
       }else {
-        codeSections.push({ code: stringCodeSections[i], readOnlySection: true, fileName: programName});
+        codeSections.push({ code: stringCodeSections[i], readonlySection: true, fileName: programName});
       }
     }
     return codeSections;

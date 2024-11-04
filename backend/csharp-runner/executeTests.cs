@@ -6,11 +6,11 @@ namespace csharp_runner
     {
         public static async Task<string> runCSharp(string exerciseName, string templateFilePath, string filePathForRandomDirectory, string code, string fileName)
         {
-            Console.WriteLine("in Methode runCSharp in execute Tests");
+            //Console.WriteLine("in Methode runCSharp in execute Tests");
 
             // Erstellen eines temporären Verzeichnisses
             string solutionDir = createTempDir(filePathForRandomDirectory);
-            Console.WriteLine($"Solution Directory: {solutionDir}");
+            //Console.WriteLine($"Solution Directory: {solutionDir}");
 
             // Kopieren der Vorlagendatei ins temporäre Verzeichnis
             await CopyAsync(templateFilePath, solutionDir);
@@ -22,7 +22,8 @@ namespace csharp_runner
 
             // Den Code in das entsprechende Verzeichnis einfügen
             await ReplaceCodeAsync(solutionDir, code, fileName, exerciseName);
-
+            Console.WriteLine("Replaced Code");
+            Console.WriteLine($"{solutionDir}");
             // NuGet-Paket-Verzeichnis angeben (hier sollte der gemountete Ordner angegeben werden)
             string nugetPackagesPath = $@"{solutionDir}/nuget-packages";  // Diesen Pfad auf den gemounteten Pfad setzen
 
@@ -32,11 +33,11 @@ namespace csharp_runner
             // Testausführung ohne Restore, um Zeit zu sparen
             exitCode = await RunCommandsAsyncForDotnet(solutionDir, "test --no-restore -l:trx;LogFileName=TestOutput.xml");
 
-            Console.WriteLine($"tests ausführen fertig und code ist: {exitCode}");
+            //Console.WriteLine($"tests ausführen fertig und code ist: {exitCode}");
 
             // Ergebnis der Tests einlesen und zurückgeben
             string testOutput = await File.ReadAllTextAsync(Path.Combine(solutionDir, $"{exerciseName}Tests/TestResults/TestOutput.xml"));
-            Console.WriteLine($"SUCCESS: CSharp {exerciseName} were successful");
+            //Console.WriteLine($"SUCCESS: CSharp {exerciseName} were successful");
 
             return testOutput;
         }
@@ -99,15 +100,15 @@ namespace csharp_runner
 
                 if (!string.IsNullOrEmpty(error))
                 {
-                    Console.WriteLine("Dotnet test errors:");
-                    Console.WriteLine(error);
+                    //Console.WriteLine("Dotnet test errors:");
+                    //Console.WriteLine(error);
                 }
 
                 return exitCode;
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"An error occurred: {ex.Message}");
+                //Console.WriteLine($"An error occurred: {ex.Message}");
                 return -1;
             }
         }
@@ -167,20 +168,20 @@ namespace csharp_runner
                 string error = errorBuilder.ToString();
 
                 // Hier können Sie die Ausgabe verarbeiten oder sie zurückgeben
-                Console.WriteLine("Dotnet test output:");
-                Console.WriteLine(output);
+                //Console.WriteLine("Dotnet test output:");
+                //Console.WriteLine(output);
 
                 if (!string.IsNullOrEmpty(error))
                 {
-                    Console.WriteLine("Dotnet test errors:");
-                    Console.WriteLine(error);
+                    //Console.WriteLine("Dotnet test errors:");
+                    //Console.WriteLine(error);
                 }
 
                 return exitCode;
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"An error occurred: {ex.Message}");
+                //Console.WriteLine($"An error occurred: {ex.Message}");
                 return -1; // Rückgabewert für Fehler
             }
         }
@@ -239,20 +240,20 @@ namespace csharp_runner
                 string error = errorBuilder.ToString();
 
                 // Hier können Sie die Ausgabe verarbeiten oder sie zurückgeben
-                Console.WriteLine("Dotnet test output:");
-                Console.WriteLine(output);
+                //Console.WriteLine("Dotnet test output:");
+                //Console.WriteLine(output);
 
                 if (!string.IsNullOrEmpty(error))
                 {
-                    Console.WriteLine("Dotnet test errors:");
-                    Console.WriteLine(error);
+                    //Console.WriteLine("Dotnet test errors:");
+                    //Console.WriteLine(error);
                 }
 
                 return exitCode;
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"An error occurred: {ex.Message}");
+                //Console.WriteLine($"An error occurred: {ex.Message}");
                 return -1; // Rückgabewert für Fehler
             }
         }
@@ -272,7 +273,7 @@ namespace csharp_runner
             string fullPath = Path.Combine(filePathForRandomDirectory, randomFolderName);
             Directory.CreateDirectory(fullPath);
 
-            Console.WriteLine($"Random Ordner generiert {fullPath}");
+            //Console.WriteLine($"Random Ordner generiert {fullPath}");
 
             return fullPath;
         }
@@ -296,11 +297,11 @@ namespace csharp_runner
             string output = await outputReader;
             string error = await errorReader;
 
-            Console.WriteLine("Output:");
-            Console.WriteLine(output);
+            //Console.WriteLine("Output:");
+            //Console.WriteLine(output);
 
-            Console.WriteLine("Error:");
-            Console.WriteLine(error);
+            //Console.WriteLine("Error:");
+            //Console.WriteLine(error);
 
             process.WaitForExit();
         }

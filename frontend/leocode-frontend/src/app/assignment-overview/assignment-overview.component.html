@@ -1,0 +1,87 @@
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">LeoCode</a>
+  <button
+    class="navbar-toggler"
+    type="button"
+    data-toggle="collapse"
+    data-target="#navbarNav"
+    aria-controls="navbarNav"
+    aria-expanded="false"
+    aria-label="Toggle navigation"
+  >
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link text-light" href="assignment-overview" style="margin-left: 50px;">Assignments</a>
+      </li>
+    </ul>
+
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <span class="navbar-text text-light">{{ ifUserName }}</span>
+      </li>
+      <li class="nav-item">
+        <button class="btn btn-outline-light ml-3" (click)="logout()">Logout</button>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Assignment Overview -->
+<div class="container my-4">
+  <br>
+
+  <!-- Assignment Card -->
+  <div *ngFor="let assignment of assignments" class="card mb-4 shadow-sm rounded">
+    <div class="card-body">
+      <!-- Assignment Details -->
+      <div class="d-flex flex-wrap justify-content-between mb-4">
+        <div>
+          <h3 class="font-weight-bold">Assignment</h3>
+          <p>{{ assignment.assignmentName }}</p>
+        </div>
+        <div>
+          <h3 class="font-weight-bold">Due Date</h3>
+          <p>{{ assignment.dueDate | date: 'dd.MM.yyyy HH:mm' }}</p>
+        </div>
+        <div>
+          <h3 class="font-weight-bold">Exercise</h3>
+          <p>{{ assignment.exerciseName }}</p>
+        </div>
+        <div>
+          <h3 class="font-weight-bold">Teacher</h3>
+          <p>{{ assignment.teacher }}</p>
+        </div>
+      </div>
+      <table class="table table-striped rounded-table">
+        <thead class="thead-rounded">
+          <tr>
+            <th style="width: 50px;">&nbsp;</th> <!-- Leere Spalte für das Icon -->
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>IF Number</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let student of assignment.students">
+            <td>
+              <i class="fas fa-user-circle fa-lg text-secondary" style="margin-right: 5px;"></i>
+            </td>
+            <td>{{ student.studentFirstname }}</td>
+            <td>{{ student.studentLastname }}</td>
+            <td>{{ student.studentUsername }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+/>

@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Component, computed, inject, Signal, signal, WritableSignal, OnInit } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { finalize } from "rxjs";
+import { DbService } from '../service/db-service.service';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +15,7 @@ export class LoginComponent implements OnInit  {
   public readonly response: WritableSignal<string | null> = signal(null);
   public readonly loading: WritableSignal<boolean> = signal(false);
   public readonly showResponse: Signal<boolean> = computed(() => this.response() !== null);
-  constructor(private keycloakService: KeycloakService, private router: Router) {
+  constructor(private keycloakService: KeycloakService, private router: Router, private rest: DbService) {
 
   }
 
@@ -44,15 +45,29 @@ export class LoginComponent implements OnInit  {
       .subscribe({
         next: (res) => {
           this.response.update(() => res);
+          const ifUserName: string = sessionStorage.getItem('ifUserName') || '';
+          const firstname: string = sessionStorage.getItem('firstName') || '';
+          const lastname: string = sessionStorage.getItem('lastName') || '';
           if (res === 'You are at least a student') {
-            if (sessionStorage.getItem('ifUserName') === 'if200183') {
-              this.router.navigate(['/start-screen']);
-              //this.router.navigate(['/student-start-screen']);
+            if (ifUserName === 'if200183') {
+              //api call für user createn für teacher
+              this.rest.AddUser(ifUserName, firstname, lastname, true).subscribe((data: any) => {
+                console.log(data);
+                this.router.navigate(['/start-screen']);
+              });
             } else {
-              this.router.navigate(['/student-start-screen']);
+              //api call für user createn für student
+              this.rest.AddUser(ifUserName, firstname, lastname, false).subscribe((data: any) => {
+                console.log(data);
+                this.router.navigate(['/student-start-screen']);
+              });
             }
           } else {
-            this.router.navigate(['/start-screen']);
+            //api call für user createn für teacher
+            this.rest.AddUser(ifUserName, firstname, lastname, true).subscribe((data: any) => {
+              console.log(data);
+              this.router.navigate(['/start-screen']);
+            });
           }
         },
         error: err => {
@@ -65,10 +80,14 @@ export class LoginComponent implements OnInit  {
   async setUserData(): Promise<void> {
     const user = await this.keycloakService.loadUserProfile();
     sessionStorage.setItem('firstName', user.firstName!);
+    sessionStorage.setItem('lastName', user.lastName!);
     sessionStorage.setItem('ifUserName', user.username!);
   }
 
   async logout(): Promise<void> {
+    /*sessionStorage.setItem('ifUserName', '');
+    sessionStorage.setItem('firstName', '');
+    sessionStorage.setItem('lastName', '');*/
     await this.keycloakService.logout();
     //this.router.navigate(['/login']);
   }

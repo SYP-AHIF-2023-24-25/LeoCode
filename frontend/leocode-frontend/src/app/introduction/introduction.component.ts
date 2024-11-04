@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ExerciseDto } from '../model/exerciseDto';
 import { Params } from '@angular/router';
 import { DbService } from '../service/db-service.service';
+import { Exercise } from '../model/exercise';
 
 @Component({
   selector: 'app-introduction',
@@ -16,16 +17,20 @@ export class IntroductionComponent {
   date: Date = new Date();
   creator: string | undefined = "";
 
-  exercise : ExerciseDto = {
-    name: "",
-    creator: "",
-    description: "",
-    language: "",
-    tags: [],
-    arrayOfSnippets: [],
-    dateCreated: new Date(),
-    dateUpdated: new Date()
-  }
+    exercise : Exercise={
+      name: "",
+      creator: "",
+      description: "",
+      language: "",
+      tags: [],
+      zipFile: null,
+      emptyZipFile: null,
+      arrayOfSnippets:[],
+      dateCreated: new Date(),
+      dateUpdated: new Date(),
+      teacher: undefined
+    };
+
   constructor( private route: ActivatedRoute, private restDb: DbService, private router: Router) {
   }
 
@@ -46,7 +51,7 @@ export class IntroductionComponent {
     console.log(this.exerciseName);
 
     if(this.creator != null && this.exerciseName != null){
-      this.restDb.getExerciseByUsername(this.creator, this.exerciseName).subscribe((data: ExerciseDto[]) => {
+      this.restDb.getExerciseByUsername(this.creator, this.exerciseName).subscribe((data: Exercise[]) => {
         this.exercise = data[0];
        
         console.log(this.exercise.name);

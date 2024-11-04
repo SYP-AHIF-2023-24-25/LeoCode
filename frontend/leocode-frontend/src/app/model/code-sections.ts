@@ -1,5 +1,5 @@
 export interface CodeSection {
   code: string;
-  readOnlySection: boolean;
+  readonlySection: boolean;
   fileName: string;
 }

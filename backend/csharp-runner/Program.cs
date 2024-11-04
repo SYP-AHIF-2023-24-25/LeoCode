@@ -86,7 +86,7 @@ namespace csharp_runner
                 {
                     string csFilePath = csFiles[0];
                     string fileContent = await System.IO.File.ReadAllTextAsync(csFilePath);
-                    Console.WriteLine(fileContent);
+                    //Console.WriteLine(fileContent);
                     return new OkObjectResult(fileContent);
                 }
                 else
@@ -102,14 +102,16 @@ namespace csharp_runner
 
         static async Task<IActionResult> RunTests(string exerciseName, [FromBody] JsonObject jsonContent)
         {
+            Console.WriteLine(jsonContent);
+            Console.WriteLine(jsonContent.ToString());
             try
             {
-                Console.WriteLine("Unit Test für C# am ausführen");
+                //Console.WriteLine("Unit Test für C# am ausführen");
                 var currentDirectory = Directory.GetCurrentDirectory();
-                Console.WriteLine("Current Directory: " + currentDirectory);
+                //Console.WriteLine("Current Directory: " + currentDirectory);
                 Body body = JsonConvert.DeserializeObject<Body>(jsonContent.ToString());
                 string templateFilePath = @$"{currentDirectory}/templates/{exerciseName}";
-                Console.WriteLine($"Template File Path: {templateFilePath}");
+                //Console.WriteLine($"Template File Path: {templateFilePath}");
                 string filePathForRandomDirectory = @$"{currentDirectory}";
                 string filePathForNuGetConfigFile = @$"{currentDirectory}/config";
                 var result = await executeTests.runCSharp(exerciseName, templateFilePath, filePathForRandomDirectory, body.code, body.fileName);
@@ -119,7 +121,7 @@ namespace csharp_runner
             catch (Exception ex)
             {
                 //log error
-                Console.WriteLine($"Error: {ex.Message}");
+                //Console.WriteLine($"Error: {ex.Message}");
                 return new BadRequestObjectResult(ex.Message);
             }
         }

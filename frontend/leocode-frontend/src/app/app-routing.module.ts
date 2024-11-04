@@ -9,18 +9,24 @@ import { ExerciseDetailsComponent } from './exercise-details/exercise-details.co
 import { StudentStartScreenComponent } from './student-start-screen/student-start-screen.component';
 import { AuthGuard } from '../core/util/auth-guard';
 import { LoginComponent } from './login/login.component';
+import { AssignmentOverviewComponent } from './assignment-overview/assignment-overview.component';
+import { CreateAssignmentComponent } from './create-assignment/create-assignment.component';
+import { JoinAssignmentComponentComponent } from './join-assignment-component/join-assignment-component.component';
 
 
 
 export const routes: Routes = [
   {path: '', redirectTo: '/login', pathMatch: 'full' },
   {path: 'login', component: LoginComponent},
+  {path: 'create-assignment', component: CreateAssignmentComponent },
   {path: 'test-results', component: TestResultComponent},
   {path: 'result-history', component: ResultHistoryComponent},
-  {path: 'introdcution', component: IntroductionComponent},
+  {path: 'introduction', component: IntroductionComponent},
   {path: 'create-exercise', component: CreateExerciseComponent},
   {path: 'start-screen', component: StartScreenComponent},
   {path: 'exercise-details', component: ExerciseDetailsComponent},
+  {path: 'assignment-overview', component: AssignmentOverviewComponent},
+  { path: 'join-assignment/:id', component: JoinAssignmentComponentComponent },
   {path: 'student-start-screen', component: StudentStartScreenComponent, canActivate: [AuthGuard]}
 ];
 @NgModule({

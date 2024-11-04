@@ -6,7 +6,13 @@
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
-    "Parameters": [],
+    "Parameters": [
+      {
+        "Name": "username",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
     "ReturnTypes": []
   },
   {
@@ -36,6 +42,64 @@
         "Name": "Name",
         "Type": "System.String",
         "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.String",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "WebAPI.Controllers.AssignmentsController",
+    "Method": "GetAssignmentsByUsername",
+    "RelativePath": "api/Assignments/GetAssignmentsByUsername",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "username",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebAPI.Controllers.AssignmentsController",
+    "Method": "GetAssignmentUsers",
+    "RelativePath": "api/Assignments/GetAssignmentUsers",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "assignmentId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebAPI.Controllers.AssignmentsController",
+    "Method": "JoinAssignmentAsync",
+    "RelativePath": "api/Assignments/JoinAssignment",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "WebAPI.Controllers.AssignmentsController\u002BJoinAssignmentRequest",
+        "IsRequired": true
       }
     ],
     "ReturnTypes": []
@@ -145,7 +209,7 @@
   },
   {
     "ContainingType": "WebAPI.Controllers.ExerciseController",
-    "Method": "UpdateExerciseForUser",
+    "Method": "UpdateExerciseForTeacher",
     "RelativePath": "api/Exercise",
     "HttpMethod": "PUT",
     "IsController": true,
@@ -158,11 +222,6 @@
       },
       {
         "Name": "description",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "tags",
         "Type": "System.String",
         "IsRequired": false
       },
@@ -182,11 +241,6 @@
         "IsRequired": false
       },
       {
-        "Name": "arrayOfSnippets",
-        "Type": "Core.Dto.ArrayOfSnippetsDto",
-        "IsRequired": true
-      },
-      {
         "Name": "dateCreated",
         "Type": "System.DateTime",
         "IsRequired": false
@@ -195,6 +249,11 @@
         "Name": "dateUpdated",
         "Type": "System.DateTime",
         "IsRequired": false
+      },
+      {
+        "Name": "body",
+        "Type": "WebAPI.Controllers.ExerciseController\u002BUpdateExerciseRequestBodyDto",
+        "IsRequired": true
       }
     ],
     "ReturnTypes": []
@@ -213,11 +272,6 @@
         "IsRequired": false
       },
       {
-        "Name": "tags",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
         "Name": "exerciseName",
         "Type": "System.String",
         "IsRequired": false
@@ -231,8 +285,54 @@
         "Name": "newExerciseName",
         "Type": "System.String",
         "IsRequired": false
+      },
+      {
+        "Name": "tags",
+        "Type": "System.String[]",
+        "IsRequired": true
       }
     ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "UserController",
+    "Method": "CreateUser",
+    "RelativePath": "api/User",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "username",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "firstname",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "lastname",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "isTeacher",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "UserController",
+    "Method": "GetAllUsers",
+    "RelativePath": "api/User",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
     "ReturnTypes": []
   }
 ]

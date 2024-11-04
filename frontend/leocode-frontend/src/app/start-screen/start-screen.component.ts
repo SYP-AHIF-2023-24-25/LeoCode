@@ -10,6 +10,8 @@ import { User } from '../model/user';
 import { ExerciseDto } from '../model/exerciseDto';
 import { Router } from '@angular/router';
 
+import { Exercise } from '../model/exercise';
+
 @Component({
   selector: 'app-start-screen',
   templateUrl: './start-screen.component.html',
@@ -34,7 +36,8 @@ export class StartScreenComponent {
    defaultUser :User = {
     username: "Default",
     password: "Default",
-    exercises: []
+    exercises: [],
+    isTeacher: true
   }
 
     ifUserName: string | null = '';
@@ -55,19 +58,19 @@ export class StartScreenComponent {
   filteredTags: Observable<string[]> | undefined;
   separatorKeysCodes: number[] = [13, 188]; // Enter und Komma
 
-  exercises : ExerciseDto[]= [];
+  exercises : Exercise[] = [];
+
   
 
   ngOnInit(): void {
     this.ifUserName = sessionStorage.getItem('ifUserName');
     sessionStorage.setItem("userName", this.defaultUser.username);
-    this.rest.getExerciseByUsername().subscribe((data: ExerciseDto[]) => {
+    this.rest.getExerciseByUsername().subscribe((data: Exercise[]) => {
       this.exercises = data;
       console.log(this.exercises);
     });
 
-    sessionStorage.setItem("userName", this.defaultUser.username);
-
+    sessionStorage.setItem("userName",this.defaultUser.username),
     document.addEventListener("DOMContentLoaded", () => {
       const mainMenuLinks = document.querySelectorAll('.main-menu-link');
       

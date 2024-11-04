@@ -20,9 +20,9 @@ public class ExerciseController : Controller
     }
 
     [HttpPut("UpdateDetails")]
-    public async Task<IActionResult> UpdateDetails(string description, string tags, string exerciseName, string username, string newExerciseName)
+    public async Task<IActionResult> UpdateDetails(string description, string exerciseName, string username, string newExerciseName, [FromBody] string[] tags)
     {
-        string[] splitted = tags.Split(",");
+        List<Tag> allTags = _unitOfWork.Tags.CheckIfTagsExistElseCreate(tags);
         try
         {
             User user = _unitOfWork.Users.GetByUsername(username);
@@ -32,7 +32,7 @@ public class ExerciseController : Controller
                 .ToList();
 
             exercises[0].Description = description;
-            exercises[0].Tags = splitted;
+            exercises[0].Tags = allTags;                 //TODO: jedes Tag schauen ob es schon in der Datenbank ist wenn nicht neu erstellen
             exercises[0].Name = newExerciseName;
             exercises[0].DateUpdated = DateTime.Now;
             await _unitOfWork.SaveChangesAsync();
@@ -47,7 +47,8 @@ public class ExerciseController : Controller
     [HttpPost]
     public async Task<IActionResult> AddExerciseAsync([FromBody] ArrayOfSnippetsDto arrayOfSnippets, string name, string description, string language, string[] tags, string username, DateTime datecreated, DateTime dateupdated)
     {
-        User user = _unitOfWork.Users.GetByUsername(username);
+        List<Tag> allTags = _unitOfWork.Tags.CreateTagsAndStoreInDB(tags);
+        User teacher = _unitOfWork.Users.GetByUsername(username);
         Language enumLanguage = Language.CSharp;
         switch(language)
         {
@@ -66,12 +67,11 @@ public class ExerciseController : Controller
             Exercise exercise = new Exercise
             {
                 Name = name,
-                Creator = username,
                 Description = description,
                 Language = enumLanguage,
-                Tags = tags,
-                UserId = user.Id,
-                User = user,
+                Tags = allTags,                  //TODO: Tags neu erstellen
+                TeacherId = teacher.Id,
+                Teacher = teacher,
                 DateCreated = datecreated,
                 DateUpdated = dateupdated
             };
@@ -86,7 +86,7 @@ public class ExerciseController : Controller
                 exercise.ArrayOfSnippets.Snippets.Add(new Snippet
                 {
                     Code = snippet.Code,
-                    ReadonlySection = snippet.ReadOnlySection,
+                    ReadonlySection = snippet.ReadonlySection,
                     FileName = snippet.FileName,
                     ArrayOfSnippets = exercise.ArrayOfSnippets,
                     ArrayOfSnippetsId = exercise.ArrayOfSnippets.Id
@@ -117,11 +117,10 @@ public class ExerciseController : Controller
                 exercises = await _unitOfWork.Exercises.GetAll();
                 return exercises.Select(exercise => new ExerciseDto(
                 exercise.Name,
-                exercise.Creator,
+                exercise.Teacher.Username,
                 exercise.Description,
                 ((Language)exercise.Language).ToString(),
-                exercise.Tags,
-
+                exercise.Tags.Select(tag => tag.Name).ToArray(),
                 exercise.ArrayOfSnippets.Snippets.Select(snippet => new SnippetDto(
                         snippet.Code,
                         snippet.ReadonlySection,
@@ -135,11 +134,11 @@ public class ExerciseController : Controller
             exercises = await _unitOfWork.Exercises.GetExersiceByUsernameAsync(user, exerciseName);
             return exercises.Select(exercise => new ExerciseDto(
             exercise.Name,
-            exercise.Creator,
+            exercise.Teacher.Username,
             exercise.Description,
             ((Language)exercise.Language).ToString(),
-            exercise.Tags,
-           
+            exercise.Tags.Select(tag => tag.Name).ToArray(),
+
             exercise.ArrayOfSnippets.Snippets.Select(snippet => new SnippetDto(
                     snippet.Code,
                     snippet.ReadonlySection,
@@ -149,17 +148,28 @@ public class ExerciseController : Controller
 
             )).ToArray();
         }
-        catch (Exception ex)
+        catch (Exception)
         {
             return [];
         }
     }
     [HttpPut]
-    public async Task<IActionResult> UpdateExerciseForUser(string username, string description, string tags, string language, string subject, string exerciseName, [FromBody] ArrayOfSnippetsDto arrayOfSnippets, DateTime dateCreated, DateTime dateUpdated)
+    public async Task<IActionResult> UpdateExerciseForTeacher(
+    string username,
+    string description,
+    string language,
+    string subject,
+    string exerciseName,
+    DateTime dateCreated,
+    DateTime dateUpdated,
+    [FromBody] UpdateExerciseRequestBodyDto body)
     {
-        string[] splitted = tags.Split(",");
         try
         {
+            // Extract tags and arrayOfSnippets from the body
+            string[] tags = body.Tags;
+            ArrayOfSnippetsDto arrayOfSnippets = body.ArrayOfSnippets;
+
             User user = _unitOfWork.Users.GetByUsername(username);
             List<Exercise> exercises = await _unitOfWork.Exercises.GetExersiceByUsernameAsync(user, exerciseName);
             exercises = exercises
@@ -168,18 +178,19 @@ public class ExerciseController : Controller
 
             if (exercises.IsNullOrEmpty())
             {
-                await AddExerciseAsync(arrayOfSnippets, exerciseName, description, language, splitted, username, dateCreated, dateUpdated);
+                await AddExerciseAsync(arrayOfSnippets, exerciseName, description, language, tags, username, dateCreated, dateUpdated);
                 return Ok();
             }
 
-            for(int i = 0; i < exercises[0].ArrayOfSnippets.Snippets.Count; i++)
+            for (int i = 0; i < exercises[0].ArrayOfSnippets.Snippets.Count; i++)
             {
                 Snippet currentSnippet = exercises[0].ArrayOfSnippets.Snippets[i];
-                if (currentSnippet.ReadonlySection == false)
+                if (!currentSnippet.ReadonlySection)
                 {
                     currentSnippet.Code = arrayOfSnippets.snippets[i].Code;
                 }
             }
+
             await _unitOfWork.SaveChangesAsync();
             return Ok();
         }
@@ -188,4 +199,12 @@ public class ExerciseController : Controller
             return BadRequest(ex.Message);
         }
     }
+
+
+    public class UpdateExerciseRequestBodyDto
+    {
+        public string[] Tags { get; set; }
+        public ArrayOfSnippetsDto ArrayOfSnippets { get; set; }
+    }
+
 }

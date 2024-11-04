@@ -10,6 +10,8 @@ import { Tags } from '../model/tags.enum';
 import { map, Observable, startWith } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
+import { Exercise } from '../model/exercise';
+
 @Component({
   selector: 'app-exercise-details',
   templateUrl: './exercise-details.component.html',
@@ -22,23 +24,32 @@ export class ExerciseDetailsComponent implements OnInit {
   currentName: string = "";
   isEditingName = false; // Bearbeitungsmodus für den Übungsnamen
   isEditingDescription = false; // Bearbeitungsmodus für die Einführung
+  isEditingTag=false;
   originalDescription: string = ""; // Originalbeschreibung für Abbrechen
+
+  zipFile: File | null = null;
+  emptyZipFile: File | null = null;
+  emptyZipFileUploaded: boolean = false;
+  ZipFileUploaded: boolean = false;
 
   tagCtrl = new FormControl();
   availableTags: string[] = Object.values(Tags);
   filteredTags: Observable<string[]> | undefined;
   separatorKeysCodes: number[] = [13, 188]; // Enter und Komma
 
-  exercise: ExerciseDto = {
-    name: "",
-    creator: "",
-    description: "",
-    language: "",
-    tags: [],
-    arrayOfSnippets: [],
-    dateCreated: new Date(),
-    dateUpdated: new Date()
-  }
+    exercise : Exercise={
+      name: "",
+      creator: "",
+      description: "",
+      language: "",
+      tags: [],
+      zipFile: null,
+      emptyZipFile: null,
+      arrayOfSnippets:[],
+      dateCreated: new Date(),
+      dateUpdated: new Date(),
+      teacher: undefined
+    };
 
   constructor(
     private rest: RestService,
@@ -60,6 +71,7 @@ export class ExerciseDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.ifUserName = sessionStorage.getItem('ifUserName');
+    console.log(this.ifUserName)
     this.route.queryParams.subscribe((params: Params) => {
       this.exerciseName = params['exerciseName'];
       this.currentName = params['exerciseName'];
@@ -73,8 +85,10 @@ export class ExerciseDetailsComponent implements OnInit {
     });
 
     if (this.ifUserName != null && this.exerciseName != null) {
-      this.restDb.getExerciseByUsername(this.creator, this.exerciseName).subscribe((data: ExerciseDto[]) => {
+      this.restDb.getExerciseByUsername(this.creator, this.exerciseName).subscribe((data: Exercise[]) => {
         this.exercise = data[0];
+        console.log(this.exercise);
+        console.log(this.exercise.zipFile);
         this.originalDescription = this.exercise.description; // Speichert die Originalbeschreibung für Abbrechen
       });
     }
@@ -88,6 +102,10 @@ export class ExerciseDetailsComponent implements OnInit {
   // Bearbeiten der Beschreibung
   editDescription() {
     this.isEditingDescription = true;
+  }
+
+  editTag(){
+    this.isEditingTag = true;
   }
 
   // Tags auswählen
@@ -146,5 +164,68 @@ export class ExerciseDetailsComponent implements OnInit {
         verticalPosition: 'top',
       });
     });
+    this.isEditingDescription=false;
+    this.isEditingName=false;
+    this.isEditingTag = false;
+  }
+
+  clearEmptyZipFile() {
+    this.emptyZipFile = null;
+    this.emptyZipFileUploaded = false;
+    console.log(this.emptyZipFile);
+  }
+
+  clearZipFile() {
+    this.zipFile = null;
+    this.ZipFileUploaded = false;
+    console.log(this.zipFile);
+  }
+
+  uploadZipFile(event: DragEvent) {
+    const file = event.dataTransfer;
+
+    if (file && file.files && file.files.length > 0) {
+      this.zipFile = file.files[0];
+      this.ZipFileUploaded = true;
+    } else {
+      console.error('No file selected');
+      this.snackBar.open('No file selected', 'Close', {
+        duration: 5000,
+      });
+    }
+  }
+
+    uploadEmptyZipFile(event: DragEvent) {
+    const file = event.dataTransfer;
+
+    if (file && file.files && file.files.length > 0) {
+      this.emptyZipFile = file.files[0];
+      this.emptyZipFileUploaded = true;
+    } else {
+
+      console.error('No file selected');
+      this.snackBar.open('No file selected', 'Close', {
+        duration: 5000,
+      });
+    }
+  }
+
+  createAssignment() {
+    /*this.restDb.AddAssignment(this.exerciseName!, this.ifUserName!, new Date(), 'Assignment ' + this.exerciseName).subscribe((data: any) => {
+      this.snackBar.open('Assignment successfully created', 'Close', {
+        duration: 5000,
+        horizontalPosition: 'center',
+        verticalPosition: 'top',
+      });
+      console.log(data);
+      this.router.navigate(['/create-assignment'], { state: { assignmentData: data } });
+    });*/
+    let data = {
+      exerciseName: this.exerciseName,
+      creator: this.ifUserName,
+      dateDue: new Date(),
+      name: 'Assignment ' + this.exerciseName
+    };
+    this.router.navigate(['/create-assignment'], { state: { assignmentData: data } });
   }
 }

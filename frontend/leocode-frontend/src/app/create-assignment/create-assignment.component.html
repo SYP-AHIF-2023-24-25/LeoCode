@@ -1,0 +1,69 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">LeoCode</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <span class="navbar-text text-light">
+          {{ ifUserName }}
+        </span>
+      </li>
+      <li class="nav-item">
+        <button class="btn btn-outline-light ml-3" (click)="logout()">Logout</button>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<div class="assignment-form">
+  <form [formGroup]="assignmentForm" (ngSubmit)="onSubmit()">
+    
+    <!-- Form Title -->
+    <h2 class="form-title">Create Assignment</h2>
+    
+    <!-- Exercise Name Field -->
+    <mat-form-field class="full-width-field" appearance="outline">
+      <mat-label>Exercise Name</mat-label>
+      <input matInput formControlName="exerciseName" readonly>
+    </mat-form-field>
+
+    <!-- Creator Field -->
+    <mat-form-field class="full-width-field" appearance="outline">
+      <mat-label>Creator</mat-label>
+      <input matInput formControlName="creator" readonly>
+    </mat-form-field>
+
+    <!-- Due Date Field with Date Picker -->
+    <mat-form-field class="full-width-field" appearance="outline">
+      <mat-label>Due Date</mat-label>
+      <input matInput [matDatepicker]="picker" formControlName="dateDue" required>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <!-- Assignment Name Field -->
+    <mat-form-field class="full-width-field" appearance="outline">
+      <mat-label>Assignment Name</mat-label>
+      <input matInput formControlName="name" required>
+    </mat-form-field>
+
+    <!-- Submit Button -->
+    <div class="button-container">
+      <button mat-raised-button class="styled-button" color="primary" type="submit" [disabled]="!assignmentForm.valid">
+        Save Assignment
+      </button>
+    </div>
+    
+
+  </form>
+
+  <!-- Display the assignment link in blue if available -->
+  <div *ngIf="assignmentLink" class="assignment-link">
+    <a [href]="assignmentLink" target="_blank">{{ assignmentLink }}</a>
+  </div>
+</div>
+
+

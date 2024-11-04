@@ -1,0 +1,30 @@
+.assignment-card {
+  border: 1px solid #ccc;
+  padding: 15px;
+  margin-bottom: 20px;
+  border-radius: 10px; /* Abgerundete Ecken für die Assignment-Karte */
+  background-color: #f9f9f9;
+}
+
+.assignment-card h2 {
+  color: #333;
+}
+
+.assignment-card ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.assignment-card li {
+  padding: 5px 0;
+}
+
+.rounded-table {
+  border-radius: 0.5rem; /* Abrundung der Ecken */
+  overflow: hidden; /* Verhindert, dass der Inhalt über die abgerundeten Ecken hinausgeht */
+}
+
+.thead-rounded th {
+  border-top-left-radius: 0.5rem; /* Abrundung der oberen linken Ecke */
+  border-top-right-radius: 0.5rem; /* Abrundung der oberen rechten Ecke */
+}

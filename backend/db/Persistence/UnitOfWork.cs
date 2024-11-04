@@ -5,6 +5,8 @@ namespace Persistence;
 using Base.Persistence;
 using Core.Entities;
 using Microsoft.EntityFrameworkCore;
+using System.Diagnostics;
+using System.Reflection.Metadata;
 
 public class UnitOfWork : BaseUnitOfWork, IUnitOfWork
 {
@@ -19,8 +21,10 @@ public class UnitOfWork : BaseUnitOfWork, IUnitOfWork
         Snippets = new SnippetRepository(dBContext);
         Exercises = new ExerciseRepository(dBContext);
         Assignments = new AssignmentsRepository(dBContext);
+        Tags = new TagRepository(dBContext);
+        AssignmentUser = new AssignmentUserRepository(dBContext);
     }
-
+    public ITagRepository Tags { get; }
     public IUserRepository Users { get; }
     public IExerciseRepository Exercises { get; }
 
@@ -28,4 +32,5 @@ public class UnitOfWork : BaseUnitOfWork, IUnitOfWork
 
     public ISnippetRepository Snippets { get; }
     public IAssignmentsRepository Assignments { get; set; }
+    public IAssignmentUserRepository AssignmentUser { get; set; }
 }
