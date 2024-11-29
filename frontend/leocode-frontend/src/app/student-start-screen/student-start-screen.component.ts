@@ -29,6 +29,15 @@ export class StudentStartScreenComponent implements OnInit {
   userName: string | null= "";
   exerciseName: string |null = "";
   creator: string | undefined = "";
+
+  resultsAvailable: boolean = false;
+  showResults: boolean = true; 
+  showIntroduction: boolean = true;
+  showPlayground: boolean = true;
+  showSummary : boolean = true;
+  showDetailedResults : boolean = true;
+  showHistory : boolean = true;
+ 
  
      exercise : Exercise={
        name: "",
@@ -45,6 +54,11 @@ export class StudentStartScreenComponent implements OnInit {
      };
 
      assignments: Assignment[] = [];
+
+     
+ resultHistory:{message: string,timestamp:Date, passed:number, notPassed:number, total:number, timer:string}[] = [];
+
+
 
  
  
@@ -76,7 +90,8 @@ export class StudentStartScreenComponent implements OnInit {
  
    ngOnInit(): void {
      this.ifUserName = sessionStorage.getItem('ifUserName');
- 
+     this.resultHistory = this.resultHistoryService.getResultsHistory();
+
      this.route.queryParams.subscribe((params: Params) => {
        this.userName = params['userName'];
        this.exerciseName = params['exerciseName'];
@@ -113,6 +128,7 @@ export class StudentStartScreenComponent implements OnInit {
    // parse from json new
    convertFromJsonV2(value: Value): Result {// mit neuen json format
     
+    console.log("Value:"+value);
      const TotalTests: number = value.value.Summary.TotalTests;
      const PassedTests: number = value.value.Summary.PassedTests;
      const FailedTests: number = value.value.Summary.FailedTests;
@@ -140,6 +156,12 @@ export class StudentStartScreenComponent implements OnInit {
  
      return result;
  }
+
+ clearHistory() {
+  this.resultHistoryService.clearResultsHistory();
+  this.resultHistory = [];
+  }
+
  
  
      //reset fields for new json format
@@ -159,6 +181,7 @@ export class StudentStartScreenComponent implements OnInit {
    startTest() {
      this.resetFields();
      this.loading = true;
+     this.resultsAvailable = false;
      const timeLogger = new TimeLoggerService();
      timeLogger.start();
  
@@ -186,11 +209,13 @@ export class StudentStartScreenComponent implements OnInit {
  
              this.resultHistoryService.addResult(logEntry.message, logEntry.passed, logEntry.notPassed, logEntry.total, logEntry.timer);
              this.loading = false;
+             this.resultsAvailable = true;
          },
          (error) => {
              console.error("Error in API request", error);
              this.timer = timeLogger.stop();
              this.loading = false;
+            
          }
      );
      let subject = "";
@@ -250,4 +275,31 @@ export class StudentStartScreenComponent implements OnInit {
         console.error('No exercise found in assignment:', assignment);
     }
   }
+
+  toggleResults() {
+    this.showResults = !this.showResults;
+  }
+
+  toggleIntroduction() {
+    this.showIntroduction = !this.showIntroduction;  // Umschalten zwischen true und false
+  }
+
+  togglePlayground() {
+    this.showPlayground = !this.showPlayground;
+  }
+   // Toggle the visibility of the summary
+   toggleSummary() {
+    this.showSummary = !this.showSummary;
+  }
+
+  // Toggle the visibility of the detailed test results
+  toggleDetailedResults() {
+    this.showDetailedResults = !this.showDetailedResults;
+  }
+
+  // Toggle the visibility of the result history
+  toggleHistory() {
+    this.showHistory = !this.showHistory;
+  }
+
  }

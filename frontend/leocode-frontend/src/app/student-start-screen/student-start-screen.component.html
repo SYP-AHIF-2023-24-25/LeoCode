@@ -6,9 +6,7 @@
   
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link active" [routerLink]="['/introduction']" [queryParams]="{ creator: exercise.teacher?.username}">Introduction</a>
-      </li>
+      
     </ul>
   </div>
   
@@ -28,9 +26,7 @@
 
 <div class="container-fluid">
   <div class="row flex-grow-1">
-    <!-- Sidebar displaying assignment names -->
-    <!-- Sidebar displaying assignment names -->
-    <div class="col-md-2 d-none d-md-block bg-light sidebar">
+    <div class="col-md-2 d-none d-md-block sidebar" style="background-color: lightgray; height: 100vh;">
       <div class="sidebar-sticky">
         <h2>Assignments</h2>
         <ul class="nav flex-column">
@@ -43,62 +39,128 @@
       </div>
     </div>
 
-    
+    <!-- Main content -->
     <div class="col-md-10 content">
       <div class="container mt-4">
-        <h2>Playground: {{exercise.name}}</h2>
-        
-        <!-- Loop through code sections -->
-        <div *ngFor="let codeSection of exercise.arrayOfSnippets" class="mb-3">
-          <!-- Readonly code section -->
-          <div *ngIf="codeSection.readonlySection">
-             <pre class="p bg-light" style="border: 1px solid #ddd; white-space: pre-wrap;">
-              {{ codeSection.code }}
-            </pre>
+        <!-- Show this message if no assignment is selected -->
+        <div *ngIf="!exercise.name">
+          <h3>Welcome to the playground. Please choose an assignment.</h3>
+        </div>
+
+        <!-- Title with toggle -->
+        <h1 *ngIf="exercise.name" (click)="toggleIntroduction()" style="cursor: pointer; margin-bottom: 20px;">{{exercise.name}}</h1>
+
+        <!-- Introduction text -->
+        <div *ngIf="exercise.name && showIntroduction" style="margin-bottom: 40px;">
+          <p>{{exercise.description}}</p>
+        </div>
+
+        <!-- Toggleable Playground section -->
+        <h2 *ngIf="exercise.name" (click)="togglePlayground()" style="cursor: pointer;">Playground</h2>
+        <div *ngIf="exercise.name && showPlayground">
+          <div *ngFor="let codeSection of exercise.arrayOfSnippets" class="mb-3">
+            <!-- Readonly code section -->
+            <div *ngIf="codeSection.readonlySection">
+              <pre class="p bg-light" style="border: 1px solid #ddd; white-space: pre-wrap;">
+                {{ codeSection.code }}
+              </pre>
+            </div>
+            <!-- Editable code section -->
+            <div *ngIf="!codeSection.readonlySection" style="height: 300px;">
+              <ngx-monaco-editor style="height: 300px; width: 100%;" [options]="editorOptions" [(ngModel)]="codeSection.code"></ngx-monaco-editor>
+            </div>
           </div>
-          <!-- Editable code section -->
-          <div *ngIf="!codeSection.readonlySection" style="height: 300px;">
-            <ngx-monaco-editor style="height: 300px; width: 100%;" [options]="editorOptions" [(ngModel)]="codeSection.code"></ngx-monaco-editor>
+
+        <!-- Loading bar -->
+        <div *ngIf="loading" class="text-center my-3">         
+          <mat-progress-bar mode="indeterminate" color="primary"></mat-progress-bar> 
+        </div>
+
+        <!-- Start Tests button -->
+        <div *ngIf="exercise.name" class="d-flex justify-content-start align-items-center my-4" style="gap: 1rem;">
+          <button (click)="startTest()" class="btn btn-sm btn-primary d-flex align-items-center" [disabled]="loading" style="padding: 0.5rem 1rem; font-size: 1rem;">
+            Start Tests
+          </button>
+        </div>
+      </div>
+    </div>
+
+      <!-- Unit Test Results -->
+      <div *ngIf="resultsAvailable" style="margin-top: 3rem;">
+        <h1 (click)="toggleResults()" style="cursor: pointer;">Unit Test Results</h1>
+        
+        <div *ngIf="showResults">
+          <h2 (click)="toggleSummary()" style="cursor: pointer;">Summary</h2>
+          <div *ngIf="showSummary">
+            <table class="table table-striped table-bordered">
+              <thead class="thead-dark">
+                <tr>
+                  <th>Messages</th>
+                  <th>Passed</th>
+                  <th>Not Passed</th>
+                  <th>Total Tests</th>
+                  <th>Timer</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Tests</td>
+                  <td>{{ result.Summary.PassedTests }}</td>
+                  <td>{{ result.Summary.FailedTests }}</td>
+                  <td>{{ result.Summary.TotalTests }}</td>
+                  <td>{{ timer }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h2 (click)="toggleDetailedResults()" style="cursor: pointer;">Detailed Test Results</h2>
+          <div *ngIf="showDetailedResults">
+            <table class="table table-striped table-bordered">
+              <thead class="thead-light">
+                <tr>
+                  <th>Test Name</th>
+                  <th>Outcome</th>
+                </tr>
+              </thead>
+              <tbody>
+                <ng-container *ngFor="let testResult of result.TestResults">
+                  <tr>
+                    <td>{{ testResult.TestName }}</td>
+                    <td [ngStyle]="{'color': testResult.Outcome === 'Passed' ? 'green' : 'red'}">
+                      {{ testResult.Outcome }}
+                    </td>
+                  </tr>
+                  <tr *ngIf="testResult.Outcome === 'Failed' && testResult.ErrorMessage">
+                    <td colspan="2" style="padding-left: 40px; color: red;">
+                      Error: {{ testResult.ErrorMessage }}
+                    </td>
+                  </tr>
+                </ng-container>
+              </tbody>
+            </table>
           </div>
         </div>
-        
-        <h1>Unitests-result</h1>
-        <table class="table table-striped table-bordered">
-          <thead class="thead-dark">
-            <tr>
-              <th>Messages</th>
-              <th>Passed</th>
-              <th>Not Passed</th>
-              <th>Total Tests</th>
-              <th>Timer</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Tests</td>
-              <td>{{ result.Summary.PassedTests }}</td>
-              <td>{{ result.Summary.FailedTests }}</td>
-              <td>{{ result.Summary.TotalTests }}</td>
-              <td>{{ timer }}</td>
-            </tr>
-            <ng-container *ngFor="let testResult of result.TestResults">
-              <tr>
-                <td colspan="4">{{ testResult.TestName }}</td>
-                <td [ngStyle]="{'color': testResult.Outcome === 'Passed' ? 'green' : 'red'}">{{ testResult.Outcome }}</td>
-              </tr>
-              <!-- Error message row for failed tests -->
-              <tr *ngIf="testResult.Outcome === 'Failed' && testResult.ErrorMessage">
-                <td colspan="5" style="padding-left: 40px; color: red;">Error: {{ testResult.ErrorMessage }}</td>
-              </tr>
-            </ng-container>
-          </tbody>
-        </table>
-        
-        <mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar>
-        <br><br>
-        
-        <button (click)="startTest()" class="btn btn-primary" [disabled]="loading">Start Tests</button>
-        <button routerLink="/result-history" class="btn btn-primary ml-2">Result History</button>
+      </div>
+
+      <!-- Result History (only if not empty) -->
+      <h1 *ngIf="exercise.name && resultHistory.length > 0" (click)="toggleHistory()" style="cursor: pointer;">Result-History</h1>
+      <div *ngIf="showHistory && exercise.name && resultHistory.length > 0">
+        <ul class="list-group">
+          <li *ngFor="let entry of resultHistory" class="list-group-item d-flex justify-content-between">
+            <div>
+              <strong>{{ entry.timestamp | date }}</strong><br>
+              <small>{{ entry.message }}</small>
+            </div>
+            <div class="text-muted">
+              <span class="badge badge-success">{{ entry.passed }} Passed</span>
+              <span class="badge badge-danger">{{ entry.notPassed }} Failed</span>
+              <span class="badge badge-info">{{ entry.total }} Total</span>
+              <span class="badge badge-secondary">{{ entry.timer }}</span>
+            </div>
+          </li>
+        </ul>
+        <button class="btn btn-danger mt-3" (click)="clearHistory()">Clear History</button>
       </div>
     </div>
   </div>

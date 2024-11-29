@@ -95,11 +95,11 @@
             <div class="col-md-12">
               <div class="card mt-5">
                 <div class="card-body" style="height: 500px; width: 1000px">
-                  <h2 class="card-title">Step 3: Chose Tags</h2>
+                  <h2 class="card-title">Step 3: Choose Tags</h2>
                   <!-- Ausgewählte Tags anzeigen -->
                   <form>
                     <mat-form-field class="example-chip-list">
-                      <mat-label>Chosen Tags</mat-label>
+                      <mat-label>Choose Tags</mat-label>
                       <mat-chip-grid #chipGrid aria-label="Tag selection">
                         <mat-chip-row *ngFor="let tag of selectedTags" (removed)="removeTag(tag)">
                           {{tag}}
