@@ -28,6 +28,17 @@ export class TestResultComponent  implements OnInit{
  userName: string | null= "";
  exerciseName: string |null = "";
  creator: string | undefined = "";
+ resultsAvailable: boolean = false;
+ showResults: boolean = true; 
+ showIntroduction: boolean = true;
+ showPlayground: boolean = true;
+ showSummary : boolean = true;
+ showDetailedResults : boolean = true;
+ showHistory : boolean = true;
+
+ resultHistory:{message: string,timestamp:Date, passed:number, notPassed:number, total:number, timer:string}[] = [];
+
+
 
     exercise : Exercise={
       name: "",
@@ -45,7 +56,14 @@ export class TestResultComponent  implements OnInit{
 
 
   //Code Editor
-  editorOptions = { theme: 'vs-dark', language: this.exercise.language}; // language auswählen
+  editorOptions = { 
+    theme: 'vs-dark', 
+    language: this.exercise.language.toLowerCase(), 
+    automaticLayout: true,  
+    lineNumbers: 'on',
+    minimap: { enabled: false }, 
+    wordWrap: 'on' 
+  }; 
 
   // timer
   timer: string = "";
@@ -72,7 +90,8 @@ export class TestResultComponent  implements OnInit{
 
   ngOnInit(): void {
     this.ifUserName = sessionStorage.getItem('ifUserName');
-
+    this.resultHistory = this.resultHistoryService.getResultsHistory();
+    
     this.route.queryParams.subscribe((params: Params) => {
       this.userName = params['userName'];
       this.exerciseName = params['exerciseName'];
@@ -98,6 +117,12 @@ export class TestResultComponent  implements OnInit{
     });
     }
   }
+
+  clearHistory() {
+    this.resultHistoryService.clearResultsHistory();
+    this.resultHistory = [];
+  }
+
   
   // parse from json new
   convertFromJsonV2(value: Value): Result {// mit neuen json format
@@ -149,6 +174,7 @@ export class TestResultComponent  implements OnInit{
   startTest() {
     this.resetFields();
     this.loading = true;
+    this.resultsAvailable = false;
     const timeLogger = new TimeLoggerService();
     timeLogger.start();
 
@@ -176,6 +202,7 @@ export class TestResultComponent  implements OnInit{
 
             this.resultHistoryService.addResult(logEntry.message, logEntry.passed, logEntry.notPassed, logEntry.total, logEntry.timer);
             this.loading = false;
+            this.resultsAvailable = true;
         },
         (error) => {
             console.error("Error in API request", error);
@@ -202,5 +229,31 @@ export class TestResultComponent  implements OnInit{
     } else {
       console.error("Username is null");
     }
+  }
+
+  toggleResults() {
+    this.showResults = !this.showResults;
+  }
+
+  toggleIntroduction() {
+    this.showIntroduction = !this.showIntroduction;  // Umschalten zwischen true und false
+  }
+
+  togglePlayground() {
+    this.showPlayground = !this.showPlayground;
+  }
+   // Toggle the visibility of the summary
+   toggleSummary() {
+    this.showSummary = !this.showSummary;
+  }
+
+  // Toggle the visibility of the detailed test results
+  toggleDetailedResults() {
+    this.showDetailedResults = !this.showDetailedResults;
+  }
+
+  // Toggle the visibility of the result history
+  toggleHistory() {
+    this.showHistory = !this.showHistory;
   }
 }

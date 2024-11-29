@@ -1,22 +1,35 @@
-.welcome-text {
-    font-size: 80px; /* Noch größerer Text */
-    font-weight: bold;
-    color: #2c3e50; /* Dunklerer Blauton */
-    text-align: center;
-    position: absolute;
-    margin-top: 20%;
-    margin-left: 20%;
-  }
+/* Stil für das Sidebar-Menü */
+.sidebar {
+  background-color: #f8f9fa; /* Helles Grau für den Hintergrund */
+  border-right: 1px solid #ddd; /* Subtile Trennlinie */
+  height: 100vh;
+  padding-top: 20px;
+}
+
+/* Stil für die Assignments */
+.nav-item {
+  margin-bottom: 10px; /* Etwas Abstand zwischen den Items */
+}
+
+.nav-link {
+  font-weight: 600;
+  padding: 8px 15px;
+  border-radius: 4px;  /* Abgerundete Ecken */
+  color: #495057; /* Dunkles Grau */
+  transition: background-color 0.3s ease, color 0.3s ease; /* Sanfter Übergang */
+}
+
+.nav-link:hover {
+  background-color: #007bff; /* Heller blauer Hintergrund beim Hover */
+  color: white !important; /* Weiße Schrift beim Hover */
+}
+
+/* Stil für das aktive Assignment */
+.active-assignment {
+  background-color: #007bff !important; /* Blaue Hintergrundfarbe */
+  color: white !important; /* Weiße Schrift */
+  font-weight: bold; /* Fettdruck für den Text */
+  box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3); /* Subtle shadow around the active item */
+}
+
   
-  .navbar-nav {
-    align-items: center;
-  }
-  
-  .navbar-text {
-    margin-right: 15px;
-  }
-  
-  .btn {
-    padding: 5px 10px;
-    font-size: 14px;
-  }
