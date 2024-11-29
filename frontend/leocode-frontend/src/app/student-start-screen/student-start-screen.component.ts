@@ -37,6 +37,8 @@ export class StudentStartScreenComponent implements OnInit {
   showSummary : boolean = true;
   showDetailedResults : boolean = true;
   showHistory : boolean = true;
+
+  selectedAssignment: any = null; // To hold the selected assignment details
  
  
      exercise : Exercise={
@@ -158,6 +160,7 @@ export class StudentStartScreenComponent implements OnInit {
  }
 
  clearHistory() {
+  
   this.resultHistoryService.clearResultsHistory();
   this.resultHistory = [];
   }
@@ -166,6 +169,8 @@ export class StudentStartScreenComponent implements OnInit {
  
      //reset fields for new json format
      resetFields() {
+      this.resultsAvailable = false;
+
        this.result = {
          Summary: {
            TotalTests: 0,
@@ -240,7 +245,9 @@ export class StudentStartScreenComponent implements OnInit {
 
    loadAssignment(assignment: any): void {
     // Extract exercise details from the assignment
+    this.resetFields();
     const exercise = assignment.exercise;
+    this.selectedAssignment = assignment;
     
 
     // Check if exercise exists and extract its properties

@@ -28,7 +28,8 @@ import { ExerciseDetailsComponent } from './exercise-details/exercise-details.co
 import { CreateAssignmentComponent } from './create-assignment/create-assignment.component';
 import { JoinAssignmentComponentComponent } from './join-assignment-component/join-assignment-component.component';
 import { AssignmentOverviewComponent } from './assignment-overview/assignment-overview.component';
-
+import { MatTableModule } from '@angular/material/table'; // Hier importieren wir das MatTableModule
+import { MatButtonModule } from '@angular/material/button'; // Für Material Buttons
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () => keycloak.init({
@@ -83,7 +84,8 @@ function initializeKeycloak(keycloak: KeycloakService) {
     MatDatepickerModule,
     MatInputModule,
     MatFormFieldModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatTableModule,
   ],
   providers: [KeycloakService,
     {

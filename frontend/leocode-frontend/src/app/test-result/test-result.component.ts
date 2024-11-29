@@ -58,7 +58,7 @@ export class TestResultComponent  implements OnInit{
   //Code Editor
   editorOptions = { 
     theme: 'vs-dark', 
-    language: this.exercise.language, 
+    language: this.exercise.language.toLowerCase(), 
     automaticLayout: true,  
     lineNumbers: 'on',
     minimap: { enabled: false }, 
