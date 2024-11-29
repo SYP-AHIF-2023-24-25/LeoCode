@@ -136,3 +136,37 @@
 11/03/2024 21:58:21: SUCCESS: Response from CSharp-runner was successful
 11/04/2024 08:17:12: SUCCESS: Response from CSharp-runner was successful
 11/04/2024 08:17:42: SUCCESS: Response from CSharp-runner was successful
+11/29/2024 10:54:26: SUCCESS: Response from TypeScript-runner was successful
+11/29/2024 10:56:45: SUCCESS: Response from TypeScript-runner was successful
+11/29/2024 11:03:14: SUCCESS: Response from TypeScript-runner was successful
+11/29/2024 11:03:40: SUCCESS: Response from TypeScript-runner was successful
+11/29/2024 11:06:43: SUCCESS: Response from TypeScript-runner was successful
+11/29/2024 11:10:48: SUCCESS: Response from TypeScript-runner was successful
+11/29/2024 11:15:14: SUCCESS: Response from TypeScript-runner was successful
+11/29/2024 11:15:35: SUCCESS: Response from TypeScript-runner was successful
+11/29/2024 11:17:04: SUCCESS: Response from TypeScript-runner was successful
+11/29/2024 11:21:48: SUCCESS: Response from TypeScript-runner was successful
+11/29/2024 11:22:21: SUCCESS: Response from TypeScript-runner was successful
+11/29/2024 11:25:52: SUCCESS: Response from TypeScript-runner was successful
+11/29/2024 11:26:04: SUCCESS: Response from TypeScript-runner was successful
+11/29/2024 11:29:17: SUCCESS: Response from TypeScript-runner was successful
+11/29/2024 11:30:05: SUCCESS: Response from TypeScript-runner was successful
+11/29/2024 11:30:48: SUCCESS: Response from TypeScript-runner was successful
+11/29/2024 11:35:48: SUCCESS: Response from TypeScript-runner was successful
+11/29/2024 11:36:08: SUCCESS: Response from TypeScript-runner was successful
+11/29/2024 11:50:54: SUCCESS: Response from CSharp-runner was successful
+11/29/2024 11:56:45: SUCCESS: Response from CSharp-runner was successful
+11/29/2024 11:56:45: ERROR: Response from CSharp-runner wasn't successful. Error Message: Data at the root level is invalid. Line 1, position 1.
+11/29/2024 11:58:19: SUCCESS: Response from CSharp-runner was successful
+11/29/2024 12:00:43: SUCCESS: Response from CSharp-runner was successful
+11/29/2024 12:07:58: ERROR: Response from -runner wasn't successful. Error Message: Index was outside the bounds of the array.
+11/29/2024 12:14:17: SUCCESS: Response from CSharp-runner was successful
+11/29/2024 12:15:14: SUCCESS: Response from CSharp-runner was successful
+11/29/2024 12:16:18: SUCCESS: Response from CSharp-runner was successful
+11/29/2024 12:18:15: SUCCESS: Response from CSharp-runner was successful
+11/29/2024 12:19:11: SUCCESS: Response from CSharp-runner was successful
+11/29/2024 12:20:44: SUCCESS: Response from CSharp-runner was successful
+11/29/2024 12:26:52: SUCCESS: Response from CSharp-runner was successful
+11/29/2024 12:29:45: SUCCESS: Response from CSharp-runner was successful
+11/29/2024 12:30:00: SUCCESS: Response from CSharp-runner was successful
+11/29/2024 12:40:45: SUCCESS: Response from CSharp-runner was successful

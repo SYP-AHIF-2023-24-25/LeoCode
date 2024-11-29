@@ -12,6 +12,7 @@ export class AssignmentOverviewComponent implements OnInit {
   firstName: string | null = '';
   ifUserName: string | null = '';
   assignments: any[] = []; // Array to hold parsed assignment data
+  selectedAssignment: any = null; // To hold the selected assignment details
 
   constructor(
     private keycloakService: KeycloakService,
@@ -27,7 +28,14 @@ export class AssignmentOverviewComponent implements OnInit {
     this.restDb.GetAssignmentsByUsernameForTeacher(this.ifUserName).subscribe((data: any) => {
       // Parse the assignments and students
       if (data && data.$values) {
-        this.assignments = data.$values.map((assignment: { assignmentName: any; dueDate: any; exerciseName: any; teacher: { firstname: any; lastname: any; }; students: { $values: any[]; }; }) => ({
+        this.assignments = data.$values.map((assignment: { 
+          assignmentName: any; 
+          dueDate: any; 
+          exerciseName: any; 
+          teacher: { firstname: any; lastname: any; }; 
+          students: { $values: any[]; }; 
+          exercise: { tags: any[]; language: string; }; // exercise contains tags and language
+        }) => ({
           assignmentName: assignment.assignmentName,
           dueDate: assignment.dueDate,
           exerciseName: assignment.exerciseName,
@@ -36,15 +44,28 @@ export class AssignmentOverviewComponent implements OnInit {
             studentFirstname: student.firstname,
             studentLastname: student.lastname,
             studentUsername: student.username
-          }))
+          })),
+          tags: assignment.exercise?.tags || [],  // Handle possible null or undefined
+          language: assignment.exercise?.language || 'No language specified',  // Default value if no language is provided
+          showStudents: false // Initially hide the students
         }));
       }
       console.log(this.assignments); // Log the parsed assignments
     });
   }
 
+  // Select the assignment to show details
+  selectAssignment(assignment: any): void {
+    this.selectedAssignment = assignment;
+  }
+
   async logout(): Promise<void> {
     sessionStorage.setItem('shouldLogOut', 'true');
     this.router.navigate(['/login']);
+  }
+
+  // Method to toggle the visibility of students list
+  toggleStudents(assignment: any): void {
+    assignment.showStudents = !assignment.showStudents;
   }
 }

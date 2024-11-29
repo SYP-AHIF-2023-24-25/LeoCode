@@ -141,25 +141,24 @@
           </div>
         </div>
 
-        <!-- Result History -->
-        <h1 (click)="toggleHistory()" style="cursor: pointer;">Result-History</h1>
-        <div *ngIf="showHistory">
-          <ul class="list-group">
-            <li *ngFor="let entry of resultHistory" class="list-group-item d-flex justify-content-between">
-              <div>
-                <strong>{{ entry.timestamp | date }}</strong><br>
-                <small>{{ entry.message }}</small>
-              </div>
-              <div class="text-muted">
-                <span class="badge badge-success">{{ entry.passed }} Passed</span>
-                <span class="badge badge-danger">{{ entry.notPassed }} Failed</span>
-                <span class="badge badge-info">{{ entry.total }} Total</span>
-                <span class="badge badge-secondary">{{ entry.timer }}</span>
-              </div>
-            </li>
-          </ul>
-          <button class="btn btn-danger mt-3" (click)="clearHistory()">Clear History</button>
-        </div>
+        <!-- Result History (only if not empty) -->
+      <h1 *ngIf="exercise.name && resultHistory.length > 0" (click)="toggleHistory()" style="cursor: pointer;">Result-History</h1>
+      <div *ngIf="showHistory && exercise.name && resultHistory.length > 0">
+        <ul class="list-group">
+          <li *ngFor="let entry of resultHistory" class="list-group-item d-flex justify-content-between">
+            <div>
+              <strong>{{ entry.timestamp | date }}</strong><br>
+              <small>{{ entry.message }}</small>
+            </div>
+            <div class="text-muted">
+              <span class="badge badge-success">{{ entry.passed }} Passed</span>
+              <span class="badge badge-danger">{{ entry.notPassed }} Failed</span>
+              <span class="badge badge-info">{{ entry.total }} Total</span>
+              <span class="badge badge-secondary">{{ entry.timer }}</span>
+            </div>
+          </li>
+        </ul>
+        <button class="btn btn-danger mt-3" (click)="clearHistory()">Clear History</button>
       </div>
     </div>
   </div>

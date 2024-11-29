@@ -73,7 +73,7 @@ namespace Persistence
 
             if (!string.IsNullOrEmpty(username))
             {
-                query = query.Where(a => a.Teacher.Username == username);
+                query = query.Where(a => a.Teacher.Username == username).OrderBy(a => a.DateDue);
             }
 
             var assignments = await query.ToListAsync();
