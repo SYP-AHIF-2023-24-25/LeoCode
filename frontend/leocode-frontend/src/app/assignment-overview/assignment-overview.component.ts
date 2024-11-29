@@ -34,11 +34,11 @@ export class AssignmentOverviewComponent implements OnInit {
           exerciseName: any; 
           teacher: { firstname: any; lastname: any; }; 
           students: { $values: any[]; }; 
-          exercise: { tags: any[]; language: string; }; // exercise contains tags and language
+          exercise: { tags: any[]; language: string; exerciseName: string}; // exercise contains tags and language
         }) => ({
           assignmentName: assignment.assignmentName,
           dueDate: assignment.dueDate,
-          exerciseName: assignment.exerciseName,
+          exerciseName: assignment.exercise?.exerciseName,
           teacher: `${assignment.teacher.firstname} ${assignment.teacher.lastname}`,
           students: assignment.students.$values.map(student => ({
             studentFirstname: student.firstname,

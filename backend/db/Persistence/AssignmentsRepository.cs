@@ -66,8 +66,8 @@ namespace Persistence
         {
             IQueryable<Assignments> query = _dbContext.Assignments
                 .Include(a => a.Teacher)
-                .Include(a => a.Exercise)
-                    .ThenInclude(e => e.Tags)
+                .Include(a => a.Exercise) // Lädt die Exercise mit allen primitiven Feldern (inkl. Language)
+                    .ThenInclude(e => e.Tags) // Lädt die Tags von Exercise
                 .Include(a => a.AssignmentUsers)
                     .ThenInclude(au => au.User);
 
@@ -83,7 +83,12 @@ namespace Persistence
             {
                 AssignmentName = a.Name,
                 DueDate = a.DateDue,
-                ExerciseName = a.Exercise.Name,
+                Exercise = new ExerciseAssignemntDto
+                {
+                    Language = a.Exercise.Language.ToString(),
+                    ExerciseName = a.Exercise.Name,
+                    Tags = a.Exercise.Tags.Select(t => t.Name).ToArray()
+                },
                 Teacher = new TeacherDto
                 {
                     Firstname = a.Teacher.Firstname,
