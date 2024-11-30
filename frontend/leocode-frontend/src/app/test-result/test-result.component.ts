@@ -52,6 +52,8 @@ export class TestResultComponent  implements OnInit{
       teacher: undefined
     };
 
+    mergedCodeSections: CodeSection[] = [];
+
 
   //Code Editor
   editorOptions = { 
@@ -61,7 +63,17 @@ export class TestResultComponent  implements OnInit{
     automaticLayout: true,  
     lineNumbers: 'on',
     minimap: { enabled: false }, 
-    wordWrap: 'on' 
+    wordWrap: 'on' ,
+    readonly: false
+  }; 
+  readonlyEditorOptions = {
+    theme: 'vs-dark', 
+    language: this.exercise.language.toLowerCase(), 
+    automaticLayout: true,  
+    lineNumbers: 'on',
+    minimap: { enabled: false }, 
+    wordWrap: 'on' ,
+    readonly: true
   }; 
 
   // timer
@@ -115,10 +127,13 @@ export class TestResultComponent  implements OnInit{
         console.log(this.exercise.dateCreated);
         this.editorOptions.language = this.exercise.language.toLowerCase();
         console.log(this.editorOptions.language);
+
+        this.mergeCodeSections();
     });
     }
 
   }
+  
 
   clearHistory() {
     this.resultHistoryService.clearResultsHistory();
@@ -181,8 +196,19 @@ export class TestResultComponent  implements OnInit{
     timeLogger.start();
 
 
-    //this.rest.runTests('PasswordChecker', this.codeSections, "Typescript").subscribe(
+    // merge the new code into th exercise.arrayOfSnippets
+    this.exercise.arrayOfSnippets.forEach((section) => {
+      if(section.readonlySection == false){
+        this.mergedCodeSections.forEach((section2) => {
+          if(section2.readonlySection == false){
+            section.code = section2.code;
+          }
+        });
+      } 
+    });
+    
     console.log(this.exercise.language);
+    console.log(this.exercise.arrayOfSnippets);
       this.rest.runTests(this.exercise.name, this.exercise.arrayOfSnippets, this.exercise.language).subscribe(
         (data) => {
           console.log(data);
@@ -232,6 +258,45 @@ export class TestResultComponent  implements OnInit{
       console.error("Username is null");
     }
   }
+
+  mergeCodeSections(): void {
+    setTimeout(() => {  // Verarbeitung im Hintergrund, um den UI-Thread nicht zu blockieren
+      let mergedSectionStringBeforEditSection = "";
+      let editSection = "";
+      let foundEditableSection = false;
+      let mergedCodeSectionsAfterEditSection = "";
+  
+      this.exercise.arrayOfSnippets.forEach((section) => {
+        if (section.readonlySection && !foundEditableSection) {
+          mergedSectionStringBeforEditSection += section.code;
+        } else if (!section.readonlySection && !foundEditableSection) {
+          foundEditableSection = true;
+          editSection = section.code;
+        } else {
+          mergedCodeSectionsAfterEditSection += section.code;
+        }
+      });
+  
+      this.mergedCodeSections = [
+        {
+          code: mergedSectionStringBeforEditSection,
+          readonlySection: true,
+          fileName: "Before Editable Section"
+        },
+        {
+          code: editSection,
+          readonlySection: false,
+          fileName: "Editable Section"
+        },
+        {
+          code: mergedCodeSectionsAfterEditSection,
+          readonlySection: true,
+          fileName: "After Editable Section"
+        }
+      ];
+    }, 0); // asynchron verarbeiten
+  }
+  
 
   toggleResults() {
     this.showResults = !this.showResults;

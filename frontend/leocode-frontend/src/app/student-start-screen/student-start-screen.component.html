@@ -71,16 +71,14 @@
       <!-- Toggleable Playground section -->
       <h2 *ngIf="exercise.name" (click)="togglePlayground()" class="text-info" style="cursor: pointer;">Playground</h2>
       <div *ngIf="showPlayground">
-        <div *ngFor="let codeSection of exercise.arrayOfSnippets" class="mb-4">
+        <div *ngFor="let codeSection of mergedCodeSections" class="mb-4">
           <!-- Readonly code section -->
           <div *ngIf="codeSection.readonlySection">
-            <pre class="p bg-light border rounded" style="white-space: pre-wrap; padding: 15px;">
-              {{ codeSection.code }}
-            </pre>
+            <ngx-monaco-editor  style="height: 150px; width: 100%;" [options]="readonlyEditorOptions" [(ngModel)]="codeSection.code"></ngx-monaco-editor>
           </div>
           <!-- Editable code section -->
           <div *ngIf="!codeSection.readonlySection" style="height: 300px;">
-            <ngx-monaco-editor style="height: 300px; width: 100%;" [options]="editorOptions" [(ngModel)]="codeSection.code"></ngx-monaco-editor>
+            <ngx-monaco-editor  style="height: 300px; width: 100%;" [options]="editorOptions" [(ngModel)]="codeSection.code"></ngx-monaco-editor>
           </div>
         </div>
 

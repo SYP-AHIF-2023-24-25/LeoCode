@@ -61,11 +61,30 @@ export class StudentStartScreenComponent implements OnInit {
  resultHistory:{message: string,timestamp:Date, passed:number, notPassed:number, total:number, timer:string}[] = [];
 
 
+ mergedCodeSections: CodeSection[] = [];
 
  
  
    //Code Editor
-   editorOptions = { theme: 'vs-dark', language: this.exercise.language}; // language auswählen
+   editorOptions = { 
+   
+    theme: 'vs-dark', 
+    language: this.exercise.language.toLowerCase(), 
+    automaticLayout: true,  
+    lineNumbers: 'on',
+    minimap: { enabled: false }, 
+    wordWrap: 'on' ,
+    readonly: false
+  }; 
+   readonlyEditorOptions = {
+    theme: 'vs-dark', 
+    language: this.exercise.language.toLowerCase(), 
+    automaticLayout: true,  
+    lineNumbers: 'on',
+    minimap: { enabled: false }, 
+    wordWrap: 'on' ,
+    readonly: true
+  }; 
  
    // timer
    timer: string = "";
@@ -120,6 +139,7 @@ export class StudentStartScreenComponent implements OnInit {
       } else {
         console.error('Expected data to be an array, but received:', data);
       }
+      
     }, (error) => {
       console.error('Error fetching assignments:', error);
     });
@@ -191,7 +211,18 @@ export class StudentStartScreenComponent implements OnInit {
      timeLogger.start();
  
  
-     //this.rest.runTests('PasswordChecker', this.codeSections, "Typescript").subscribe(
+     
+        // merge the new code into th exercise.arrayOfSnippets
+    this.exercise.arrayOfSnippets.forEach((section) => {
+      if(section.readonlySection == false){
+        this.mergedCodeSections.forEach((section2) => {
+          if(section2.readonlySection == false){
+            section.code = section2.code;
+          }
+        });
+      } 
+    });
+
      console.log(this.exercise.language);
        this.rest.runTests(this.exercise.name, this.exercise.arrayOfSnippets, this.exercise.language).subscribe(
          (data) => {
@@ -278,10 +309,50 @@ export class StudentStartScreenComponent implements OnInit {
         sessionStorage.setItem("exerciseName",this.exercise.name);
 
         console.log('Loaded assignment with exercise:', this.exercise);
+        this.mergeCodeSections();
     } else {
         console.error('No exercise found in assignment:', assignment);
     }
   }
+
+  mergeCodeSections(): void {
+    setTimeout(() => {  // Verarbeitung im Hintergrund, um den UI-Thread nicht zu blockieren
+      let mergedSectionStringBeforEditSection = "";
+      let editSection = "";
+      let foundEditableSection = false;
+      let mergedCodeSectionsAfterEditSection = "";
+  
+      this.exercise.arrayOfSnippets.forEach((section) => {
+        if (section.readonlySection && !foundEditableSection) {
+          mergedSectionStringBeforEditSection += section.code;
+        } else if (!section.readonlySection && !foundEditableSection) {
+          foundEditableSection = true;
+          editSection = section.code;
+        } else {
+          mergedCodeSectionsAfterEditSection += section.code;
+        }
+      });
+  
+      this.mergedCodeSections = [
+        {
+          code: mergedSectionStringBeforEditSection,
+          readonlySection: true,
+          fileName: "Before Editable Section"
+        },
+        {
+          code: editSection,
+          readonlySection: false,
+          fileName: "Editable Section"
+        },
+        {
+          code: mergedCodeSectionsAfterEditSection,
+          readonlySection: true,
+          fileName: "After Editable Section"
+        }
+      ];
+    }, 0); // asynchron verarbeiten
+  }
+  
 
   toggleResults() {
     this.showResults = !this.showResults;
