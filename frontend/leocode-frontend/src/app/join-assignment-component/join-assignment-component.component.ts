@@ -59,13 +59,13 @@ export class JoinAssignmentComponentComponent implements OnInit {
           if (res === 'You are at least a student') {
             if (ifUserName === 'if200183') {
               // API call to create user for teacher
-              this.rest.AddUser(ifUserName, firstname, lastname, true).subscribe((data: any) => {
+              this.rest.AddTeacher(ifUserName, firstname, lastname).subscribe((data: any) => {
                 console.log(data);
                 this.router.navigate(['/start-screen']);
               });
             } else {
               // API call to create user for student
-              this.rest.AddUser(ifUserName, firstname, lastname, false).subscribe((data: any) => {
+              this.rest.AddStudent(ifUserName, firstname, lastname).subscribe((data: any) => {
                 console.log(data);
               });
               // Use the assignmentId here
@@ -78,7 +78,7 @@ export class JoinAssignmentComponentComponent implements OnInit {
             }
           } else {
             // API call to create user for teacher
-            this.rest.AddUser(ifUserName, firstname, lastname, true).subscribe((data: any) => {
+            this.rest.AddStudent(ifUserName, firstname, lastname).subscribe((data: any) => {
               console.log(data);
               this.router.navigate(['/start-screen']);
             });

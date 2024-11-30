@@ -225,7 +225,7 @@ export class TestResultComponent  implements OnInit{
     console.log(this.exercise.name);
     console.log(this.exercise.tags.length);
     if (usrname) {
-      this.restDb.UpdateExercise(usrname, this.exercise.description, this.exercise.language, this.exercise.tags, this.exercise.name, arrayOfSnippets, subject).subscribe();
+      //this.restDb.UpdateExercise(usrname, this.exercise.description, this.exercise.language, this.exercise.tags, this.exercise.name, arrayOfSnippets, subject,this.exercise.dateCreated, this.exercise.dateUpdated).subscribe();
     } else {
       console.error("Username is null");
     }

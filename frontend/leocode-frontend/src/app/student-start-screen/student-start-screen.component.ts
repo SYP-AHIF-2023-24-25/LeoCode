@@ -116,7 +116,6 @@ export class StudentStartScreenComponent implements OnInit {
           this.assignments.push(assignment);
         });
     
-        console.log(this.assignments);
       } else {
         console.error('Expected data to be an array, but received:', data);
       }
@@ -130,12 +129,10 @@ export class StudentStartScreenComponent implements OnInit {
    // parse from json new
    convertFromJsonV2(value: Value): Result {// mit neuen json format
     
-    console.log("Value:"+value);
      const TotalTests: number = value.value.Summary.TotalTests;
      const PassedTests: number = value.value.Summary.PassedTests;
      const FailedTests: number = value.value.Summary.FailedTests;
  
-     console.log(PassedTests);
  
      const summary: Summary = {
          TotalTests,
@@ -183,7 +180,7 @@ export class StudentStartScreenComponent implements OnInit {
      }
  
    // start tests for new json format
-   startTest() {
+  startTest() {
      this.resetFields();
      this.loading = true;
      this.resultsAvailable = false;
@@ -193,16 +190,13 @@ export class StudentStartScreenComponent implements OnInit {
  
      //this.rest.runTests('PasswordChecker', this.codeSections, "Typescript").subscribe(
      console.log(this.exercise.language);
-       this.rest.runTests(this.exercise.name, this.exercise.arrayOfSnippets, this.exercise.language).subscribe(
+      this.rest.runTests(this.exercise.name, this.exercise.arrayOfSnippets, this.exercise.language).subscribe(
          (data) => {
-           console.log(data);
            
              const d = data
-             console.log(d);
              this.result = this.convertFromJsonV2(d as Value);
              
              this.timer = timeLogger.stop();
-             console.log(this.result.Summary.TotalTests);
              const logEntry = {
                  message: `Unitests : ${this.result.Summary.PassedTests}/${this.result.Summary.TotalTests} test completed.`,
                  timestamp: new Date(),
@@ -211,10 +205,32 @@ export class StudentStartScreenComponent implements OnInit {
                  total: this.result.Summary.TotalTests,
                  timer: this.timer
              };
- 
+           
              this.resultHistoryService.addResult(logEntry.message, logEntry.passed, logEntry.notPassed, logEntry.total, logEntry.timer);
              this.loading = false;
              this.resultsAvailable = true;
+             let subject = "";
+              if(this.exercise.tags.includes("WMC")){
+                subject = "WMC";
+              }else if(this.exercise.tags.includes("POSE")){
+                subject = "POSE";
+              }else if(this.exercise.tags.includes("TYPESCRIPT")){
+                subject = "TYPESCRIPT";
+              }
+              let arrayOfSnippets: ArrayOfSnippetsDto = {
+                snippets: this.exercise.arrayOfSnippets
+              }
+
+              this.exercise.teacher;
+              this.userName = sessionStorage.getItem('ifUserName');
+              console.log("AAAAAAAAAAA")
+              console.log(this.userName);
+              console.log(this.exercise.teacher?.username);
+              console.log(this.exercise.creator);
+              if(this.userName !== null && this.exercise.creator !== undefined){
+                console.log("BBBBBBBBBBBBBB")
+                this.restDb.UpdateExercise(this.userName,this.exercise.creator, this.exercise.description, this.exercise.language, this.exercise.tags, this.exercise.name, arrayOfSnippets, subject, this.exercise.dateCreated, this.exercise.dateUpdated, logEntry.total, logEntry.passed, logEntry.notPassed).subscribe();
+              }
          },
          (error) => {
              console.error("Error in API request", error);
@@ -223,64 +239,101 @@ export class StudentStartScreenComponent implements OnInit {
             
          }
      );
-     let subject = "";
-     if(this.exercise.tags.includes("WMC")){
-       subject = "WMC";
-     }else if(this.exercise.tags.includes("POSE")){
-       subject = "POSE";
-     }else if(this.exercise.tags.includes("TYPESCRIPT")){
-       subject = "TYPESCRIPT";
-     }
-     let arrayOfSnippets: ArrayOfSnippetsDto = {
-       snippets: this.exercise.arrayOfSnippets
-     }
-
-     console.log(this.exercise.name);
-     console.log(this.exercise.tags.length);
-
-     if(this.userName != null){
-      this.restDb.UpdateExercise(this.userName, this.exercise.description, this.exercise.language, this.exercise.tags, this.exercise.name, arrayOfSnippets, subject).subscribe();
-     }
+     
 }
 
    loadAssignment(assignment: any): void {
     // Extract exercise details from the assignment
     this.resetFields();
-    const exercise = assignment.exercise;
-    this.selectedAssignment = assignment;
+    const student = sessionStorage.getItem('ifUserName');
+    let exercise = null;
+    this.restDb.GetExerciseForStudentAssignment(assignment.exercise.language, assignment.exercise.name, student).subscribe({
+      next: (data: ExerciseDto) => {
+        exercise = data; // Wenn ein Exercise gefunden wurde, wird es hier gespeichert
+        console.log("In next");
+        console.log(data);
+        if(exercise === null){
+          exercise = assignment.exercise;
+        }
+        this.selectedAssignment = assignment;
+        
     
-
-    // Check if exercise exists and extract its properties
-    if (exercise) {
-        this.exercise.name = exercise.name; 
-        this.exercise.description = exercise.description; 
-        if(exercise.language = 1){
-          this.exercise.language = "CSharp"
-        } else if(exercise.language = 0){
-          this.exercise.language = "Java";
-        }else{
-          this.exercise.language= "TypeScript";
-        }
-                
-        // Ensure arrayOfSnippets is correctly populated
-        if (exercise.arrayOfSnippets && exercise.arrayOfSnippets.snippets && exercise.arrayOfSnippets.snippets.$values) {
-            this.exercise.arrayOfSnippets = exercise.arrayOfSnippets.snippets.$values; 
+        // Check if exercise exists and extract its properties
+        if (exercise) {
+            this.exercise.name = exercise.name; 
+            this.exercise.description = exercise.description; 
+            if(exercise.language = 1){
+              this.exercise.language = "CSharp"
+            } else if(exercise.language = 0){
+              this.exercise.language = "Java";
+            }else{
+              this.exercise.language= "TypeScript";
+            }
+                    
+            // Ensure arrayOfSnippets is correctly populated
+            this.exercise.arrayOfSnippets = exercise.arrayOfSnippets; 
+            console.log(exercise.arrayOfSnippets);
+            console.log(exercise.arrayOfSnippets.snippets);
+            
             console.log(this.exercise.arrayOfSnippets);
+            /*if (exercise.arrayOfSnippets && exercise.arrayOfSnippets.snippets) {
+                
+            } else {
+                console.warn('exercise.arrayOfSnippets does not contain the expected format:', exercise.arrayOfSnippets);
+                this.exercise.arrayOfSnippets = []; 
+            }*/
+    
+            this.exercise.tags= exercise.tags;
+            this.exercise.creator = exercise.creator;
+            this.editorOptions.language = this.exercise.language; 
+            sessionStorage.setItem("exerciseName",this.exercise.name);
+    
         } else {
-            console.warn('exercise.arrayOfSnippets does not contain the expected format:', exercise.arrayOfSnippets);
-            this.exercise.arrayOfSnippets = []; 
+            console.error('No exercise found in assignment:', assignment);
         }
-
-        this.exercise.tags= exercise.tags.$values;
-        this.exercise.teacher = exercise.teacher;
-        console.log(exercise.tags);
-        this.editorOptions.language = this.exercise.language; 
-        sessionStorage.setItem("exerciseName",this.exercise.name);
-
-        console.log('Loaded assignment with exercise:', this.exercise);
-    } else {
-        console.error('No exercise found in assignment:', assignment);
-    }
+      },
+      error: (err) => {
+        console.log("In error");
+        exercise = assignment.exercise;
+        
+        console.log(exercise);
+        this.selectedAssignment = assignment;
+        console.log("in error 2");
+    
+        // Check if exercise exists and extract its properties
+        if (exercise) {
+            this.exercise.name = exercise.name; 
+            this.exercise.description = exercise.description; 
+            if(exercise.language = 1){
+              this.exercise.language = "CSharp"
+            } else if(exercise.language = 0){
+              this.exercise.language = "Java";
+            }else{
+              this.exercise.language= "TypeScript";
+            }
+            console.log("in error 3");
+            // Ensure arrayOfSnippets is correctly populated
+            console.log(exercise.arrayOfSnippets);
+            console.log(exercise.arrayOfSnippets.snippets);
+            this.exercise.arrayOfSnippets = exercise.arrayOfSnippets.snippets.$values; 
+            console.log("in error 4");
+            console.log(this.exercise.arrayOfSnippets);
+            /*if (exercise.arrayOfSnippets && exercise.arrayOfSnippets.snippets) {
+                
+            } else {
+                console.warn('exercise.arrayOfSnippets does not contain the expected format:', exercise.arrayOfSnippets);
+                this.exercise.arrayOfSnippets = []; 
+            }*/
+    
+            this.exercise.tags= exercise.tags.$values;
+            this.exercise.creator = exercise.teacher.username;
+            this.editorOptions.language = this.exercise.language; 
+            sessionStorage.setItem("exerciseName",this.exercise.name);
+            console.log("in error 5");
+   }}});
+    console.log("EXERCISEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
+    console.log(exercise);
+    
   }
 
   toggleResults() {
