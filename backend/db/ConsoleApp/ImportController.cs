@@ -12,68 +12,46 @@ namespace Import
         public static ImportData ImportDemoData()
         {
 
-            User user1 = new User
+            Teacher user1 = new Teacher
             {
                 Username = "if200183",
                 Firstname = "Florian",
-                Lastname = "Hagmair",
-                IsTeacher = true,
+                Lastname = "Hagmair"
             };
 
-            User user2 = new User
+            Student user2 = new Student
             {
                 Username = "if200182",
                 Firstname = "David",
-                Lastname = "Pröller",
-                IsTeacher = false,
+                Lastname = "Pröller"
             };
 
-            User user3 = new User
+            Student user3 = new Student
             {
                 Username = "if200104",
                 Firstname = "Christian",
-                Lastname = "Ekhator",
-                IsTeacher = false,
+                Lastname = "Ekhator"
             };
 
-            User user4 = new User
+            Student user4 = new Student
             {
                 Username = "if200177",
                 Firstname = "Samuel",
-                Lastname = "Atzlesberger",
-                IsTeacher = false,
+                Lastname = "Atzlesberger"
             };
 
-            User user5 = new User
+            Student user5 = new Student
             {
                 Username = "if200145",
                 Firstname = "Michael",
-                Lastname = "Werner",
-                IsTeacher = false,
+                Lastname = "Werner"
             };
 
-            User user6 = new User
+            Student user6 = new Student
             {
                 Username = "if200107",
                 Firstname = "Marcus",
-                Lastname = "Rabeder",
-                IsTeacher = false,
-            };
-
-            User user7 = new User
-            {
-                Username = "if200153",
-                Firstname = "Julia",
-                Lastname = "Meyr",
-                IsTeacher = false,
-            };
-
-            User user8 = new User
-            {
-                Username = "if200160",
-                Firstname = "Julian",
-                Lastname = "Kapl",
-                IsTeacher = false,
+                Lastname = "Rabeder"
             };
 
             Tag tag1 = new("Class1");
@@ -252,22 +230,19 @@ namespace Import
 
             var assignmentUsers = new List<AssignmentUser>
             {
-                new AssignmentUser { Assignment = assignment1, User = user2 },
-                new AssignmentUser { Assignment = assignment1, User = user3 },
-                new AssignmentUser { Assignment = assignment1, User = user4 },
-                new AssignmentUser { Assignment = assignment1, User = user5 },
-                new AssignmentUser { Assignment = assignment1, User = user6 },
-                new AssignmentUser { Assignment = assignment1, User = user7 },
-                new AssignmentUser { Assignment = assignment1, User = user8 },
+                new AssignmentUser { Assignment = assignment1, Student = user2 },
+                new AssignmentUser { Assignment = assignment1, Student = user3 },
+                new AssignmentUser { Assignment = assignment1, Student = user4 },
+                new AssignmentUser { Assignment = assignment1, Student = user5 },
+                new AssignmentUser { Assignment = assignment1, Student = user6 },
 
-                new AssignmentUser { Assignment = assignment2, User = user2 },
-                new AssignmentUser { Assignment = assignment2, User = user3 },
-                new AssignmentUser { Assignment = assignment2, User = user4 },
-                new AssignmentUser { Assignment = assignment2, User = user5 },
-                new AssignmentUser { Assignment = assignment2, User = user8 },
+                new AssignmentUser { Assignment = assignment2, Student = user2 },
+                new AssignmentUser { Assignment = assignment2, Student = user3 },
+                new AssignmentUser { Assignment = assignment2, Student = user4 },
             };
 
-            var users = new List<User> { user1, user2, user3, user4, user5, user6 };
+            var users = new List<Student> { user2, user3, user4, user5, user6 };
+            var teachers = new List<Teacher> { user1 };
 
             var tags = new List<Tag> { tag1, tag2, tag3, tag4 };
 
@@ -279,7 +254,8 @@ namespace Import
             {
                 AssignmentUsers = assignmentUsers,
                 Tags = tags,
-                Users = users,
+                Students = users,
+                Teachers = teachers,
                 Exercises = exercises,
                 Assignments = new List<Assignments> { assignment1, assignment2 },
                 ArrayOfSnippets = new List<ArrayOfSnippets> { exercise1.ArrayOfSnippets, exercise2.ArrayOfSnippets, exercise3.ArrayOfSnippets },

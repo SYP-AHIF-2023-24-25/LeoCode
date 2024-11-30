@@ -16,16 +16,16 @@ public class UnitOfWork : BaseUnitOfWork, IUnitOfWork
     }
     public UnitOfWork(ApplicationDbContext dBContext) : base(dBContext)
     {
-        Users = new UserRepository(dBContext);
         ArrayOfSnippets = new ArrayOfSnippetsRepository(dBContext);
         Snippets = new SnippetRepository(dBContext);
         Exercises = new ExerciseRepository(dBContext);
         Assignments = new AssignmentsRepository(dBContext);
         Tags = new TagRepository(dBContext);
         AssignmentUser = new AssignmentUserRepository(dBContext);
+        Teacher = new TeacherRepository(dBContext);
+        Student = new StudentRepository(dBContext);
     }
     public ITagRepository Tags { get; }
-    public IUserRepository Users { get; }
     public IExerciseRepository Exercises { get; }
 
     public IArrayOfSnippetsRepository ArrayOfSnippets { get; }
@@ -33,4 +33,6 @@ public class UnitOfWork : BaseUnitOfWork, IUnitOfWork
     public ISnippetRepository Snippets { get; }
     public IAssignmentsRepository Assignments { get; set; }
     public IAssignmentUserRepository AssignmentUser { get; set; }
+    public ITeacherRepository Teacher { get; set; }
+    public IStudentRepository Student { get; set; }
 }

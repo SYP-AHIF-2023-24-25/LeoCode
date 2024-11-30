@@ -29,10 +29,68 @@ namespace Persistence
                 .ToListAsync();
         }
 
-        public async Task<List<Exercise>> GetExersiceByUsernameAsync(User teacher, string? exerciseName)
+        public async Task<ExerciseDto> GetExerciseForStudentAssignment(string language, string exerciseName, string student)
+        {
+            Exercise exercise = _dbContext.Exercises
+                .Include(e => e.Teacher)
+                .Include(e => e.Tags)
+                .Include(e => e.ArrayOfSnippets)
+                .ThenInclude(e => e.Snippets)
+                .Where(e => e.Name == exerciseName
+                    && e.Language == (Language)Enum.Parse(typeof(Language), language)
+                    && e.Student.Username == student)
+                .SingleOrDefault();
+
+            if (exercise != null)
+            {
+                // Exercise erfolgreich gefunden, dann DTO erstellen
+                var exerciseDto = new ExerciseDto(
+                    exercise.Name,
+                    exercise.Teacher.Username,
+                    exercise.Description,
+                    ((Language)exercise.Language).ToString(),
+                    exercise.Tags.Select(tag => tag.Name).ToArray(),
+                    exercise.ArrayOfSnippets.Snippets.Select(snippet => new SnippetDto(
+                        snippet.Code,
+                        snippet.ReadonlySection,
+                        snippet.FileName)).ToArray(),
+                    exercise.DateCreated,
+                    exercise.DateUpdated
+                );
+
+                return exerciseDto;  // Beispiel für Rückgabe des DTOs
+            }
+            else
+            {
+                // Falls kein Exercise gefunden wurde
+                return null;
+            }
+        }
+
+        public async Task<List<Exercise>> GetExersiceByUsernameStudentAsync(Student student, string? exerciseName)
         {
             IQueryable<Exercise> exerciseQuery = _dbContext.Exercises
-                .Include(exercise => exercise.Teacher)
+                .Include(exercise => exercise.Student)
+                .Include(exercise => exercise.Tags)
+                .Include(exercise => exercise.ArrayOfSnippets)
+                .ThenInclude(arrayOfSnippets => arrayOfSnippets.Snippets);
+
+            if (exerciseName != null)
+            {
+                exerciseQuery = exerciseQuery.Where(exercise => exercise.Student.Username == student.Username && exercise.Name == exerciseName);
+            }
+            else
+            {
+                exerciseQuery = exerciseQuery.Where(exercise => exercise.StudentId == student.Id);
+            }
+
+            return await exerciseQuery.ToListAsync();
+        }
+
+        public async Task<List<Exercise>> GetExersiceByUsernameTeacherAsync(Teacher teacher, string? exerciseName)
+        {
+            IQueryable<Exercise> exerciseQuery = _dbContext.Exercises
+                .Include(exercise => exercise.Student)
                 .Include(exercise => exercise.Tags)
                 .Include(exercise => exercise.ArrayOfSnippets)
                 .ThenInclude(arrayOfSnippets => arrayOfSnippets.Snippets);

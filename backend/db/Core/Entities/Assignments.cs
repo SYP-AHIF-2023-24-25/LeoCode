@@ -19,7 +19,7 @@ namespace Core.Entities
 
         public int TeacherId { get; set; }
         [ForeignKey(nameof(TeacherId))]
-        public User? Teacher { get; set; }
+        public Teacher? Teacher { get; set; }
 
         public string Name { get; set; }
         public string? Link { get; set; }
