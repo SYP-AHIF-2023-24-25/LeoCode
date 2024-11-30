@@ -21,7 +21,7 @@ namespace Persistence
 
         public string CreateAssignment(string exerciseName, string creator, DateTime dateDue, string Name)
         {
-            User? teacher = _dbContext.Users.FirstOrDefault(teacher => teacher.Username == creator);
+            Teacher? teacher = _dbContext.Teacher.FirstOrDefault(teacher => teacher.Username == creator);
             if (teacher == null)
             {
                 throw new ArgumentException("Creator not found", nameof(creator));
@@ -66,14 +66,14 @@ namespace Persistence
         {
             IQueryable<Assignments> query = _dbContext.Assignments
                 .Include(a => a.Teacher)
-                .Include(a => a.Exercise) // Lädt die Exercise mit allen primitiven Feldern (inkl. Language)
-                    .ThenInclude(e => e.Tags) // Lädt die Tags von Exercise
+                .Include(a => a.Exercise)
+                    .ThenInclude(e => e.Tags)
                 .Include(a => a.AssignmentUsers)
-                    .ThenInclude(au => au.User);
+                    .ThenInclude(au => au.Student);
 
             if (!string.IsNullOrEmpty(username))
             {
-                query = query.Where(a => a.Teacher.Username == username).OrderBy(a => a.DateDue);
+                query = query.Where(a => a.Teacher.Username == username);
             }
 
             var assignments = await query.ToListAsync();
@@ -83,12 +83,7 @@ namespace Persistence
             {
                 AssignmentName = a.Name,
                 DueDate = a.DateDue,
-                Exercise = new ExerciseAssignemntDto
-                {
-                    Language = a.Exercise.Language.ToString(),
-                    ExerciseName = a.Exercise.Name,
-                    Tags = a.Exercise.Tags.Select(t => t.Name).ToArray()
-                },
+                ExerciseName = a.Exercise.Name,
                 Teacher = new TeacherDto
                 {
                     Firstname = a.Teacher.Firstname,
@@ -97,9 +92,9 @@ namespace Persistence
                 },
                 Students = a.AssignmentUsers.Select(au => new StudentDto
                 {
-                    Firstname = au.User.Firstname,
-                    Lastname = au.User.Lastname,
-                    Username = au.User.Username
+                    Firstname = au.Student.Firstname,
+                    Lastname = au.Student.Lastname,
+                    Username = au.Student.Username
                 }).ToList()
             }).ToList();
 
@@ -108,7 +103,7 @@ namespace Persistence
 
         public async Task<Assignments?> GetOneAssignment(string Creator, string Name)
         {
-            User? teacher = _dbContext.Users.FirstOrDefault(teacher => teacher.Username == Creator);
+            Teacher? teacher = _dbContext.Teacher.FirstOrDefault(teacher => teacher.Username == Creator);
             if (teacher == null)
             {
                 return null;
@@ -124,7 +119,7 @@ namespace Persistence
 
         public void JoinAssignment(int assignmentId, string ifStudentName)
         {
-            var user = _dbContext.Users.FirstOrDefault(u => u.Username == ifStudentName);
+            var user = _dbContext.Student.FirstOrDefault(u => u.Username == ifStudentName);
             if (user == null)
             {
                 throw new ArgumentException("Student not found", nameof(ifStudentName));
@@ -133,20 +128,20 @@ namespace Persistence
             AssignmentUser assignmentUser = new AssignmentUser
             {
                 Assignment = _dbContext.Assignments.FirstOrDefault(a => a.Id == assignmentId),
-                User = user,
+                Student = user,
                 AssignmentId = assignmentId,
-                UserId = user.Id
+                StudentId = user.Id
             };
             _dbContext.Assignments.FirstOrDefault(a => a.Id == assignmentId)?.AssignmentUsers.Add(assignmentUser);
             _dbContext.SaveChanges();
         }
 
-        public async Task<List<User>?> GetAssignmentUsers(int assignmentId)
+        public async Task<List<Student>?> GetAssignmentUsers(int assignmentId)
         {
             var users = await _dbContext.Assignments
                 .Where(a => a.Id == assignmentId)
                 .SelectMany(a => a.AssignmentUsers)
-                .Select(au => au.User)
+                .Select(au => au.Student)
                 .ToListAsync();
 
             return users;
@@ -164,7 +159,7 @@ namespace Persistence
                 .ThenInclude(a => a.Snippets)
            .Include(a => a.Exercise)
                .ThenInclude(e => e.Teacher)
-           .Where(a => a.AssignmentUsers.Any(s => s.User.Username == username))
+           .Where(a => a.AssignmentUsers.Any(s => s.Student.Username == username))
            .ToListAsync();
         }
     }

@@ -10,35 +10,34 @@ using System.Threading.Tasks;
 
 namespace Persistence
 {
-    public class UserRepository : GenericRepository<User>, IUserRepository
+    public class StudentRepository : GenericRepository<Student>, IStudentRepository
     {
         private readonly ApplicationDbContext _dbContext;
-        public UserRepository(ApplicationDbContext dbContext) : base(dbContext)
+        public StudentRepository(ApplicationDbContext dbContext) : base(dbContext)
         {
             _dbContext = dbContext;
         }
 
-        public void CreateUser(string username, string firstName, string lastName, bool isTeacher)
+        public void CreateUser(string username, string firstName, string lastName)
         {
-            User user = new User
+            Student user = new Student
             {
                 Username = username,
                 Firstname = firstName,
                 Lastname = lastName,
-                IsTeacher = isTeacher
             };
-            _dbContext.Users.Add(user);
+            _dbContext.Student.Add(user);
             _dbContext.SaveChanges();
         }
 
-        public async Task<List<User>> GetAllUsers()
+        public async Task<List<Student>> GetAllUsers()
         {
-            return await _dbContext.Users.ToListAsync();
+            return await _dbContext.Student.ToListAsync();
         }
 
-        public User GetByUsername(string username)
+        public Student GetByUsername(string username)
         {
-            return _dbContext.Users.SingleOrDefault(u => u.Username == username)!;
+            return _dbContext.Student.SingleOrDefault(u => u.Username == username)!;
         }
     }
 }

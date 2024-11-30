@@ -8,7 +8,6 @@ using System.Diagnostics;
 namespace Persistence;
 public class ApplicationDbContext : DbContext
 {
-    public DbSet<User> Users { get; set; }
     public DbSet<Exercise> Exercises { get; set; }
     public DbSet<Assignments> Assignments { get; set; }
     public DbSet<Tag> Tags { get; set; }
@@ -17,6 +16,8 @@ public class ApplicationDbContext : DbContext
     public DbSet<AssignmentUser> AssignmentUsers { get; set; }
 
     public DbSet<ArrayOfSnippets> ArrayOfSnippets { get; set; }
+    public DbSet<Teacher> Teacher { get; set; }
+    public DbSet<Student> Student { get; set; }
 
 
 
@@ -53,6 +54,13 @@ public class ApplicationDbContext : DbContext
             .HasForeignKey(e => e.TeacherId)
             .OnDelete(DeleteBehavior.NoAction); // Verhindert Cascade Delete
 
+        // Exercise-Student Beziehung
+        modelBuilder.Entity<Exercise>()
+            .HasOne(e => e.Student)
+            .WithMany() // Keine Rückbeziehung
+            .HasForeignKey(e => e.StudentId)
+            .OnDelete(DeleteBehavior.NoAction); // Verhindert Cascade Delete
+
         // Assignment-Teacher Beziehung
         modelBuilder.Entity<Assignments>()
             .HasOne(a => a.Teacher)
@@ -68,7 +76,7 @@ public class ApplicationDbContext : DbContext
             .OnDelete(DeleteBehavior.NoAction); // Verhindert Cascade Delete
 
         modelBuilder.Entity<AssignmentUser>()
-            .HasKey(au => new { au.AssignmentId, au.UserId });
+            .HasKey(au => new { au.AssignmentId, au.StudentId });
 
         modelBuilder.Entity<AssignmentUser>()
             .HasOne(au => au.Assignment)
@@ -76,8 +84,8 @@ public class ApplicationDbContext : DbContext
             .HasForeignKey(au => au.AssignmentId);
 
         modelBuilder.Entity<AssignmentUser>()
-            .HasOne(au => au.User)
+            .HasOne(au => au.Student)
             .WithMany(u => u.AssignmentUsers)
-            .HasForeignKey(au => au.UserId);
+            .HasForeignKey(au => au.StudentId);
     }
 }

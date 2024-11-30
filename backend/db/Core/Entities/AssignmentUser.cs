@@ -12,7 +12,7 @@ namespace Core.Entities
         public int AssignmentId { get; set; }
         public Assignments Assignment { get; set; }
 
-        public int UserId { get; set; }
-        public User User { get; set; }
+        public int StudentId { get; set; }
+        public Student Student { get; set; }
     }
 }
