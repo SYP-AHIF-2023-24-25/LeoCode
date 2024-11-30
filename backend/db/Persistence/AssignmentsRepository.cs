@@ -73,7 +73,7 @@ namespace Persistence
 
             if (!string.IsNullOrEmpty(username))
             {
-                query = query.Where(a => a.Teacher.Username == username);
+                query = query.Where(a => a.Teacher.Username == username).OrderBy(a => a.DateDue);
             }
 
             var assignments = await query.ToListAsync();
@@ -83,7 +83,12 @@ namespace Persistence
             {
                 AssignmentName = a.Name,
                 DueDate = a.DateDue,
-                ExerciseName = a.Exercise.Name,
+                Exercise = new ExerciseAssignmentDto
+                {
+                    Language = a.Exercise.Language.ToString(),
+                    ExerciseName = a.Exercise.Name,
+                    Tags = a.Exercise.Tags.Select(t => t.Name).ToArray()
+                },
                 Teacher = new TeacherDto
                 {
                     Firstname = a.Teacher.Firstname,
