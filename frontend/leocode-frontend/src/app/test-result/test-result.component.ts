@@ -38,8 +38,6 @@ export class TestResultComponent  implements OnInit{
 
  resultHistory:{message: string,timestamp:Date, passed:number, notPassed:number, total:number, timer:string}[] = [];
 
-
-
     exercise : Exercise={
       name: "",
       creator: "",
@@ -57,6 +55,7 @@ export class TestResultComponent  implements OnInit{
 
   //Code Editor
   editorOptions = { 
+   
     theme: 'vs-dark', 
     language: this.exercise.language.toLowerCase(), 
     automaticLayout: true,  
@@ -114,8 +113,11 @@ export class TestResultComponent  implements OnInit{
         console.log(this.exercise.tags.length);
         console.log(this.exercise.creator);
         console.log(this.exercise.dateCreated);
+        this.editorOptions.language = this.exercise.language.toLowerCase();
+        console.log(this.editorOptions.language);
     });
     }
+
   }
 
   clearHistory() {

@@ -50,16 +50,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 10,
+          "SelectedChildIndex": 9,
           "Children": [
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
-            },
             {
               "$type": "Document",
               "DocumentIndex": 3,
@@ -74,6 +66,10 @@
               "IsPinned": true
             },
             {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
               "$type": "Document",
               "DocumentIndex": 1,
               "Title": "AssignmentsRepository.cs",
@@ -83,8 +79,7 @@
               "RelativeToolTip": "Persistence\\AssignmentsRepository.cs",
               "ViewState": "AgIAACsAAAAAAAAAAAAIwFEAAABCAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-29T12:06:00.507Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-29T12:06:00.507Z"
             },
             {
               "$type": "Document",
@@ -166,7 +161,7 @@
               "RelativeDocumentMoniker": "WebAPI\\Controllers\\ExerciseController.cs",
               "ToolTip": "C:\\Schule_2024_25\\Syp\\LeoCode\\backend\\db\\WebAPI\\Controllers\\ExerciseController.cs",
               "RelativeToolTip": "WebAPI\\Controllers\\ExerciseController.cs",
-              "ViewState": "AgIAAIsAAAAAAAAAAAAwwKkAAAAMAAAAAAAAAA==",
+              "ViewState": "AgIAAIsAAAAAAAAAAAAwwKUAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-11-03T19:24:14.944Z",
               "EditorCaption": ""
@@ -182,6 +177,10 @@
               "ViewState": "AgIAABsAAAAAAAAAAAAowCIAAAA2AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-11-03T19:24:13.025Z"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
             }
           ]
         }

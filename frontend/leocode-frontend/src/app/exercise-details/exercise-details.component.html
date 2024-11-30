@@ -1,3 +1,4 @@
+<!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <a class="navbar-brand" href="#">LeoCode</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -25,46 +26,41 @@
   </div>
 </nav>
 
-
-
+<!-- Main Content -->
 <div class="container-fluid">
   <div class="row justify-content-center">
     <div class="col-md-10">
-      <div class="card mt-3">
+      <div class="card mt-4 shadow-lg rounded">
         <div class="card-body d-flex justify-content-between align-items-center">
           <div class="d-flex align-items-center">
-            <h1 *ngIf="!isEditingName" class="display-4" style="font-size: 3.5rem;">{{ exercise.name }}</h1>
-            <input *ngIf="isEditingName" type="text" class="form-control mr-2" [(ngModel)]="exercise.name">
-            <button *ngIf="ifUserName == exercise.creator && !isEditingName" class="btn" (click)="editExerciseName()" style="background: none; border: none; padding: 0;">
+            <h1 *ngIf="!isEditingName" class="display-4" style="font-size: 3rem; font-weight: bold;">{{ exercise.name }}</h1>
+            <input *ngIf="isEditingName" type="text" class="form-control border-0 rounded" [(ngModel)]="exercise.name">
+            <button *ngIf="ifUserName == exercise.creator && !isEditingName" class="btn p-0" (click)="editExerciseName()" style="background: none; border: none;">
               <mat-icon style="color: gray;">edit</mat-icon>
             </button>
           </div>
 
           <div class="text-right">
-            <p class="mb-1" style="font-size: 16px;">Created on: {{ exercise.dateCreated | date: 'mediumDate' }}</p>
-            <p class="mb-0" style="font-size: 18px;">Creator: {{ exercise.creator }}</p>
+            <p class="mb-1" style="font-size: 16px; color: #6c757d;">Created on: {{ exercise.dateCreated | date: 'mediumDate' }}</p>
+            <p class="mb-0" style="font-size: 18px; font-weight: bold;">Creator: {{ exercise.creator }}</p>
           </div>
         </div>
 
         <div class="card-body">
-
+          <!-- Tags Section -->
           <div *ngIf="ifUserName == exercise.creator">
-
-            <!-- Tags Section -->
-            <h1 class="d-flex align-items-center">
+            <h3 class="d-flex align-items-center text-dark">
               Tags
-              <button *ngIf="ifUserName == exercise.creator && !isEditingTag" class="btn" (click)="editTag()" style="background: none; border: none; padding: 0;">
+              <button *ngIf="!isEditingTag" class="btn p-0 ml-3" (click)="editTag()" style="background: none; border: none;">
                 <mat-icon style="color: gray;">edit</mat-icon>
               </button>
-            </h1>
+            </h3>
 
             <div class="form-group">
-              <!-- Tags anzeigen, wenn nicht bearbeitet wird -->
-              <p *ngIf="!isEditingTag" class="card-text" style="white-space: pre-wrap;">
+              <p *ngIf="!isEditingTag" class="card-text" style="white-space: pre-wrap; font-size: 16px; color: #495057;">
                 {{ exercise.tags.join(', ') }}
               </p>
 
-              <!-- Bearbeitungsmodus für Tags mit Chips -->
               <form *ngIf="isEditingTag">
                 <mat-form-field class="example-chip-list" style="width: 100%">
                   <mat-label>Chosen Tags</mat-label>
@@ -79,7 +75,7 @@
                   <input placeholder="New Tag..." #tagInput [formControl]="tagCtrl"
                         [matChipInputFor]="chipGrid" [matAutocomplete]="auto"
                         [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                        (matChipInputTokenEnd)="addTag($event)" />
+                        (matChipInputTokenEnd)="addTag($event)" class="border-0 rounded" />
                   <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
                     <mat-option *ngFor="let tag of filteredTags | async" [value]="tag">
                       {{ tag }}
@@ -88,68 +84,71 @@
                 </mat-form-field>
               </form>
             </div>
-
           </div>
 
-          <!-- Tags für nicht-Creator anzeigen -->
+          <!-- Tags for non-Creator -->
           <div *ngIf="ifUserName != exercise.creator">
-            <h1>Tags</h1>
+            <h3 class="text-dark">Tags</h3>
             <ul>
-              <li *ngFor="let tag of exercise.tags">
+              <li *ngFor="let tag of exercise.tags" style="font-size: 16px; color: #495057;">
                 {{ tag }}
               </li>
             </ul>
           </div>
 
           <!-- Introduction Section -->
-          <h1 class="d-flex align-items-center">
+          <h3 class="d-flex align-items-center text-dark">
             Introduction
-            <button *ngIf="ifUserName == exercise.creator && !isEditingDescription" class="btn" (click)="editDescription()" style="background: none; border: none; padding: 0;">
+            <button *ngIf="ifUserName == exercise.creator && !isEditingDescription" class="btn p-0 ml-3" (click)="editDescription()" style="background: none; border: none;">
               <mat-icon style="color: gray;">edit</mat-icon>
             </button>
-          </h1>
+          </h3>
 
           <div class="form-group">
-            <textarea *ngIf="isEditingDescription && ifUserName == exercise.creator" class="form-control" rows="5" style="width: 100%" [(ngModel)]="exercise.description"></textarea>
-            <p *ngIf="!isEditingDescription" class="card-text" style="white-space: pre-wrap;">{{ exercise.description }}</p>
+            <textarea *ngIf="isEditingDescription && ifUserName == exercise.creator" class="form-control border-0 rounded" rows="5" style="width: 100%" [(ngModel)]="exercise.description" placeholder="Enter Introduction"></textarea>
+            <p *ngIf="!isEditingDescription" class="card-text" style="white-space: pre-wrap; font-size: 16px; color: #495057;">{{ exercise.description }}</p>
           </div>
 
+          <!-- Drag & Drop Areas for File Uploads -->
           <div *ngIf="ifUserName == exercise.creator">
-          <!-- Drag & Drop Areas -->
-              <div class="row justify-content-center">
-                <div class="col-md-12">
-                  <div class="card mt-5">
-                    <p>  Edit solution solution:</p>
-                      <div class="drag-drop-area" 
-                          (drop)="uploadZipFile($event); $event.preventDefault();" 
-                          (dragover)="$event.preventDefault();">
-                        <p *ngIf="!zipFile">Drag & Drop your file here</p>
-                        <button class="btn-ZipFile" *ngIf="zipFile" (click)="clearZipFile()" >
-                          <p>{{zipFile.name}} <mat-icon>cancel</mat-icon></p>
-                        </button>             
-                      </div>
-        
-                      <br><br>
-                      <p>  Edit template solution:</p>
-                      <div class="drag-drop-area" 
-                          (drop)="uploadEmptyZipFile($event); $event.preventDefault();" 
-                          (dragover)="$event.preventDefault();">
-                        <p *ngIf="!emptyZipFile">Drag & Drop your file here</p>
-                        <button class="btn-ZipFile" *ngIf="emptyZipFile" (click)="clearEmptyZipFile()">
-                          <p>{{emptyZipFile.name}} <mat-icon>cancel</mat-icon></p>
-                        </button>
-                      </div>
-                    </div>
+            <div class="row justify-content-center">
+              <div class="col-md-12">
+                <div class="card mt-5 shadow-sm rounded">
+                  <p class="mb-3" style="font-size: 16px; color: #495057;">Edit Solution:</p>
+                  <div class="drag-drop-area" 
+                    (drop)="uploadZipFile($event); $event.preventDefault();" 
+                    (dragover)="$event.preventDefault();">
+                    <p *ngIf="!zipFile" style="font-size: 14px; color: #6c757d;">Drag & Drop your file here</p>
+                    <button class="btn btn-outline-danger" *ngIf="zipFile" (click)="clearZipFile()">
+                      <p>{{zipFile.name}} <mat-icon>cancel</mat-icon></p>
+                    </button>             
                   </div>
+
+                  <br><br>
+
+                  <p class="mb-3" style="font-size: 16px; color: #495057;">Edit Template Solution:</p>
+                  <div class="drag-drop-area" 
+                    (drop)="uploadEmptyZipFile($event); $event.preventDefault();" 
+                    (dragover)="$event.preventDefault();">
+                    <p *ngIf="!emptyZipFile" style="font-size: 14px; color: #6c757d;">Drag & Drop your file here</p>
+                    <button class="btn btn-outline-danger" *ngIf="emptyZipFile" (click)="clearEmptyZipFile()">
+                      <p>{{emptyZipFile.name}} <mat-icon>cancel</mat-icon></p>
+                    </button>
+                  </div>
+                </div>
               </div>
+            </div>
           </div>
 
           <!-- Action Buttons -->
-          <div class="d-flex">
-            <button class="btn btn-primary" [routerLink]="['/test-results']" [queryParams]="{ exerciseName: exercise.name, creator: exercise.creator }">Run Test</button>
-            <button *ngIf="ifUserName == exercise.creator" class="btn btn-primary ml-2" (click)="SaveChanges()">Save Changes</button>
+          <div class="d-flex mt-4 justify-content-between">
+            <div class="d-flex">
+              <button class="btn" style="background-color: #28a745; color: white; padding: 10px 20px; border-radius: 5px; margin-left: 10px;" [routerLink]="['/test-results']" [queryParams]="{ exerciseName: exercise.name, creator: exercise.creator }">Run Test</button>
+              <button class="btn" style="background-color: #007bff; color: white; padding: 10px 20px; border-radius: 5px; margin-left: 10px;" (click)="SaveChanges()">Save Changes</button>
+            </div>
+            <!-- Create Assignment Button aligned to the right with color #17a2b8 -->
             <div class="createAssignmentButton">
-              <button class="btn btn-primary" (click)="createAssignment()">Create Assignment</button>
+              <button class="btn" style="background-color: #17a2b8; color: white; padding: 10px 20px; border-radius: 5px; margin-left: 10px;" (click)="createAssignment()">Create Assignment</button>
             </div>
           </div>
         </div>

@@ -17,6 +17,8 @@ import { Exercise } from '../model/exercise';
 
 export class StartScreenComponent implements OnInit {
   ifUserName: string | null = '';
+  filterMyExercises: boolean = false;  // Zustand für das Filtern nach dem Ersteller
+
 
   defaultUser: User = {
     username: 'Default User',
@@ -26,30 +28,26 @@ export class StartScreenComponent implements OnInit {
   }
 
   constructor(private rest: DbService, private router: Router) {
-    // Initialisiere die gefilterten Tags und die Autocomplete-Suche
     this.filteredSearchTags = this.tagCtrl.valueChanges.pipe(
       startWith(null),
       map((tag: string | null) => tag ? this._filter(tag) : this.availableTags.slice())
     );
   }
 
-  // Property für den Suchtext der Übungsnamen
   searchQuery: string = '';
 
-  // Property für die gefilterten Übungen
   exercises: Exercise[] = [];
   filteredSearchTags: Observable<string[]> | undefined;
 
-  // Hier definieren wir displayedColumns für die Tabelle
   displayedColumns: string[] = ['name', 'creator', 'tags', 'dateCreated', 'dateUpdated', 'details']; 
   separatorKeysCodes: number[] = [13, 188]; // 13: Enter, 188: Komma
 
 
-  selectedSearchTags: string[] = [];  // Tags, die ausgewählt wurden
-  tagCtrl = new FormControl();  // FormControl für die Tags
+  selectedSearchTags: string[] = [];  
+  tagCtrl = new FormControl();  
 
   // Verfügbare Tags
-  availableTags: string[] = Object.values(Tags);  // Ersetzen durch tatsächliche Tags
+  availableTags: string[] = Object.values(Tags); 
 
   ngOnInit(): void {
     this.ifUserName = sessionStorage.getItem('ifUserName');
@@ -60,13 +58,11 @@ export class StartScreenComponent implements OnInit {
     });
   }
 
-  // Filtert die Tags basierend auf dem Eingabewert
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
     return this.availableTags.filter(tag => tag.toLowerCase().includes(filterValue));
   }
 
-  // Entfernen eines Tags aus der ausgewählten Liste
   removeSearchTag(tag: string): void {
     const index = this.selectedSearchTags.indexOf(tag);
     if (index >= 0) {
@@ -74,33 +70,36 @@ export class StartScreenComponent implements OnInit {
     }
   }
 
-  // Hinzufügen eines Tags zur Liste der ausgewählten Tags
   selectedSearch(event: MatAutocompleteSelectedEvent): void {
     this.selectedSearchTags.push(event.option.viewValue);
     this.tagCtrl.setValue(null);
   }
 
-  // Getter für die gefilterten Übungen
   get filteredExercises() {
     return this.exercises
       .filter(exercise => {
-        // Übungsname filtern
-        const matchesName = this.searchQuery 
-          ? exercise.name.toLowerCase().includes(this.searchQuery.toLowerCase()) 
+        // Filter für den Namen der Übung
+        const matchesName = this.searchQuery
+          ? exercise.name.toLowerCase().includes(this.searchQuery.toLowerCase())
           : true;
 
-        // Tags filtern
+        // Filter für die Tags
         const matchesTags = this.selectedSearchTags.length
           ? exercise.tags.some(tag => this.selectedSearchTags.includes(tag))
           : true;
 
-        return matchesName && matchesTags;
+        // Filter für 'nur meine Übungen'
+        const matchesCreator = this.filterMyExercises
+          ? exercise.creator === this.ifUserName  // Filtert nur Übungen, die der angemeldete Benutzer erstellt hat
+          : true;
+
+        return matchesName && matchesTags && matchesCreator;  // Alle Filter müssen zutreffen
       })
       .sort((a, b) => {
-        // Sortiere nach Übungsnamen
-        return a.name.localeCompare(b.name);
+        return a.name.localeCompare(b.name);  // Sortierung nach Namen
       });
   }
+  
 
   addExerciseNameToSessionStorage(exerciseName: string) {
     sessionStorage.setItem("exerciseName", exerciseName);

@@ -39,25 +39,20 @@
     <div class="col-md-2 d-none d-md-block sidebar" style="background-color: #f0f0f0; height: 100vh;">
       <div class="sidebar-sticky">
         <ul class="nav flex-column">
-          <!-- Sidebar links can be added here -->
         </ul>
       </div>
     </div>
 
-    <!-- Main content wrapped in a card -->
     <div class="col-md-10 content">
       <div class="card mt-4 shadow-lg rounded-lg">
         <div class="card-body">
           
-          <!-- Title with toggle -->
           <h1 (click)="toggleIntroduction()" class="text-primary" style="cursor: pointer; margin-bottom: 20px;">{{exercise.name}}</h1>
 
-          <!-- Introduction text -->
           <div *ngIf="showIntroduction" style="margin-bottom: 40px;">
             <p>{{exercise.description}}</p>
           </div>
 
-          <!-- Toggleable Playground section -->
           <h2 (click)="togglePlayground()" class="text-info" style="cursor: pointer;">Playground</h2>
           <div *ngIf="showPlayground">
             <div *ngFor="let codeSection of exercise.arrayOfSnippets" class="mb-4">
@@ -69,17 +64,14 @@
               </div>
               <!-- Editable code section -->
               <div *ngIf="!codeSection.readonlySection" style="height: 300px;">
-                <ngx-monaco-editor style="height: 300px; width: 100%;" [options]="editorOptions" [(ngModel)]="codeSection.code"></ngx-monaco-editor>
+                <ngx-monaco-editor  style="height: 300px; width: 100%;" [options]="editorOptions" [(ngModel)]="codeSection.code"></ngx-monaco-editor>
               </div>
             </div>
          
-
-          <!-- Loading bar -->
           <div *ngIf="loading" class="text-center my-4">         
             <mat-progress-bar mode="indeterminate" color="primary"></mat-progress-bar> 
           </div>
 
-          <!-- Start Tests button -->
           <div class="d-flex justify-content-start align-items-center my-4" style="gap: 1rem;">
             <button (click)="startTest()" class="btn btn-lg btn-primary" [disabled]="loading">
               Start Tests
@@ -87,7 +79,6 @@
           </div>
         </div>
 
-          <!-- Unit Test Results -->
           <div *ngIf="resultsAvailable" class="mt-4">
             <h1 (click)="toggleResults()" class="text-info" style="cursor: pointer;">Unit Test Results</h1>
             
@@ -145,7 +136,6 @@
             </div>
           </div>
 
-          <!-- Result History (only if not empty) -->
           <h1 *ngIf="exercise.name && resultHistory.length > 0" (click)="toggleHistory()" class="text-info" style="cursor: pointer;">Result History</h1>
           <div *ngIf="showHistory && exercise.name && resultHistory.length > 0">
             <ul class="list-group">

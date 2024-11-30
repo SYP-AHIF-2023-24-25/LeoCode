@@ -1,20 +1,19 @@
 .drag-drop-area {
-    border: 2px dashed #ccc;
-    border-radius: 5px;
-    padding: 20px;
-    text-align: center;
-    margin: 10px;
-    background-color: #f9f9f9;
-  }
-  
-  .btn-ZipFile {
-    background-color: #007bff;
-    border-color: #007bff;
-    border-radius: 10px;
-    color: #fff;
-  }
-
-  .createAssignmentButton {
-    margin-left: auto;
-  }
-  
+  border: 2px dashed #6c757d;
+  padding: 20px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+.btn-outline-danger {
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
+  color: #721c24;
+  padding: 10px 20px;
+}
+.btn-outline-danger:hover {
+  background-color: #f5c6cb;
+  border-color: #f5c6cb;
+}
+.createAssignmentButton {
+  margin-left: auto;
+}
