@@ -212,7 +212,6 @@ C:\Schule\5AHIF\david\LeoCode\backend\LeoCodeBackend\obj\Debug\net8.0\refint\Leo
 C:\Schule\5AHIF\david\LeoCode\backend\LeoCodeBackend\obj\Debug\net8.0\LeoCodeBackend.pdb
 C:\Schule\5AHIF\david\LeoCode\backend\LeoCodeBackend\obj\Debug\net8.0\LeoCodeBackend.genruntimeconfig.cache
 C:\Schule\5AHIF\david\LeoCode\backend\LeoCodeBackend\obj\Debug\net8.0\ref\LeoCodeBackend.dll
-C:\Schule\5AHIF\LeoCode\backend\LeoCodeBackend\obj\Debug\net8.0\LeoCodeBackend.csproj.CopyComplete
 C:\Schule\5AHIF\FlorianUndLukas\LeoCode\backend\LeoCodeBackend\bin\Debug\net8.0\appsettings.Development.json
 C:\Schule\5AHIF\FlorianUndLukas\LeoCode\backend\LeoCodeBackend\bin\Debug\net8.0\appsettings.json
 C:\Schule\5AHIF\FlorianUndLukas\LeoCode\backend\LeoCodeBackend\bin\Debug\net8.0\LeoCodeBackend.exe
@@ -361,3 +360,4 @@ C:\Schule\5AHIF\Lukas Branch\LeoCode\backend\LeoCodeBackend\obj\Debug\net8.0\ref
 C:\Schule\5AHIF\Lukas Branch\LeoCode\backend\LeoCodeBackend\obj\Debug\net8.0\LeoCodeBackend.pdb
 C:\Schule\5AHIF\Lukas Branch\LeoCode\backend\LeoCodeBackend\obj\Debug\net8.0\LeoCodeBackend.genruntimeconfig.cache
 C:\Schule\5AHIF\Lukas Branch\LeoCode\backend\LeoCodeBackend\obj\Debug\net8.0\ref\LeoCodeBackend.dll
+C:\Schule\5AHIF\LeoCode\backend\LeoCodeBackend\obj\Debug\net8.0\LeoCodeB.4B5F1E93.Up2Date

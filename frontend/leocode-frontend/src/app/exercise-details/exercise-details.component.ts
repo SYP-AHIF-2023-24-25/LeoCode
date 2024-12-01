@@ -48,7 +48,7 @@ export class ExerciseDetailsComponent implements OnInit {
       arrayOfSnippets:[],
       dateCreated: new Date(),
       dateUpdated: new Date(),
-      teacher: undefined
+      teacher: ""
     };
 
   constructor(

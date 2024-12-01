@@ -29,20 +29,21 @@ export class AssignmentOverviewComponent implements OnInit {
     // Fetch assignments from the service
     this.restDb.GetAssignmentsByUsernameForTeacher(this.ifUserName).subscribe((data: any) => {
       // Parse the assignments and students
-      if (data && data.$values) {
-        this.assignments = data.$values.map((assignment: { 
+      console.log(data);
+      if (data) {
+        this.assignments = data.map((assignment: { 
           assignmentName: any; 
           dueDate: any; 
           exerciseName: any; 
           teacher: { firstname: any; lastname: any; }; 
-          students: { $values: any[]; }; 
+          students: any[];
           exercise: { tags: any[]; language: string; exerciseName: string}; // exercise contains tags and language
         }) => ({
           assignmentName: assignment.assignmentName,
           dueDate: assignment.dueDate,
           exerciseName: assignment.exercise?.exerciseName,
           teacher: `${assignment.teacher.firstname} ${assignment.teacher.lastname}`,
-          students: assignment.students.$values.map(student => ({
+          students: assignment.students.map(student => ({
             studentFirstname: student.firstname,
             studentLastname: student.lastname,
             studentUsername: student.username,

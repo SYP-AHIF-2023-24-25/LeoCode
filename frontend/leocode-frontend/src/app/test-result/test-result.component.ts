@@ -49,7 +49,7 @@ export class TestResultComponent  implements OnInit{
       arrayOfSnippets:[],
       dateCreated: new Date(),
       dateUpdated: new Date(),
-      teacher: undefined
+      teacher: ""
     };
 
     mergedCodeSections: CodeSection[] = [];

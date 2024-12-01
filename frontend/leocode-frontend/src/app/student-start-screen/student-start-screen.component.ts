@@ -52,7 +52,7 @@ export class StudentStartScreenComponent implements OnInit {
        arrayOfSnippets:[],
        dateCreated: new Date(),
        dateUpdated: new Date(),
-       teacher: undefined
+       teacher: ""
      };
 
      assignments: Assignment[] = [];
@@ -128,7 +128,7 @@ export class StudentStartScreenComponent implements OnInit {
        }
      });
      this.restDb.getAssignmentsByUsername(this.ifUserName).subscribe((response: any) => {
-      const data = response["$values"]; 
+      const data = response; 
       if (Array.isArray(data)) {
         this.assignments = []; 
         data.forEach((assignment) => {
@@ -219,14 +219,10 @@ export class StudentStartScreenComponent implements OnInit {
         });
       } 
     });
-      console.log(this.exercise.arrayOfSnippets);
-      console.log(this.exercise.language);
-      console.log(this.exercise.name);
      this.rest.runTests(this.exercise.name, this.exercise.arrayOfSnippets, this.exercise.language).subscribe(
       (data) => {
         
           const d = data
-          console.log(d);
           this.result = this.convertFromJsonV2(d as Value);
           
           this.timer = timeLogger.stop();
@@ -254,15 +250,16 @@ export class StudentStartScreenComponent implements OnInit {
              snippets: this.exercise.arrayOfSnippets
            }
 
-           this.exercise.teacher;
            this.userName = sessionStorage.getItem('ifUserName');
-           console.log('1');
-           console.log('username' + this.userName);
-           console.log('crerator name' + this.exercise.creator)
-          
-           if(this.userName !== null && this.exercise.creator !== undefined){
+           console.log(this.exercise);
+           console.log(logEntry.total);
+            console.log(logEntry.passed);
+            console.log(logEntry.notPassed);
+          console.log(this.userName);
+          console.log(this.exercise.teacher);
+           if(this.userName !== null && this.exercise.teacher !== undefined){
             console.log('2');
-             this.restDb.UpdateExercise(this.userName,this.exercise.creator, this.exercise.description, this.exercise.language, this.exercise.tags, this.exercise.name, arrayOfSnippets, subject, this.exercise.dateCreated, this.exercise.dateUpdated, logEntry.total, logEntry.passed, logEntry.notPassed).subscribe();
+             this.restDb.UpdateExercise(this.userName,this.exercise.teacher, this.exercise.description, this.exercise.language, this.exercise.tags, this.exercise.name, arrayOfSnippets, subject, this.exercise.dateCreated, this.exercise.dateUpdated, logEntry.total, logEntry.passed, logEntry.notPassed).subscribe();
            }
       },
       (error) => {
@@ -275,7 +272,6 @@ export class StudentStartScreenComponent implements OnInit {
 }
 
 loadAssignment(assignment: any): void {
-  console.log(assignment)
   // Extract exercise details from the assignment
   this.resetFields();
   const student = sessionStorage.getItem('ifUserName');
@@ -283,8 +279,10 @@ loadAssignment(assignment: any): void {
   
   this.restDb.GetExerciseForStudentAssignment(assignment.exercise.language, assignment.exercise.name, student).subscribe({
     next: (data: ExerciseDto) => {
+      console.log("exercise");
+      console.log(data);
+      
       exercise = data; // Wenn ein Exercise gefunden wurde, wird es hier gespeichert
-      console.log(exercise);
       if(exercise === null){
         exercise = assignment.exercise;
       }
@@ -294,14 +292,12 @@ loadAssignment(assignment: any): void {
   
       // Check if exercise exists and extract its properties
       if (exercise) {
-          console.log(exercise.language + " Language exercise");
           this.exercise.name = exercise.name; 
           this.exercise.description = exercise.description; 
           this.exercise.language = exercise.language;
                   
           // Ensure arrayOfSnippets is correctly populated
           this.exercise.arrayOfSnippets = exercise.arrayOfSnippets;
-          console.log(exercise.arrayOfSnippets);
 
           
           if (exercise.language !== "CSharp" && exercise.language !== "Java" && exercise.language !== "TypeScript") {
@@ -327,8 +323,9 @@ loadAssignment(assignment: any): void {
           }*/
   
           this.exercise.tags= exercise.tags;
-          this.exercise.creator = exercise.creator;
-          console.log(this.exercise.creator + "creator exercise 2 db");
+          this.exercise.teacher = exercise.creator;
+          console.log(this.exercise + "exercise1");
+          console.log(this.exercise.teacher);
           sessionStorage.setItem("exerciseName",this.exercise.name);
   
       } else {
@@ -337,17 +334,15 @@ loadAssignment(assignment: any): void {
     },
     error: (err) => {
       exercise = assignment.exercise;
-      
       this.selectedAssignment = assignment;
   
       // Check if exercise exists and extract its properties
       if (exercise) {
-          console.log(exercise.language + " Language exercise");
           this.exercise.name = exercise.name; 
           this.exercise.description = exercise.description; 
           this.exercise.language = exercise.language;
           // Ensure arrayOfSnippets is correctly populated
-          this.exercise.arrayOfSnippets = exercise.arrayOfSnippets.snippets.$values; 
+          this.exercise.arrayOfSnippets = exercise.arrayOfSnippets.snippets; 
           
           if (exercise.language !== "CSharp" && exercise.language !== "Java" && exercise.language !== "TypeScript") {
             if(exercise.language === 0){
@@ -369,10 +364,10 @@ loadAssignment(assignment: any): void {
               this.exercise.arrayOfSnippets = []; 
           }*/
   
-          this.exercise.tags= exercise.tags.$values;
-          this.exercise.creator = exercise.teacher.username;
-          console.log(this.exercise.creator + "creator exercise 2 db");
+          this.exercise.tags= exercise.tags;
+          this.exercise.teacher = exercise.teacher.username;
           sessionStorage.setItem("exerciseName",this.exercise.name);
+          console.log(this.exercise + "exercise2");
  }}});
 
   
@@ -384,7 +379,6 @@ loadAssignment(assignment: any): void {
       let editSection = "";
       let foundEditableSection = false;
       let mergedCodeSectionsAfterEditSection = "";
-  
       this.exercise.arrayOfSnippets.forEach((section) => {
         if (section.readonlySection && !foundEditableSection) {
           mergedSectionStringBeforEditSection += section.code;

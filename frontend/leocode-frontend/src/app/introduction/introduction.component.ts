@@ -28,7 +28,7 @@ export class IntroductionComponent {
       arrayOfSnippets:[],
       dateCreated: new Date(),
       dateUpdated: new Date(),
-      teacher: undefined
+      teacher: ""
     };
 
   constructor( private route: ActivatedRoute, private restDb: DbService, private router: Router) {
