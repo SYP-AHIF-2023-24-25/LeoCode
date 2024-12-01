@@ -125,6 +125,7 @@ export class TestResultComponent  implements OnInit{
         console.log(this.exercise.tags.length);
         console.log(this.exercise.creator);
         console.log(this.exercise.dateCreated);
+        console.log(this.exercise.language);
         this.editorOptions.language = this.exercise.language.toLowerCase();
         console.log(this.editorOptions.language);
 

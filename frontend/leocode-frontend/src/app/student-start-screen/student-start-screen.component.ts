@@ -279,6 +279,13 @@ export class StudentStartScreenComponent implements OnInit {
     this.resetFields();
     const exercise = assignment.exercise;
     this.selectedAssignment = assignment;
+    console.log('exercise:',this.exercise);
+    console.log(this.exercise.language);
+    console.log('language:', this.exercise.language);
+    this.editorOptions.language = this.exercise.language.toLowerCase();
+    this.readonlyEditorOptions.language = this.exercise.language.toLowerCase(); 
+    console.log('editorOptions.language:', this.editorOptions.language);
+    console.log('readonlyEditorOptions.language:', this.readonlyEditorOptions.language);
     
 
     // Check if exercise exists and extract its properties
@@ -305,7 +312,6 @@ export class StudentStartScreenComponent implements OnInit {
         this.exercise.tags= exercise.tags.$values;
         this.exercise.teacher = exercise.teacher;
         console.log(exercise.tags);
-        this.editorOptions.language = this.exercise.language; 
         sessionStorage.setItem("exerciseName",this.exercise.name);
 
         console.log('Loaded assignment with exercise:', this.exercise);
