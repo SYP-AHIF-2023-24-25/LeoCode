@@ -1,12 +1,11 @@
 {
   "Version": 1,
-  "Hash": "5iV8Z+4gh5bUuUaMWlImyV9q6Vkgnkb/qtELFE5iMVY=",
+  "Hash": "UQRoYSwnazqPHnj4rlm7w9nyZxmMOMPxl3I2ty7cx6Q=",
   "Source": "LeoCodeBackend",
   "BasePath": "_content/LeoCodeBackend",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
   "DiscoveryPatterns": [],
-  "Assets": [],
-  "Endpoints": []
+  "Assets": []
 }

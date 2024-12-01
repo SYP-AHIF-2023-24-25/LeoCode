@@ -19,8 +19,16 @@ namespace Core.Entities
         
         public int TeacherId { get; set; }
         [ForeignKey(nameof(TeacherId))]
-        public User? Teacher { get; set; }
-        
+        public Teacher? Teacher { get; set; }
+
+        public int? StudentId { get; set; }
+        [ForeignKey(nameof(StudentId))]
+        public Student? Student { get; set; }
+
+
+        public int? TotalTests { get; set; }
+        public int? PassedTests { get; set; }
+        public int? FailedTests { get; set; }
 
         public ArrayOfSnippets ArrayOfSnippets { get; set; }
 

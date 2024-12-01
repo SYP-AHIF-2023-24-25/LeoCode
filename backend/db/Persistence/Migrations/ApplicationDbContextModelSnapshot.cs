@@ -51,7 +51,7 @@ namespace Persistence.Migrations
                     b.Property<int>("AssignmentId")
                         .HasColumnType("int");
 
-                    b.Property<int>("UserId")
+                    b.Property<int>("StudentId")
                         .HasColumnType("int");
 
                     b.Property<int>("Id")
@@ -62,9 +62,14 @@ namespace Persistence.Migrations
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("rowversion");
 
-                    b.HasKey("AssignmentId", "UserId");
+                    b.Property<int?>("TeacherId")
+                        .HasColumnType("int");
 
-                    b.HasIndex("UserId");
+                    b.HasKey("AssignmentId", "StudentId");
+
+                    b.HasIndex("StudentId");
+
+                    b.HasIndex("TeacherId");
 
                     b.ToTable("AssignmentUsers");
                 });
@@ -123,21 +128,35 @@ namespace Persistence.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("FailedTests")
+                        .HasColumnType("int");
+
                     b.Property<int>("Language")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("PassedTests")
+                        .HasColumnType("int");
+
                     b.Property<byte[]>("RowVersion")
                         .IsConcurrencyToken()
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("rowversion");
 
+                    b.Property<int?>("StudentId")
+                        .HasColumnType("int");
+
                     b.Property<int>("TeacherId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("TotalTests")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("StudentId");
 
                     b.HasIndex("TeacherId");
 
@@ -176,6 +195,33 @@ namespace Persistence.Migrations
                     b.ToTable("Snippets");
                 });
 
+            modelBuilder.Entity("Core.Entities.Student", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Firstname")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Lastname")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte[]>("RowVersion")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("rowversion");
+
+                    b.Property<string>("Username")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Student");
+                });
+
             modelBuilder.Entity("Core.Entities.Tag", b =>
                 {
                     b.Property<int>("Id")
@@ -202,7 +248,7 @@ namespace Persistence.Migrations
                     b.ToTable("Tags");
                 });
 
-            modelBuilder.Entity("Core.Entities.User", b =>
+            modelBuilder.Entity("Core.Entities.Teacher", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -212,9 +258,6 @@ namespace Persistence.Migrations
 
                     b.Property<string>("Firstname")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsTeacher")
-                        .HasColumnType("bit");
 
                     b.Property<string>("Lastname")
                         .HasColumnType("nvarchar(max)");
@@ -229,7 +272,7 @@ namespace Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users");
+                    b.ToTable("Teacher");
                 });
 
             modelBuilder.Entity("Core.Entities.ArrayOfSnippets", b =>
@@ -251,15 +294,19 @@ namespace Persistence.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Core.Entities.User", "User")
+                    b.HasOne("Core.Entities.Student", "Student")
                         .WithMany("AssignmentUsers")
-                        .HasForeignKey("UserId")
+                        .HasForeignKey("StudentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Core.Entities.Teacher", null)
+                        .WithMany("AssignmentUsers")
+                        .HasForeignKey("TeacherId");
+
                     b.Navigation("Assignment");
 
-                    b.Navigation("User");
+                    b.Navigation("Student");
                 });
 
             modelBuilder.Entity("Core.Entities.Assignments", b =>
@@ -270,7 +317,7 @@ namespace Persistence.Migrations
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("Core.Entities.User", "Teacher")
+                    b.HasOne("Core.Entities.Teacher", "Teacher")
                         .WithMany()
                         .HasForeignKey("TeacherId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -283,11 +330,18 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Core.Entities.Exercise", b =>
                 {
-                    b.HasOne("Core.Entities.User", "Teacher")
+                    b.HasOne("Core.Entities.Student", "Student")
+                        .WithMany()
+                        .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.HasOne("Core.Entities.Teacher", "Teacher")
                         .WithMany()
                         .HasForeignKey("TeacherId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
+
+                    b.Navigation("Student");
 
                     b.Navigation("Teacher");
                 });
@@ -327,7 +381,12 @@ namespace Persistence.Migrations
                     b.Navigation("Tags");
                 });
 
-            modelBuilder.Entity("Core.Entities.User", b =>
+            modelBuilder.Entity("Core.Entities.Student", b =>
+                {
+                    b.Navigation("AssignmentUsers");
+                });
+
+            modelBuilder.Entity("Core.Entities.Teacher", b =>
                 {
                     b.Navigation("AssignmentUsers");
                 });

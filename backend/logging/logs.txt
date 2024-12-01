@@ -232,3 +232,47 @@
 11/30/2024 20:21:28: SUCCESS: Response from CSharp-runner was successful
 11/30/2024 20:22:04: SUCCESS: Response from TypeScript-runner was successful
 12/01/2024 19:49:02: SUCCESS: Response from CSharp-runner was successful
+12/01/2024 20:10:45: SUCCESS: Response from CSharp-runner was successful
+12/01/2024 20:11:46: SUCCESS: Response from CSharp-runner was successful
+12/01/2024 20:33:28: SUCCESS: Response from CSharp-runner was successful
+12/01/2024 20:34:54: SUCCESS: Response from CSharp-runner was successful
+12/01/2024 20:34:54: ERROR: Response from CSharp-runner wasn't successful. Error Message: Data at the root level is invalid. Line 1, position 1.
+12/01/2024 20:39:02: SUCCESS: Response from CSharp-runner was successful
+12/01/2024 20:39:02: ERROR: Response from CSharp-runner wasn't successful. Error Message: Data at the root level is invalid. Line 1, position 1.
+12/01/2024 20:40:33: SUCCESS: Response from TypeScript-runner was successful
+12/01/2024 20:44:14: SUCCESS: Response from CSharp-runner was successful
+12/01/2024 20:44:14: ERROR: Response from CSharp-runner wasn't successful. Error Message: Data at the root level is invalid. Line 1, position 1.
+12/01/2024 20:49:49: SUCCESS: Response from CSharp-runner was successful
+12/01/2024 20:50:07: SUCCESS: Response from TypeScript-runner was successful
+12/01/2024 21:10:42: SUCCESS: Response from CSharp-runner was successful
+12/01/2024 21:35:49: ERROR: Response from 0-runner wasn't successful. Error Message: An invalid request URI was provided. Either the request URI must be an absolute URI or BaseAddress must be set.
+12/01/2024 21:38:55: ERROR: Response from 0-runner wasn't successful. Error Message: An invalid request URI was provided. Either the request URI must be an absolute URI or BaseAddress must be set.
+12/01/2024 21:55:46: SUCCESS: Response from CSharp-runner was successful
+12/01/2024 21:55:57: SUCCESS: Response from CSharp-runner was successful
+12/01/2024 21:55:57: ERROR: Response from CSharp-runner wasn't successful. Error Message: Data at the root level is invalid. Line 1, position 1.
+12/01/2024 21:57:19: SUCCESS: Response from CSharp-runner was successful
+12/01/2024 21:57:20: ERROR: Response from CSharp-runner wasn't successful. Error Message: Data at the root level is invalid. Line 1, position 1.
+12/01/2024 21:58:00: SUCCESS: Response from CSharp-runner was successful
+12/01/2024 21:58:14: SUCCESS: Response from CSharp-runner was successful
+12/01/2024 21:58:14: ERROR: Response from CSharp-runner wasn't successful. Error Message: Data at the root level is invalid. Line 1, position 1.
+12/01/2024 22:00:07: SUCCESS: Response from CSharp-runner was successful
+12/01/2024 22:00:07: ERROR: Response from CSharp-runner wasn't successful. Error Message: Data at the root level is invalid. Line 1, position 1.
+12/01/2024 22:02:56: SUCCESS: Response from CSharp-runner was successful
+12/01/2024 22:03:12: SUCCESS: Response from TypeScript-runner was successful
+12/01/2024 22:03:54: SUCCESS: Response from CSharp-runner was successful
+12/01/2024 22:04:12: SUCCESS: Response from TypeScript-runner was successful
+12/01/2024 22:05:45: SUCCESS: Response from CSharp-runner was successful
+12/01/2024 22:11:52: ERROR: Response from Java-runner wasn't successful. Error Message: Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte. (localhost:8002)
+12/01/2024 22:15:40: SUCCESS: Response from CSharp-runner was successful
+12/01/2024 22:15:40: ERROR: Response from CSharp-runner wasn't successful. Error Message: Data at the root level is invalid. Line 1, position 1.
+12/01/2024 22:17:04: SUCCESS: Response from CSharp-runner was successful
+12/01/2024 22:18:06: SUCCESS: Response from TypeScript-runner was successful
+12/01/2024 22:25:20: SUCCESS: Response from CSharp-runner was successful
+12/01/2024 22:25:49: SUCCESS: Response from CSharp-runner was successful
+12/01/2024 22:26:25: SUCCESS: Response from CSharp-runner was successful
+12/01/2024 22:26:52: SUCCESS: Response from CSharp-runner was successful
+12/01/2024 22:28:14: SUCCESS: Response from CSharp-runner was successful
+12/01/2024 22:32:56: SUCCESS: Response from CSharp-runner was successful
+12/01/2024 22:34:36: SUCCESS: Response from CSharp-runner was successful
+12/01/2024 22:36:00: SUCCESS: Response from CSharp-runner was successful
+12/01/2024 22:38:01: SUCCESS: Response from CSharp-runner was successful

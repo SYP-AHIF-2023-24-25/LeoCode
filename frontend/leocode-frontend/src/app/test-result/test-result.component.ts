@@ -127,6 +127,7 @@ export class TestResultComponent  implements OnInit{
         console.log(this.exercise.dateCreated);
         console.log(this.exercise.language);
         this.editorOptions.language = this.exercise.language.toLowerCase();
+        this.readonlyEditorOptions.language = this.exercise.language.toLowerCase();
         console.log(this.editorOptions.language);
 
         this.mergeCodeSections();
@@ -254,7 +255,7 @@ export class TestResultComponent  implements OnInit{
     console.log(this.exercise.name);
     console.log(this.exercise.tags.length);
     if (usrname) {
-      this.restDb.UpdateExercise(usrname, this.exercise.description, this.exercise.language, this.exercise.tags, this.exercise.name, arrayOfSnippets, subject).subscribe();
+      //this.restDb.UpdateExercise(usrname, this.exercise.description, this.exercise.language, this.exercise.tags, this.exercise.name, arrayOfSnippets, subject).subscribe();
     } else {
       console.error("Username is null");
     }

@@ -325,3 +325,39 @@ C:\Schule_2024_25\Syp\LeoCode\backend\LeoCodeBackend\obj\Debug\net8.0\refint\Leo
 C:\Schule_2024_25\Syp\LeoCode\backend\LeoCodeBackend\obj\Debug\net8.0\LeoCodeBackend.pdb
 C:\Schule_2024_25\Syp\LeoCode\backend\LeoCodeBackend\obj\Debug\net8.0\LeoCodeBackend.genruntimeconfig.cache
 C:\Schule_2024_25\Syp\LeoCode\backend\LeoCodeBackend\obj\Debug\net8.0\ref\LeoCodeBackend.dll
+C:\Schule\5AHIF\Lukas Branch\LeoCode\backend\LeoCodeBackend\bin\Debug\net8.0\appsettings.Development.json
+C:\Schule\5AHIF\Lukas Branch\LeoCode\backend\LeoCodeBackend\bin\Debug\net8.0\appsettings.json
+C:\Schule\5AHIF\Lukas Branch\LeoCode\backend\LeoCodeBackend\bin\Debug\net8.0\LeoCodeBackend.exe
+C:\Schule\5AHIF\Lukas Branch\LeoCode\backend\LeoCodeBackend\bin\Debug\net8.0\LeoCodeBackend.deps.json
+C:\Schule\5AHIF\Lukas Branch\LeoCode\backend\LeoCodeBackend\bin\Debug\net8.0\LeoCodeBackend.runtimeconfig.json
+C:\Schule\5AHIF\Lukas Branch\LeoCode\backend\LeoCodeBackend\bin\Debug\net8.0\LeoCodeBackend.dll
+C:\Schule\5AHIF\Lukas Branch\LeoCode\backend\LeoCodeBackend\bin\Debug\net8.0\LeoCodeBackend.pdb
+C:\Schule\5AHIF\Lukas Branch\LeoCode\backend\LeoCodeBackend\bin\Debug\net8.0\Jackletter.Microsoft.Extensions.Logging.File.dll
+C:\Schule\5AHIF\Lukas Branch\LeoCode\backend\LeoCodeBackend\bin\Debug\net8.0\Microsoft.AspNetCore.OpenApi.dll
+C:\Schule\5AHIF\Lukas Branch\LeoCode\backend\LeoCodeBackend\bin\Debug\net8.0\Microsoft.OpenApi.dll
+C:\Schule\5AHIF\Lukas Branch\LeoCode\backend\LeoCodeBackend\bin\Debug\net8.0\Newtonsoft.Json.dll
+C:\Schule\5AHIF\Lukas Branch\LeoCode\backend\LeoCodeBackend\bin\Debug\net8.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Schule\5AHIF\Lukas Branch\LeoCode\backend\LeoCodeBackend\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Schule\5AHIF\Lukas Branch\LeoCode\backend\LeoCodeBackend\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Schule\5AHIF\Lukas Branch\LeoCode\backend\LeoCodeBackend\obj\Debug\net8.0\LeoCodeBackend.csproj.AssemblyReference.cache
+C:\Schule\5AHIF\Lukas Branch\LeoCode\backend\LeoCodeBackend\obj\Debug\net8.0\LeoCodeBackend.GeneratedMSBuildEditorConfig.editorconfig
+C:\Schule\5AHIF\Lukas Branch\LeoCode\backend\LeoCodeBackend\obj\Debug\net8.0\LeoCodeBackend.AssemblyInfoInputs.cache
+C:\Schule\5AHIF\Lukas Branch\LeoCode\backend\LeoCodeBackend\obj\Debug\net8.0\LeoCodeBackend.AssemblyInfo.cs
+C:\Schule\5AHIF\Lukas Branch\LeoCode\backend\LeoCodeBackend\obj\Debug\net8.0\LeoCodeBackend.csproj.CoreCompileInputs.cache
+C:\Schule\5AHIF\Lukas Branch\LeoCode\backend\LeoCodeBackend\obj\Debug\net8.0\LeoCodeBackend.MvcApplicationPartsAssemblyInfo.cs
+C:\Schule\5AHIF\Lukas Branch\LeoCode\backend\LeoCodeBackend\obj\Debug\net8.0\LeoCodeBackend.MvcApplicationPartsAssemblyInfo.cache
+C:\Schule\5AHIF\Lukas Branch\LeoCode\backend\LeoCodeBackend\obj\Debug\net8.0\LeoCodeBackend.sourcelink.json
+C:\Schule\5AHIF\Lukas Branch\LeoCode\backend\LeoCodeBackend\obj\Debug\net8.0\staticwebassets.build.json
+C:\Schule\5AHIF\Lukas Branch\LeoCode\backend\LeoCodeBackend\obj\Debug\net8.0\staticwebassets.development.json
+C:\Schule\5AHIF\Lukas Branch\LeoCode\backend\LeoCodeBackend\obj\Debug\net8.0\staticwebassets\msbuild.LeoCodeBackend.Microsoft.AspNetCore.StaticWebAssets.props
+C:\Schule\5AHIF\Lukas Branch\LeoCode\backend\LeoCodeBackend\obj\Debug\net8.0\staticwebassets\msbuild.build.LeoCodeBackend.props
+C:\Schule\5AHIF\Lukas Branch\LeoCode\backend\LeoCodeBackend\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.LeoCodeBackend.props
+C:\Schule\5AHIF\Lukas Branch\LeoCode\backend\LeoCodeBackend\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.LeoCodeBackend.props
+C:\Schule\5AHIF\Lukas Branch\LeoCode\backend\LeoCodeBackend\obj\Debug\net8.0\staticwebassets.pack.json
+C:\Schule\5AHIF\Lukas Branch\LeoCode\backend\LeoCodeBackend\obj\Debug\net8.0\scopedcss\bundle\LeoCodeBackend.styles.css
+C:\Schule\5AHIF\Lukas Branch\LeoCode\backend\LeoCodeBackend\obj\Debug\net8.0\LeoCodeBackend.csproj.CopyComplete
+C:\Schule\5AHIF\Lukas Branch\LeoCode\backend\LeoCodeBackend\obj\Debug\net8.0\LeoCodeBackend.dll
+C:\Schule\5AHIF\Lukas Branch\LeoCode\backend\LeoCodeBackend\obj\Debug\net8.0\refint\LeoCodeBackend.dll
+C:\Schule\5AHIF\Lukas Branch\LeoCode\backend\LeoCodeBackend\obj\Debug\net8.0\LeoCodeBackend.pdb
+C:\Schule\5AHIF\Lukas Branch\LeoCode\backend\LeoCodeBackend\obj\Debug\net8.0\LeoCodeBackend.genruntimeconfig.cache
+C:\Schule\5AHIF\Lukas Branch\LeoCode\backend\LeoCodeBackend\obj\Debug\net8.0\ref\LeoCodeBackend.dll

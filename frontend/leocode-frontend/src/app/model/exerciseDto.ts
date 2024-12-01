@@ -1,4 +1,5 @@
 import { CodeSection} from './code-sections';
+import { User } from './user';
 export interface ExerciseDto {
     name:string,
     creator:string,
@@ -7,5 +8,6 @@ export interface ExerciseDto {
     tags:string[],
     arrayOfSnippets: CodeSection[]
     dateCreated: Date,
-    dateUpdated: Date
+    dateUpdated: Date,
+    teacher: User | undefined,
 }
