@@ -65,11 +65,11 @@ namespace Persistence
         public async Task<List<AssignmentDto>> GetAll(string? username)
         {
             IQueryable<Assignments> query = _dbContext.Assignments
-                .Include(a => a.Teacher)
-                .Include(a => a.Exercise)
-                    .ThenInclude(e => e.Tags)
-                .Include(a => a.AssignmentUsers)
-                    .ThenInclude(au => au.Student);
+        .Include(a => a.Teacher)
+        .Include(a => a.Exercise)
+            .ThenInclude(e => e.Tags)
+        .Include(a => a.AssignmentUsers)
+            .ThenInclude(au => au.Student);
 
             if (!string.IsNullOrEmpty(username))
             {
@@ -78,7 +78,13 @@ namespace Persistence
 
             var assignments = await query.ToListAsync();
 
-            // Transform to DTOs
+            // Alle Exercises, die einem Schüler zugeordnet sind
+            var allExercises = _dbContext.Exercises
+                .Include(e => e.Student) // Include für den direkten Zugriff auf den Schüler
+                .Where(e => e.Student != null) // Nur Exercises mit zugeordneten Schülern
+                .ToList();
+
+            // Transformiere die Ergebnisse in DTOs
             var result = assignments.Select(a => new AssignmentDto
             {
                 AssignmentName = a.Name,
@@ -95,11 +101,20 @@ namespace Persistence
                     Lastname = a.Teacher.Lastname,
                     Username = a.Teacher.Username
                 },
-                Students = a.AssignmentUsers.Select(au => new StudentDto
+                Students = a.AssignmentUsers.Select(au =>
                 {
-                    Firstname = au.Student.Firstname,
-                    Lastname = au.Student.Lastname,
-                    Username = au.Student.Username
+                    // Suche die Testergebnisse des Studenten in `allExercises`
+                    var studentExercise = allExercises.FirstOrDefault(e => e.StudentId == au.Student.Id);
+
+                    return new StudentDto
+                    {
+                        Firstname = au.Student.Firstname,
+                        Lastname = au.Student.Lastname,
+                        Username = au.Student.Username,
+                        TotalTests = studentExercise?.TotalTests ?? 0,   // Standardwert 0 bei fehlendem Exercise
+                        PassedTests = studentExercise?.PassedTests ?? 0,
+                        FailedTests = studentExercise?.FailedTests ?? 0
+                    };
                 }).ToList()
             }).ToList();
 

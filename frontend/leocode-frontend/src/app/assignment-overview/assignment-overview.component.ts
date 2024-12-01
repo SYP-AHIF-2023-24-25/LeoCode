@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { KeycloakService } from 'keycloak-angular';
 import { DbService } from '../service/db-service.service';
@@ -18,7 +18,9 @@ export class AssignmentOverviewComponent implements OnInit {
     private keycloakService: KeycloakService,
     private router: Router,
     private restDb: DbService
-  ) {}
+  ) {
+    
+  }
 
   ngOnInit(): void {
     this.firstName = sessionStorage.getItem('firstName');
@@ -43,7 +45,11 @@ export class AssignmentOverviewComponent implements OnInit {
           students: assignment.students.$values.map(student => ({
             studentFirstname: student.firstname,
             studentLastname: student.lastname,
-            studentUsername: student.username
+            studentUsername: student.username,
+            studentTotalTests: student.totalTests,
+            studentPassedTests: student.passedTests,
+            studentFailedTests: student.failedTests,
+            studentPercentage: Math.round((student.passedTests / student.totalTests) * 100) || 0 // Calculate the percentage (default to 0 if no tests are present)
           })),
           tags: assignment.exercise?.tags || [],  // Handle possible null or undefined
           language: assignment.exercise?.language || 'No language specified',  // Default value if no language is provided
@@ -59,6 +65,7 @@ export class AssignmentOverviewComponent implements OnInit {
     this.selectedAssignment = assignment;
   }
 
+
   async logout(): Promise<void> {
     sessionStorage.setItem('shouldLogOut', 'true');
     this.router.navigate(['/login']);
@@ -68,4 +75,6 @@ export class AssignmentOverviewComponent implements OnInit {
   toggleStudents(assignment: any): void {
     assignment.showStudents = !assignment.showStudents;
   }
+
+  
 }

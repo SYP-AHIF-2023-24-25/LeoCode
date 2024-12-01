@@ -38,5 +38,8 @@ namespace Core.Dto
         public string Firstname { get; set; }
         public string Lastname { get; set; }
         public string Username { get; set; }
+        public int TotalTests { get; set; }
+        public int PassedTests { get; set; }
+        public int FailedTests { get; set; }
     }
 }

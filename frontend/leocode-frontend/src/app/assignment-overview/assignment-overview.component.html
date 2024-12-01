@@ -122,6 +122,10 @@
                       <th>First Name</th>
                       <th>Last Name</th>
                       <th>IF Number</th>
+                      <th>Passed</th>
+                      <th>Failed</th>
+                      <th>Total</th>
+                      <th>Percentage</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -132,9 +136,14 @@
                       <td>{{ student.studentFirstname }}</td>
                       <td>{{ student.studentLastname }}</td>
                       <td>{{ student.studentUsername }}</td>
+                      <td style="color: green">{{ student.studentPassedTests }}</td>
+                      <td style="color: red">{{ student.studentFailedTests }}</td>
+                      <td>{{ student.studentTotalTests }}</td>
+                      <td>{{ student.studentPercentage }} %</td>
                     </tr>
                   </tbody>
                 </table>
+
               </div>
             </div>
           </div>
@@ -149,3 +158,5 @@
   rel="stylesheet"
   href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
 />
+
+
