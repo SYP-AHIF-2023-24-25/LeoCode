@@ -18,6 +18,9 @@ const httpOptions = {
   providedIn: 'root',
 })
 export class DbService {
+  GetExerciseForStudentAssignment(language: any, exerciseName: any, student: string | null) {
+    return this.http.get<ExerciseDto>(`${this.apiUrl}/exercise/GetExerciseForStudentAssignment?language=${language}&exerciseName=${exerciseName}&student=${student}`, httpOptions);
+  }
 
   private apiUrl ="https://localhost:7269/api"
   constructor(private http: HttpClient) { }
@@ -26,8 +29,12 @@ export class DbService {
     return this.http.get(`${this.apiUrl}/Assignments?username=${username}`, httpOptions);
   }
 
-  AddUser(username: string, firstname: string, lastname: string, isTeacher: boolean) {
-    return this.http.post(`${this.apiUrl}/User?username=${username}&firstname=${firstname}&lastname=${lastname}&isTeacher=${isTeacher}`, httpOptions);
+  AddStudent(username: string, firstname: string, lastname: string) {
+    return this.http.post(`${this.apiUrl}/Student?username=${username}&firstname=${firstname}&lastname=${lastname}`, httpOptions);
+  }
+
+  AddTeacher(username: string, firstname: string, lastname: string) {
+    return this.http.post(`${this.apiUrl}/Teacher?username=${username}&firstname=${firstname}&lastname=${lastname}`, httpOptions);
   }
 
   AddAssignment(exerciseName: string, creator: string, dateDue: Date, Name: string): Observable<any> {
@@ -70,26 +77,44 @@ export class DbService {
 
   UpdateExercise(
     username: string,
+    teacher: string,
     introduction: string,
     language: string,
     tags: string[],
     exerciseName: string,
     arrayOfSnippets: ArrayOfSnippetsDto,
-    subject: string
+    subject: string,
+    dateCreated: Date,
+    dateUpdated: Date,
+    total: number,
+    passed: number,
+    failed: number
   ) {
-    const queryParams = `username=${username}&description=${introduction}&language=${language}&subject=${subject}&exerciseName=${exerciseName}`;
-    console.log(tags);
+    // Convert dates to ISO strings
+    const queryParams = `student=${username}&teacher=${teacher}&description=${encodeURIComponent(introduction)}&language=${language}&subject=${subject}&exerciseName=${exerciseName}&dateCreated=${dateCreated.toISOString()}&dateUpdated=${dateUpdated.toISOString()}&tags=${tags}&total=${total}&passed=${passed}&failed=${failed}`;
+  
+    // Prepare the body
     const body = {
-      tags: tags,
       arrayOfSnippets: arrayOfSnippets
     };
   
+    console.log("Request Body:", JSON.stringify(body));
+  
+    // Set Content-Type to application/json
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    };
+  
+    // Send the PUT request
     return this.http.put<Exercise>(
       `${this.apiUrl}/exercise?${queryParams}`,
-      body,
+      arrayOfSnippets,
       httpOptions
     );
   }
+  
   
 
   UpdateDetails(username: string, description: string, tags: string[], exerciseName: string, newExerciseName: string) {

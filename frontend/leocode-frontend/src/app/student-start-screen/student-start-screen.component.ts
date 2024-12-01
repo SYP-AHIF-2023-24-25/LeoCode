@@ -29,6 +29,17 @@ export class StudentStartScreenComponent implements OnInit {
   userName: string | null= "";
   exerciseName: string |null = "";
   creator: string | undefined = "";
+
+  resultsAvailable: boolean = false;
+  showResults: boolean = true; 
+  showIntroduction: boolean = true;
+  showPlayground: boolean = true;
+  showSummary : boolean = true;
+  showDetailedResults : boolean = true;
+  showHistory : boolean = true;
+
+  selectedAssignment: any = null; // To hold the selected assignment details
+ 
  
      exercise : Exercise={
        name: "",
@@ -41,15 +52,39 @@ export class StudentStartScreenComponent implements OnInit {
        arrayOfSnippets:[],
        dateCreated: new Date(),
        dateUpdated: new Date(),
-       teacher: undefined
+       teacher: ""
      };
 
      assignments: Assignment[] = [];
 
+     
+ resultHistory:{message: string,timestamp:Date, passed:number, notPassed:number, total:number, timer:string}[] = [];
+
+
+ mergedCodeSections: CodeSection[] = [];
+
  
  
    //Code Editor
-   editorOptions = { theme: 'vs-dark', language: this.exercise.language}; // language auswählen
+   editorOptions = { 
+   
+    theme: 'vs-dark', 
+    language: this.exercise.language.toLowerCase(), 
+    automaticLayout: true,  
+    lineNumbers: 'on',
+    minimap: { enabled: false }, 
+    wordWrap: 'on' ,
+    readonly: false
+  }; 
+   readonlyEditorOptions = {
+    theme: 'vs-dark', 
+    language: this.exercise.language.toLowerCase(), 
+    automaticLayout: true,  
+    lineNumbers: 'on',
+    minimap: { enabled: false }, 
+    wordWrap: 'on' ,
+    readonly: true
+  }; 
  
    // timer
    timer: string = "";
@@ -76,7 +111,8 @@ export class StudentStartScreenComponent implements OnInit {
  
    ngOnInit(): void {
      this.ifUserName = sessionStorage.getItem('ifUserName');
- 
+     this.resultHistory = this.resultHistoryService.getResultsHistory();
+
      this.route.queryParams.subscribe((params: Params) => {
        this.userName = params['userName'];
        this.exerciseName = params['exerciseName'];
@@ -92,17 +128,17 @@ export class StudentStartScreenComponent implements OnInit {
        }
      });
      this.restDb.getAssignmentsByUsername(this.ifUserName).subscribe((response: any) => {
-      const data = response["$values"]; 
+      const data = response; 
       if (Array.isArray(data)) {
         this.assignments = []; 
         data.forEach((assignment) => {
           this.assignments.push(assignment);
         });
     
-        console.log(this.assignments);
       } else {
         console.error('Expected data to be an array, but received:', data);
       }
+      
     }, (error) => {
       console.error('Error fetching assignments:', error);
     });
@@ -117,7 +153,6 @@ export class StudentStartScreenComponent implements OnInit {
      const PassedTests: number = value.value.Summary.PassedTests;
      const FailedTests: number = value.value.Summary.FailedTests;
  
-     console.log(PassedTests);
  
      const summary: Summary = {
          TotalTests,
@@ -140,10 +175,19 @@ export class StudentStartScreenComponent implements OnInit {
  
      return result;
  }
+
+ clearHistory() {
+  
+  this.resultHistoryService.clearResultsHistory();
+  this.resultHistory = [];
+  }
+
  
  
      //reset fields for new json format
      resetFields() {
+      this.resultsAvailable = false;
+
        this.result = {
          Summary: {
            TotalTests: 0,
@@ -159,95 +203,238 @@ export class StudentStartScreenComponent implements OnInit {
    startTest() {
      this.resetFields();
      this.loading = true;
+     this.resultsAvailable = false;
      const timeLogger = new TimeLoggerService();
      timeLogger.start();
  
  
-     //this.rest.runTests('PasswordChecker', this.codeSections, "Typescript").subscribe(
-     console.log(this.exercise.language);
-       this.rest.runTests(this.exercise.name, this.exercise.arrayOfSnippets, this.exercise.language).subscribe(
-         (data) => {
-           console.log(data);
-           
-             const d = data
-             console.log(d);
-             this.result = this.convertFromJsonV2(d as Value);
-             
-             this.timer = timeLogger.stop();
-             console.log(this.result.Summary.TotalTests);
-             const logEntry = {
-                 message: `Unitests : ${this.result.Summary.PassedTests}/${this.result.Summary.TotalTests} test completed.`,
-                 timestamp: new Date(),
-                 passed: this.result.Summary.PassedTests,
-                 notPassed: this.result.Summary.FailedTests,
-                 total: this.result.Summary.TotalTests,
-                 timer: this.timer
-             };
- 
-             this.resultHistoryService.addResult(logEntry.message, logEntry.passed, logEntry.notPassed, logEntry.total, logEntry.timer);
-             this.loading = false;
-         },
-         (error) => {
-             console.error("Error in API request", error);
-             this.timer = timeLogger.stop();
-             this.loading = false;
-         }
-     );
-     let subject = "";
-     if(this.exercise.tags.includes("WMC")){
-       subject = "WMC";
-     }else if(this.exercise.tags.includes("POSE")){
-       subject = "POSE";
-     }else if(this.exercise.tags.includes("TYPESCRIPT")){
-       subject = "TYPESCRIPT";
-     }
-     let arrayOfSnippets: ArrayOfSnippetsDto = {
-       snippets: this.exercise.arrayOfSnippets
-     }
+     
+        // merge the new code into th exercise.arrayOfSnippets
+    this.exercise.arrayOfSnippets.forEach((section) => {
+      if(section.readonlySection == false){
+        this.mergedCodeSections.forEach((section2) => {
+          if(section2.readonlySection == false){
+            section.code = section2.code;
+          }
+        });
+      } 
+    });
+     this.rest.runTests(this.exercise.name, this.exercise.arrayOfSnippets, this.exercise.language).subscribe(
+      (data) => {
+        
+          const d = data
+          this.result = this.convertFromJsonV2(d as Value);
+          
+          this.timer = timeLogger.stop();
+          const logEntry = {
+              message: `Unitests : ${this.result.Summary.PassedTests}/${this.result.Summary.TotalTests} test completed.`,
+              timestamp: new Date(),
+              passed: this.result.Summary.PassedTests,
+              notPassed: this.result.Summary.FailedTests,
+              total: this.result.Summary.TotalTests,
+              timer: this.timer
+          };
+        
+          this.resultHistoryService.addResult(logEntry.message, logEntry.passed, logEntry.notPassed, logEntry.total, logEntry.timer);
+          this.loading = false;
+          this.resultsAvailable = true;
+          let subject = "";
+           if(this.exercise.tags.includes("WMC")){
+             subject = "WMC";
+           }else if(this.exercise.tags.includes("POSE")){
+             subject = "POSE";
+           }else if(this.exercise.tags.includes("TYPESCRIPT")){
+             subject = "TYPESCRIPT";
+           }
+           let arrayOfSnippets: ArrayOfSnippetsDto = {
+             snippets: this.exercise.arrayOfSnippets
+           }
 
-     console.log(this.exercise.name);
-     console.log(this.exercise.tags.length);
-
-     if(this.userName != null){
-      this.restDb.UpdateExercise(this.userName, this.exercise.description, this.exercise.language, this.exercise.tags, this.exercise.name, arrayOfSnippets, subject).subscribe();
-     }
+           this.userName = sessionStorage.getItem('ifUserName');
+           console.log(this.exercise);
+           console.log(logEntry.total);
+            console.log(logEntry.passed);
+            console.log(logEntry.notPassed);
+          console.log(this.userName);
+          console.log(this.exercise.teacher);
+           if(this.userName !== null && this.exercise.teacher !== undefined){
+            console.log('2');
+             this.restDb.UpdateExercise(this.userName,this.exercise.teacher, this.exercise.description, this.exercise.language, this.exercise.tags, this.exercise.name, arrayOfSnippets, subject, this.exercise.dateCreated, this.exercise.dateUpdated, logEntry.total, logEntry.passed, logEntry.notPassed).subscribe();
+           }
+      },
+      (error) => {
+          console.error("Error in API request", error);
+          this.timer = timeLogger.stop();
+          this.loading = false;
+         
+      }
+  );
 }
 
-   loadAssignment(assignment: any): void {
-    // Extract exercise details from the assignment
-    const exercise = assignment.exercise;
-    
+loadAssignment(assignment: any): void {
+  // Extract exercise details from the assignment
+  this.resetFields();
+  const student = sessionStorage.getItem('ifUserName');
+  let exercise = null;
+  
+  this.restDb.GetExerciseForStudentAssignment(assignment.exercise.language, assignment.exercise.name, student).subscribe({
+    next: (data: ExerciseDto) => {
+      console.log("exercise");
+      console.log(data);
+      
+      exercise = data; // Wenn ein Exercise gefunden wurde, wird es hier gespeichert
+      if(exercise === null){
+        exercise = assignment.exercise;
+      }
+      this.selectedAssignment = assignment;
+      
+      
+  
+      // Check if exercise exists and extract its properties
+      if (exercise) {
+          this.exercise.name = exercise.name; 
+          this.exercise.description = exercise.description; 
+          this.exercise.language = exercise.language;
+                  
+          // Ensure arrayOfSnippets is correctly populated
+          this.exercise.arrayOfSnippets = exercise.arrayOfSnippets;
 
-    // Check if exercise exists and extract its properties
-    if (exercise) {
-        this.exercise.name = exercise.name; 
-        this.exercise.description = exercise.description; 
-        if(exercise.language = 1){
-          this.exercise.language = "CSharp"
-        } else if(exercise.language = 0){
-          this.exercise.language = "Java";
-        }else{
-          this.exercise.language= "TypeScript";
-        }
-                
-        // Ensure arrayOfSnippets is correctly populated
-        if (exercise.arrayOfSnippets && exercise.arrayOfSnippets.snippets && exercise.arrayOfSnippets.snippets.$values) {
-            this.exercise.arrayOfSnippets = exercise.arrayOfSnippets.snippets.$values; 
-            console.log(this.exercise.arrayOfSnippets);
+          
+          if (exercise.language !== "CSharp" && exercise.language !== "Java" && exercise.language !== "TypeScript") {
+            if(exercise.language === 0){
+              this.exercise.language = "CSharp"
+            } else if(exercise.language === 1){
+              this.exercise.language = "Java";
+            }else{
+              this.exercise.language= "TypeScript";
+            }
+          }
+            this.editorOptions.language = this.exercise.language.toLocaleLowerCase(); 
+            this.readonlyEditorOptions.language = this.exercise.language.toLocaleLowerCase();
+
+
+
+          this.mergeCodeSections();
+          /*if (exercise.arrayOfSnippets && exercise.arrayOfSnippets.snippets) {
+              
+          } else {
+              console.warn('exercise.arrayOfSnippets does not contain the expected format:', exercise.arrayOfSnippets);
+              this.exercise.arrayOfSnippets = []; 
+          }*/
+  
+          this.exercise.tags= exercise.tags;
+          this.exercise.teacher = exercise.creator;
+          console.log(this.exercise + "exercise1");
+          console.log(this.exercise.teacher);
+          sessionStorage.setItem("exerciseName",this.exercise.name);
+  
+      } else {
+          console.error('No exercise found in assignment:', assignment);
+      }
+    },
+    error: (err) => {
+      exercise = assignment.exercise;
+      this.selectedAssignment = assignment;
+  
+      // Check if exercise exists and extract its properties
+      if (exercise) {
+          this.exercise.name = exercise.name; 
+          this.exercise.description = exercise.description; 
+          this.exercise.language = exercise.language;
+          // Ensure arrayOfSnippets is correctly populated
+          this.exercise.arrayOfSnippets = exercise.arrayOfSnippets.snippets; 
+          
+          if (exercise.language !== "CSharp" && exercise.language !== "Java" && exercise.language !== "TypeScript") {
+            if(exercise.language === 0){
+              this.exercise.language = "CSharp"
+            } else if(exercise.language === 1){
+              this.exercise.language = "Java";
+            }else{
+              this.exercise.language = "TypeScript";
+            }
+          }
+            this.editorOptions.language = this.exercise.language.toLocaleLowerCase(); 
+            this.readonlyEditorOptions.language = this.exercise.language.toLocaleLowerCase();
+
+          this.mergeCodeSections();
+          /*if (exercise.arrayOfSnippets && exercise.arrayOfSnippets.snippets) {
+              
+          } else {
+              console.warn('exercise.arrayOfSnippets does not contain the expected format:', exercise.arrayOfSnippets);
+              this.exercise.arrayOfSnippets = []; 
+          }*/
+  
+          this.exercise.tags= exercise.tags;
+          this.exercise.teacher = exercise.teacher.username;
+          sessionStorage.setItem("exerciseName",this.exercise.name);
+          console.log(this.exercise + "exercise2");
+ }}});
+
+  
+}
+
+  mergeCodeSections(): void {
+    setTimeout(() => {  // Verarbeitung im Hintergrund, um den UI-Thread nicht zu blockieren
+      let mergedSectionStringBeforEditSection = "";
+      let editSection = "";
+      let foundEditableSection = false;
+      let mergedCodeSectionsAfterEditSection = "";
+      this.exercise.arrayOfSnippets.forEach((section) => {
+        if (section.readonlySection && !foundEditableSection) {
+          mergedSectionStringBeforEditSection += section.code;
+        } else if (!section.readonlySection && !foundEditableSection) {
+          foundEditableSection = true;
+          editSection = section.code;
         } else {
-            console.warn('exercise.arrayOfSnippets does not contain the expected format:', exercise.arrayOfSnippets);
-            this.exercise.arrayOfSnippets = []; 
+          mergedCodeSectionsAfterEditSection += section.code;
         }
-
-        this.exercise.tags= exercise.tags.$values;
-        this.exercise.teacher = exercise.teacher;
-        console.log(exercise.tags);
-        this.editorOptions.language = this.exercise.language; 
-        sessionStorage.setItem("exerciseName",this.exercise.name);
-
-        console.log('Loaded assignment with exercise:', this.exercise);
-    } else {
-        console.error('No exercise found in assignment:', assignment);
-    }
+      });
+  
+      this.mergedCodeSections = [
+        {
+          code: mergedSectionStringBeforEditSection,
+          readonlySection: true,
+          fileName: "Before Editable Section"
+        },
+        {
+          code: editSection,
+          readonlySection: false,
+          fileName: "Editable Section"
+        },
+        {
+          code: mergedCodeSectionsAfterEditSection,
+          readonlySection: true,
+          fileName: "After Editable Section"
+        }
+      ];
+    }, 0); // asynchron verarbeiten
   }
+  
+
+  toggleResults() {
+    this.showResults = !this.showResults;
+  }
+
+  toggleIntroduction() {
+    this.showIntroduction = !this.showIntroduction;  // Umschalten zwischen true und false
+  }
+
+  togglePlayground() {
+    this.showPlayground = !this.showPlayground;
+  }
+   // Toggle the visibility of the summary
+   toggleSummary() {
+    this.showSummary = !this.showSummary;
+  }
+
+  // Toggle the visibility of the detailed test results
+  toggleDetailedResults() {
+    this.showDetailedResults = !this.showDetailedResults;
+  }
+
+  // Toggle the visibility of the result history
+  toggleHistory() {
+    this.showHistory = !this.showHistory;
+  }
+
  }

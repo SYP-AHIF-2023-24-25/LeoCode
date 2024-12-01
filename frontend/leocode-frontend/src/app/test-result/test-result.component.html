@@ -3,7 +3,7 @@
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-  
+
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav">
       <li class="nav-item">
@@ -11,11 +11,14 @@
       </li>
     </ul>
   </div>
-  
+
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
         <a class="nav-link text-light" href="assignment-overview" style="margin-left: 50px;">Assignments</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-light" href="start-screen" style="margin-left: 50px;">Exercises</a>
       </li>
     </ul>
 
@@ -32,77 +35,128 @@
 
 <div class="container-fluid">
   <div class="row flex-grow-1">
-    <div class="col-md-2 d-none d-md-block bg-light sidebar">
+    <!-- Sidebar -->
+    <div class="col-md-2 d-none d-md-block sidebar" style="background-color: #f0f0f0; height: 100vh;">
       <div class="sidebar-sticky">
         <ul class="nav flex-column">
-          <li class="nav-item">
-            <a class="nav-link active" [routerLink]="['/introduction']" [queryParams]="{ creator: exercise.creator }">Introduction</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" [routerLink]="['/test-results']" [queryParams]="{ creator: exercise.creator }">Implementation</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" [routerLink]="['/result-history']">Result-History</a>
-          </li>
         </ul>
       </div>
     </div>
-    
+
     <div class="col-md-10 content">
-      <div class="container mt-4">
-        <h2>Playground</h2>
-        
-        <!-- Loop through code sections -->
-        <div *ngFor="let codeSection of exercise.arrayOfSnippets" class="mb-3">
-          <!-- Readonly code section -->
-          <div *ngIf="codeSection.readonlySection">
-             <pre class="p bg-light" style="border: 1px solid #ddd; white-space: pre-wrap;">
-              {{ codeSection.code }}
-            </pre>
+      <div class="card mt-4 shadow-lg rounded-lg">
+        <div class="card-body">
+          
+          <h1 (click)="toggleIntroduction()" class="text-primary" style="cursor: pointer; margin-bottom: 20px;">{{exercise.name}}</h1>
+
+          <div *ngIf="showIntroduction" style="margin-bottom: 40px;">
+            <p>{{exercise.description}}</p>
           </div>
-          <!-- Editable code section -->
-          <div *ngIf="!codeSection.readonlySection" style="height: 300px;">
-            <ngx-monaco-editor style="height: 300px; width: 100%;" [options]="editorOptions" [(ngModel)]="codeSection.code"></ngx-monaco-editor>
+
+
+
+          <h2 (click)="togglePlayground()" class="text-info" style="cursor: pointer;">Playground</h2>
+          <div *ngIf="showPlayground">
+            <div *ngFor="let codeSection of mergedCodeSections" class="mb-4">
+              <!-- Readonly code section -->
+              <div *ngIf="codeSection.readonlySection">
+                <ngx-monaco-editor  style="height: 150px; width: 100%;" [options]="readonlyEditorOptions" [(ngModel)]="codeSection.code"></ngx-monaco-editor>
+              </div>
+              <!-- Editable code section -->
+              <div *ngIf="!codeSection.readonlySection" style="height: 300px;">
+                <ngx-monaco-editor  style="height: 300px; width: 100%;" [options]="editorOptions" [(ngModel)]="codeSection.code"></ngx-monaco-editor>
+              </div>
+            </div>
+
+            
+         
+          <div *ngIf="loading" class="text-center my-4">         
+            <mat-progress-bar mode="indeterminate" color="primary"></mat-progress-bar> 
+          </div>
+
+          <div class="d-flex justify-content-start align-items-center my-4" style="gap: 1rem;">
+            <button (click)="startTest()" class="btn btn-lg btn-primary" [disabled]="loading">
+              Start Tests
+            </button>
           </div>
         </div>
-        
-        <h1>Unitests-result</h1>
-        <table class="table table-striped table-bordered">
-          <thead class="thead-dark">
-            <tr>
-              <th>Messages</th>
-              <th>Passed</th>
-              <th>Not Passed</th>
-              <th>Total Tests</th>
-              <th>Timer</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Tests</td>
-              <td>{{ result.Summary.PassedTests }}</td>
-              <td>{{ result.Summary.FailedTests }}</td>
-              <td>{{ result.Summary.TotalTests }}</td>
-              <td>{{ timer }}</td>
-            </tr>
-            <ng-container *ngFor="let testResult of result.TestResults">
-              <tr>
-                <td colspan="4">{{ testResult.TestName }}</td>
-                <td [ngStyle]="{'color': testResult.Outcome === 'Passed' ? 'green' : 'red'}">{{ testResult.Outcome }}</td>
-              </tr>
-              <!-- Error message row for failed tests -->
-              <tr *ngIf="testResult.Outcome === 'Failed' && testResult.ErrorMessage">
-                <td colspan="5" style="padding-left: 40px; color: red;">Error: {{ testResult.ErrorMessage }}</td>
-              </tr>
-            </ng-container>
-          </tbody>
-        </table>
-        
-        <mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar>
-        <br><br>
-        
-        <button (click)="startTest()" class="btn btn-primary" [disabled]="loading">Start Tests</button>
-        <button routerLink="/result-history" class="btn btn-primary ml-2">Result History</button>
+
+          <div *ngIf="resultsAvailable" class="mt-4">
+            <h1 (click)="toggleResults()" class="text-info" style="cursor: pointer;">Unit Test Results</h1>
+            
+            <div *ngIf="showResults">
+              <h2 (click)="toggleSummary()" class="text-secondary" style="cursor: pointer;">Summary</h2>
+              <div *ngIf="showSummary">
+                <table class="table table-striped table-bordered">
+                  <thead class="thead-dark">
+                    <tr>
+                      <th>Messages</th>
+                      <th>Passed</th>
+                      <th>Not Passed</th>
+                      <th>Total Tests</th>
+                      <th>Timer</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Tests</td>
+                      <td>{{ result.Summary.PassedTests }}</td>
+                      <td>{{ result.Summary.FailedTests }}</td>
+                      <td>{{ result.Summary.TotalTests }}</td>
+                      <td>{{ timer }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <h2 (click)="toggleDetailedResults()" class="text-secondary" style="cursor: pointer;">Detailed Test Results</h2>
+              <div *ngIf="showDetailedResults">
+                <table class="table table-striped table-bordered">
+                  <thead class="thead-light">
+                    <tr>
+                      <th>Test Name</th>
+                      <th>Outcome</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <ng-container *ngFor="let testResult of result.TestResults">
+                      <tr>
+                        <td>{{ testResult.TestName }}</td>
+                        <td [ngStyle]="{'color': testResult.Outcome === 'Passed' ? 'green' : 'red'}">
+                          {{ testResult.Outcome }}
+                        </td>
+                      </tr>
+                      <tr *ngIf="testResult.Outcome === 'Failed' && testResult.ErrorMessage">
+                        <td colspan="2" class="text-danger" style="padding-left: 40px;">
+                          Error: {{ testResult.ErrorMessage }}
+                        </td>
+                      </tr>
+                    </ng-container>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <h1 *ngIf="exercise.name && resultHistory.length > 0" (click)="toggleHistory()" class="text-info" style="cursor: pointer;">Result History</h1>
+          <div *ngIf="showHistory && exercise.name && resultHistory.length > 0">
+            <ul class="list-group">
+              <li *ngFor="let entry of resultHistory" class="list-group-item d-flex justify-content-between">
+                <div>
+                  <strong>{{ entry.timestamp | date }}</strong><br>
+                  <small>{{ entry.message }}</small>
+                </div>
+                <div class="text-muted">
+                  <span class="badge badge-success">{{ entry.passed }} Passed</span>
+                  <span class="badge badge-danger">{{ entry.notPassed }} Failed</span>
+                  <span class="badge badge-info">{{ entry.total }} Total</span>
+                  <span class="badge badge-secondary">{{ entry.timer }}</span>
+                </div>
+              </li>
+            </ul>
+            <button class="btn btn-danger mt-3" (click)="clearHistory()">Clear History</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>

@@ -1,5 +1,6 @@
 using Core.Contracts;
 using Persistence;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 
@@ -12,6 +13,8 @@ builder.Services.AddControllers()
     {
         options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
         options.JsonSerializerOptions.WriteIndented = true; // Optional: macht die JSON-Ausgabe lesbarer
+        options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
+        options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
     });
 
 builder.Services.AddCors(options =>

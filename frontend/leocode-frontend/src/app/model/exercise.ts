@@ -12,5 +12,5 @@ export interface Exercise {
     arrayOfSnippets: CodeSection[]
     dateCreated: Date;
     dateUpdated: Date;
-    teacher: User| undefined;
+    teacher: string;
 }

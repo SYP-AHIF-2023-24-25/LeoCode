@@ -11,7 +11,10 @@ namespace Core.Contracts
 {
     public interface IExerciseRepository : IGenericRepository<Exercise>
     {
-        public Task<List<Exercise>> GetExersiceByUsernameAsync(User teacher, string? exerciseName);
+        public Task<List<Exercise>> GetExersiceByUsernameStudentAsync(Student student, string? exerciseName);
+        public Task<List<Exercise>> GetExersiceByUsernameTeacherAsync(Teacher teacher, string? exerciseName);
+        
         public Task<List<Exercise>> GetAll();
+        Task<ExerciseDto> GetExerciseForStudentAssignment(string language, string exerciseName, string student);
     }
 }

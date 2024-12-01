@@ -18,6 +18,9 @@
       <li class="nav-item">
         <a class="nav-link text-light" href="assignment-overview" style="margin-left: 50px;">Assignments</a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link text-light" href="start-screen" style="margin-left: 50px;">Exercises</a>
+      </li>
     </ul>
 
     <ul class="navbar-nav">
@@ -31,57 +34,129 @@
   </div>
 </nav>
 
-<!-- Assignment Overview -->
-<div class="container my-4">
-  <br>
+<!-- Main Container -->
+<div class="container-fluid">
+  <div class="row flex-grow-1">
+    <!-- Sidebar with Assignments -->
+    <div class="col-md-2 d-none d-md-block sidebar" style="background-color:#f0f0f0; height: 100vh;">
+      <div class="sidebar-sticky">
+        <ul class="nav flex-column">
+          <h4 class="ml-2 mt-3 text-primary">Assignments</h4>
+          <li *ngFor="let assignment of assignments" class="nav-item">
+            <a
+              class="nav-link"
+              (click)="selectAssignment(assignment)"
+              [ngClass]="{
+                'active-assignment': selectedAssignment === assignment
+              }"
+            >
+              {{ assignment.assignmentName }}
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
 
-  <!-- Assignment Card -->
-  <div *ngFor="let assignment of assignments" class="card mb-4 shadow-sm rounded">
-    <div class="card-body">
-      <!-- Assignment Details -->
-      <div class="d-flex flex-wrap justify-content-between mb-4">
-        <div>
-          <h3 class="font-weight-bold">Assignment</h3>
-          <p>{{ assignment.assignmentName }}</p>
+    <!-- Main Content Area: Assignment Details -->
+    <div class="col-md-10">
+      <div class="container my-4">
+        <!-- If no assignment is selected, show a default message -->
+        <div *ngIf="!selectedAssignment">
+          <div class="alert alert-info">
+            <h4 class="alert-heading">No Assignment Selected</h4>
+            <p>Please choose an assignment from the sidebar to view the details.</p>
+          </div>
         </div>
-        <div>
-          <h3 class="font-weight-bold">Due Date</h3>
-          <p>{{ assignment.dueDate | date: 'dd.MM.yyyy HH:mm' }}</p>
-        </div>
-        <div>
-          <h3 class="font-weight-bold">Exercise</h3>
-          <p>{{ assignment.exerciseName }}</p>
-        </div>
-        <div>
-          <h3 class="font-weight-bold">Teacher</h3>
-          <p>{{ assignment.teacher }}</p>
+
+        <!-- If an assignment is selected, show its details -->
+        <div *ngIf="selectedAssignment">
+          <div class="card shadow-sm">
+            <div class="card-header bg-primary text-white">
+              <h3 class="font-weight-bold">Assignment Details</h3>
+            </div>
+            <div class="card-body">
+              <div class="row mb-3">
+                <div class="col-md-4">
+                  <h5 class="font-weight-bold">Assignment Name</h5>
+                  <p>{{ selectedAssignment.assignmentName }}</p>
+                </div>
+                <div class="col-md-4">
+                  <h5 class="font-weight-bold">Due Date</h5>
+                  <p>{{ selectedAssignment.dueDate | date: 'dd.MM.yyyy HH:mm' }}</p>
+                </div>
+                <div class="col-md-4">
+                  <h5 class="font-weight-bold">Exercise Name</h5>
+                  <p>{{ selectedAssignment.exerciseName }}</p>
+                </div>
+              </div>
+
+              <div class="row mb-3">
+                <div class="col-md-4">
+                  <h5 class="font-weight-bold">Teacher</h5>
+                  <p>{{ selectedAssignment.teacher }}</p>
+                </div>
+                <div class="col-md-4">
+                  <h5 class="font-weight-bold">Tags</h5>
+                  <p>{{ selectedAssignment.tags?.join(', ') || 'No tags available' }}</p>
+                </div>
+                <div class="col-md-4">
+                  <h5 class="font-weight-bold">Language</h5>
+                  <p>{{ selectedAssignment.language || 'No language specified' }}</p>
+                </div>
+              </div>
+
+              <!-- Toggle Button to Show/Hide Students -->
+              <div class="mb-3">
+                <button class="btn btn-info" (click)="toggleStudents(selectedAssignment)">
+                  <i class="fas" [ngClass]="selectedAssignment.showStudents ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
+                  {{ selectedAssignment.showStudents ? 'Hide Students' : 'Show Students' }}
+                </button>
+              </div>
+
+              <!-- Students Table (only visible when `showStudents` is true) -->
+              <div *ngIf="selectedAssignment.showStudents">
+                <table class="table table-striped table-hover">
+                  <thead class="thead-light">
+                    <tr>
+                      <th style="width: 50px;">&nbsp;</th> <!-- Leere Spalte für das Icon -->
+                      <th>First Name</th>
+                      <th>Last Name</th>
+                      <th>IF Number</th>
+                      <th>Passed</th>
+                      <th>Failed</th>
+                      <th>Total</th>
+                      <th>Percentage</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let student of selectedAssignment.students">
+                      <td>
+                        <i class="fas fa-user-circle fa-lg text-secondary" style="margin-right: 5px;"></i>
+                      </td>
+                      <td>{{ student.studentFirstname }}</td>
+                      <td>{{ student.studentLastname }}</td>
+                      <td>{{ student.studentUsername }}</td>
+                      <td style="color: green">{{ student.studentPassedTests }}</td>
+                      <td style="color: red">{{ student.studentFailedTests }}</td>
+                      <td>{{ student.studentTotalTests }}</td>
+                      <td>{{ student.studentPercentage }} %</td>
+                    </tr>
+                  </tbody>
+                </table>
+
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-      <table class="table table-striped rounded-table">
-        <thead class="thead-rounded">
-          <tr>
-            <th style="width: 50px;">&nbsp;</th> <!-- Leere Spalte für das Icon -->
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>IF Number</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let student of assignment.students">
-            <td>
-              <i class="fas fa-user-circle fa-lg text-secondary" style="margin-right: 5px;"></i>
-            </td>
-            <td>{{ student.studentFirstname }}</td>
-            <td>{{ student.studentLastname }}</td>
-            <td>{{ student.studentUsername }}</td>
-          </tr>
-        </tbody>
-      </table>
     </div>
   </div>
 </div>
 
+<!-- External CSS for Font Awesome -->
 <link
   rel="stylesheet"
   href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
 />
+
+

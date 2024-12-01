@@ -1,87 +1,117 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">LeoCode</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-  
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item">
-          <a class="nav-link text-light" href="assignment-overview" style="margin-left: 50px;">Assignments</a>
-        </li>
-      </ul>
-  
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <span class="navbar-text text-light">{{ ifUserName }}</span>
-        </li>
-        <li class="nav-item">
-          <button class="btn btn-outline-light ml-3" (click)="logout()">Logout</button>
-        </li>
-      </ul>
-    </div>
-  </nav>
-  
-  <div class="container-fluid">
-    <div class="row justify-content-center">
-      <div class="col-md-10">
-        <!-- Gemeinsame Card für Suchleiste und Grid -->
-        <div class="card mt-3">
-          <div class="card-body" >
-            <h1>Exercises</h1>        
-            <!-- Suchleiste -->
-            <form>
-              <mat-form-field class="example-chip-list" style="width: 1000px">
-                <mat-label>Chose tags to sort</mat-label>
+  <a class="navbar-brand" href="#">LeoCode</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link text-light" href="assignment-overview" style="margin-left: 50px;">Assignments</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-light" href="start-screen" style="margin-left: 50px;">Exercises</a>
+      </li>
+    </ul>
+
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <span class="navbar-text text-light">{{ ifUserName }}</span>
+      </li>
+      <li class="nav-item">
+        <button class="btn btn-outline-light ml-3" (click)="logout()">Logout</button>
+      </li>
+   
+           
+    </ul>
+  </div>
+</nav>
+
+<div class="container-fluid">
+  <div class="row justify-content-center">
+    <div class="col-md-10">
+      <!-- Card mit abgerundeten Ecken und Schatten -->
+      <div class="card shadow-lg rounded-lg mt-4 custom-card">
+        <div class="card-body">
+          <!-- Überschrift -->
+          <h1 class="text-center mb-4 custom-heading">Exercises</h1>      
+
+          <!-- Suchleiste für den Namen -->
+            <form class="mb-4">
+              <mat-form-field class="example-chip-list w-100">
+                <mat-label>Search</mat-label>
+                <input matInput placeholder="Search exercises by name..." [(ngModel)]="searchQuery" name="searchQuery" />
+              </mat-form-field>
+
+              <!-- Chips für ausgewählte Tags -->
+              <mat-form-field class="example-chip-list w-100">
+                <mat-label>Choose Tags</mat-label>
                 <mat-chip-grid #chipGrid aria-label="Tag selection">
                   <mat-chip-row *ngFor="let tag of selectedSearchTags" (removed)="removeSearchTag(tag)">
-                    {{tag}}
+                    {{ tag }}
                     <button matChipRemove [attr.aria-label]="'remove ' + tag">
                       <mat-icon>cancel</mat-icon>
                     </button>
                   </mat-chip-row>
                 </mat-chip-grid>
-                <input placeholder="Search..." #tagInput [formControl]="tagCtrl" [matChipInputFor]="chipGrid" [matAutocomplete]="auto" [matChipInputSeparatorKeyCodes]="separatorKeysCodes" />
+                <input placeholder="Search tags..." #tagInput [formControl]="tagCtrl" [matChipInputFor]="chipGrid" [matAutocomplete]="auto" [matChipInputSeparatorKeyCodes]="separatorKeysCodes" />
                 <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectedSearch($event)">
                   <mat-option *ngFor="let tag of filteredSearchTags | async" [value]="tag">
-                    {{tag}}
+                    {{ tag }}
                   </mat-option>
                 </mat-autocomplete>
               </mat-form-field>
             </form>
-            
-            <!-- Tabelle -->
-            <table class="table mt-3">
-              <thead>
-                <tr>
-                  <th>Exercise Name</th>
-                  <th>Creator Name</th>
-                  <th>Tags</th>
-                  <th>Date created</th>
-                  <th>Date edited</th>
-                  <th>Details</th>
-              
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let exercise of filteredExercises">
-                  <td>{{exercise.name}}</td>
-                  <td>{{exercise.creator}}</td>
-                  <td>{{exercise.tags}}</td>
-                  <td>{{exercise.dateCreated | date: 'mediumDate'}}</td>
-                  <td>{{exercise.dateUpdated | date: 'mediumDate'}}</td>
-                  <td>
-                    <button class="btn btn-primary" [routerLink]="['/exercise-details']" [queryParams]="{exerciseName: exercise.name, creator: exercise.creator}">Details</button>
-                  </td>
-                </tr>
-              </tbody>
+
+            <div class="form-check mt-4">
+              <input class="form-check-input" type="checkbox" [(ngModel)]="filterMyExercises" id="filterMyExercises">
+              <label class="form-check-label" for="filterMyExercises">
+                Show only my exercises
+              </label>
+            </div>
+
+          <!-- Material Tabelle -->
+          <div class="table-responsive">
+            <table mat-table [dataSource]="filteredExercises" class="mat-elevation-z8 table-striped table-hover custom-table">
+              <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef class="custom-header">Exercise Name</th>
+                <td mat-cell *matCellDef="let exercise">{{exercise.name}}</td>
+              </ng-container>
+
+              <ng-container matColumnDef="creator">
+                <th mat-header-cell *matHeaderCellDef class="custom-header">Creator Name</th>
+                <td mat-cell *matCellDef="let exercise">{{exercise.creator}}</td>
+              </ng-container>
+
+              <ng-container matColumnDef="tags">
+                <th mat-header-cell *matHeaderCellDef class="custom-header">Tags</th>
+                <td mat-cell *matCellDef="let exercise">{{exercise.tags}}</td>
+              </ng-container>
+
+              <ng-container matColumnDef="dateCreated">
+                <th mat-header-cell *matHeaderCellDef class="custom-header">Date Created</th>
+                <td mat-cell *matCellDef="let exercise">{{exercise.dateCreated | date: 'mediumDate'}}</td>
+              </ng-container>
+
+              <ng-container matColumnDef="dateUpdated">
+                <th mat-header-cell *matHeaderCellDef class="custom-header">Date Edited</th>
+                <td mat-cell *matCellDef="let exercise">{{exercise.dateUpdated | date: 'mediumDate'}}</td>
+              </ng-container>
+
+              <ng-container matColumnDef="details">
+                <th mat-header-cell *matHeaderCellDef class="custom-header">Details</th>
+                <td mat-cell *matCellDef="let exercise">
+                  <button  class="btn btn-primary" [routerLink]="['/exercise-details']" [queryParams]="{exerciseName: exercise.name, creator: exercise.creator}">Details</button>
+                </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
             </table>
-            
-            <!-- Button zum Hinzufügen -->
-            <button class="btn btn-primary rounded-circle" style="width: 50px; height: 50px; color: white;" [routerLink]="['/create-exercise']">+</button>
           </div>
+          <button class="btn btn-primary rounded-circle add-btn" [routerLink]="['/create-exercise']">+</button>
         </div>
       </div>
     </div>
   </div>
-  
+</div>

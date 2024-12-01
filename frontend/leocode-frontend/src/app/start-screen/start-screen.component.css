@@ -1,41 +1,93 @@
-
-  .table-container {
-    padding-left: 15px; /* Abstand links */
-    padding-right: 15px; /* Abstand rechts */
-  }
-
-  html, body {
-    height: 100%;
-    margin: 0;
+/* Card Design */
+.custom-card {
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+  padding: 20px;
 }
 
-.container-fluid {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
+.custom-heading {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 20px;
 }
 
-.row.flex-nowrap {
-    flex: 1;
+/* Suchleiste Design */
+.mat-form-field {
+  width: 100%;
 }
 
-.sidebar {
-    height: 100%;
-    background-color: gray; /* Ensure background color is applied */
-    position: relative;
+.mat-chip-grid {
+  margin-top: 10px;
 }
 
-
-.sub-menu-link {
-  color: #888; /* Graue Farbe für Untermenüpunkte */
-  font-size: 14px; /* Kleinere Schriftgröße für Untermenüpunkte */
+.mat-chip-row {
+  margin-right: 5px;
 }
 
-
-.sub-menu {
-  display: none;
+/* Tabelle Design */
+.custom-table {
+  width: 100%;
+  border-collapse: collapse;
 }
 
-.sub-menu.show {
+.custom-header {
+  background-color: #f8f9fa;
+  color: #495057;
+  font-weight: 600;
+  padding: 12px;
+  text-align: left;
+  border-bottom: 2px solid #dee2e6;
+}
+
+.mat-cell, .mat-header-cell {
+  padding: 12px;
+  font-size: 1rem;
+}
+
+.mat-row:hover {
+  background-color: #f1f1f1;
+}
+
+.mat-cell {
+  border-bottom: 1px solid #dee2e6;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: #f9f9f9;
+}
+
+.table-hover tbody tr:hover {
+  background-color: #e9ecef;
+}
+
+/* Button zum Hinzufügen */
+.add-btn {
+  width: 50px;
+  height: 50px;
+  color: white;
+  font-size: 24px;
   display: block;
+  margin: 20px auto 0;
+  padding: 0;
+  border-radius: 50%;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+.add-btn:hover {
+  background-color: #0069d9;
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .custom-card {
+    padding: 15px;
+  }
+  
+  .custom-heading {
+    font-size: 1.5rem;
+  }
 }

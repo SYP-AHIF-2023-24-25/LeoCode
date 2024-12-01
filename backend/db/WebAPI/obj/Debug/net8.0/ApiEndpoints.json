@@ -209,14 +209,19 @@
   },
   {
     "ContainingType": "WebAPI.Controllers.ExerciseController",
-    "Method": "UpdateExerciseForTeacher",
+    "Method": "UpdateExerciseForStudent",
     "RelativePath": "api/Exercise",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "username",
+        "Name": "student",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "teacher",
         "Type": "System.String",
         "IsRequired": false
       },
@@ -251,12 +256,68 @@
         "IsRequired": false
       },
       {
-        "Name": "body",
-        "Type": "WebAPI.Controllers.ExerciseController\u002BUpdateExerciseRequestBodyDto",
+        "Name": "tags",
+        "Type": "System.String[]",
+        "IsRequired": false
+      },
+      {
+        "Name": "total",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "passed",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "failed",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "arrayOfSnippets",
+        "Type": "Core.Dto.ArrayOfSnippetsDto",
         "IsRequired": true
       }
     ],
     "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebAPI.Controllers.ExerciseController",
+    "Method": "GetExerciseForStudentAssignment",
+    "RelativePath": "api/Exercise/GetExerciseForStudentAssignment",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "language",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "exerciseName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "student",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Core.Dto.ExerciseDto",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
   },
   {
     "ContainingType": "WebAPI.Controllers.ExerciseController",
@@ -295,9 +356,9 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "UserController",
+    "ContainingType": "StudentController",
     "Method": "CreateUser",
-    "RelativePath": "api/User",
+    "RelativePath": "api/Student",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -316,19 +377,50 @@
         "Name": "lastname",
         "Type": "System.String",
         "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "StudentController",
+    "Method": "GetAllUsers",
+    "RelativePath": "api/Student",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TeacherController",
+    "Method": "CreateUser",
+    "RelativePath": "api/Teacher",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "username",
+        "Type": "System.String",
+        "IsRequired": false
       },
       {
-        "Name": "isTeacher",
-        "Type": "System.Boolean",
+        "Name": "firstname",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "lastname",
+        "Type": "System.String",
         "IsRequired": false
       }
     ],
     "ReturnTypes": []
   },
   {
-    "ContainingType": "UserController",
+    "ContainingType": "TeacherController",
     "Method": "GetAllUsers",
-    "RelativePath": "api/User",
+    "RelativePath": "api/Teacher",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,

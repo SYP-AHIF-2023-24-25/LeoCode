@@ -51,20 +51,20 @@ export class LoginComponent implements OnInit  {
           if (res === 'You are at least a student') {
             if (ifUserName === 'if200183') {
               //api call für user createn für teacher
-              this.rest.AddUser(ifUserName, firstname, lastname, true).subscribe((data: any) => {
+              this.rest.AddTeacher(ifUserName, firstname, lastname).subscribe((data: any) => {
                 console.log(data);
                 this.router.navigate(['/start-screen']);
               });
             } else {
               //api call für user createn für student
-              this.rest.AddUser(ifUserName, firstname, lastname, false).subscribe((data: any) => {
+              this.rest.AddStudent(ifUserName, firstname, lastname).subscribe((data: any) => {
                 console.log(data);
                 this.router.navigate(['/student-start-screen']);
               });
             }
           } else {
             //api call für user createn für teacher
-            this.rest.AddUser(ifUserName, firstname, lastname, true).subscribe((data: any) => {
+            this.rest.AddStudent(ifUserName, firstname, lastname).subscribe((data: any) => {
               console.log(data);
               this.router.navigate(['/start-screen']);
             });

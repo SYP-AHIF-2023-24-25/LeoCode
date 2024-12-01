@@ -1,15 +1,12 @@
-import { Component } from '@angular/core';
-import {Tags} from '../model/tags.enum';
+import { Component, OnInit } from '@angular/core';
+import { Tags } from '../model/tags.enum';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
-import { startWith } from 'rxjs/operators';
-import { map } from 'rxjs/operators';
+import { startWith, map } from 'rxjs/operators';
 import { DbService } from '../service/db-service.service';
 import { User } from '../model/user';
-import { ExerciseDto } from '../model/exerciseDto';
 import { Router } from '@angular/router';
-
 import { Exercise } from '../model/exercise';
 
 @Component({
@@ -17,107 +14,99 @@ import { Exercise } from '../model/exercise';
   templateUrl: './start-screen.component.html',
   styleUrls: ['./start-screen.component.css']
 })
-export class StartScreenComponent {
+
+export class StartScreenComponent implements OnInit {
+  ifUserName: string | null = '';
+  filterMyExercises: boolean = false;  // Zustand für das Filtern nach dem Ersteller
 
 
-  constructor( private rest: DbService, private router: Router) {
-    this.filteredTags = this.tagCtrl.valueChanges.pipe(
-      startWith(null),
-      map((tag: string | null) => tag ? this._filter(tag) : this.availableTags.slice()));  
-
-    
-    this.filteredSearchTags = this.tagCtrl.valueChanges.pipe(
-      startWith(null),
-      map((tag: string | null) => tag ? this._filter(tag) : this.availableTags.slice())); 
-   }
-
-   
-
-   defaultUser :User = {
-    username: "Default",
-    password: "Default",
+  defaultUser: User = {
+    username: 'Default User',
+    password: 'password',
     exercises: [],
-    isTeacher: true
+    isTeacher: false
   }
 
-    ifUserName: string | null = '';
+  constructor(private rest: DbService, private router: Router) {
+    this.filteredSearchTags = this.tagCtrl.valueChanges.pipe(
+      startWith(null),
+      map((tag: string | null) => tag ? this._filter(tag) : this.availableTags.slice())
+    );
+  }
 
-    async logout(): Promise<void> {
-      sessionStorage.setItem('shouldLogOut', 'true');
-      this.router.navigate(['/login']);
-    }
+  searchQuery: string = '';
 
-  //für Suche in der Liste
-  selectedSearchTags: string[] = [];
+  exercises: Exercise[] = [];
   filteredSearchTags: Observable<string[]> | undefined;
 
-  // property für die ausgewählten Tags
-  tagCtrl = new FormControl();
-  selectedTags: string[] = [];
-  availableTags: string[] = Object.values(Tags); // ersetzen Sie dies durch Ihre tatsächlichen Tags
-  filteredTags: Observable<string[]> | undefined;
-  separatorKeysCodes: number[] = [13, 188]; // Enter und Komma
+  displayedColumns: string[] = ['name', 'creator', 'tags', 'dateCreated', 'dateUpdated', 'details']; 
+  separatorKeysCodes: number[] = [13, 188]; // 13: Enter, 188: Komma
 
-  exercises : Exercise[] = [];
 
-  
+  selectedSearchTags: string[] = [];  
+  tagCtrl = new FormControl();  
+
+  // Verfügbare Tags
+  availableTags: string[] = Object.values(Tags); 
 
   ngOnInit(): void {
     this.ifUserName = sessionStorage.getItem('ifUserName');
     sessionStorage.setItem("userName", this.defaultUser.username);
+
     this.rest.getExerciseByUsername().subscribe((data: Exercise[]) => {
       this.exercises = data;
-      console.log(this.exercises);
-    });
-
-    sessionStorage.setItem("userName",this.defaultUser.username),
-    document.addEventListener("DOMContentLoaded", () => {
-      const mainMenuLinks = document.querySelectorAll('.main-menu-link');
-      
-      mainMenuLinks.forEach(link => {
-        link.addEventListener('click', (event) => {
-          event.preventDefault();
-          const subMenu = link.nextElementSibling;
-          if (subMenu) {
-            subMenu.classList.toggle('show');
-          }
-        });
-      });
     });
   }
 
-  
-
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
-
     return this.availableTags.filter(tag => tag.toLowerCase().includes(filterValue));
   }
 
   removeSearchTag(tag: string): void {
     const index = this.selectedSearchTags.indexOf(tag);
-
     if (index >= 0) {
       this.selectedSearchTags.splice(index, 1);
     }
   }
+
   selectedSearch(event: MatAutocompleteSelectedEvent): void {
     this.selectedSearchTags.push(event.option.viewValue);
     this.tagCtrl.setValue(null);
   }
 
-    // Getter-Funktion für gefilterte Übungen basierend auf dem Suchbegriff für Tags
-    get filteredExercises() {
-      if (!this.selectedSearchTags.length) {
-        return this.exercises;
-      }
-    
-      return this.exercises.filter(exercise =>
-        exercise.tags.some(tag => this.selectedSearchTags.includes(tag))
-      );
-    }
+  get filteredExercises() {
+    return this.exercises
+      .filter(exercise => {
+        // Filter für den Namen der Übung
+        const matchesName = this.searchQuery
+          ? exercise.name.toLowerCase().includes(this.searchQuery.toLowerCase())
+          : true;
 
-    addExerciseNameToSessionStorage(exerciseName: string){
-      sessionStorage.setItem("exerciseName", exerciseName);
-    }
+        // Filter für die Tags
+        const matchesTags = this.selectedSearchTags.length
+          ? exercise.tags.some(tag => this.selectedSearchTags.includes(tag))
+          : true;
+
+        // Filter für 'nur meine Übungen'
+        const matchesCreator = this.filterMyExercises
+          ? exercise.creator === this.ifUserName  // Filtert nur Übungen, die der angemeldete Benutzer erstellt hat
+          : true;
+
+        return matchesName && matchesTags && matchesCreator;  // Alle Filter müssen zutreffen
+      })
+      .sort((a, b) => {
+        return a.name.localeCompare(b.name);  // Sortierung nach Namen
+      });
+  }
+  
+
+  addExerciseNameToSessionStorage(exerciseName: string) {
+    sessionStorage.setItem("exerciseName", exerciseName);
+  }
+
+  async logout(): Promise<void> {
+    sessionStorage.setItem('shouldLogOut', 'true');
+    this.router.navigate(['/login']);
+  }
 }

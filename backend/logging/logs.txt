@@ -136,3 +136,163 @@
 11/03/2024 21:58:21: SUCCESS: Response from CSharp-runner was successful
 11/04/2024 08:17:12: SUCCESS: Response from CSharp-runner was successful
 11/04/2024 08:17:42: SUCCESS: Response from CSharp-runner was successful
+11/29/2024 10:54:26: SUCCESS: Response from TypeScript-runner was successful
+11/29/2024 10:56:45: SUCCESS: Response from TypeScript-runner was successful
+11/29/2024 11:03:14: SUCCESS: Response from TypeScript-runner was successful
+11/29/2024 11:03:40: SUCCESS: Response from TypeScript-runner was successful
+11/29/2024 11:06:43: SUCCESS: Response from TypeScript-runner was successful
+11/29/2024 11:10:48: SUCCESS: Response from TypeScript-runner was successful
+11/29/2024 11:15:14: SUCCESS: Response from TypeScript-runner was successful
+11/29/2024 11:15:35: SUCCESS: Response from TypeScript-runner was successful
+11/29/2024 11:17:04: SUCCESS: Response from TypeScript-runner was successful
+11/29/2024 11:21:48: SUCCESS: Response from TypeScript-runner was successful
+11/29/2024 11:22:21: SUCCESS: Response from TypeScript-runner was successful
+11/29/2024 11:25:52: SUCCESS: Response from TypeScript-runner was successful
+11/29/2024 11:26:04: SUCCESS: Response from TypeScript-runner was successful
+11/29/2024 11:29:17: SUCCESS: Response from TypeScript-runner was successful
+11/29/2024 11:30:05: SUCCESS: Response from TypeScript-runner was successful
+11/29/2024 11:30:48: SUCCESS: Response from TypeScript-runner was successful
+11/29/2024 11:35:48: SUCCESS: Response from TypeScript-runner was successful
+11/29/2024 11:36:08: SUCCESS: Response from TypeScript-runner was successful
+11/29/2024 11:50:54: SUCCESS: Response from CSharp-runner was successful
+11/29/2024 11:56:45: SUCCESS: Response from CSharp-runner was successful
+11/29/2024 11:56:45: ERROR: Response from CSharp-runner wasn't successful. Error Message: Data at the root level is invalid. Line 1, position 1.
+11/29/2024 11:58:19: SUCCESS: Response from CSharp-runner was successful
+11/29/2024 12:00:43: SUCCESS: Response from CSharp-runner was successful
+11/29/2024 12:07:58: ERROR: Response from -runner wasn't successful. Error Message: Index was outside the bounds of the array.
+11/29/2024 12:14:17: SUCCESS: Response from CSharp-runner was successful
+11/29/2024 12:15:14: SUCCESS: Response from CSharp-runner was successful
+11/29/2024 12:16:18: SUCCESS: Response from CSharp-runner was successful
+11/29/2024 12:18:15: SUCCESS: Response from CSharp-runner was successful
+11/29/2024 12:19:11: SUCCESS: Response from CSharp-runner was successful
+11/29/2024 12:20:44: SUCCESS: Response from CSharp-runner was successful
+11/29/2024 12:26:52: SUCCESS: Response from CSharp-runner was successful
+11/29/2024 12:29:45: SUCCESS: Response from CSharp-runner was successful
+11/29/2024 12:30:00: SUCCESS: Response from CSharp-runner was successful
+11/29/2024 12:40:45: SUCCESS: Response from CSharp-runner was successful
+11/29/2024 14:26:12: SUCCESS: Response from CSharp-runner was successful
+11/29/2024 14:28:26: SUCCESS: Response from CSharp-runner was successful
+11/29/2024 14:48:15: SUCCESS: Response from CSharp-runner was successful
+11/29/2024 14:50:44: SUCCESS: Response from CSharp-runner was successful
+11/29/2024 15:10:45: SUCCESS: Response from CSharp-runner was successful
+11/29/2024 15:12:05: SUCCESS: Response from CSharp-runner was successful
+11/29/2024 15:12:53: SUCCESS: Response from CSharp-runner was successful
+11/29/2024 15:15:08: SUCCESS: Response from CSharp-runner was successful
+11/29/2024 15:18:45: SUCCESS: Response from CSharp-runner was successful
+11/29/2024 15:21:49: SUCCESS: Response from CSharp-runner was successful
+11/29/2024 15:21:56: SUCCESS: Response from CSharp-runner was successful
+11/29/2024 15:21:56: ERROR: Response from CSharp-runner wasn't successful. Error Message: Data at the root level is invalid. Line 1, position 1.
+11/29/2024 15:22:21: SUCCESS: Response from CSharp-runner was successful
+11/29/2024 15:22:33: SUCCESS: Response from CSharp-runner was successful
+11/29/2024 15:23:31: SUCCESS: Response from CSharp-runner was successful
+11/29/2024 15:25:48: SUCCESS: Response from CSharp-runner was successful
+11/29/2024 15:26:07: SUCCESS: Response from CSharp-runner was successful
+11/29/2024 15:26:25: SUCCESS: Response from CSharp-runner was successful
+11/29/2024 15:27:10: SUCCESS: Response from CSharp-runner was successful
+11/29/2024 15:30:50: SUCCESS: Response from TypeScript-runner was successful
+11/29/2024 15:38:49: SUCCESS: Response from CSharp-runner was successful
+11/29/2024 15:39:25: SUCCESS: Response from CSharp-runner was successful
+11/30/2024 11:34:58: SUCCESS: Response from CSharp-runner was successful
+11/30/2024 11:35:54: SUCCESS: Response from CSharp-runner was successful
+11/30/2024 11:35:54: ERROR: Response from CSharp-runner wasn't successful. Error Message: Data at the root level is invalid. Line 1, position 1.
+11/30/2024 12:44:00: SUCCESS: Response from CSharp-runner was successful
+11/30/2024 12:45:03: SUCCESS: Response from TypeScript-runner was successful
+11/30/2024 19:31:01: SUCCESS: Response from CSharp-runner was successful
+11/30/2024 19:31:02: ERROR: Response from CSharp-runner wasn't successful. Error Message: Data at the root level is invalid. Line 1, position 1.
+11/30/2024 19:31:49: SUCCESS: Response from CSharp-runner was successful
+11/30/2024 19:31:49: ERROR: Response from CSharp-runner wasn't successful. Error Message: Data at the root level is invalid. Line 1, position 1.
+11/30/2024 19:35:49: SUCCESS: Response from CSharp-runner was successful
+11/30/2024 19:35:49: ERROR: Response from CSharp-runner wasn't successful. Error Message: Data at the root level is invalid. Line 1, position 1.
+11/30/2024 19:36:25: SUCCESS: Response from CSharp-runner was successful
+11/30/2024 19:37:42: SUCCESS: Response from CSharp-runner was successful
+11/30/2024 19:37:42: ERROR: Response from CSharp-runner wasn't successful. Error Message: Data at the root level is invalid. Line 1, position 1.
+11/30/2024 19:38:27: SUCCESS: Response from CSharp-runner was successful
+11/30/2024 19:38:27: ERROR: Response from CSharp-runner wasn't successful. Error Message: Data at the root level is invalid. Line 1, position 1.
+11/30/2024 19:39:58: SUCCESS: Response from CSharp-runner was successful
+11/30/2024 19:39:58: ERROR: Response from CSharp-runner wasn't successful. Error Message: Data at the root level is invalid. Line 1, position 1.
+11/30/2024 19:41:06: SUCCESS: Response from CSharp-runner was successful
+11/30/2024 19:41:06: ERROR: Response from CSharp-runner wasn't successful. Error Message: Data at the root level is invalid. Line 1, position 1.
+11/30/2024 19:41:36: SUCCESS: Response from CSharp-runner was successful
+11/30/2024 19:41:36: ERROR: Response from CSharp-runner wasn't successful. Error Message: Data at the root level is invalid. Line 1, position 1.
+11/30/2024 19:51:44: SUCCESS: Response from CSharp-runner was successful
+11/30/2024 19:51:44: ERROR: Response from CSharp-runner wasn't successful. Error Message: Data at the root level is invalid. Line 1, position 1.
+11/30/2024 19:53:12: SUCCESS: Response from CSharp-runner was successful
+11/30/2024 19:53:12: ERROR: Response from CSharp-runner wasn't successful. Error Message: Data at the root level is invalid. Line 1, position 1.
+11/30/2024 19:53:25: SUCCESS: Response from CSharp-runner was successful
+11/30/2024 19:53:25: ERROR: Response from CSharp-runner wasn't successful. Error Message: Data at the root level is invalid. Line 1, position 1.
+11/30/2024 19:57:06: SUCCESS: Response from CSharp-runner was successful
+11/30/2024 20:08:43: SUCCESS: Response from CSharp-runner was successful
+11/30/2024 20:09:07: SUCCESS: Response from CSharp-runner was successful
+11/30/2024 20:10:38: SUCCESS: Response from CSharp-runner was successful
+11/30/2024 20:10:38: ERROR: Response from CSharp-runner wasn't successful. Error Message: Data at the root level is invalid. Line 1, position 1.
+11/30/2024 20:12:08: SUCCESS: Response from CSharp-runner was successful
+11/30/2024 20:13:24: SUCCESS: Response from CSharp-runner was successful
+11/30/2024 20:19:48: SUCCESS: Response from CSharp-runner was successful
+11/30/2024 20:20:52: SUCCESS: Response from CSharp-runner was successful
+11/30/2024 20:21:28: SUCCESS: Response from CSharp-runner was successful
+11/30/2024 20:22:04: SUCCESS: Response from TypeScript-runner was successful
+12/01/2024 19:49:02: SUCCESS: Response from CSharp-runner was successful
+12/01/2024 20:10:45: SUCCESS: Response from CSharp-runner was successful
+12/01/2024 20:11:46: SUCCESS: Response from CSharp-runner was successful
+12/01/2024 20:33:28: SUCCESS: Response from CSharp-runner was successful
+12/01/2024 20:34:54: SUCCESS: Response from CSharp-runner was successful
+12/01/2024 20:34:54: ERROR: Response from CSharp-runner wasn't successful. Error Message: Data at the root level is invalid. Line 1, position 1.
+12/01/2024 20:39:02: SUCCESS: Response from CSharp-runner was successful
+12/01/2024 20:39:02: ERROR: Response from CSharp-runner wasn't successful. Error Message: Data at the root level is invalid. Line 1, position 1.
+12/01/2024 20:40:33: SUCCESS: Response from TypeScript-runner was successful
+12/01/2024 20:44:14: SUCCESS: Response from CSharp-runner was successful
+12/01/2024 20:44:14: ERROR: Response from CSharp-runner wasn't successful. Error Message: Data at the root level is invalid. Line 1, position 1.
+12/01/2024 20:49:49: SUCCESS: Response from CSharp-runner was successful
+12/01/2024 20:50:07: SUCCESS: Response from TypeScript-runner was successful
+12/01/2024 21:10:42: SUCCESS: Response from CSharp-runner was successful
+12/01/2024 21:35:49: ERROR: Response from 0-runner wasn't successful. Error Message: An invalid request URI was provided. Either the request URI must be an absolute URI or BaseAddress must be set.
+12/01/2024 21:38:55: ERROR: Response from 0-runner wasn't successful. Error Message: An invalid request URI was provided. Either the request URI must be an absolute URI or BaseAddress must be set.
+12/01/2024 21:55:46: SUCCESS: Response from CSharp-runner was successful
+12/01/2024 21:55:57: SUCCESS: Response from CSharp-runner was successful
+12/01/2024 21:55:57: ERROR: Response from CSharp-runner wasn't successful. Error Message: Data at the root level is invalid. Line 1, position 1.
+12/01/2024 21:57:19: SUCCESS: Response from CSharp-runner was successful
+12/01/2024 21:57:20: ERROR: Response from CSharp-runner wasn't successful. Error Message: Data at the root level is invalid. Line 1, position 1.
+12/01/2024 21:58:00: SUCCESS: Response from CSharp-runner was successful
+12/01/2024 21:58:14: SUCCESS: Response from CSharp-runner was successful
+12/01/2024 21:58:14: ERROR: Response from CSharp-runner wasn't successful. Error Message: Data at the root level is invalid. Line 1, position 1.
+12/01/2024 22:00:07: SUCCESS: Response from CSharp-runner was successful
+12/01/2024 22:00:07: ERROR: Response from CSharp-runner wasn't successful. Error Message: Data at the root level is invalid. Line 1, position 1.
+12/01/2024 22:02:56: SUCCESS: Response from CSharp-runner was successful
+12/01/2024 22:03:12: SUCCESS: Response from TypeScript-runner was successful
+12/01/2024 22:03:54: SUCCESS: Response from CSharp-runner was successful
+12/01/2024 22:04:12: SUCCESS: Response from TypeScript-runner was successful
+12/01/2024 22:05:45: SUCCESS: Response from CSharp-runner was successful
+12/01/2024 22:11:52: ERROR: Response from Java-runner wasn't successful. Error Message: Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte. (localhost:8002)
+12/01/2024 22:15:40: SUCCESS: Response from CSharp-runner was successful
+12/01/2024 22:15:40: ERROR: Response from CSharp-runner wasn't successful. Error Message: Data at the root level is invalid. Line 1, position 1.
+12/01/2024 22:17:04: SUCCESS: Response from CSharp-runner was successful
+12/01/2024 22:18:06: SUCCESS: Response from TypeScript-runner was successful
+12/01/2024 22:25:20: SUCCESS: Response from CSharp-runner was successful
+12/01/2024 22:25:49: SUCCESS: Response from CSharp-runner was successful
+12/01/2024 22:26:25: SUCCESS: Response from CSharp-runner was successful
+12/01/2024 22:26:52: SUCCESS: Response from CSharp-runner was successful
+12/01/2024 22:28:14: SUCCESS: Response from CSharp-runner was successful
+12/01/2024 22:32:56: SUCCESS: Response from CSharp-runner was successful
+12/01/2024 22:34:36: SUCCESS: Response from CSharp-runner was successful
+12/01/2024 22:36:00: SUCCESS: Response from CSharp-runner was successful
+12/01/2024 22:38:01: SUCCESS: Response from CSharp-runner was successful
+12/01/2024 23:50:50: SUCCESS: Response from CSharp-runner was successful
+12/01/2024 23:53:33: SUCCESS: Response from CSharp-runner was successful
+12/01/2024 23:54:45: SUCCESS: Response from CSharp-runner was successful
+12/01/2024 23:59:56: SUCCESS: Response from CSharp-runner was successful
+12/02/2024 00:02:09: SUCCESS: Response from CSharp-runner was successful
+12/02/2024 00:02:47: SUCCESS: Response from CSharp-runner was successful
+12/02/2024 00:03:43: SUCCESS: Response from CSharp-runner was successful
+12/02/2024 00:04:16: SUCCESS: Response from CSharp-runner was successful
+12/02/2024 00:11:58: SUCCESS: Response from CSharp-runner was successful
+12/02/2024 00:14:47: SUCCESS: Response from CSharp-runner was successful
+12/02/2024 00:21:43: SUCCESS: Response from CSharp-runner was successful
+12/02/2024 00:22:48: SUCCESS: Response from CSharp-runner was successful
+12/02/2024 00:23:45: SUCCESS: Response from CSharp-runner was successful
+12/02/2024 00:25:58: SUCCESS: Response from CSharp-runner was successful
+12/02/2024 00:28:47: SUCCESS: Response from CSharp-runner was successful
+12/02/2024 00:30:32: SUCCESS: Response from CSharp-runner was successful
+12/02/2024 00:31:57: SUCCESS: Response from CSharp-runner was successful
+12/02/2024 00:33:24: SUCCESS: Response from CSharp-runner was successful
+12/02/2024 00:35:49: SUCCESS: Response from CSharp-runner was successful
+12/02/2024 00:36:52: SUCCESS: Response from CSharp-runner was successful
