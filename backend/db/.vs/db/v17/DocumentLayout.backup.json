@@ -155,12 +155,11 @@
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "dbo.Snippets [Daten]",
+              "Title": "dbo.Snippets.sql",
               "DocumentMoniker": "ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/LeoCodeDb/True/SqlTable/dbo.Snippets.sql",
-              "ToolTip": "dbo.Snippets [Daten]",
+              "ToolTip": "ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/LeoCodeDb/True/SqlTable/dbo.Snippets.sql",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
-              "WhenOpened": "2024-12-01T23:08:31.564Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-01T23:08:31.564Z"
             },
             {
               "$type": "Document",
@@ -172,8 +171,7 @@
               "RelativeToolTip": "WebAPI\\Program.cs",
               "ViewState": "AgIAAAMAAAAAAAAAAAAAABAAAABXAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-30T16:13:14.178Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-30T16:13:14.178Z"
             },
             {
               "$type": "Document",
@@ -183,7 +181,7 @@
               "RelativeDocumentMoniker": "WebAPI\\Controllers\\ExerciseController.cs",
               "ToolTip": "C:\\Schule\\5AHIF\\LeoCode\\backend\\db\\WebAPI\\Controllers\\ExerciseController.cs",
               "RelativeToolTip": "WebAPI\\Controllers\\ExerciseController.cs",
-              "ViewState": "AgIAAP8AAAAAAAAAAAAAwA0BAAAMAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAOMAAAAEAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-11-03T19:24:14.944Z",
               "EditorCaption": ""
@@ -198,18 +196,16 @@
               "RelativeToolTip": "Persistence\\UnitOfWork.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAaAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-30T16:36:17.781Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-30T16:36:17.781Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "dbo.Exercises [Daten]",
+              "Title": "dbo.Exercises.sql",
               "DocumentMoniker": "ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/LeoCodeDb/True/SqlTable/dbo.Exercises.sql",
-              "ToolTip": "dbo.Exercises [Daten]",
+              "ToolTip": "ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/LeoCodeDb/True/SqlTable/dbo.Exercises.sql",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
-              "WhenOpened": "2024-12-01T22:32:41.764Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-01T22:32:41.764Z"
             },
             {
               "$type": "Document",
@@ -257,8 +253,7 @@
               "RelativeToolTip": "Persistence\\ExerciseRepository.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAACAAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-30T17:13:50.641Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-30T17:13:50.641Z"
             },
             {
               "$type": "Document",
@@ -291,8 +286,7 @@
               "RelativeToolTip": "Core\\Dto\\ExerciseDto.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAASAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-30T18:32:51.243Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-30T18:32:51.243Z"
             },
             {
               "$type": "Document",
