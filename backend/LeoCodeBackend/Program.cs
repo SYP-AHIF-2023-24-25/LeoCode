@@ -173,8 +173,16 @@ namespace LeoCodeBackend
             if(language == "TypeScript"){
                 apiUrl = $"http://localhost:8000/api/execute/{exerciseName}";
             } else if(language == "CSharp"){
-                //apiUrl = $"http://localhost:5168/api/execute/{exerciseName}";
-                apiUrl = $"http://localhost:8001/api/execute/{exerciseName}";
+                string baseUrl = "";
+                if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Production")
+                {
+                    baseUrl = "http://LeoCode.htl-leonding.ac.at:8082";
+                }
+                else
+                {
+                    baseUrl = "http://localhost:8001";
+                }
+                apiUrl = $"{baseUrl}/api/execute/{exerciseName}";
             } else if(language == "Java"){
                 apiUrl = $"http://localhost:8002/api/execute/{exerciseName}";
             }
