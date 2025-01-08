@@ -4,5 +4,6 @@ export const environment = {
     apiUrl: 'https://your-production-api.com/',
     uploadUrl: 'https://your-production-upload.com/',
     cSharpUrl: 'https://your-production-csharp.com/',
+    kcUrl: 'https://your-production-api-url/api/demo/',
   };
   
