@@ -17,7 +17,7 @@ export class RestService {
       'Content-Type': 'application/json',
       'Access-Control-Allow-Origin': '*'
     });
-    return this.httpClient.delete(`${this.baseUrl}api/stopRunner?language=${language}`, { headers: headers });
+    return this.httpClient.delete(`${this.baseUrl}/api/stopRunner?language=${language}`, { headers: headers });
   }
 
   runTests(programName: string, code: CodeSection[], language: string): Observable<any> {
@@ -31,7 +31,7 @@ export class RestService {
     };
 
     return this.httpClient.post(
-      `${this.baseUrl}api/runTests?exerciseName=${programName}&language=${language}`,
+      `${this.baseUrl}/api/runTests?exerciseName=${programName}&language=${language}`,
       requestBody,
       { headers: headers }
     );
@@ -43,7 +43,7 @@ export class RestService {
       'Access-Control-Allow-Origin': '*'
     });
 
-    return this.httpClient.post(`${this.baseUrl}api/startRunner?language=${language}`, null, { headers: headers });
+    return this.httpClient.post(`${this.baseUrl}/api/startRunner?language=${language}`, null, { headers: headers });
   }
 
   uploadZipFile(file: File) {
@@ -51,7 +51,7 @@ export class RestService {
     const formData = new FormData();
     formData.append('file', file);
 
-    return this.httpClient.post<any>(`${this.baseUrl}api/testTemplate`, formData);
+    return this.httpClient.post<any>(`${this.baseUrl}/api/testTemplate`, formData);
   }
 
   getCode(programName: string) {
@@ -60,7 +60,7 @@ export class RestService {
       'Access-Control-Allow-Origin': '*'
     });
 
-    return this.httpClient.get(`${this.baseUrl}api/code/${programName}/`, { headers: headers });
+    return this.httpClient.get(`${this.baseUrl}/api/code/${programName}/`, { headers: headers });
   }
 
   getCodeCSharp(programName: string) {
@@ -69,6 +69,6 @@ export class RestService {
       'Access-Control-Allow-Origin': '*'
     });
 
-    return this.httpClient.get(`${this.baseUrl}api/code?exerciseName=${programName}`, { headers: headers });
+    return this.httpClient.get(`${this.baseUrl}/api/code?exerciseName=${programName}`, { headers: headers });
   }
 }

@@ -75,7 +75,7 @@ internal static class Setup
         {
             // TODO adjust origin if your client is not running on localhost:5005 (or uses https)
             // origin has to be set if credentials are used (which we need)
-            const string Origin = "http://localhost:5005";
+            const string Origin = "https://LeoCode.htl-leonding.ac.at";
 
             // this is _not_ a production configuration!
             b.WithOrigins(Origin)

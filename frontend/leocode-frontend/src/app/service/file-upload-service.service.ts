@@ -15,7 +15,7 @@ export class FileUploadService {
     const formData = new FormData();
     formData.append('file', file);
     formData.append('content', content);
-    return this.http.post(`${this.uploadUrl}uploadFullTemplate`, formData);
+    return this.http.post(`${this.uploadUrl}/uploadFullTemplate`, formData);
   }
 
   async uploadCSharpTemplate(file: File, content: string) {
@@ -26,6 +26,6 @@ export class FileUploadService {
     const headers = new HttpHeaders();
     headers.set('Content-Type', 'multipart/form-data');
 
-    return await this.http.post(`${this.cSharpUrl}CSharpExercises/UploadTemplate`, formData, { headers });
+    return await this.http.post(`${this.cSharpUrl}/CSharpExercises/UploadTemplate`, formData, { headers });
   }
 }

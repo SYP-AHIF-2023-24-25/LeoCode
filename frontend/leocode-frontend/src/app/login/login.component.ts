@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit  {
   }
 
   public performCall(action: string): void {
-    const route = `${environment.apiUrl}${action}`;
+    const route = `${environment.kcUrl}${action}`;
 
     this.loading.set(true);
 
