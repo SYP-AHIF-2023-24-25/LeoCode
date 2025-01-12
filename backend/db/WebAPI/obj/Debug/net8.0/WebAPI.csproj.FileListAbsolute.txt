@@ -229,7 +229,6 @@ C:\Users\Kelit\Schule2023-24\syp\LeoCode\backend\db\WebAPI\obj\Debug\net8.0\WebA
 C:\Users\Kelit\Schule2023-24\syp\LeoCode\backend\db\WebAPI\obj\Debug\net8.0\WebAPI.genruntimeconfig.cache
 C:\Users\Kelit\Schule2023-24\syp\LeoCode\backend\db\WebAPI\obj\Debug\net8.0\ref\WebAPI.dll
 C:\Schule\4AHIF\LeoCode\backend\db\WebAPI\obj\Debug\net8.0\WebAPI.csproj.CopyComplete
-C:\Schule\5AHIF\LeoCode\backend\db\WebAPI\bin\Debug\net8.0\appsettings.Development.json
 C:\Schule\5AHIF\LeoCode\backend\db\WebAPI\bin\Debug\net8.0\WebAPI.exe
 C:\Schule\5AHIF\LeoCode\backend\db\WebAPI\bin\Debug\net8.0\appsettings.json
 C:\Schule\5AHIF\LeoCode\backend\db\WebAPI\bin\Debug\net8.0\WebAPI.deps.json
@@ -539,7 +538,6 @@ C:\Users\Kelit\Schule2024_25\Syp\LeoCode\backend\db\WebAPI\obj\Debug\net8.0\WebA
 C:\Users\Kelit\Schule2024_25\Syp\LeoCode\backend\db\WebAPI\obj\Debug\net8.0\WebAPI.genruntimeconfig.cache
 C:\Users\Kelit\Schule2024_25\Syp\LeoCode\backend\db\WebAPI\obj\Debug\net8.0\ref\WebAPI.dll
 C:\Schule\LeoCode\backend\db\WebAPI\bin\Debug\net8.0\libman.json
-C:\Schule\5AHIF\LeoCode\backend\db\WebAPI\bin\Debug\net8.0\libman.json
 C:\Schule\5AHIF\FlorianUndLukas\LeoCode\backend\db\WebAPI\bin\Debug\net8.0\appsettings.Development.json
 C:\Schule\5AHIF\FlorianUndLukas\LeoCode\backend\db\WebAPI\bin\Debug\net8.0\libman.json
 C:\Schule\5AHIF\FlorianUndLukas\LeoCode\backend\db\WebAPI\bin\Debug\net8.0\WebAPI.exe
@@ -775,3 +773,9 @@ C:\Schule\5AHIF\Lukas Branch\LeoCode\backend\db\WebAPI\obj\Debug\net8.0\WebAPI.p
 C:\Schule\5AHIF\Lukas Branch\LeoCode\backend\db\WebAPI\obj\Debug\net8.0\WebAPI.genruntimeconfig.cache
 C:\Schule\5AHIF\Lukas Branch\LeoCode\backend\db\WebAPI\obj\Debug\net8.0\ref\WebAPI.dll
 C:\Schule\5AHIF\LeoCode\backend\db\WebAPI\obj\Debug\net8.0\WebAPI.csproj.Up2Date
+C:\Schule\5AHIF\LeoCode\backend\db\WebAPI\bin\Debug\net8.0\WebAPI.staticwebassets.endpoints.json
+C:\Schule\5AHIF\LeoCode\backend\db\WebAPI\bin\Debug\net8.0\MySqlConnector.dll
+C:\Schule\5AHIF\LeoCode\backend\db\WebAPI\bin\Debug\net8.0\Pomelo.EntityFrameworkCore.MySql.dll
+C:\Schule\5AHIF\LeoCode\backend\db\WebAPI\obj\Debug\net8.0\staticwebassets.build.endpoints.json
+C:\Schule\5AHIF\LeoCode\backend\db\WebAPI\obj\Debug\net8.0\staticwebassets\msbuild.WebAPI.Microsoft.AspNetCore.StaticWebAssetEndpoints.props
+C:\Schule\5AHIF\LeoCode\backend\db\WebAPI\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
