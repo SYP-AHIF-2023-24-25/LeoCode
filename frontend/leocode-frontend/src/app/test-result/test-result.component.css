@@ -30,3 +30,16 @@
     background-color: gray; /* Ensure background color is applied */
     position: relative;
   }
+  /* CSS für den readonly-Bereich */
+/* Readonly Bereiche - Grau */
+.readonly {
+  background-color: #f0f0f0 !important; /* Hellgrau */
+  color: #808080; /* Graue Schriftfarbe */
+  pointer-events: none; /* Keine Interaktion zulassen */
+}
+
+/* Bearbeitbare Bereiche - Schwarz */
+.editable {
+  background-color: black !important; /* Weißer Hintergrund */
+  color: white; /* Schwarze Schriftfarbe */
+}

@@ -148,3 +148,18 @@ C:\Schule\5AHIF\Lukas Branch\LeoCode\backend\db\Base\obj\Debug\net8.0\refint\Bas
 C:\Schule\5AHIF\Lukas Branch\LeoCode\backend\db\Base\obj\Debug\net8.0\Base.pdb
 C:\Schule\5AHIF\Lukas Branch\LeoCode\backend\db\Base\obj\Debug\net8.0\Base.genruntimeconfig.cache
 C:\Schule\5AHIF\Lukas Branch\LeoCode\backend\db\Base\obj\Debug\net8.0\ref\Base.dll
+C:\Schule_2024_25\Syp\LeoCode\backend\db\Base\bin\Debug\net8.0\Base.deps.json
+C:\Schule_2024_25\Syp\LeoCode\backend\db\Base\bin\Debug\net8.0\Base.runtimeconfig.json
+C:\Schule_2024_25\Syp\LeoCode\backend\db\Base\bin\Debug\net8.0\Base.dll
+C:\Schule_2024_25\Syp\LeoCode\backend\db\Base\bin\Debug\net8.0\Base.pdb
+C:\Schule_2024_25\Syp\LeoCode\backend\db\Base\obj\Debug\net8.0\Base.csproj.AssemblyReference.cache
+C:\Schule_2024_25\Syp\LeoCode\backend\db\Base\obj\Debug\net8.0\Base.GeneratedMSBuildEditorConfig.editorconfig
+C:\Schule_2024_25\Syp\LeoCode\backend\db\Base\obj\Debug\net8.0\Base.AssemblyInfoInputs.cache
+C:\Schule_2024_25\Syp\LeoCode\backend\db\Base\obj\Debug\net8.0\Base.AssemblyInfo.cs
+C:\Schule_2024_25\Syp\LeoCode\backend\db\Base\obj\Debug\net8.0\Base.csproj.CoreCompileInputs.cache
+C:\Schule_2024_25\Syp\LeoCode\backend\db\Base\obj\Debug\net8.0\Base.sourcelink.json
+C:\Schule_2024_25\Syp\LeoCode\backend\db\Base\obj\Debug\net8.0\Base.dll
+C:\Schule_2024_25\Syp\LeoCode\backend\db\Base\obj\Debug\net8.0\refint\Base.dll
+C:\Schule_2024_25\Syp\LeoCode\backend\db\Base\obj\Debug\net8.0\Base.pdb
+C:\Schule_2024_25\Syp\LeoCode\backend\db\Base\obj\Debug\net8.0\Base.genruntimeconfig.cache
+C:\Schule_2024_25\Syp\LeoCode\backend\db\Base\obj\Debug\net8.0\ref\Base.dll

@@ -176,3 +176,21 @@ C:\Schule\5AHIF\Lukas Branch\LeoCode\backend\db\Core\obj\Debug\net8.0\Core.pdb
 C:\Schule\5AHIF\Lukas Branch\LeoCode\backend\db\Core\obj\Debug\net8.0\Core.genruntimeconfig.cache
 C:\Schule\5AHIF\Lukas Branch\LeoCode\backend\db\Core\obj\Debug\net8.0\ref\Core.dll
 C:\Schule\5AHIF\LeoCode\backend\db\Core\obj\Debug\net8.0\Core.csproj.Up2Date
+C:\Schule_2024_25\Syp\LeoCode\backend\db\Core\bin\Debug\net8.0\Core.deps.json
+C:\Schule_2024_25\Syp\LeoCode\backend\db\Core\bin\Debug\net8.0\Core.runtimeconfig.json
+C:\Schule_2024_25\Syp\LeoCode\backend\db\Core\bin\Debug\net8.0\Core.dll
+C:\Schule_2024_25\Syp\LeoCode\backend\db\Core\bin\Debug\net8.0\Core.pdb
+C:\Schule_2024_25\Syp\LeoCode\backend\db\Core\bin\Debug\net8.0\Base.dll
+C:\Schule_2024_25\Syp\LeoCode\backend\db\Core\bin\Debug\net8.0\Base.pdb
+C:\Schule_2024_25\Syp\LeoCode\backend\db\Core\obj\Debug\net8.0\Core.csproj.AssemblyReference.cache
+C:\Schule_2024_25\Syp\LeoCode\backend\db\Core\obj\Debug\net8.0\Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\Schule_2024_25\Syp\LeoCode\backend\db\Core\obj\Debug\net8.0\Core.AssemblyInfoInputs.cache
+C:\Schule_2024_25\Syp\LeoCode\backend\db\Core\obj\Debug\net8.0\Core.AssemblyInfo.cs
+C:\Schule_2024_25\Syp\LeoCode\backend\db\Core\obj\Debug\net8.0\Core.csproj.CoreCompileInputs.cache
+C:\Schule_2024_25\Syp\LeoCode\backend\db\Core\obj\Debug\net8.0\Core.sourcelink.json
+C:\Schule_2024_25\Syp\LeoCode\backend\db\Core\obj\Debug\net8.0\Core.csproj.Up2Date
+C:\Schule_2024_25\Syp\LeoCode\backend\db\Core\obj\Debug\net8.0\Core.dll
+C:\Schule_2024_25\Syp\LeoCode\backend\db\Core\obj\Debug\net8.0\refint\Core.dll
+C:\Schule_2024_25\Syp\LeoCode\backend\db\Core\obj\Debug\net8.0\Core.pdb
+C:\Schule_2024_25\Syp\LeoCode\backend\db\Core\obj\Debug\net8.0\Core.genruntimeconfig.cache
+C:\Schule_2024_25\Syp\LeoCode\backend\db\Core\obj\Debug\net8.0\ref\Core.dll

@@ -216,3 +216,25 @@ C:\Schule\5AHIF\Lukas Branch\LeoCode\backend\db\Persistence\obj\Debug\net8.0\Per
 C:\Schule\5AHIF\Lukas Branch\LeoCode\backend\db\Persistence\obj\Debug\net8.0\Persistence.genruntimeconfig.cache
 C:\Schule\5AHIF\Lukas Branch\LeoCode\backend\db\Persistence\obj\Debug\net8.0\ref\Persistence.dll
 C:\Schule\5AHIF\LeoCode\backend\db\Persistence\obj\Debug\net8.0\Persiste.61C28332.Up2Date
+C:\Schule_2024_25\Syp\LeoCode\backend\db\Persistence\bin\Debug\net8.0\appsettings.Development.json
+C:\Schule_2024_25\Syp\LeoCode\backend\db\Persistence\bin\Debug\net8.0\appsettings.json
+C:\Schule_2024_25\Syp\LeoCode\backend\db\Persistence\bin\Debug\net8.0\Persistence.deps.json
+C:\Schule_2024_25\Syp\LeoCode\backend\db\Persistence\bin\Debug\net8.0\Persistence.runtimeconfig.json
+C:\Schule_2024_25\Syp\LeoCode\backend\db\Persistence\bin\Debug\net8.0\Persistence.dll
+C:\Schule_2024_25\Syp\LeoCode\backend\db\Persistence\bin\Debug\net8.0\Persistence.pdb
+C:\Schule_2024_25\Syp\LeoCode\backend\db\Persistence\bin\Debug\net8.0\Base.dll
+C:\Schule_2024_25\Syp\LeoCode\backend\db\Persistence\bin\Debug\net8.0\Core.dll
+C:\Schule_2024_25\Syp\LeoCode\backend\db\Persistence\bin\Debug\net8.0\Core.pdb
+C:\Schule_2024_25\Syp\LeoCode\backend\db\Persistence\bin\Debug\net8.0\Base.pdb
+C:\Schule_2024_25\Syp\LeoCode\backend\db\Persistence\obj\Debug\net8.0\Persistence.csproj.AssemblyReference.cache
+C:\Schule_2024_25\Syp\LeoCode\backend\db\Persistence\obj\Debug\net8.0\Persistence.GeneratedMSBuildEditorConfig.editorconfig
+C:\Schule_2024_25\Syp\LeoCode\backend\db\Persistence\obj\Debug\net8.0\Persistence.AssemblyInfoInputs.cache
+C:\Schule_2024_25\Syp\LeoCode\backend\db\Persistence\obj\Debug\net8.0\Persistence.AssemblyInfo.cs
+C:\Schule_2024_25\Syp\LeoCode\backend\db\Persistence\obj\Debug\net8.0\Persistence.csproj.CoreCompileInputs.cache
+C:\Schule_2024_25\Syp\LeoCode\backend\db\Persistence\obj\Debug\net8.0\Persistence.sourcelink.json
+C:\Schule_2024_25\Syp\LeoCode\backend\db\Persistence\obj\Debug\net8.0\Persiste.61C28332.Up2Date
+C:\Schule_2024_25\Syp\LeoCode\backend\db\Persistence\obj\Debug\net8.0\Persistence.dll
+C:\Schule_2024_25\Syp\LeoCode\backend\db\Persistence\obj\Debug\net8.0\refint\Persistence.dll
+C:\Schule_2024_25\Syp\LeoCode\backend\db\Persistence\obj\Debug\net8.0\Persistence.pdb
+C:\Schule_2024_25\Syp\LeoCode\backend\db\Persistence\obj\Debug\net8.0\Persistence.genruntimeconfig.cache
+C:\Schule_2024_25\Syp\LeoCode\backend\db\Persistence\obj\Debug\net8.0\ref\Persistence.dll

@@ -26,7 +26,6 @@
     </ul>
   </div>
 </nav>
-
 <div class="container-fluid">
   <div class="row justify-content-center">
     <div class="col-md-10">
@@ -36,39 +35,45 @@
           <!-- Überschrift -->
           <h1 class="text-center mb-4 custom-heading">Exercises</h1>      
 
-          <!-- Suchleiste für den Namen -->
-            <form class="mb-4">
-              <mat-form-field class="example-chip-list w-100">
-                <mat-label>Search</mat-label>
-                <input matInput placeholder="Search exercises by name..." [(ngModel)]="searchQuery" name="searchQuery" />
-              </mat-form-field>
-
-              <!-- Chips für ausgewählte Tags -->
-              <mat-form-field class="example-chip-list w-100">
-                <mat-label>Choose Tags</mat-label>
-                <mat-chip-grid #chipGrid aria-label="Tag selection">
-                  <mat-chip-row *ngFor="let tag of selectedSearchTags" (removed)="removeSearchTag(tag)">
-                    {{ tag }}
-                    <button matChipRemove [attr.aria-label]="'remove ' + tag">
-                      <mat-icon>cancel</mat-icon>
-                    </button>
-                  </mat-chip-row>
-                </mat-chip-grid>
-                <input placeholder="Search tags..." #tagInput [formControl]="tagCtrl" [matChipInputFor]="chipGrid" [matAutocomplete]="auto" [matChipInputSeparatorKeyCodes]="separatorKeysCodes" />
-                <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectedSearch($event)">
-                  <mat-option *ngFor="let tag of filteredSearchTags | async" [value]="tag">
-                    {{ tag }}
-                  </mat-option>
-                </mat-autocomplete>
-              </mat-form-field>
-            </form>
-
-            <div class="form-check mt-4">
-              <input class="form-check-input" type="checkbox" [(ngModel)]="filterMyExercises" id="filterMyExercises">
-              <label class="form-check-label" for="filterMyExercises">
-                Show only my exercises
-              </label>
+          <!-- Suchleisten nebeneinander -->
+          <form class="mb-4">
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <!-- Suchleiste für den Namen -->
+                <mat-form-field class="example-chip-list w-100">
+                  <mat-label>Search</mat-label>
+                  <input matInput placeholder="Search exercises by name..." [(ngModel)]="searchQuery" name="searchQuery" />
+                </mat-form-field>
+              </div>
+              <div class="col-md-6 mb-3">
+                <!-- Chips für ausgewählte Tags -->
+                <mat-form-field class="example-chip-list w-100">
+                  <mat-label>Choose Tags</mat-label>
+                  <mat-chip-grid #chipGrid aria-label="Tag selection">
+                    <mat-chip-row *ngFor="let tag of selectedSearchTags" (removed)="removeSearchTag(tag)">
+                      {{ tag }}
+                      <button matChipRemove [attr.aria-label]="'remove ' + tag">
+                        <mat-icon>cancel</mat-icon>
+                      </button>
+                    </mat-chip-row>
+                  </mat-chip-grid>
+                  <input placeholder="Search tags..." #tagInput [formControl]="tagCtrl" [matChipInputFor]="chipGrid" [matAutocomplete]="auto" [matChipInputSeparatorKeyCodes]="separatorKeysCodes" />
+                  <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectedSearch($event)">
+                    <mat-option *ngFor="let tag of filteredSearchTags | async" [value]="tag">
+                      {{ tag }}
+                    </mat-option>
+                  </mat-autocomplete>
+                </mat-form-field>
+              </div>
             </div>
+          </form>
+
+          <div class="form-check mt-4">
+            <input class="form-check-input" type="checkbox" [(ngModel)]="filterMyExercises" id="filterMyExercises">
+            <label class="form-check-label" for="filterMyExercises">
+              Show only my exercises
+            </label>
+          </div>
 
           <!-- Material Tabelle -->
           <div class="table-responsive">
@@ -101,7 +106,7 @@
               <ng-container matColumnDef="details">
                 <th mat-header-cell *matHeaderCellDef class="custom-header">Details</th>
                 <td mat-cell *matCellDef="let exercise">
-                  <button  class="btn btn-primary" [routerLink]="['/exercise-details']" [queryParams]="{exerciseName: exercise.name, creator: exercise.creator}">Details</button>
+                  <button class="btn btn-primary" [routerLink]="['/exercise-details']" [queryParams]="{exerciseName: exercise.name, creator: exercise.creator}">Details</button>
                 </td>
               </ng-container>
 
@@ -109,7 +114,7 @@
               <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
             </table>
           </div>
-          <button class="btn btn-primary rounded-circle add-btn" [routerLink]="['/create-exercise']">+</button>
+          <button class="btn btn-primary rounded-circle add-btn fixed-btn" [routerLink]="['/create-exercise']">+</button>
         </div>
       </div>
     </div>
