@@ -21,16 +21,17 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAngularFrontend", builder =>
     {
-        builder.WithOrigins("http://localhost:4200/test-results", "http://localhost:4200")
+        builder.AllowAnyOrigin()
             .AllowAnyHeader()
-            .AllowAnyMethod()
-            .AllowAnyOrigin();
+            .AllowAnyMethod();
     });
 });
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+
 
 var app = builder.Build();
 
@@ -49,5 +50,5 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
-
+app.UsePathBase("/db");
 app.Run();

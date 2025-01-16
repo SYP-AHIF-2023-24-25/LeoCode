@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Import")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a7b90b74a40cf5e1ed1ad4c360bd69249652a9f6")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+699255641197b23f9d413de6f8b87e6ed1c80a88")]
 [assembly: System.Reflection.AssemblyProductAttribute("Import")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Import")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

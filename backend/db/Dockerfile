@@ -10,11 +10,11 @@ RUN dotnet restore ./WebAPI/WebAPI.csproj
 
 # Copy everything else and build
 COPY . .
-RUN dotnet publish ./WebAPI/WebAPI.csproj -c Release -o /app/publish
+RUN dotnet publish ./WebAPI/WebAPI.csproj -c Development -o /app/publish
 
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS final
 WORKDIR /app
-EXPOSE 8080
-ENV ASPNETCORE_ENVIRONMENT=Production
+EXPOSE 5015
+ENV ASPNETCORE_ENVIRONMENT=Development
 COPY --from=build /app/publish .
 ENTRYPOINT ["dotnet", "WebAPI.dll"]

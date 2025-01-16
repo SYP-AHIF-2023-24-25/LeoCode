@@ -22,5 +22,7 @@ WORKDIR /app
 # Kopiere die veröffentlichten Dateien aus dem Build-Image
 COPY --from=build /app/publish .
 
+EXPOSE 5001
+
 # Setze den Einstiegspunkt
 ENTRYPOINT ["dotnet", "AuthDemoApi.dll"]

@@ -2,16 +2,27 @@ using AuthDemoApi;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Set the application to listen on port 8083
+
+/*builder.WebHost.ConfigureKestrel(options =>
+{
+    options.ListenAnyIP(5001, listenOptions =>
+    {
+        
+    });
+});*/
+
+    
+
 // CORS hinzuf�gen
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAngularApp",
         policy =>
         {
-            policy.WithOrigins("http://localhost:4200") // Erlaubt Anfragen von Angular-Frontend
+            policy.AllowAnyOrigin() // Erlaubt Anfragen von Angular-Frontend
                   .AllowAnyHeader()                     // Erlaubt beliebige Header
-                  .AllowAnyMethod()                     // Erlaubt alle HTTP-Methoden
-                  .AllowCredentials();                  // Erlaubt Anfragen mit Anmeldeinformationen (z.B. Cookies)
+                  .AllowAnyMethod();                  // Erlaubt Anfragen mit Anmeldeinformationen (z.B. Cookies)
         });
 });
 
@@ -30,6 +41,7 @@ var app = builder.Build();
 
 
 // Verwende die konfigurierte CORS-Policy
+app.UsePathBase("/keycloak");
 app.UseCors("AllowAngularApp");
 
 app.UseAuthentication();
