@@ -19,7 +19,7 @@ const httpOptions = {
   providedIn: 'root',
 })
 export class DbService {
-  private apiUrl = environment.apiUrl; // Use environment variable for base URL
+  private apiUrl = environment.dbUrl; // Use environment variable for base URL
 
   constructor(private http: HttpClient) {}
 
