@@ -7,6 +7,22 @@
       "RelativeMoniker": "D:0:0:{0EAD1F07-78D3-4478-802C-D2F22A90D02D}|LeoCodeBackend.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{0EAD1F07-78D3-4478-802C-D2F22A90D02D}|LeoCodeBackend.csproj|c:\\schule\\5ahif\\leocode\\backend\\leocodebackend\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{0EAD1F07-78D3-4478-802C-D2F22A90D02D}|LeoCodeBackend.csproj|solutionrelative:properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0EAD1F07-78D3-4478-802C-D2F22A90D02D}|LeoCodeBackend.csproj|c:\\schule\\5ahif\\leocode\\backend\\leocodebackend\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{0EAD1F07-78D3-4478-802C-D2F22A90D02D}|LeoCodeBackend.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0EAD1F07-78D3-4478-802C-D2F22A90D02D}|LeoCodeBackend.csproj|c:\\schule\\5ahif\\leocode\\backend\\leocodebackend\\dockerfile||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{0EAD1F07-78D3-4478-802C-D2F22A90D02D}|LeoCodeBackend.csproj|solutionrelative:dockerfile||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0EAD1F07-78D3-4478-802C-D2F22A90D02D}|LeoCodeBackend.csproj|c:\\schule\\5ahif\\leocode\\backend\\leocodebackend\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{0EAD1F07-78D3-4478-802C-D2F22A90D02D}|LeoCodeBackend.csproj|solutionrelative:appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{0EAD1F07-78D3-4478-802C-D2F22A90D02D}|LeoCodeBackend.csproj|c:\\schule\\5ahif\\leocode\\backend\\leocodebackend\\resultfilehelpercsharp.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{0EAD1F07-78D3-4478-802C-D2F22A90D02D}|LeoCodeBackend.csproj|solutionrelative:resultfilehelpercsharp.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -33,7 +49,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Bookmark",
@@ -41,7 +57,72 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "launchSettings.json",
+              "DocumentMoniker": "C:\\Schule\\5AHIF\\LeoCode\\backend\\LeoCodeBackend\\Properties\\launchSettings.json",
+              "RelativeDocumentMoniker": "Properties\\launchSettings.json",
+              "ToolTip": "C:\\Schule\\5AHIF\\LeoCode\\backend\\LeoCodeBackend\\Properties\\launchSettings.json",
+              "RelativeToolTip": "Properties\\launchSettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-01-16T22:56:45.548Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Schule\\5AHIF\\LeoCode\\backend\\LeoCodeBackend\\appsettings.json",
+              "RelativeDocumentMoniker": "appsettings.json",
+              "ToolTip": "C:\\Schule\\5AHIF\\LeoCode\\backend\\LeoCodeBackend\\appsettings.json",
+              "RelativeToolTip": "appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-01-16T22:56:38.66Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 3,
+              "Title": "Dockerfile",
+              "DocumentMoniker": "C:\\Schule\\5AHIF\\LeoCode\\backend\\LeoCodeBackend\\Dockerfile",
+              "RelativeDocumentMoniker": "Dockerfile",
+              "ToolTip": "C:\\Schule\\5AHIF\\LeoCode\\backend\\LeoCodeBackend\\Dockerfile",
+              "RelativeToolTip": "Dockerfile",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-01-16T22:55:47.269Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Schule\\5AHIF\\LeoCode\\backend\\LeoCodeBackend\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\Schule\\5AHIF\\LeoCode\\backend\\LeoCodeBackend\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAAC4AAAAAAAAAAAAiwFAAAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-07T08:07:03.739Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "appsettings.Development.json",
+              "DocumentMoniker": "C:\\Schule\\5AHIF\\LeoCode\\backend\\LeoCodeBackend\\appsettings.Development.json",
+              "RelativeDocumentMoniker": "appsettings.Development.json",
+              "ToolTip": "C:\\Schule\\5AHIF\\LeoCode\\backend\\LeoCodeBackend\\appsettings.Development.json",
+              "RelativeToolTip": "appsettings.Development.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-01-16T22:56:41.841Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
               "Title": "Microsoft.Common.CurrentVersion.targets",
               "DocumentMoniker": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Current\\Bin\\amd64\\Microsoft.Common.CurrentVersion.targets",
               "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Current\\Bin\\amd64\\Microsoft.Common.CurrentVersion.targets",
@@ -53,7 +134,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 8,
               "Title": "requests.http",
               "DocumentMoniker": "C:\\Schule\\5AHIF\\LeoCode\\backend\\LeoCodeBackend\\requests.http",
               "RelativeDocumentMoniker": "requests.http",
@@ -65,20 +146,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Schule\\5AHIF\\LeoCode\\backend\\LeoCodeBackend\\Program.cs",
-              "RelativeDocumentMoniker": "Program.cs",
-              "ToolTip": "C:\\Schule\\5AHIF\\LeoCode\\backend\\LeoCodeBackend\\Program.cs",
-              "RelativeToolTip": "Program.cs",
-              "ViewState": "AgIAANwAAAAAAAAAAAAkwPMAAAAMAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-02-07T08:07:03.739Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 9,
               "Title": "LeoCodeBackend.http",
               "DocumentMoniker": "C:\\Schule\\5AHIF\\LeoCode\\backend\\LeoCodeBackend\\LeoCodeBackend.http",
               "RelativeDocumentMoniker": "LeoCodeBackend.http",
@@ -90,7 +158,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 6,
               "Title": "ResultFileHelperTypescript.cs",
               "DocumentMoniker": "C:\\Schule\\5AHIF\\LeoCode\\backend\\LeoCodeBackend\\ResultFileHelperTypescript.cs",
               "RelativeDocumentMoniker": "ResultFileHelperTypescript.cs",
@@ -102,7 +170,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 5,
               "Title": "ResultFileHelperCSharp.cs",
               "DocumentMoniker": "C:\\Schule\\5AHIF\\LeoCode\\backend\\LeoCodeBackend\\ResultFileHelperCSharp.cs",
               "RelativeDocumentMoniker": "ResultFileHelperCSharp.cs",

@@ -88,5 +88,14 @@ services:
       - "traefik.http.routers.keycloak-api.rule=Host(`leocode.htl-leonding.ac.at`) && PathPrefix(`/keycloak`)"
       - "traefik.http.services.keycloak-api.loadbalancer.server.port=5001"
 
+  leocode-backend:
+    image: florianhagmair06/leocode-backend:latest
+    container_name: leocode-backend
+    restart: always
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.leocode-backend.rule=Host(`leocode.htl-leonding.ac.at`) && PathPrefix(`/backend`)"
+      - "traefik.http.services.leocode-backend.loadbalancer.server.port=5080"
+
 volumes:
   leocode-mysql-data:

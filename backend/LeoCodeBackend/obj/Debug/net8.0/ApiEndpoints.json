@@ -1,5 +1,24 @@
 [
   {
+    "ContainingType": "LeoCodeBackend.Program\u002B\u003C\u003Ec",
+    "Method": "\u003CMain\u003Eb__2_1",
+    "RelativePath": "api/hello",
+    "HttpMethod": "GET",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.OkObjectResult",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 200
+      }
+    ],
+    "EndpointName": "Hello"
+  },
+  {
     "ContainingType": "LeoCodeBackend.Program",
     "Method": "RunTests",
     "RelativePath": "api/runTests",

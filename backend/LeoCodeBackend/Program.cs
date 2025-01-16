@@ -63,6 +63,13 @@ namespace LeoCodeBackend
                 .WithName("StopRunner")
                 .WithOpenApi();
 
+            app.MapGet("/api/hello", async () =>
+            {
+                return new OkObjectResult("Hello World");
+            })
+                .WithName("Hello")
+                .WithOpenApi();
+
             using var loggerFactory = LoggerFactory.Create(builder =>
             {
                 builder
@@ -71,7 +78,7 @@ namespace LeoCodeBackend
 
             var logger = loggerFactory.CreateLogger<Program>();
 
-
+            app.UsePathBase("/backend");
             app.Run();
         }
 
@@ -171,12 +178,12 @@ namespace LeoCodeBackend
         {
             string apiUrl = "";
             if(language == "TypeScript"){
-                apiUrl = $"http://localhost:8000/api/execute/{exerciseName}";
+                apiUrl = $"https://localhost:8000/api/execute/{exerciseName}";
             } else if(language == "CSharp"){
                 string baseUrl = "";
                 if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Production")
                 {
-                    baseUrl = "http://LeoCode.htl-leonding.ac.at:8082";
+                    baseUrl = "https://leocode.htl-leonding.ac.at:8082";
                 }
                 else
                 {
