@@ -2,7 +2,7 @@ using AuthDemoApi;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// CORS hinzufügen
+// CORS hinzufï¿½gen
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAngularApp",
@@ -21,15 +21,13 @@ builder.Services.AddBasicLeoAuthorization();
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerWithAuth();
-// Keine Notwendigkeit für AddLenientCors, da wir AddCors explizit konfigurieren
+// Keine Notwendigkeit fï¿½r AddLenientCors, da wir AddCors explizit konfigurieren
 
 var app = builder.Build();
 
-if (app.Environment.IsDevelopment())
-{
     app.UseSwagger();
     app.UseSwaggerUI();
-}
+
 
 // Verwende die konfigurierte CORS-Policy
 app.UseCors("AllowAngularApp");

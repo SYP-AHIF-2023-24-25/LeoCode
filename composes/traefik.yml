@@ -16,7 +16,6 @@ entryPoints:
     http:
       tls:
         certresolver: leocoderesolver
-
 api:
   insecure: false
   dashboard: false
