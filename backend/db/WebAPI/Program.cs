@@ -41,6 +41,7 @@ var app = builder.Build();
     app.UseSwagger();
     app.UseSwaggerUI();
 }*/
+app.UsePathBase("/db");
 app.UseCors("AllowAngularFrontend");
 app.UseSwagger();
 app.UseSwaggerUI();
@@ -50,5 +51,5 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
-app.UsePathBase("/db");
+
 app.Run();

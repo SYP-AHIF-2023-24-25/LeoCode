@@ -12,9 +12,9 @@ services:
     networks: 
       - leocode-network
 
-  my-sql:
+  leocode-my-sql:
     image: mysql:5.7
-    container_name: leocode-mysql
+    container_name: leocode-my-sql
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: root

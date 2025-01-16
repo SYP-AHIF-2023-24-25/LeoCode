@@ -29,6 +29,11 @@ services:
     image: mysql:5.7
     container_name: leocode-mysql
     restart: always
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: leocode
@@ -54,17 +59,19 @@ services:
   leocode-api:
     restart: always
     container_name: leocode-api
-    image: florianhagmair06/leocode-db
+    image: florianhagmair06/leocode-db:latest
+    environment:
+      ASPNETCORE_ENVIRONMENT: 'Development'
     depends_on:
       - leocode-my-sql
-    build:
-      context: .
-      dockerfile: Dockerfile
-    ports:
-      - 5000:8080
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.leocode-api.rule=Host(`leocode.htl-leonding.ac.at`)&&PathPrefix(`/db`)"
+      - "traefik.http.services.leocode-api.loadbalancer.server.port=5015"
+
 
   leocode-frontend:
-    image: florianhagmair06/leocode-frontend
+    image: florianhagmair06/leocode-frontend:latest
     container_name: leocode-frontend
     restart: always
     labels:
@@ -73,13 +80,13 @@ services:
       - "traefik.http.services.leocode-frontend.loadbalancer.server.port=80"
 
   keycloak-api:
-    image: florianhagmair06/keycloak
+    image: florianhagmair06/keycloak:latest
     container_name: keycloak-api
     restart: always
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.keycloak-api.rule=Host(`leocode.htl-leonding.ac.at`) && PathPrefix(`/keycloak`)"
-      - "traefik.http.services.keycloak-api.loadbalancer.server.port=8081"
+      - "traefik.http.services.keycloak-api.loadbalancer.server.port=5001"
 
 volumes:
   leocode-mysql-data:
