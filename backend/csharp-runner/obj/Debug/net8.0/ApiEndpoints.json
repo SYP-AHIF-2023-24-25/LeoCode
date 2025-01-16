@@ -1,5 +1,72 @@
 [
   {
+    "ContainingType": "csharp_runner.Controllers.CSharpExercisesController",
+    "Method": "UploadTemplate",
+    "RelativePath": "CSharpExercises/UploadTemplate",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "file",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      },
+      {
+        "Name": "content",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "csharp_runner.Controllers.WeatherForecastController",
+    "Method": "Get",
+    "RelativePath": "WeatherForecast",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[csharp_runner.WeatherForecast, csharp-runner, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ],
+    "EndpointName": "GetWeatherForecast"
+  },
+  {
+    "ContainingType": "csharp_runner.Program",
+    "Method": "GetFirstCsFileContent",
+    "RelativePath": "api/code",
+    "HttpMethod": "GET",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "exerciseName",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.IActionResult",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 200
+      }
+    ],
+    "EndpointName": "GetCode"
+  },
+  {
     "ContainingType": "csharp_runner.Program",
     "Method": "RunTests",
     "RelativePath": "api/execute/{exerciseName}",
@@ -26,30 +93,7 @@
         ],
         "StatusCode": 200
       }
-    ]
-  },
-  {
-    "ContainingType": "csharp_runner.Program",
-    "Method": "UploadTemplate",
-    "RelativePath": "api/uploadTemplate",
-    "HttpMethod": "POST",
-    "IsController": false,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "model",
-        "Type": "csharp_runner.TemplateUploadModel",
-        "IsRequired": true
-      }
     ],
-    "ReturnTypes": [
-      {
-        "Type": "Microsoft.AspNetCore.Mvc.IActionResult",
-        "MediaTypes": [
-          "application/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
+    "EndpointName": "RunTests"
   }
 ]

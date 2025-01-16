@@ -64,7 +64,7 @@ namespace csharp_runner
             app.UseAuthorization();
 
             app.MapControllers();
-
+            app.UsePathBase("/csharp-runner");
             app.Run();
         }
 

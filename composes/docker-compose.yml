@@ -97,5 +97,14 @@ services:
       - "traefik.http.routers.leocode-backend.rule=Host(`leocode.htl-leonding.ac.at`) && PathPrefix(`/backend`)"
       - "traefik.http.services.leocode-backend.loadbalancer.server.port=5080"
 
+  leocode-csharp-runner:
+    image: florianhagmair06/leocode-csharp-runner:latest
+    container_name: leocode-csharp-runner
+    restart: always
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.leocode-csharp-runner.rule=Host(`leocode.htl-leonding.ac.at`) && PathPrefix(`/csharp-runner`)"
+      - "traefik.http.services.leocode-csharp-runner.loadbalancer.server.port=5168"
+
 volumes:
   leocode-mysql-data:
