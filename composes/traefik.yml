@@ -35,7 +35,7 @@ providers:
 certificatesResolvers:
   leocoderesolver:
     acme:
-      email: "sophiehaider06@gmail.com"
+      email: "flohagi14@gmail.com"
       storage: "/letsencrypt/acme.json"
       httpChallenge:
         entryPoint: web
