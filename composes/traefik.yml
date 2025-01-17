@@ -15,7 +15,8 @@ entryPoints:
       insecure: true
     http:
       tls:
-        certresolver: leocoderesolver
+        certResolver: leocoderesolver
+
 api:
   insecure: false
   dashboard: false
@@ -26,6 +27,7 @@ log:
 providers:
   docker:
     exposedByDefault: false
+    network: custom-net
     watch: true
 
   file:
