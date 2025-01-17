@@ -45,7 +45,6 @@ services:
       MYSQL_PASSWORD: password
     volumes:
       - leocode-mysql-data:/var/lib/mysql
-      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
     networks:
       - custom-net
 
@@ -122,3 +121,14 @@ services:
       - "traefik.http.services.leocode-csharp-runner.loadbalancer.server.port=5168"
     networks:
       - custom-net
+    entrypoint: >
+        /bin/sh -c "
+        apt-get update &&
+        apt-get install -y wget &&
+        wget https://dot.net/v1/dotnet-install.sh &&
+        chmod +x dotnet-install.sh &&
+        ./dotnet-install.sh --channel 8.0 &&
+        rm dotnet-install.sh &&
+        export PATH=/root/.dotnet:$PATH &&
+        mkdir -p /app/templates &&
+        exec dotnet csharp-runner.dll"
