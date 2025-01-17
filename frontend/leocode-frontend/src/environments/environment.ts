@@ -10,9 +10,9 @@
   export const environment = {
     production: true,
     dbUrl: 'https://leocode.htl-leonding.ac.at/db/api',
-    apiUrl: 'https://leocode.htl-leonding.ac.at:8081',
-    uploadUrl: 'https://leocode.htl-leonding.ac.at:8085',
-    cSharpUrl: 'https://leocode.htl-leonding.ac.at:8082',
+    apiUrl: 'https://leocode.htl-leonding.ac.at/backend',
+    uploadUrl: 'https://leocode.htl-leonding.ac.at/ts-runner',
+    cSharpUrl: 'https://leocode.htl-leonding.ac.at/csharp-runner',
     kcUrl: 'https://leocode.htl-leonding.ac.at/keycloak/api/demo/',
   };
   
