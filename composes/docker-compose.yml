@@ -98,6 +98,8 @@ services:
       - "traefik.http.services.keycloak-api.loadbalancer.server.port=5001"
     networks:
       - custom-net
+    extra_hosts:
+      - "auth.htl-leonding.ac.at:10.191.112.13"
 
   leocode-backend:
     image: florianhagmair06/leocode-backend:latest

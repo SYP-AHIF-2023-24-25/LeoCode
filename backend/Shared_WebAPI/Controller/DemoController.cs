@@ -18,14 +18,12 @@ public sealed class DemoController : ControllerBase
 
     [HttpGet]
     // Note: test users are treated like students
-    //[Authorize(nameof(LeoUserRole.Student))]
-    [AllowAnonymous]
+    [Authorize(nameof(LeoUserRole.Student))]
     [Route("at-least-student")]
     public IActionResult GetIfAtLeastStudent() => Ok("You are at least a student");
     
     [HttpGet]
-    //[Authorize(nameof(LeoUserRole.Teacher))]
-    [AllowAnonymous]
+    [Authorize(nameof(LeoUserRole.Teacher))]
     [Route("is-teacher")]
     public IActionResult GetIfTeacher() => Ok("You are a teacher");
     
