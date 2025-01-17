@@ -111,9 +111,11 @@ namespace csharp_runner
                 //Console.WriteLine("Current Directory: " + currentDirectory);
                 Body body = JsonConvert.DeserializeObject<Body>(jsonContent.ToString());
                 string templateFilePath = @$"{currentDirectory}/templates/{exerciseName}";
-                //Console.WriteLine($"Template File Path: {templateFilePath}");
+                Console.WriteLine($"Template File Path: {templateFilePath}");
                 string filePathForRandomDirectory = @$"{currentDirectory}";
                 string filePathForNuGetConfigFile = @$"{currentDirectory}/config";
+                Console.WriteLine($"File Path For Random Directory: {filePathForRandomDirectory}");
+                Console.WriteLine($"File Path For NuGet Config File: {filePathForNuGetConfigFile}");
                 var result = await executeTests.runCSharp(exerciseName, templateFilePath, filePathForRandomDirectory, body.code, body.fileName);
                 //log succes
                 return new OkObjectResult(result);

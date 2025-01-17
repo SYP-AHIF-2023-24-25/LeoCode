@@ -10,16 +10,17 @@ namespace csharp_runner
 
             // Erstellen eines temporären Verzeichnisses
             string solutionDir = createTempDir(filePathForRandomDirectory);
-            //Console.WriteLine($"Solution Directory: {solutionDir}");
+            Console.WriteLine($"Solution Directory: {solutionDir}");
 
             // Kopieren der Vorlagendatei ins temporäre Verzeichnis
+            Console.WriteLine($"Template File Path: {templateFilePath}");   
             await CopyAsync(templateFilePath, solutionDir);
 
             // Erstellen eines Symlinks zur NuGet-Konfigurationsdatei (falls notwendig)
-            int exitCode = await RunCommandsAsyncCommandLine(solutionDir, $"ln -s /usr/src/app/config/nuget.config {solutionDir}/{exerciseName}/nuget.config");
-            exitCode = await RunCommandsAsyncCommandLine(solutionDir, $"ln -s /usr/src/app/nuget-packages {solutionDir}/{exerciseName}/nuget-packages");
+            int exitCode = await RunCommandsAsyncCommandLine(solutionDir, $"ln -s /app/config/nuget.config {solutionDir}/{exerciseName}/nuget.config");
+            exitCode = await RunCommandsAsyncCommandLine(solutionDir, $"ln -s /app/nuget-packages {solutionDir}/{exerciseName}/nuget-packages");
             solutionDir = $@"{solutionDir}/{exerciseName}";
-
+            Console.WriteLine($"Solution Directory: {solutionDir}");
             // Den Code in das entsprechende Verzeichnis einfügen
             await ReplaceCodeAsync(solutionDir, code, fileName, exerciseName);
             Console.WriteLine("Replaced Code");

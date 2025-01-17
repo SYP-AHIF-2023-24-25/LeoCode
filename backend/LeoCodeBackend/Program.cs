@@ -183,13 +183,16 @@ namespace LeoCodeBackend
                 string baseUrl = "";
                 if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Production")
                 {
-                    baseUrl = "https://leocode.htl-leonding.ac.at:8082";
+                    Console.WriteLine("Production aaaaaaaaaaaaaaaa");
+                    baseUrl = "https://leocode.htl-leonding.ac.at/csharp-runner";
                 }
                 else
                 {
+                    Console.WriteLine("Development aaaaaaaaaaaaaaaa");
                     baseUrl = "http://localhost:8001";
                 }
                 apiUrl = $"{baseUrl}/api/execute/{exerciseName}";
+                Console.WriteLine(apiUrl);
             } else if(language == "Java"){
                 apiUrl = $"http://localhost:8002/api/execute/{exerciseName}";
             }
@@ -215,6 +218,8 @@ namespace LeoCodeBackend
                     HttpContent content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
 
                     // Send the POST request
+                    Console.WriteLine("vor chsarp runner");
+                    Console.WriteLine(content.ReadAsStringAsync().ToString());
                     response = await httpClient.PostAsync(apiUrl, content);
                     if (response.IsSuccessStatusCode)
                     {
@@ -246,12 +251,14 @@ namespace LeoCodeBackend
                     }
                     else
                     {
+                        Console.WriteLine("scheiﬂe");
                         _fileLogger.Log($"ERROR: Response from {language}-runner wasn't successful");
                         Console.WriteLine($"Request failed with status code {response.StatusCode}");
                     }
                 }
                 catch (Exception ex)
                 {
+                    Console.WriteLine("scheiﬂe1");
                     _fileLogger.Log($"ERROR: Response from {language}-runner wasn't successful. Error Message: {ex.Message}");
                     Console.WriteLine($"An error occurred: {ex.Message}");
                 }
