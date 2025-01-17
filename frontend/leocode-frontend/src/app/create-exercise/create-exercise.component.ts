@@ -283,9 +283,11 @@ export class CreateExerciseComponent {
         }
       }
       else if(exercise.language === 'Csharp'){
+        console.log("upload chsarp template1");
         const fullResponse = await this.uploadZipFileToCSharpRunner(exercise.zipFile, "full");
-
+        console.log("upload chsarp template2");
         if (this.testsMatchPassesCSharp(fullResponse) && exercise.emptyZipFile) {
+          console.log("upload chsarp template3");
           await this.uploadZipFileToCSharpRunner(exercise.emptyZipFile, "empty");
           let name: string[] = exercise.emptyZipFile.name.split('.');
           console.log(name[0]);

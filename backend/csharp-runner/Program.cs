@@ -72,7 +72,7 @@ namespace csharp_runner
         {
             try
             {
-                string directoryPath = $"/usr/src/app/templates/{exerciseName}/{exerciseName}/";
+                string directoryPath = $"/app/templates/{exerciseName}/{exerciseName}/";
 
                 if (!Directory.Exists(directoryPath))
                 {

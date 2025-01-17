@@ -52,10 +52,11 @@ export class StartScreenComponent implements OnInit {
   ngOnInit(): void {
     this.ifUserName = sessionStorage.getItem('ifUserName');
     sessionStorage.setItem("userName", this.defaultUser.username);
-
+    console.log("!!!!!!!!!!!!!");
     this.rest.getExerciseByUsername().subscribe((data: Exercise[]) => {
       this.exercises = data;
     });
+    console.log(this.exercises);
   }
 
   private _filter(value: string): string[] {

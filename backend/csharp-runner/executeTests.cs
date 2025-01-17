@@ -44,9 +44,14 @@ namespace csharp_runner
 
         public static async Task<string> testTemplate(string path, string exerciseName)
         {
-            await RunCommandsAsync(path, "restore");
-            await RunCommandsAsync(path, "test -l:trx;LogFileName=TestOutput.xml");
-            string testOutput = await File.ReadAllTextAsync(Path.Combine(path, $"{exerciseName}Tests/TestResults/TestOutput.xml"));
+            string path1 = $@"/app/templates/{exerciseName}";
+            Console.WriteLine($"path1 {path1}");
+            await RunCommandsAsync(path1, "restore");
+            await RunCommandsAsync(path1, "test -l:trx;LogFileName=TestOutput.xml");
+            Console.WriteLine("====================");
+            Console.WriteLine(path);
+            string testOutput = await File.ReadAllTextAsync(Path.Combine($"/app/templates/{ exerciseName}", $"{exerciseName}Tests/TestResults/TestOutput.xml"));
+            Console.WriteLine($"testoutput: {testOutput}");
             return testOutput;
         }
 
@@ -108,7 +113,7 @@ namespace csharp_runner
             }
             catch (Exception ex)
             {
-                //Console.WriteLine($"An error occurred: {ex.Message}");
+                Console.WriteLine($"An error occurred: {ex.Message}");
                 return -1;
             }
         }

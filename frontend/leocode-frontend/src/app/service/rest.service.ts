@@ -53,22 +53,22 @@ export class RestService {
 
     return this.httpClient.post<any>(`${this.baseUrl}/api/testTemplate`, formData);
   }
-
+  private baseUrl1 = environment.uploadUrl;
   getCode(programName: string) {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Access-Control-Allow-Origin': '*'
     });
 
-    return this.httpClient.get(`${this.baseUrl}/api/code/${programName}/`, { headers: headers });
+    return this.httpClient.get(`${this.baseUrl1}/api/code/${programName}/`, { headers: headers });
   }
-
+  private baseUrl2 = environment.cSharpUrl;
   getCodeCSharp(programName: string) {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Access-Control-Allow-Origin': '*'
     });
 
-    return this.httpClient.get(`${this.baseUrl}/api/code?exerciseName=${programName}`, { headers: headers });
+    return this.httpClient.get(`${this.baseUrl2}/api/code?exerciseName=${programName}`, { headers: headers });
   }
 }
