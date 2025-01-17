@@ -55,7 +55,8 @@ namespace Persistence
 
         private string GenerateAssignmentLink(int assignmentId)
         {
-            string baseUrl = "http://localhost:4200/join-assignment"; // Base URL of the Angular frontend
+            //string baseUrl = "http://localhost:4200/join-assignment"; // Base URL of the Angular frontend
+            string baseUrl = "https://leocode.htl-leonding.ac.at/join-assignment";
             return $"{baseUrl}/{assignmentId}"; // Construct the full link with the assignmentId as a path parameter
         }
 

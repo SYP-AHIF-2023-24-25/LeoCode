@@ -37,14 +37,14 @@ services:
     networks:
       - leocode-network
     links:
-      - my-sql
+      - leocode-my-sql
 
   leocode-api:
     restart: always
     container_name: leocode-api
     image: florianhagmair06/leocode-db
     depends_on:
-      - my-sql
+      - leocode-my-sql
     build:
       context: .
       dockerfile: Dockerfile
