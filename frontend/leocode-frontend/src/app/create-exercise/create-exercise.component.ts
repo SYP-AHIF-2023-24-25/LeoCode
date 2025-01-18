@@ -185,9 +185,10 @@ export class CreateExerciseComponent {
   async uploadZipFileToCSharpRunner(file: File, content: string): Promise<any> {
     if (!file) {
       console.error('No file selected');
-      return; // Return early if no file is selected
+      return; 
     }
     this.isUploading = true;
+    
     try {
       let result = await (await this.fileUploadService.uploadCSharpTemplate(file, content)).toPromise();
       console.log(result);
@@ -196,7 +197,7 @@ export class CreateExerciseComponent {
     } catch (error) {
       console.error('Error occurred during file upload:', error);
       this.isUploading = false;
-      throw error; // Rethrow the error for handling in the calling function
+      throw error; 
     }
   }
 
@@ -206,7 +207,7 @@ export class CreateExerciseComponent {
       this.snackBar.open('No file selected', 'Close', {
         duration: 5000,
       });
-      return; // Return early if no file is selected
+      return; 
     }
 
     this.isUploading = true;
@@ -229,10 +230,9 @@ export class CreateExerciseComponent {
   
   }
   
-
   async sendCodeToRunner() {
     this.isDisabled = true;
-     let exercise  = {
+    let exercise = {
       name: this.exerciseName,
       creator: this.ifUserName || '',
       instruction: this.instruction,
@@ -241,101 +241,180 @@ export class CreateExerciseComponent {
       zipFile: this.zipFile,
       emptyZipFile: this.emptyZipFile,
       dateCreated: new Date(),
-      dateUpdated: new Date()
+      dateUpdated: new Date(),
     };
-
+  
     if (exercise.zipFile) {
-      if(exercise.language === 'TypeScript'){
-        const fullResponse = await this.uploadZipToTsRunner(exercise.zipFile, "full");
-        if (exercise.emptyZipFile && this.testsMatchPasses(fullResponse)) {
-          await this.uploadZipToTsRunner(exercise.emptyZipFile, "empty");
-          let name: string[] = exercise.emptyZipFile.name.split('.');
-          console.log(name[0]);
-          const response: any = await this.rest.getCode(name[0]).toPromise();
-          console.log(response);
-          let codeSections: CodeSection[] = this.parseTemplateToCodeSections(response, name[0]);
-          console.log(codeSections);
-
-          let arrayOfSnippets : ArrayOfSnippetsDto = {
-            snippets: codeSections
-          }
-          
-          console.log(arrayOfSnippets);
-            
-
-          this.dbRest.AddExercise(arrayOfSnippets, exercise.name, exercise.instruction, exercise.language, exercise.tags, exercise.creator, exercise.dateCreated, exercise.dateUpdated)
-          .subscribe((data: Exercise) => {
-            this.snackBar.open('Exercise created successfully', 'Close', {
-              duration: 5000,
+      this.snackBar.open('Starting upload process...', 'Close', {
+        duration: 3000,
+        horizontalPosition: 'center',
+        verticalPosition: 'top',
+      });
+  
+      if (exercise.language === 'TypeScript') {
+        try {
+          this.snackBar.open('Uploading main ZIP file for TypeScript...', 'Close', {
+            duration: 3000,
+            horizontalPosition: 'center',
+            verticalPosition: 'top',
+          });
+  
+          const fullResponse = await this.uploadZipToTsRunner(exercise.zipFile, 'full');
+          this.snackBar.open('Main ZIP file uploaded successfully.', 'Close', {
+            duration: 3000,
+            horizontalPosition: 'center',
+            verticalPosition: 'top',
+          });
+  
+          if (exercise.emptyZipFile && this.testsMatchPasses(fullResponse)) {
+            this.snackBar.open('Uploading empty template ZIP file...', 'Close', {
+              duration: 3000,
               horizontalPosition: 'center',
               verticalPosition: 'top',
             });
-
-            this.router.navigate(['/exercise-details'], {
-              queryParams: {
-                exerciseName: exercise.name,
-                creator: exercise.creator
-              }
-            }).then(() => {
-              window.location.reload();
-            });
-          });
-        }
-      }
-      else if(exercise.language === 'Csharp'){
-        const fullResponse = await this.uploadZipFileToCSharpRunner(exercise.zipFile, "full");
-
-        if (this.testsMatchPassesCSharp(fullResponse) && exercise.emptyZipFile) {
-          await this.uploadZipFileToCSharpRunner(exercise.emptyZipFile, "empty");
-          let name: string[] = exercise.emptyZipFile.name.split('.');
-          console.log(name[0]);
-          const response: any = await this.rest.getCodeCSharp(name[0]).toPromise();
-          console.log(response);
-          //let codeSections: CodeSection[] = this.parseTemplateToCodeSections(response.value, name[0]);
-          let codeSections: CodeSection[] = this.parseTemplateToCodeSections(response.value, "Program.cs");
-          console.log(codeSections);
-
-          let arrayOfSnippets : ArrayOfSnippetsDto = {
-            snippets: codeSections
-          }
-          
-          console.log(arrayOfSnippets);
-
-            
-
-          this.dbRest.AddExercise(arrayOfSnippets, exercise.name, exercise.instruction, exercise.language, exercise.tags, exercise.creator, exercise.dateCreated, exercise.dateUpdated)
-          .subscribe((data: Exercise) => {
-            this.snackBar.open('Exercise created successfully', 'Close', {
-              duration: 5000,
+  
+            await this.uploadZipToTsRunner(exercise.emptyZipFile, 'empty');
+            let name: string[] = exercise.emptyZipFile.name.split('.');
+            console.log(name[0]);
+  
+            this.snackBar.open('Fetching generated code snippets...', 'Close', {
+              duration: 3000,
               horizontalPosition: 'center',
               verticalPosition: 'top',
             });
-
-            this.router.navigate(['/exercise-details'], {
-              queryParams: {
-                exerciseName: exercise.name,
-                creator: exercise.creator
-              }
-            }).then(() => {
-              window.location.reload();
-            });
+  
+            const response: any = await this.rest.getCode(name[0]).toPromise();
+            let codeSections: CodeSection[] = this.parseTemplateToCodeSections(response, name[0]);
+  
+            let arrayOfSnippets: ArrayOfSnippetsDto = {
+              snippets: codeSections,
+            };
+  
+            console.log(arrayOfSnippets);
+  
+            this.dbRest
+              .AddExercise(
+                arrayOfSnippets,
+                exercise.name,
+                exercise.instruction,
+                exercise.language,
+                exercise.tags,
+                exercise.creator,
+                exercise.dateCreated,
+                exercise.dateUpdated
+              )
+              .subscribe((data: Exercise) => {
+                this.snackBar.open('Exercise created successfully.', 'Close', {
+                  duration: 5000,
+                  horizontalPosition: 'center',
+                  verticalPosition: 'top',
+                });
+  
+                this.router.navigate(['/exercise-details'], {
+                  queryParams: {
+                    exerciseName: exercise.name,
+                    creator: exercise.creator,
+                  },
+                }).then(() => {
+                  window.location.reload();
+                });
+              });
+          }
+        } catch (error) {
+          this.snackBar.open('An error occurred during the TypeScript upload process.', 'Close', {
+            duration: 5000,
+            horizontalPosition: 'center',
+            verticalPosition: 'top',
           });
-
         }
-        this.isDisabled = false;
+      } else if (exercise.language === 'Csharp') {
+        try {
+          this.snackBar.open('Uploading main ZIP file for C#...', 'Close', {
+            duration: 3000,
+            horizontalPosition: 'center',
+            verticalPosition: 'top',
+          });
+  
+          const fullResponse = await this.uploadZipFileToCSharpRunner(exercise.zipFile, 'full');
+          this.snackBar.open('Main ZIP file uploaded successfully.', 'Close', {
+            duration: 3000,
+            horizontalPosition: 'center',
+            verticalPosition: 'top',
+          });
+  
+          if (this.testsMatchPassesCSharp(fullResponse) && exercise.emptyZipFile) {
+            this.snackBar.open('Uploading empty template ZIP file...', 'Close', {
+              duration: 3000,
+              horizontalPosition: 'center',
+              verticalPosition: 'top',
+            });
+  
+            await this.uploadZipFileToCSharpRunner(exercise.emptyZipFile, 'empty');
+            let name: string[] = exercise.emptyZipFile.name.split('.');
+            console.log(name[0]);
+  
+            this.snackBar.open('Fetching generated code snippets...', 'Close', {
+              duration: 3000,
+              horizontalPosition: 'center',
+              verticalPosition: 'top',
+            });
+  
+            const response: any = await this.rest.getCodeCSharp(name[0]).toPromise();
+            let codeSections: CodeSection[] = this.parseTemplateToCodeSections(response.value, 'Program.cs');
+  
+            let arrayOfSnippets: ArrayOfSnippetsDto = {
+              snippets: codeSections,
+            };
+  
+            console.log(arrayOfSnippets);
+  
+            this.dbRest
+              .AddExercise(
+                arrayOfSnippets,
+                exercise.name,
+                exercise.instruction,
+                exercise.language,
+                exercise.tags,
+                exercise.creator,
+                exercise.dateCreated,
+                exercise.dateUpdated
+              )
+              .subscribe((data: Exercise) => {
+                this.snackBar.open('Exercise created successfully.', 'Close', {
+                  duration: 5000,
+                  horizontalPosition: 'center',
+                  verticalPosition: 'top',
+                });
+  
+                this.router.navigate(['/exercise-details'], {
+                  queryParams: {
+                    exerciseName: exercise.name,
+                    creator: exercise.creator,
+                  },
+                }).then(() => {
+                  window.location.reload();
+                });
+              });
+          }
+        } catch (error) {
+          this.snackBar.open('An error occurred during the C# upload process.', 'Close', {
+            duration: 5000,
+            horizontalPosition: 'center',
+            verticalPosition: 'top',
+          });
+        }
       }
-      
-      
-    }else{
+    } else {
       console.error('No file selected');
-      this.snackBar.open('No ZIP file !!!', 'Close', {
+      this.snackBar.open('No ZIP file selected!', 'Close', {
         duration: 5000,
         horizontalPosition: 'center',
         verticalPosition: 'top',
       });
-      this.isDisabled=false;
+      this.isDisabled = false;
     }
   }
+  
   testsMatchPassesCSharp(response: any): boolean {
     const xmlString = response;
     const xmlObject = xml2js(xmlString, { compact: true }) as ElementCompact; // Add type assertion

@@ -92,3 +92,26 @@
   }
 }
 
+.fixed-table-container {
+  height: 300px; 
+  overflow-y: auto; 
+  border: 1px solid #ddd; 
+}
+
+table.custom-table {
+  width: 100%;
+  border-collapse: collapse; 
+}
+
+table.custom-table th {
+  position: sticky; 
+  top: 0; 
+  background-color: #f8f9fa; 
+  z-index: 10; 
+}
+
+table.custom-table th, table.custom-table td {
+  padding: 8px; 
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}

@@ -1,88 +1,41 @@
 .step-indicator {
   display: flex;
-  justify-content: space-around;
+  gap: 20px;
   margin-bottom: 20px;
 }
 
 .step-indicator-item {
-  width: 20px; /* Punktgröße anpassen */
-  height: 20px; /* Punktgröße anpassen */
-  border-radius: 50%;
-  background-color: lightgray;
-  margin: 0 2px; /* Abstand zwischen den Punkten verringern */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   cursor: pointer;
 }
 
 .step-dot {
-  height: 15px;
-  width: 15px;
+  width: 20px;
+  height: 20px;
   background-color: lightgray;
   border-radius: 50%;
-  display: inline-block;
 }
 
 .current-step .step-dot {
   background-color: rgb(74, 136, 186);
-  width: 20px; /* Punktgröße anpassen */
-  height: 20px; /* Punktgröße anpassen */
 }
 
-.sub-menu-link {
-  color: #888; /* Graue Farbe für Untermenüpunkte */
-  font-size: 14px; /* Kleinere Schriftgröße für Untermenüpunkte */
-}
-
-
-.sub-menu {
-  display: none;
-}
-
-.sub-menu.show {
-  display: block;
-}
-
-.example-chip-list {
-  width: 100%;
-}
-
-.mt-4{
-  width: 100%;
+.step-label {
+  margin-top: 5px;
+  font-size: 12px;
+  color: #555;
 }
 
 .drag-drop-area {
   border: 2px dashed #ccc;
-  border-radius: 5px;
   padding: 20px;
   text-align: center;
-  margin: 10px;
   background-color: #f9f9f9;
+  border-radius: 5px;
 }
 
-.btn-ZipFile {
-  background-color: #007bff;
-  border-color: #007bff;
-  border-radius: 10px;
-  color: #fff;
-}
-
-
-html, body {
-  height: 100%;
-  margin: 0;
-}
-
-.container-fluid {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-}
-
-.row.flex-nowrap {
-  flex: 1;
-}
-
-.sidebar {
-  height: 100%;
-  background-color: gray; /* Ensure background color is applied */
-  position: relative;
+.drag-drop-area:hover {
+  background-color: #e9e9e9;
 }

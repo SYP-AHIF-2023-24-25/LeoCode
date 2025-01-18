@@ -186,7 +186,7 @@
               "RelativeDocumentMoniker": "Persistence\\AssignmentsRepository.cs",
               "ToolTip": "C:\\Schule_2024_25\\Syp\\LeoCode\\backend\\db\\Persistence\\AssignmentsRepository.cs",
               "RelativeToolTip": "Persistence\\AssignmentsRepository.cs",
-              "ViewState": "AgIAAEcAAAAAAAAAAAAIwHUAAAAbAAAAAAAAAA==",
+              "ViewState": "AgIAAEcAAAAAAAAAAAAIwHEAAABIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-11-30T15:15:35.174Z",
               "EditorCaption": ""
@@ -270,8 +270,7 @@
               "RelativeToolTip": "Persistence\\AssignmentUserRepository.cs",
               "ViewState": "AgIAAAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-30T17:57:46.264Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-30T17:57:46.264Z"
             },
             {
               "$type": "Document",
@@ -283,8 +282,7 @@
               "RelativeToolTip": "Persistence\\TeacherRepository.cs",
               "ViewState": "AgIAAAkAAAAAAAAAAAAmwBIAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-30T16:34:05.453Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-30T16:34:05.453Z"
             },
             {
               "$type": "Document",

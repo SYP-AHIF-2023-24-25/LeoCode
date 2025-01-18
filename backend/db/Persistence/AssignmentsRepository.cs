@@ -116,7 +116,7 @@ namespace Persistence
                         FailedTests = studentExercise?.FailedTests ?? 0
                     };
                 }).ToList()
-            }).OrderBy(a=> a.DueDate).ToList();
+            }).OrderByDescending(a=> a.DueDate).ToList();
 
             return result;
         }
