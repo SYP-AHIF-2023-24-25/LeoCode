@@ -184,7 +184,8 @@ namespace LeoCodeBackend
                 if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Production")
                 {
                     Console.WriteLine("Production aaaaaaaaaaaaaaaa");
-                    baseUrl = "https://leocode.htl-leonding.ac.at/csharp-runner";
+                    //baseUrl = "https://leocode.htl-leonding.ac.at/csharp-runner";
+                    baseUrl = "http://leocode-csharp-runner:5168";
                 }
                 else
                 {
@@ -200,11 +201,15 @@ namespace LeoCodeBackend
             HttpResponseMessage response = null;
             Snippets snippets = JsonConvert.DeserializeObject<Snippets>(arrayOfSnippets.ToString());
             //Console.WriteLine(snippets.ArrayOfSnippets[0].FileName);
-
-            using (HttpClient httpClient = new HttpClient())
+            using HttpClientHandler handler = new HttpClientHandler
+            {
+                ServerCertificateCustomValidationCallback = (message, cert, chain, sslPolicyErrors) => true
+            };
+            using (HttpClient httpClient = new HttpClient(handler))
             {
                 // Timeout für HttpClient erhöhen
                 httpClient.Timeout = TimeSpan.FromMinutes(5);
+
 
                 try
                 {
