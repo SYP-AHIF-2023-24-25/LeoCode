@@ -22,9 +22,13 @@ namespace csharp_runner
             solutionDir = $@"{solutionDir}/{exerciseName}";
             Console.WriteLine($"Solution Directory: {solutionDir}");
             // Den Code in das entsprechende Verzeichnis einfügen
+            Console.WriteLine(solutionDir, fileName, exerciseName);
             await ReplaceCodeAsync(solutionDir, code, fileName, exerciseName);
             Console.WriteLine("Replaced Code");
             Console.WriteLine($"{solutionDir}");
+            string filePath = $@"{solutionDir}/{exerciseName}/{fileName}";
+            string fileContent = File.ReadAllText(filePath);
+            Console.WriteLine($"File Content: {fileContent}");
             // NuGet-Paket-Verzeichnis angeben (hier sollte der gemountete Ordner angegeben werden)
             string nugetPackagesPath = $@"{solutionDir}/nuget-packages";  // Diesen Pfad auf den gemounteten Pfad setzen
 

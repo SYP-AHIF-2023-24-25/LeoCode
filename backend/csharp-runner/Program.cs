@@ -61,6 +61,8 @@ namespace csharp_runner
             app.MapGet("/api/code", GetFirstCsFileContent)
                     .WithName("GetCode");
 
+            app.MapGet("/api/test", () => "test");
+
             app.UseAuthorization();
 
             app.MapControllers();
@@ -102,8 +104,8 @@ namespace csharp_runner
 
         static async Task<IActionResult> RunTests(string exerciseName, [FromBody] JsonObject jsonContent)
         {
+            Console.WriteLine("In Run Tests");
             Console.WriteLine(jsonContent);
-            Console.WriteLine(jsonContent.ToString());
             try
             {
                 //Console.WriteLine("Unit Test für C# am ausführen");
