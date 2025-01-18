@@ -28,33 +28,62 @@ namespace csharp_runner.Controllers
                 {
                     return new BadRequestObjectResult("No Description if Template is complete or empty");
                 }
-
                 var fileName = Path.GetFileName(file.FileName);
                 var currentDirectory = Directory.GetCurrentDirectory();
-                string templateFilePath = Path.Combine(currentDirectory, "templates", fileName);
-                string destinationFilePath = Path.Combine(currentDirectory, "templates");
+                // Sicherstellen, dass der Ordner "templates" existiert
+                string templatesDirectory = Path.Combine(currentDirectory, "templates");
+                if (!Directory.Exists(templatesDirectory))
+                {
+                    Directory.CreateDirectory(templatesDirectory);
+                }
+
+                string templateFilePath = Path.Combine(templatesDirectory, fileName);
+                string destinationFilePath = templatesDirectory;
                 using (var fileStream = new FileStream(templateFilePath, FileMode.Create))
                 {
                     await file.CopyToAsync(fileStream);
                 }
-
                 ZipFile.ExtractToDirectory(templateFilePath, destinationFilePath);
-
                 System.IO.File.Delete(templateFilePath);
-                if(content == "full")
+                if (content == "full")
                 {
-                    string[] parts = templateFilePath.Split(".");
-                    string[] name = fileName.Split(".");
-                    var resultTask = executeTests.testTemplate(parts[0], name[0]);
-                    var result = await resultTask;
-                    var jsonResult = JsonConvert.SerializeObject(result);
-                    Console.WriteLine(content);
-                    await resultTask;
+                    try
+                    {
 
-                    Directory.Delete(parts[0], true);
-                    //log succes
-                    return Ok(jsonResult);
+                        // Use Path methods instead of string splitting for better reliability
+                        string fileNameWithoutExtension = Path.GetFileNameWithoutExtension(fileName);
+                        string directoryWithoutExtension = Path.GetFileNameWithoutExtension(templateFilePath);
+
+                        Console.WriteLine(directoryWithoutExtension);
+                        // Execute the tests and await the result
+                        var resultTask = executeTests.testTemplate(directoryWithoutExtension, fileNameWithoutExtension);
+                        var result = await resultTask;
+
+                        // Serialize the result to JSON
+                        var jsonResult = JsonConvert.SerializeObject(result);
+                        Console.WriteLine(content);
+
+                        Console.WriteLine("File uploaded10");
+
+                        // Ensure the directory exists before attempting to delete it
+                        if (Directory.Exists(directoryWithoutExtension))
+                        {
+                            Directory.Delete(directoryWithoutExtension, true);
+                        }
+
+                        // Log success and return the JSON result
+                        return Ok(jsonResult);
+                    }
+                    catch (Exception ex)
+                    {
+                        // Log any errors that occur
+                        Console.WriteLine($"Error: {ex.Message}");
+                        Console.WriteLine($"Stack Trace: {ex.StackTrace}");
+
+                        return StatusCode(StatusCodes.Status400BadRequest, "Something went wrong during the template processing.");
+                    }
                 }
+
 
                 return Ok();
                 

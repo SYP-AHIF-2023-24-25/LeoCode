@@ -356,6 +356,26 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "WebAPI.Controllers.PingController",
+    "Method": "Patch",
+    "RelativePath": "api/Ping",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.String",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
     "ContainingType": "StudentController",
     "Method": "CreateUser",
     "RelativePath": "api/Student",

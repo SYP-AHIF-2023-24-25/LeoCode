@@ -1,0 +1,66 @@
+services:
+  seq:
+    image: datalust/seq:latest
+    container_name: leocode-seq
+    volumes:
+      - seq-data:/data          
+    restart: unless-stopped
+    environment:
+      ACCEPT_EULA: "Y"
+    ports:
+      - 5341:80
+    networks: 
+      - leocode-network
+
+  leocode-my-sql:
+    image: mysql:5.7
+    container_name: leocode-my-sql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: leocode
+      MYSQL_USER: leocodeAdmin
+      MYSQL_PASSWORD: password
+    ports:
+      - 3306:3306
+    networks:
+      - leocode-network
+    volumes:
+      - leocode-data:/var/lib/mysql
+
+  adminer:
+    image: adminer
+    container_name: leocode-adminer
+    restart: always
+    ports:
+      - 8081:8080
+    networks:
+      - leocode-network
+    links:
+      - leocode-my-sql
+
+  leocode-api:
+    restart: always
+    container_name: leocode-api
+    image: florianhagmair06/leocode-db
+    depends_on:
+      - leocode-my-sql
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5015:5015"
+    networks:
+      - leocode-network
+
+volumes:
+  seq-data:
+  leocode-data:
+
+networks:
+  leocode-network:
+    driver: bridge  
+    external: false
+    ipam:
+      config:
+        - subnet: 10.4.0.0/16

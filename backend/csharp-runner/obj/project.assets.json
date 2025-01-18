@@ -8510,19 +8510,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Florian\\.nuget\\packages\\": {}
+    "C:\\Users\\dap03\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Schule\\5AHIF\\david\\LeoCode\\backend\\csharp-runner\\csharp-runner.csproj",
+      "projectUniqueName": "C:\\Schule\\5AHIF\\LeoCode\\backend\\csharp-runner\\csharp-runner.csproj",
       "projectName": "csharp-runner",
-      "projectPath": "C:\\Schule\\5AHIF\\david\\LeoCode\\backend\\csharp-runner\\csharp-runner.csproj",
-      "packagesPath": "C:\\Users\\Florian\\.nuget\\packages\\",
-      "outputPath": "C:\\Schule\\5AHIF\\david\\LeoCode\\backend\\csharp-runner\\obj\\",
+      "projectPath": "C:\\Schule\\5AHIF\\LeoCode\\backend\\csharp-runner\\csharp-runner.csproj",
+      "packagesPath": "C:\\Users\\dap03\\.nuget\\packages\\",
+      "outputPath": "C:\\Schule\\5AHIF\\LeoCode\\backend\\csharp-runner\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Florian\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\dap03\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -8530,6 +8530,7 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -8542,6 +8543,11 @@
         "warnAsError": [
           "NU1605"
         ]
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
       }
     },
     "frameworks": {
@@ -8592,7 +8598,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.403/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

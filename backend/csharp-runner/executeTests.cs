@@ -10,20 +10,25 @@ namespace csharp_runner
 
             // Erstellen eines temporären Verzeichnisses
             string solutionDir = createTempDir(filePathForRandomDirectory);
-            //Console.WriteLine($"Solution Directory: {solutionDir}");
+            Console.WriteLine($"Solution Directory: {solutionDir}");
 
             // Kopieren der Vorlagendatei ins temporäre Verzeichnis
+            Console.WriteLine($"Template File Path: {templateFilePath}");   
             await CopyAsync(templateFilePath, solutionDir);
 
             // Erstellen eines Symlinks zur NuGet-Konfigurationsdatei (falls notwendig)
-            int exitCode = await RunCommandsAsyncCommandLine(solutionDir, $"ln -s /usr/src/app/config/nuget.config {solutionDir}/{exerciseName}/nuget.config");
-            exitCode = await RunCommandsAsyncCommandLine(solutionDir, $"ln -s /usr/src/app/nuget-packages {solutionDir}/{exerciseName}/nuget-packages");
+            int exitCode = await RunCommandsAsyncCommandLine(solutionDir, $"ln -s /app/config/nuget.config {solutionDir}/{exerciseName}/nuget.config");
+            exitCode = await RunCommandsAsyncCommandLine(solutionDir, $"ln -s /app/nuget-packages {solutionDir}/{exerciseName}/nuget-packages");
             solutionDir = $@"{solutionDir}/{exerciseName}";
-
+            Console.WriteLine($"Solution Directory: {solutionDir}");
             // Den Code in das entsprechende Verzeichnis einfügen
+            Console.WriteLine(solutionDir, fileName, exerciseName);
             await ReplaceCodeAsync(solutionDir, code, fileName, exerciseName);
             Console.WriteLine("Replaced Code");
             Console.WriteLine($"{solutionDir}");
+            string filePath = $@"{solutionDir}/{exerciseName}/{fileName}";
+            string fileContent = File.ReadAllText(filePath);
+            Console.WriteLine($"File Content: {fileContent}");
             // NuGet-Paket-Verzeichnis angeben (hier sollte der gemountete Ordner angegeben werden)
             string nugetPackagesPath = $@"{solutionDir}/nuget-packages";  // Diesen Pfad auf den gemounteten Pfad setzen
 
@@ -44,9 +49,14 @@ namespace csharp_runner
 
         public static async Task<string> testTemplate(string path, string exerciseName)
         {
-            await RunCommandsAsync(path, "restore");
-            await RunCommandsAsync(path, "test -l:trx;LogFileName=TestOutput.xml");
-            string testOutput = await File.ReadAllTextAsync(Path.Combine(path, $"{exerciseName}Tests/TestResults/TestOutput.xml"));
+            string path1 = $@"/app/templates/{exerciseName}";
+            Console.WriteLine($"path1 {path1}");
+            await RunCommandsAsync(path1, "restore");
+            await RunCommandsAsync(path1, "test -l:trx;LogFileName=TestOutput.xml");
+            Console.WriteLine("====================");
+            Console.WriteLine(path);
+            string testOutput = await File.ReadAllTextAsync(Path.Combine($"/app/templates/{ exerciseName}", $"{exerciseName}Tests/TestResults/TestOutput.xml"));
+            Console.WriteLine($"testoutput: {testOutput}");
             return testOutput;
         }
 
@@ -108,7 +118,7 @@ namespace csharp_runner
             }
             catch (Exception ex)
             {
-                //Console.WriteLine($"An error occurred: {ex.Message}");
+                Console.WriteLine($"An error occurred: {ex.Message}");
                 return -1;
             }
         }

@@ -1,54 +1,49 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 import { CodeSection } from '../model/code-sections';
-import { languages } from 'monaco-editor';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RestService {
-  stopRunner(language: string) {
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': '*' // Erlaubt alle Ursprünge ()
-    });
-    if (language === 'Typescript') {
-      return this.httpClient.delete(`${this.baseUrl}api/stopRunner?language=${language}`, { headers: headers });
-    } else if (language === 'CSharp') {
-      return this.httpClient.delete(`${this.baseUrl}api/stopRunner?language=${language}`, { headers: headers });
-    } else if (language === 'Java') {
-      return this.httpClient.delete(`${this.baseUrl}api/stopRunner?language=${language}`, { headers: headers });
-    } else {
-      return new Observable<any>(); // Return an empty observable
-    }
-  }
-
-  private baseUrl: string = 'http://localhost:5080/';
+  private baseUrl = environment.apiUrl;
 
   constructor(private httpClient: HttpClient) { }
 
-  runTests(programName: string, code:CodeSection[], language: string):Observable<any> {
+  stopRunner(language: string) {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': '*' // Erlaubt alle Ursprünge ()
+      'Access-Control-Allow-Origin': '*'
+    });
+    return this.httpClient.delete(`${this.baseUrl}/api/stopRunner?language=${language}`, { headers: headers });
+  }
+
+  runTests(programName: string, code: CodeSection[], language: string): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*'
     });
 
     const requestBody = {
-      "ArrayOfSnippets": code
-    }
+      ArrayOfSnippets: code
+    };
 
-    return this.httpClient.post(`${this.baseUrl}api/runTests?exerciseName=${programName}&language=${language}`, requestBody, { headers: headers });
+    return this.httpClient.post(
+      `${this.baseUrl}/api/runTests?exerciseName=${programName}&language=${language}`,
+      requestBody,
+      { headers: headers }
+    );
   }
 
-  startRunner(language: string):Observable<any> {
+  startRunner(language: string): Observable<any> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': '*' // Erlaubt alle Ursprünge ()
+      'Access-Control-Allow-Origin': '*'
     });
 
-    console.log("Start Runner");
-    return this.httpClient.post(`${this.baseUrl}api/startRunner?language=${language}`, null, { headers: headers });
+    return this.httpClient.post(`${this.baseUrl}/api/startRunner?language=${language}`, null, { headers: headers });
   }
 
   uploadZipFile(file: File) {
@@ -56,30 +51,24 @@ export class RestService {
     const formData = new FormData();
     formData.append('file', file);
 
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': '*' // Erlaubt alle Ursprünge ()
-    });
-
-    return this.httpClient.post<any>(`http://localhost:8000/api/testTemplate`, formData, { headers });
+    return this.httpClient.post<any>(`${this.baseUrl}/api/testTemplate`, formData);
   }
-
-  getCode(programName: string){
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': '*' // Erlaubt alle Ursprünge ()
-    });
-
-      return this.httpClient.get(`http://localhost:8000/api/code/${programName}/`, { headers: headers });
-  }
-
-  getCodeCSharp(programName: string){
+  private baseUrl1 = environment.uploadUrl;
+  getCode(programName: string) {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Access-Control-Allow-Origin': '*'
     });
 
-    return this.httpClient.get(`http://localhost:8001/api/code?exerciseName=${programName}`, { headers: headers });
+    return this.httpClient.get(`${this.baseUrl1}/api/code/${programName}/`, { headers: headers });
   }
-  
+  private baseUrl2 = environment.cSharpUrl;
+  getCodeCSharp(programName: string) {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*'
+    });
+
+    return this.httpClient.get(`${this.baseUrl2}/api/code?exerciseName=${programName}`, { headers: headers });
+  }
 }

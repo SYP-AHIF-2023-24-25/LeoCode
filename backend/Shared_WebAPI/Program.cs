@@ -2,16 +2,27 @@ using AuthDemoApi;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// CORS hinzufügen
+// Set the application to listen on port 8083
+
+/*builder.WebHost.ConfigureKestrel(options =>
+{
+    options.ListenAnyIP(5001, listenOptions =>
+    {
+        
+    });
+});*/
+
+    
+
+// CORS hinzufï¿½gen
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAngularApp",
         policy =>
         {
-            policy.WithOrigins("http://localhost:4200") // Erlaubt Anfragen von Angular-Frontend
+            policy.AllowAnyOrigin() // Erlaubt Anfragen von Angular-Frontend
                   .AllowAnyHeader()                     // Erlaubt beliebige Header
-                  .AllowAnyMethod()                     // Erlaubt alle HTTP-Methoden
-                  .AllowCredentials();                  // Erlaubt Anfragen mit Anmeldeinformationen (z.B. Cookies)
+                  .AllowAnyMethod();                  // Erlaubt Anfragen mit Anmeldeinformationen (z.B. Cookies)
         });
 });
 
@@ -21,17 +32,16 @@ builder.Services.AddBasicLeoAuthorization();
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerWithAuth();
-// Keine Notwendigkeit für AddLenientCors, da wir AddCors explizit konfigurieren
+// Keine Notwendigkeit fï¿½r AddLenientCors, da wir AddCors explizit konfigurieren
 
 var app = builder.Build();
 
-if (app.Environment.IsDevelopment())
-{
     app.UseSwagger();
     app.UseSwaggerUI();
-}
+
 
 // Verwende die konfigurierte CORS-Policy
+app.UsePathBase("/keycloak");
 app.UseCors("AllowAngularApp");
 
 app.UseAuthentication();

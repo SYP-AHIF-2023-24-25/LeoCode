@@ -4,6 +4,7 @@ import { Component, computed, inject, Signal, signal, WritableSignal, OnInit } f
 import { HttpClient } from "@angular/common/http";
 import { finalize } from "rxjs";
 import { DbService } from '../service/db-service.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-login',
@@ -35,7 +36,7 @@ export class LoginComponent implements OnInit  {
   }
 
   public performCall(action: string): void {
-    const route = `http://localhost:5050/api/demo/${action}`;
+    const route = `${environment.kcUrl}${action}`;
 
     this.loading.set(true);
 

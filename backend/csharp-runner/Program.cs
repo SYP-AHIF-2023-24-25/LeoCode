@@ -29,7 +29,7 @@ namespace csharp_runner
                 options.AddPolicy("AllowOrigin",
                     builder =>
                     {
-                        builder.WithOrigins("http://localhost:4200")
+                        builder.AllowAnyOrigin()
                             .AllowAnyHeader()
                             .AllowAnyMethod();
                     });
@@ -61,10 +61,12 @@ namespace csharp_runner
             app.MapGet("/api/code", GetFirstCsFileContent)
                     .WithName("GetCode");
 
+            app.MapGet("/api/test", () => "test");
+
             app.UseAuthorization();
 
             app.MapControllers();
-
+            app.UsePathBase("/csharp-runner");
             app.Run();
         }
 
@@ -72,7 +74,7 @@ namespace csharp_runner
         {
             try
             {
-                string directoryPath = $"/usr/src/app/templates/{exerciseName}/{exerciseName}/";
+                string directoryPath = $"/app/templates/{exerciseName}/{exerciseName}/";
 
                 if (!Directory.Exists(directoryPath))
                 {
@@ -102,8 +104,8 @@ namespace csharp_runner
 
         static async Task<IActionResult> RunTests(string exerciseName, [FromBody] JsonObject jsonContent)
         {
+            Console.WriteLine("In Run Tests");
             Console.WriteLine(jsonContent);
-            Console.WriteLine(jsonContent.ToString());
             try
             {
                 //Console.WriteLine("Unit Test für C# am ausführen");
@@ -111,9 +113,11 @@ namespace csharp_runner
                 //Console.WriteLine("Current Directory: " + currentDirectory);
                 Body body = JsonConvert.DeserializeObject<Body>(jsonContent.ToString());
                 string templateFilePath = @$"{currentDirectory}/templates/{exerciseName}";
-                //Console.WriteLine($"Template File Path: {templateFilePath}");
+                Console.WriteLine($"Template File Path: {templateFilePath}");
                 string filePathForRandomDirectory = @$"{currentDirectory}";
                 string filePathForNuGetConfigFile = @$"{currentDirectory}/config";
+                Console.WriteLine($"File Path For Random Directory: {filePathForRandomDirectory}");
+                Console.WriteLine($"File Path For NuGet Config File: {filePathForNuGetConfigFile}");
                 var result = await executeTests.runCSharp(exerciseName, templateFilePath, filePathForRandomDirectory, body.code, body.fileName);
                 //log succes
                 return new OkObjectResult(result);

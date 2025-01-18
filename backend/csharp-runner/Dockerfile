@@ -1,17 +1,28 @@
-# Build-Stage
-FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build-env
-WORKDIR /usr/src/app
+# Build Stage
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+WORKDIR /src
 
-# Kopiere alles
-COPY . ./
-
-# Restore als separate Schichten
+# Copy csproj and restore as distinct layers
+COPY ./csharp-runner.csproj .
 RUN dotnet restore
-# Baue und veröffentliche ein Release
-RUN dotnet publish -c Release -o out
 
-# Runtime-Stage
-FROM mcr.microsoft.com/dotnet/sdk:8.0 AS runtime
-WORKDIR /usr/src/app
-COPY --from=build-env /usr/src/app/out .
+# Copy the rest of the application and publish
+COPY . .
+RUN dotnet publish ./csharp-runner.csproj -c Release -o /app/out
+
+# Final Runtime Stage
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
+WORKDIR /app
+
+# Copy the output from the build stage
+COPY --from=build /app/out .
+
+# Ensure templates directory exists
+RUN mkdir -p /app/templates
+
+# Expose ports for production and debugging
+EXPOSE 5168
+ENV ASPNETCORE_ENVIRONMENT=Production
+
+# Entry point for the application
 ENTRYPOINT ["dotnet", "csharp-runner.dll"]

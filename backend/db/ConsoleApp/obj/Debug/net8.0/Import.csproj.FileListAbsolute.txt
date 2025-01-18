@@ -288,7 +288,6 @@ C:\Users\Kelit\Schule2023-24\syp\LeoCode\backend\db\ConsoleApp\obj\Debug\net8.0\
 C:\Users\Kelit\Schule2023-24\syp\LeoCode\backend\db\ConsoleApp\obj\Debug\net8.0\Import.genruntimeconfig.cache
 C:\Users\Kelit\Schule2023-24\syp\LeoCode\backend\db\ConsoleApp\obj\Debug\net8.0\ref\Import.dll
 C:\Schule\4AHIF\LeoCode\backend\db\ConsoleApp\obj\Debug\net8.0\Import.csproj.CopyComplete
-C:\Schule\5AHIF\LeoCode\backend\db\ConsoleApp\bin\Debug\net8.0\appsettings.Development.json
 C:\Schule\5AHIF\LeoCode\backend\db\ConsoleApp\bin\Debug\net8.0\Import.exe
 C:\Schule\5AHIF\LeoCode\backend\db\ConsoleApp\bin\Debug\net8.0\appsettings.json
 C:\Schule\5AHIF\LeoCode\backend\db\ConsoleApp\bin\Debug\net8.0\Import.deps.json
@@ -1268,7 +1267,6 @@ C:\Schule\5AHIF\Lukas Branch\LeoCode\backend\db\ConsoleApp\obj\Debug\net8.0\refi
 C:\Schule\5AHIF\Lukas Branch\LeoCode\backend\db\ConsoleApp\obj\Debug\net8.0\Import.pdb
 C:\Schule\5AHIF\Lukas Branch\LeoCode\backend\db\ConsoleApp\obj\Debug\net8.0\Import.genruntimeconfig.cache
 C:\Schule\5AHIF\Lukas Branch\LeoCode\backend\db\ConsoleApp\obj\Debug\net8.0\ref\Import.dll
-C:\Schule\5AHIF\LeoCode\backend\db\ConsoleApp\bin\Debug\net8.0\libman.json
 C:\Schule\5AHIF\LeoCode\backend\db\ConsoleApp\bin\Debug\net8.0\WebAPI.deps.json
 C:\Schule\5AHIF\LeoCode\backend\db\ConsoleApp\bin\Debug\net8.0\WebAPI.runtimeconfig.json
 C:\Schule\5AHIF\LeoCode\backend\db\ConsoleApp\bin\Debug\net8.0\WebAPI.exe
@@ -1279,3 +1277,5 @@ C:\Schule\5AHIF\LeoCode\backend\db\ConsoleApp\bin\Debug\net8.0\Swashbuckle.AspNe
 C:\Schule\5AHIF\LeoCode\backend\db\ConsoleApp\bin\Debug\net8.0\WebAPI.dll
 C:\Schule\5AHIF\LeoCode\backend\db\ConsoleApp\bin\Debug\net8.0\WebAPI.pdb
 C:\Schule\5AHIF\LeoCode\backend\db\ConsoleApp\obj\Debug\net8.0\Import.csproj.Up2Date
+C:\Schule\5AHIF\LeoCode\backend\db\ConsoleApp\bin\Debug\net8.0\MySqlConnector.dll
+C:\Schule\5AHIF\LeoCode\backend\db\ConsoleApp\bin\Debug\net8.0\Pomelo.EntityFrameworkCore.MySql.dll

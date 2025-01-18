@@ -62,8 +62,6 @@ C:\Users\Kelit\Schule2023-24\syp\LeoCode\backend\db\Persistence\obj\Debug\net8.0
 C:\Users\Kelit\Schule2023-24\syp\LeoCode\backend\db\Persistence\obj\Debug\net8.0\Persistence.genruntimeconfig.cache
 C:\Users\Kelit\Schule2023-24\syp\LeoCode\backend\db\Persistence\obj\Debug\net8.0\ref\Persistence.dll
 C:\Schule\4AHIF\LeoCode\backend\db\Persistence\obj\Debug\net8.0\Persistence.csproj.CopyComplete
-C:\Schule\5AHIF\LeoCode\backend\db\Persistence\bin\Debug\net8.0\appsettings.Development.json
-C:\Schule\5AHIF\LeoCode\backend\db\Persistence\bin\Debug\net8.0\appsettings.json
 C:\Schule\5AHIF\LeoCode\backend\db\Persistence\bin\Debug\net8.0\Persistence.deps.json
 C:\Schule\5AHIF\LeoCode\backend\db\Persistence\bin\Debug\net8.0\Persistence.runtimeconfig.json
 C:\Schule\5AHIF\LeoCode\backend\db\Persistence\bin\Debug\net8.0\Persistence.dll
