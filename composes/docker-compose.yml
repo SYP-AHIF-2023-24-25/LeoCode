@@ -132,3 +132,7 @@ services:
         export PATH=/root/.dotnet:$PATH &&
         mkdir -p /app/templates &&
         exec dotnet csharp-runner.dll"
+    volumes:
+      - ./CSharp/templates:/app/templates
+      - ./CSharp/nuget.config:/app/config/nuget.config
+      - ./CSharp/nuget-packages:/app/nuget-packages

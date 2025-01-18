@@ -1,4 +1,4 @@
-name: Docker-Hub-Publish-frontend
+name: Docker-Hub-Publish-Leocode-Db
 
 # This workflow uses actions that are not certified by GitHub.
 # They are provided by a third-party and are governed by
@@ -13,7 +13,7 @@ env:
   # Use docker.io for Docker Hub if empty
   REGISTRY: ghcr.io
   # github.repository as <account>/<repo>
-  IMAGE_NAME: florianhagmair06/leocode-frontend
+  IMAGE_NAME: florianhagmair06/leocode-db
 jobs:
     build-and-push:
       runs-on: ubuntu-latest
@@ -36,6 +36,6 @@ jobs:
           uses: docker/build-push-action@v4
           with:
             # path to Dockerfile build context
-            context: ./frontend/leocode-frontend
+            context: ./backend/db
             push: true
             tags: ${{env.IMAGE_NAME}}
