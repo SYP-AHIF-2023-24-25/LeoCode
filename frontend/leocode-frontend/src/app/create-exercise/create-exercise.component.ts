@@ -40,7 +40,7 @@ export class CreateExerciseComponent {
    }
   
   exerciseName: string = ''; 
-  currentStep: number = 1;
+  //currentStep: number = 1;
   instruction: string = '';
   selectedLanguage: string = '';
  
@@ -51,8 +51,6 @@ export class CreateExerciseComponent {
   isUploading = false;
 
   isDisabled = false;
-
-
   // property für die ausgewählten Tags
   tagCtrl = new FormControl();
   selectedTags: string[] = [];  
@@ -77,15 +75,34 @@ export class CreateExerciseComponent {
     });
   }
 
+  steps: string[] = ['Title & Description', 'Language', 'Tags', 'Files', 'Upload'];
+  currentStepIndex: number = 0; // Index to track current step
 
+  // Getter for the current step string
+  get currentStep(): string {
+    return this.steps[this.currentStepIndex];
+  }
+
+  nextStep(): void {
+    if (this.currentStepIndex < this.steps.length - 1) {
+      this.currentStepIndex++;
+    }
+  }
+
+  goToStep(step: string): void {
+    const stepIndex = this.steps.indexOf(step);
+    if (stepIndex !== -1) {
+      this.currentStepIndex = stepIndex;
+    }
+  }
   // navigaton zwischen den schritten
-  nextStep() {
+  /*nextStep() {
     this.currentStep++;
   }
 
   goToStep(step: number) {
     this.currentStep = step;
-  }
+  }*/
 
 
   addInstructions(instructions: string) {
@@ -369,32 +386,32 @@ export class CreateExerciseComponent {
             console.log(arrayOfSnippets);
   
             this.dbRest
-              .AddExercise(
-                arrayOfSnippets,
-                exercise.name,
-                exercise.instruction,
-                exercise.language,
-                exercise.tags,
-                exercise.creator,
-                exercise.dateCreated,
-                exercise.dateUpdated
-              )
-              .subscribe((data: Exercise) => {
-                this.snackBar.open('Exercise created successfully.', 'Close', {
-                  duration: 5000,
-                  horizontalPosition: 'center',
-                  verticalPosition: 'top',
+                .AddExercise(
+                  arrayOfSnippets,
+                  exercise.name,
+                  exercise.instruction,
+                  exercise.language,
+                  exercise.tags,
+                  exercise.creator,
+                  exercise.dateCreated,
+                  exercise.dateUpdated
+                )
+                .subscribe((data: Exercise) => {
+                  this.snackBar.open('Exercise created successfully.', 'Close', {
+                    duration: 5000,
+                    horizontalPosition: 'center',
+                    verticalPosition: 'top',
+                  });
+
+                  setTimeout(() => {
+                    this.router.navigate(['/exercise-details'], {
+                      queryParams: {
+                        exerciseName: exercise.name,
+                        creator: exercise.creator,
+                      },
+                    });
+                  }, 2000); // Delay navigation by 2 seconds
                 });
-  
-                this.router.navigate(['/exercise-details'], {
-                  queryParams: {
-                    exerciseName: exercise.name,
-                    creator: exercise.creator,
-                  },
-                }).then(() => {
-                  window.location.reload();
-                });
-              });
           }
         } catch (error) {
           this.snackBar.open('An error occurred during the C# upload process.', 'Close', {
@@ -432,7 +449,7 @@ export class CreateExerciseComponent {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
   resetForm() {
-    this.currentStep = 1;
+    this.currentStepIndex = 1;
     this.instruction = '';
     this.selectedLanguage = '';
     this.selectedTags = [];

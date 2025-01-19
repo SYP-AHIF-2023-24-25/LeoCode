@@ -31,12 +31,12 @@
   <!-- Step Indicator -->
   <div class="d-flex justify-content-center mb-4">
     <div class="step-indicator">
-      <div *ngFor="let step of [1, 2, 3, 4, 5]" 
-          class="step-indicator-item" 
-          [ngClass]="{ 'current-step': currentStep === step }"
-          (click)="goToStep(step)">
+      <div *ngFor="let step of steps" 
+           class="step-indicator-item" 
+           [ngClass]="{ 'current-step': currentStep === step }"
+           (click)="goToStep(step)">
         <span class="step-dot"></span>
-        <div class="step-label">Step {{ step }}</div>
+        <div class="step-label">{{ step }}</div>
       </div>
     </div>
   </div>
@@ -45,7 +45,7 @@
   <div class="card shadow-sm">
     <div class="card-body">
       <!-- Step 1: Add Introduction and Name -->
-      <div *ngIf="currentStep === 1">
+      <div *ngIf="currentStepIndex === 0">
         <h2 class="mb-4">Step 1: Add Introduction and Name</h2>
         <div class="form-group">
           <label for="exerciseName">Exercise Name</label>
@@ -59,7 +59,7 @@
       </div>
 
       <!-- Step 2: Choose Language -->
-      <div *ngIf="currentStep === 2">
+      <div *ngIf="currentStepIndex === 1">
         <h2 class="mb-4">Step 2: Choose Language</h2>
         <div class="form-group">
           <label for="selectedLanguage">Programming Language</label>
@@ -73,7 +73,7 @@
       </div>
 
       <!-- Step 3: Choose Tags -->
-      <div *ngIf="currentStep === 3">
+      <div *ngIf="currentStepIndex === 2">
         <h2 class="mb-4">Step 3: Choose Tags</h2>
         <form>
           <mat-form-field class="example-chip-list w-100">
@@ -101,7 +101,7 @@
       </div>
 
       <!-- Step 4: Upload ZIP Files -->
-      <div *ngIf="currentStep === 4">
+      <div *ngIf="currentStepIndex === 3">
         <h2 class="mb-4">Step 4: Upload Templates</h2>
         <div class="form-group">
           <label>Upload Sample Solution</label>
@@ -129,7 +129,7 @@
       </div>
 
       <!-- Step 5: Overview -->
-      <div *ngIf="currentStep === 5">
+      <div *ngIf="currentStepIndex === 4">
         <h2 class="mb-4">Overview</h2>
         <p><strong>Exercise Name:</strong> {{ exerciseName }}</p>
         <p><strong>Introduction:</strong> {{ instruction }}</p>
