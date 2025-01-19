@@ -38,11 +38,9 @@
 }
 
 /* Stil für die Assignments */
-.nav-item {
-  margin-bottom: 10px; /* Etwas Abstand zwischen den Items */
-}
 
-.nav-link {
+/* Nur für die Sidebar */
+.sidebar .nav-link {
   font-weight: 600;
   padding: 8px 15px;
   border-radius: 4px;  /* Abgerundete Ecken */
@@ -50,13 +48,13 @@
   transition: background-color 0.3s ease, color 0.3s ease; /* Sanfter Übergang */
 }
 
-.nav-link:hover {
+.sidebar .nav-link:hover {
   background-color: #007bff; /* Heller blauer Hintergrund beim Hover */
   color: white !important; /* Weiße Schrift beim Hover */
 }
 
-/* Stil für das aktive Assignment */
-.active-assignment {
+/* Stil für das aktive Assignment nur in der Sidebar */
+.sidebar .active-assignment {
   background-color: #007bff !important; /* Blaue Hintergrundfarbe */
   color: white !important; /* Weiße Schrift */
   font-weight: bold; /* Fettdruck für den Text */
