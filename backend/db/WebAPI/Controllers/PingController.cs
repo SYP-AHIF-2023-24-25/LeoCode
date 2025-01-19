@@ -268,6 +268,7 @@ namespace WebAPI.Controllers
                 PassedTests = 3,
                 FailedTests = 0,
                 TotalTests = 3,
+                PreviousAttempts = 1
             };
 
             exercise4.ArrayOfSnippets =
@@ -322,6 +323,7 @@ namespace WebAPI.Controllers
                 PassedTests = 2,
                 FailedTests = 1,
                 TotalTests = 3,
+                PreviousAttempts = 3
             };
 
             exercise5.ArrayOfSnippets =
@@ -376,6 +378,7 @@ namespace WebAPI.Controllers
                 PassedTests = 3,
                 FailedTests = 0,
                 TotalTests = 3,
+                PreviousAttempts = 2
             };
 
             exercise6.ArrayOfSnippets =
@@ -430,6 +433,7 @@ namespace WebAPI.Controllers
                 PassedTests = 3,
                 FailedTests = 0,
                 TotalTests = 3,
+                PreviousAttempts = 1
             };
 
             exercise7.ArrayOfSnippets =
@@ -484,6 +488,7 @@ namespace WebAPI.Controllers
                 PassedTests = 0,
                 FailedTests = 3,
                 TotalTests = 3,
+                PreviousAttempts = 5
             };
 
             exercise8.ArrayOfSnippets =
@@ -537,6 +542,7 @@ namespace WebAPI.Controllers
                 PassedTests = 3,
                 FailedTests = 0,
                 TotalTests = 3,
+                PreviousAttempts = 1
             };
 
             exercise9.ArrayOfSnippets =
@@ -590,6 +596,7 @@ namespace WebAPI.Controllers
                 PassedTests = 2,
                 FailedTests = 1,
                 TotalTests = 3,
+                PreviousAttempts = 2
             };
 
             exercise10.ArrayOfSnippets =
@@ -643,6 +650,7 @@ namespace WebAPI.Controllers
                 PassedTests = 3,
                 FailedTests = 0,
                 TotalTests = 3,
+                PreviousAttempts = 1
             };
 
             exercise11.ArrayOfSnippets =

@@ -206,6 +206,7 @@ public class ExerciseController : Controller
             exercises[0].TotalTests = total;
             exercises[0].PassedTests = passed;
             exercises[0].FailedTests = failed;
+            exercises[0].PreviousAttempts++;
             for (int i = 0; i < exercises[0].ArrayOfSnippets.Snippets.Count; i++)
             {
                 Snippet currentSnippet = exercises[0].ArrayOfSnippets.Snippets[i];
@@ -258,7 +259,8 @@ public class ExerciseController : Controller
                 DateUpdated = dateUpdated,
                 TotalTests = total,
                 PassedTests = passed,
-                FailedTests = failed
+                FailedTests = failed,
+                PreviousAttempts = 0
             };
             exercise.ArrayOfSnippets = new ArrayOfSnippets
             {

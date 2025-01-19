@@ -1279,3 +1279,4 @@ C:\Schule\5AHIF\LeoCode\backend\db\ConsoleApp\bin\Debug\net8.0\WebAPI.pdb
 C:\Schule\5AHIF\LeoCode\backend\db\ConsoleApp\obj\Debug\net8.0\Import.csproj.Up2Date
 C:\Schule\5AHIF\LeoCode\backend\db\ConsoleApp\bin\Debug\net8.0\MySqlConnector.dll
 C:\Schule\5AHIF\LeoCode\backend\db\ConsoleApp\bin\Debug\net8.0\Pomelo.EntityFrameworkCore.MySql.dll
+C:\Schule\5AHIF\LeoCode\backend\db\ConsoleApp\bin\Debug\net8.0\WebAPI.staticwebassets.endpoints.json

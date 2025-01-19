@@ -11,7 +11,6 @@ namespace Import
     {
         public static ImportData ImportDemoData()
         {
-
             Teacher user1 = new Teacher
             {
                 Username = "if200183",
@@ -224,6 +223,7 @@ namespace Import
                 PassedTests = 3,
                 FailedTests = 0,
                 TotalTests = 3,
+                PreviousAttempts = 1
             };
 
             exercise4.ArrayOfSnippets =
@@ -278,6 +278,7 @@ namespace Import
                 PassedTests = 2,
                 FailedTests = 1,
                 TotalTests = 3,
+                PreviousAttempts = 3
             };
 
             exercise5.ArrayOfSnippets =
@@ -332,6 +333,7 @@ namespace Import
                 PassedTests = 3,
                 FailedTests = 0,
                 TotalTests = 3,
+                PreviousAttempts = 2
             };
 
             exercise6.ArrayOfSnippets =
@@ -386,6 +388,7 @@ namespace Import
                 PassedTests = 3,
                 FailedTests = 0,
                 TotalTests = 3,
+                PreviousAttempts = 1
             };
 
             exercise7.ArrayOfSnippets =
@@ -440,6 +443,7 @@ namespace Import
                 PassedTests = 0,
                 FailedTests = 3,
                 TotalTests = 3,
+                PreviousAttempts = 5
             };
 
             exercise8.ArrayOfSnippets =
@@ -493,6 +497,7 @@ namespace Import
                 PassedTests = 3,
                 FailedTests = 0,
                 TotalTests = 3,
+                PreviousAttempts = 1
             };
 
             exercise9.ArrayOfSnippets =
@@ -546,6 +551,7 @@ namespace Import
                 PassedTests = 2,
                 FailedTests = 1,
                 TotalTests = 3,
+                PreviousAttempts = 2
             };
 
             exercise10.ArrayOfSnippets =
@@ -599,6 +605,7 @@ namespace Import
                 PassedTests = 3,
                 FailedTests = 0,
                 TotalTests = 3,
+                PreviousAttempts = 1
             };
 
             exercise11.ArrayOfSnippets =
@@ -694,7 +701,7 @@ namespace Import
                 Assignments = new List<Assignments> { assignment1, assignment2 },
                 ArrayOfSnippets = new List<ArrayOfSnippets> { exercise1.ArrayOfSnippets, exercise2.ArrayOfSnippets, exercise3.ArrayOfSnippets, exercise4.ArrayOfSnippets, exercise5.ArrayOfSnippets, exercise6.ArrayOfSnippets, exercise7.ArrayOfSnippets, exercise8.ArrayOfSnippets, exercise9.ArrayOfSnippets, exercise10.ArrayOfSnippets, exercise11.ArrayOfSnippets },
                 Snippets = new List<Snippet> { exercise1.ArrayOfSnippets.Snippets[0], exercise1.ArrayOfSnippets.Snippets[1], exercise1.ArrayOfSnippets.Snippets[2],
-                    exercise2.ArrayOfSnippets.Snippets[0], exercise2.ArrayOfSnippets.Snippets[1], exercise2.ArrayOfSnippets.Snippets[2], 
+                    exercise2.ArrayOfSnippets.Snippets[0], exercise2.ArrayOfSnippets.Snippets[1], exercise2.ArrayOfSnippets.Snippets[2],
                     exercise3.ArrayOfSnippets.Snippets[0], exercise3.ArrayOfSnippets.Snippets[1], exercise3.ArrayOfSnippets.Snippets[2],
                     exercise4.ArrayOfSnippets.Snippets[0], exercise4.ArrayOfSnippets.Snippets[1], exercise4.ArrayOfSnippets.Snippets[2],
                     exercise5.ArrayOfSnippets.Snippets[0], exercise5.ArrayOfSnippets.Snippets[1], exercise5.ArrayOfSnippets.Snippets[2],

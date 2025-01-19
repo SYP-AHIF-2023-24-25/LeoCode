@@ -114,7 +114,8 @@ namespace Persistence
                         Username = au.Student.Username,
                         TotalTests = studentExercise?.TotalTests ?? 0,   // Standardwert 0 bei fehlendem Exercise
                         PassedTests = studentExercise?.PassedTests ?? 0,
-                        FailedTests = studentExercise?.FailedTests ?? 0
+                        FailedTests = studentExercise?.FailedTests ?? 0,
+                        PreviousAttempts = studentExercise?.PreviousAttempts ?? 0
                     };
                 }).ToList()
             }).OrderByDescending(a => a.DueDate).ToList();

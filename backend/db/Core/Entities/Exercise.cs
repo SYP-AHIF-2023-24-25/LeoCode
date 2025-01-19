@@ -34,5 +34,7 @@ namespace Core.Entities
 
         public DateTime DateCreated { get; set; }
         public DateTime DateUpdated { get; set; }
+        public int? PreviousAttempts { get; set; }
+
     }
 }

@@ -49,10 +49,9 @@ export class AssignmentOverviewComponent implements OnInit {
             studentUsername: student.username,
             studentTotalTests: student.totalTests || 0,
             studentPassedTests: student.passedTests || 0, // Falls null oder undefined, auf 0 setzen
-    studentFailedTests: student.failedTests || 0, // Falls null oder undefined, auf 0 setzen
-    studentPercentage: student.totalTests 
-        ? Math.round((student.passedTests / student.totalTests) * 100) 
-        : 0 // Falls totalTests null oder 0 ist, auf 0 setzen
+            studentFailedTests: student.failedTests || 0, // Falls null oder undefined, auf 0 setzen
+            studentPercentage: student.totalTests ? Math.round((student.passedTests / student.totalTests) * 100) : 0,
+            previousAttempts: student.previousAttempts || 0
           })),
           tags: assignment.exercise?.tags || [],  // Handle possible null or undefined
           language: assignment.exercise?.language || 'No language specified',  // Default value if no language is provided

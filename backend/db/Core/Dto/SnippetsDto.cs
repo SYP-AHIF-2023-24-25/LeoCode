@@ -41,5 +41,7 @@ namespace Core.Dto
         public int TotalTests { get; set; }
         public int PassedTests { get; set; }
         public int FailedTests { get; set; }
+
+        public int PreviousAttempts { get; set; }
     }
 }
