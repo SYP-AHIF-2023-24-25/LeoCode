@@ -35,10 +35,11 @@
 </nav>
 
 <!-- Main Container -->
+<!-- Main Container -->
 <div class="container-fluid">
   <div class="row flex-grow-1">
     <!-- Sidebar with Assignments -->
-    <div class="col-md-2 d-none d-md-block sidebar" style="background-color:#f0f0f0; height: 100vh;">
+    <div class="col-md-2 d-none d-md-block sidebar" style="background-color:#f0f0f0; height: 100vh; width: 700;">
       <div class="sidebar-sticky">
         <ul class="nav flex-column">
           <h4 class="ml-2 mt-3 text-primary">Assignments</h4>
@@ -50,7 +51,12 @@
                 'active-assignment': selectedAssignment === assignment
               }"
             >
-              {{ assignment.assignmentName }}
+              <div>
+                <strong>{{ assignment.assignmentName }}</strong>
+              </div>
+              <div>
+                <small>DueDate: {{ assignment.dueDate | date: 'dd.MM.yyyy' }}</small>
+              </div>
             </a>
           </li>
         </ul>

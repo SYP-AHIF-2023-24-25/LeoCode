@@ -1,32 +1,45 @@
 #loading-bar {
-    width: 0;
-    height: 5px;
-    background-color: #4CAF50; /* Farbe der Ladeleiste */
-    transition: width 0.3s; /* Animationsdauer für die Ladeleiste */
-  }
+  width: 0;
+  height: 5px;
+  background-color: #4CAF50; /* Farbe der Ladeleiste */
+  transition: width 0.3s; /* Animationsdauer für die Ladeleiste */
+}
 
-  .monaco-editor {
-    height: 300px;
-    width: 200%;
-  }
+.monaco-editor {
+  height: 300px;
+  width: 200%;
+}
 
-  html, body {
-    height: 100%;
-    margin: 0;
-  }
-  
-  .container-fluid {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .row.flex-nowrap {
-    flex: 1;
-  }
-  
-  .sidebar {
-    height: 100%;
-    background-color: gray; /* Ensure background color is applied */
-    position: relative;
-  }
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+.container-fluid {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.row.flex-nowrap {
+  flex: 1;
+}
+
+.sidebar {
+  height: 100%;
+  background-color: gray; /* Ensure background color is applied */
+  position: relative;
+}
+/* CSS für den readonly-Bereich */
+/* Readonly Bereiche - Grau */
+.readonly {
+background-color: #f0f0f0 !important; /* Hellgrau */
+color: #808080; /* Graue Schriftfarbe */
+pointer-events: none; /* Keine Interaktion zulassen */
+}
+
+/* Bearbeitbare Bereiche - Schwarz */
+.editable {
+background-color: black !important; /* Weißer Hintergrund */
+color: white; /* Schwarze Schriftfarbe */
+}

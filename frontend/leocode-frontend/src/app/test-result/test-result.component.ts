@@ -16,6 +16,7 @@ import { ExerciseDto } from '../model/exerciseDto';
 import { languages } from 'monaco-editor';
 import { MatLabel } from '@angular/material/form-field';
 import { Exercise } from '../model/exercise';
+import * as monaco from 'monaco-editor';
 
 @Component({
   selector: 'app-test-result',
@@ -67,13 +68,14 @@ export class TestResultComponent  implements OnInit{
     readonly: false
   }; 
   readonlyEditorOptions = {
-    theme: 'vs-dark', 
+    theme: 'vs-dark',
     language: this.exercise.language.toLowerCase(), 
     automaticLayout: true,  
     lineNumbers: 'on',
     minimap: { enabled: false }, 
     wordWrap: 'on' ,
-    readonly: true
+    readonly: true,
+    renderValidationDecorations: 'off' 
   }; 
 
   // timer

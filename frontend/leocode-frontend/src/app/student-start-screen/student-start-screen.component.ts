@@ -25,6 +25,7 @@ import { forEach } from 'jszip';
   styleUrls: ['./student-start-screen.component.css']
 })
 export class StudentStartScreenComponent implements OnInit {
+  
  
   userName: string | null= "";
   exerciseName: string |null = "";
@@ -63,12 +64,10 @@ export class StudentStartScreenComponent implements OnInit {
 
  mergedCodeSections: CodeSection[] = [];
 
- 
- 
-   //Code Editor
-   editorOptions = { 
+  //Code Editor
+  editorOptions = { 
    
-    theme: 'vs-dark', 
+    theme: 'vs-light', 
     language: this.exercise.language.toLowerCase(), 
     automaticLayout: true,  
     lineNumbers: 'on',
@@ -76,14 +75,15 @@ export class StudentStartScreenComponent implements OnInit {
     wordWrap: 'on' ,
     readonly: false
   }; 
-   readonlyEditorOptions = {
-    theme: 'vs-dark', 
+  readonlyEditorOptions = {
+    theme: 'vs-dark',
     language: this.exercise.language.toLowerCase(), 
     automaticLayout: true,  
     lineNumbers: 'on',
     minimap: { enabled: false }, 
     wordWrap: 'on' ,
-    readonly: true
+    readonly: true,
+    renderValidationDecorations: 'off' 
   }; 
  
    // timer

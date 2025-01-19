@@ -32,4 +32,23 @@
   box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3); /* Subtle shadow around the active item */
 }
 
+
+.readonly {
+  background-color: #f0f0f0 !important; /* Hellgrau */
+  color: #808080; /* Graue Schriftfarbe */
+  pointer-events: none; /* Keine Interaktion zulassen */
+}
+
+/* Bearbeitbare Bereiche - Schwarz */
+.editable {
+  background-color: #ffffff !important; /* Weißer Hintergrund */
+  color: #000000; /* Schwarze Schriftfarbe */
+}
+
+.monaco-container {
+  resize: vertical;
+  overflow: auto;
+  border: 1px solid #ddd;
+  padding: 5px;
+}
   

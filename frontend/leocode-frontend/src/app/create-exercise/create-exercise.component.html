@@ -3,7 +3,6 @@
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
@@ -13,7 +12,6 @@
         <a class="nav-link text-light" href="start-screen" style="margin-left: 50px;">Exercises</a>
       </li>
     </ul>
-
     <ul class="navbar-nav">
       <li class="nav-item">
         <span class="navbar-text text-light">{{ ifUserName }}</span>
@@ -25,178 +23,123 @@
   </div>
 </nav>
 
-<div class="container-fluid" >
-  <div class="row justify-content-center">
+<div class="container my-5">
+  <div class="text-center mb-4">
+    <h1>Create Exercise</h1>
+  </div>
 
-
-    <div class="col-md-10">
-      <div class="container mt-4">
-        <h1>Create Exercise</h1>
-         <!-- Schritte als Punkte -->
-        <div class="row justify-content-center">
-          <div class="col-md-8">
-            <div class="step-indicator">
-              <div *ngFor="let step of [1, 2, 3, 4, 5]" 
-                  class="step-indicator-item" 
-                  [ngClass]="{ 'current-step': currentStep === step }"
-                  (click)="goToStep(step)">
-                <span class="step-dot"></span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-
-        <div class="container">
-          <!-- Schritt 1: Anleitung hinzufügen -->
-          <div *ngIf="currentStep === 1">
-            <div class="row justify-content-center">
-              <div class="col-md-12">
-                <div class="card mt-5">
-                  <div class="card-body">
-                    <h2 class="card-title">Step 1: Add Introduction and Name</h2>
-                    <div class="form-group">
-                      <textarea class="form-control" rows="5" style="height: 50px; width: 250px"  [(ngModel)]="exerciseName" placeholder="Write your Name here"></textarea>
-                    </div>
-                    <br>
-                    <div class="form-group">
-                      <textarea class="form-control" rows="5" style="height: 300px; width: 1000px"  [(ngModel)]="instruction" placeholder="Write your Introduction here"></textarea>
-                    </div>
-                    <button class="btn btn-primary" (click)="nextStep()">Next</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-
-          <!-- Schritt 2: Sprache auswählen -->
-          <div *ngIf="currentStep === 2">
-            <div class="row justify-content-center">
-              <div class="col-md-12">
-                <div class="card mt-5">
-                  <div class="card-body" style="height: 300px; width: 1000px">
-                    <h2 class="card-title">Step 2: Chose Language</h2>
-                    <div class="form-group">
-                      <select class="form-control"  [(ngModel)]="selectedLanguage">
-                        <option value="TypeScript">TypeScript</option>
-                        <option value="Csharp">Csharp</option>
-                        <option value="Java">Java</option>
-                      </select>
-                    </div>
-                    <button class="btn btn-primary" (click)="nextStep()">Next</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-
-          <!-- Schritt 3: Tags auswählen -->
-        <div *ngIf="currentStep === 3">
-          <div class="row justify-content-center">
-            <div class="col-md-12">
-              <div class="card mt-5">
-                <div class="card-body" style="height: 500px; width: 1000px">
-                  <h2 class="card-title">Step 3: Choose Tags</h2>
-                  <!-- Ausgewählte Tags anzeigen -->
-                  <form>
-                    <mat-form-field class="example-chip-list">
-                      <mat-label>Choose Tags</mat-label>
-                      <mat-chip-grid #chipGrid aria-label="Tag selection">
-                        <mat-chip-row *ngFor="let tag of selectedTags" (removed)="removeTag(tag)">
-                          {{tag}}
-                          <button matChipRemove [attr.aria-label]="'remove ' + tag">
-                            <mat-icon>cancel</mat-icon>
-                          </button>
-                        </mat-chip-row>
-                      </mat-chip-grid>
-                      <input placeholder="New Tag..." #tagInput [formControl]="tagCtrl"
-                        [matChipInputFor]="chipGrid" [matAutocomplete]="auto"
-                        [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                        (matChipInputTokenEnd)="addTag($event)"/>
-                      <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
-                        <mat-option *ngFor="let tag of filteredTags | async" [value]="tag">
-                          {{tag}}
-                        </mat-option>
-                      </mat-autocomplete>
-                    </mat-form-field>
-                  </form>
-                  <button class="btn btn-primary" (click)="nextStep()">Next</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-
-    <!-- Schritt 4: ZIP-Datei hochladen -->
-    <div *ngIf="currentStep === 4">
-      <div class="row justify-content-center">
-        <div class="col-md-12">
-          <div class="card mt-5">
-            <div class="card-body" style="height: 400px; width: 1000px">
-              <h2 class="card-title">Step 4: Upload Template as ZIP</h2>
-              <p>Upload sample solution</p>
-              <div class="drag-drop-area" 
-                  (drop)="uploadZipFile($event); $event.preventDefault();" 
-                  (dragover)="$event.preventDefault();">
-                <p *ngIf="!zipFile">Drag & Drop your file here</p>
-                <button class="btn-ZipFile" *ngIf="zipFile" (click)="clearZipFile()" >
-                  <p>{{zipFile.name}} <mat-icon>cancel</mat-icon></p>
-                </button>             
-              </div>
- 
-              <br><br>
-              <p>Upload template solution:</p>
-              <div class="drag-drop-area" 
-                  (drop)="uploadEmptyZipFile($event); $event.preventDefault();" 
-                  (dragover)="$event.preventDefault();">
-                <p *ngIf="!emptyZipFile">Drag & Drop your file here</p>
-                <button class="btn-ZipFile" *ngIf="emptyZipFile" (click)="clearEmptyZipFile()">
-                  <p>{{emptyZipFile.name}} <mat-icon>cancel</mat-icon></p>
-                </button>
-              </div>
-            </div>
-            <button class="btn btn-primary" [disabled]="!ZipFileUploaded || !emptyZipFileUploaded" (click)="nextStep()">Next</button>
-          </div>
-        </div>
+  <!-- Step Indicator -->
+  <div class="d-flex justify-content-center mb-4">
+    <div class="step-indicator">
+      <div *ngFor="let step of [1, 2, 3, 4, 5]" 
+          class="step-indicator-item" 
+          [ngClass]="{ 'current-step': currentStep === step }"
+          (click)="goToStep(step)">
+        <span class="step-dot"></span>
+        <div class="step-label">Step {{ step }}</div>
       </div>
     </div>
+  </div>
 
+  <!-- Content Area -->
+  <div class="card shadow-sm">
+    <div class="card-body">
+      <!-- Step 1: Add Introduction and Name -->
+      <div *ngIf="currentStep === 1">
+        <h2 class="mb-4">Step 1: Add Introduction and Name</h2>
+        <div class="form-group">
+          <label for="exerciseName">Exercise Name</label>
+          <textarea id="exerciseName" class="form-control" rows="1" [(ngModel)]="exerciseName" placeholder="Write your Name here"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="instruction">Introduction</label>
+          <textarea id="instruction" class="form-control" rows="5" [(ngModel)]="instruction" placeholder="Write your Introduction here"></textarea>
+        </div>
+        <button class="btn btn-primary" (click)="nextStep()">Next</button>
+      </div>
 
+      <!-- Step 2: Choose Language -->
+      <div *ngIf="currentStep === 2">
+        <h2 class="mb-4">Step 2: Choose Language</h2>
+        <div class="form-group">
+          <label for="selectedLanguage">Programming Language</label>
+          <select id="selectedLanguage" class="form-control" [(ngModel)]="selectedLanguage">
+            <option value="TypeScript">TypeScript</option>
+            <option value="Csharp">Csharp</option>
+            <option value="Java">Java</option>
+          </select>
+        </div>
+        <button class="btn btn-primary" (click)="nextStep()">Next</button>
+      </div>
 
-  
+      <!-- Step 3: Choose Tags -->
+      <div *ngIf="currentStep === 3">
+        <h2 class="mb-4">Step 3: Choose Tags</h2>
+        <form>
+          <mat-form-field class="example-chip-list w-100">
+            <mat-label>Choose Tags</mat-label>
+            <mat-chip-grid #chipGrid aria-label="Tag selection">
+              <mat-chip-row *ngFor="let tag of selectedTags" (removed)="removeTag(tag)">
+                {{ tag }}
+                <button matChipRemove [attr.aria-label]="'remove ' + tag">
+                  <mat-icon>cancel</mat-icon>
+                </button>
+              </mat-chip-row>
+            </mat-chip-grid>
+            <input placeholder="New Tag..." #tagInput [formControl]="tagCtrl"
+              [matChipInputFor]="chipGrid" [matAutocomplete]="auto"
+              [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+              (matChipInputTokenEnd)="addTag($event)"/>
+            <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+              <mat-option *ngFor="let tag of filteredTags | async" [value]="tag">
+                {{ tag }}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+        </form>
+        <button class="btn btn-primary" (click)="nextStep()">Next</button>
+      </div>
 
-    
-     <!-- Schritt 5: Senden an Backend -->
-    <div *ngIf="currentStep === 5" class="row justify-content-center align-items-center">
-      <div class="col-md-12">
-        <div class="card mt-5">
-          <div class="card-body"style="height: 350px; width: 1000px">
-            <h2 class="card-title">Overview</h2>
-            <p><strong>Exercise Name:</strong> {{exerciseName}}</p>
-            <p><strong>Introdcution:</strong> {{ instruction }}</p>
-            <p><strong>Language:</strong> {{ selectedLanguage }}</p>
-            <p><strong>Chosen Tags:</strong> {{ selectedTags.join(', ') }}</p>
-            <p><strong>Sample Solution:</strong> {{ zipFile?.name }}</p>
-            <p><strong>Template Solution:</strong> {{ emptyZipFile?.name }}</p>
-          
-            <button class="btn btn-primary" [disabled]="isDisabled" (click)="sendCodeToRunner()">Upload Exercise</button>
+      <!-- Step 4: Upload ZIP Files -->
+      <div *ngIf="currentStep === 4">
+        <h2 class="mb-4">Step 4: Upload Templates</h2>
+        <div class="form-group">
+          <label>Upload Sample Solution</label>
+          <div class="drag-drop-area" 
+              (drop)="uploadZipFile($event); $event.preventDefault();" 
+              (dragover)="$event.preventDefault();">
+            <p *ngIf="!zipFile">Drag & Drop your file here</p>
+            <button class="btn btn-outline-secondary" *ngIf="zipFile" (click)="clearZipFile()">
+              {{ zipFile.name }} <mat-icon>cancel</mat-icon>
+            </button>
           </div>
         </div>
+        <div class="form-group">
+          <label>Upload Template Solution</label>
+          <div class="drag-drop-area" 
+              (drop)="uploadEmptyZipFile($event); $event.preventDefault();" 
+              (dragover)="$event.preventDefault();">
+            <p *ngIf="!emptyZipFile">Drag & Drop your file here</p>
+            <button class="btn btn-outline-secondary" *ngIf="emptyZipFile" (click)="clearEmptyZipFile()">
+              {{ emptyZipFile.name }} <mat-icon>cancel</mat-icon>
+            </button>
+          </div>
+        </div>
+        <button class="btn btn-primary" [disabled]="!zipFile || !emptyZipFile" (click)="nextStep()">Next</button>
+      </div>
+
+      <!-- Step 5: Overview -->
+      <div *ngIf="currentStep === 5">
+        <h2 class="mb-4">Overview</h2>
+        <p><strong>Exercise Name:</strong> {{ exerciseName }}</p>
+        <p><strong>Introduction:</strong> {{ instruction }}</p>
+        <p><strong>Language:</strong> {{ selectedLanguage }}</p>
+        <p><strong>Tags:</strong> {{ selectedTags.join(', ') }}</p>
+        <p><strong>Sample Solution:</strong> {{ zipFile?.name }}</p>
+        <p><strong>Template Solution:</strong> {{ emptyZipFile?.name }}</p>
+        <button class="btn btn-primary" [disabled]="isDisabled" (click)="sendCodeToRunner()">Upload Exercise</button>
       </div>
     </div>
     <mat-progress-bar mode="indeterminate" *ngIf="isUploading"></mat-progress-bar>
-
-    <br>
-    <br>
-    <br>
   </div>
 </div>
-</div>
-</div>
-
-
-
-

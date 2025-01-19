@@ -65,7 +65,9 @@ export class AssignmentOverviewComponent implements OnInit {
 
   // Select the assignment to show details
   selectAssignment(assignment: any): void {
+    console.log(assignment);
     this.selectedAssignment = assignment;
+    console.log(this.selectedAssignment);
   }
 
 
