@@ -65,7 +65,7 @@ export class LoginComponent implements OnInit  {
             }
           } else {
             //api call für user createn für teacher
-            this.rest.AddStudent(ifUserName, firstname, lastname).subscribe((data: any) => {
+            this.rest.AddTeacher(ifUserName, firstname, lastname).subscribe((data: any) => {
               console.log(data);
               this.router.navigate(['/start-screen']);
             });
