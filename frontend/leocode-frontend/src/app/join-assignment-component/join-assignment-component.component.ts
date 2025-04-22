@@ -75,6 +75,7 @@ export class JoinAssignmentComponentComponent implements OnInit {
               this.rest.joinAssignment(this.assignmentId!, ifUserName).subscribe((data: any) => {
                 console.log(data);
               });
+              this.sleep(3000);
               this.router.navigate(['/student-start-screen']);
             }
           } else {
@@ -91,6 +92,11 @@ export class JoinAssignmentComponentComponent implements OnInit {
         }
       });
   }
+
+  sleep(ms: number): Promise<void> {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+  
 
   async setUserData(): Promise<void> {
     const user = await this.keycloakService.loadUserProfile();
