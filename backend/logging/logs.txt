@@ -317,3 +317,9 @@
 01/18/2025 17:32:38: SUCCESS: Response from CSharp-runner was successful
 01/18/2025 17:43:33: SUCCESS: Response from CSharp-runner was successful
 01/18/2025 17:43:33: ERROR: Response from CSharp-runner wasn't successful. Error Message: Data at the root level is invalid. Line 1, position 1.
+04/22/2025 21:38:14: SUCCESS: Response from CSharp-runner was successful
+04/22/2025 21:38:14: ERROR: Response from CSharp-runner wasn't successful. Error Message: Data at the root level is invalid. Line 1, position 1.
+04/22/2025 21:39:31: ERROR: Response from TypeScript-runner wasn't successful. Error Message: Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte. (localhost:8000)
+04/22/2025 21:45:17: SUCCESS: Response from CSharp-runner was successful
+04/22/2025 21:45:17: ERROR: Response from CSharp-runner wasn't successful. Error Message: Data at the root level is invalid. Line 1, position 1.
+04/22/2025 21:55:51: SUCCESS: Response from CSharp-runner was successful
