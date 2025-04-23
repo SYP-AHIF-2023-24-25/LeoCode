@@ -62,7 +62,7 @@ services:
       - custom-net
 
   leocode-api:
-    image: florianhagmair06/leocode-db:latest
+    image: ghcr.io/Florian-Hagmair/leocode-db:latest
     container_name: leocode-api
     restart: always
     environment:
@@ -77,7 +77,7 @@ services:
       - custom-net
 
   leocode-frontend:
-    image: florianhagmair06/leocode-frontend:latest
+    image: ghcr.io/Florian-Hagmair/leocode-frontend:latest
     container_name: leocode-frontend
     restart: always
     labels:
@@ -87,21 +87,8 @@ services:
     networks:
       - custom-net
 
-  keycloak-api:
-    image: florianhagmair06/keycloak:latest
-    container_name: keycloak-api
-    restart: always
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.keycloak-api.rule=Host(`leocode.htl-leonding.ac.at`) && PathPrefix(`/keycloak`)"
-      - "traefik.http.services.keycloak-api.loadbalancer.server.port=5001"
-    networks:
-      - custom-net
-    extra_hosts:
-      - "auth.htl-leonding.ac.at:10.191.112.13"
-
   leocode-backend:
-    image: florianhagmair06/leocode-backend:latest
+    image: ghcr.io/Florian-Hagmair/leocode-backend:latest
     container_name: leocode-backend
     restart: always
     labels:
@@ -112,7 +99,7 @@ services:
       - custom-net
 
   leocode-csharp-runner:
-    image: florianhagmair06/leocode-csharp-runner:latest
+    image: ghcr.io/Florian-Hagmair/leocode-csharp-runner:latest
     container_name: leocode-csharp-runner
     restart: always
     labels:
