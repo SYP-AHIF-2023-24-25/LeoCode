@@ -5,6 +5,7 @@ import { HttpClient } from "@angular/common/http";
 import { finalize } from "rxjs";
 import { DbService } from '../service/db-service.service';
 import { environment } from 'src/environments/environment';
+import { LeoUser, createLeoUser } from 'src/core/util/leo-token';
 
 @Component({
   selector: 'app-login',
@@ -31,51 +32,19 @@ export class LoginComponent implements OnInit  {
       } else {
         await this.keycloakService.login();
       }
-      this.performCall('at-least-student');
-    }
-  }
-
-  public performCall(action: string): void {
-    const route = `${environment.kcUrl}${action}`;
-
-    this.loading.set(true);
-
-    // bearer token is automatically added by the interceptor
-    this.httpClient.get(route, { responseType: "text" })
-      .pipe(finalize(() => this.loading.set(false)))
-      .subscribe({
-        next: (res) => {
-          this.response.update(() => res);
-          const ifUserName: string = sessionStorage.getItem('ifUserName') || '';
-          const firstname: string = sessionStorage.getItem('firstName') || '';
-          const lastname: string = sessionStorage.getItem('lastName') || '';
-          if (res === 'You are at least a student') {
-            if (ifUserName === 'if200183') {
-              //api call für user createn für teacher
-              this.rest.AddTeacher(ifUserName, firstname, lastname).subscribe((data: any) => {
+      const user: LeoUser = await createLeoUser(this.keycloakService);
+      if (user.username === 'if200183' || user.username === undefined || user.username === '' || !user.username?.startsWith('if')) {
+        this.rest.AddTeacher(user.username!, user.firstName!, user.lastName!).subscribe((data: any) => {
                 console.log(data);
                 this.router.navigate(['/start-screen']);
               });
-            } else {
-              //api call für user createn für student
-              this.rest.AddStudent(ifUserName, firstname, lastname).subscribe((data: any) => {
+      } else {
+        this.rest.AddStudent(user.username!, user.firstName!, user.lastName!).subscribe((data: any) => {
                 console.log(data);
                 this.router.navigate(['/student-start-screen']);
               });
-            }
-          } else {
-            //api call für user createn für teacher
-            this.rest.AddTeacher(ifUserName, firstname, lastname).subscribe((data: any) => {
-              console.log(data);
-              this.router.navigate(['/start-screen']);
-            });
-          }
-        },
-        error: err => {
-          this.response.update(() => `Backend says no: ${err.status}`);
-          this.router.navigate(['/start-screen']);
-        }
-      });
+      }
+    }
   }
 
   async setUserData(): Promise<void> {

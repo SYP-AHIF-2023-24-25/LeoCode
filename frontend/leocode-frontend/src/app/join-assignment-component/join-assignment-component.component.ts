@@ -5,6 +5,7 @@ import { HttpClient } from "@angular/common/http";
 import { finalize } from "rxjs";
 import { DbService } from '../service/db-service.service';
 import { environment } from 'src/environments/environment';
+import { createLeoUser, LeoUser } from 'src/core/util/leo-token';
 
 @Component({
   selector: 'app-join-assignment-component',
@@ -13,99 +14,67 @@ import { environment } from 'src/environments/environment';
 })
 export class JoinAssignmentComponentComponent implements OnInit {
   private readonly httpClient: HttpClient = inject(HttpClient);
-  private readonly route: ActivatedRoute = inject(ActivatedRoute); // Inject ActivatedRoute
-  public readonly response: WritableSignal<string | null> = signal(null);
-  public readonly loading: WritableSignal<boolean> = signal(false);
-  public readonly showResponse: Signal<boolean> = computed(() => this.response() !== null);
-  assignmentId: number | null = null; // Variable to store the assignment ID
+    public readonly response: WritableSignal<string | null> = signal(null);
+    public readonly loading: WritableSignal<boolean> = signal(false);
+    public readonly showResponse: Signal<boolean> = computed(() => this.response() !== null);
+    assignmentId: number | null = null;
+    private readonly route: ActivatedRoute = inject(ActivatedRoute);
+    constructor(private keycloakService: KeycloakService, private router: Router, private rest: DbService) {
+  
+    }
+  
+    async ngOnInit(): Promise<void> {
 
-  constructor(private keycloakService: KeycloakService, private router: Router, private rest: DbService) { }
+      this.route.paramMap.subscribe(params => {
+        this.assignmentId = +params.get('id')!; // Convert the string parameter to a number
+        console.log('Assignment ID:', this.assignmentId); // Log the assignment ID for debugging
+      });
 
-  async ngOnInit(): Promise<void> {
-    // Get the assignment ID from the route parameters
-    this.route.paramMap.subscribe(params => {
-      this.assignmentId = +params.get('id')!; // Convert the string parameter to a number
-      console.log('Assignment ID:', this.assignmentId); // Log the assignment ID for debugging
-    });
-
-    if (sessionStorage.getItem('shouldLogOut') === 'true') {
-      sessionStorage.setItem('shouldLogOut', 'false');
-      await this.keycloakService.logout();
-    } else {
-      const isLoggedIn = await this.keycloakService.isLoggedIn();
-      if (isLoggedIn) {
-        await this.setUserData();
-        this.performCall('at-least-student');
+      if (sessionStorage.getItem('shouldLogOut') === 'true') {
+        sessionStorage.setItem('shouldLogOut', 'false');
+        await this.keycloakService.logout();
       } else {
-        await this.keycloakService.login();
+        const isLoggedIn = await this.keycloakService.isLoggedIn();
+        if (isLoggedIn) {
+          await this.setUserData();
+        } else {
+          await this.keycloakService.login();
+        }
+        const user: LeoUser = await createLeoUser(this.keycloakService);
+        if (user.username === 'if200183' || user.username === undefined || user.username === '' || !user.username?.startsWith('if')) {
+          this.rest.AddTeacher(user.username!, user.firstName!, user.lastName!).subscribe((data: any) => {
+                  console.log(data);
+                  this.router.navigate(['/start-screen']);
+                });
+        } else {
+          this.rest.AddStudent(user.username!, user.firstName!, user.lastName!).subscribe((data: any) => {
+                  console.log(data);
+          });
+          this.rest.joinAssignment(this.assignmentId!, user.username!).subscribe((data: any) => {
+            console.log(data);
+          });
+          this.sleep(5000);
+          this.router.navigate(['/student-start-screen']);
+        }
       }
     }
-  }
 
-  public performCall(action: string): void {
-    const route = `${environment.kcUrl}${action}`;
-
-    this.loading.set(true);
-
-    // bearer token is automatically added by the interceptor
-    this.httpClient.get(route, { responseType: "text" })
-      .pipe(finalize(() => this.loading.set(false)))
-      .subscribe({
-        next: (res) => {
-          this.response.update(() => res);
-          const ifUserName: string = sessionStorage.getItem('ifUserName') || '';
-          const firstname: string = sessionStorage.getItem('firstName') || '';
-          const lastname: string = sessionStorage.getItem('lastName') || '';
-
-          if (res === 'You are at least a student') {
-            if (ifUserName === 'if200183') {
-              // API call to create user for teacher
-              this.rest.AddTeacher(ifUserName, firstname, lastname).subscribe((data: any) => {
-                console.log(data);
-                this.router.navigate(['/start-screen']);
-              });
-            } else {
-              // API call to create user for student
-              this.rest.AddStudent(ifUserName, firstname, lastname).subscribe((data: any) => {
-                console.log(data);
-              });
-              // Use the assignmentId here
-              console.log('Assignment ID:', this.assignmentId);
-              console.log('ifUserName:', ifUserName);
-              this.rest.joinAssignment(this.assignmentId!, ifUserName).subscribe((data: any) => {
-                console.log(data);
-              });
-              this.sleep(3000);
-              this.router.navigate(['/student-start-screen']);
-            }
-          } else {
-            // API call to create user for teacher
-            this.rest.AddStudent(ifUserName, firstname, lastname).subscribe((data: any) => {
-              console.log(data);
-              this.router.navigate(['/start-screen']);
-            });
-          }
-        },
-        error: err => {
-          this.response.update(() => `Backend says no: ${err.status}`);
-          this.router.navigate(['/start-screen']);
-        }
-      });
-  }
-
-  sleep(ms: number): Promise<void> {
-    return new Promise(resolve => setTimeout(resolve, ms));
-  }
+    sleep(ms: number): Promise<void> {
+      return new Promise(resolve => setTimeout(resolve, ms));
+    }
   
-
-  async setUserData(): Promise<void> {
-    const user = await this.keycloakService.loadUserProfile();
-    sessionStorage.setItem('firstName', user.firstName!);
-    sessionStorage.setItem('lastName', user.lastName!);
-    sessionStorage.setItem('ifUserName', user.username!);
-  }
-
-  async logout(): Promise<void> {
-    await this.keycloakService.logout();
-  }
+    async setUserData(): Promise<void> {
+      const user = await this.keycloakService.loadUserProfile();
+      sessionStorage.setItem('firstName', user.firstName!);
+      sessionStorage.setItem('lastName', user.lastName!);
+      sessionStorage.setItem('ifUserName', user.username!);
+    }
+  
+    async logout(): Promise<void> {
+      /*sessionStorage.setItem('ifUserName', '');
+      sessionStorage.setItem('firstName', '');
+      sessionStorage.setItem('lastName', '');*/
+      await this.keycloakService.logout();
+      //this.router.navigate(['/login']);
+    }
 }

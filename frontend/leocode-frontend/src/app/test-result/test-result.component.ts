@@ -264,42 +264,52 @@ export class TestResultComponent  implements OnInit{
   }
 
   mergeCodeSections(): void {
-    setTimeout(() => {  // Verarbeitung im Hintergrund, um den UI-Thread nicht zu blockieren
-      let mergedSectionStringBeforEditSection = "";
-      let editSection = "";
-      let foundEditableSection = false;
-      let mergedCodeSectionsAfterEditSection = "";
+    setTimeout(() => {
+      const mergedSections: { code: string; readonlySection: boolean; fileName: string }[] = [];
+      let currentSectionCode = "";
+      let currentReadonlyState: boolean | null = null;
+      let editableCount = 0;
+      let readonlyCount = 0;
   
-      this.exercise.arrayOfSnippets.forEach((section) => {
-        if (section.readonlySection && !foundEditableSection) {
-          mergedSectionStringBeforEditSection += section.code;
-        } else if (!section.readonlySection && !foundEditableSection) {
-          foundEditableSection = true;
-          editSection = section.code;
+      this.exercise.arrayOfSnippets.forEach((section, index) => {
+        if (currentReadonlyState === null) {
+          // Erste Section initialisieren
+          currentReadonlyState = section.readonlySection;
+          currentSectionCode = section.code;
+        } else if (section.readonlySection === currentReadonlyState) {
+          // Gleicher Typ wie vorherige Section => anhängen
+          currentSectionCode += section.code;
         } else {
-          mergedCodeSectionsAfterEditSection += section.code;
+          // Typwechsel => aktuelle Section abschließen und neue starten
+          mergedSections.push({
+            code: currentSectionCode,
+            readonlySection: currentReadonlyState,
+            fileName: currentReadonlyState
+              ? `Readonly Section ${++readonlyCount}`
+              : `Editable Section ${++editableCount}`,
+          });
+  
+          // Neue Section starten
+          currentReadonlyState = section.readonlySection;
+          currentSectionCode = section.code;
         }
       });
   
-      this.mergedCodeSections = [
-        {
-          code: mergedSectionStringBeforEditSection,
-          readonlySection: true,
-          fileName: "Before Editable Section"
-        },
-        {
-          code: editSection,
-          readonlySection: false,
-          fileName: "Editable Section"
-        },
-        {
-          code: mergedCodeSectionsAfterEditSection,
-          readonlySection: true,
-          fileName: "After Editable Section"
-        }
-      ];
-    }, 0); // asynchron verarbeiten
+      // Letzte Section noch hinzufügen
+      if (currentSectionCode !== "") {
+        mergedSections.push({
+          code: currentSectionCode,
+          readonlySection: currentReadonlyState!,
+          fileName: currentReadonlyState
+            ? `Readonly Section ${++readonlyCount}`
+            : `Editable Section ${++editableCount}`,
+        });
+      }
+  
+      this.mergedCodeSections = mergedSections;
+    }, 0);
   }
+  
   
 
   toggleResults() {
