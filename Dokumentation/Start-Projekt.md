@@ -7,16 +7,15 @@ Diese Anleitung führt dich Schritt für Schritt durch die notwendigen Schritte,
 Öffne das Projektverzeichnis in Visual Studio Code, um effizient mit dem Code arbeiten zu können.
 ### 🔧 Schritt 1: Backend-Templates vorbereiten
 
-Damit der TypeScript-Code später korrekt ausgeführt werden kann, müssen zunächst die Abhängigkeiten in den Templates installiert werden.
-✅ Vorgehensweise:
+Damit der `TypeScript-Code` später korrekt ausgeführt werden kann, müssen zunächst die Abhängigkeiten in den Templates installiert werden.
 
     Navigiere im Terminal in folgendes Verzeichnis:
 
     LeoCode/backend/languages/Typescript/templates
 
-Öffne innerhalb dieses Ordners einen beliebigen Template-Unterordner. (Hier befinden sich verschiedene Beispiel- oder Projekt-Templates für den TypeScript-Runner.)
+Öffne innerhalb dieses Ordners einen beliebigen Template-Unterordner. Hier befinden sich verschiedene Beispiel- oder Projekt-Templates für den TypeScript-Runner.
 
-Führe nun folgenden Befehl im Terminal aus, um alle benötigten Node-Abhängigkeiten im darüberliegenden Verzeichnis zu installieren:
+Führe nun folgenden Befehl im Terminal aus, um alle benötigten `Node-Abhängigkeiten` im darüberliegenden Verzeichnis zu installieren:
 
     npm install --prefix ../../
 
@@ -35,7 +34,7 @@ Installiere die benötigten Node-Module (Abhängigkeiten), die für Angular ben�
 
     npm install
 
-Starte anschließend das Angular-Frontend mit dem folgenden Befehl:
+Starte anschließend das `Angular-Frontend` mit dem folgenden Befehl:
 
     npx ng serve
 
@@ -43,9 +42,9 @@ Starte anschließend das Angular-Frontend mit dem folgenden Befehl:
 
 ### 🐳 Schritt 3: Docker-Images für die Runner bauen
 
-Damit die Backend-Komponenten (die sogenannten "Runner", welche Code ausführen) funktionieren, müssen passende Docker-Images gebaut werden. Es gibt einen Runner für TypeScript und einen für C#.
+Damit die Backend-Komponenten (die sogenannten "Runner", welche Code ausführen) funktionieren, müssen passende `Docker-Images` gebaut werden. Es gibt einen `Runner` für TypeScript und einen für C#.
 
-▶️ TypeScript Runner
+▶️ `TypeScript Runner`
 
     Navigiere in den Ordner für den TypeScript-Runner:
 
@@ -57,7 +56,7 @@ Erstelle das Docker-Image mit folgendem Befehl:
 
     📦 Das Image erhält den Namen ts-runner und kann später für Container-basierte Ausführung verwendet werden.
 
-▶️ C# Runner
+▶️ `C# Runner`
 
     Navigiere in den Ordner für den C#-Runner:
 
@@ -68,10 +67,10 @@ Baue das Docker-Image mit:
 
     docker build -t csharp-runner .
 
-⚙️ Dieses Image wird für das Ausführen von C#-Code in einer isolierten Umgebung benötigt.
+⚙️ Dieses `Image` wird für das Ausführen von `C#-Code` in einer isolierten Umgebung benötigt.
 
-### 4 LeoCodeBacken Starten
-Als nächstes muss das LeoCodeBackend im Visulal Studio gestarten werden um die Runner zu starten.
+### Schritt 4: LeoCodeBacken Starten
+Als nächstes muss das `LeoCodeBackend` im Visual Studio gestartet werden um die `Runner` zu starten.
 
 
 ▶️ TypeScript Runner
@@ -79,5 +78,42 @@ Als nächstes muss das LeoCodeBackend im Visulal Studio gestarten werden um die 
 
 ▶️ C# Runner
 ![Docker-Setup](assets/swaggerCsharp.png)
+
+
+### 🗄️ Schritt 5: Datenbank starten
+
+Öffne als Nächstes das Projekt **`db`** in **Visual Studio**.
+
+![Datenbank-Projekt öffnen](assets/db.png)
+
+1. Führe zunächst den **Datenimport** aus (z. B. über den Importer im `ImportController`).
+2. Anschließend kannst du die **API des Datenbank-Projekts** starten.
+
+### Schritt 6: Login über KeyClock
+Rufe anschließend im Browser die Adresse **http://localhost:4200** auf und melde dich mit deiner `IF-Nummer` sowie deinem `Passwort` an.
+
+![Datenbank-Projekt öffnen](assets/login.png)
+
+
+
+## Abschluss und Hinweise
+
+Wenn alle Schritte erfolgreich abgeschlossen wurden, solltest du nun:
+
+- Zugriff auf die Weboberfläche unter `http://localhost:4200` haben  
+- Dich mit deinen Zugangsdaten einloggen können  
+- Die wichtigsten Dienste wie **Frontend**, **Backend**, **Runner-Container** und **Datenbank** lokal laufen sehen
+
+Falls nach dem Login keine Inhalte wie z. B. **Assignments** angezeigt werden, stelle sicher, dass dein Benutzer korrekt im System angelegt wurde.  
+Du kannst Beispielnutzer in der Datei `ImportController.cs` im `db`-Projekt anpassen oder erweitern.
+
+> Für die Anzeige der Lehreransicht:  
+> Weise deinem Benutzer Lehrerrechte zu, indem du eine zusätzliche IF-Nummer mit entsprechender Rolle im Demo-Import definierst.
+
+
+
+
+
+
 
 
