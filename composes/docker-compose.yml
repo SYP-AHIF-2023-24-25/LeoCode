@@ -62,7 +62,7 @@ services:
       - custom-net
 
   leocode-api:
-    image: ghcr.io/Florian-Hagmair/leocode-db:latest
+    image: ghcr.io/syp-ahif-2023-24-25/leocode-db:latest
     container_name: leocode-api
     restart: always
     environment:
@@ -77,7 +77,7 @@ services:
       - custom-net
 
   leocode-frontend:
-    image: ghcr.io/Florian-Hagmair/leocode-frontend:latest
+    image: ghcr.io/syp-ahif-2023-24-25/leocode-frontend:latest
     container_name: leocode-frontend
     restart: always
     labels:
@@ -88,7 +88,7 @@ services:
       - custom-net
 
   leocode-backend:
-    image: ghcr.io/Florian-Hagmair/leocode-backend:latest
+    image: ghcr.io/syp-ahif-2023-24-25/leocode-backend:latest
     container_name: leocode-backend
     restart: always
     labels:
@@ -99,7 +99,7 @@ services:
       - custom-net
 
   leocode-csharp-runner:
-    image: ghcr.io/Florian-Hagmair/leocode-csharp-runner:latest
+    image: ghcr.io/syp-ahif-2023-24-25/leocode-csharp-runner:latest
     container_name: leocode-csharp-runner
     restart: always
     labels:
